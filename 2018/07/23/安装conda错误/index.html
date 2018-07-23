@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="conda," />
 
 
 
@@ -79,17 +79,22 @@
 
 
 
-<meta name="description" content="人一己千">
+<meta name="description" content="在服务器上安装conda的时候，一开始使用了pip安装pip install conda在安装好conda之后想要使用conda命令，出现： ERROR: The install method you used for conda–probably either pip install conda or easy_install conda–is not compatible with using">
+<meta name="keywords" content="conda">
 <meta property="og:type" content="article">
-<meta property="og:title" content="template">
-<meta property="og:url" content="http://yoursite.com/2018/07/23/template/index.html">
+<meta property="og:title" content="安装conda错误">
+<meta property="og:url" content="http://yoursite.com/2018/07/23/安装conda错误/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="人一己千">
+<meta property="og:description" content="在服务器上安装conda的时候，一开始使用了pip安装pip install conda在安装好conda之后想要使用conda命令，出现： ERROR: The install method you used for conda–probably either pip install conda or easy_install conda–is not compatible with using">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-23T02:41:13.071Z">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-07-23-15323331261104.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-07-23-15323337042406.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-07-23-15323337894186.jpg">
+<meta property="og:updated_time" content="2018-07-23T08:17:20.206Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="template">
-<meta name="twitter:description" content="人一己千">
+<meta name="twitter:title" content="安装conda错误">
+<meta name="twitter:description" content="在服务器上安装conda的时候，一开始使用了pip安装pip install conda在安装好conda之后想要使用conda命令，出现： ERROR: The install method you used for conda–probably either pip install conda or easy_install conda–is not compatible with using">
+<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-07-23-15323331261104.jpg">
 
 
 
@@ -119,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/23/template/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/23/安装conda错误/"/>
 
 
 
 
 
-  <title>template | Hexo</title>
+  <title>安装conda错误 | Hexo</title>
   
 
 
@@ -262,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/template/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/安装conda错误/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
@@ -279,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">template</h1>
+          <h1 class="post-title" itemprop="name headline">安装conda错误</h1>
         
 
         <div class="post-meta">
@@ -301,6 +306,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/七七八八/" itemprop="url" rel="index">
+                    <span itemprop="name">七七八八</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -329,7 +356,13 @@
       
 
       
-        
+        <p>在服务器上安装conda的时候，一开始使用了pip安装<br><code>pip install conda</code><br>在安装好conda之后想要使用conda命令，出现：</p>
+<p>ERROR: The install method you used for conda–probably either <code>pip install conda</code> or <code>easy_install conda</code>–is not compatible with using conda as an application. If your intention is to install conda as a standalone application, currently supported install methods include the Anaconda installer and the miniconda installer. You can download the miniconda installer from <a href="https://conda.io/miniconda.html" target="_blank" rel="noopener">https://conda.io/miniconda.html</a>.</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-23-15323331261104.jpg" alt=""></p>
+<p>然后到官网下载.sh文件并bash安装，仍然没有解决该问题；接着尝试pip uninstall conda，出现<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-23-15323337042406.jpg" alt=""></p>
+<p>最后在查阅了网上之后，使用 <code>which conda</code>找到conda的地址，并删除<code>rm ×××</code><br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-23-15323337894186.jpg" alt=""></p>
+<p>最后重新bash安装即可。</p>
+
       
     </div>
     
@@ -344,27 +377,17 @@
 
     <footer class="post-footer">
       
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/07/23/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
+        <div class="post-tags">
+          
+            <a href="/tags/conda/" rel="tag"> <i class="fa fa-tag"></i> conda</a>
+          
         </div>
+      
+
+      
+      
+      
+
       
 
       
@@ -433,14 +456,32 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
