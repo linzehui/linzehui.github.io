@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="困惑度,perplexity," />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="人一己千">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Weekly Review">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+<meta name="description" content="前几天在写新手任务task3的时候，参考了Pytorch官方example的word language model，官方example在训练过程中计算困惑度是这样的： 1math.exp(cur_loss) 其中，cur_loss表示交叉熵的loss，即 $-P(\hat{x})logP(x)$，$\hat{x}$表示ground truth。 然而，在查阅了困惑度相关资料后，我发现，困惑度的定义">
+<meta name="keywords" content="困惑度,perplexity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于困惑度">
+<meta property="og:url" content="http://yoursite.com/2018/07/29/有关困惑度/index.html">
 <meta property="og:site_name" content="Weekly Review">
-<meta property="og:description" content="人一己千">
+<meta property="og:description" content="前几天在写新手任务task3的时候，参考了Pytorch官方example的word language model，官方example在训练过程中计算困惑度是这样的： 1math.exp(cur_loss) 其中，cur_loss表示交叉熵的loss，即 $-P(\hat{x})logP(x)$，$\hat{x}$表示ground truth。 然而，在查阅了困惑度相关资料后，我发现，困惑度的定义">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-29T02:32:48.243Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Weekly Review">
-<meta name="twitter:description" content="人一己千">
+<meta name="twitter:title" content="关于困惑度">
+<meta name="twitter:description" content="前几天在写新手任务task3的时候，参考了Pytorch官方example的word language model，官方example在训练过程中计算困惑度是这样的： 1math.exp(cur_loss) 其中，cur_loss表示交叉熵的loss，即 $-P(\hat{x})logP(x)$，$\hat{x}$表示ground truth。 然而，在查阅了困惑度相关资料后，我发现，困惑度的定义">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/29/有关困惑度/"/>
 
 
 
 
 
-  <title>归档 | Weekly Review</title>
+  <title>关于困惑度 | Weekly Review</title>
   
 
 
@@ -143,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -237,333 +239,162 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/有关困惑度/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">关于困惑度</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-29T09:43:04+08:00">
+                2018-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 8 篇日志。 继续努力。
-      </span>
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/29/每周碎片知识点1/" itemprop="url">
-              
-                <span itemprop="name">每周碎片知识1</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-29T11:40:37+08:00"
-              content="2018-07-29" >
-          07-29
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/29/Mac配置复旦有线网/" itemprop="url">
-              
-                <span itemprop="name">Mac配置复旦有线网</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-29T10:59:37+08:00"
-              content="2018-07-29" >
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/29/ssh快速登录配置/" itemprop="url">
-              
-                <span itemprop="name">ssh快速登录配置</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-29T10:30:05+08:00"
-              content="2018-07-29" >
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>前几天在写新手任务<a href="https://github.com/FudanNLP/nlp-beginner" target="_blank" rel="noopener">task3</a>的时候，参考了Pytorch官方example的word language model，官方example在训练过程中计算困惑度是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">math.exp(cur_loss)</span><br></pre></td></tr></table></figure>
+<p>其中，cur_loss表示交叉熵的loss，即 $-P(\hat{x})logP(x)$，$\hat{x}$表示ground truth。</p>
+<p>然而，在查阅了困惑度相关资料后，我发现，困惑度的定义是这样的：</p>
+<p>$$<br>\begin{aligned}<br>PP(S)=&amp;{P(w_{1}w_{2}…w_{N})}^{-\frac{1}{N}} \<br>=&amp;\sqrt[N]{\frac{1}{p(w_1 w_2 … w_N)}} \<br>=&amp; \sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2… w_{i-1})}} }<br>\end{aligned}<br>$$</p>
+<p>这是另一种形式:<br>$$<br>\begin{aligned}<br>Perplexity(W）=&amp; 2^{H(W)} \<br>=&amp;{P(w_{1}w_{2}…w_{N})}^{-\frac{1}{N}} \<br>=&amp;\sqrt[N]{\frac{1}{p(w_1 w_2 … w_N)}} \<br>=&amp; \sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2… w_{i-1})}} }<br>\end{aligned}<br>$$</p>
+<p>可以看到，二者本质是一样的。</p>
+<p><strong>那么，为什么在代码中以e为底去计算困惑度，而不是2呢?</strong></p>
+<p>实际上，是因为在上述公式中，log是以2为底的，但在Pytorch中，log默认是以e为底的。因此在代码中，需要用e作为指数的底来还原成困惑度的原本形式： $$\sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2… w_{i-1})}} }$$</p>
+<p>最后这是perplexity的数学推导：<br><a href="https://www.zhihu.com/question/58482430" target="_blank" rel="noopener">https://www.zhihu.com/question/58482430</a></p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/29/有关困惑度/" itemprop="url">
-              
-                <span itemprop="name">关于困惑度</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-29T09:43:04+08:00"
-              content="2018-07-29" >
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/29/每周诗词/每周诗词2/" itemprop="url">
-              
-                <span itemprop="name">每周诗词2</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-29T09:28:14+08:00"
-              content="2018-07-29" >
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/23/每周代码片段分享/" itemprop="url">
-              
-                <span itemprop="name">每周代码片段分享</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-23T18:59:30+08:00"
-              content="2018-07-23" >
-          07-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/23/每周诗词/每周诗词1/" itemprop="url">
-              
-                <span itemprop="name">每周诗词1</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-23T18:00:00+08:00"
-              content="2018-07-23" >
-          07-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/23/安装conda错误/" itemprop="url">
-              
-                <span itemprop="name">安装conda错误</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-23T10:41:13+08:00"
-              content="2018-07-23" >
-          07-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/困惑度/" rel="tag"> <i class="fa fa-tag"></i> 困惑度</a>
+          
+            <a href="/tags/perplexity/" rel="tag"> <i class="fa fa-tag"></i> perplexity</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/29/每周诗词/每周诗词2/" rel="next" title="每周诗词2">
+                <i class="fa fa-chevron-left"></i> 每周诗词2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/29/ssh快速登录配置/" rel="prev" title="ssh快速登录配置">
+                ssh快速登录配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -571,6 +402,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -776,6 +611,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
