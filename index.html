@@ -599,10 +599,11 @@
       
         
           
-            <h3 id="配置ip、子网掩码、DNS、路由器"><a href="#配置ip、子网掩码、DNS、路由器" class="headerlink" title="配置ip、子网掩码、DNS、路由器"></a>配置ip、子网掩码、DNS、路由器</h3><p>有线似乎不支持DHCP，因此只好自己设置。<br>首先连接上有线，将配置iPv4选为手动。问实验室的学长具体的ip地址、子网掩码、路由器、DNS服务器。其中ip地址最后三位要自己设定，只要不和其他人冲突就好。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328333841584.jpg" alt=""></p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328335236981.jpg" alt=""></p>
+            <h3 id="配置ip、子网掩码、DNS、路由器"><a href="#配置ip、子网掩码、DNS、路由器" class="headerlink" title="配置ip、子网掩码、DNS、路由器"></a>配置ip、子网掩码、DNS、路由器</h3><p>有线似乎不支持DHCP，因此只好自己设置。<br>首先连接上有线，将配置iPv4选为手动。问实验室的学长具体的ip地址、子网掩码、路由器、DNS服务器。其中ip地址最后三位要自己设定，只要不和其他人冲突就好。</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328333841584.jpg" width="50%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328335236981.jpg" width="50%" height="50%"></p>
 <h3 id="手动认证"><a href="#手动认证" class="headerlink" title="手动认证"></a>手动认证</h3><p>到认证平台，下载Mac客户端，其实就是一个.sh文件：<br><a href="http://10.108.255.249/srun_portal_pc.php?ac_id=1&amp;&amp;phone=1" target="_blank" rel="noopener">http://10.108.255.249/srun_portal_pc.php?ac_id=1&amp;&amp;phone=1</a></p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328336395029.jpg" alt=""></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328336395029.jpg" width="30%" height="30%"></p>
 <p>然后，打开文件配置用户名密码，注意到等号后面要有双引号：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328337135244.jpg" alt=""></p>
 <p>保存并放入终端运行，接下来就可以使用有线网了。</p>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>似乎，每次重新连接都要这样配置，我没有试过不清楚；<br>有线网好像也没有比无线网快多少，但应该会稳定一些。</p>
@@ -735,10 +736,12 @@
 <h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="创建rsa-key"><a href="#创建rsa-key" class="headerlink" title="创建rsa key"></a>创建rsa key</h2><p>在终端输入命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
 <p>当然如果以前有创建过的可以不用。</p>
-<p>结果：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-Xnip2018-07-29_10-43-15.jpg" alt=""></p>
+<p>结果：</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-Xnip2018-07-29_10-43-15.jpg" width="50%" height="50%"></p>
 <h2 id="上传public-key到服务器"><a href="#上传public-key到服务器" class="headerlink" title="上传public key到服务器"></a>上传public key到服务器</h2><p>使用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub user@127.0.0.1</span><br></pre></td></tr></table></figure></p>
 <p>输入密码即可</p>
-<p>结果：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328324683354.jpg" alt=""></p>
+<p>结果：</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328324683354.jpg" width="50%" height="50%"></p>
 <h2 id="设置alias"><a href="#设置alias" class="headerlink" title="设置alias"></a>设置alias</h2><p>完成以上步骤就可以不输入密码登录，但还是需要输入ip地址和用户名，为了更简化操作，给命令起个别名。需要配置 .bash_profile文件。<br>输入命令:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
 <p>在文件后面添加以下文字：</p>
@@ -747,7 +750,7 @@
 <p>然后还要使其生效:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
 <p>这样，输入别名，就可以直接登录了：</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328329815456.jpg" alt=""></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328329815456.jpg" width="50%" height="50%"></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.jianshu.com/p/66d658c7cb9e" target="_blank" rel="noopener">https://www.jianshu.com/p/66d658c7cb9e</a></p>
 
           
