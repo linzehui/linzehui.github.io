@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="前几天在写新手任务task3的时候，参考了Pytorch官方example的word language model，官方example在训练过程中计算困惑度是这样的： 1math.exp(cur_loss) 其中，cur_loss表示交叉熵的loss，即 $-P(\hat{x})logP(x)$，$\hat{x}$表示ground truth。 然而，在查阅了困惑度相关资料后，我发现，困惑度的定义">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-29T02:32:48.243Z">
+<meta property="og:updated_time" content="2018-07-29T06:58:10.926Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于困惑度">
 <meta name="twitter:description" content="前几天在写新手任务task3的时候，参考了Pytorch官方example的word language model，官方example在训练过程中计算困惑度是这样的： 1math.exp(cur_loss) 其中，cur_loss表示交叉熵的loss，即 $-P(\hat{x})logP(x)$，$\hat{x}$表示ground truth。 然而，在查阅了困惑度相关资料后，我发现，困惑度的定义">
@@ -682,6 +682,26 @@ Perplexity(W）=& 2^{H(W)} \\
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
