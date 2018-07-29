@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="前几天在写新手任务task3的时候，参考了Pytorch官方example的word language model，官方example在训练过程中计算困惑度是这样的： 1math.exp(cur_loss) 其中，cur_loss表示交叉熵的loss，即 $-P(\hat{x})logP(x)$，$\hat{x}$表示ground truth。 然而，在查阅了困惑度相关资料后，我发现，困惑度的定义">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-29T06:58:10.926Z">
+<meta property="og:updated_time" content="2018-07-29T07:09:15.822Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于困惑度">
 <meta name="twitter:description" content="前几天在写新手任务task3的时候，参考了Pytorch官方example的word language model，官方example在训练过程中计算困惑度是这样的： 1math.exp(cur_loss) 其中，cur_loss表示交叉熵的loss，即 $-P(\hat{x})logP(x)$，$\hat{x}$表示ground truth。 然而，在查阅了困惑度相关资料后，我发现，困惑度的定义">
@@ -326,20 +326,23 @@
 <p>然而，在查阅了困惑度相关资料后，我发现，困惑度的定义是这样的：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-PP(S)=&{P(w_{1}w_{2}...w_{N})}^{-\frac{1}{N}} \\
-=&\sqrt[N]{\frac{1}{p(w_1 w_2 ... w_N)}} \\
-=& \sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }
+PP(S)= &{P(w_{1}w_{2}...w_{N})}^{-\frac{1}{N}} \\
+= &\sqrt[N]{\frac{1}{p(w_1 w_2 ... w_N)}} \\
+= & \sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }
 \end{aligned}</script><p>这是另一种形式:</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-Perplexity(W）=& 2^{H(W)} \\
-=&{P(w_{1}w_{2}...w_{N})}^{-\frac{1}{N}} \\
-=&\sqrt[N]{\frac{1}{p(w_1 w_2 ... w_N)}} \\
-=& \sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }
+Perplexity (W)=& 2^{H(W)} \\
+= & {P(w_{1}w_{2}...w_{N})}^{-\frac{1}{N}} \\
+= & \sqrt[N]{\frac{1}{p(w_1 w_2 ... w_N)}} \\
+= & \sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }
 \end{aligned}</script><p>可以看到，二者本质是一样的。</p>
 <p><strong>那么，为什么在代码中以e为底去计算困惑度，而不是2呢?</strong></p>
-<p>实际上，是因为在上述公式中，log是以2为底的，但在Pytorch中，log默认是以e为底的。因此在代码中，需要用e作为指数的底来还原成困惑度的原本形式： <script type="math/tex">\sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }</script></p>
-<p>最后这是perplexity的数学推导：<br><a href="https://www.zhihu.com/question/58482430" target="_blank" rel="noopener">https://www.zhihu.com/question/58482430</a></p>
+<p>实际上，是因为在上述公式中，log是以2为底的，但在Pytorch中，log默认是以e为底的。因此在代码中，需要用e作为指数的底来还原成困惑度的原本形式： </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }
+\end{aligned}</script><p>最后这是perplexity的数学推导：<br><a href="https://www.zhihu.com/question/58482430" target="_blank" rel="noopener">https://www.zhihu.com/question/58482430</a></p>
 
       
     </div>

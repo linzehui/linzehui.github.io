@@ -604,7 +604,8 @@
 <p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328335236981.jpg" width="50%" height="50%"></p>
 <h3 id="手动认证"><a href="#手动认证" class="headerlink" title="手动认证"></a>手动认证</h3><p>到认证平台，下载Mac客户端，其实就是一个.sh文件：<br><a href="http://10.108.255.249/srun_portal_pc.php?ac_id=1&amp;&amp;phone=1" target="_blank" rel="noopener">http://10.108.255.249/srun_portal_pc.php?ac_id=1&amp;&amp;phone=1</a></p>
 <p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328336395029.jpg" width="30%" height="30%"></p>
-<p>然后，打开文件配置用户名密码，注意到等号后面要有双引号：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328337135244.jpg" alt=""></p>
+<p>然后，打开文件配置用户名密码，注意到等号后面要有双引号：</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328337135244.jpg" width="50%" height="50%"></p>
 <p>保存并放入终端运行，接下来就可以使用有线网了。</p>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>似乎，每次重新连接都要这样配置，我没有试过不清楚；<br>有线网好像也没有比无线网快多少，但应该会稳定一些。</p>
 
@@ -741,7 +742,7 @@
 <h2 id="上传public-key到服务器"><a href="#上传public-key到服务器" class="headerlink" title="上传public key到服务器"></a>上传public key到服务器</h2><p>使用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub user@127.0.0.1</span><br></pre></td></tr></table></figure></p>
 <p>输入密码即可</p>
 <p>结果：</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328324683354.jpg" width="50%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328324683354.jpg" width="60%" height="60%"></p>
 <h2 id="设置alias"><a href="#设置alias" class="headerlink" title="设置alias"></a>设置alias</h2><p>完成以上步骤就可以不输入密码登录，但还是需要输入ip地址和用户名，为了更简化操作，给命令起个别名。需要配置 .bash_profile文件。<br>输入命令:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
 <p>在文件后面添加以下文字：</p>
@@ -877,20 +878,23 @@
 <p>然而，在查阅了困惑度相关资料后，我发现，困惑度的定义是这样的：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-PP(S)=&{P(w_{1}w_{2}...w_{N})}^{-\frac{1}{N}} \\
-=&\sqrt[N]{\frac{1}{p(w_1 w_2 ... w_N)}} \\
-=& \sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }
+PP(S)= &{P(w_{1}w_{2}...w_{N})}^{-\frac{1}{N}} \\
+= &\sqrt[N]{\frac{1}{p(w_1 w_2 ... w_N)}} \\
+= & \sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }
 \end{aligned}</script><p>这是另一种形式:</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-Perplexity(W）=& 2^{H(W)} \\
-=&{P(w_{1}w_{2}...w_{N})}^{-\frac{1}{N}} \\
-=&\sqrt[N]{\frac{1}{p(w_1 w_2 ... w_N)}} \\
-=& \sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }
+Perplexity (W)=& 2^{H(W)} \\
+= & {P(w_{1}w_{2}...w_{N})}^{-\frac{1}{N}} \\
+= & \sqrt[N]{\frac{1}{p(w_1 w_2 ... w_N)}} \\
+= & \sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }
 \end{aligned}</script><p>可以看到，二者本质是一样的。</p>
 <p><strong>那么，为什么在代码中以e为底去计算困惑度，而不是2呢?</strong></p>
-<p>实际上，是因为在上述公式中，log是以2为底的，但在Pytorch中，log默认是以e为底的。因此在代码中，需要用e作为指数的底来还原成困惑度的原本形式： <script type="math/tex">\sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }</script></p>
-<p>最后这是perplexity的数学推导：<br><a href="https://www.zhihu.com/question/58482430" target="_blank" rel="noopener">https://www.zhihu.com/question/58482430</a></p>
+<p>实际上，是因为在上述公式中，log是以2为底的，但在Pytorch中，log默认是以e为底的。因此在代码中，需要用e作为指数的底来还原成困惑度的原本形式： </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }
+\end{aligned}</script><p>最后这是perplexity的数学推导：<br><a href="https://www.zhihu.com/question/58482430" target="_blank" rel="noopener">https://www.zhihu.com/question/58482430</a></p>
 
           
         
