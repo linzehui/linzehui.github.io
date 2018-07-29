@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Python,碎片知识,Pytorch," />
+  <meta name="keywords" content="Python,碎片知识,Pytorch,Paper," />
 
 
 
@@ -80,10 +80,10 @@
 
 
 <meta name="description" content="1️⃣[Python]assert用法： assert expression等价于if not expression: raise AssertionError  2️⃣[Pytorch]Pytorch view：创建一个新的tensor，但他们的data是共享的。   3️⃣[Pytorch]在Pytorch中，embedding的index是不能requires_grad=True的，否则会出">
-<meta name="keywords" content="Python,碎片知识,Pytorch">
+<meta name="keywords" content="Python,碎片知识,Pytorch,Paper">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每周碎片知识1">
-<meta property="og:url" content="http://yoursite.com/2018/07/29/每周碎片知识点1/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/07/29/碎片知识点/每周碎片知识点1/index.html">
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="1️⃣[Python]assert用法： assert expression等价于if not expression: raise AssertionError  2️⃣[Pytorch]Pytorch view：创建一个新的tensor，但他们的data是共享的。   3️⃣[Pytorch]在Pytorch中，embedding的index是不能requires_grad=True的，否则会出">
 <meta property="og:locale" content="zh-Hans">
@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328370301774.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328372609264.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328375536418.jpg">
-<meta property="og:updated_time" content="2018-07-29T04:13:15.365Z">
+<meta property="og:updated_time" content="2018-07-29T05:17:09.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周碎片知识1">
 <meta name="twitter:description" content="1️⃣[Python]assert用法： assert expression等价于if not expression: raise AssertionError  2️⃣[Pytorch]Pytorch view：创建一个新的tensor，但他们的data是共享的。   3️⃣[Pytorch]在Pytorch中，embedding的index是不能requires_grad=True的，否则会出">
@@ -125,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/29/每周碎片知识点1/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/29/碎片知识点/每周碎片知识点1/"/>
 
 
 
@@ -258,7 +258,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/每周碎片知识点1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/碎片知识点/每周碎片知识点1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
@@ -329,7 +329,7 @@
 <p><code>assert expression</code><br>等价于<br><code>if not expression: raise AssertionError</code></p>
 <hr>
 <p>2️⃣[Pytorch]<br>Pytorch view：<br>创建一个新的tensor，但他们的<strong>data是共享的</strong>。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328360404485.jpg" width="80%" height="80%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328360404485.jpg" width="50%" height="50%"></p>
 <hr>
 <p>3️⃣[Pytorch]<br>在Pytorch中，embedding的index是不能requires_grad=True的，否则会出错。<br><a href="https://github.com/pytorch/pytorch/issues/7021" target="_blank" rel="noopener">https://github.com/pytorch/pytorch/issues/7021</a></p>
 <p>之前看过一份代码，设置volatile=false但没有出错，是因为在Pytorch0.4之后volatile已经被弃用了，因此volatile=false不起作用，而默认requires_grad=false</p>
@@ -346,14 +346,17 @@
 <hr>
 <p>6️⃣[Pytorch]<br>调用Cross_entropy时，Pytorch会帮助你加log和softmax。</p>
 <p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328370301774.jpg" alt=""></p>
+<hr>
 <p>7️⃣[Paper]<br><a href="https://arxiv.org/abs/1807.02291" target="_blank" rel="noopener">Sliced_RNN</a></p>
 <p>将RNN分块以提高并行性，甚至每层的RNN都可以不一样，达到抽取不同程度的抽象语义信息的目的。实验证明，在不同任务上都有一定的提升，但速度的提升很大。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328372609264.jpg" alt=""></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328372609264.jpg" width="50%" height="50%"></p>
+<hr>
 <p>8️⃣[Tf-idf]<br>计算词语对于句子的重要程度</p>
 <p><a href="https://zh.wikipedia.org/wiki/Tf-idf" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/Tf-idf</a></p>
 <p>tf是词频，idf是逆向文件频率。也即如果词在该句出现的次数越多，在所有文本的出现次数越少，则词对于句子的重要程度越高。</p>
+<hr>
 <p>9️⃣[numpy]<br>在numpy中，一个列表虽然是横着表示的，但它是列向量。我之前居然没有注意到这个问题。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328375536418.jpg" width="80%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328375536418.jpg" width="50%" height="50%"></p>
 
       
     </div>
@@ -377,6 +380,8 @@
           
             <a href="/tags/Pytorch/" rel="tag"> <i class="fa fa-tag"></i> Pytorch</a>
           
+            <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
+          
         </div>
       
 
@@ -397,6 +402,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/29/代码分享/每周代码片段分享2/" rel="prev" title="每周代码片段分享2">
+                每周代码片段分享2 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -468,7 +477,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -481,7 +490,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

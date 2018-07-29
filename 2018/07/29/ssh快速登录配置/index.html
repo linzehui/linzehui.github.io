@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-Xnip2018-07-29_10-43-15.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328324683354.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328329815456.jpg">
-<meta property="og:updated_time" content="2018-07-29T03:36:35.072Z">
+<meta property="og:updated_time" content="2018-07-29T06:39:20.149Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssh快速登录配置">
 <meta name="twitter:description" content="Motivation分配了服务器之后，每次要ssh进入都很麻烦：ssh user_name@ip_address 然后还要输入密码。 特别是如果分配了多个服务器，那有时候还容易忘记ip地址。因此如果能够一条命令就进入服务器能够减少麻烦。主要有三点：  创建rsa key 上传public key到服务器 设置alias  配置创建rsa key在终端输入命令： 1ssh-keygen -t rsa">
@@ -334,7 +334,7 @@
 <h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="创建rsa-key"><a href="#创建rsa-key" class="headerlink" title="创建rsa key"></a>创建rsa key</h2><p>在终端输入命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
 <p>当然如果以前有创建过的可以不用。</p>
-<p>结果：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-Xnip2018-07-29_10-43-15.jpg" alt="Xnip2018-07-29_10-43-15"></p>
+<p>结果：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-Xnip2018-07-29_10-43-15.jpg" alt=""></p>
 <h2 id="上传public-key到服务器"><a href="#上传public-key到服务器" class="headerlink" title="上传public key到服务器"></a>上传public key到服务器</h2><p>使用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub user@127.0.0.1</span><br></pre></td></tr></table></figure></p>
 <p>输入密码即可</p>
 <p>结果：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328324683354.jpg" alt=""></p>
@@ -473,7 +473,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -486,7 +486,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
