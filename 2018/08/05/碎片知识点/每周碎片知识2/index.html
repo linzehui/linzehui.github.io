@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="碎片知识,Pytorch,Paper,文本分类,hexo,nohup," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1️⃣[Pytorch]避免写出： 1x = Variable(torch.zeros(...), requires_grad=True).cuda() 而是应该要： 1x = Variable(torch.zeros(...).cuda(), requires_grad=True) Reference:https://discuss.pytorch.org/t/variable-grad-is-">
+<meta name="keywords" content="碎片知识,Pytorch,Paper,文本分类,hexo,nohup">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周碎片知识2">
+<meta property="og:url" content="http://www.linzehui.me/2018/08/05/碎片知识点/每周碎片知识2/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="1️⃣[Pytorch]避免写出： 1x = Variable(torch.zeros(...), requires_grad=True).cuda() 而是应该要： 1x = Variable(torch.zeros(...).cuda(), requires_grad=True) Reference:https://discuss.pytorch.org/t/variable-grad-is-">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334453515509.jpg">
+<meta property="og:updated_time" content="2018-08-05T06:27:57.945Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每周碎片知识2">
+<meta name="twitter:description" content="1️⃣[Pytorch]避免写出： 1x = Variable(torch.zeros(...), requires_grad=True).cuda() 而是应该要： 1x = Variable(torch.zeros(...).cuda(), requires_grad=True) Reference:https://discuss.pytorch.org/t/variable-grad-is-">
+<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334453515509.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2018/08/05/碎片知识点/每周碎片知识2/"/>
+
+
+
+
+
+  <title>每周碎片知识2 | Weekly Review</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/碎片知识点/每周碎片知识2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">每周碎片知识2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T11:02:37+08:00">
+                2018-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1️⃣[Pytorch]<br>避免写出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = Variable(torch.zeros(...), requires_grad=<span class="keyword">True</span>).cuda()</span><br></pre></td></tr></table></figure>
+<p>而是应该要：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = Variable(torch.zeros(...).cuda(), requires_grad=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p>Reference:<br><a href="https://discuss.pytorch.org/t/variable-grad-is-always-none-when-extending-autograd/12187" target="_blank" rel="noopener">https://discuss.pytorch.org/t/variable-grad-is-always-none-when-extending-autograd/12187</a></p>
+<hr>
+<p>2️⃣[Tf-idf]<br>本周因为比赛的原因了解了一下各种文本建模的方法。Tf-idf能够取得不错的成绩，但有一定的缺陷。</p>
+<blockquote>
+<p>TF-IDF用于向量空间模型，进行文档相似度计算是相当有效的。但在文本分类中单纯使用TF-IDF来判断一个特征是否有区分度是不够的。</p>
+<ol>
+<li>它仅仅综合考虑了该词在文档中的重要程度和文档区分度。</li>
+<li>它没有考虑特征词在类间的分布。特征选择所选择的特征应该在某类出现多，而其它类出现少，即考察各类的文档频率的差异。如果一个特征词，在各个类间分布比较均匀，这样的词对分类基本没有贡献；但是如果一个特征词比较集中的分布在某个类中，而在其它类中几乎不出现，这样的词却能够很好代表这个类的特征，而TF-IDF不能区分这两种情况。</li>
+<li>它没有考虑特征词在类内部文档中的分布情况。在类内部的文档中，如果特征词均匀分布在其中，则这个特征词能够很好的代表这个类的特征，如果只在几篇文档中出现，而在此类的其它文档中不出现，显然这样的特征词不能够代表这个类的特征。</li>
+</ol>
+</blockquote>
+<p>Reference:<br><a href="https://blog.csdn.net/mmc2015/article/details/46771791" target="_blank" rel="noopener">https://blog.csdn.net/mmc2015/article/details/46771791</a></p>
+<hr>
+<p>3️⃣[卡方检验CHI]<br>在文本分类中，用于选择最相关的特征。</p>
+<p>Reference:<br><a href="https://blog.csdn.net/blockheadls/article/details/49977361" target="_blank" rel="noopener">https://blog.csdn.net/blockheadls/article/details/49977361</a></p>
+<hr>
+<p>4️⃣[文本分类]<br>各种文本分类方法的简单介绍。</p>
+<p>Reference:<br><a href="https://github.com/wangjiang0624/Note/blob/master/MachineLearning/文本分类.md" target="_blank" rel="noopener">https://github.com/wangjiang0624/Note/blob/master/MachineLearning/文本分类.md</a></p>
+<hr>
+<p>5️⃣[Python]<br>collections的两个有用的类</p>
+<ol>
+<li>named_tuple：快速建立一个类，使得可以使用属性来访问而非索引，提高了代码可读性</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line">Point = namedtuple(<span class="string">'Point'</span>,[<span class="string">'x'</span>,<span class="string">'y'</span>])</span><br><span class="line">p = Point(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">print(p.x)  <span class="comment"># 1</span></span><br><span class="line">print(p.y)  <span class="comment"># 2</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>Counter：统计字符出现的次数</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">count = Counter([...]).most_commom()  <span class="comment">#会按照出现的次数排序，通常可用于构建词典</span></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> count:     <span class="comment"># c是一个tuple，c[0]是词，c[1]是频率</span></span><br><span class="line">    <span class="keyword">if</span> c[<span class="number">1</span>]&gt;= threshold:</span><br><span class="line">        vocab.add_word(c[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<p>Counter用法：<br><a href="https://blog.csdn.net/u014755493/article/details/69812244" target="_blank" rel="noopener">https://blog.csdn.net/u014755493/article/details/69812244</a></p>
+<hr>
+<p>6️⃣[nohup]<br>本周在服务器上跑代码的时候遇到一个问题，使用nohup执行python程序时，发现输出文件没有显示。以为是代码的问题，但经过排查并非是代码的问题。通过查阅资料，发现问题所在：<br>因为python输出有缓冲，导致output不能<strong>马上</strong>看到输出。实际上，在等待了一段时间后，输出文件终于显示出来了。</p>
+<p>解决方案：使用python的参数 -u 使得python不启用缓冲。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python -u test.py &gt; nohup.out 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>Reference:<br><a href="https://blog.csdn.net/sunlylorn/article/details/19127107" target="_blank" rel="noopener">https://blog.csdn.net/sunlylorn/article/details/19127107</a></p>
+<hr>
+<p>7️⃣[hexo配置]</p>
+<ol>
+<li>mathjax配置: <a href="https://www.jianshu.com/p/7ab21c7f0674" target="_blank" rel="noopener">https://www.jianshu.com/p/7ab21c7f0674</a></li>
+<li>配置域名:<a href="https://www.zhihu.com/question/31377141" target="_blank" rel="noopener">https://www.zhihu.com/question/31377141</a></li>
+<li>配置sitemap:<a href="http://www.yuan-ji.me/Hexo-优化：提交sitemap及解决百度爬虫抓取-GitHub-Pages-问题/" target="_blank" rel="noopener">http://www.yuan-ji.me/Hexo-优化：提交sitemap及解决百度爬虫抓取-GitHub-Pages-问题/</a></li>
+</ol>
+<hr>
+<p>8️⃣[Paper]<br><a href="http://aclweb.org/anthology/D17-1025" target="_blank" rel="noopener">Learning Chinese Word Representations From Glyphs Of Characters</a></p>
+<p>使用图像的卷积来生成词向量:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334453515509.jpg" width="50%" height="50%"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/碎片知识/" rel="tag"> <i class="fa fa-tag"></i> 碎片知识</a>
+          
+            <a href="/tags/Pytorch/" rel="tag"> <i class="fa fa-tag"></i> Pytorch</a>
+          
+            <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
+          
+            <a href="/tags/文本分类/" rel="tag"> <i class="fa fa-tag"></i> 文本分类</a>
+          
+            <a href="/tags/hexo/" rel="tag"> <i class="fa fa-tag"></i> hexo</a>
+          
+            <a href="/tags/nohup/" rel="tag"> <i class="fa fa-tag"></i> nohup</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/05/代码分享/每周代码片段分享3/" rel="next" title="每周代码片段分享3">
+                <i class="fa fa-chevron-left"></i> 每周代码片段分享3
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/05/碎片知识点/如何训练GloVe中文词向量/" rel="prev" title="如何训练GloVe中文词向量">
+                如何训练GloVe中文词向量 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg"
+                alt="林泽辉" />
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
