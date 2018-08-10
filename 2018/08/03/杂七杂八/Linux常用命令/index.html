@@ -79,22 +79,24 @@
 
 
 
-<meta name="description" content="记录自己常用的命令。 1️⃣ls：显式当前目录下的文件和目录    -a 包括隐藏文件 2️⃣top：动态查看系统运行状态    -u 指定用户名    -p 指定进程 3️⃣kill 杀死程序    -l 信息编号。当l=9时，无条件终止，其他信号可能忽略  4️⃣ps 报告当前系统的进程状态    -a 所有    -p 指定程序    -u 指定用户 5️⃣htop 比top更优，交互更好，">
+<meta name="description" content="记录自己常用的命令。 1️⃣ls：显式当前目录下的文件和目录    -a 包括隐藏文件    -h 将文件的容量以易读方式列出（配合-s使用）  2️⃣cd 到达指定地址  3️⃣kill 杀死程序    -l 信息编号。当l=9时，无条件终止，其他信号可能忽略    killall -u  杀死该用户全部进程   4️⃣ps 报告当前系统的进程状态    -a 所有    -p 指定程序">
 <meta name="keywords" content="Linux,碎片知识">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux常用命令">
 <meta property="og:url" content="http://www.linzehui.me/2018/08/03/杂七杂八/Linux常用命令/index.html">
 <meta property="og:site_name" content="Weekly Review">
-<meta property="og:description" content="记录自己常用的命令。 1️⃣ls：显式当前目录下的文件和目录    -a 包括隐藏文件 2️⃣top：动态查看系统运行状态    -u 指定用户名    -p 指定进程 3️⃣kill 杀死程序    -l 信息编号。当l=9时，无条件终止，其他信号可能忽略  4️⃣ps 报告当前系统的进程状态    -a 所有    -p 指定程序    -u 指定用户 5️⃣htop 比top更优，交互更好，">
+<meta property="og:description" content="记录自己常用的命令。 1️⃣ls：显式当前目录下的文件和目录    -a 包括隐藏文件    -h 将文件的容量以易读方式列出（配合-s使用）  2️⃣cd 到达指定地址  3️⃣kill 杀死程序    -l 信息编号。当l=9时，无条件终止，其他信号可能忽略    killall -u  杀死该用户全部进程   4️⃣ps 报告当前系统的进程状态    -a 所有    -p 指定程序">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-03-15332830170623.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15339036207642.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-04-15333484387393.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-04-15333497266470.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-04-15333500837235.jpg">
-<meta property="og:updated_time" content="2018-08-05T05:18:48.983Z">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334547949248.jpg">
+<meta property="og:updated_time" content="2018-08-10T12:20:47.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令">
-<meta name="twitter:description" content="记录自己常用的命令。 1️⃣ls：显式当前目录下的文件和目录    -a 包括隐藏文件 2️⃣top：动态查看系统运行状态    -u 指定用户名    -p 指定进程 3️⃣kill 杀死程序    -l 信息编号。当l=9时，无条件终止，其他信号可能忽略  4️⃣ps 报告当前系统的进程状态    -a 所有    -p 指定程序    -u 指定用户 5️⃣htop 比top更优，交互更好，">
+<meta name="twitter:description" content="记录自己常用的命令。 1️⃣ls：显式当前目录下的文件和目录    -a 包括隐藏文件    -h 将文件的容量以易读方式列出（配合-s使用）  2️⃣cd 到达指定地址  3️⃣kill 杀死程序    -l 信息编号。当l=9时，无条件终止，其他信号可能忽略    killall -u  杀死该用户全部进程   4️⃣ps 报告当前系统的进程状态    -a 所有    -p 指定程序">
 <meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-03-15332830170623.jpg">
 
 
@@ -326,21 +328,46 @@
 
       
         <p>记录自己常用的命令。</p>
-<p>1️⃣ls：显式当前目录下的文件和目录<br>    -a 包括隐藏文件</p>
-<p>2️⃣top：动态查看系统运行状态<br>    -u 指定用户名<br>    -p 指定进程</p>
-<p>3️⃣kill 杀死程序<br>    -l 信息编号。<strong>当l=9时，无条件终止，其他信号可能忽略</strong></p>
+<p>1️⃣ls：显式当前目录下的文件和目录<br>    -a 包括隐藏文件<br>    -h 将文件的容量以易读方式列出（配合-s使用）</p>
+<hr>
+<p>2️⃣cd 到达指定地址</p>
+<hr>
+<p>3️⃣kill 杀死程序<br>    -l 信息编号。<strong>当l=9时，无条件终止，其他信号可能忽略</strong><br>    killall -u <user_name> 杀死该用户全部进程</user_name></p>
 <p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-03-15332830170623.jpg" width="50%" height="50%"></p>
-<p>4️⃣ps 报告当前系统的进程状态<br>    -a 所有<br>    -p 指定程序<br>    -u 指定用户</p>
-<p>5️⃣htop 比top更优，交互更好，同时可以直观看到资源占用情况<br>基本命令与top一致<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-04-15333484387393.jpg" width="50%" height="50%"></p>
-<p>6️⃣cd 到达指定地址</p>
+<hr>
+<p>4️⃣ps 报告当前系统的进程状态<br>    -a 所有<br>    -p 指定程序<br>    -u 指定用户<br>    -x 列出该用户的进程的详细信息(我的理解应该是)<br>    如：<br>    <img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15339036207642.jpg" alt=""></p>
+<hr>
+<p>5️⃣htop 比top更优，交互更好，同时可以直观看到资源占用情况<br>基本命令与top一致<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-04-15333484387393.jpg" width="70%" height="50%"></p>
+<hr>
+<p>6️⃣top：动态查看系统运行状态<br>    -u 指定用户名<br>    -p 指定进程</p>
 <p>7️⃣nvidia-smi 查看显卡状态</p>
-<p>8️⃣vim 使用vim打开指定文件<br>    :q 退出<br>    :wq 写入并退出<br>    :q! 退出并忽略所有更改<br>    :e! 放弃修改并打开原来的文件<br>    :u 撤销<br>    :n 跳转到行号  如， :100<br>    :set nu 显示行号<br>    :set nonu 隐藏行号<br>    i 插入模式</p>
-<p>9️⃣echo 用于打印指定的字符串<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-04-15333497266470.jpg" width="50%" height="50%"></p>
+<hr>
+<p>8️⃣tail 显示指定文件的末尾若干行<br>    -f 显示文件最新追加的内容<br>    -n 显示文件尾部n行内容<br>    -c 显示文件尾部最后c个字符</p>
+<p>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tail file 显示最后10行</span><br><span class="line">tail -n +20 file 显示从第20行至末尾</span><br><span class="line">tail -c 10 file 显示文件file的最后10个字符</span><br></pre></td></tr></table></figure>
+<pre><code>-------
+</code></pre><p>9️⃣echo 用于打印指定的字符串<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-04-15333497266470.jpg" width="50%" height="50%"></p>
+<hr>
 <p>🔟which 用于查找并显示给定命令的绝对路径，which指令会在环境变量$PATH设置的目录里查找符合条件的文件。使用which命令，可以看到某个系统命令是否存在，以及执行的是哪个位置的命令。如：</p>
 <p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-04-15333500837235.jpg" width="50%" height="50%"></p>
+<hr>
 <p>1️⃣1️⃣nohup 将程序以忽略挂起信号的方式运行，经常用于在服务器跑代码<br>如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python xxx.py &gt;output.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure></p>
 <p>即，将输出重定向到output.txt ；最后一个<code>&amp;</code>表示后台挂起</p>
-<p>1️⃣2️⃣</p>
+<hr>
+<p>1️⃣2️⃣cp 复制文件   cp [文件] [目标文件夹]<br>    -r 递归复制，用于目录的复制</p>
+<hr>
+<p>1️⃣3️⃣mv 移动文件、目录或更名  mv [文件/文件夹] [文件夹]<br>    -f 强制，当目标文件存在，直接覆盖<br>    -i 会询问</p>
+<hr>
+<p>1️⃣4️⃣rm 删除文件或目录<br>    -f 强制删除<br>    -r 递归删除，用于目录删除</p>
+<hr>
+<p>1️⃣5️⃣file 用于判断文件的基本数据<br>如：</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334547949248.jpg" width="80%" height="50%"></p>
+<hr>
+<p>1️⃣6️⃣tar 对文件打包/压缩<br>    -t 查看打包文件的内容含有哪些文件名<br>    -x 解压缩<br>    -c 新建打包文件<br>    -C 指定压缩/解压目录<br>    -v 解压/压缩过程中将处理的文件名显示出来<br>常用的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">压缩：tar -jcv -f filename.tar.bz2 要被处理的文件或目录名称</span><br><span class="line">查询：tar -jtv -f filename.tar.bz2</span><br><span class="line">解压：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录</span><br></pre></td></tr></table></figure>
+<hr>
+<p>1️⃣7️⃣wc word count 统计文件内容信息，如行数、字符数<br>    -l 显示文件行数<br>    -c 显示字节数<br>    -m 显示字符数<br>    -w 显示字数  字被定义为由空白、跳格、换行字符分隔的字符串<br>    -L 显示最长行的长度<br>    不加参数，所有的都显示，依次是行数、单词数、字节数、文件名</p>
+<hr>
 <p>———-持续更新———-</p>
 
       
@@ -458,7 +485,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -471,7 +498,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

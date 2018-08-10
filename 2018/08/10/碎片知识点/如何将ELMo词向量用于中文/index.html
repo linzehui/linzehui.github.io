@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="教程,ELMo,词向量," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于每句话进入到language model获得不同的词向量。根据实验可得，使用了Elmo词向量之后，许多NLP任务都有了大幅的提高。 论文:Deep contextualized word representations AllenNLP一共relea">
+<meta name="keywords" content="教程,ELMo,词向量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何将ELMo词向量用于中文">
+<meta property="og:url" content="http://www.linzehui.me/2018/08/10/碎片知识点/如何将ELMo词向量用于中文/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于每句话进入到language model获得不同的词向量。根据实验可得，使用了Elmo词向量之后，许多NLP任务都有了大幅的提高。 论文:Deep contextualized word representations AllenNLP一共relea">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338861462682.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338884324046.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338879402377.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338888745894.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338904085078.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15339015862848.jpg">
+<meta property="og:updated_time" content="2018-08-10T11:48:44.796Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何将ELMo词向量用于中文">
+<meta name="twitter:description" content="ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于每句话进入到language model获得不同的词向量。根据实验可得，使用了Elmo词向量之后，许多NLP任务都有了大幅的提高。 论文:Deep contextualized word representations AllenNLP一共relea">
+<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338861462682.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2018/08/10/碎片知识点/如何将ELMo词向量用于中文/"/>
+
+
+
+
+
+  <title>如何将ELMo词向量用于中文 | Weekly Review</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/10/碎片知识点/如何将ELMo词向量用于中文/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何将ELMo词向量用于中文</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-10T11:17:05+08:00">
+                2018-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于每句话进入到language model获得不同的词向量。根据实验可得，使用了Elmo词向量之后，许多NLP任务都有了大幅的提高。</p>
+<p>论文:<a href="https://arxiv.org/pdf/1802.05365.pdf" target="_blank" rel="noopener">Deep contextualized word representations</a></p>
+<p>AllenNLP一共release了两份ELMo的代码，一份是Pytorch版本的，另一份是Tensorflow版本的。Pytorch版本的只开放了使用预训练好的词向量的接口，但没有给出自己训练的接口，因此无法使用到中文语料中。Tensorflow版本有提供训练的代码，因此本文记录如何将ELMo用于中文语料中，但本文只记录使用到的部分，而不会分析全部的代码。</p>
+<p>需求:<br>使用预训练好的词向量作为句子表示直接传入到RNN中(也就是不使用代码中默认的先过CNN)，在训练完后，将模型保存，在需要用的时候load进来，对于一个特定的句子，首先将其转换成预训练的词向量，传入language model之后最终得到ELMo词向量。</p>
+<p>准备工作:</p>
+<ol>
+<li>将中文语料分词</li>
+<li>训练好GloVe词向量或者word2vec</li>
+<li>下载<a href="https://github.com/allenai/bilm-tf" target="_blank" rel="noopener">bilm-tf代码</a></li>
+<li>生成词表 vocab_file （训练的时候要用到）</li>
+<li>optional:阅读Readme</li>
+<li>optional:通读bilm-tf的代码，对代码结构有一定的认识</li>
+</ol>
+<p>思路:</p>
+<ol>
+<li>将预训练的词向量读入，并保存到hdf5文件（后面要用）</li>
+<li>修改bilm-tf代码<ol>
+<li>option部分</li>
+<li>添加给embedding weight赋初值</li>
+</ol>
+</li>
+<li>开始训练，获得checkpoint和option文件</li>
+<li>运行脚本，获得language model的weight文件</li>
+<li>运行脚本，将语料转化成ELMo并保存到文件(也可以选择不保存，修改对应代码即可)</li>
+</ol>
+<h3 id="训练GloVe或word2vec"><a href="#训练GloVe或word2vec" class="headerlink" title="训练GloVe或word2vec"></a>训练GloVe或word2vec</h3><p>可参见我以前的博客或者网上的教程<br>注意到，如果要用gensim导入GloVe训好的词向量，需要在开头添加num_word embedding_dim 如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338861462682.jpg" alt=""></p>
+<h3 id="获得vocab词表文件"><a href="#获得vocab词表文件" class="headerlink" title="获得vocab词表文件"></a>获得vocab词表文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">model=gensim.models.KeyedVectors.load_word2vec_format(</span><br><span class="line">    fname=<span class="string">'/home/zhlin/GloVe/vectors.txt'</span>,binary=<span class="keyword">False</span></span><br><span class="line">)</span><br><span class="line">words=model.vocab</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'vocab.txt'</span>,<span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">'&lt;S&gt;'</span>)</span><br><span class="line">    f.write(<span class="string">'\n'</span>）</span><br><span class="line">    f.write(<span class="string">'&lt;/S&gt;'</span>)</span><br><span class="line">    f.write(<span class="string">'\n'</span>)</span><br><span class="line">    f.write(<span class="string">'&lt;UNK&gt;'</span>)</span><br><span class="line">    f.write(<span class="string">'\n'</span>)    <span class="comment"># bilm-tf 要求vocab有这三个符号，并且在最前面</span></span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> words:</span><br><span class="line">        f.write(word)</span><br><span class="line">        f.write(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="保存到hdf5"><a href="#保存到hdf5" class="headerlink" title="保存到hdf5"></a>保存到hdf5</h3><p>将embedding保存:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###保存hdf5文件</span></span><br><span class="line"><span class="keyword">import</span> h5py</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> gensim</span><br><span class="line">num_embedding=<span class="number">1618166</span></span><br><span class="line">embeding_dim=<span class="number">300</span></span><br><span class="line"></span><br><span class="line">embedding=np.zeros((num_embedding,embeding_dim),dtype=<span class="string">'float'</span>)</span><br><span class="line">model=gensim.models.KeyedVectors.load_word2vec_format(</span><br><span class="line">    fname=<span class="string">'/home/zhlin/GloVe/vectors.txt'</span>,binary=<span class="keyword">False</span></span><br><span class="line">)</span><br><span class="line">words=model.vocab</span><br><span class="line"><span class="keyword">for</span> i,word <span class="keyword">in</span> enumerate(words):</span><br><span class="line">    embedding[i][:]=model[word]</span><br><span class="line"></span><br><span class="line"><span class="comment">#print(embedding)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> h5py.File(<span class="string">'vocab_embedding.hdf5'</span>,<span class="string">'w'</span>) <span class="keyword">as</span> fout:</span><br><span class="line">    fout.create_dataset(<span class="string">'embedding'</span>,embedding.shape,dtype=<span class="string">'float32'</span>,data=embedding)</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338884324046.jpg" alt="运行结果"></p>
+<h3 id="修改bilm-tf代码"><a href="#修改bilm-tf代码" class="headerlink" title="修改bilm-tf代码"></a>修改bilm-tf代码</h3><p>注意到，在使用该代码之前，需要安装好相应的环境。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338879402377.jpg" alt=""></p>
+<p>如果使用的是conda作为默认的Python解释器，强烈建议使用conda安装，否则可能会出现一些莫名的错误。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda install tensorflow-gpu=1.4</span><br><span class="line">conda install h5py</span><br><span class="line">python setup.py install <span class="comment">#应在bilm-tf的文件夹下执行该指令</span></span><br></pre></td></tr></table></figure></p>
+<p>然后再运行测试代码，通过说明安装成功。</p>
+<p>bin文件夹下的train_elmo.py是程序的入口。<br>主要修改的地方：</p>
+<ol>
+<li>load_vocab的第二个参数应该改为None</li>
+<li>n_gpus CUDA_VISIBLE_DEVICES 根据自己需求改</li>
+<li>n_train_tokens 可改可不改，影响的是输出信息，可以通过<code>wc -l corpus.txt</code> 查看行数</li>
+<li><strong>option的修改</strong>，将char_cnn部分都注释掉，其他根据自己需求修改</li>
+</ol>
+<p>如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338888745894.jpg" alt=""></p>
+<p>由于我需要传入预训练好的GloVe embedding，那么还需要修改embedding部分，这部分在bilm文件夹下的training.py，进入到LanguageModel类中_build_word_embeddings函数中。<br>如:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338904085078.jpg" alt=""></p>
+<h3 id="训练并获得weight文件"><a href="#训练并获得weight文件" class="headerlink" title="训练并获得weight文件"></a>训练并获得weight文件</h3><p>训练需要语料文件corpus.txt，词表文件vocab.txt。注意到，词表文件的开头必须要有<code>&lt;S&gt; &lt;/S&gt; &lt;UNK&gt;</code>，且大小写敏感。</p>
+<p>cd到bilm-tf文件夹下，运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> CUDA_VISIBLE_DEVICES=4</span><br><span class="line">nohup python -u bin/train_elmo.py \</span><br><span class="line">--train_prefix=<span class="string">'/home/zhlin/bilm-tf/corpus.txt'</span> \</span><br><span class="line">--vocab_file /home/zhlin/bilm-tf/glove_embedding_vocab8.10/vocab.txt \</span><br><span class="line">--save_dir /home/zhlin/bilm-tf/try &gt;bilm_out.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure></p>
+<p>根据实际情况设定不同的值和路径。</p>
+<p>运行情况：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15339015862848.jpg" alt=""></p>
+<p>PS:运行过程中可能会有warning:</p>
+<blockquote>
+<p>‘list’ object has no attribute ‘name’<br>WARNING:tensorflow:Error encountered when serializing lstm_output_embeddings.<br>Type is unsupported, or the types of the items don’t match field type in CollectionDef.</p>
+</blockquote>
+<p>应该不用担心，还是能够继续运行的，后面也不受影响。</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://github.com/allenai/bilm-tf" target="_blank" rel="noopener">https://github.com/allenai/bilm-tf</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/教程/" rel="tag"> <i class="fa fa-tag"></i> 教程</a>
+          
+            <a href="/tags/ELMo/" rel="tag"> <i class="fa fa-tag"></i> ELMo</a>
+          
+            <a href="/tags/词向量/" rel="tag"> <i class="fa fa-tag"></i> 词向量</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/06/诗词&句/无题/" rel="next" title="无题">
+                <i class="fa fa-chevron-left"></i> 无题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/10/杂七杂八/Pycharm常用技巧/" rel="prev" title="Pycharm常用技巧">
+                Pycharm常用技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg"
+                alt="林泽辉" />
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#训练GloVe或word2vec"><span class="nav-number">1.</span> <span class="nav-text">训练GloVe或word2vec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获得vocab词表文件"><span class="nav-number">2.</span> <span class="nav-text">获得vocab词表文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存到hdf5"><span class="nav-number">3.</span> <span class="nav-text">保存到hdf5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改bilm-tf代码"><span class="nav-number">4.</span> <span class="nav-text">修改bilm-tf代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练并获得weight文件"><span class="nav-number">5.</span> <span class="nav-text">训练并获得weight文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
