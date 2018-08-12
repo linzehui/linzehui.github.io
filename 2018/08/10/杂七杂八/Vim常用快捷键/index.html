@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="杂七杂八,快捷键,技巧,Vim," />
+  <meta name="keywords" content="技巧,杂七杂八,快捷键,Vim," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="在服务器经常要用到vim，因此记录常用的快捷键并熟悉之。 :q 退出:wq 写入并退出:q! 退出并忽略所有更改:e! 放弃修改并打开原来的文件:u 撤销:n 跳转到行号  如， :100:set nu 显示行号:set nonu 隐藏行号:m,nd 删除从m到n行的内容，如: :100,10000di 插入模式">
-<meta name="keywords" content="杂七杂八,快捷键,技巧,Vim">
+<meta name="description" content="在服务器经常要用到Vim，因此记录常用的快捷键并熟悉之。 退出:q 退出:wq 写入并退出:q! 退出并忽略所有更改:e! 放弃修改并打开原来的文件 插入i 在当前位置前插入a 在当前位置后插入 撤销:u 撤销:U 撤销整行操作Ctrl+r 重做 删除:md 删除第m行nd 删除当前行开始的n行(一共n+1行)dd 删除当前行D 删除当前字符至行尾:m,nd 删除从m到n行的内容，如: :100,">
+<meta name="keywords" content="技巧,杂七杂八,快捷键,Vim">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vim常用技巧">
+<meta property="og:title" content="Vim常用快捷键">
 <meta property="og:url" content="http://www.linzehui.me/2018/08/10/杂七杂八/Vim常用快捷键/index.html">
 <meta property="og:site_name" content="Weekly Review">
-<meta property="og:description" content="在服务器经常要用到vim，因此记录常用的快捷键并熟悉之。 :q 退出:wq 写入并退出:q! 退出并忽略所有更改:e! 放弃修改并打开原来的文件:u 撤销:n 跳转到行号  如， :100:set nu 显示行号:set nonu 隐藏行号:m,nd 删除从m到n行的内容，如: :100,10000di 插入模式">
+<meta property="og:description" content="在服务器经常要用到Vim，因此记录常用的快捷键并熟悉之。 退出:q 退出:wq 写入并退出:q! 退出并忽略所有更改:e! 放弃修改并打开原来的文件 插入i 在当前位置前插入a 在当前位置后插入 撤销:u 撤销:U 撤销整行操作Ctrl+r 重做 删除:md 删除第m行nd 删除当前行开始的n行(一共n+1行)dd 删除当前行D 删除当前字符至行尾:m,nd 删除从m到n行的内容，如: :100,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-10T11:51:43.133Z">
+<meta property="og:updated_time" content="2018-08-11T07:26:44.487Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vim常用技巧">
-<meta name="twitter:description" content="在服务器经常要用到vim，因此记录常用的快捷键并熟悉之。 :q 退出:wq 写入并退出:q! 退出并忽略所有更改:e! 放弃修改并打开原来的文件:u 撤销:n 跳转到行号  如， :100:set nu 显示行号:set nonu 隐藏行号:m,nd 删除从m到n行的内容，如: :100,10000di 插入模式">
+<meta name="twitter:title" content="Vim常用快捷键">
+<meta name="twitter:description" content="在服务器经常要用到Vim，因此记录常用的快捷键并熟悉之。 退出:q 退出:wq 写入并退出:q! 退出并忽略所有更改:e! 放弃修改并打开原来的文件 插入i 在当前位置前插入a 在当前位置后插入 撤销:u 撤销:U 撤销整行操作Ctrl+r 重做 删除:md 删除第m行nd 删除当前行开始的n行(一共n+1行)dd 删除当前行D 删除当前字符至行尾:m,nd 删除从m到n行的内容，如: :100,">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>Vim常用技巧 | Weekly Review</title>
+  <title>Vim常用快捷键 | Weekly Review</title>
   
 
 
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Vim常用技巧</h1>
+          <h1 class="post-title" itemprop="name headline">Vim常用快捷键</h1>
         
 
         <div class="post-meta">
@@ -320,8 +320,16 @@
       
 
       
-        <p>在服务器经常要用到vim，因此记录常用的快捷键并熟悉之。</p>
-<p>:q 退出<br>:wq 写入并退出<br>:q! 退出并忽略所有更改<br>:e! 放弃修改并打开原来的文件<br>:u 撤销<br>:n 跳转到行号  如， :100<br>:set nu 显示行号<br>:set nonu 隐藏行号<br>:m,nd 删除从m到n行的内容，如: <code>:100,10000d</code><br>i 插入模式</p>
+        <p>在服务器经常要用到Vim，因此记录常用的快捷键并熟悉之。</p>
+<h3 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h3><p>:q 退出<br>:wq 写入并退出<br>:q! 退出并忽略所有更改<br>:e! 放弃修改并打开原来的文件</p>
+<h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>i 在当前位置前插入<br>a 在当前位置后插入</p>
+<h3 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h3><p>:u 撤销<br>:U 撤销整行操作<br>Ctrl+r 重做</p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>:md 删除第m行<br>nd 删除当前行开始的n行(一共n+1行)<br>dd 删除当前行<br>D 删除当前字符至行尾<br>:m,nd 删除从m到n行的内容，如: <code>:100,10000d</code><br>:m,$d 删除m行及以后所有的行<br>:10d</p>
+<h3 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h3><p>:n 跳转到行号  如， :100<br>gg 跳到行首<br>G(shift+g)移动到文件尾</p>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>/text 搜索text，n搜索下一个，N搜索上一个<br>?text 反向查找<br>:set ignorecase 忽略大小写查找<br>:set noignorecase 不忽略大小写查找<br>*或# 对光标处的单词搜索</p>
+<h3 id="复制粘贴"><a href="#复制粘贴" class="headerlink" title="复制粘贴"></a>复制粘贴</h3><p>v 从当前位置开始，光标经过的地方被选中，再按一下v结束</p>
+<h3 id="环境设置"><a href="#环境设置" class="headerlink" title="环境设置"></a>环境设置</h3><p>:set nu 显示行号<br>:set nonu 隐藏行号</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://www.cnblogs.com/wangrx/p/5907013.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangrx/p/5907013.html</a><br><a href="https://www.cnblogs.com/yangjig/p/6014198.html" target="_blank" rel="noopener">https://www.cnblogs.com/yangjig/p/6014198.html</a></p>
 
       
     </div>
@@ -339,11 +347,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/技巧/" rel="tag"> <i class="fa fa-tag"></i> 技巧</a>
+          
             <a href="/tags/杂七杂八/" rel="tag"> <i class="fa fa-tag"></i> 杂七杂八</a>
           
             <a href="/tags/快捷键/" rel="tag"> <i class="fa fa-tag"></i> 快捷键</a>
-          
-            <a href="/tags/技巧/" rel="tag"> <i class="fa fa-tag"></i> 技巧</a>
           
             <a href="/tags/Vim/" rel="tag"> <i class="fa fa-tag"></i> Vim</a>
           
@@ -367,6 +375,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/12/诗词&句/每周诗词4/" rel="prev" title="每周诗词4">
+                每周诗词4 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -418,8 +430,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -438,7 +459,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -451,7 +472,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -474,6 +495,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#退出"><span class="nav-number">1.</span> <span class="nav-text">退出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入"><span class="nav-number">2.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销"><span class="nav-number">3.</span> <span class="nav-text">撤销</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除"><span class="nav-number">4.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动"><span class="nav-number">5.</span> <span class="nav-text">移动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索"><span class="nav-number">6.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制粘贴"><span class="nav-number">7.</span> <span class="nav-text">复制粘贴</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境设置"><span class="nav-number">8.</span> <span class="nav-text">环境设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">9.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
