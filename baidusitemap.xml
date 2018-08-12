@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://www.linzehui.me/2018/08/12/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%863/</loc>
-    <lastmod>2018-08-12T09:05:50.229Z</lastmod>
+    <lastmod>2018-08-12T11:37:10.643Z</lastmod>
     <data>
         <display>
         <title>每周碎片知识3</title>
@@ -13,9 +13,42 @@
         
         <tag>碎片知识</tag>
          
+        <tag>Python</tag>
+         
         <tag>度量标准</tag>
          
         <tag>调参技巧</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/08/05/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%862/</loc>
+    <lastmod>2018-08-12T11:33:41.715Z</lastmod>
+    <data>
+        <display>
+        <title>每周碎片知识2</title>
+        <pubTime>2018-08-05T03:02:37.000Z</pubTime>
+        
+        <tag>碎片知识</tag>
+         
+        <tag>Pytorch</tag>
+         
+        <tag>Paper</tag>
+         
+        <tag>Tf-idf</tag>
+         
+        <tag>文本分类</tag>
+         
+        <tag>hexo</tag>
+         
+        <tag>nohup</tag>
+         
+        <tag>CHI</tag>
          
          
            
@@ -55,11 +88,11 @@
         
         <tag>技巧</tag>
          
-        <tag>Pycharm</tag>
-         
         <tag>杂七杂八</tag>
          
         <tag>快捷键</tag>
+         
+        <tag>Pycharm</tag>
          
          
            
@@ -137,11 +170,11 @@
         
         <tag>技巧</tag>
          
+        <tag>Vim</tag>
+         
         <tag>杂七杂八</tag>
          
         <tag>快捷键</tag>
-         
-        <tag>Vim</tag>
          
          
            
@@ -203,33 +236,6 @@
     </url>
 
     
-  <url>
-    <loc>http://www.linzehui.me/2018/08/05/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%862/</loc>
-    <lastmod>2018-08-05T06:58:08.233Z</lastmod>
-    <data>
-        <display>
-        <title>每周碎片知识2</title>
-        <pubTime>2018-08-05T03:02:37.000Z</pubTime>
-        
-        <tag>碎片知识</tag>
-         
-        <tag>Pytorch</tag>
-         
-        <tag>文本分类</tag>
-         
-        <tag>hexo</tag>
-         
-        <tag>Paper</tag>
-         
-        <tag>nohup</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
     
   <url>
     <loc>http://www.linzehui.me/2018/07/31/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E4%B8%80%E4%B8%AA%E5%85%B3%E4%BA%8Eyield%E7%9A%84%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86/</loc>
@@ -239,11 +245,11 @@
         <title>一个关于yield的重新认识</title>
         <pubTime>2018-07-31T06:26:37.000Z</pubTime>
         
-        <tag>遇到的问题</tag>
-         
         <tag>Python</tag>
          
         <tag>yield</tag>
+         
+        <tag>遇到的问题</tag>
          
          
            
@@ -507,9 +513,9 @@
         
         <tag>杂七杂八</tag>
          
-        <tag>conda</tag>
-         
         <tag>遇到的问题</tag>
+         
+        <tag>conda</tag>
          
          
            
