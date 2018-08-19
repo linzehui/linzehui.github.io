@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="本周主要看了AllenNLP/ELMO的代码，但并没有找到很多可复用的代码。本周也没有比较有意义的代码。  1️⃣get_time_diff获取已使用的时间 123456789import timefrom datetime import timedeltastart_time=time.time()def get_time_dif(start_time):    &quot;&quot;&quot;获取已使用时间&quot;&quot;&quot;">
+<meta name="description" content="本周主要看了AllenNLP/ELMO的代码，但并没有找到很多可复用的代码。本周也没有比较有意义的代码。  1️⃣get_time_diff获取已使用的时间123456789import timefrom datetime import timedeltastart_time=time.time()def get_time_dif(start_time):    &quot;&quot;&quot;获取已使用时间&quot;&quot;&quot;">
 <meta name="keywords" content="code snippets,代码片段">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每周代码片段分享2">
 <meta property="og:url" content="http://www.linzehui.me/2018/07/29/代码分享/每周代码片段分享2/index.html">
 <meta property="og:site_name" content="Weekly Review">
-<meta property="og:description" content="本周主要看了AllenNLP/ELMO的代码，但并没有找到很多可复用的代码。本周也没有比较有意义的代码。  1️⃣get_time_diff获取已使用的时间 123456789import timefrom datetime import timedeltastart_time=time.time()def get_time_dif(start_time):    &quot;&quot;&quot;获取已使用时间&quot;&quot;&quot;">
+<meta property="og:description" content="本周主要看了AllenNLP/ELMO的代码，但并没有找到很多可复用的代码。本周也没有比较有意义的代码。  1️⃣get_time_diff获取已使用的时间123456789import timefrom datetime import timedeltastart_time=time.time()def get_time_dif(start_time):    &quot;&quot;&quot;获取已使用时间&quot;&quot;&quot;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-29T06:37:23.863Z">
+<meta property="og:updated_time" content="2018-08-19T06:52:19.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周代码片段分享2">
-<meta name="twitter:description" content="本周主要看了AllenNLP/ELMO的代码，但并没有找到很多可复用的代码。本周也没有比较有意义的代码。  1️⃣get_time_diff获取已使用的时间 123456789import timefrom datetime import timedeltastart_time=time.time()def get_time_dif(start_time):    &quot;&quot;&quot;获取已使用时间&quot;&quot;&quot;">
+<meta name="twitter:description" content="本周主要看了AllenNLP/ELMO的代码，但并没有找到很多可复用的代码。本周也没有比较有意义的代码。  1️⃣get_time_diff获取已使用的时间123456789import timefrom datetime import timedeltastart_time=time.time()def get_time_dif(start_time):    &quot;&quot;&quot;获取已使用时间&quot;&quot;&quot;">
 
 
 
@@ -322,11 +322,10 @@
       
         <p>本周主要看了<a href="https://github.com/allenai/bilm-tf" target="_blank" rel="noopener">AllenNLP/ELMO</a>的代码，但并没有找到很多可复用的代码。本周也没有比较有意义的代码。</p>
 <hr>
-<p>1️⃣get_time_diff<br>获取已使用的时间</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line"></span><br><span class="line">start_time=time.time()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_time_dif</span><span class="params">(start_time)</span>:</span></span><br><span class="line">    <span class="string">"""获取已使用时间"""</span></span><br><span class="line">    end_time = time.time()</span><br><span class="line">    time_dif = end_time - start_time</span><br><span class="line">    <span class="keyword">return</span> timedelta(seconds=int(round(time_dif)))</span><br></pre></td></tr></table></figure>
+<p>1️⃣get_time_diff<br>获取已使用的时间<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line"></span><br><span class="line">start_time=time.time()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_time_dif</span><span class="params">(start_time)</span>:</span></span><br><span class="line">    <span class="string">"""获取已使用时间"""</span></span><br><span class="line">    end_time = time.time()</span><br><span class="line">    time_dif = end_time - start_time</span><br><span class="line">    <span class="keyword">return</span> timedelta(seconds=int(round(time_dif)))</span><br></pre></td></tr></table></figure></p>
 <hr>
-<p>2️⃣parser使用</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser()</span><br><span class="line">parser.add_argument(<span class="string">'--save_dir'</span>, help=<span class="string">'Location of checkpoint files'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'--vocab_file'</span>, help=<span class="string">'Vocabulary file'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'--train_prefix'</span>, help=<span class="string">'Prefix for train files'</span>)</span><br><span class="line"></span><br><span class="line">args = parser.parse_args()</span><br><span class="line">    </span><br><span class="line">main(args)   <span class="comment">#使用</span></span><br></pre></td></tr></table></figure>
+<p>2️⃣parser使用<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">parser = argparse.ArgumentParser()</span><br><span class="line">parser.add_argument(<span class="string">'--save_dir'</span>, help=<span class="string">'Location of checkpoint files'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'--vocab_file'</span>, help=<span class="string">'Vocabulary file'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'--train_prefix'</span>, help=<span class="string">'Prefix for train files'</span>)</span><br><span class="line"></span><br><span class="line">args = parser.parse_args()</span><br><span class="line">    </span><br><span class="line">main(args)   <span class="comment">#使用</span></span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -442,7 +441,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -455,7 +454,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
