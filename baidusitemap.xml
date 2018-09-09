@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://www.linzehui.me/2018/09/09/%E8%AF%97%E8%AF%8D&%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D8/</loc>
+    <lastmod>2018-09-09T11:25:21.405Z</lastmod>
+    <data>
+        <display>
+        <title>每周诗词8</title>
+        <pubTime>2018-09-09T06:19:10.000Z</pubTime>
+        
+        <tag>诗词</tag>
+         
+        <tag>诗词分享</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.linzehui.me/2018/09/02/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%866/</loc>
     <lastmod>2018-09-02T11:52:28.629Z</lastmod>
     <data>
@@ -118,13 +137,13 @@
         <title>Pycharm常用技巧</title>
         <pubTime>2018-08-10T11:05:13.000Z</pubTime>
         
-        <tag>技巧</tag>
-         
-        <tag>Pycharm</tag>
-         
         <tag>杂七杂八</tag>
          
         <tag>快捷键</tag>
+         
+        <tag>技巧</tag>
+         
+        <tag>Pycharm</tag>
          
          
            
@@ -141,9 +160,9 @@
         <title>Python惯例[转]</title>
         <pubTime>2018-08-05T03:28:05.000Z</pubTime>
         
-        <tag>碎片知识</tag>
-         
         <tag>杂七杂八</tag>
+         
+        <tag>碎片知识</tag>
          
         <tag>Python</tag>
          
@@ -450,13 +469,13 @@
         <title>Vim常用快捷键</title>
         <pubTime>2018-08-10T11:50:13.000Z</pubTime>
         
-        <tag>技巧</tag>
+        <tag>Vim</tag>
          
         <tag>杂七杂八</tag>
          
         <tag>快捷键</tag>
          
-        <tag>Vim</tag>
+        <tag>技巧</tag>
          
          
            
@@ -473,11 +492,11 @@
         <title>Linux常用命令</title>
         <pubTime>2018-08-03T05:48:13.000Z</pubTime>
         
+        <tag>技巧</tag>
+         
         <tag>Linux</tag>
          
         <tag>碎片知识</tag>
-         
-        <tag>技巧</tag>
          
          
            
@@ -498,15 +517,15 @@
          
         <tag>Pytorch</tag>
          
+        <tag>Paper</tag>
+         
+        <tag>Tf-idf</tag>
+         
         <tag>文本分类</tag>
          
         <tag>hexo</tag>
          
-        <tag>Paper</tag>
-         
         <tag>nohup</tag>
-         
-        <tag>Tf-idf</tag>
          
         <tag>CHI</tag>
          
