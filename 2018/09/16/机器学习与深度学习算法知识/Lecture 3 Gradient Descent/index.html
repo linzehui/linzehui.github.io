@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Gradient Descent," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Gradient Descent tipstip 1：Adaptive Learning RatesAdagrad基本思想  其中σ是之前所有的梯度的平方根 化简形式： 为什么要怎么做？考虑一个开口向上的二次函数 也即，最好的步长是一次导除以二次导，但二次导计算量大，因此使用近似的方式：对一次导作多次的sample。下图显示，如果二次导小，那么多次sample获得的一次导也小，反之则大，也就是说，">
+<meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Gradient Descent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lecture 3:Gradient Descent">
+<meta property="og:url" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture 3 Gradient Descent/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="Gradient Descent tipstip 1：Adaptive Learning RatesAdagrad基本思想  其中σ是之前所有的梯度的平方根 化简形式： 为什么要怎么做？考虑一个开口向上的二次函数 也即，最好的步长是一次导除以二次导，但二次导计算量大，因此使用近似的方式：对一次导作多次的sample。下图显示，如果二次导小，那么多次sample获得的一次导也小，反之则大，也就是说，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370654467771.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370654502774.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370654728457.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370654853172.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370655091732.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370655850876.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370656836724.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370657785697.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658066669.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658167935.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658315314.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658494091.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658736683.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658623258.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658855882.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658981519.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370659061025.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370659680601.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370659747339.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370660126195.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370660243469.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370660628961.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370660794436.jpg">
+<meta property="og:updated_time" content="2018-09-16T03:45:29.492Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lecture 3:Gradient Descent">
+<meta name="twitter:description" content="Gradient Descent tipstip 1：Adaptive Learning RatesAdagrad基本思想  其中σ是之前所有的梯度的平方根 化简形式： 为什么要怎么做？考虑一个开口向上的二次函数 也即，最好的步长是一次导除以二次导，但二次导计算量大，因此使用近似的方式：对一次导作多次的sample。下图显示，如果二次导小，那么多次sample获得的一次导也小，反之则大，也就是说，">
+<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370654467771.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture 3 Gradient Descent/"/>
+
+
+
+
+
+  <title>Lecture 3:Gradient Descent | Weekly Review</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture 3 Gradient Descent/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lecture 3:Gradient Descent</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T10:29:24+08:00">
+                2018-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Gradient-Descent-tips"><a href="#Gradient-Descent-tips" class="headerlink" title="Gradient Descent tips"></a>Gradient Descent tips</h2><h3 id="tip-1：Adaptive-Learning-Rates"><a href="#tip-1：Adaptive-Learning-Rates" class="headerlink" title="tip 1：Adaptive Learning Rates"></a>tip 1：Adaptive Learning Rates</h3><h4 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h4><h5 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h5><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370654467771.jpg" width="30%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370654502774.jpg" width="20%" height="50%"></p>
+<p>其中σ是之前所有的梯度的平方根<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370654728457.jpg" width="30%" height="50%"></p>
+<p>化简形式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370654853172.jpg" width="50%" height="50%"></p>
+<h5 id="为什么要怎么做？"><a href="#为什么要怎么做？" class="headerlink" title="为什么要怎么做？"></a>为什么要怎么做？</h5><p>考虑一个开口向上的二次函数<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370655091732.jpg" width="50%" height="50%"></p>
+<p>也即，最好的步长是一次导除以二次导，但二次导计算量大，因此使用近似的方式：<br><strong>对一次导作多次的sample</strong>。<br>下图显示，如果二次导小，那么多次sample获得的一次导也小，反之则大，也就是说，一次导在某种程度上可以反映二次导的大小，所以直接用一次导近似，可以减少计算量。</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370655850876.jpg" width="50%" height="50%"></p>
+<h3 id="tip-2：feature-scaling"><a href="#tip-2：feature-scaling" class="headerlink" title="tip 2：feature scaling"></a>tip 2：feature scaling</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370656836724.jpg" width="50%" height="50%"></p>
+<p>能够改变loss的分布，上图1中w2对loss的影响较大，则较陡峭，参数更新就较困难，需要adaptive learning rate；如果进行feature scaling，能够更好达到local optimal</p>
+<h2 id="Gradient-Descent-Theory"><a href="#Gradient-Descent-Theory" class="headerlink" title="Gradient Descent Theory"></a>Gradient Descent Theory</h2><p>另一种角度看gradient descent：</p>
+<p>基本思想：<br>我们希望每一次都在当前点附近找到一个最小的点，即在一个范围内：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370657785697.jpg" width="40%" height="50%"></p>
+<p>应该如何找到该最小点？</p>
+<p>我们知道，泰勒级数的形式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658066669.jpg" width="50%" height="50%"></p>
+<p>当x接近x0时，会有如下近似：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658167935.jpg" width="30%" height="50%"></p>
+<p>推广到多元泰勒级数则有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658315314.jpg" width="60%" height="50%"></p>
+<p>那么，如前所述，x接近x0，对于图中，即圆圈足够小时：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658494091.jpg" width="50%" height="50%"></p>
+<p>简化符号：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658736683.jpg" width="12%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658623258.jpg" width="30%" height="50%"></p>
+<p>所以可以简写成：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658855882.jpg" width="30%" height="50%"></p>
+<p>由于s,u,v都是常数，在圆圈范围内寻找最小值对应的参数可以简化成：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658981519.jpg" width="40%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370659061025.jpg" width="30%" height="50%"></p>
+<p>再度简化，可以表达成：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370659680601.jpg" width="40%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370659747339.jpg" width="30%" height="50%"></p>
+<p>在图中可以画为两个向量的点积<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370660126195.jpg" width="40%" height="50%"></p>
+<p>显然，当反方向时，最小：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370660243469.jpg" width="40%" height="50%"></p>
+<p>也即：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370660628961.jpg" width="50%" height="50%"></p>
+<p>最终完整的式子：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370660794436.jpg" width="55%" height="50%"></p>
+<p>因此，当learning rate不够小时，是不满足泰勒级数近似的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习🤖/" rel="tag"> <i class="fa fa-tag"></i> 机器学习🤖</a>
+          
+            <a href="/tags/李宏毅机器学习课程/" rel="tag"> <i class="fa fa-tag"></i> 李宏毅机器学习课程</a>
+          
+            <a href="/tags/Gradient-Descent/" rel="tag"> <i class="fa fa-tag"></i> Gradient Descent</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/16/机器学习与深度学习算法知识/Lecture 2 Bias and Variance/" rel="next" title="Lecture 2:Bias and Variance">
+                <i class="fa fa-chevron-left"></i> Lecture 2:Bias and Variance
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/16/机器学习与深度学习算法知识/Lecture 4 Classification  Probabilistic Generative Model/" rel="prev" title="Lecture 4:Classification:Probabilistic Generative Model">
+                Lecture 4:Classification:Probabilistic Generative Model <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg"
+                alt="林泽辉" />
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient-Descent-tips"><span class="nav-number">1.</span> <span class="nav-text">Gradient Descent tips</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tip-1：Adaptive-Learning-Rates"><span class="nav-number">1.1.</span> <span class="nav-text">tip 1：Adaptive Learning Rates</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Adagrad"><span class="nav-number">1.1.1.</span> <span class="nav-text">Adagrad</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基本思想"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">基本思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为什么要怎么做？"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">为什么要怎么做？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tip-2：feature-scaling"><span class="nav-number">1.2.</span> <span class="nav-text">tip 2：feature scaling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient-Descent-Theory"><span class="nav-number">2.</span> <span class="nav-text">Gradient Descent Theory</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -2,6 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.linzehui.me/2018/09/16/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/Pytorch%20backward()%E6%B5%85%E6%9E%90/</loc>
+    
+    <lastmod>2018-09-16T03:46:54.380Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2018/09/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%202%20Bias%20and%20Variance/</loc>
+    
+    <lastmod>2018-09-16T03:46:12.531Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2018/09/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%203%20Gradient%20Descent/</loc>
+    
+    <lastmod>2018-09-16T03:45:29.492Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2018/09/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/</loc>
+    
+    <lastmod>2018-09-16T03:36:08.155Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2018/09/16/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%867/</loc>
+    
+    <lastmod>2018-09-16T03:25:10.554Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2018/09/16/%E8%AF%97%E8%AF%8D&%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D9/</loc>
+    
+    <lastmod>2018-09-16T02:17:44.464Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2018/08/03/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2018-09-13T02:39:21.774Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.linzehui.me/2018/09/09/%E8%AF%97%E8%AF%8D&%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D8/</loc>
     
     <lastmod>2018-09-09T11:25:21.405Z</lastmod>
@@ -159,13 +208,6 @@
     <loc>http://www.linzehui.me/2018/08/10/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Vim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
     
     <lastmod>2018-08-18T11:58:59.480Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.linzehui.me/2018/08/03/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
-    
-    <lastmod>2018-08-17T11:35:42.760Z</lastmod>
     
   </url>
   

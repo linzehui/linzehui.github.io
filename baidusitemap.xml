@@ -4,6 +4,149 @@
 
     
   <url>
+    <loc>http://www.linzehui.me/2018/09/16/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/Pytorch%20backward()%E6%B5%85%E6%9E%90/</loc>
+    <lastmod>2018-09-16T03:46:54.380Z</lastmod>
+    <data>
+        <display>
+        <title>Pytorch backward()浅析</title>
+        <pubTime>2018-09-16T01:26:24.000Z</pubTime>
+        
+        <tag>Pytorch</tag>
+         
+        <tag>backward</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/09/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%202%20Bias%20and%20Variance/</loc>
+    <lastmod>2018-09-16T03:46:12.531Z</lastmod>
+    <data>
+        <display>
+        <title>Lecture 2:Bias and Variance</title>
+        <pubTime>2018-09-16T02:29:24.000Z</pubTime>
+        
+        <tag>机器学习🤖</tag>
+         
+        <tag>bias&amp;variance</tag>
+         
+        <tag>李宏毅机器学习课程</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/09/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%203%20Gradient%20Descent/</loc>
+    <lastmod>2018-09-16T03:45:29.492Z</lastmod>
+    <data>
+        <display>
+        <title>Lecture 3:Gradient Descent</title>
+        <pubTime>2018-09-16T02:29:24.000Z</pubTime>
+        
+        <tag>机器学习🤖</tag>
+         
+        <tag>李宏毅机器学习课程</tag>
+         
+        <tag>Gradient Descent</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/09/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/</loc>
+    <lastmod>2018-09-16T03:36:08.155Z</lastmod>
+    <data>
+        <display>
+        <title>Lecture 4:Classification:Probabilistic Generative Model</title>
+        <pubTime>2018-09-16T02:49:24.000Z</pubTime>
+        
+        <tag>机器学习🤖</tag>
+         
+        <tag>李宏毅机器学习课程</tag>
+         
+        <tag>Classification</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/09/16/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%867/</loc>
+    <lastmod>2018-09-16T03:25:10.554Z</lastmod>
+    <data>
+        <display>
+        <title>每周碎片知识7</title>
+        <pubTime>2018-09-16T03:04:14.000Z</pubTime>
+        
+        <tag>碎片知识</tag>
+         
+        <tag>Pytorch</tag>
+         
+        <tag>协方差</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/09/16/%E8%AF%97%E8%AF%8D&%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D9/</loc>
+    <lastmod>2018-09-16T02:17:44.464Z</lastmod>
+    <data>
+        <display>
+        <title>每周诗词9</title>
+        <pubTime>2018-09-16T02:14:14.000Z</pubTime>
+        
+        <tag>诗词</tag>
+         
+        <tag>诗词分享</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/08/03/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2018-09-13T02:39:21.774Z</lastmod>
+    <data>
+        <display>
+        <title>Linux常用命令</title>
+        <pubTime>2018-08-03T05:48:13.000Z</pubTime>
+        
+        <tag>技巧</tag>
+         
+        <tag>Linux</tag>
+         
+        <tag>碎片知识</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.linzehui.me/2018/09/09/%E8%AF%97%E8%AF%8D&%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D8/</loc>
     <lastmod>2018-09-09T11:25:21.405Z</lastmod>
     <data>
@@ -70,13 +213,13 @@
         <title>Deep Learning NLP best practices笔记</title>
         <pubTime>2018-08-26T03:35:24.000Z</pubTime>
         
-        <tag>指南</tag>
-         
-        <tag>调参</tag>
-         
         <tag>NLP🤖</tag>
          
         <tag>笔记📒</tag>
+         
+        <tag>指南</tag>
+         
+        <tag>调参</tag>
          
          
            
@@ -198,13 +341,13 @@
         <title>CNN文本分类任务指南</title>
         <pubTime>2018-08-25T08:25:11.000Z</pubTime>
         
-        <tag>CNN</tag>
-         
-        <tag>情感分析</tag>
-         
         <tag>指南</tag>
          
         <tag>调参</tag>
+         
+        <tag>CNN</tag>
+         
+        <tag>情感分析</tag>
          
          
            
@@ -303,9 +446,9 @@
         
         <tag>碎片知识</tag>
          
-        <tag>Python</tag>
-         
         <tag>Pytorch</tag>
+         
+        <tag>Python</tag>
          
         <tag>Paper</tag>
          
@@ -485,27 +628,6 @@
 
     
   <url>
-    <loc>http://www.linzehui.me/2018/08/03/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
-    <lastmod>2018-08-17T11:35:42.760Z</lastmod>
-    <data>
-        <display>
-        <title>Linux常用命令</title>
-        <pubTime>2018-08-03T05:48:13.000Z</pubTime>
-        
-        <tag>技巧</tag>
-         
-        <tag>Linux</tag>
-         
-        <tag>碎片知识</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.linzehui.me/2018/08/05/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%862/</loc>
     <lastmod>2018-08-12T11:33:41.710Z</lastmod>
     <data>
@@ -659,9 +781,9 @@
         
         <tag>遇到的问题</tag>
          
-        <tag>Python</tag>
-         
         <tag>yield</tag>
+         
+        <tag>Python</tag>
          
          
            
@@ -737,9 +859,9 @@
         
         <tag>碎片知识</tag>
          
-        <tag>Python</tag>
-         
         <tag>Pytorch</tag>
+         
+        <tag>Python</tag>
          
         <tag>Paper</tag>
          

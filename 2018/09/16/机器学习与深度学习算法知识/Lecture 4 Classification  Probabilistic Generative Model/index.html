@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Classification," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="为什么不使用regression来分类？1️⃣如果使用regression的思想来分类，会对离边界较远的点进行惩罚： 2️⃣如果多分类使用regression，如class 1, class 2, class 3；则隐式地假设了class 1 和 class 2较为接近，如果没有这种接近关系，则分类会不正确。 问题描述与定义 当P大于0.5则是C1类，反之是C2类先验P(C1)和P(C2)都好计算">
+<meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Classification">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lecture 4:Classification:Probabilistic Generative Model">
+<meta property="og:url" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture 4 Classification  Probabilistic Generative Model/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="为什么不使用regression来分类？1️⃣如果使用regression的思想来分类，会对离边界较远的点进行惩罚： 2️⃣如果多分类使用regression，如class 1, class 2, class 3；则隐式地假设了class 1 和 class 2较为接近，如果没有这种接近关系，则分类会不正确。 问题描述与定义 当P大于0.5则是C1类，反之是C2类先验P(C1)和P(C2)都好计算">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370662150910.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370662762802.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370663099515.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370663870205.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370664041246.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370664355955.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665362081.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665553962.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665888683.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370666092459.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370666567324.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667000974.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667135868.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667376312.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667582564.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667763267.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667880942.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668274551.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668394919.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668522531.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668957564.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669103562.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669221472.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669594744.jpg">
+<meta property="og:updated_time" content="2018-09-16T03:36:08.155Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lecture 4:Classification:Probabilistic Generative Model">
+<meta name="twitter:description" content="为什么不使用regression来分类？1️⃣如果使用regression的思想来分类，会对离边界较远的点进行惩罚： 2️⃣如果多分类使用regression，如class 1, class 2, class 3；则隐式地假设了class 1 和 class 2较为接近，如果没有这种接近关系，则分类会不正确。 问题描述与定义 当P大于0.5则是C1类，反之是C2类先验P(C1)和P(C2)都好计算">
+<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370662150910.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture 4 Classification  Probabilistic Generative Model/"/>
+
+
+
+
+
+  <title>Lecture 4:Classification:Probabilistic Generative Model | Weekly Review</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture 4 Classification  Probabilistic Generative Model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lecture 4:Classification:Probabilistic Generative Model</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T10:49:24+08:00">
+                2018-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="为什么不使用regression来分类？"><a href="#为什么不使用regression来分类？" class="headerlink" title="为什么不使用regression来分类？"></a>为什么不使用regression来分类？</h3><p>1️⃣如果使用regression的思想来分类，会对离边界较远的点进行惩罚：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370662150910.jpg" width="70%" height="50%"></p>
+<p>2️⃣如果多分类使用regression，如class 1, class 2, class 3；则隐式地假设了class 1 和 class 2较为接近，如果没有这种接近关系，则分类会不正确。</p>
+<h3 id="问题描述与定义"><a href="#问题描述与定义" class="headerlink" title="问题描述与定义"></a>问题描述与定义</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370662762802.jpg" width="70%" height="50%"></p>
+<p>当P大于0.5则是C1类，反之是C2类<br>先验P(C1)和P(C2)都好计算，计算C1占总的比例即可<br>因此，我们需要计算的就是p(x|C)</p>
+<p>这一想法，本质是得到了生成式模型：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370663099515.jpg" width="70%" height="50%"></p>
+<h3 id="原理概述"><a href="#原理概述" class="headerlink" title="原理概述"></a>原理概述</h3><p>现<strong>假设训练数据点的分布服从高斯分布</strong>：（显然可以自己设任何分布）<br>即数据从高斯分布采样得到：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370663870205.jpg" width="50%" height="50%"></p>
+<p>根据最大似然估计，可以获得每个类别的μ和Σ：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370664041246.jpg" width="70%" height="50%"></p>
+<p>得到了参数后，即可代入得到P(C|x) ：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370664355955.jpg" width="80%" height="50%"></p>
+<p>刚刚假设$Σ$对于不同类别不同，现我们<strong>令不同类别共享相同$Σ$</strong>：<br>（因为协方差代表的是不同feature之间的联系，可以认为是和类别无关的）</p>
+<p>$Σ$的计算公式是加权求和：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665362081.jpg" width="30%" height="50%"></p>
+<p>在使用了相同的协方差矩阵后，边界就是线性的（后面会提到为什么是这样）：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665553962.jpg" alt=""></p>
+<p> 总结：<br> 三步走，定义function set，计算μ和协方差矩阵，得到best function：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665888683.jpg" width="60%" height="50%"></p>
+<p>注意到，如果我们认为，不同feature之间没有关系，每个feature符合特定的高斯分布，则该分类器则是朴素贝叶斯分类器：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370666092459.jpg" width="60%" height="50%"></p>
+<h3 id="分类与logistics-regression"><a href="#分类与logistics-regression" class="headerlink" title="分类与logistics regression"></a>分类与logistics regression</h3><p>现推导，该分类问题与logistics regression之间的联系：<br>即：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370666567324.jpg" width="60%" height="50%"></p>
+<h4 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h4><p>数据服从高斯分布，共享$Σ$</p>
+<h4 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h4><p>①总框架：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667000974.jpg" width="50%" height="50%"></p>
+<p>令<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667135868.jpg" width="24%" height="50%"></p>
+<p>则有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667376312.jpg" width="50%" height="50%"></p>
+<p>②z的进一步推导与简化：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667582564.jpg" width="30%" height="50%"></p>
+<p>将z展开：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667763267.jpg" width="50%" height="50%"></p>
+<p>而第一部分有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667880942.jpg" width="50%" height="50%"></p>
+<p>第一部分相除，有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668274551.jpg" width="50%" height="50%"></p>
+<p>再进行展开，有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668394919.jpg" width="50%" height="50%"></p>
+<p>最终z的公式为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668522531.jpg" width="50%" height="50%"></p>
+<p>由于共享协方差矩阵，则可以消去部分，得到：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668957564.jpg" width="50%" height="50%"></p>
+<p>替换成w和b：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669103562.jpg" width="50%" height="50%"></p>
+<p>③最终，将z带回到原式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669221472.jpg" width="25%" height="50%"></p>
+<p>所以我们不需要再估计N1,N2,μ和Σ，直接计算w和b即可。也因此，分界线是线性的。</p>
+<p>全过程：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669594744.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习🤖/" rel="tag"> <i class="fa fa-tag"></i> 机器学习🤖</a>
+          
+            <a href="/tags/李宏毅机器学习课程/" rel="tag"> <i class="fa fa-tag"></i> 李宏毅机器学习课程</a>
+          
+            <a href="/tags/Classification/" rel="tag"> <i class="fa fa-tag"></i> Classification</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/16/机器学习与深度学习算法知识/Lecture 3 Gradient Descent/" rel="next" title="Lecture 3:Gradient Descent">
+                <i class="fa fa-chevron-left"></i> Lecture 3:Gradient Descent
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/16/碎片知识点/每周碎片知识7/" rel="prev" title="每周碎片知识7">
+                每周碎片知识7 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg"
+                alt="林泽辉" />
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么不使用regression来分类？"><span class="nav-number">1.</span> <span class="nav-text">为什么不使用regression来分类？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述与定义"><span class="nav-number">2.</span> <span class="nav-text">问题描述与定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原理概述"><span class="nav-number">3.</span> <span class="nav-text">原理概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类与logistics-regression"><span class="nav-number">4.</span> <span class="nav-text">分类与logistics regression</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#假设"><span class="nav-number">4.1.</span> <span class="nav-text">假设</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#推导"><span class="nav-number">4.2.</span> <span class="nav-text">推导</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
