@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Classification," />
+  <meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Classification,Probabilistic Generative Model," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="为什么不使用regression来分类？1️⃣如果使用regression的思想来分类，会对离边界较远的点进行惩罚： 2️⃣如果多分类使用regression，如class 1, class 2, class 3；则隐式地假设了class 1 和 class 2较为接近，如果没有这种接近关系，则分类会不正确。 问题描述与定义 当P大于0.5则是C1类，反之是C2类先验P(C1)和P(C2)都好计算">
-<meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Classification">
+<meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Classification,Probabilistic Generative Model">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lecture 4:Classification:Probabilistic Generative Model">
 <meta property="og:url" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture 4 Classification  Probabilistic Generative Model/index.html">
@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669103562.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669221472.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669594744.jpg">
-<meta property="og:updated_time" content="2018-09-16T03:36:08.155Z">
+<meta property="og:updated_time" content="2018-09-23T01:36:24.494Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lecture 4:Classification:Probabilistic Generative Model">
 <meta name="twitter:description" content="为什么不使用regression来分类？1️⃣如果使用regression的思想来分类，会对离边界较远的点进行惩罚： 2️⃣如果多分类使用regression，如class 1, class 2, class 3；则隐式地假设了class 1 和 class 2较为接近，如果没有这种接近关系，则分类会不正确。 问题描述与定义 当P大于0.5则是C1类，反之是C2类先验P(C1)和P(C2)都好计算">
@@ -397,6 +397,8 @@
           
             <a href="/tags/Classification/" rel="tag"> <i class="fa fa-tag"></i> Classification</a>
           
+            <a href="/tags/Probabilistic-Generative-Model/" rel="tag"> <i class="fa fa-tag"></i> Probabilistic Generative Model</a>
+          
         </div>
       
 
@@ -501,7 +503,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -514,7 +516,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -758,6 +760,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

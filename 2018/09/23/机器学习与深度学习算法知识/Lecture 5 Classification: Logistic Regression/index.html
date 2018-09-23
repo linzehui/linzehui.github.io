@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Classification,Logistic Regression," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="logistic regression如何做？step1: 定义function set step2: 更新使用最大似然更新 L(w,b)=f_{w,b}(x^1 )f_{w,b}(x^2 )(1−f_{w,b} (x^3 ))⋯f_{w,b} (x^N )找到w，b使得L最大 对似然函数取负对数，则有： 将式子的每个元素写成伯努利分布形式： 上式就是cross-entropy损失函数。 求导该式">
+<meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Classification,Logistic Regression">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lecture 5:Classification:Logistic Regression">
+<meta property="og:url" content="http://www.linzehui.me/2018/09/23/机器学习与深度学习算法知识/Lecture 5 Classification: Logistic Regression/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="logistic regression如何做？step1: 定义function set step2: 更新使用最大似然更新 L(w,b)=f_{w,b}(x^1 )f_{w,b}(x^2 )(1−f_{w,b} (x^3 ))⋯f_{w,b} (x^N )找到w，b使得L最大 对似然函数取负对数，则有： 将式子的每个元素写成伯努利分布形式： 上式就是cross-entropy损失函数。 求导该式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376666391912.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376667791380.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376669013511.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376669743224.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376669980138.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376671202521.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376672527230.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376672892502.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376674213503.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376677559470.jpg">
+<meta property="og:updated_time" content="2018-09-23T03:51:50.699Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lecture 5:Classification:Logistic Regression">
+<meta name="twitter:description" content="logistic regression如何做？step1: 定义function set step2: 更新使用最大似然更新 L(w,b)=f_{w,b}(x^1 )f_{w,b}(x^2 )(1−f_{w,b} (x^3 ))⋯f_{w,b} (x^N )找到w，b使得L最大 对似然函数取负对数，则有： 将式子的每个元素写成伯努利分布形式： 上式就是cross-entropy损失函数。 求导该式">
+<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376666391912.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2018/09/23/机器学习与深度学习算法知识/Lecture 5 Classification: Logistic Regression/"/>
+
+
+
+
+
+  <title>Lecture 5:Classification:Logistic Regression | Weekly Review</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/23/机器学习与深度学习算法知识/Lecture 5 Classification: Logistic Regression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lecture 5:Classification:Logistic Regression</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-23T09:35:24+08:00">
+                2018-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="logistic-regression如何做？"><a href="#logistic-regression如何做？" class="headerlink" title="logistic regression如何做？"></a>logistic regression如何做？</h3><p>step1: 定义function set<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376666391912.jpg" width="30%" height="50%"></p>
+<p>step2: 更新<br>使用最大似然更新</p>
+<script type="math/tex; mode=display">L(w,b)=f_{w,b}(x^1 )f_{w,b}(x^2 )(1−f_{w,b} (x^3 ))⋯f_{w,b} (x^N )</script><p>找到w，b使得L最大</p>
+<p>对似然函数取负对数，则有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376667791380.jpg" width="60%" height="50%"></p>
+<p>将式子的每个元素写成伯努利分布形式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376669013511.jpg" width="60%" height="50%"></p>
+<p>上式就是cross-entropy损失函数。</p>
+<p>求导该式子可得：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376669743224.jpg" width="30%" height="50%"><br>更新公式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376669980138.jpg" width="40%" height="50%"><br>可以看出上式很直观：和答案差距越大，更新步伐越大。</p>
+<p>同时发现上式和linear regression的更新公式是一致的。</p>
+<h3 id="为什么不像linear-regression那样设loss为square？"><a href="#为什么不像linear-regression那样设loss为square？" class="headerlink" title="为什么不像linear regression那样设loss为square？"></a>为什么不像linear regression那样设loss为square？</h3><p>假设我们使用square loss，则求导得到的梯度：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376671202521.jpg" width="50%" height="50%"><br>上式可以看出，当接近target时，梯度小；远离target时，梯度也小。难以达到全局最小<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376672527230.jpg" width="60%" height="50%"></p>
+<p>下图是cross entropy和square error的图像示意：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376672892502.jpg" width="60%" height="50%"></p>
+<p>如图，square loss难以到达全局最小。</p>
+<h3 id="生成式模型与判别式模型的区别"><a href="#生成式模型与判别式模型的区别" class="headerlink" title="生成式模型与判别式模型的区别"></a>生成式模型与判别式模型的区别</h3><p>生成式对联合概率分布进行建模，再通过贝叶斯定理获得后验概率；而判别式模型直接对后验概率建模。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376674213503.jpg" width="60%" height="50%"><br>二者所定义的function set是一致的，但同一组数据可能会得到不同的w和b。</p>
+<p>二者优劣对比：</p>
+<ul>
+<li>数据量多时，一般来说判别式模型会更好。因为判别式模型没有先验假设，完全依赖于数据。但如果数据有噪声，容易受影响。</li>
+<li>生成式模型是有一定的假设的，当假设错误，会影响分类效果。</li>
+<li>正因为有一定的先验假设，当数据量很少时，可能效果会不错；对于噪声更具有鲁棒性。</li>
+<li>先验可以从其他数据源获得来帮助特定任务，如语音识别问题。</li>
+</ul>
+<h3 id="logistic的局限"><a href="#logistic的局限" class="headerlink" title="logistic的局限"></a>logistic的局限</h3><p>本质仍是一个线性分类器，没办法分类非线性的数据。<br>如何解决该问题?<br><strong>将logistic regression model拼接起来</strong>，前面的model对数据进行feature transformation，然后再对新的feature进行分类。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376677559470.jpg" width="70%" height="50%"></p>
+<p>logistic与deep learning的联系：<br>如果将logistic regression的一个单元称为neuron，拼起来就是neural network了！！！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习🤖/" rel="tag"> <i class="fa fa-tag"></i> 机器学习🤖</a>
+          
+            <a href="/tags/李宏毅机器学习课程/" rel="tag"> <i class="fa fa-tag"></i> 李宏毅机器学习课程</a>
+          
+            <a href="/tags/Classification/" rel="tag"> <i class="fa fa-tag"></i> Classification</a>
+          
+            <a href="/tags/Logistic-Regression/" rel="tag"> <i class="fa fa-tag"></i> Logistic Regression</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/23/碎片知识点/每周碎片知识8/" rel="next" title="每周碎片知识8">
+                <i class="fa fa-chevron-left"></i> 每周碎片知识8
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/23/机器学习与深度学习算法知识/Lecture 6: Backpropagation/" rel="prev" title="Lecture 6:Backpropagation">
+                Lecture 6:Backpropagation <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg"
+                alt="林泽辉" />
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#logistic-regression如何做？"><span class="nav-number">1.</span> <span class="nav-text">logistic regression如何做？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么不像linear-regression那样设loss为square？"><span class="nav-number">2.</span> <span class="nav-text">为什么不像linear regression那样设loss为square？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成式模型与判别式模型的区别"><span class="nav-number">3.</span> <span class="nav-text">生成式模型与判别式模型的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#logistic的局限"><span class="nav-number">4.</span> <span class="nav-text">logistic的局限</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
