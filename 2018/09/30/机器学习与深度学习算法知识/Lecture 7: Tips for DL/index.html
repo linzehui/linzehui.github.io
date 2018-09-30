@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Tips for DL," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="大纲 new activation function梯度消失问题：由于sigmoid会将值压缩，所以在反向传播时，越到后面值越小。 所以后层的更新会比前层的更新更快，导致前层还没converge，后层就根据前层的数据（random）达到converge了 ReLU能够快速计算，且能够解决梯度消失问题。 因为会有部分neuron的值是0，所以相当于每次训练一个瘦长的神经网络。 ReLU的变体 Max">
+<meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Tips for DL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lecture 7:Tips for DL">
+<meta property="og:url" content="http://www.linzehui.me/2018/09/30/机器学习与深度学习算法知识/Lecture 7: Tips for DL/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="大纲 new activation function梯度消失问题：由于sigmoid会将值压缩，所以在反向传播时，越到后面值越小。 所以后层的更新会比前层的更新更快，导致前层还没converge，后层就根据前层的数据（random）达到converge了 ReLU能够快速计算，且能够解决梯度消失问题。 因为会有部分neuron的值是0，所以相当于每次训练一个瘦长的神经网络。 ReLU的变体 Max">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382757690955.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382758841507.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382759503401.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382760030965.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382928024258.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382761367509.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382761741870.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382762237369.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382763537888.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382764343880.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382764564859.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382765516383.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382765821828.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382766372355.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382769712428.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382770120104.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382771516587.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382772986250.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382814784406.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382815175056.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382815336088.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382815641437.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382816962676.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382817122102.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382817409633.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382817897319.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382819376579.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382819772611.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382821089494.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382821379688.jpg">
+<meta property="og:updated_time" content="2018-09-30T07:37:13.515Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lecture 7:Tips for DL">
+<meta name="twitter:description" content="大纲 new activation function梯度消失问题：由于sigmoid会将值压缩，所以在反向传播时，越到后面值越小。 所以后层的更新会比前层的更新更快，导致前层还没converge，后层就根据前层的数据（random）达到converge了 ReLU能够快速计算，且能够解决梯度消失问题。 因为会有部分neuron的值是0，所以相当于每次训练一个瘦长的神经网络。 ReLU的变体 Max">
+<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382757690955.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2018/09/30/机器学习与深度学习算法知识/Lecture 7: Tips for DL/"/>
+
+
+
+
+
+  <title>Lecture 7:Tips for DL | Weekly Review</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/30/机器学习与深度学习算法知识/Lecture 7: Tips for DL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lecture 7:Tips for DL</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T12:03:24+08:00">
+                2018-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>大纲<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382757690955.jpg" width="50%" height="50%"></p>
+<h2 id="new-activation-function"><a href="#new-activation-function" class="headerlink" title="new activation function"></a>new activation function</h2><p>梯度消失问题：由于sigmoid会将值压缩，所以在反向传播时，越到后面值越小。</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382758841507.jpg" width="30%" height="50%"><br>所以后层的更新会比前层的更新更快，导致前层还没converge，后层就根据前层的数据（random）达到converge了</p>
+<h3 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382759503401.jpg" width="30%" height="50%"><br>能够快速计算，且能够解决梯度消失问题。</p>
+<p>因为会有部分neuron的值是0，所以相当于每次训练一个瘦长的神经网络。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382760030965.jpg" width="50%" height="50%"></p>
+<h4 id="ReLU的变体"><a href="#ReLU的变体" class="headerlink" title="ReLU的变体"></a>ReLU的变体</h4><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382928024258.jpg" width="50%" height="50%"></p>
+<h3 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h3><p>首先将几个neuron归为一组，然后每次前向传播时取最大的作为输出。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382761367509.jpg" width="50%" height="50%"></p>
+<p>实际上ReLU是maxout的一种特殊形式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382761741870.jpg" width="40%" height="50%"></p>
+<p>更一般的，有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382762237369.jpg" width="40%" height="50%"></p>
+<p>因为w和b的变化，所以该activation function实际上就是一个learnable activation function</p>
+<p>这样一个learnable activation function有这样的特点：</p>
+<blockquote>
+<p>Activation function in maxout network can be any piecewise linear convex function<br>How many pieces depending on how many elements in a group</p>
+</blockquote>
+<p>如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382763537888.jpg" width="60%" height="50%"></p>
+<p>maxout应如何训练？</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382764343880.jpg" width="50%" height="50%"></p>
+<p>实际上就是一个普通的瘦长network，常规训练即可。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382764564859.jpg" width="50%" height="50%"></p>
+<h2 id="Adaptive-learning-rate"><a href="#Adaptive-learning-rate" class="headerlink" title="Adaptive learning rate"></a>Adaptive learning rate</h2><p>在adagrad中:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382765516383.jpg" width="30%" height="50%"></p>
+<p>越到后面learning rate越来越小，但实际上在dl里面，error surface是非常复杂的，越来越小的learning rate可能不适用于dl。如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382765821828.jpg" width="50%" height="50%"></p>
+<h3 id="RMSprop"><a href="#RMSprop" class="headerlink" title="RMSprop"></a>RMSprop</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382766372355.jpg" width="60%" height="50%"><br>$σ^t$是历史信息，也就是说$σ^t$参考了过去的梯度和当前的梯度获得一个新的放缩大小</p>
+<h3 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h3><p>引入惯性作为参考，也即参考了上一次梯度的方向。引入惯性后，可能有机会越过local minimum。<br>普通的gradient descent:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382769712428.jpg" width="40%" height="50%"><br>每次朝着梯度的反方向走。</p>
+<p>Momentum:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382770120104.jpg" width="40%" height="50%"></p>
+<p>考虑了上一步走的方向。</p>
+<p>具体算法：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382771516587.jpg" width="30%" height="50%"></p>
+<h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><p>结合了RMSprop和Momentum，也即综合考虑了历史信息决定当前步长；考虑了上一步的方向决定当前走的方向。<br>具体算法：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382772986250.jpg" width="60%" height="50%"></p>
+<h2 id="Early-Stopping"><a href="#Early-Stopping" class="headerlink" title="Early Stopping"></a>Early Stopping</h2><p>就是在validation set的loss不再减小时停止<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382814784406.jpg" width="50%" height="50%"></p>
+<h2 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h2><h3 id="L2正则化"><a href="#L2正则化" class="headerlink" title="L2正则化"></a>L2正则化</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382815175056.jpg" width="50%" height="50%"><br>其中<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382815336088.jpg" width="30%" height="50%"><br>因此更新公式为：<br>    <img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382815641437.jpg" width="50%" height="50%"></p>
+<p>也即每次以$1-\eta \lambda$对w进行放缩，使w更接近0<br>正则化在DL中也称为weight decay</p>
+<h3 id="L1正则化"><a href="#L1正则化" class="headerlink" title="L1正则化"></a>L1正则化</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382816962676.jpg" width="25%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382817122102.jpg" width="25%" height="50%"><br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382817409633.jpg" width="25%" height="50%"></p>
+<p>则更新公式为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382817897319.jpg" width="50%" height="50%"></p>
+<p>也即每次以$ηλsgn(w)$ 使w往0靠（sgn表示符号函数）</p>
+<p>可以看出，L1每次都加减相同的值，而L2按比例进行缩放。因此L1更为稀疏(sparse)。</p>
+<h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h2><p>训练的时候每一层采样p%的神经元设为0，让其不工作<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382819376579.jpg" width="50%" height="50%"></p>
+<p>实际上就是每个batch改变了网络结构，使得网络更细长<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382819772611.jpg" width="50%" height="50%"></p>
+<p>测试的时候所有的weight都乘以1-p%</p>
+<p>从ensemble的角度看待dropout：<br>在训练的时候训练一堆不同结构的network，最多有$2^N$种组合，N为neuron个数，可以称为终极的ensemble方法了。而在测试的时候对这些不同的网络进行平均。</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382821089494.jpg" width="50%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382821379688.jpg" width="50%" height="50%"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习🤖/" rel="tag"> <i class="fa fa-tag"></i> 机器学习🤖</a>
+          
+            <a href="/tags/李宏毅机器学习课程/" rel="tag"> <i class="fa fa-tag"></i> 李宏毅机器学习课程</a>
+          
+            <a href="/tags/Tips-for-DL/" rel="tag"> <i class="fa fa-tag"></i> Tips for DL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/30/机器学习与深度学习算法知识/采样浅析/" rel="next" title="采样浅析">
+                <i class="fa fa-chevron-left"></i> 采样浅析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/30/机器学习与深度学习算法知识/Lecture 10: Semi-supervised/" rel="prev" title="Lecture 10:Semi-supervised learning">
+                Lecture 10:Semi-supervised learning <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg"
+                alt="林泽辉" />
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#new-activation-function"><span class="nav-number">1.</span> <span class="nav-text">new activation function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ReLU"><span class="nav-number">1.1.</span> <span class="nav-text">ReLU</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ReLU的变体"><span class="nav-number">1.1.1.</span> <span class="nav-text">ReLU的变体</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maxout"><span class="nav-number">1.2.</span> <span class="nav-text">Maxout</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adaptive-learning-rate"><span class="nav-number">2.</span> <span class="nav-text">Adaptive learning rate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RMSprop"><span class="nav-number">2.1.</span> <span class="nav-text">RMSprop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Momentum"><span class="nav-number">2.2.</span> <span class="nav-text">Momentum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adam"><span class="nav-number">2.3.</span> <span class="nav-text">Adam</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Early-Stopping"><span class="nav-number">3.</span> <span class="nav-text">Early Stopping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Regularization"><span class="nav-number">4.</span> <span class="nav-text">Regularization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#L2正则化"><span class="nav-number">4.1.</span> <span class="nav-text">L2正则化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L1正则化"><span class="nav-number">4.2.</span> <span class="nav-text">L1正则化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dropout"><span class="nav-number">5.</span> <span class="nav-text">Dropout</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
