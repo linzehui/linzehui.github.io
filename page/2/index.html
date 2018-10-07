@@ -286,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/23/碎片知识点/每周碎片知识8/">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/30/机器学习与深度学习算法知识/PRML第二章 概率分布/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
@@ -305,7 +305,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/23/碎片知识点/每周碎片知识8/" itemprop="url">每周碎片知识8</a></h1>
+                <a class="post-title-link" href="/2018/09/30/机器学习与深度学习算法知识/PRML第二章 概率分布/" itemprop="url">PRML第二章 概率分布</a></h1>
         
 
         <div class="post-meta">
@@ -317,1060 +317,14 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-23T09:20:14+08:00">
-                2018-09-23
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-23T11:47:43+08:00">
-                2018-09-23
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>torch.max()有两种不同写法。<br>torch.max(input) → Tensor 返回其中最大的元素<br>torch.max(input, dim, keepdim=False, out=None) -&gt; (Tensor, LongTensor) 返回该维度上最大值，以及对应的index</p>
-<hr>
-<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>将模型同时部署到多张卡上训练，本质就是将一个batch的数据split，送到各个model，然后合并结果。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model = nn.DataParallel(model)</span><br><span class="line">device = torch.device(<span class="string">"cuda:0"</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">"cpu"</span>)</span><br><span class="line">model.to(device)</span><br><span class="line"><span class="keyword">for</span> data <span class="keyword">in</span> rand_loader:</span><br><span class="line">    input = data.to(device)</span><br><span class="line">    output = model(input)</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="3️⃣-求导"><a href="#3️⃣-求导" class="headerlink" title="3️⃣[求导]"></a>3️⃣[求导]</h3><p>标量、向量、矩阵之间的求导有两种布局，即分子布局和分母布局。分子布局和分母布局只差一个转置。<br>我的记法：在求导过程中，假设分母为m*n，分子为 k*n，则导数矩阵应该为 k*m 。一些特殊的如标量对矩阵求导等除外。<br>具体直接查表：<a href="https://en.m.wikipedia.org/wiki/Matrix_calculus" target="_blank" rel="noopener">https://en.m.wikipedia.org/wiki/Matrix_calculus</a></p>
-<p>按位计算求导：<br>假设一个函数$f(x)$的输入是标量$x$。对于一组K个标量$x_1,··· ,x_K$，我们<br>可以通过$f(x)$得到另外一组K个标量$z_1,··· ,z_K$，<br>$z_k = f(x_k),∀k = 1,··· ,K$<br>其中，$f(x)$是按位运算的，即$[f(x)]_i = f(x_i)$<br>其导数是一个对角矩阵：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376727095200.jpg" width="50%" height="50%"></p>
-<p><strong>Reference</strong>：<br><a href="https://en.m.wikipedia.org/wiki/Matrix_calculus" target="_blank" rel="noopener">https://en.m.wikipedia.org/wiki/Matrix_calculus</a><br><a href="https://blog.csdn.net/uncle_gy/article/details/78879131" target="_blank" rel="noopener">https://blog.csdn.net/uncle_gy/article/details/78879131</a><br><a href="https://nndl.github.io/chap-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80.pdf" target="_blank" rel="noopener">https://nndl.github.io/chap-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80.pdf</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/23/代码相关/代码记录7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/23/代码相关/代码记录7/" itemprop="url">代码片段记录7</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-23T09:19:30+08:00">
-                2018-09-23
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-23T09:27:26+08:00">
-                2018-09-23
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣softmax的numpy实现"><a href="#1️⃣softmax的numpy实现" class="headerlink" title="1️⃣softmax的numpy实现"></a>1️⃣softmax的numpy实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax</span><span class="params">(x,axis=<span class="number">0</span>)</span>:</span></span><br><span class="line">    <span class="string">"""Compute softmax values for each sets of scores in x."""</span></span><br><span class="line">    <span class="keyword">return</span> np.exp(x) / np.sum(np.exp(x), axis=axis)</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="2️⃣numpy-手动求导relu"><a href="#2️⃣numpy-手动求导relu" class="headerlink" title="2️⃣numpy 手动求导relu"></a>2️⃣numpy 手动求导relu</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># N is batch size; D_in is input dimension;</span></span><br><span class="line"><span class="comment"># H is hidden dimension; D_out is output dimension.</span></span><br><span class="line">N, D_in, H, D_out = <span class="number">64</span>, <span class="number">1000</span>, <span class="number">100</span>, <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create random input and output data</span></span><br><span class="line">x = np.random.randn(N, D_in)</span><br><span class="line">y = np.random.randn(N, D_out)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Randomly initialize weights</span></span><br><span class="line">w1 = np.random.randn(D_in, H)</span><br><span class="line">w2 = np.random.randn(H, D_out)</span><br><span class="line"></span><br><span class="line">learning_rate = <span class="number">1e-6</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">500</span>):</span><br><span class="line">    <span class="comment"># Forward pass: compute predicted y</span></span><br><span class="line">    h = x.dot(w1)</span><br><span class="line">    h_relu = np.maximum(h, <span class="number">0</span>)</span><br><span class="line">    y_pred = h_relu.dot(w2)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute and print loss</span></span><br><span class="line">    loss = np.square(y_pred - y).sum()</span><br><span class="line">    print(t, loss)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Backprop to compute gradients of w1 and w2 with respect to loss</span></span><br><span class="line">    grad_y_pred = <span class="number">2.0</span> * (y_pred - y)</span><br><span class="line">    grad_w2 = h_relu.T.dot(grad_y_pred)</span><br><span class="line">    grad_h_relu = grad_y_pred.dot(w2.T)</span><br><span class="line">    grad_h = grad_h_relu.copy()</span><br><span class="line">    grad_h[h &lt; <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">    grad_w1 = x.T.dot(grad_h)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Update weights</span></span><br><span class="line">    w1 -= learning_rate * grad_w1</span><br><span class="line">    w2 -= learning_rate * grad_w2</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="3️⃣Pytorch实现relu"><a href="#3️⃣Pytorch实现relu" class="headerlink" title="3️⃣Pytorch实现relu"></a>3️⃣Pytorch实现relu</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyReLU</span><span class="params">(torch.autograd.Function)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    We can implement our own custom autograd Functions by subclassing</span></span><br><span class="line"><span class="string">    torch.autograd.Function and implementing the forward and backward passes</span></span><br><span class="line"><span class="string">    which operate on Tensors.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(ctx, input)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        In the forward pass we receive a Tensor containing the input and return</span></span><br><span class="line"><span class="string">        a Tensor containing the output. ctx is a context object that can be used</span></span><br><span class="line"><span class="string">        to stash information for backward computation. You can cache arbitrary</span></span><br><span class="line"><span class="string">        objects for use in the backward pass using the ctx.save_for_backward method.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        ctx.save_for_backward(input)  <span class="comment">#为了之后的backward计算</span></span><br><span class="line">        <span class="keyword">return</span> input.clamp(min=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(ctx, grad_output)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        In the backward pass we receive a Tensor containing the gradient of the loss</span></span><br><span class="line"><span class="string">        with respect to the output, and we need to compute the gradient of the loss</span></span><br><span class="line"><span class="string">        with respect to the input.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        input, = ctx.saved_tensors</span><br><span class="line">        grad_input = grad_output.clone()</span><br><span class="line">        grad_input[input &lt; <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> grad_input</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="4️⃣Pytorch在多张卡上部署"><a href="#4️⃣Pytorch在多张卡上部署" class="headerlink" title="4️⃣Pytorch在多张卡上部署"></a>4️⃣Pytorch在多张卡上部署</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model = nn.DataParallel(model)</span><br><span class="line">device = torch.device(<span class="string">"cuda:0"</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">"cpu"</span>)</span><br><span class="line">model.to(device)</span><br><span class="line"><span class="keyword">for</span> data <span class="keyword">in</span> rand_loader:</span><br><span class="line">    input = data.to(device)</span><br><span class="line">    output = model(input)</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/19/见闻&想法/听达观杯现场答辩有感/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/19/见闻&想法/听达观杯现场答辩有感/" itemprop="url">听达观杯现场答辩有感</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-19T22:26:14+08:00">
-                2018-09-19
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-26T16:03:34+08:00">
-                2018-09-26
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前几日（周日）去了达观杯答辩现场听了前10名做了报告，有了一些感想，但一直没有抽出时间写一下自己的感想（懒）。</p>
-<p>自己大概花了十来天做了一下比赛，实际上也就是一个文本分类的<a href="http://www.dcjingsai.com/common/cmpt/%E2%80%9C%E8%BE%BE%E8%A7%82%E6%9D%AF%E2%80%9D%E6%96%87%E6%9C%AC%E6%99%BA%E8%83%BD%E5%A4%84%E7%90%86%E6%8C%91%E6%88%98%E8%B5%9B_%E8%B5%9B%E4%BD%93%E4%B8%8E%E6%95%B0%E6%8D%AE.html" target="_blank" rel="noopener">比赛</a>，因为没有比赛经验的缘故，走了很多弯路。不过也学到了一些东西。</p>
-<p>现记录前十名的一些idea/trick：</p>
-<ul>
-<li>数据增强<ul>
-<li>因为给的句子长度很长，因此在做截断的时候后面的就没法训练到了，可以将文本倒序作为新的数据训练模型。可以充分利用到数据</li>
-<li>将数据打乱、随机删除，实际上就是对一个句子的词进行sample再组合</li>
-<li>打乱词序以增加数据量</li>
-<li>使用pseudo labeling，但有的队伍使用这个做出效果了，但有的没有</li>
-</ul>
-</li>
-<li>特征工程<ul>
-<li>假设开头中间结尾的信息对分类有帮助，因此截取该部分信息做训练</li>
-<li>改进baseline的tfidf的特征工程方法，使用基于熵的词权重计算</li>
-<li>降维，留下最重要的特征。先用卡方分布降到20万，再用SVD降到8000</li>
-<li>将word2vec和GloVe拼接起来作为deep learning模型的输入</li>
-<li>将文章分段，每段取前20后20拼起来</li>
-</ul>
-</li>
-<li>模型融合<br>  所有队伍都无一例外使用了模型融合，stacking或者简单的投票<ul>
-<li>DL+ML —&gt; lgbm model —&gt; voting</li>
-<li>深度模型+传统模型，在深度模型最后一层加入传统模型的信息/feature</li>
-<li>后向选择剔除冗余模型</li>
-</ul>
-</li>
-<li>DL&amp;其他<ul>
-<li>HAN，选择10个attention vector</li>
-<li>对易错类增加权重，通过改变损失函数来增加权重</li>
-<li>CNN, [1,2,3,4,5,6]*600</li>
-<li>提出新的模型（第一名）</li>
-</ul>
-</li>
-</ul>
-<p>其实除了一些trick，我还是有些失望的，因为都是用模型融合堆出来的，这也让我对比赛失去了一些兴趣。虽然能理解现在的比赛都是这样的，但感觉实在太暴力了。<br>当然，其中还是有一些亮点的，有一支队伍立意很高，从理解业务的角度出发而不是堆模型，也取得了很好的效果；还有一个使用了最新论文中的特征工程改进方法，令我耳目一新；以及第一名在比赛过程中提出来三个新的模型。</p>
-<p>Anyway，我目前还是太菜了，还是安心搞科研吧。_(:з」∠)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/碎片知识点/每周碎片知识7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/16/碎片知识点/每周碎片知识7/" itemprop="url">每周碎片知识7</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T11:04:14+08:00">
-                2018-09-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-16T11:25:10+08:00">
-                2018-09-16
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>只有一个元素的tensor，可用.item()来获取元素</p>
-<p>tensor &lt;—&gt; numpy 相互转化会共享内部数据，因此改变其中一个会改变另一个</p>
-<p>可用使用 .to 来移动到设备<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370671350548.jpg" alt=""></p>
-<p>.detech()  detach it from the computation history, and to prevent future computation from being tracked. 将其从计算图中分离，变为叶子节点，并且requires_grad=False</p>
-<p>Function 记录了这个tensor是怎么来的，所有的tensor都有，除非是用户自定义的：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370672806253.jpg" width="70%" height="50%"></p>
-<hr>
-<h3 id="2️⃣-协方差"><a href="#2️⃣-协方差" class="headerlink" title="2️⃣[协方差]"></a>2️⃣[协方差]</h3><p>关于协方差的理解，x与y关于某个自变量的变化程度，即度量了x与y之间的联系。<br><a href="https://www.zhihu.com/question/20852004" target="_blank" rel="noopener">https://www.zhihu.com/question/20852004</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture 4 Classification  Probabilistic Generative Model/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/16/机器学习与深度学习算法知识/Lecture 4 Classification  Probabilistic Generative Model/" itemprop="url">Lecture 4:Classification:Probabilistic Generative Model</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T10:49:24+08:00">
-                2018-09-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-23T09:36:24+08:00">
-                2018-09-23
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="为什么不使用regression来分类？"><a href="#为什么不使用regression来分类？" class="headerlink" title="为什么不使用regression来分类？"></a>为什么不使用regression来分类？</h3><p>1️⃣如果使用regression的思想来分类，会对离边界较远的点进行惩罚：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370662150910.jpg" width="70%" height="50%"></p>
-<p>2️⃣如果多分类使用regression，如class 1, class 2, class 3；则隐式地假设了class 1 和 class 2较为接近，如果没有这种接近关系，则分类会不正确。</p>
-<h3 id="问题描述与定义"><a href="#问题描述与定义" class="headerlink" title="问题描述与定义"></a>问题描述与定义</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370662762802.jpg" width="70%" height="50%"></p>
-<p>当P大于0.5则是C1类，反之是C2类<br>先验P(C1)和P(C2)都好计算，计算C1占总的比例即可<br>因此，我们需要计算的就是p(x|C)</p>
-<p>这一想法，本质是得到了生成式模型：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370663099515.jpg" width="70%" height="50%"></p>
-<h3 id="原理概述"><a href="#原理概述" class="headerlink" title="原理概述"></a>原理概述</h3><p>现<strong>假设训练数据点的分布服从高斯分布</strong>：（显然可以自己设任何分布）<br>即数据从高斯分布采样得到：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370663870205.jpg" width="50%" height="50%"></p>
-<p>根据最大似然估计，可以获得每个类别的μ和Σ：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370664041246.jpg" width="70%" height="50%"></p>
-<p>得到了参数后，即可代入得到P(C|x) ：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370664355955.jpg" width="80%" height="50%"></p>
-<p>刚刚假设$Σ$对于不同类别不同，现我们<strong>令不同类别共享相同$Σ$</strong>：<br>（因为协方差代表的是不同feature之间的联系，可以认为是和类别无关的）</p>
-<p>$Σ$的计算公式是加权求和：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665362081.jpg" width="30%" height="50%"></p>
-<p>在使用了相同的协方差矩阵后，边界就是线性的（后面会提到为什么是这样）：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665553962.jpg" alt=""></p>
-<p> 总结：<br> 三步走，定义function set，计算μ和协方差矩阵，得到best function：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665888683.jpg" width="60%" height="50%"></p>
-<p>注意到，如果我们认为，不同feature之间没有关系，每个feature符合特定的高斯分布，则该分类器则是朴素贝叶斯分类器：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370666092459.jpg" width="60%" height="50%"></p>
-<h3 id="分类与logistics-regression"><a href="#分类与logistics-regression" class="headerlink" title="分类与logistics regression"></a>分类与logistics regression</h3><p>现推导，该分类问题与logistics regression之间的联系：<br>即：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370666567324.jpg" width="60%" height="50%"></p>
-<h4 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h4><p>数据服从高斯分布，共享$Σ$</p>
-<h4 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h4><p>①总框架：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667000974.jpg" width="50%" height="50%"></p>
-<p>令<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667135868.jpg" width="24%" height="50%"></p>
-<p>则有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667376312.jpg" width="50%" height="50%"></p>
-<p>②z的进一步推导与简化：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667582564.jpg" width="30%" height="50%"></p>
-<p>将z展开：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667763267.jpg" width="50%" height="50%"></p>
-<p>而第一部分有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667880942.jpg" width="50%" height="50%"></p>
-<p>第一部分相除，有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668274551.jpg" width="50%" height="50%"></p>
-<p>再进行展开，有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668394919.jpg" width="50%" height="50%"></p>
-<p>最终z的公式为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668522531.jpg" width="50%" height="50%"></p>
-<p>由于共享协方差矩阵，则可以消去部分，得到：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668957564.jpg" width="50%" height="50%"></p>
-<p>替换成w和b：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669103562.jpg" width="50%" height="50%"></p>
-<p>③最终，将z带回到原式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669221472.jpg" width="25%" height="50%"></p>
-<p>所以我们不需要再估计N1,N2,μ和Σ，直接计算w和b即可。也因此，分界线是线性的。</p>
-<p>全过程：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669594744.jpg" alt=""></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture 3 Gradient Descent/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/16/机器学习与深度学习算法知识/Lecture 3 Gradient Descent/" itemprop="url">Lecture 3:Gradient Descent</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T10:39:24+08:00">
-                2018-09-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-17T16:42:23+08:00">
-                2018-09-17
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Gradient-Descent-tips"><a href="#Gradient-Descent-tips" class="headerlink" title="Gradient Descent tips"></a>Gradient Descent tips</h2><h3 id="tip-1：Adaptive-Learning-Rates"><a href="#tip-1：Adaptive-Learning-Rates" class="headerlink" title="tip 1：Adaptive Learning Rates"></a>tip 1：Adaptive Learning Rates</h3><h4 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h4><h5 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h5><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370654467771.jpg" width="30%" height="50%"></p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370654502774.jpg" width="20%" height="50%"></p>
-<p>其中σ是之前所有的梯度的平方根<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370654728457.jpg" width="30%" height="50%"></p>
-<p>化简形式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370654853172.jpg" width="50%" height="50%"></p>
-<h5 id="为什么要怎么做？"><a href="#为什么要怎么做？" class="headerlink" title="为什么要怎么做？"></a>为什么要怎么做？</h5><p>考虑一个开口向上的二次函数<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370655091732.jpg" width="50%" height="50%"></p>
-<p>也即，最好的步长是一次导除以二次导，但二次导计算量大，因此使用近似的方式：<br><strong>对一次导作多次的sample</strong>。<br>下图显示，如果二次导小，那么多次sample获得的一次导也小，反之则大，也就是说，一次导在某种程度上可以反映二次导的大小，所以直接用一次导近似，可以减少计算量。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370655850876.jpg" width="50%" height="50%"></p>
-<h3 id="tip-2：feature-scaling"><a href="#tip-2：feature-scaling" class="headerlink" title="tip 2：feature scaling"></a>tip 2：feature scaling</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370656836724.jpg" width="50%" height="50%"></p>
-<p>能够改变loss的分布，上图1中w2对loss的影响较大，则较陡峭，参数更新就较困难，需要adaptive learning rate；如果进行feature scaling，能够更好达到local optimal</p>
-<h2 id="Gradient-Descent-Theory"><a href="#Gradient-Descent-Theory" class="headerlink" title="Gradient Descent Theory"></a>Gradient Descent Theory</h2><p>另一种角度看gradient descent：</p>
-<p>基本思想：<br>我们希望每一次都在当前点附近找到一个最小的点，即在一个范围内：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370657785697.jpg" width="40%" height="50%"></p>
-<p>应该如何找到该最小点？</p>
-<p>我们知道，泰勒级数的形式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658066669.jpg" width="50%" height="50%"></p>
-<p>当x接近x0时，会有如下近似：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658167935.jpg" width="30%" height="50%"></p>
-<p>推广到多元泰勒级数则有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658315314.jpg" width="60%" height="50%"></p>
-<p>那么，如前所述，x接近x0，对于图中，即圆圈足够小时：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658494091.jpg" width="50%" height="50%"></p>
-<p>简化符号：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658736683.jpg" width="12%" height="50%"></p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658623258.jpg" width="30%" height="50%"></p>
-<p>所以可以简写成：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658855882.jpg" width="30%" height="50%"></p>
-<p>由于s,u,v都是常数，在圆圈范围内寻找最小值对应的参数可以简化成：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370658981519.jpg" width="40%" height="50%"></p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370659061025.jpg" width="30%" height="50%"></p>
-<p>再度简化，可以表达成：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370659680601.jpg" width="40%" height="50%"></p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370659747339.jpg" width="30%" height="50%"></p>
-<p>在图中可以画为两个向量的点积<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370660126195.jpg" width="40%" height="50%"></p>
-<p>显然，当反方向时，最小：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370660243469.jpg" width="40%" height="50%"></p>
-<p>也即：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370660628961.jpg" width="50%" height="50%"></p>
-<p>最终完整的式子：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370660794436.jpg" width="55%" height="50%"></p>
-<p>因此，当learning rate不够小时，是不满足泰勒级数近似的。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture 2 Bias and Variance/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/16/机器学习与深度学习算法知识/Lecture 2 Bias and Variance/" itemprop="url">Lecture 2:Bias and Variance</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T10:29:24+08:00">
-                2018-09-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-17T16:42:24+08:00">
-                2018-09-17
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="如何理解bias-amp-variance"><a href="#如何理解bias-amp-variance" class="headerlink" title="如何理解bias&amp;variance"></a>如何理解bias&amp;variance</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370650140053.jpg" width="40%" height="50%"><br>bias是function space中心离optimal model的差距，variance是某次实验所得模型离function space中心的距离。</p>
-<p>比如说，简单地模型的function space小，随机性小，因此variance小，但也因为function space小，表示能力有限，因此bias大。</p>
-<p>如图：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370651353167.jpg" width="70%" height="50%"><br>该图中蓝色圈代表模型所能表达的范围。</p>
-<h3 id="如何解决variance大的问题"><a href="#如何解决variance大的问题" class="headerlink" title="如何解决variance大的问题"></a>如何解决variance大的问题</h3><p>①更多的data<br>②regularization：强迫function更平滑，因此减小variance，但因为调整了function space，可能会增加bias。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/诗词&句/每周诗词9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/16/诗词&句/每周诗词9/" itemprop="url">每周诗词9</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T10:14:14+08:00">
-                2018-09-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-30T08:54:14+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T14:21:24+08:00">
                 2018-09-30
               </time>
             
+
+            
+
+            
           </span>
 
           
@@ -1403,10 +357,17 @@
       
         
           
-            <h3 id="白雪歌送武判官归京"><a href="#白雪歌送武判官归京" class="headerlink" title="白雪歌送武判官归京"></a>白雪歌送武判官归京</h3><p>[唐] 岑参<br>北风卷地白草折，胡天八月即飞雪。<br><strong>忽如一夜春风来，千树万树梨花开</strong>。<br>散入珠帘湿罗幕，狐裘不暖锦衾薄。<br>将军角弓不得控，都护铁衣冷难着。<br>瀚海阑干百丈冰，愁云惨淡万里凝。<br>中军置酒饮归客，胡琴琵琶与羌笛。<br>纷纷暮雪下辕门，风掣红旗冻不翻。<br><strong>轮台东门送君去，去时雪满天山路。<br>山回路转不见君，雪上空留马行处。</strong></p>
-<p><a href="http://m.xichuangzhu.com/work/57b903e3d342d3005ac74290" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b903e3d342d3005ac74290</a></p>
-<hr>
-<h3 id="绝命诗"><a href="#绝命诗" class="headerlink" title="绝命诗"></a>绝命诗</h3><p>谭嗣同<br>望门投止思张俭，<br>忍死须臾待杜根。<br><strong>我自横刀向天笑，<br>去留肝胆两昆仑！</strong></p>
+            <h1 id="二元变量"><a href="#二元变量" class="headerlink" title="二元变量"></a>二元变量</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-Xnip2018-09-30_14-25-21.jpg" alt="二元变量1"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-Xnip2018-09-30_14-26-46.jpg" alt="贝塔分布"></p>
+<h1 id="多项式分布"><a href="#多项式分布" class="headerlink" title="多项式分布"></a>多项式分布</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-Xnip2018-09-30_14-31-55.jpg" alt="多项式分布"></p>
+<h1 id="高斯分布"><a href="#高斯分布" class="headerlink" title="高斯分布"></a>高斯分布</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-Xnip2018-09-30_14-40-32.jpg" alt="高斯分布"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-Xnip2018-09-30_14-43-09.jpg" alt="2"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-Xnip2018-09-30_14-45-15.jpg" alt="3"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-Xnip2018-09-30_14-48-58.jpg" alt="4"></p>
+<h1 id="指数族分布"><a href="#指数族分布" class="headerlink" title="指数族分布"></a>指数族分布</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-Xnip2018-09-30_14-51-25.jpg" alt="1"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-03-Xnip2018-10-03_10-03-54.jpg" alt="2"></p>
+<h1 id="非参数优化"><a href="#非参数优化" class="headerlink" title="非参数优化"></a>非参数优化</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-03-Xnip2018-10-03_10-05-24.jpg" alt="1"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-03-Xnip2018-10-03_10-06-55.jpg" alt="2"></p>
 
           
         
@@ -1455,7 +416,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/碎片知识点/Pytorch backward()浅析/">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/30/机器学习与深度学习算法知识/Lecture 10: Semi-supervised/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
@@ -1474,7 +435,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/16/碎片知识点/Pytorch backward()浅析/" itemprop="url">Pytorch backward()浅析</a></h1>
+                <a class="post-title-link" href="/2018/09/30/机器学习与深度学习算法知识/Lecture 10: Semi-supervised/" itemprop="url">Lecture 10:Semi-supervised learning</a></h1>
         
 
         <div class="post-meta">
@@ -1486,25 +447,13 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T09:26:24+08:00">
-                2018-09-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T12:39:24+08:00">
+                2018-09-30
               </time>
             
 
             
-              <span class="post-meta-divider">|</span>
-            
 
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-16T11:46:54+08:00">
-                2018-09-16
-              </time>
             
           </span>
 
@@ -1538,17 +487,51 @@
       
         
           
-            <p>最近在看pytorch文档的时候，看到backward内有一个参数gradient，在经过查阅了相关资料和进行了实验后，对backward有了更深的认识。</p>
-<h2 id="backward"><a href="#backward" class="headerlink" title="backward"></a>backward</h2><p>1️⃣如果调用backward的是一个标量，如：<code>loss.backward()</code><br>则gradient不需要手动传入，会自动求导。<br>例子:<br>$a=[x_1,x_2],b=\frac{x_1+x_2}{2}$<br>则b对a求导，有：<br>$\dfrac {\partial b}{\partial x_{1}}=\frac{1}{2}，\dfrac {\partial b}{\partial x_{2}}=\frac{1}{2}$</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">a=torch.Tensor([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">a.requires_grad=<span class="keyword">True</span></span><br><span class="line">b=torch.mean(a)  <span class="comment">#tensor(2.5000, grad_fn=&lt;MeanBackward1&gt;)</span></span><br><span class="line">b.backward()</span><br><span class="line">a.grad   <span class="comment">#tensor([0.5000, 0.5000])</span></span><br></pre></td></tr></table></figure>
-<p>gradient此时只是在缩放原grad的大小，也即不指定gradient和gradient=1是等价的</p>
-<p>当然，也可以指定gradient，其中指定gradient的shape必须和b的维度相同<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gradient=torch.tensor(<span class="number">10.0</span>)</span><br><span class="line">b.backward(gradient)</span><br><span class="line">a.grad   <span class="comment">#tensor([5., 5.])</span></span><br></pre></td></tr></table></figure></p>
-<p>2️⃣如果调用backward的是一个向量<br>例子：<br>$a=[x_1,x_2],b=[b_1,b_2]$, 其中 $b_1=x_1+x_2,b_2=x_1*x_2$<br>b对a求导，有：<br>$\dfrac {\partial b_1}{\partial x_{1}}=1,\dfrac {\partial b_1}{\partial x_{2}}=1$</p>
-<p>$\dfrac {\partial b_2}{\partial x_{1}}=x_2,\dfrac {\partial b_2}{\partial x_{2}}=x_1$</p>
-<p>在backward的时候则必须指定gradient。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">a=torch.FloatTensor([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">a.requires_grad=<span class="keyword">True</span></span><br><span class="line">b=torch.zeros(<span class="number">2</span>)</span><br><span class="line">b[<span class="number">0</span>]=a[<span class="number">0</span>]+a[<span class="number">1</span>]</span><br><span class="line">b[<span class="number">1</span>]=a[<span class="number">0</span>]*a[<span class="number">1</span>]    <span class="comment"># b=tensor([5., 6.], grad_fn=&lt;CopySlices&gt;)</span></span><br><span class="line">gradient=torch.tensor([<span class="number">1.0</span>,<span class="number">0.0</span>])</span><br><span class="line">b.backward(gradient,retain_graph=<span class="keyword">True</span>)</span><br><span class="line">a.grad   <span class="comment">#tensor([1., 1.])，说明是对b_1进行求导</span></span><br><span class="line">a.grad.zero_()  <span class="comment">#将梯度清空，否则会叠加</span></span><br><span class="line"><span class="comment">#-------------- #</span></span><br><span class="line">gradient=torch.tensor([<span class="number">0.0</span>,<span class="number">1.0</span>])</span><br><span class="line">b.backward(gradient,retain_graph=<span class="keyword">True</span>)</span><br><span class="line">a.grad  <span class="comment"># tensor([3., 2.])，说明对b_2进行求导</span></span><br><span class="line">a.grad.zero_()</span><br><span class="line"><span class="comment"># ------------- #</span></span><br><span class="line">gradient=torch.tensor([<span class="number">1.0</span>,<span class="number">1.0</span>])</span><br><span class="line">b.backward(gradient,retain_graph=<span class="keyword">True</span>)</span><br><span class="line">a.grad   <span class="comment"># tensor([4., 3.])，即b_1,b_2的导数的叠加</span></span><br><span class="line">a.grad.zero_()</span><br></pre></td></tr></table></figure>
-<p>注意到b.backward()时需要retain_graph设为True，否则在计算完后会自动释放计算图的内存，这样就没法进行二次反向传播了。</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.pytorchtutorial.com/pytorch-backward/" target="_blank" rel="noopener">https://www.pytorchtutorial.com/pytorch-backward/</a></p>
+            <p>什么是semi-supervised learning</p>
+<p>给定数据${(x^r,\hat{y}^r)}_{r=1}^{R},{(x_u)}_{u=R}^{R+U}$，其中未标记数据远远多于标记数据 $U&gt;&gt;R$</p>
+<p>为什么半监督学习有用？<br>因为未标记数据的分布可能能够给我们一些信息。</p>
+<h3 id="生成模型的半监督学习"><a href="#生成模型的半监督学习" class="headerlink" title="生成模型的半监督学习"></a>生成模型的半监督学习</h3><p>给定两类$C_1$、$C_2$，要求得到后验概率分布</p>
+<script type="math/tex; mode=display">P(C_1 |x)=\frac{P(x|C_1 )P(C_1 )}{(P(x|C_1 )P(C_1 )+P(x|C_2 )P(C_2 ) )}</script><p>其中联合概率分布服从高斯分布。未标记数据此时的作用即帮我们重新估计$P(C_1),P(C_2),\mu,\Sigma$</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382829251218.jpg" width="50%" height="50%"></p>
+<p>如何做?<br>先初始化$P(C_1),P(C_2),\mu,\Sigma$，通常可以先用有标记数据进行估计</p>
+<ol>
+<li>计算每个未标记数据的后验概率分布</li>
+<li>以该概率分布更新模型<br>不断重复直至拟合</li>
+</ol>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382829987091.jpg" width="70%" height="50%"></p>
+<p>原因：<br>当我们在做监督学习时，使用最大似然求解：</p>
+<script type="math/tex; mode=display">logL(θ)=∑_{x^r,\hat{y}^r} logP_θ (x^r |\hat{y}^r )</script><p>加上了未标记数据后，同样也要做最大似然：</p>
+<script type="math/tex; mode=display">logL(θ)=∑_{(x^r,\hat{y}^r)} logP_θ (x^r |\hat{y}^r )+∑_{x^u} logP_θ (x^u)</script><h3 id="Low-density-Separation"><a href="#Low-density-Separation" class="headerlink" title="Low-density Separation"></a>Low-density Separation</h3><p>假设不同类别之间有一条明显的分界线，也即存在一个区域，其密度比其他区域小</p>
+<h4 id="Self-training"><a href="#Self-training" class="headerlink" title="Self-training"></a>Self-training</h4><p>如何做?</p>
+<ol>
+<li>先用有标签数据训练一个模型$f$；</li>
+<li>利用模型对未标记数据进行标记，这些标签称为伪标签（pseudo-label）</li>
+<li>将部分有伪标签的数据放入有标签数据中，重新训练<br>重复直到拟合</li>
+</ol>
+<p>这种方式和生成模型的区别：该方法使用的是hard label而生成模型使用的是soft label</p>
+<h4 id="Entropy-based-Regularization"><a href="#Entropy-based-Regularization" class="headerlink" title="Entropy-based Regularization"></a>Entropy-based Regularization</h4><p>将未标记数据充当正则化的效果，我们希望模型预测标签的概率较为集中，也即熵应该尽可能小。也就是说，未标记数据使得分类边界尽可能划在低密度区域。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382837957204.jpg" width="30%" height="50%"></p>
+<h3 id="Smoothness-Assumption"><a href="#Smoothness-Assumption" class="headerlink" title="Smoothness Assumption"></a>Smoothness Assumption</h3><p>假设：位于稠密数据区域的两个距离很近的样例的类标签相似，通过high density path连接。</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382840889274.jpg" width="40%" height="50%"><br>x1与x2之间较为稠密，因此x2与x1比x2与x3更为接近。</p>
+<p><strong>如何知道x1与x2通过high density path连接？</strong><br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382841851160.jpg" width="50%" height="50%"></p>
+<p>基于图的方法：</p>
+<ol>
+<li>定义xi与xj之间的相似度$s(x^i,x^j)$</li>
+<li>添加边，有两种选择<ol>
+<li>k nearest neighbor</li>
+<li>e-neighborhood<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382842669412.jpg" width="50%" height="50%"></li>
+</ol>
+</li>
+<li>边之间的权重通过相似度来衡量。如： $s(x^i,x^j )=exp(−γ‖x^i−x^j‖^2)$</li>
+</ol>
+<p>该方法本质即利用有标签数据去影响未标记数据，通过图的传播。但一个问题是如果数据不够多，就可能没办法传播。如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382844101208.jpg" width="30%" height="50%"></p>
+<p>在建立好图后，如何使用?</p>
+<ul>
+<li>定义图的平滑程度，$y$表示标签。$S$越小表示越平滑。<script type="math/tex; mode=display">S=1/2∑_{i,j} w_{i,j} (y^i−y^j )^2=y^T Ly</script><script type="math/tex; mode=display">y=[⋯y^i⋯y^j⋯]^T</script><script type="math/tex; mode=display">L=D−W</script></li>
+</ul>
+<p>D是邻接矩阵，第ij个元素即xi与xj之间的weight，W是对角矩阵，ii个元素是D的第i行的加和；L称为Graph Laplacian<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382847006975.jpg" width="50%" height="50%"></p>
+<ul>
+<li>我们最终在计算Loss的时候要加上这项正则项<script type="math/tex; mode=display">L=∑_{x^r}C(y^r,\hat{y}^r ) +λS</script></li>
+</ul>
 
           
         
@@ -1597,7 +580,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/09/诗词&句/每周诗词8/">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/30/机器学习与深度学习算法知识/Lecture 7: Tips for DL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
@@ -1616,7 +599,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/09/诗词&句/每周诗词8/" itemprop="url">每周诗词8</a></h1>
+                <a class="post-title-link" href="/2018/09/30/机器学习与深度学习算法知识/Lecture 7: Tips for DL/" itemprop="url">Lecture 7:Tips for DL</a></h1>
         
 
         <div class="post-meta">
@@ -1628,25 +611,13 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-09T14:19:10+08:00">
-                2018-09-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T12:03:24+08:00">
+                2018-09-30
               </time>
             
 
             
-              <span class="post-meta-divider">|</span>
-            
 
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-09T19:25:21+08:00">
-                2018-09-09
-              </time>
             
           </span>
 
@@ -1680,15 +651,937 @@
       
         
           
-            <h3 id="望月怀远"><a href="#望月怀远" class="headerlink" title="望月怀远"></a>望月怀远</h3><p>[唐] 张九龄<br><strong>海上生明月，天涯共此时。</strong><br>情人怨遥夜，竟夕起相思。<br>灭烛怜光满，披衣觉露滋。<br>不堪盈手赠，还寝梦佳期。</p>
-<p>遥夜，长夜。</p>
-<p><a href="http://m.xichuangzhu.com/work/57aca120a341310060e2a09f" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57aca120a341310060e2a09f</a></p>
+            <p>大纲<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382757690955.jpg" width="50%" height="50%"></p>
+<h2 id="new-activation-function"><a href="#new-activation-function" class="headerlink" title="new activation function"></a>new activation function</h2><p>梯度消失问题：由于sigmoid会将值压缩，所以在反向传播时，越到后面值越小。</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382758841507.jpg" width="30%" height="50%"><br>所以后层的更新会比前层的更新更快，导致前层还没converge，后层就根据前层的数据（random）达到converge了</p>
+<h3 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382759503401.jpg" width="30%" height="50%"><br>能够快速计算，且能够解决梯度消失问题。</p>
+<p>因为会有部分neuron的值是0，所以相当于每次训练一个瘦长的神经网络。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382760030965.jpg" width="50%" height="50%"></p>
+<h4 id="ReLU的变体"><a href="#ReLU的变体" class="headerlink" title="ReLU的变体"></a>ReLU的变体</h4><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382928024258.jpg" width="50%" height="50%"></p>
+<h3 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h3><p>首先将几个neuron归为一组，然后每次前向传播时取最大的作为输出。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382761367509.jpg" width="50%" height="50%"></p>
+<p>实际上ReLU是maxout的一种特殊形式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382761741870.jpg" width="40%" height="50%"></p>
+<p>更一般的，有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382762237369.jpg" width="40%" height="50%"></p>
+<p>因为w和b的变化，所以该activation function实际上就是一个learnable activation function</p>
+<p>这样一个learnable activation function有这样的特点：</p>
+<blockquote>
+<p>Activation function in maxout network can be any piecewise linear convex function<br>How many pieces depending on how many elements in a group</p>
+</blockquote>
+<p>如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382763537888.jpg" width="60%" height="50%"></p>
+<p>maxout应如何训练？</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382764343880.jpg" width="50%" height="50%"></p>
+<p>实际上就是一个普通的瘦长network，常规训练即可。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382764564859.jpg" width="50%" height="50%"></p>
+<h2 id="Adaptive-learning-rate"><a href="#Adaptive-learning-rate" class="headerlink" title="Adaptive learning rate"></a>Adaptive learning rate</h2><p>在adagrad中:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382765516383.jpg" width="30%" height="50%"></p>
+<p>越到后面learning rate越来越小，但实际上在dl里面，error surface是非常复杂的，越来越小的learning rate可能不适用于dl。如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382765821828.jpg" width="50%" height="50%"></p>
+<h3 id="RMSprop"><a href="#RMSprop" class="headerlink" title="RMSprop"></a>RMSprop</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382766372355.jpg" width="60%" height="50%"><br>$σ^t$是历史信息，也就是说$σ^t$参考了过去的梯度和当前的梯度获得一个新的放缩大小</p>
+<h3 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h3><p>引入惯性作为参考，也即参考了上一次梯度的方向。引入惯性后，可能有机会越过local minimum。<br>普通的gradient descent:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382769712428.jpg" width="40%" height="50%"><br>每次朝着梯度的反方向走。</p>
+<p>Momentum:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382770120104.jpg" width="40%" height="50%"></p>
+<p>考虑了上一步走的方向。</p>
+<p>具体算法：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382771516587.jpg" width="30%" height="50%"></p>
+<h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><p>结合了RMSprop和Momentum，也即综合考虑了历史信息决定当前步长；考虑了上一步的方向决定当前走的方向。<br>具体算法：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382772986250.jpg" width="60%" height="50%"></p>
+<h2 id="Early-Stopping"><a href="#Early-Stopping" class="headerlink" title="Early Stopping"></a>Early Stopping</h2><p>就是在validation set的loss不再减小时停止<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382814784406.jpg" width="50%" height="50%"></p>
+<h2 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h2><h3 id="L2正则化"><a href="#L2正则化" class="headerlink" title="L2正则化"></a>L2正则化</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382815175056.jpg" width="50%" height="50%"><br>其中<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382815336088.jpg" width="30%" height="50%"><br>因此更新公式为：<br>    <img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382815641437.jpg" width="50%" height="50%"></p>
+<p>也即每次以$1-\eta \lambda$对w进行放缩，使w更接近0<br>正则化在DL中也称为weight decay</p>
+<h3 id="L1正则化"><a href="#L1正则化" class="headerlink" title="L1正则化"></a>L1正则化</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382816962676.jpg" width="25%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382817122102.jpg" width="25%" height="50%"><br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382817409633.jpg" width="25%" height="50%"></p>
+<p>则更新公式为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382817897319.jpg" width="50%" height="50%"></p>
+<p>也即每次以$ηλsgn(w)$ 使w往0靠（sgn表示符号函数）</p>
+<p>可以看出，L1每次都加减相同的值，而L2按比例进行缩放。因此L1更为稀疏(sparse)。</p>
+<h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h2><p>训练的时候每一层采样p%的神经元设为0，让其不工作<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382819376579.jpg" width="50%" height="50%"></p>
+<p>实际上就是每个batch改变了网络结构，使得网络更细长<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382819772611.jpg" width="50%" height="50%"></p>
+<p>测试的时候所有的weight都乘以1-p%</p>
+<p>从ensemble的角度看待dropout：<br>在训练的时候训练一堆不同结构的network，最多有$2^N$种组合，N为neuron个数，可以称为终极的ensemble方法了。而在测试的时候对这些不同的网络进行平均。</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382821089494.jpg" width="50%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382821379688.jpg" width="50%" height="50%"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/30/机器学习与深度学习算法知识/采样浅析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/30/机器学习与深度学习算法知识/采样浅析/" itemprop="url">采样浅析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T09:24:24+08:00">
+                2018-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>总结在NLP中的采样方法（持续更新）。</p>
+<h2 id="采样方法"><a href="#采样方法" class="headerlink" title="采样方法"></a>采样方法</h2><h3 id="1️⃣逆变换采样-Inverse-Sampling"><a href="#1️⃣逆变换采样-Inverse-Sampling" class="headerlink" title="1️⃣逆变换采样(Inverse Sampling)"></a>1️⃣逆变换采样(Inverse Sampling)</h3><p>目的：已知任意概率分布的<strong>累积分布函数</strong>时，用于从该分布中生成随机样本。</p>
+<p>—-什么是累积分布函数(CDF)—-<br>是概率密度函数(PDF)的积分，定义：</p>
+<script type="math/tex; mode=display">F_X(x)=P(X≤x)=\int_{-∞}^{x}f_X(t)dt</script><p>—-END—-</p>
+<p>想象我们知道高斯分布的概率密度函数，我们应该如何采样？本质上我们只能对均匀分布进行直接采样（高斯分布有<a href="https://www.zhihu.com/question/29971598" target="_blank" rel="noopener">算法</a>可以生成采样，但无法一般化）。对于这种连续的随机变量，我们只能通过间接的方法进行采样。</p>
+<p>逆变换采样即是通过累积分布函数的反函数来采样。因为累积分布函数的值域为$[0,1]$，因此我们通过在$[0,1]$上进行采样，再映射到原分布。<br>例子:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382714567064.jpg" width="80%" height="50%"><br>映射关系如图：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382715821631.jpg" width="50%" height="50%"></p>
+<h3 id="2️⃣重要性采样-Importance-Sampling"><a href="#2️⃣重要性采样-Importance-Sampling" class="headerlink" title="2️⃣重要性采样(Importance Sampling)"></a>2️⃣重要性采样(Importance Sampling)</h3><p>目的：已知某个分布$P$，希望能估计$f(x)$的期望。亦即：</p>
+<script type="math/tex; mode=display">E[f(x)]=\int_{x}f(x)p(x)dx≈\frac{1}{n}\sum_{i=1}^{n}f(x_i)</script><p>其中$x\sim p$。<br>假设$p(x)$的分布复杂或样本不好生成，另一分布$q(x)$方便生成样本。因此我们引入$q(x)$对原先分布进行估计。</p>
+<script type="math/tex; mode=display">E[f(x)]=\int_{x}f(x)p(x)dx=\int_{x}f(x)\frac{p(x)}{q(x)}q(x)dx≈\frac{1}{n}\sum_{i=1}^{n}f(x_i)\frac{p(x_i)}{q(x_i)}</script><p>其中，$x \sim q$。$w(x)=\frac{p(x)}{q(x)}$称为Importance Weight</p>
+<p>根据上式，实际上就是每次采样的加权求和。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>逆变换采样<br><a href="https://zh.wikipedia.org/wiki/%E9%80%86%E5%8F%98%E6%8D%A2%E9%87%87%E6%A0%B7" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/%E9%80%86%E5%8F%98%E6%8D%A2%E9%87%87%E6%A0%B7</a></p>
+<p>重要性采样<br><a href="https://www.youtube.com/watch?v=S3LAOZxGcnk" target="_blank" rel="noopener">https://www.youtube.com/watch?v=S3LAOZxGcnk</a></p>
+<p>——持续更新——</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/30/碎片知识点/每周碎片知识9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/30/碎片知识点/每周碎片知识9/" itemprop="url">每周碎片知识9</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T09:03:14+08:00">
+                2018-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>Pytorch中保存checkpoint是一个dict形式，可以保存任意多个模型到一个checkpoint中。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="comment">#save</span></span><br><span class="line">torch.save(&#123;            <span class="string">'epoch'</span>: epoch,            <span class="string">'model_state_dict'</span>: model.state_dict(),            <span class="string">'optimizer_state_dict'</span>: optimizer.state_dict(),            <span class="string">'loss'</span>: loss,            ...            &#125;, PATH)</span><br><span class="line"><span class="comment">#load</span></span><br><span class="line">model = TheModelClass(*args, **kwargs)optimizer = TheOptimizerClass(*args, **kwargs)</span><br><span class="line">checkpoint = torch.load(PATH)model.load_state_dict(checkpoint[<span class="string">'model_state_dict'</span>])optimizer.load_state_dict(checkpoint[<span class="string">'optimizer_state_dict'</span>])epoch = checkpoint[<span class="string">'epoch'</span>]loss = checkpoint[<span class="string">'loss'</span>]</span><br><span class="line">model.eval()<span class="comment"># - or -</span>model.train()</span><br></pre></td></tr></table></figure></p>
 <hr>
-<h3 id="无题"><a href="#无题" class="headerlink" title="无题"></a>无题</h3><p>萨镇冰<br>五十七载犹如梦，举国沦亡缘汉城。<br><strong>龙游浅水勿自弃，终有扬眉吐气天。</strong></p>
-<p>1951年，中国人民志愿军在抗美援朝战争第三次战役后打进了汉城，萨镇冰得知此事，回想起57年前的甲午悲歌，当即作诗一首。</p>
+<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>Pytorch可以load部分模型，也就是只load进来部分我们需要的层，这在transfer learning中用到。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">torch.save(modelA.state_dict(), PATH)</span><br><span class="line">modelB = TheModelBClass(*args, **kwargs)modelB.load_state_dict(torch.load(PATH), strict=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/30/诗词&句/有力量的文字/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/30/诗词&句/有力量的文字/" itemprop="url">no title</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T08:54:15+08:00">
+                2018-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>每当我遇到自己不敢直视的困难时，我就会闭上双眼，想象自己是一个80岁的老人，为人生中曾放弃和逃避过的无数困难而懊悔不已，我会对自己说，能再年轻一次该有多好，然后我睁开眼睛：砰！我又年轻一次了！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/30/诗词&句/每周诗词10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/30/诗词&句/每周诗词10/" itemprop="url">每周诗词10</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T08:54:14+08:00">
+                2018-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣次北固山下"><a href="#1️⃣次北固山下" class="headerlink" title="1️⃣次北固山下"></a>1️⃣次北固山下</h3><p>[唐] 王湾<br>客路青山外，行舟绿水前。<br>潮平两岸阔，风正一帆悬。<br><strong>海日生残夜，江春入旧年。</strong><br>乡书何处达，归雁洛阳边。</p>
+<p>次：旅途中暂时停宿，这里是停泊的意思。</p>
+<p><a href="http://m.xichuangzhu.com/work/57b95de92e958a005fa8919e" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b95de92e958a005fa8919e</a></p>
 <hr>
-<h3 id="白雪歌送武判官归京"><a href="#白雪歌送武判官归京" class="headerlink" title="白雪歌送武判官归京"></a>白雪歌送武判官归京</h3><p>[唐] 岑参<br>北风卷地白草折，胡天八月即飞雪。<br><strong>忽如一夜春风来，千树万树梨花开。</strong><br>散入珠帘湿罗幕，狐裘不暖锦衾薄。<br>将军角弓不得控，都护铁衣冷难着。<br>瀚海阑干百丈冰，愁云惨淡万里凝。<br>中军置酒饮归客，胡琴琵琶与羌笛。<br>纷纷暮雪下辕门，风掣红旗冻不翻。<br><strong>轮台东门送君去，去时雪满天山路。<br>山回路转不见君，雪上空留马行处</strong>。</p>
-<p><a href="http://m.xichuangzhu.com/work/57b903e3d342d3005ac74290" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b903e3d342d3005ac74290</a></p>
+<h3 id="2️⃣将赴吴兴登乐游原"><a href="#2️⃣将赴吴兴登乐游原" class="headerlink" title="2️⃣将赴吴兴登乐游原"></a>2️⃣将赴吴兴登乐游原</h3><p>[唐] 杜牧<br>清时有味是无能，闲爱孤云静爱僧。<br><strong>欲把一麾江海去，乐游原上望昭陵。</strong></p>
+<p>无能：无所作为。</p>
+<p><a href="http://m.xichuangzhu.com/work/57b99db9165abd005a6da742" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b99db9165abd005a6da742</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/23/机器学习与深度学习算法知识/PRML第一章 绪论/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/23/机器学习与深度学习算法知识/PRML第一章 绪论/" itemprop="url">PRML第一章 绪论</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-23T10:30:24+08:00">
+                2018-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>记录PRML学习过程。<br>笔记共享链接：<a href="https://1drv.ms/u/s!Apsp2510NHF6rIRjMclFB16v7B0FWg" target="_blank" rel="noopener">https://1drv.ms/u/s!Apsp2510NHF6rIRjMclFB16v7B0FWg</a></p>
+<hr>
+<h1 id="概率论"><a href="#概率论" class="headerlink" title="概率论"></a>概率论</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-Xnip2018-09-23_10-27-21.jpg" alt="概率论"></p>
+<h1 id="决策论"><a href="#决策论" class="headerlink" title="决策论"></a>决策论</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-Xnip2018-09-23_10-36-52.jpg" alt="决策论"></p>
+<h1 id="信息论"><a href="#信息论" class="headerlink" title="信息论"></a>信息论</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-Xnip2018-09-23_10-38-46.jpg" alt="信息论"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/23/机器学习与深度学习算法知识/Lecture 6: Backpropagation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/23/机器学习与深度学习算法知识/Lecture 6: Backpropagation/" itemprop="url">Lecture 6:Backpropagation</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-23T10:03:24+08:00">
+                2018-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Chain-Rule"><a href="#Chain-Rule" class="headerlink" title="Chain Rule"></a>Chain Rule</h3><p>基本公式<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376684598125.jpg" width="50%" height="50%"><br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376684674095.jpg" width="50%" height="50%"></p>
+<h3 id="forward-pass和backward-pass"><a href="#forward-pass和backward-pass" class="headerlink" title="forward pass和backward pass"></a>forward pass和backward pass</h3><p>可以将backpropagation分为两步</p>
+<h4 id="forward-pass"><a href="#forward-pass" class="headerlink" title="forward pass"></a>forward pass</h4><p>在前向传播的时候提前计算/保存好，因为该梯度很简单<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376686358832.jpg" width="50%" height="50%"></p>
+<p>比如z对w1的梯度就是x1，就是和w1相连的项<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376687025289.jpg" width="20%" height="50%"></p>
+<h4 id="backward-pass"><a href="#backward-pass" class="headerlink" title="backward pass"></a>backward pass</h4><p>回传的时候逐层相乘下去，类似动态规划，获得了后一层的梯度才能求出前一层的梯度。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376687488493.jpg" width="50%" height="50%"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376687824826.jpg" width="50%" height="50%"></p>
+<p>先前向，提前算出最邻近的梯度，直到output layer，计算完该梯度，再不断回传逐层相乘获得output对各层的梯度。</p>
+<h3 id="代码实现例子"><a href="#代码实现例子" class="headerlink" title="代码实现例子"></a>代码实现例子</h3><p>relu实现forward pass和backward pass<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyReLU</span><span class="params">(torch.autograd.Function)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    We can implement our own custom autograd Functions by subclassing</span></span><br><span class="line"><span class="string">    torch.autograd.Function and implementing the forward and backward passes</span></span><br><span class="line"><span class="string">    which operate on Tensors.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(ctx, input)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        In the forward pass we receive a Tensor containing the input and return</span></span><br><span class="line"><span class="string">        a Tensor containing the output. ctx is a context object that can be used</span></span><br><span class="line"><span class="string">        to stash information for backward computation. You can cache arbitrary</span></span><br><span class="line"><span class="string">        objects for use in the backward pass using the ctx.save_for_backward method.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        ctx.save_for_backward(input)  <span class="comment">#为了之后的backward计算</span></span><br><span class="line">        <span class="keyword">return</span> input.clamp(min=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(ctx, grad_output)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        In the backward pass we receive a Tensor containing the gradient of the loss</span></span><br><span class="line"><span class="string">        with respect to the output, and we need to compute the gradient of the loss</span></span><br><span class="line"><span class="string">        with respect to the input.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        input, = ctx.saved_tensors</span><br><span class="line">        grad_input = grad_output.clone()</span><br><span class="line">        grad_input[input &lt; <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> grad_input</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/23/机器学习与深度学习算法知识/Lecture 5 Classification: Logistic Regression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/23/机器学习与深度学习算法知识/Lecture 5 Classification: Logistic Regression/" itemprop="url">Lecture 5:Classification:Logistic Regression</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-23T09:35:24+08:00">
+                2018-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="logistic-regression如何做？"><a href="#logistic-regression如何做？" class="headerlink" title="logistic regression如何做？"></a>logistic regression如何做？</h3><p>step1: 定义function set<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376666391912.jpg" width="30%" height="50%"></p>
+<p>step2: 更新<br>使用最大似然更新</p>
+<script type="math/tex; mode=display">L(w,b)=f_{w,b}(x^1 )f_{w,b}(x^2 )(1−f_{w,b} (x^3 ))⋯f_{w,b} (x^N )</script><p>找到w，b使得L最大</p>
+<p>对似然函数取负对数，则有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376667791380.jpg" width="60%" height="50%"></p>
+<p>将式子的每个元素写成伯努利分布形式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376669013511.jpg" width="60%" height="50%"></p>
+<p>上式就是cross-entropy损失函数。</p>
+<p>求导该式子可得：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376669743224.jpg" width="30%" height="50%"><br>更新公式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376669980138.jpg" width="40%" height="50%"><br>可以看出上式很直观：和答案差距越大，更新步伐越大。</p>
+<p>同时发现上式和linear regression的更新公式是一致的。</p>
+<h3 id="为什么不像linear-regression那样设loss为square？"><a href="#为什么不像linear-regression那样设loss为square？" class="headerlink" title="为什么不像linear regression那样设loss为square？"></a>为什么不像linear regression那样设loss为square？</h3><p>假设我们使用square loss，则求导得到的梯度：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376671202521.jpg" width="50%" height="50%"><br>上式可以看出，当接近target时，梯度小；远离target时，梯度也小。难以达到全局最小<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376672527230.jpg" width="60%" height="50%"></p>
+<p>下图是cross entropy和square error的图像示意：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376672892502.jpg" width="60%" height="50%"></p>
+<p>如图，square loss难以到达全局最小。</p>
+<h3 id="生成式模型与判别式模型的区别"><a href="#生成式模型与判别式模型的区别" class="headerlink" title="生成式模型与判别式模型的区别"></a>生成式模型与判别式模型的区别</h3><p>生成式对联合概率分布进行建模，再通过贝叶斯定理获得后验概率；而判别式模型直接对后验概率建模。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376674213503.jpg" width="60%" height="50%"><br>二者所定义的function set是一致的，但同一组数据可能会得到不同的w和b。</p>
+<p>二者优劣对比：</p>
+<ul>
+<li>数据量多时，一般来说判别式模型会更好。因为判别式模型没有先验假设，完全依赖于数据。但如果数据有噪声，容易受影响。</li>
+<li>生成式模型是有一定的假设的，当假设错误，会影响分类效果。</li>
+<li>正因为有一定的先验假设，当数据量很少时，可能效果会不错；对于噪声更具有鲁棒性。</li>
+<li>先验可以从其他数据源获得来帮助特定任务，如语音识别问题。</li>
+</ul>
+<h3 id="logistic的局限"><a href="#logistic的局限" class="headerlink" title="logistic的局限"></a>logistic的局限</h3><p>本质仍是一个线性分类器，没办法分类非线性的数据。<br>如何解决该问题?<br><strong>将logistic regression model拼接起来</strong>，前面的model对数据进行feature transformation，然后再对新的feature进行分类。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-23-15376677559470.jpg" width="70%" height="50%"></p>
+<p>logistic与deep learning的联系：<br>如果将logistic regression的一个单元称为neuron，拼起来就是neural network了！！！</p>
 
           
         
@@ -1728,7 +1621,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1778,7 +1671,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">71</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1791,7 +1684,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
