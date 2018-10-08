@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="记RNN中每一步的损失为$E_t$，则损失对权重$W$的导数有： \frac{\partial{E_t}}{\partial{W}}=\sum_{k=1}^{t}     \frac{\partial{E_t}}{\partial{y_t}} \frac{\partial{y_t}}{\partial{h_t}} \frac{\partial{h_t}}{\partial{h_k}} \frac">
+<meta name="description" content="记RNN中每一步的损失为$E_t$，则损失对$h_{t-1}$的权重$W$的导数有： \frac{\partial{E_t}}{\partial{W}}=\sum_{k=1}^{t}     \frac{\partial{E_t}}{\partial{y_t}} \frac{\partial{y_t}}{\partial{h_t}} \frac{\partial{h_t}}{\partial{h">
 <meta name="keywords" content="梯度消失,梯度爆炸">
 <meta property="og:type" content="article">
 <meta property="og:title" content="梯度消失与梯度爆炸的推导">
 <meta property="og:url" content="http://www.linzehui.me/2018/10/07/碎片知识点/梯度消失与梯度爆炸的推导/index.html">
 <meta property="og:site_name" content="Weekly Review">
-<meta property="og:description" content="记RNN中每一步的损失为$E_t$，则损失对权重$W$的导数有： \frac{\partial{E_t}}{\partial{W}}=\sum_{k=1}^{t}     \frac{\partial{E_t}}{\partial{y_t}} \frac{\partial{y_t}}{\partial{h_t}} \frac{\partial{h_t}}{\partial{h_k}} \frac">
+<meta property="og:description" content="记RNN中每一步的损失为$E_t$，则损失对$h_{t-1}$的权重$W$的导数有： \frac{\partial{E_t}}{\partial{W}}=\sum_{k=1}^{t}     \frac{\partial{E_t}}{\partial{y_t}} \frac{\partial{y_t}}{\partial{h_t}} \frac{\partial{h_t}}{\partial{h">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-07T08:55:00.541Z">
+<meta property="og:updated_time" content="2018-10-08T04:21:18.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="梯度消失与梯度爆炸的推导">
-<meta name="twitter:description" content="记RNN中每一步的损失为$E_t$，则损失对权重$W$的导数有： \frac{\partial{E_t}}{\partial{W}}=\sum_{k=1}^{t}     \frac{\partial{E_t}}{\partial{y_t}} \frac{\partial{y_t}}{\partial{h_t}} \frac{\partial{h_t}}{\partial{h_k}} \frac">
+<meta name="twitter:description" content="记RNN中每一步的损失为$E_t$，则损失对$h_{t-1}$的权重$W$的导数有： \frac{\partial{E_t}}{\partial{W}}=\sum_{k=1}^{t}     \frac{\partial{E_t}}{\partial{y_t}} \frac{\partial{y_t}}{\partial{h_t}} \frac{\partial{h_t}}{\partial{h">
 
 
 
@@ -322,7 +322,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-08T12:21:18+08:00">
+                2018-10-08
+              </time>
             
           </span>
 
@@ -354,7 +366,7 @@
       
 
       
-        <p> 记RNN中每一步的损失为$E_t$，则损失对权重$W$的导数有：</p>
+        <p> 记RNN中每一步的损失为$E_t$，则损失对$h_{t-1}$的权重$W$的导数有：</p>
 <script type="math/tex; mode=display">\frac{\partial{E_t}}{\partial{W}}=\sum_{k=1}^{t}
     \frac{\partial{E_t}}{\partial{y_t}} \frac{\partial{y_t}}{\partial{h_t}} \frac{\partial{h_t}}{\partial{h_k}} \frac{\partial{h_k}}{\partial{W}}</script><p>其中$\frac{\partial{h_t}}{\partial{h_k}}$使用链式法则有：</p>
 <script type="math/tex; mode=display">\frac{\partial{h_t}}{\partial{h_k}} = 
@@ -490,7 +502,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">72</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -503,7 +515,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-count">84</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

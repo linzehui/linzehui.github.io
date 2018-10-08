@@ -4,6 +4,109 @@
 
     
   <url>
+    <loc>http://www.linzehui.me/2018/10/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B7%B1%E5%BA%A6%E7%82%BC%E4%B8%B9tricks%E5%90%88%E9%9B%86/</loc>
+    <lastmod>2018-10-08T11:30:44.916Z</lastmod>
+    <data>
+        <display>
+        <title>深度炼丹tricks合集</title>
+        <pubTime>2018-10-07T10:46:24.000Z</pubTime>
+        
+        <tag>调参</tag>
+         
+        <tag>tricks</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/10/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E4%B8%8E%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8%E7%9A%84%E6%8E%A8%E5%AF%BC/</loc>
+    <lastmod>2018-10-08T04:21:18.121Z</lastmod>
+    <data>
+        <display>
+        <title>梯度消失与梯度爆炸的推导</title>
+        <pubTime>2018-10-07T01:53:24.000Z</pubTime>
+        
+        <tag>梯度消失</tag>
+         
+        <tag>梯度爆炸</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2014:%20Unsupervised%20Learning:%20Generation/</loc>
+    <lastmod>2018-10-08T02:11:59.911Z</lastmod>
+    <data>
+        <display>
+        <title>Lecture 14:Unsupervised Learning:Generation</title>
+        <pubTime>2018-10-07T03:40:24.000Z</pubTime>
+        
+        <tag>机器学习🤖</tag>
+         
+        <tag>李宏毅机器学习课程</tag>
+         
+        <tag>Unsupervised Learning</tag>
+         
+        <tag>Generation</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/PRML%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E5%9B%9E%E5%BD%92%E7%9A%84%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2018-10-07T15:32:50.278Z</lastmod>
+    <data>
+        <display>
+        <title>PRML第三章 回归的线性模型</title>
+        <pubTime>2018-10-07T07:50:24.000Z</pubTime>
+        
+        <tag>机器学习🤖</tag>
+         
+        <tag>PRML</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/10/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8610/</loc>
+    <lastmod>2018-10-07T11:10:00.712Z</lastmod>
+    <data>
+        <display>
+        <title>每周碎片知识9</title>
+        <pubTime>2018-10-07T01:33:14.000Z</pubTime>
+        
+        <tag>碎片知识</tag>
+         
+        <tag>调参</tag>
+         
+        <tag>正态分布</tag>
+         
+        <tag>RNN</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2015:%20SVM/</loc>
     <lastmod>2018-10-07T09:08:58.167Z</lastmod>
     <data>
@@ -55,9 +158,9 @@
         
         <tag>机器学习🤖</tag>
          
-        <tag>Unsupervised Learning</tag>
-         
         <tag>李宏毅机器学习课程</tag>
+         
+        <tag>Unsupervised Learning</tag>
          
         <tag>Neighbor Embedding</tag>
          
@@ -78,30 +181,11 @@
         
         <tag>机器学习🤖</tag>
          
-        <tag>Unsupervised Learning</tag>
-         
         <tag>李宏毅机器学习课程</tag>
          
+        <tag>Unsupervised Learning</tag>
+         
         <tag>Linear Dimension Reduction</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.linzehui.me/2018/10/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E4%B8%8E%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8%E7%9A%84%E6%8E%A8%E5%AF%BC/</loc>
-    <lastmod>2018-10-07T08:55:00.541Z</lastmod>
-    <data>
-        <display>
-        <title>梯度消失与梯度爆炸的推导</title>
-        <pubTime>2018-10-07T01:53:24.000Z</pubTime>
-        
-        <tag>梯度消失</tag>
-         
-        <tag>梯度爆炸</tag>
          
          
            
@@ -149,48 +233,6 @@
 
     
   <url>
-    <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/PRML%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E5%9B%9E%E5%BD%92%E7%9A%84%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/</loc>
-    <lastmod>2018-10-07T08:19:03.034Z</lastmod>
-    <data>
-        <display>
-        <title>PRML第三章 回归的线性模型</title>
-        <pubTime>2018-10-07T07:50:24.000Z</pubTime>
-        
-        <tag>机器学习🤖</tag>
-         
-        <tag>PRML</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2014:%20Unsupervised%20Learning:%20Generation/</loc>
-    <lastmod>2018-10-07T03:44:12.191Z</lastmod>
-    <data>
-        <display>
-        <title>Lecture 14:Unsupervised Learning:Generation</title>
-        <pubTime>2018-10-07T03:40:24.000Z</pubTime>
-        
-        <tag>机器学习🤖</tag>
-         
-        <tag>Unsupervised Learning</tag>
-         
-        <tag>Generation</tag>
-         
-        <tag>李宏毅机器学习课程</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2013:%20Unsupervised%20Learning:%20Auto-encoder/</loc>
     <lastmod>2018-10-07T03:39:33.745Z</lastmod>
     <data>
@@ -200,32 +242,11 @@
         
         <tag>机器学习🤖</tag>
          
-        <tag>Unsupervised Learning</tag>
-         
         <tag>李宏毅机器学习课程</tag>
          
+        <tag>Unsupervised Learning</tag>
+         
         <tag>Auto-encoder</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.linzehui.me/2018/10/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8610/</loc>
-    <lastmod>2018-10-07T01:53:23.709Z</lastmod>
-    <data>
-        <display>
-        <title>每周碎片知识9</title>
-        <pubTime>2018-10-07T01:33:14.000Z</pubTime>
-        
-        <tag>碎片知识</tag>
-         
-        <tag>正态分布</tag>
-         
-        <tag>RNN</tag>
          
          
            
@@ -329,9 +350,9 @@
         
         <tag>机器学习🤖</tag>
          
-        <tag>李宏毅机器学习课程</tag>
-         
         <tag>Semi-supervised learning</tag>
+         
+        <tag>李宏毅机器学习课程</tag>
          
          
            
@@ -520,31 +541,12 @@
 
     
   <url>
-    <loc>http://www.linzehui.me/2018/07/29/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB2/</loc>
+    <loc>http://www.linzehui.me/2018/08/19/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB5/</loc>
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
     <data>
         <display>
-        <title>代码片段记录2</title>
-        <pubTime>2018-07-29T06:24:30.000Z</pubTime>
-        
-        <tag>code snippets</tag>
-         
-        <tag>代码片段</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.linzehui.me/2018/08/05/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB3/</loc>
-    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>代码片段记录3</title>
-        <pubTime>2018-08-05T02:58:30.000Z</pubTime>
+        <title>代码片段记录5</title>
+        <pubTime>2018-08-19T06:44:30.000Z</pubTime>
         
         <tag>code snippets</tag>
          
@@ -577,6 +579,25 @@
 
     
   <url>
+    <loc>http://www.linzehui.me/2018/08/05/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB3/</loc>
+    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>代码片段记录3</title>
+        <pubTime>2018-08-05T02:58:30.000Z</pubTime>
+        
+        <tag>code snippets</tag>
+         
+        <tag>代码片段</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.linzehui.me/2018/07/23/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB1/</loc>
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
     <data>
@@ -596,12 +617,12 @@
 
     
   <url>
-    <loc>http://www.linzehui.me/2018/08/19/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB5/</loc>
+    <loc>http://www.linzehui.me/2018/07/29/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB2/</loc>
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
     <data>
         <display>
-        <title>代码片段记录5</title>
-        <pubTime>2018-08-19T06:44:30.000Z</pubTime>
+        <title>代码片段记录2</title>
+        <pubTime>2018-07-29T06:24:30.000Z</pubTime>
         
         <tag>code snippets</tag>
          
@@ -721,11 +742,11 @@
         <title>Linux常用命令</title>
         <pubTime>2018-08-03T05:48:13.000Z</pubTime>
         
-        <tag>技巧</tag>
-         
         <tag>Linux</tag>
          
         <tag>碎片知识</tag>
+         
+        <tag>技巧</tag>
          
          
            
@@ -868,11 +889,11 @@
         <title>Pycharm常用技巧</title>
         <pubTime>2018-08-10T11:05:13.000Z</pubTime>
         
+        <tag>技巧</tag>
+         
         <tag>杂七杂八</tag>
          
         <tag>快捷键</tag>
-         
-        <tag>技巧</tag>
          
         <tag>Pycharm</tag>
          
@@ -891,9 +912,9 @@
         <title>Python惯例[转]</title>
         <pubTime>2018-08-05T03:28:05.000Z</pubTime>
         
-        <tag>杂七杂八</tag>
-         
         <tag>碎片知识</tag>
+         
+        <tag>杂七杂八</tag>
          
         <tag>Python</tag>
          
@@ -1124,13 +1145,13 @@
         <title>Vim常用快捷键</title>
         <pubTime>2018-08-10T11:50:13.000Z</pubTime>
         
+        <tag>技巧</tag>
+         
         <tag>Vim</tag>
          
         <tag>杂七杂八</tag>
          
         <tag>快捷键</tag>
-         
-        <tag>技巧</tag>
          
          
            
@@ -1178,9 +1199,9 @@
         <title>如何将ELMo词向量用于中文</title>
         <pubTime>2018-08-12T08:49:05.000Z</pubTime>
         
-        <tag>教程</tag>
-         
         <tag>ELMo</tag>
+         
+        <tag>教程</tag>
          
         <tag>词向量</tag>
          
@@ -1218,9 +1239,9 @@
         <title>如何训练GloVe中文词向量</title>
         <pubTime>2018-08-05T03:06:05.000Z</pubTime>
         
-        <tag>GloVe</tag>
-         
         <tag>教程</tag>
+         
+        <tag>GloVe</tag>
          
          
            

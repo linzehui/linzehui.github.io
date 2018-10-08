@@ -286,6 +286,149 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/碎片知识点/深度炼丹tricks合集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/07/碎片知识点/深度炼丹tricks合集/" itemprop="url">深度炼丹tricks合集</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T18:46:24+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-08T19:30:44+08:00">
+                2018-10-08
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>长期更新。受知乎深度炼丹的启发，以及个人在实践过程和阅读中会接触到一些tricks，认为有必要做一个合集，将一些可能有用的tricks做记录。有实践过的会特别标注。</p>
+<h2 id="调参技巧"><a href="#调参技巧" class="headerlink" title="调参技巧"></a>调参技巧</h2><h3 id="学习率"><a href="#学习率" class="headerlink" title="学习率"></a>学习率</h3><p>1️⃣一条原则：当validation loss开始上升时，减少学习率。调整学习率是有一定的技巧的。[1]<br>建议：使用Time/Drop-based/Cyclical Learning Rate</p>
+<h3 id="batch-size"><a href="#batch-size" class="headerlink" title="batch size"></a>batch size</h3><p>1️⃣[2]中详细论述了增加batch size而不是减小learning rate能够提升模型表现。<br>建议：保持学习率不变，提高batch size，直到batch size~训练集/10，接下来再采用学习率下降的策略。</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>1️⃣在Hinton的slide中[3]提到，可以将RNN/LSTM的初始hidden state设置为可学习的weights。</p>
+<blockquote>
+<p>• We could just fix these initial states to have some default value like 0.5.<br>• But it is better to treat the initial states as learned parameters.<br>• We learn them in the same way as we learn the weights.</p>
+</blockquote>
+<p>2️⃣Weight initialization<br>[4]分析并总结了几种初始化权重的方法<br>建议：使用Xavier initialization或He initialization或Batch Normalization</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[1]<a href="https://blog.goodaudience.com/how-to-make-your-model-happy-again-part-1-40d94a9ffb41" target="_blank" rel="noopener">https://blog.goodaudience.com/how-to-make-your-model-happy-again-part-1-40d94a9ffb41</a></p>
+<p>[2]<a href="https://arxiv.org/abs/1711.00489" target="_blank" rel="noopener">https://arxiv.org/abs/1711.00489</a></p>
+<p>[3]<a href="https://www.cs.toronto.edu/~hinton/csc2535/notes/lec10new.pdf" target="_blank" rel="noopener">https://www.cs.toronto.edu/~hinton/csc2535/notes/lec10new.pdf</a></p>
+<p>[4]<a href="https://zhuanlan.zhihu.com/p/25110150" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/25110150</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/诗词&句/每周诗词11/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -323,7 +466,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T16:47:35+08:00">
+                2018-10-07
+              </time>
             
           </span>
 
@@ -445,7 +600,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T23:32:50+08:00">
+                2018-10-07
+              </time>
             
           </span>
 
@@ -483,6 +650,7 @@
 <p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-Xnip2018-10-07_15-53-54.jpg" alt="1"></p>
 <h1 id="偏置-⽅差分解"><a href="#偏置-⽅差分解" class="headerlink" title="偏置-⽅差分解"></a>偏置-⽅差分解</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-Xnip2018-10-07_15-56-30.jpg" alt="0"></p>
 <h1 id="贝叶斯线性回归"><a href="#贝叶斯线性回归" class="headerlink" title="贝叶斯线性回归"></a>贝叶斯线性回归</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-Xnip2018-10-07_16-13-57.jpg" alt="1"></p>
+<h1 id="贝叶斯模型⽐较"><a href="#贝叶斯模型⽐较" class="headerlink" title="贝叶斯模型⽐较"></a>贝叶斯模型⽐较</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-Xnip2018-10-07_23-30-33.jpg" alt="1"></p>
 <p>—-未完—-</p>
 
           
@@ -569,7 +737,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T17:08:58+08:00">
+                2018-10-07
+              </time>
             
           </span>
 
@@ -726,7 +906,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T17:06:59+08:00">
+                2018-10-07
+              </time>
             
           </span>
 
@@ -860,7 +1052,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-08T10:11:59+08:00">
+                2018-10-08
+              </time>
             
           </span>
 
@@ -897,7 +1101,14 @@
             <h3 id="Component-by-component"><a href="#Component-by-component" class="headerlink" title="Component-by-component"></a>Component-by-component</h3><p>对于图像来说，每次生成一个pixel：PixelRNN</p>
 <h3 id="VAE"><a href="#VAE" class="headerlink" title="VAE"></a>VAE</h3><p>架构：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388837191574.jpg" width="50%" height="50%"></p>
 <p>其中e是噪声，σ是方差，目标是最小化reconstruction error，以及一个限制。该限制的目的即防止σ=0，m是正则化项。</p>
-<p>中间的推导以及为什么是这样的架构我还不是很懂，之后再更新。</p>
+<p><del>中间的推导以及为什么是这样的架构我还不是很懂，之后再更新。</del><br>实际上可以这么理解，有几个要点：</p>
+<ul>
+<li>首先我们是基于这么一个假设：中间的code应当是服从正态分布的，而encoder的作用即在于拟合该正态分布的均值与方差的对数（因为方差应当恒为正，但神经网络的输出可能有正有负）</li>
+<li>如果生成出来的code不符合正态分布，会有一个惩罚项，也就是上图的constraint（可以通过KL散度推导获得）</li>
+<li>按理说，应当是在生成了均值和方差后，定义好该正态分布，然后再从中采样，但是这样没办法回传更新梯度，因此这里使用重参数技巧(Reparameterization Trick)，也即从$N(\mu,\sigma^2)$中采样$Z$，相当于从$N(0,I)$中采样$\varepsilon$，然后让$Z=\mu + \varepsilon \times \mu$</li>
+</ul>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-08-15389638077301.jpg" width="70%" height="50%"></p>
+<p><strong>Reference</strong>:<br><a href="https://www.sohu.com/a/226209674_500659" target="_blank" rel="noopener">https://www.sohu.com/a/226209674_500659</a></p>
 <p>VAE的主要问题在于，网络只试图去记住见过的图像，但没法真正去生成没见过的图像。</p>
 <h3 id="Generative-Adversarial-Network-GAN"><a href="#Generative-Adversarial-Network-GAN" class="headerlink" title="Generative Adversarial Network (GAN)"></a>Generative Adversarial Network (GAN)</h3><p>GAN包含一个discriminator和一个generator，generator试图生成能够骗过discriminator的样本，而generator试图能够将generator生成的样本和真实的样本区分。</p>
 <p>之后会有详细的介绍。</p>
@@ -986,7 +1197,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T11:39:33+08:00">
+                2018-10-07
+              </time>
             
           </span>
 
@@ -1115,7 +1338,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T17:03:55+08:00">
+                2018-10-07
+              </time>
             
           </span>
 
@@ -1250,7 +1485,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T17:01:29+08:00">
+                2018-10-07
+              </time>
             
           </span>
 
@@ -1401,7 +1648,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-08T12:21:18+08:00">
+                2018-10-08
+              </time>
             
           </span>
 
@@ -1435,7 +1694,7 @@
       
         
           
-            <p> 记RNN中每一步的损失为$E_t$，则损失对权重$W$的导数有：</p>
+            <p> 记RNN中每一步的损失为$E_t$，则损失对$h_{t-1}$的权重$W$的导数有：</p>
 <script type="math/tex; mode=display">\frac{\partial{E_t}}{\partial{W}}=\sum_{k=1}^{t}
     \frac{\partial{E_t}}{\partial{y_t}} \frac{\partial{y_t}}{\partial{h_t}} \frac{\partial{h_t}}{\partial{h_k}} \frac{\partial{h_k}}{\partial{W}}</script><p>其中$\frac{\partial{h_t}}{\partial{h_k}}$使用链式法则有：</p>
 <script type="math/tex; mode=display">\frac{\partial{h_t}}{\partial{h_k}} = 
@@ -1450,131 +1709,6 @@
 ≤ (\beta_W \beta_h)^{t-k}</script><p>从上式可以看出，当t-k足够大时，如果$(\beta_W \beta_h)$小于1则$(\beta_W \beta_h)^{t-k}$则会变得非常小，相反，若$(\beta_W \beta_h)$大于1则$(\beta_W \beta_h)^{t-k}$则会变得非常大。</p>
 <p>在计算机中，当梯度值很大时，会造成上溢(NaN)，也即梯度爆炸问题，当梯度值很小时，会变成0，也即梯度消失。注意到，t-k的损失实际上评估的是一个较远的词对当前t的贡献，梯度消失也即意味着对当前的贡献消失。</p>
 <p>Reference:<br>CS224d: Deep Learning for NLP Lecture4</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/碎片知识点/每周碎片知识10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/碎片知识点/每周碎片知识10/" itemprop="url">每周碎片知识9</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T09:33:14+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-正态分布"><a href="#1️⃣-正态分布" class="headerlink" title="1️⃣[正态分布]"></a>1️⃣[正态分布]</h3><p>高维正态分布是从一维发展而来的：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388761009977.jpg" width="70%" height="50%"></p>
-<p><a href="https://www.zhihu.com/question/36339816" target="_blank" rel="noopener">https://www.zhihu.com/question/36339816</a></p>
-<hr>
-<h3 id="2️⃣-RNN"><a href="#2️⃣-RNN" class="headerlink" title="2️⃣[RNN]"></a>2️⃣[RNN]</h3><p>from <a href="https://www.cs.toronto.edu/~hinton/csc2535/notes/lec10new.pdf" target="_blank" rel="noopener">https://www.cs.toronto.edu/~hinton/csc2535/notes/lec10new.pdf</a></p>
-<p>通常而言，我们都会将RNN的initial state设为全0，但在Hinton的slide中提到，我们可以将初始状态作为可学习的变量，和我们在学习权重矩阵一样。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388770544817.jpg" width="80%" height="50%"></p>
 
           
         
@@ -1664,7 +1798,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">72</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1677,7 +1811,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-count">84</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

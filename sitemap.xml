@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.linzehui.me/2018/10/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B7%B1%E5%BA%A6%E7%82%BC%E4%B8%B9tricks%E5%90%88%E9%9B%86/</loc>
+    
+    <lastmod>2018-10-08T11:30:44.916Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2018/10/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E4%B8%8E%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8%E7%9A%84%E6%8E%A8%E5%AF%BC/</loc>
+    
+    <lastmod>2018-10-08T04:21:18.121Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2014:%20Unsupervised%20Learning:%20Generation/</loc>
+    
+    <lastmod>2018-10-08T02:11:59.911Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/PRML%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E5%9B%9E%E5%BD%92%E7%9A%84%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/</loc>
+    
+    <lastmod>2018-10-07T15:32:50.278Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2018/10/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8610/</loc>
+    
+    <lastmod>2018-10-07T11:10:00.712Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2015:%20SVM/</loc>
     
     <lastmod>2018-10-07T09:08:58.167Z</lastmod>
@@ -30,13 +65,6 @@
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/10/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E4%B8%8E%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8%E7%9A%84%E6%8E%A8%E5%AF%BC/</loc>
-    
-    <lastmod>2018-10-07T08:55:00.541Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.linzehui.me/2018/10/07/%E8%AF%97%E8%AF%8D&%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D11/</loc>
     
     <lastmod>2018-10-07T08:47:35.705Z</lastmod>
@@ -51,30 +79,9 @@
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/PRML%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E5%9B%9E%E5%BD%92%E7%9A%84%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/</loc>
-    
-    <lastmod>2018-10-07T08:19:03.034Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2014:%20Unsupervised%20Learning:%20Generation/</loc>
-    
-    <lastmod>2018-10-07T03:44:12.191Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2013:%20Unsupervised%20Learning:%20Auto-encoder/</loc>
     
     <lastmod>2018-10-07T03:39:33.745Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.linzehui.me/2018/10/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8610/</loc>
-    
-    <lastmod>2018-10-07T01:53:23.709Z</lastmod>
     
   </url>
   
@@ -184,14 +191,7 @@
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/07/29/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB2/</loc>
-    
-    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.linzehui.me/2018/08/05/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB3/</loc>
+    <loc>http://www.linzehui.me/2018/07/23/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB1/</loc>
     
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
     
@@ -205,6 +205,13 @@
   </url>
   
   <url>
+    <loc>http://www.linzehui.me/2018/08/19/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB5/</loc>
+    
+    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.linzehui.me/2018/08/26/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB6/</loc>
     
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
@@ -212,14 +219,14 @@
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/07/23/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB1/</loc>
+    <loc>http://www.linzehui.me/2018/08/05/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB3/</loc>
     
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/08/19/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB5/</loc>
+    <loc>http://www.linzehui.me/2018/07/29/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB2/</loc>
     
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
     
