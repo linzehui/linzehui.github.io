@@ -333,7 +333,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-08T19:30:44+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-08T22:50:54+08:00">
                 2018-10-08
               </time>
             
@@ -370,17 +370,24 @@
         
           
             <p>长期更新。受知乎深度炼丹的启发，以及个人在实践过程和阅读中会接触到一些tricks，认为有必要做一个合集，将一些可能有用的tricks做记录。有实践过的会特别标注。</p>
-<h2 id="调参技巧"><a href="#调参技巧" class="headerlink" title="调参技巧"></a>调参技巧</h2><h3 id="学习率"><a href="#学习率" class="headerlink" title="学习率"></a>学习率</h3><p>1️⃣一条原则：当validation loss开始上升时，减少学习率。调整学习率是有一定的技巧的。[1]<br>建议：使用Time/Drop-based/Cyclical Learning Rate</p>
-<h3 id="batch-size"><a href="#batch-size" class="headerlink" title="batch size"></a>batch size</h3><p>1️⃣[2]中详细论述了增加batch size而不是减小learning rate能够提升模型表现。<br>建议：保持学习率不变，提高batch size，直到batch size~训练集/10，接下来再采用学习率下降的策略。</p>
-<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>1️⃣在Hinton的slide中[3]提到，可以将RNN/LSTM的初始hidden state设置为可学习的weights。</p>
-<blockquote>
-<p>• We could just fix these initial states to have some default value like 0.5.<br>• But it is better to treat the initial states as learned parameters.<br>• We learn them in the same way as we learn the weights.</p>
-</blockquote>
-<p>2️⃣Weight initialization<br>[4]分析并总结了几种初始化权重的方法<br>建议：使用Xavier initialization或He initialization或Batch Normalization</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[1]<a href="https://blog.goodaudience.com/how-to-make-your-model-happy-again-part-1-40d94a9ffb41" target="_blank" rel="noopener">https://blog.goodaudience.com/how-to-make-your-model-happy-again-part-1-40d94a9ffb41</a></p>
-<p>[2]<a href="https://arxiv.org/abs/1711.00489" target="_blank" rel="noopener">https://arxiv.org/abs/1711.00489</a></p>
-<p>[3]<a href="https://www.cs.toronto.edu/~hinton/csc2535/notes/lec10new.pdf" target="_blank" rel="noopener">https://www.cs.toronto.edu/~hinton/csc2535/notes/lec10new.pdf</a></p>
+<h2 id="调参技巧"><a href="#调参技巧" class="headerlink" title="调参技巧"></a>调参技巧</h2><h3 id="数据增强"><a href="#数据增强" class="headerlink" title="数据增强"></a>数据增强</h3><h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><h4 id="1️⃣zero-center"><a href="#1️⃣zero-center" class="headerlink" title="1️⃣zero-center"></a>1️⃣zero-center</h4><p>[9]将数据中心化</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><h4 id="1️⃣Xavier-initialization-7-方法"><a href="#1️⃣Xavier-initialization-7-方法" class="headerlink" title="1️⃣Xavier initialization[7]方法"></a>1️⃣Xavier initialization[7]方法</h4><p>适用[9]于普通激活函数(tanh,sigmoid)：scale = np.sqrt(3/n)</p>
+<h4 id="2️⃣He-initialization-8-方法"><a href="#2️⃣He-initialization-8-方法" class="headerlink" title="2️⃣He initialization[8]方法"></a>2️⃣He initialization[8]方法</h4><p>适用[9]于ReLU：scale = np.sqrt(6/n)</p>
+<h4 id="3️⃣Batch-normalization-10"><a href="#3️⃣Batch-normalization-10" class="headerlink" title="3️⃣Batch normalization[10]"></a>3️⃣Batch normalization[10]</h4><h4 id="4️⃣RNN-LSTM-init-hidden-state"><a href="#4️⃣RNN-LSTM-init-hidden-state" class="headerlink" title="4️⃣RNN/LSTM init hidden state"></a>4️⃣RNN/LSTM init hidden state</h4><p>Hinton[3]提到将RNN/LSTM的初始hidden state设置为可学习的weight</p>
+<h3 id="训练技巧"><a href="#训练技巧" class="headerlink" title="训练技巧"></a>训练技巧</h3><h4 id="1️⃣Gradient-Clipping-5-6"><a href="#1️⃣Gradient-Clipping-5-6" class="headerlink" title="1️⃣Gradient Clipping[5,6]"></a>1️⃣Gradient Clipping[5,6]</h4><h4 id="2️⃣learning-rate"><a href="#2️⃣learning-rate" class="headerlink" title="2️⃣learning rate"></a>2️⃣learning rate</h4><p>原则：当validation loss开始上升时，减少学习率。<br>[1]Time/Drop-based/Cyclical Learning Rate</p>
+<h4 id="3️⃣batch-size"><a href="#3️⃣batch-size" class="headerlink" title="3️⃣batch size"></a>3️⃣batch size</h4><p>[2]中详细论述了增加batch size而不是减小learning rate能够提升模型表现。保持学习率不变，提高batch size，直到batch size~训练集/10，接下来再采用学习率下降的策略。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[1]<a href="https://blog.goodaudience.com/how-to-make-your-model-happy-again-part-1-40d94a9ffb41" target="_blank" rel="noopener">How to make your model happy again — part 1</a></p>
+<p>[2]<a href="https://arxiv.org/abs/1711.00489" target="_blank" rel="noopener">Don’t Decay the Learning Rate, Increase the Batch Size</a></p>
+<p>[3]<a href="https://www.cs.toronto.edu/~hinton/csc2535/notes/lec10new.pdf" target="_blank" rel="noopener">CSC2535 2013: Advanced Machine Learning Lecture 10 Recurrent neural networks</a></p>
 <p>[4]<a href="https://zhuanlan.zhihu.com/p/25110150" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/25110150</a></p>
+<p>[5]<a href="https://arxiv.org/abs/1211.5063" target="_blank" rel="noopener">On the difficulty of training Recurrent Neural Networks
+</a></p>
+<p>[6]<a href="https://arxiv.org/abs/1612.08083" target="_blank" rel="noopener">Language Modeling with Gated Convolutional Networks
+</a></p>
+<p>[7]<a href="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf" target="_blank" rel="noopener">Understanding the difficulty of training deep feedforward neural networks</a></p>
+<p>[8]<a href="https://arxiv.org/abs/1502.01852" target="_blank" rel="noopener">Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification</a></p>
+<p>[9]<a href="https://www.zhihu.com/question/41631631" target="_blank" rel="noopener">知乎：你有哪些deep learning（rnn、cnn）调参的经验？</a></p>
+<p>[10]<a href="https://arxiv.org/abs/1502.03167" target="_blank" rel="noopener">Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</a></p>
 
           
         
@@ -610,8 +617,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T23:32:50+08:00">
-                2018-10-07
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-09T22:07:12+08:00">
+                2018-10-09
               </time>
             
           </span>
@@ -651,6 +658,7 @@
 <h1 id="偏置-⽅差分解"><a href="#偏置-⽅差分解" class="headerlink" title="偏置-⽅差分解"></a>偏置-⽅差分解</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-Xnip2018-10-07_15-56-30.jpg" alt="0"></p>
 <h1 id="贝叶斯线性回归"><a href="#贝叶斯线性回归" class="headerlink" title="贝叶斯线性回归"></a>贝叶斯线性回归</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-Xnip2018-10-07_16-13-57.jpg" alt="1"></p>
 <h1 id="贝叶斯模型⽐较"><a href="#贝叶斯模型⽐较" class="headerlink" title="贝叶斯模型⽐较"></a>贝叶斯模型⽐较</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-Xnip2018-10-07_23-30-33.jpg" alt="1"></p>
+<h1 id="证据近似"><a href="#证据近似" class="headerlink" title="证据近似"></a>证据近似</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-09-Xnip2018-10-09_22-06-22.jpg" alt="1"></p>
 <p>—-未完—-</p>
 
           

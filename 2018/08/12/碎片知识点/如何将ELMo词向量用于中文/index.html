@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于一句话进入到language model获得不同的词向量。根据实验可得，使用了Elmo词向量之后，许多NLP任务都有了大幅的提高。 论文:Deep contextualized word representations AllenNLP一共relea">
+<meta name="description" content="10.10更新：ELMo已经由哈工大组用PyTorch重写了，并且提供了中文的预训练好的language model，可以直接使用，但代码中似乎还不能对生成的词向量进行加权求和，这部分可能需要自己改。如果可能我应该会再写一篇如何改代码的博客。  ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于一句">
 <meta name="keywords" content="ELMo,教程,词向量">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何将ELMo词向量用于中文">
 <meta property="og:url" content="http://www.linzehui.me/2018/08/12/碎片知识点/如何将ELMo词向量用于中文/index.html">
 <meta property="og:site_name" content="Weekly Review">
-<meta property="og:description" content="ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于一句话进入到language model获得不同的词向量。根据实验可得，使用了Elmo词向量之后，许多NLP任务都有了大幅的提高。 论文:Deep contextualized word representations AllenNLP一共relea">
+<meta property="og:description" content="10.10更新：ELMo已经由哈工大组用PyTorch重写了，并且提供了中文的预训练好的language model，可以直接使用，但代码中似乎还不能对生成的词向量进行加权求和，这部分可能需要自己改。如果可能我应该会再写一篇如何改代码的博客。  ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于一句">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338861462682.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-11-15339757184030.jpg">
@@ -98,10 +98,10 @@
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-11-15339740970081.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-11-15339745511775.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-11-15339978499136.jpg">
-<meta property="og:updated_time" content="2018-08-12T09:00:11.730Z">
+<meta property="og:updated_time" content="2018-10-10T03:26:50.845Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何将ELMo词向量用于中文">
-<meta name="twitter:description" content="ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于一句话进入到language model获得不同的词向量。根据实验可得，使用了Elmo词向量之后，许多NLP任务都有了大幅的提高。 论文:Deep contextualized word representations AllenNLP一共relea">
+<meta name="twitter:description" content="10.10更新：ELMo已经由哈工大组用PyTorch重写了，并且提供了中文的预训练好的language model，可以直接使用，但代码中似乎还不能对生成的词向量进行加权求和，这部分可能需要自己改。如果可能我应该会再写一篇如何改代码的博客。  ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于一句">
 <meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338861462682.jpg">
 
 
@@ -344,8 +344,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-12T17:00:11+08:00">
-                2018-08-12
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-10T11:26:50+08:00">
+                2018-10-10
               </time>
             
           </span>
@@ -378,7 +378,9 @@
       
 
       
-        <p>ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于一句话进入到language model获得不同的词向量。根据实验可得，使用了Elmo词向量之后，许多NLP任务都有了大幅的提高。</p>
+        <p>10.10更新：ELMo已经由哈工大组用PyTorch重写了，并且提供了中文的预训练好的language model，可以直接使用，但代码中似乎还不能对生成的词向量进行加权求和，这部分可能需要自己改。如果可能我应该会再写一篇如何改代码的博客。</p>
+<hr>
+<p>ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于一句话进入到language model获得不同的词向量。根据实验可得，使用了Elmo词向量之后，许多NLP任务都有了大幅的提高。</p>
 <p>论文:<a href="https://arxiv.org/pdf/1802.05365.pdf" target="_blank" rel="noopener">Deep contextualized word representations</a></p>
 <p>AllenNLP一共release了两份ELMo的代码，一份是Pytorch版本的，另一份是Tensorflow版本的。Pytorch版本的只开放了使用预训练好的词向量的接口，但没有给出自己训练的接口，因此无法使用到中文语料中。Tensorflow版本有提供训练的代码，因此本文记录如何将ELMo用于中文语料中，但本文只记录使用到的部分，而不会分析全部的代码。</p>
 <p>需求:<br>使用预训练好的词向量作为句子表示直接传入到RNN中(也就是不使用代码中默认的先过CNN)，在训练完后，将模型保存，在需要用的时候load进来，对于一个特定的句子，首先将其转换成预训练的词向量，传入language model之后最终得到ELMo词向量。</p>
