@@ -286,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/碎片知识点/深度炼丹tricks合集/">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/14/论文/每周论文1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
@@ -305,7 +305,654 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/07/碎片知识点/深度炼丹tricks合集/" itemprop="url">深度炼丹tricks合集</a></h1>
+                <a class="post-title-link" href="/2018/10/14/论文/每周论文1/" itemprop="url">每周论文1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-14T11:09:30+08:00">
+                2018-10-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-14T12:40:05+08:00">
+                2018-10-14
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣-Learned-in-Translation-Contextualized-Word-Vectors"><a href="#1️⃣-Learned-in-Translation-Contextualized-Word-Vectors" class="headerlink" title="1️⃣[Learned in Translation: Contextualized Word Vectors]"></a>1️⃣[Learned in Translation: Contextualized Word Vectors]</h3><p>CoVe是第一个引入动态词向量的模型。<br>Motivation：翻译模型能够保存最多的信息，因为如果保存信息不够多，decoder接收到的信息不足，翻译效果就不会好。</p>
+<p>做法：使用传统NMT的encoder-decoder的做法翻译模型，只是将(bi)LSTM所得到的隐层状态表示取出来和embedding拼接起来，作为一个词的表示：</p>
+<script type="math/tex; mode=display">w=[GloVe(w); CoVe(w)]</script><hr>
+<h3 id="2️⃣-Language-Modeling-with-Gated-Convolutional-Networks"><a href="#2️⃣-Language-Modeling-with-Gated-Convolutional-Networks" class="headerlink" title="2️⃣[Language Modeling with Gated Convolutional Networks]"></a>2️⃣[Language Modeling with Gated Convolutional Networks]</h3><p>使用CNN对语言模型进行建模，提高并行性。</p>
+<p>贡献：使用了CNN进行language model建模；提出了简化版的gate机制应用在CNN中。</p>
+<p>做法：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394870930257.jpg" width="50%" height="50%"></p>
+<p>实际上就是一个输入两个filter，卷积出来的做一个gate的操作$H_0 = A⊗σ(B)$，控制流向下一层的数据。</p>
+<p>一个小细节是，为了不让language model看到下一个词，每一层在开始卷积的时候会在左边添加kernel_size-1个padding。</p>
+<p>扩展：因为CNN的并行性高，可以使用CNN来对language model建模替代ELMo，同样可以获得动态词向量。这个想法已经由提出ELMo的团队做出来并进行对比了。论文：Dissecting Contextual Word Embeddings: Architecture and Representation</p>
+<p>目前正在<a href="https://github.com/linzehui/Gated-Convolutional-Networks" target="_blank" rel="noopener">复现</a>该论文 。</p>
+<hr>
+<h3 id="3️⃣-Attention-is-All-you-need"><a href="#3️⃣-Attention-is-All-you-need" class="headerlink" title="3️⃣[Attention is All you need]"></a>3️⃣[Attention is All you need]</h3><p>非常经典的论文。提出了Transformer。为了读BERT重温了一遍。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394876881322.jpg" width="70%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394877200390.jpg" width="70%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394877478814.jpg" width="70%" height="50%"></p>
+<hr>
+<h3 id="4️⃣-BERT-Pre-training-of-Deep-Bidirectional-Transformers-for-Language-Understanding"><a href="#4️⃣-BERT-Pre-training-of-Deep-Bidirectional-Transformers-for-Language-Understanding" class="headerlink" title="4️⃣[BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding]"></a>4️⃣[BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding]</h3><p>刷爆各榜单的一篇神文。和ELMo一样，是预训练一个language model获得词向量动态表示。</p>
+<p>Motivation：之前的language model只能根据前面的词来预测下一个（即使ELMo是双向的LSTM，也是分别训练一个前向和一个后向的），限制了双向的context；因此提出了双向的language model。</p>
+<p>做法：<br>模型分为两个部分：<br>①masked LM：因为使用了两边的context，而language model的目的是预测下一个词，这样模型会提前看到下一个词，为了解决该问题，训练的时候讲部分词mask掉，最终只预测被mask掉的词。</p>
+<p>②Next Sentence Prediction：随机50%生成两个句子是有上下句关系的，50%两个句子是没有关系的，然后做分类；具体来说是拿第一个词[CLS]（这是手动添加的）的表示，过一个softmax层得到。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394891973653.jpg" width="50%" height="50%"></p>
+<p>联合训练这两个任务。</p>
+<p>本文贡献：使用Transformer进行双向的language model建模。论文提到的一些细节/tricks非常值得讨论，比如对token embedding添加了许多信息，非常简单粗暴。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/14/机器学习与深度学习算法知识/Lecture 18: Deep Reinforcement Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/14/机器学习与深度学习算法知识/Lecture 18: Deep Reinforcement Learning/" itemprop="url">Lecture 18:Deep Reinforcement Learning</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-14T10:17:24+08:00">
+                2018-10-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-14T10:59:14+08:00">
+                2018-10-14
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>记号： $a$是action，$s$即外部状态state，$\pi_{\theta}(s)$也即从$s$映射到$a$的函数；$r$是reward，每采取一个动作，会有一个reward，则总的reward为</p>
+<script type="math/tex; mode=display">R_\theta = \sum_{t=1}^{T} r_t</script><p>我们使用神经网络来拟合$\pi$，一个eposide $\tau$是一个流程下来的的所有state、action和reward的集合。</p>
+<script type="math/tex; mode=display">\tau = \{s_1,a_1,r_1,s_2,a_2,r_2,...,s_T,a_T,r_T \}</script><p>如果我们使用相同的actor运行n次，则每个$\tau$会有一定的概率被采样到，采样概率记为$P(\tau|\theta)$，则我们可以通过采样的方式来对期望reward进行估计：</p>
+<script type="math/tex; mode=display">\overline{R}_\theta = \sum_\tau R(\tau) P(\tau|\theta) ≈ \frac{1}{N} \sum_{n=1}^{N} R(\tau^n)</script><p>那么我们接下来的<strong>目标</strong>就是最大化期望reward，其中期望reward是：</p>
+<script type="math/tex; mode=display">\overline{R}_\theta = \sum_\tau R(\tau) P(\tau|\theta)</script><p>我们同样使用梯度上升：其中与$θ$相关的是$P$，则可以写成：</p>
+<script type="math/tex; mode=display">\nabla \overline{R}_\theta = \sum_\tau R(\tau) \nabla P(\tau|\theta)= \sum_\tau R(\tau) P(\tau|\theta) \frac{\nabla P(\tau|\theta)}{P(\tau|\theta)}</script><p>由于$\dfrac {d\log \left( f\left( x\right) \right) }{dx}=\dfrac {1}{f\left( x\right) }\dfrac {df(x)}{dx}$，则前式可写成：</p>
+<script type="math/tex; mode=display">\nabla \overline{R}_\theta = \sum_\tau R(\tau) P(\tau|\theta) \nabla log P(\tau | \theta) ≈ \frac{1}{N} \sum_{n=1}^{N} R(\tau^n) log P(\tau ^n| \theta)</script><p>如何求梯度？<br>由于：</p>
+<script type="math/tex; mode=display">P(\tau | \theta)=p(s_1)p(a_1|s_1,\theta)p(r_1,s_2|s_1,a_1)p(a_2|s_2,\theta)p(r_2,s_3|s_2,a_2)...
+\\=p(s_1)\prod_{t=1}^{T}p(a_t|s_t,\theta)p(r_t , s_{t+1}| s_t,a_t)</script><p>实际上，其中与梯度相关的只有中间项$p(a_t|s_t,\theta)$，该项也即$π$函数，从state到action的映射。<br>取log并求导，有：</p>
+<script type="math/tex; mode=display">\nabla log P(\tau | \theta)= \sum_{t=1}^{T} \nabla log p(a_t|s_t,\theta)</script><p>代回，因此最终$\overline{R}_\theta$的梯度为：</p>
+<script type="math/tex; mode=display">\nabla \overline{R}_\theta = \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_n} R(\tau^n) \nabla log p(a_{t}^n | s_t^n,\theta)</script><p>注意到该式子告诉我们，应考虑整体的reward而不应该只考虑每一步的reward；并且取log的原因可以理解成是对action取归一化，因为：</p>
+<script type="math/tex; mode=display">\frac{\nabla p(a_t^n | s_t^n,\theta)}{p(a_t^n | s_t^n,\theta)}</script><p>也就是说对于那些出现次数较多的action，要衡量他们对reward的真正影响，应当对他们归一化。</p>
+<p>为了让那些出现可能性较低的action不会因为没被sample到而在更新后被降低他们的概率，可以添加一个baseline，只有超过$b$的reward才会增加他们出现的概率。</p>
+<script type="math/tex; mode=display">\nabla \overline{R}_\theta = \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_n} (R(\tau^n)-b) \nabla log p(a_{t}^n | s_t^n,\theta)</script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/14/机器学习与深度学习算法知识/Lecture 17: Ensemble/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/14/机器学习与深度学习算法知识/Lecture 17: Ensemble/" itemprop="url">Lecture 17:Ensemble</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-14T10:09:24+08:00">
+                2018-10-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-14T10:16:48+08:00">
+                2018-10-14
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h2><p>对于复杂模型，往往variance会大，通过对多个模型的平均，能够减小variance：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394832736339.jpg" width="50%" height="50%"></p>
+<p>bagging的思想是多次有放回地采样N’个点（通常N’=N），然后对采样的几个数据集分别训练一个模型<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394833007835.jpg" width="50%" height="50%"></p>
+<p>测试的时候再对几个模型进行平均或投票<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394833255306.jpg" width="50%" height="50%"></p>
+<h2 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h2><p>基本思想是对几个弱分类器线性加权，得到强分类器。分类器按先后顺序训练，每次训练完，对新模型分类错误的数据进行调高权重，而正确的数据则降低权重。</p>
+<p>可以保证：只要分类器的错误率小于50%，在boosting后能够有100%的正确率（在训练集）。</p>
+<p>证明过程略。</p>
+<h2 id="Ensemble-Stacking"><a href="#Ensemble-Stacking" class="headerlink" title="Ensemble: Stacking"></a>Ensemble: Stacking</h2><p>基本思想：使用训练数据训练多个初级分类器，将初级分类器的输出作为次级分类器的输入，获得最终的输出。我们应当使用不同的训练数据来训练次级分类器<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394833971028.jpg" width="50%" height="50%"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/12/碎片知识/浅谈mask矩阵/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/12/碎片知识/浅谈mask矩阵/" itemprop="url">浅谈mask矩阵</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-12T23:10:24+08:00">
+                2018-10-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-14T12:41:01+08:00">
+                2018-10-14
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>个人目前对mask矩阵的一点理解。</p>
+<hr>
+<h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><p>mask矩阵是什么？是一个由0和1组成的矩阵。一个例子是，在自然语言处理(NLP)中，句子的长度是不等长的，但因为我们经常将句子组成mini-batch用以训练，因此那些长度较短的句子都会在句尾进行填充0，也即padding的操作。一个mask矩阵即用以指示哪些是真正的数据，哪些是padding。如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-12-15393574958961.jpg" width="50%" height="50%"><br>图片来源：<a href="https://www.cnblogs.com/neopenx/p/4806006.html" target="_blank" rel="noopener">Theano：LSTM源码解析</a></p>
+<p>其中mask矩阵中1代表真实数据；0代表padding数据。</p>
+<h2 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h2><p>为什么要使用mask矩阵？使用mask矩阵是为了让那些被mask掉的tensor不会被更新。考虑一个tensor T的size(a,b)，同样大小的mask矩阵M，相乘后，在反向回传的时候在T对应mask为0的地方，0的梯度仍为0。因此不会被更新。</p>
+<h2 id="怎么做"><a href="#怎么做" class="headerlink" title="怎么做"></a>怎么做</h2><p>接下来介绍几种（可能不全）使用mask的场景。</p>
+<h3 id="对输入进行mask"><a href="#对输入进行mask" class="headerlink" title="对输入进行mask"></a>对输入进行mask</h3><p>考虑NLP中常见的句子不等长的情况。设我们的输入的batch I:(batch_size,max_seqlen)，我们在过一层Embedding层之前，<br>在过了一层Embedding层，则有 E:(batch_size,max_seqlen,embed_dim)，如果我们希望Embedding是更新的(比如我们的Embedding是随机初始化的，那当然Embedding需要更新)，但我们又不希望padding更新。<br>一种方法即令E与M相乘。其中M是mask矩阵(batch_size,max_seqlen,1) (1是因为要broadcast），这样在Embedding更新梯度时，因为mask矩阵的关系，padding位置上的梯度就是0。<br>当然在Pytorch中还可以直接显式地写：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.embedding = nn.Embedding(vocab_size, embed_dim,padding_idx=<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<p>而此时应当将padding显式添加到词典的第一个。</p>
+<h3 id="对模型中间进行mask"><a href="#对模型中间进行mask" class="headerlink" title="对模型中间进行mask"></a>对模型中间进行mask</h3><p>一个很经典的场景就是dropout。<br>对于参数矩阵W:(h,w)，同样大小的mask矩阵M，在前向传播时令W’=W*M，则在反向传播时，M中为0的部分不被更新。<br>当然，我们可以直接调用PyTorch中的包<code>nn.Dropout()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">m = nn.Dropout(p=<span class="number">0.2</span>)</span><br><span class="line">input = torch.randn(<span class="number">20</span>, <span class="number">16</span>)</span><br><span class="line">output = m(input)</span><br></pre></td></tr></table></figure>
+<h3 id="对loss进行mask"><a href="#对loss进行mask" class="headerlink" title="对loss进行mask"></a>对loss进行mask</h3><p>考虑NLP中的language model，每个词都需要预测下一个词，在一个batch中句子总是有长有短，对于一个短句，此时在计算loss的时候，会出现这样的场景：<code>&lt;pad&gt;</code>词要预测下一个<code>&lt;pad&gt;</code>词。举个例子：三个句子[a,b,c,d],[e,f,g],[h,i]，在组成batch后，会变成<br>X：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>b</td>
+<td>c</td>
+<td>d</td>
+</tr>
+<tr>
+<td>e</td>
+<td>f</td>
+<td>g</td>
+<td><code>&lt;pad&gt;</code></td>
+</tr>
+<tr>
+<td>h</td>
+<td>i</td>
+<td><code>&lt;pad&gt;</code></td>
+<td><code>&lt;pad&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Y：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>b</td>
+<td>c</td>
+<td>d</td>
+<td><code>&lt;pad&gt;</code></td>
+</tr>
+<tr>
+<td>f</td>
+<td>g</td>
+<td><code>&lt;eos&gt;</code></td>
+<td><code>&lt;pad&gt;</code></td>
+</tr>
+<tr>
+<td>i</td>
+<td><code>&lt;eos&gt;</code></td>
+<td><code>&lt;pad&gt;</code></td>
+<td><code>&lt;pad&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>X是输入，Y是预测。那么从第三行可以看出，<code>&lt;pad&gt;</code>在预测下一个<code>&lt;pad&gt;</code>。这显然是有问题的。<br>一种解决方案就是使用mask矩阵，在loss的计算时，将那些本不应该计算的mask掉，使得其loss为0，这样就不会反向回传了。<br>具体实践：在PyTorch中，以CrossEntropy为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">torch</span>.<span class="title">nn</span>.<span class="title">CrossEntropyLoss</span><span class="params">(weight=None, size_average=None, ignore_index=<span class="number">-100</span>, </span></span></span><br><span class="line"><span class="class"><span class="params">reduce=None, reduction=’elementwise_mean’</span></span></span><br></pre></td></tr></table></figure>
+<p>如果<code>reduction=None</code>则会返回一个与输入同样大小的矩阵。在与mask矩阵相乘后，再对新矩阵进行mean操作。<br>在PyTorch实践上还可以可以这么写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">masked_outputs = torch.masked_select(dec_outputs, mask)</span><br><span class="line">masked_targets = torch.masked_select(targets, mask)</span><br><span class="line">loss = my_criterion(masked_outputs, masked_targets)</span><br></pre></td></tr></table></figure>
+<p>另一种更为简单的解决方案是，直接在CrossEntropy中设<code>ignore_index=0</code>，这样，在计算loss的时候，发现target=0时，会自动不对其进行loss的计算。其本质和mask矩阵是一致的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>mask矩阵可以用在任何地方，只要希望与之相乘的tensor相对应的地方不更新就可以进行mask操作。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/碎片知识/深度炼丹tricks合集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/07/碎片知识/深度炼丹tricks合集/" itemprop="url">深度炼丹tricks合集</a></h1>
         
 
         <div class="post-meta">
@@ -617,8 +1264,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-09T22:07:12+08:00">
-                2018-10-09
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-14T10:07:19+08:00">
+                2018-10-14
               </time>
             
           </span>
@@ -659,7 +1306,6 @@
 <h1 id="贝叶斯线性回归"><a href="#贝叶斯线性回归" class="headerlink" title="贝叶斯线性回归"></a>贝叶斯线性回归</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-Xnip2018-10-07_16-13-57.jpg" alt="1"></p>
 <h1 id="贝叶斯模型⽐较"><a href="#贝叶斯模型⽐较" class="headerlink" title="贝叶斯模型⽐较"></a>贝叶斯模型⽐较</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-Xnip2018-10-07_23-30-33.jpg" alt="1"></p>
 <h1 id="证据近似"><a href="#证据近似" class="headerlink" title="证据近似"></a>证据近似</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-09-Xnip2018-10-09_22-06-22.jpg" alt="1"></p>
-<p>—-未完—-</p>
 
           
         
@@ -708,7 +1354,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 15: SVM/">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 16: SVM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
@@ -727,7 +1373,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 15: SVM/" itemprop="url">Lecture 16:SVM</a></h1>
+                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 16: SVM/" itemprop="url">Lecture 16:SVM</a></h1>
         
 
         <div class="post-meta">
@@ -1155,603 +1801,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 13: Unsupervised Learning: Auto-encoder/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 13: Unsupervised Learning: Auto-encoder/" itemprop="url">Lecture 13:Unsupervised Learning:Auto-encoder</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T11:33:24+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T11:39:33+08:00">
-                2018-10-07
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Auto-encoder"><a href="#Auto-encoder" class="headerlink" title="Auto-encoder"></a>Auto-encoder</h3><p>由一个encoder和一个decoder组成，encoder负责将输入转成一个向量表示（维度通常小于输入），decoder负责将这段向量表示恢复成原来的输入。那么中间的code就可以作为输入的一个低维表示：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388832782913.jpg" width="50%" height="50%"></p>
-<h3 id="Auto-encoder-for-CNN"><a href="#Auto-encoder-for-CNN" class="headerlink" title="Auto-encoder for CNN"></a>Auto-encoder for CNN</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388833149617.jpg" width="50%" height="50%"></p>
-<h4 id="Unpooling"><a href="#Unpooling" class="headerlink" title="Unpooling"></a>Unpooling</h4><p>有两种方法，一种在pooling的时候记录最大值的位置，在unpooling时在相对位置填充最大值，其他位置填充0；另一种不记录最大值位置，直接在pooling区域全部填充最大值。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388833530548.jpg" width="50%" height="50%"></p>
-<h4 id="Deconvolution"><a href="#Deconvolution" class="headerlink" title="Deconvolution"></a>Deconvolution</h4><p>其实本质就是convolution。</p>
-<p>这是convolution:</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388834044149.jpg" width="10%" height="50%"></p>
-<p>我们期待的convolution：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388834434741.jpg" width="15%" height="50%"></p>
-<p>实际上就等价在两边做padding，然后直接convolution：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388834751493.jpg" width="15%" height="50%"></p>
-<h3 id="Auto-encoder的用处"><a href="#Auto-encoder的用处" class="headerlink" title="Auto-encoder的用处"></a>Auto-encoder的用处</h3><p>可以预训练每一层的DNN：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388835335550.jpg" width="50%" height="50%"></p>
-<p>同理其它层也是一样，每次fix住其他层然后做Auto-encoder。那么在bp的时候只需要fine-tune就行。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 12: Unsupervised Learning: Neighbor Embedding/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 12: Unsupervised Learning: Neighbor Embedding/" itemprop="url">Lecture 12:Unsupervised Learning:Neighbor Embedding</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T11:17:24+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T17:03:55+08:00">
-                2018-10-07
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Locally-Linear-Embedding-LLE"><a href="#Locally-Linear-Embedding-LLE" class="headerlink" title="Locally Linear Embedding (LLE)"></a>Locally Linear Embedding (LLE)</h3><p>一种降维方法<br>思想：假设每个点可以由其周围的点来表示<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388822769215.jpg" width="25%" height="50%"></p>
-<p>我们需要找到这样的$w_{ij}$，使得：</p>
-<script type="math/tex; mode=display">∑_i‖x^i−∑_j w_{ij} x^j ‖_2</script><p>这样在降维的时候，我们仍然保持x之间的这样的关系:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388823792351.jpg" width="50%" height="50%"></p>
-<h3 id="Laplacian-Eigenmaps"><a href="#Laplacian-Eigenmaps" class="headerlink" title="Laplacian Eigenmaps"></a>Laplacian Eigenmaps</h3><p>一种降维方法<br>基本思想：如果$x^1$与$x^2$在高维空间中相近，则降维后也应该接近：</p>
-<script type="math/tex; mode=display">S=1/2 ∑_{i,j} w_{i,j} (z^i−z^j )^2</script><p>其中：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388824984809.jpg" width="30%" height="50%"></p>
-<p>如果将z全设为0，显然S最小，因此我们需要给z一个限制：z应当充满空间，也即假如z是M维，那么$\{z^1,z^2…,z^N\}$的秩应该等于M</p>
-<h3 id="T-distributed-Stochastic-Neighbor-Embedding-t-SNE"><a href="#T-distributed-Stochastic-Neighbor-Embedding-t-SNE" class="headerlink" title="T-distributed Stochastic Neighbor Embedding (t-SNE)"></a>T-distributed Stochastic Neighbor Embedding (t-SNE)</h3><p>也是一种降维方法<br>前面提到的方法有一个问题：同一类的点确实聚在一起，但不同类的点并没有尽量分开<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388826477983.jpg" width="50%" height="50%"></p>
-<p>t-SNE的主要思想：将数据点映射到概率分布，我们希望降维前和降维后，数据分布的概率应当尽可能一致。<br>t-SNE构建一个高维对象之间的概率分布，使得相似的对象有更高的概率被选择，而不相似的对象有较低的概率被选择。t-SNE在低维空间里在构建这些点的概率分布，使得这两个概率分布之间尽可能的相似。</p>
-<p>如何做？<br>在高维空间中，我们定义：</p>
-<script type="math/tex; mode=display">P(x^j |x^i )=\frac{S(x^i,x^j )}{∑_{k≠i}S(x^i,x^k )}</script><p>其中S表示i与j之间的相似度。</p>
-<p>在低维空间中，同样有：</p>
-<script type="math/tex; mode=display">Q(z^j |z^i )=\frac{S′(z^i,z^j )}{∑_{k≠i}S′(z^i,z^k )}</script><p>使用KL散度去计算两个分布之间的差异：</p>
-<script type="math/tex; mode=display">L=∑_i KL(P(∗|x^i )||Q(∗|z^i )) =∑_i∑_j P(x^j |x^i )\frac{log P(x^j |x^i )}{Q(z^j |z^i )}</script><p>t-SNE中，高维空间和低维空间计算相似度的公式不大一样：</p>
-<script type="math/tex; mode=display">S(x^i,x^j )=exp(−‖x^i−x^j ‖_2 )</script><script type="math/tex; mode=display">S′(z^i,z^j )=\frac{1}{(1+‖z^i−z^j ‖_2)}</script><p>两个公式的图示：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388830652023.jpg" width="70%" height="50%"></p>
-<p>也即<strong>低维空间会拉长距离，使得距离远的点尽可能被拉开</strong>。</p>
-<p>t-SNE的问题在于：t-SNE无法对新的数据点进行降维。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 11: Unsupervised Learning: Linear Dimension Reduction/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 11: Unsupervised Learning: Linear Dimension Reduction/" itemprop="url">Lecture 11:Unsupervised Learning:Linear Dimension Reduction</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T10:38:24+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T17:01:29+08:00">
-                2018-10-07
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Clustering"><a href="#Clustering" class="headerlink" title="Clustering"></a>Clustering</h2><h3 id="K-means"><a href="#K-means" class="headerlink" title="K-means"></a>K-means</h3><p>算法步骤：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388800377875.jpg" width="70%" height="50%"></p>
-<p>迭代更新使得最后聚类中心收敛。但事先需要定好有多少类。</p>
-<h3 id="Hierarchical-Agglomerative-Clustering-HAC"><a href="#Hierarchical-Agglomerative-Clustering-HAC" class="headerlink" title="Hierarchical Agglomerative Clustering (HAC)"></a>Hierarchical Agglomerative Clustering (HAC)</h3><p>自下而上，每次选两个最近的聚为一类，直到所有的都分成一类<br>最后选择一个阈值划分，如蓝色绿色和红色的线<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388801021791.jpg" width="50%" height="50%"></p>
-<h2 id="Dimension-Reduction"><a href="#Dimension-Reduction" class="headerlink" title="Dimension Reduction"></a>Dimension Reduction</h2><p>找到一个映射，使得x能够映射到低维z</p>
-<h3 id="Principle-Component-Analysis-PCA"><a href="#Principle-Component-Analysis-PCA" class="headerlink" title="Principle Component Analysis (PCA)"></a>Principle Component Analysis (PCA)</h3><p>目的是找到一个维度，使得投影得到的variance最大，也即最大程度保留数据的差异性。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388801830659.jpg" width="50%" height="50%"></p>
-<p>形式化可以写成（一维情形）：</p>
-<script type="math/tex; mode=display">Var(z_1 )=\frac{1}{N} ∑_{z_1}(z_1−\overline{z_1} )^2</script><p>其中：</p>
-<script type="math/tex; mode=display">‖w^1 ‖_2=1</script><script type="math/tex; mode=display">z_1=w^1 \cdot x</script><p>$\overline{z_1}$表示z的均值</p>
-<p>假如我们要投影到多维，其他维度也有同样的目标。其中每个维度之间都应该是相互正交的。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388804752506.jpg" width="20%" height="50%"></p>
-<h4 id="如何做？"><a href="#如何做？" class="headerlink" title="如何做？"></a>如何做？</h4><p>找到$ \frac{1}{N}∑(x−\overline{x} ) (x−\overline{x})^T$的前k个最大的特征值对应的特征向量，组合起来即是我们要找的$W$</p>
-<h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><p>—-Warning of Math—-<br>目的：$Var(z_1 )=\frac{1}{N} ∑_{z_1}(z_1−\overline{z_1} )^2 $<br>其中 $\overline{z_1} =\frac{1}{N} ∑{z_1} = \frac{1}{N} ∑ w^1 \cdot x=w^1\cdot \overline{x}$</p>
-<p>推导：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388811276042.jpg" width="35%" height="50%"><br>改变符号 $S=Cov(x)$</p>
-<p>利用拉格朗日乘数法，有：<br>$Sw^1=αw^1$<br>等式两边各左乘$(w^1)^T$，有：<br>$(w^1 )^T Sw^1=α(w^1 )^T w^1=α$</p>
-<p>也即，$α$是$S$的特征值，选择最大的特征值，就能够最大化我们的目标。</p>
-<p>同理，我们要找$w^2$，最大化$(w^2 )^T Sw^2$，其中有：<br>$(w^2 )^T w^2=1$<br>$(w^2 )^T w^1=0$ （与第一维正交）</p>
-<p>因此利用拉格朗日乘数法：</p>
-<script type="math/tex; mode=display">g(w^2 )= (w^2 )^T Sw^2−α((w^2 )^T w^2−1)−β((w^2 )^T w^1−0)</script><p>最终得到，w2对应第二大的特征值的特征向量。</p>
-<p>以此类推，其他维也同理。<br>—-End of Math—-</p>
-<h4 id="PCA的其他"><a href="#PCA的其他" class="headerlink" title="PCA的其他"></a>PCA的其他</h4><p>实际上最终得到的z，每一维之间的协方差都为0<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388815546680.jpg" width="50%" height="50%"></p>
-<p>证明如下：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388815837458.jpg" width="50%" height="50%"></p>
-<p>PCA也可以用SVD来做：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388816250075.jpg" width="60%" height="50%"></p>
-<p>U中保存了K个特征向量。</p>
-<p>从另一种角度理解PCA，也可以认为PCA是一种autoencoder：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388816896369.jpg" width="50%" height="50%"></p>
-<h4 id="PCA的问题"><a href="#PCA的问题" class="headerlink" title="PCA的问题"></a>PCA的问题</h4><p>PCA是无监督学习，如果有标签，则无法按照类别来进行正确降维，如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388817393283.jpg" width="30%" height="50%"></p>
-<p>第二就是PCA是线性变换，对于一些需要非线性变换的无能为力<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388817566149.jpg" width="28%" height="50%"></p>
-<h3 id="Matrix-Factorization"><a href="#Matrix-Factorization" class="headerlink" title="Matrix Factorization"></a>Matrix Factorization</h3><p>定义：矩阵分解，就是将一个矩阵D分解为U和V的乘积，即对于一个特定的规模为m*n的矩阵D，估计出规模分别为m*k和n*k的矩阵U和V，使得$UV^T$的值尽可能逼近矩阵D。常用于推荐系统。</p>
-<p>思想：<br>假如有一个矩阵：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388819053983.jpg" width="60%" height="50%"></p>
-<p>假设横轴和纵轴每一维都有一个向量代表该维，矩阵的每个元素就是横轴和纵轴对应维的点积。我们的目的是尽可能减小：</p>
-<script type="math/tex; mode=display">L=\sum_{(i,j)} (r^i \cdot r^j -n_{ij})^2</script><p>其中$r_i$ $r_j$就是向量表示，$n_{ij}$就是矩阵的内容。</p>
-<p>可以使用SVD求解上式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388820642382.jpg" width="50%" height="50%"></p>
-<p>实际上，考虑每一行或列本身的特性，我们对Loss进行扩展：</p>
-<script type="math/tex; mode=display">Minimizing \ \ L=\sum_{(i,j)} (r^i \cdot r^j +b_i+b_j-n_{ij})^2</script><p>使用SGD可以求解。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/碎片知识点/梯度消失与梯度爆炸的推导/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/碎片知识点/梯度消失与梯度爆炸的推导/" itemprop="url">梯度消失与梯度爆炸的推导</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T09:53:24+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-08T12:21:18+08:00">
-                2018-10-08
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p> 记RNN中每一步的损失为$E_t$，则损失对$h_{t-1}$的权重$W$的导数有：</p>
-<script type="math/tex; mode=display">\frac{\partial{E_t}}{\partial{W}}=\sum_{k=1}^{t}
-    \frac{\partial{E_t}}{\partial{y_t}} \frac{\partial{y_t}}{\partial{h_t}} \frac{\partial{h_t}}{\partial{h_k}} \frac{\partial{h_k}}{\partial{W}}</script><p>其中$\frac{\partial{h_t}}{\partial{h_k}}$使用链式法则有：</p>
-<script type="math/tex; mode=display">\frac{\partial{h_t}}{\partial{h_k}} = 
-    \prod_{j=k+1}^{t} \frac{\partial{h_j}}{\partial{h_{j-1}}} =
-    \prod_{j=k+1}^{t} W^T \times diag[f^{\prime}(h_{j-1})]</script><p>其中$\frac{\partial{h_j}}{\partial{h_{j-1}}}$ 是雅克比矩阵。对其取模(norm)，有：</p>
-<script type="math/tex; mode=display">\rVert \frac{\partial{h_j}}{\partial{h_{j-1}}}\rVert ≤ 
-\rVert W^T \rVert \rVert diag[f^{\prime}(h_{j-1})] \rVert 
-≤ \beta_W \beta_h</script><p>当$f$为sigmoid时，$f^{\prime}(h_{j-1})$最大值为1。</p>
-<p>最终我们有：</p>
-<script type="math/tex; mode=display">\rVert \frac{\partial{h_t}}{\partial{h_{k}}}\rVert ≤ 
-\rVert \prod_{j=k+1}^{t} \frac{\partial{h_j}}{\partial{h_{j-1}}} \rVert 
-≤ (\beta_W \beta_h)^{t-k}</script><p>从上式可以看出，当t-k足够大时，如果$(\beta_W \beta_h)$小于1则$(\beta_W \beta_h)^{t-k}$则会变得非常小，相反，若$(\beta_W \beta_h)$大于1则$(\beta_W \beta_h)^{t-k}$则会变得非常大。</p>
-<p>在计算机中，当梯度值很大时，会造成上溢(NaN)，也即梯度爆炸问题，当梯度值很小时，会变成0，也即梯度消失。注意到，t-k的损失实际上评估的是一个较远的词对当前t的贡献，梯度消失也即意味着对当前的贡献消失。</p>
-<p>Reference:<br>CS224d: Deep Learning for NLP Lecture4</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1806,7 +1855,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1819,7 +1868,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">84</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

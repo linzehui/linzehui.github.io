@@ -286,6 +286,649 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/18/碎片知识/Python中的拷贝/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/18/碎片知识/Python中的拷贝/" itemprop="url">Python中的拷贝</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-18T10:47:05+08:00">
+                2018-08-18
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-19T11:26:51+08:00">
+                2018-08-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Python的拷贝和C/C++的差别很大，很经常就容易搞混，因此记录一下。</p>
+<h3 id="赋值、拷贝"><a href="#赋值、拷贝" class="headerlink" title="赋值、拷贝"></a>赋值、拷贝</h3><ul>
+<li>赋值：实际上就是对象的引用，没有开辟新的内存空间<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lst=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">l=lst</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>浅拷贝:创建了新对象，但是<strong>内容是对原对象的引用</strong>，有三种形式</p>
+<ol>
+<li><p>切片  </p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">l=lst[:]</span><br><span class="line">l=[i <span class="keyword">for</span> i <span class="keyword">in</span> lst]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>工厂</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">l=list(lst)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>copy </p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">l=copy.copy(lst)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>深拷贝:copy中的deepcopy，生成一个全新的对象，与原来的对象无关</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">l=copy.deepcopy(lst)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 引用https://www.cnblogs.com/huangbiquan/p/7795152.html 的例子###</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> copy</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,[<span class="string">'a'</span>,<span class="string">'b'</span>]] <span class="comment">#定义一个列表a</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a <span class="comment">#赋值</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = copy.copy(a) <span class="comment">#浅拷贝</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = copy.deepcopy(a) <span class="comment">#深拷贝</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.append(<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>], <span class="number">5</span>] <span class="comment">#a添加一个元素5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(b) </span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>], <span class="number">5</span>] <span class="comment">#b跟着添加一个元素5 </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(c)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]] <span class="comment">#c保持不变</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(d)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]] <span class="comment">#d保持不变</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">4</span>].append(<span class="string">'c'</span>) </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>], <span class="number">5</span>] <span class="comment">#a中的list(即a[4])添加一个元素c</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(b)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>], <span class="number">5</span>] <span class="comment">#b跟着添加一个元素c</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(c)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]] <span class="comment">#c跟着添加一个元素c</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(d)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]] <span class="comment">#d保持不变</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#说明如下：</span></span><br><span class="line"><span class="comment">#1.外层添加元素时， 浅拷贝c不会随原列表a变化而变化；内层list添加元素时，浅拷贝c才会变化。</span></span><br><span class="line"><span class="comment">#2.无论原列表a如何变化，深拷贝d都保持不变。</span></span><br><span class="line"><span class="comment">#3.赋值对象随着原列表一起变化</span></span><br></pre></td></tr></table></figure>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://www.cnblogs.com/huangbiquan/p/7795152.html" target="_blank" rel="noopener">https://www.cnblogs.com/huangbiquan/p/7795152.html</a><br><a href="https://www.cnblogs.com/xueli/p/4952063.html" target="_blank" rel="noopener">https://www.cnblogs.com/xueli/p/4952063.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/12/碎片知识/如何将ELMo词向量用于中文/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/12/碎片知识/如何将ELMo词向量用于中文/" itemprop="url">如何将ELMo词向量用于中文</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-12T16:49:05+08:00">
+                2018-08-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-12T23:04:35+08:00">
+                2018-10-12
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>10.10更新：ELMo已经由哈工大组用PyTorch重写了，并且提供了中文的预训练好的language model，可以直接使用。</p>
+<hr>
+<p>ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于一句话进入到language model获得不同的词向量。根据实验可得，使用了Elmo词向量之后，许多NLP任务都有了大幅的提高。</p>
+<p>论文:<a href="https://arxiv.org/pdf/1802.05365.pdf" target="_blank" rel="noopener">Deep contextualized word representations</a></p>
+<p>AllenNLP一共release了两份ELMo的代码，一份是Pytorch版本的，另一份是Tensorflow版本的。Pytorch版本的只开放了使用预训练好的词向量的接口，但没有给出自己训练的接口，因此无法使用到中文语料中。Tensorflow版本有提供训练的代码，因此本文记录如何将ELMo用于中文语料中，但本文只记录使用到的部分，而不会分析全部的代码。</p>
+<p>需求:<br>使用预训练好的词向量作为句子表示直接传入到RNN中(也就是不使用代码中默认的先过CNN)，在训练完后，将模型保存，在需要用的时候load进来，对于一个特定的句子，首先将其转换成预训练的词向量，传入language model之后最终得到ELMo词向量。</p>
+<p>准备工作:</p>
+<ol>
+<li>将中文语料分词</li>
+<li>训练好GloVe词向量或者word2vec</li>
+<li>下载<a href="https://github.com/allenai/bilm-tf" target="_blank" rel="noopener">bilm-tf代码</a></li>
+<li>生成词表 vocab_file （训练的时候要用到）</li>
+<li>optional:阅读Readme</li>
+<li>optional:通读bilm-tf的代码，对代码结构有一定的认识</li>
+</ol>
+<p>思路:</p>
+<ol>
+<li>将预训练的词向量读入</li>
+<li>修改bilm-tf代码<ol>
+<li>option部分</li>
+<li>添加给embedding weight赋初值</li>
+<li>添加保存embedding weight的代码</li>
+</ol>
+</li>
+<li>开始训练，获得checkpoint和option文件</li>
+<li>运行脚本，获得language model的weight文件</li>
+<li>将embedding weight保存为hdf5文件形式</li>
+<li>运行脚本，将语料转化成ELMo embedding。</li>
+</ol>
+<h3 id="训练GloVe或word2vec"><a href="#训练GloVe或word2vec" class="headerlink" title="训练GloVe或word2vec"></a>训练GloVe或word2vec</h3><p>可参见我以前的博客或者网上的教程。<br>注意到，如果要用gensim导入GloVe训好的词向量，需要在开头添加num_word embedding_dim。 如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338861462682.jpg" width="70%" height="50%"></p>
+<h3 id="获得vocab词表文件"><a href="#获得vocab词表文件" class="headerlink" title="获得vocab词表文件"></a>获得vocab词表文件</h3><p>注意到，词表文件的开头必须要有<code>&lt;S&gt; &lt;/S&gt; &lt;UNK&gt;</code>，且大小写敏感。并且应当按照单词的词频降序排列。可以通过手动添加这三个特殊符号。<br>如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-11-15339757184030.jpg" width="10%" height="50%"></p>
+<p>代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">model=gensim.models.KeyedVectors.load_word2vec_format(</span><br><span class="line">    fname=<span class="string">'/home/zhlin/GloVe/vectors.txt'</span>,binary=<span class="keyword">False</span></span><br><span class="line">)</span><br><span class="line">words=model.vocab</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'vocab.txt'</span>,<span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">'&lt;S&gt;'</span>)</span><br><span class="line">    f.write(<span class="string">'\n'</span>）</span><br><span class="line">    f.write(<span class="string">'&lt;/S&gt;'</span>)</span><br><span class="line">    f.write(<span class="string">'\n'</span>)</span><br><span class="line">    f.write(<span class="string">'&lt;UNK&gt;'</span>)</span><br><span class="line">    f.write(<span class="string">'\n'</span>)    <span class="comment"># bilm-tf 要求vocab有这三个符号，并且在最前面</span></span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> words:</span><br><span class="line">        f.write(word)</span><br><span class="line">        f.write(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="修改bilm-tf代码"><a href="#修改bilm-tf代码" class="headerlink" title="修改bilm-tf代码"></a>修改bilm-tf代码</h3><p>注意到，在使用该代码之前，需要安装好相应的环境。</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338879402377.jpg" width="50%" height="50%"></p>
+<p>如果使用的是conda作为默认的Python解释器，强烈建议使用conda安装，否则可能会出现一些莫名的错误。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda install tensorflow-gpu=1.4</span><br><span class="line">conda install h5py</span><br><span class="line">python setup.py install <span class="comment">#应在bilm-tf的文件夹下执行该指令</span></span><br></pre></td></tr></table></figure></p>
+<p>然后再运行测试代码，通过说明安装成功。</p>
+<h4 id="修改train-elmo-py"><a href="#修改train-elmo-py" class="headerlink" title="修改train_elmo.py"></a>修改train_elmo.py</h4><p>bin文件夹下的train_elmo.py是程序的入口。<br>主要修改的地方：</p>
+<ol>
+<li>load_vocab的第二个参数应该改为None</li>
+<li>n_gpus CUDA_VISIBLE_DEVICES 根据自己需求改</li>
+<li>n_train_tokens 可改可不改，影响的是输出信息。要查看自己语料的行数，可以通过<code>wc -l corpus.txt</code> 查看。</li>
+<li><strong>option的修改</strong>，将char_cnn部分都注释掉，其他根据自己需求修改</li>
+</ol>
+<p>如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338888745894.jpg" width="70%" height="50%"></p>
+<h4 id="修改LanguageModel类"><a href="#修改LanguageModel类" class="headerlink" title="修改LanguageModel类"></a>修改LanguageModel类</h4><p>由于我需要传入预训练好的GloVe embedding，那么还需要修改embedding部分，这部分在bilm文件夹下的training.py，进入到LanguageModel类中_build_word_embeddings函数中。注意到，由于前三个是<code>&lt;S&gt; &lt;/S&gt; &lt;UNK&gt;</code>，而这三个字符在GloVe里面是没有的，因此这三个字符的embedding应当在训练的时候逐渐学习到，而正因此 <code>embedding_weights</code>的<code>trainable</code>应当设为<code>True</code></p>
+<p>如:</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-12-15340585073779.jpg" alt=""></p>
+<h4 id="修改train函数"><a href="#修改train函数" class="headerlink" title="修改train函数"></a>修改train函数</h4><p>添加代码，使得在train函数的最后保存embedding文件。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-12-15340607132103.jpg" alt=""></p>
+<h3 id="训练并获得weights文件"><a href="#训练并获得weights文件" class="headerlink" title="训练并获得weights文件"></a>训练并获得weights文件</h3><p>训练需要语料文件corpus.txt，词表文件vocab.txt。</p>
+<h4 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h4><p>cd到bilm-tf文件夹下，运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> CUDA_VISIBLE_DEVICES=4</span><br><span class="line">nohup python -u bin/train_elmo.py \</span><br><span class="line">--train_prefix=<span class="string">'/home/zhlin/bilm-tf/corpus.txt'</span> \</span><br><span class="line">--vocab_file /home/zhlin/bilm-tf/glove_embedding_vocab8.10/vocab.txt \</span><br><span class="line">--save_dir /home/zhlin/bilm-tf/try &gt;bilm_out.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure></p>
+<p>根据实际情况设定不同的值和路径。</p>
+<p>运行情况：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15339015862848.jpg" width="50%" height="50%"></p>
+<p>PS:运行过程中可能会有warning:</p>
+<blockquote>
+<p>‘list’ object has no attribute ‘name’<br>WARNING:tensorflow:Error encountered when serializing lstm_output_embeddings.<br>Type is unsupported, or the types of the items don’t match field type in CollectionDef.</p>
+</blockquote>
+<p>应该不用担心，还是能够继续运行的，后面也不受影响。</p>
+<p>在等待了相当长的时间后，在save_dir文件夹内生成了几个文件，其中checkpoint和options是关键，checkpoint能够进一步生成language model的weights文件，而options记录language model的参数。</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-11-15339734319058.jpg" alt=""></p>
+<h4 id="获得language-model的weights"><a href="#获得language-model的weights" class="headerlink" title="获得language model的weights"></a>获得language model的weights</h4><p>接下来运行bin/dump_weights.py将checkpoint转换成hdf5文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nohup python -u  /home/zhlin/bilm-tf/bin/dump_weights.py  \</span><br><span class="line">--save_dir /home/zhlin/bilm-tf/try  \</span><br><span class="line">--outfile /home/zhlin/bilm-tf/try/weights.hdf5 &gt;outfile.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>其中save_dir是checkpoint和option文件保存的地址。</p>
+<p>接下来等待程序运行：</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-11-15339740970081.jpg" width="70%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-11-15339745511775.jpg" width="70%" height="50%"></p>
+<p>最终获得了想要的weights和option：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-11-15339978499136.jpg" alt=""></p>
+<h3 id="将语料转化成ELMo-embedding"><a href="#将语料转化成ELMo-embedding" class="headerlink" title="将语料转化成ELMo embedding"></a>将语料转化成ELMo embedding</h3><p>由于我们有了vocab_file、与vocab_file一一对应的embedding h5py文件、以及language model的weights.hdf5和options.json。<br>接下来参考usage_token.py将一句话转化成ELMo embedding。</p>
+<p>参考代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> bilm <span class="keyword">import</span> TokenBatcher, BidirectionalLanguageModel, weight_layers, \</span><br><span class="line">    dump_token_embeddings</span><br><span class="line"></span><br><span class="line"><span class="comment"># Our small dataset.</span></span><br><span class="line">raw_context = [</span><br><span class="line">    <span class="string">'这 是 测试 .'</span>,</span><br><span class="line">    <span class="string">'好的 .'</span></span><br><span class="line">]</span><br><span class="line">tokenized_context = [sentence.split() <span class="keyword">for</span> sentence <span class="keyword">in</span> raw_context]</span><br><span class="line">tokenized_question = [</span><br><span class="line">    [<span class="string">'这'</span>, <span class="string">'是'</span>, <span class="string">'什么'</span>],</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">vocab_file=<span class="string">'/home/zhlin/bilm-tf/glove_embedding_vocab8.10/vocab.txt'</span></span><br><span class="line">options_file=<span class="string">'/home/zhlin/bilm-tf/try/options.json'</span></span><br><span class="line">weight_file=<span class="string">'/home/zhlin/bilm-tf/try/weights.hdf5'</span></span><br><span class="line">token_embedding_file=<span class="string">'/home/zhlin/bilm-tf/glove_embedding_vocab8.10/vocab_embedding.hdf5'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Now we can do inference.</span></span><br><span class="line"><span class="comment"># Create a TokenBatcher to map text to token ids.</span></span><br><span class="line">batcher = TokenBatcher(vocab_file)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Input placeholders to the biLM.</span></span><br><span class="line">context_token_ids = tf.placeholder(<span class="string">'int32'</span>, shape=(<span class="keyword">None</span>, <span class="keyword">None</span>))</span><br><span class="line">question_token_ids = tf.placeholder(<span class="string">'int32'</span>, shape=(<span class="keyword">None</span>, <span class="keyword">None</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Build the biLM graph.</span></span><br><span class="line">bilm = BidirectionalLanguageModel(</span><br><span class="line">    options_file,</span><br><span class="line">    weight_file,</span><br><span class="line">    use_character_inputs=<span class="keyword">False</span>,</span><br><span class="line">    embedding_weight_file=token_embedding_file</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get ops to compute the LM embeddings.</span></span><br><span class="line">context_embeddings_op = bilm(context_token_ids)</span><br><span class="line">question_embeddings_op = bilm(question_token_ids)</span><br><span class="line"></span><br><span class="line">elmo_context_input = weight_layers(<span class="string">'input'</span>, context_embeddings_op, l2_coef=<span class="number">0.0</span>)</span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">''</span>, reuse=<span class="keyword">True</span>):</span><br><span class="line">    <span class="comment"># the reuse=True scope reuses weights from the context for the question</span></span><br><span class="line">    elmo_question_input = weight_layers(</span><br><span class="line">        <span class="string">'input'</span>, question_embeddings_op, l2_coef=<span class="number">0.0</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">elmo_context_output = weight_layers(</span><br><span class="line">    <span class="string">'output'</span>, context_embeddings_op, l2_coef=<span class="number">0.0</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">''</span>, reuse=<span class="keyword">True</span>):</span><br><span class="line">    <span class="comment"># the reuse=True scope reuses weights from the context for the question</span></span><br><span class="line">    elmo_question_output = weight_layers(</span><br><span class="line">        <span class="string">'output'</span>, question_embeddings_op, l2_coef=<span class="number">0.0</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="comment"># It is necessary to initialize variables once before running inference.</span></span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Create batches of data.</span></span><br><span class="line">    context_ids = batcher.batch_sentences(tokenized_context)</span><br><span class="line">    question_ids = batcher.batch_sentences(tokenized_question)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute ELMo representations (here for the input only, for simplicity).</span></span><br><span class="line">    elmo_context_input_, elmo_question_input_ = sess.run(</span><br><span class="line">        [elmo_context_input[<span class="string">'weighted_op'</span>], elmo_question_input[<span class="string">'weighted_op'</span>]],</span><br><span class="line">        feed_dict=&#123;context_token_ids: context_ids,</span><br><span class="line">                   question_token_ids: question_ids&#125;</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">print(elmo_context_input_,elmo_context_input_)</span><br></pre></td></tr></table></figure></p>
+<p>可以修改代码以适应自己的需求。</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://github.com/allenai/bilm-tf" target="_blank" rel="noopener">https://github.com/allenai/bilm-tf</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/12/代码相关/代码分享4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/12/代码相关/代码分享4/" itemprop="url">代码片段记录4</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-12T11:20:30+08:00">
+                2018-08-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-23T09:30:20+08:00">
+                2018-09-23
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本周没有什么代码要记录的。</p>
+<h3 id="1️⃣sklearn之Pipeline例子"><a href="#1️⃣sklearn之Pipeline例子" class="headerlink" title="1️⃣sklearn之Pipeline例子"></a>1️⃣sklearn之Pipeline例子</h3><p>用机器学习解决问题的流程：<br>(去掉部分数据）—&gt; 获取feature（Tf-idf等） —&gt; （feature selection，chi2、互信息等） —&gt; （缩放/正则化） —&gt; 分类器 —&gt; GridSearch/RandomizedSearch调参</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pipe=Pipeline([     <span class="comment">#建立pipeline</span></span><br><span class="line">    (<span class="string">'vect'</span>,TfidfVectorizer()),</span><br><span class="line">    (<span class="string">'select'</span>,SelectKBest(chi2),</span><br><span class="line">    (<span class="string">'norm'</span>,MaxAbsScaler()),   </span><br><span class="line">    (<span class="string">'svm'</span>,svm.LinearSVC())</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">parameters=&#123;</span><br><span class="line">    <span class="string">'vect__ngram_range'</span>:[(<span class="number">1</span>,<span class="number">1</span>),(<span class="number">1</span>,<span class="number">2</span>),(<span class="number">1</span>,<span class="number">3</span>),(<span class="number">2</span>,<span class="number">3</span>)],</span><br><span class="line">    <span class="string">'vect__max_df'</span>:[<span class="number">0.6</span>,<span class="number">0.7</span>,<span class="number">0.8</span>,<span class="number">0.9</span>],</span><br><span class="line">    <span class="string">'vect__min_df'</span>:[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>],</span><br><span class="line">    <span class="string">'vect__norm'</span>:[<span class="string">'l1'</span>,<span class="string">'l2'</span>],</span><br><span class="line">    <span class="string">'svm__penalty'</span>:[<span class="string">'l1'</span>,<span class="string">'l2'</span>],</span><br><span class="line">    <span class="string">'svm__loss'</span>:[<span class="string">'squared_hinge'</span>],  </span><br><span class="line">    <span class="string">'svm__dual'</span>:[<span class="keyword">False</span>,<span class="keyword">True</span>],</span><br><span class="line">    <span class="string">'svm__tol'</span>:[<span class="number">1e-5</span>,<span class="number">1e-4</span>],</span><br><span class="line">    <span class="string">'svm__C'</span>:[<span class="number">0.1</span>,<span class="number">0.2</span>,<span class="number">0.3</span>,<span class="number">0.4</span>,<span class="number">0.5</span>,<span class="number">0.6</span>,<span class="number">0.7</span>,<span class="number">0.8</span>,<span class="number">0.9</span>,<span class="number">1.0</span>,<span class="number">1.1</span>],</span><br><span class="line">    <span class="string">'svm__class_weight'</span>:[<span class="keyword">None</span>,<span class="string">'balanced'</span>],</span><br><span class="line">    <span class="string">'svm__max_iter'</span>:[<span class="number">1000</span>,<span class="number">5000</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">grid_search_model=GridSearchCV(pipe,parameters,error_score=<span class="number">0</span>,n_jobs=<span class="number">5</span>)</span><br><span class="line">grid_search_model.fit(train[column],train[<span class="string">'class'</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> para_name <span class="keyword">in</span> sorted(parameters.keys()):</span><br><span class="line">    print(para_name,grid_search_model.best_params_[para_name])</span><br><span class="line"></span><br><span class="line">print(<span class="string">"cv_result:"</span>)</span><br><span class="line">print(grid_search_model.cv_results_)</span><br></pre></td></tr></table></figure>
+<hr>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/12/碎片知识/每周碎片知识3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/12/碎片知识/每周碎片知识3/" itemprop="url">每周碎片知识3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-12T10:13:37+08:00">
+                2018-08-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-01T21:04:40+08:00">
+                2018-09-01
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1️⃣[Python]<br>在服务器上跑代码时，如 <code>python project/folder1/a.py</code>，如果a.py引用了一个自定义的模块但又不在folder1内，此时interpreter就会报错，提示找不到该模块。这是因为解释器默认只会在同一个folder下查找。解决方案是在运行前显式添加查找范围。如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PYTHONPATH=/home/zhlin/bilm-tf:<span class="variable">$PYTHONPATH</span></span><br></pre></td></tr></table></figure></p>
+<p>那么python解释器就会到该目录下去找。</p>
+<hr>
+<p>2️⃣[度量标准]<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-12-15340420442670.jpg" alt=""></p>
+<ul>
+<li>准确率(accuracy):  $ACC=\frac{TP+TN}{TP+TN+FP+FN}$<br> 衡量的是分类器预测准确的比例</li>
+<li>召回率(recall): $Recall=\frac{TP}{TP+FN}$<br>  正例中被分对的比例，衡量了分类器对正例的识别能力。</li>
+<li>精确率(Precision): $P=\frac{TP}{TP+FP}$<br>度量了被分为正例的示例中实际为正例的比例。</li>
+<li>F-Measure: $F=\frac{(\alpha^2 +1)P*R}{\alpha^2 (P+R)}$<br>  其中P是Precision,R是Recall。综合考量了两种度量。<br>  当$\alpha=1$时，称为F1值 $F1=\frac{2PR}{P+R}$</li>
+</ul>
+<hr>
+<p>3️⃣[调参技巧]<br>在google发布的一份关于text-classification的<a href="https://developers.google.com/machine-learning/guides/text-classification/" target="_blank" rel="noopener">guide</a>中，提到了几个调参的trick。</p>
+<ol>
+<li>在feature selection步骤中，卡方检验chi2和方差分析的F值 f_classif的表现相当，在大约选择20k的feature时，准确率达到顶峰，当feature越多，效果并没有提升甚至会下降。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-12-15340434326365.jpg" width="90%" height="50%"></li>
+<li>在文本分类中，似乎使用normalization并没有多少用处，建议跳过。<blockquote>
+<p>Normalization converts all feature/sample values to small and similar values. This simplifies gradient descent convergence in learning algorithms. From what we have seen, normalization during data preprocessing does not seem to add much value in text classification problems; we recommend skipping this step.</p>
+</blockquote>
+</li>
+</ol>
+<p>实际上我也测试过，发现确实normalization对于准确率的提高没什么帮助，甚至还有一点下降。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/12/诗词&句/每周诗词4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -983,7 +1626,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/碎片知识点/Python惯例/">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/碎片知识/Python惯例/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
@@ -1002,7 +1645,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/05/碎片知识点/Python惯例/" itemprop="url">Python惯例[转]</a></h1>
+                <a class="post-title-link" href="/2018/08/05/碎片知识/Python惯例/" itemprop="url">Python惯例[转]</a></h1>
         
 
         <div class="post-meta">
@@ -1161,628 +1804,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/碎片知识点/如何训练GloVe中文词向量/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/05/碎片知识点/如何训练GloVe中文词向量/" itemprop="url">如何训练GloVe中文词向量</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T11:06:05+08:00">
-                2018-08-05
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-10T11:33:55+08:00">
-                2018-08-10
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="准备语料"><a href="#准备语料" class="headerlink" title="准备语料"></a>准备语料</h3><p>准备好自己的语料，保存为txt，每行一个句子或一段话，注意要分好词。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334388069130.jpg" width="60%" height="60%"></p>
-<h3 id="准备源码"><a href="#准备源码" class="headerlink" title="准备源码"></a>准备源码</h3><p>从GitHub下载代码，<a href="https://github.com/stanfordnlp/GloVe" target="_blank" rel="noopener">https://github.com/stanfordnlp/GloVe</a><br>将语料corpus.txt放入到Glove的主文件夹下。</p>
-<h3 id="修改bash"><a href="#修改bash" class="headerlink" title="修改bash"></a>修改bash</h3><p>打开demo.sh，修改相应的内容</p>
-<ol>
-<li>因为demo默认是下载网上的语料来训练的，因此如果要训练自己的语料，需要注释掉</li>
-</ol>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334390298383.jpg" width="70%" height="50%"></p>
-<ol>
-<li>修改参数设置，将CORPUS设置成语料的名字</li>
-</ol>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334391029224.jpg" width="50%" height="50%"></p>
-<h3 id="执行bash文件"><a href="#执行bash文件" class="headerlink" title="执行bash文件"></a>执行bash文件</h3><p>进入到主文件夹下</p>
-<ol>
-<li>make</li>
-</ol>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334392348665.jpg" width="70%" height="50%"></p>
-<ol>
-<li>bash demo.sh</li>
-</ol>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334392595148.jpg" width="70%" height="70%"></p>
-<p>注意，如果训练数据较大，则训练时间较长，那么建议使用nohup来运行程序</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup bash demo.sh &gt;output.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>坐等训练，最后会得到vectors.txt 以及其他的相应的文件。如果要用gensim的word2ve load进来，那么需要在vectors.txt的第一行加上vacob_size vector_size，第一个数指明一共有多少个向量，第二个数指明每个向量有多少维。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.cnblogs.com/echo-cheng/p/8561171.html" target="_blank" rel="noopener">https://www.cnblogs.com/echo-cheng/p/8561171.html</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/碎片知识点/每周碎片知识2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/05/碎片知识点/每周碎片知识2/" itemprop="url">每周碎片知识2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T11:02:37+08:00">
-                2018-08-05
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-12T19:33:41+08:00">
-                2018-08-12
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1️⃣[Pytorch]<br>避免写出：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = Variable(torch.zeros(...), requires_grad=<span class="keyword">True</span>).cuda()</span><br></pre></td></tr></table></figure>
-<p>而是应该要：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = Variable(torch.zeros(...).cuda(), requires_grad=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
-<p>Reference:<br><a href="https://discuss.pytorch.org/t/variable-grad-is-always-none-when-extending-autograd/12187" target="_blank" rel="noopener">https://discuss.pytorch.org/t/variable-grad-is-always-none-when-extending-autograd/12187</a></p>
-<hr>
-<p>2️⃣[Tf-idf]<br>本周因为比赛的原因了解了一下各种文本建模的方法。Tf-idf能够取得不错的成绩，但有一定的缺陷。</p>
-<blockquote>
-<p>TF-IDF用于向量空间模型，进行文档相似度计算是相当有效的。但在文本分类中单纯使用TF-IDF来判断一个特征是否有区分度是不够的。</p>
-<ol>
-<li>它仅仅综合考虑了该词在文档中的重要程度和文档区分度。</li>
-<li>它没有考虑特征词在类间的分布。特征选择所选择的特征应该在某类出现多，而其它类出现少，即考察各类的文档频率的差异。如果一个特征词，在各个类间分布比较均匀，这样的词对分类基本没有贡献；但是如果一个特征词比较集中的分布在某个类中，而在其它类中几乎不出现，这样的词却能够很好代表这个类的特征，而TF-IDF不能区分这两种情况。</li>
-<li>它没有考虑特征词在类内部文档中的分布情况。在类内部的文档中，如果特征词均匀分布在其中，则这个特征词能够很好的代表这个类的特征，如果只在几篇文档中出现，而在此类的其它文档中不出现，显然这样的特征词不能够代表这个类的特征。</li>
-</ol>
-</blockquote>
-<p>Reference:<br><a href="https://blog.csdn.net/mmc2015/article/details/46771791" target="_blank" rel="noopener">https://blog.csdn.net/mmc2015/article/details/46771791</a></p>
-<hr>
-<p>3️⃣[卡方检验CHI]<br>在文本分类中，用于选择最相关的特征。</p>
-<p>Reference:<br><a href="https://blog.csdn.net/blockheadls/article/details/49977361" target="_blank" rel="noopener">https://blog.csdn.net/blockheadls/article/details/49977361</a></p>
-<hr>
-<p>4️⃣[文本分类]<br>各种文本分类方法的简单介绍。</p>
-<p>Reference:<br><a href="https://github.com/wangjiang0624/Note/blob/master/MachineLearning/文本分类.md" target="_blank" rel="noopener">https://github.com/wangjiang0624/Note/blob/master/MachineLearning/文本分类.md</a></p>
-<hr>
-<p>5️⃣[Python]<br>collections的两个有用的类</p>
-<ol>
-<li>named_tuple：快速建立一个类，使得可以使用属性来访问而非索引，提高了代码可读性</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line">Point = namedtuple(<span class="string">'Point'</span>,[<span class="string">'x'</span>,<span class="string">'y'</span>])</span><br><span class="line">p = Point(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">print(p.x)  <span class="comment"># 1</span></span><br><span class="line">print(p.y)  <span class="comment"># 2</span></span><br></pre></td></tr></table></figure>
-<ol>
-<li>Counter：统计字符出现的次数</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">count = Counter([...]).most_commom()  <span class="comment">#会按照出现的次数排序，通常可用于构建词典</span></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> count:     <span class="comment"># c是一个tuple，c[0]是词，c[1]是频率</span></span><br><span class="line">    <span class="keyword">if</span> c[<span class="number">1</span>]&gt;= threshold:</span><br><span class="line">        vocab.add_word(c[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-<p>Counter用法：<br><a href="https://blog.csdn.net/u014755493/article/details/69812244" target="_blank" rel="noopener">https://blog.csdn.net/u014755493/article/details/69812244</a></p>
-<hr>
-<p>6️⃣[nohup]<br>本周在服务器上跑代码的时候遇到一个问题，使用nohup执行python程序时，发现输出文件没有显示。以为是代码的问题，但经过排查并非是代码的问题。通过查阅资料，发现问题所在：<br>因为python输出有缓冲，导致output不能<strong>马上</strong>看到输出。实际上，在等待了一段时间后，输出文件终于显示出来了。</p>
-<p>解决方案：使用python的参数 -u 使得python不启用缓冲。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python -u test.py &gt; nohup.out 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>Reference:<br><a href="https://blog.csdn.net/sunlylorn/article/details/19127107" target="_blank" rel="noopener">https://blog.csdn.net/sunlylorn/article/details/19127107</a></p>
-<hr>
-<p>7️⃣[hexo配置]</p>
-<ol>
-<li>mathjax配置: <a href="https://www.jianshu.com/p/7ab21c7f0674" target="_blank" rel="noopener">https://www.jianshu.com/p/7ab21c7f0674</a></li>
-<li>配置域名:<a href="https://www.zhihu.com/question/31377141" target="_blank" rel="noopener">https://www.zhihu.com/question/31377141</a></li>
-<li>配置sitemap:<a href="http://www.yuan-ji.me/Hexo-优化：提交sitemap及解决百度爬虫抓取-GitHub-Pages-问题/" target="_blank" rel="noopener">http://www.yuan-ji.me/Hexo-优化：提交sitemap及解决百度爬虫抓取-GitHub-Pages-问题/</a></li>
-</ol>
-<hr>
-<p>8️⃣[Paper]<br><a href="http://aclweb.org/anthology/D17-1025" target="_blank" rel="noopener">Learning Chinese Word Representations From Glyphs Of Characters</a></p>
-<p>使用图像的卷积来生成词向量:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334453515509.jpg" width="60%" height="50%"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/代码相关/代码片段分享3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/05/代码相关/代码片段分享3/" itemprop="url">代码片段记录3</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T10:58:30+08:00">
-                2018-08-05
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-23T09:30:20+08:00">
-                2018-09-23
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本周只有简单的代码。</p>
-<h3 id="1️⃣使用gensim训练word2vec"><a href="#1️⃣使用gensim训练word2vec" class="headerlink" title="1️⃣使用gensim训练word2vec"></a>1️⃣使用gensim训练word2vec</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> gensim.models <span class="keyword">import</span> word2vec</span><br><span class="line">sentences=word2vec.Text8Corpus(<span class="string">u'分词后的爽肤水评论.txt'</span>)   <span class="comment">#sentence:[ [ a b ],[c d]... ]</span></span><br><span class="line">model=word2vec.Word2Vec(sentences, size=<span class="number">50</span>)  <span class="comment">#size:dim </span></span><br><span class="line"></span><br><span class="line">y2=model.similarity(<span class="string">u"好"</span>, <span class="string">u"还行"</span>)  <span class="comment">#计算相似度</span></span><br><span class="line">print(y2)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> model.most_similar(<span class="string">u"滋润"</span>):</span><br><span class="line">    <span class="keyword">print</span> i[<span class="number">0</span>],i[<span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="comment">#保存</span></span><br><span class="line">model.save(<span class="string">'/model/word2vec_model'</span>)</span><br><span class="line"></span><br><span class="line">new_model=gensim.models.Word2Vec.load(<span class="string">'/model/word2vec_model'</span>)</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="2️⃣使用Counter建立词表"><a href="#2️⃣使用Counter建立词表" class="headerlink" title="2️⃣使用Counter建立词表"></a>2️⃣使用Counter建立词表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_dict</span><span class="params">(dataset,min_freq=<span class="number">5</span>)</span>:</span></span><br><span class="line">    dictionary=Dictionary() </span><br><span class="line">    count=Counter(flat(dataset)).most_common()  </span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> count:</span><br><span class="line">        <span class="keyword">if</span> c[<span class="number">1</span>]&gt;=min_freq:</span><br><span class="line">            dictionary.add_word(c[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> dictionary</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/诗词&句/每周诗词3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/05/诗词&句/每周诗词3/" itemprop="url">每周诗词3</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T10:52:00+08:00">
-                2018-08-05
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-05T14:26:01+08:00">
-                2018-08-05
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本周背的都是比较简单的。</p>
-<p>1️⃣</p>
-<h3 id="把酒问月"><a href="#把酒问月" class="headerlink" title="把酒问月"></a>把酒问月</h3><p>[唐] 李白<br>青天有月来几时？我今停杯一问之。<br>人攀明月不可得，月行却与人相随。<br>皎如飞镜临丹阙，绿烟灭尽清辉发。<br>但见宵从海上来，宁知晓向云间没。<br>白兔捣药秋复春，嫦娥孤栖与谁邻？<br><strong>今人不见古时月，今月曾经照古人。<br>古人今人若流水，共看明月皆如此。</strong><br><strong>唯愿当歌对酒时，月光长照金樽里。</strong></p>
-<p><a href="http://m.xichuangzhu.com/work/57b8f6f4165abd0054bf8c13" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b8f6f4165abd0054bf8c13</a></p>
-<hr>
-<p>2️⃣</p>
-<h3 id="金缕衣"><a href="#金缕衣" class="headerlink" title="金缕衣"></a>金缕衣</h3><p>[唐] 杜秋娘<br>劝君莫惜金缕衣，劝君惜取少年时。<br><strong>花开堪折直须折，莫待无花空折枝。</strong></p>
-<p><a href="http://m.xichuangzhu.com/work/57b92bdca633bd00665eb99e" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b92bdca633bd00665eb99e</a></p>
-<hr>
-<p>3️⃣</p>
-<h3 id="北青萝"><a href="#北青萝" class="headerlink" title="北青萝"></a>北青萝</h3><p>[唐] 李商隐<br>残阳西入崦，茅屋访孤僧。<br>落叶人何在，寒云路几层。<br>独敲初夜磬，闲倚一枝藤。<br><strong>世界微尘里，吾宁爱与憎。</strong></p>
-<p>崦（yān）：即“崦嵫（zī）”，山名，在甘肃。古时常用来指太阳落山的地方。<br><strong>磬（qìng）</strong>：古代打击乐器，形状像曲尺，用玉、石制成，可悬挂。</p>
-<p><a href="http://m.xichuangzhu.com/work/57b8ee240a2b58005c91c99e" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b8ee240a2b58005c91c99e</a></p>
-<hr>
-<p>4️⃣</p>
-<h3 id="夏日绝句"><a href="#夏日绝句" class="headerlink" title="夏日绝句"></a>夏日绝句</h3><p>[宋] 李清照<br>生当作人杰，死亦为鬼雄。<br><strong>至今思项羽，不肯过江东。</strong></p>
-<p><a href="http://m.xichuangzhu.com/work/57b911dac4c97100558fb30e" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b911dac4c97100558fb30e</a></p>
-<hr>
-<p>5️⃣</p>
-<h3 id="雨霖铃"><a href="#雨霖铃" class="headerlink" title="雨霖铃"></a>雨霖铃</h3><p>[宋] 柳永<br>寒蝉凄切，对长亭晚，骤雨初歇。都门帐饮无绪，留恋处，兰舟催发。执手相看泪眼，竟无语凝噎。念去去，千里烟波，暮霭沉沉楚天阔。<br><strong>多情自古伤离别</strong>，更那堪、冷落清秋节。今宵酒醒何处？杨柳岸，晓风残月。此去经年，应是良辰好景虚设。<strong>便纵有千种风情，更与何人说</strong>？</p>
-<p><a href="http://m.xichuangzhu.com/work/57ad742f5bbb500062bc7c9c" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57ad742f5bbb500062bc7c9c</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1837,7 +1858,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1850,7 +1871,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">84</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
