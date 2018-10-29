@@ -4,6 +4,52 @@
 
     
   <url>
+    <loc>http://www.linzehui.me/2018/10/29/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%873/</loc>
+    <lastmod>2018-10-29T14:28:54.447Z</lastmod>
+    <data>
+        <display>
+        <title>每周论文3</title>
+        <pubTime>2018-10-29T02:17:30.000Z</pubTime>
+        
+        <tag>Embedding</tag>
+         
+        <tag>Paper</tag>
+         
+        <tag>每周论文阅读</tag>
+         
+        <tag>Transformer</tag>
+         
+        <tag>ACT</tag>
+         
+        <tag>Language Modeling</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/10/29/%E8%AF%97%E8%AF%8D&%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D13/</loc>
+    <lastmod>2018-10-29T02:36:40.828Z</lastmod>
+    <data>
+        <display>
+        <title>每周诗词13</title>
+        <pubTime>2018-10-29T02:20:14.000Z</pubTime>
+        
+        <tag>诗词</tag>
+         
+        <tag>诗词分享</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.linzehui.me/2018/10/20/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%872/</loc>
     <lastmod>2018-10-21T07:05:42.669Z</lastmod>
     <data>
@@ -736,50 +782,31 @@
 
     
   <url>
-    <loc>http://www.linzehui.me/2018/08/26/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB6/</loc>
-    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>代码片段记录6</title>
-        <pubTime>2018-08-26T03:07:30.000Z</pubTime>
-        
-        <tag>code snippets</tag>
-         
-        <tag>代码片段</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.linzehui.me/2018/07/23/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB1/</loc>
-    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>代码片段记录1</title>
-        <pubTime>2018-07-23T10:59:30.000Z</pubTime>
-        
-        <tag>code snippets</tag>
-         
-        <tag>代码片段</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.linzehui.me/2018/08/05/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB3/</loc>
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
     <data>
         <display>
         <title>代码片段记录3</title>
         <pubTime>2018-08-05T02:58:30.000Z</pubTime>
+        
+        <tag>code snippets</tag>
+         
+        <tag>代码片段</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/07/29/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB2/</loc>
+    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>代码片段记录2</title>
+        <pubTime>2018-07-29T06:24:30.000Z</pubTime>
         
         <tag>code snippets</tag>
          
@@ -831,12 +858,31 @@
 
     
   <url>
-    <loc>http://www.linzehui.me/2018/07/29/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB2/</loc>
+    <loc>http://www.linzehui.me/2018/07/23/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB1/</loc>
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
     <data>
         <display>
-        <title>代码片段记录2</title>
-        <pubTime>2018-07-29T06:24:30.000Z</pubTime>
+        <title>代码片段记录1</title>
+        <pubTime>2018-07-23T10:59:30.000Z</pubTime>
+        
+        <tag>code snippets</tag>
+         
+        <tag>代码片段</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/08/26/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB6/</loc>
+    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>代码片段记录6</title>
+        <pubTime>2018-08-26T03:07:30.000Z</pubTime>
         
         <tag>code snippets</tag>
          
@@ -1086,11 +1132,11 @@
         
         <tag>技巧</tag>
          
+        <tag>Pycharm</tag>
+         
         <tag>杂七杂八</tag>
          
         <tag>快捷键</tag>
-         
-        <tag>Pycharm</tag>
          
          
            
@@ -1342,11 +1388,11 @@
         
         <tag>技巧</tag>
          
-        <tag>Vim</tag>
-         
         <tag>杂七杂八</tag>
          
         <tag>快捷键</tag>
+         
+        <tag>Vim</tag>
          
          
            

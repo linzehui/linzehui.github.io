@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[每周诗词13]]></title>
+    <url>%2F2018%2F10%2F29%2F%E8%AF%97%E8%AF%8D%26%E5%8F%A5%2F%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D13%2F</url>
+    <content type="text"><![CDATA[1️⃣行路难三首[唐] 李白【其一】金樽清酒斗十千，玉盘珍羞直万钱。停杯投箸不能食，拔剑四顾心茫然。欲渡黄河冰塞川，将登太行雪满山。闲来垂钓碧溪上，忽复乘舟梦日边。行路难，行路难，多歧路，今安在？长风破浪会有时，直挂云帆济沧海！ 注释：「闲来垂钓碧溪上，忽复乘舟梦日边。」句：暗用典故：姜太公吕尚曾在渭水的磻溪上钓鱼，得遇周文王，助周灭商；伊尹曾梦见自己乘船从日月旁边经过，后被商汤聘请，助商灭夏。这两句表示诗人自己对从政仍有所期待。碧，一作「坐」。 2️⃣登科后[唐] 孟郊昔日龌龊不足夸，今朝放荡思无涯。春风得意马蹄疾，一日看尽长安花。 注释：龌龊（wò chuò）：原意是肮脏，这里指不如意的处境。不足夸：不值得提起。放荡（dàng）：自由自在，不受约束。思无涯：兴致高涨。 http://m.xichuangzhu.com/work/57add198a633bd0057eefa8a]]></content>
+      <tags>
+        <tag>诗词</tag>
+        <tag>诗词分享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[每周论文3]]></title>
+    <url>%2F2018%2F10%2F29%2F%E8%AE%BA%E6%96%87%2F%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%873%2F</url>
+    <content type="text"><![CDATA[1️⃣[A Neural Probabilistic Language Model]第一篇使用神经网络获得词向量的paper。 通过对language model建模，将词映射到低维表示，在训练过程中同时训练语言模型以及每个词的词向量。 将中心词的前n个拼接起来 $x=(C(w_{t-1},C(w_{t-2}),…,C(w_{t-n+1}))$将$x$送入神经网络中获得$y=b+Wx+Utanh(d+Hx)$，最后做一个softmax即可。 2️⃣[Adaptive Computation Time for Recurrent Neural Networks]一种允许RNN动态堆叠层数的算法。 Motivation证据证明，RNN的堆叠层数多，效果会有提升。但是，对于不同的任务，要求不同的计算复杂度。我们需要先验来决定特定任务的计算复杂度。当然我们可以粗暴地直接堆叠深层的网络。ACT(Adaptive Computation Time)能够动态决定每个输入t所需的计算次数。 方法将RNN每一步的输出过一个网络+sigmoid层，获得一个概率分布，也即什么时候应当停止不再继续往上堆叠，直到概率加和为1。同时为了尽可能抑制层数的无限增长，在loss添加一项惩罚。 模型对于普通的RNN： s是隐藏层；y是输出。 对于ACT的RNN，有： 上标n是指的t时刻的层数；其中： $δ$是flat，指示x是第几次输入。 引入新的网络，输入时隐状态，输出是一个概率分布： 那么每一层的概率是： 其中$R(t)$是在每一层概率求和超过1时的剩余概率（为了保证概率和为1，可以试着举一个例子来证明） ε是为了解决第一次输出时就超过1-ε的情况，ε一般取很小。 最终，加权求和，作为最终的结果，传入下一个时间步： 普通RNN与ACT的RNN对比： 损失函数为了防止模型层数无限增长，添加一项惩罚项以抑制。 记每一步的惩罚项为： 总的惩罚项则为： Loss function则为： 因为N(t)是不可导的，我们在实际过程中只去最小化R(t) （我觉得不甚合理） 3️⃣[Universal Transformers]提出一种新型通用的transformer。 MotivationTransformer的问题：RNN的归纳偏置(inductive bias)在一些任务上很重要，也即RNN的循环学习的过程；Transformer在一些问题上表现不好，可能是归纳偏置的原因。 Notably, however, the Transformer foregoes the RNN’s inductive bias towards learning iterative or recursive transformations.Our experiments indicate that this inductive bias may be crucial for several algorithmic and language understanding tasks of varying complexity: in contrast to models such as the Neural Turing Machine [13], the Neural GPU [17] or Stack RNNs [16], the Transformer does not generalize well to input lengths not encountered during training. 因此在Transformer内引入归纳偏置 特点 每一层的权重是共享的，也即multi-head上的权重以及transition function在每一层是一致的。这一点和RNN、CNN一致。 动态层数（ACT mechanism ）：对于每个词都会有不同的循环次数；也即有些词需要更多的refine；而有些词不需要。和固定层数的transformer相比，会有更好的通用性。 模型总体架构 过程： 和普通Transformer不同的地方在于： 加了一层Transition层，Transition可以是depth-wise separable convolution（是什么？）或者全连接层。 每层都添加了position embedding；以及timestep embedding，用以指示层数。 ACT由于一个句子中间，有些词比其他词更难学会，需要更多计算量，但堆叠太多层会大大增加计算量，为了节省计算量，我们可以引入ACT来动态分配计算量。 ACT原来用于RNN，在Transformer中，当halting unit指示词t应当停止时，直接讲该词的状态复制到下一个time step，直到所有的词都停止。]]></content>
+      <tags>
+        <tag>Embedding</tag>
+        <tag>Paper</tag>
+        <tag>每周论文阅读</tag>
+        <tag>Transformer</tag>
+        <tag>ACT</tag>
+        <tag>Language Modeling</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[每周诗词12]]></title>
     <url>%2F2018%2F10%2F21%2F%E8%AF%97%E8%AF%8D%26%E5%8F%A5%2F%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D12%2F</url>
     <content type="text"><![CDATA[1️⃣望海潮[宋] 柳永东南形胜，三吴都会，钱塘自古繁华。烟柳画桥，风帘翠幕，参差十万人家。云树绕堤沙，怒涛卷霜雪，天堑无涯。市列珠玑，户盈罗绮，竞豪奢。重湖叠巘清嘉，有三秋桂子，十里荷花。羌管弄晴，菱歌泛夜，嬉嬉钓叟莲娃。千骑拥高牙，乘醉听箫鼓，吟赏烟霞。异日图将好景，归去凤池夸。 叠巘（yǎn）：层层叠叠的山峦。 http://m.xichuangzhu.com/work/57b318228ac247005f2223db]]></content>
@@ -589,9 +611,9 @@
     <content type="text"><![CDATA[在服务器经常要用到Vim，因此记录常用的快捷键并熟悉之。 退出:q 退出:wq 写入并退出:q! 退出并忽略所有更改:e! 放弃修改并打开原来的文件 插入i 在当前位置前插入a 在当前位置后插入 撤销:u 撤销:U 撤销整行操作Ctrl+r 重做 删除:md 删除第m行nd 删除当前行开始的n行(一共n+1行)dd 删除当前行D 删除当前字符至行尾:m,nd 删除从m到n行的内容，如: :100,10000d:m,$d 删除m行及以后所有的行:10d 移动:n 跳转到行号 如， :100gg 跳到行首G(shift+g)移动到文件尾 搜索/text 搜索text，n搜索下一个，N搜索上一个?text 反向查找:set ignorecase 忽略大小写查找:set noignorecase 不忽略大小写查找*或# 对光标处的单词搜索 复制粘贴v 从当前位置开始，光标经过的地方被选中，再按一下v结束 环境设置:set nu 显示行号:set nonu 隐藏行号:set hlsearch 设置搜索结果高亮 Referencehttps://www.cnblogs.com/wangrx/p/5907013.htmlhttps://www.cnblogs.com/yangjig/p/6014198.html]]></content>
       <tags>
         <tag>技巧</tag>
-        <tag>Vim</tag>
         <tag>杂七杂八</tag>
         <tag>快捷键</tag>
+        <tag>Vim</tag>
       </tags>
   </entry>
   <entry>
@@ -600,9 +622,9 @@
     <content type="text"><![CDATA[记录Pycharm的一些技巧，让Pycharm更顺手 快捷键0️⃣Double Shift 万能搜索可以搜索文件名、类名、方法名、目录名（在关键字前面加/ ），并不能用来搜索任意关键字 1️⃣ Command+F 在页面搜索 2️⃣ Ctrl+Shift+F Find in Path 在路径下搜索 3️⃣✨Command+E 快速查找文件显示最近打开的文件 4️⃣ Shift+Enter 任意位置换行无论光标在何处都可以直接另起一行 5️⃣ Option+Enter 自动导入模块；万能提示键自动导入如何设置见小技巧#0️⃣ 6️⃣ Ctrl+F10 运行我已经添加了Ctrl+R作为另一对运行快捷键 7️⃣ Command+Shift+ +/- 展开/收缩代码 8️⃣ Option+F 在Dash中搜索 小技巧0️⃣ Pycharm自动导入模块https://blog.csdn.net/lantian_123/article/details/78094148 1️⃣ ✨远程部署工程 强烈推荐两步走：配置服务器映射+配置服务器解释器 2️⃣跳转后如何回退开启toolbar即可https://segmentfault.com/a/1190000010205945 Referencehttps://foofish.net/pycharm-tips.htmlhttps://blog.csdn.net/lantian_123/article/details/78094148https://segmentfault.com/a/1190000010205945]]></content>
       <tags>
         <tag>技巧</tag>
+        <tag>Pycharm</tag>
         <tag>杂七杂八</tag>
         <tag>快捷键</tag>
-        <tag>Pycharm</tag>
       </tags>
   </entry>
   <entry>
