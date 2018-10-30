@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[“莱斯杯”挑战赛有感]]></title>
+    <url>%2F2018%2F10%2F30%2F%E8%A7%81%E9%97%BB%26%E6%83%B3%E6%B3%95%2F%E2%80%9C%E8%8E%B1%E6%96%AF%E6%9D%AF%E2%80%9D%E6%8C%91%E6%88%98%E8%B5%9B%E6%9C%89%E6%84%9F%2F</url>
+    <content type="text"><![CDATA[历时三个月的“莱斯杯”全国第一届“军事智能·机器阅读”挑战赛终于落下帷幕，前几日（10.26-10.28）有幸在南京青旅宾馆参与决赛，体验多多，收获满满，心中亦有一些感想。 一个是南京总带给我一种回家的感觉，对南京的事物总有亲切感。第一次来南京是一年半前，也是来参加比赛。周五晚上的夜游秦淮，让我感受到许久未曾感受到的烟火气息。 第二个是此次主办方提供的食宿令人惊喜。一开始听到青旅宾馆，我已经做好了艰苦奋战的准备了，然而酒店是星级酒店的，吃方面直接到楼下的自助。可以看出主办方此次确实用心在举办这次比赛。 第三点是关于比赛的，关于比赛的整个历程我还是颇有感触。我们是以第9名的成绩挺进决赛，其实在后期比赛中，我们都有所懈怠了，几乎没有花时间在这上面，10月初发布决赛的数据集，而我们在10月20日才得知这一事情，此时离决赛只剩一周时间。因此我们确实准备不足。当然我们也没有预料到我们的决赛成绩会这么靠前，否则我们肯定会更加充分去准备。这确实是我们的失误。 我们在比赛过程中，一直尝试在使用ELMo，这正是我负责的部分。一开始使用官方TensorFlow的代码，费了九牛二虎之力我才跑通代码，但因为队长使用的是pytorch，而二者在cuda版本上不兼容，因此在初赛我们没有使用ELMo。而在最后几天，我尝试使用哈工大的pytorch训练代码，但因为inference速度实在太慢，我们最终还是弃用了这个方案。而在决赛现场，我们发现也确实是因为速度和资源的原因，大家都没有使用ELMo，除了一组。该组正是凭借了ELMo弯道超车从第7升到了第一，拿走了20万大奖。这也是我们非常遗憾的一个地方，我们在遇到困难时没有尝试解决，而是直接弃用，最终没有取得更好的成绩。 此次我们的成绩排名第4(三等奖)，是有一定的进步的，但有一点遗憾的是，我们仅差0.18百分点，就能超过第三名拿到5万的奖金了。后面我们分析了一下，还是因为我们对比赛懈怠的态度，其他组都对数据进行了分析并有针对性的改进，而我们并没有做这一步。 Anyway，第一次组队参加比赛就有收获，增长了见识，从交流中也获得了许多。这个比赛之后，就得好好看paper了。 __(:з」∠)_]]></content>
+      <tags>
+        <tag>有感</tag>
+        <tag>莱斯杯</tag>
+        <tag>比赛</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[每周诗词13]]></title>
     <url>%2F2018%2F10%2F29%2F%E8%AF%97%E8%AF%8D%26%E5%8F%A5%2F%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D13%2F</url>
     <content type="text"><![CDATA[1️⃣行路难三首[唐] 李白【其一】金樽清酒斗十千，玉盘珍羞直万钱。停杯投箸不能食，拔剑四顾心茫然。欲渡黄河冰塞川，将登太行雪满山。闲来垂钓碧溪上，忽复乘舟梦日边。行路难，行路难，多歧路，今安在？长风破浪会有时，直挂云帆济沧海！ 注释：「闲来垂钓碧溪上，忽复乘舟梦日边。」句：暗用典故：姜太公吕尚曾在渭水的磻溪上钓鱼，得遇周文王，助周灭商；伊尹曾梦见自己乘船从日月旁边经过，后被商汤聘请，助商灭夏。这两句表示诗人自己对从政仍有所期待。碧，一作「坐」。 2️⃣登科后[唐] 孟郊昔日龌龊不足夸，今朝放荡思无涯。春风得意马蹄疾，一日看尽长安花。 注释：龌龊（wò chuò）：原意是肮脏，这里指不如意的处境。不足夸：不值得提起。放荡（dàng）：自由自在，不受约束。思无涯：兴致高涨。 http://m.xichuangzhu.com/work/57add198a633bd0057eefa8a]]></content>
@@ -335,8 +345,8 @@
     <content type="text"><![CDATA[前几日（周日）去了达观杯答辩现场听了前10名做了报告，有了一些感想，但一直没有抽出时间写一下自己的感想（懒）。 自己大概花了十来天做了一下比赛，实际上也就是一个文本分类的比赛，因为没有比赛经验的缘故，走了很多弯路。不过也学到了一些东西。 现记录前十名的一些idea/trick： 数据增强 因为给的句子长度很长，因此在做截断的时候后面的就没法训练到了，可以将文本倒序作为新的数据训练模型。可以充分利用到数据 将数据打乱、随机删除，实际上就是对一个句子的词进行sample再组合 打乱词序以增加数据量 使用pseudo labeling，但有的队伍使用这个做出效果了，但有的没有 特征工程 假设开头中间结尾的信息对分类有帮助，因此截取该部分信息做训练 改进baseline的tfidf的特征工程方法，使用基于熵的词权重计算 降维，留下最重要的特征。先用卡方分布降到20万，再用SVD降到8000 将word2vec和GloVe拼接起来作为deep learning模型的输入 将文章分段，每段取前20后20拼起来 模型融合 所有队伍都无一例外使用了模型融合，stacking或者简单的投票 DL+ML —&gt; lgbm model —&gt; voting 深度模型+传统模型，在深度模型最后一层加入传统模型的信息/feature 后向选择剔除冗余模型 DL&amp;其他 HAN，选择10个attention vector 对易错类增加权重，通过改变损失函数来增加权重 CNN, [1,2,3,4,5,6]*600 提出新的模型（第一名） 其实除了一些trick，我还是有些失望的，因为都是用模型融合堆出来的，这也让我对比赛失去了一些兴趣。虽然能理解现在的比赛都是这样的，但感觉实在太暴力了。当然，其中还是有一些亮点的，有一支队伍立意很高，从理解业务的角度出发而不是堆模型，也取得了很好的效果；还有一个使用了最新论文中的特征工程改进方法，令我耳目一新；以及第一名在比赛过程中提出来三个新的模型。 Anyway，我目前还是太菜了，还是安心搞科研吧。_(:з」∠)]]></content>
       <tags>
         <tag>有感</tag>
-        <tag>达观杯</tag>
         <tag>比赛</tag>
+        <tag>达观杯</tag>
       </tags>
   </entry>
   <entry>
@@ -439,10 +449,10 @@
     <url>%2F2018%2F08%2F26%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FDeep%20Learning%20NLP%20best%20practices%E7%AC%94%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[博客地址：http://ruder.io/deep-learning-nlp-best-practices/index.html个人觉得这篇文章写得很好，有许多实践得到的经验，通过这篇可以避免走一些弯路。 PracticesWord Embedding The optimal dimensionality of word embeddings is mostly task-dependent: a smaller dimensionality works better for more syntactic tasks such as named entity recognition or part-of-speech (POS) tagging, while a larger dimensionality is more useful for more semantic tasks such as sentiment analysis. 对于偏向语法的，使用维度低一些的词向量；而对于偏向语义内容的，使用维度大一些的词向量，如情感分析。 LSTM Depth performance improvements of making the model deeper than 2 layers are minimal LSTM深度最好不要超过两层。 Optimization It is often thought that Adam clearly outperforms vanilla stochastic gradient descent (SGD). However, while it converges much faster than SGD, it has been observed that SGD with learning rate annealing slightly outperforms Adam. Recent work furthermore shows that SGD with properly tuned momentum outperforms Adam . Adam可以更早拟合，而SGD效果可能会更好一些。 可以采用优化策略，比如说使用Adam训练直到拟合，然后将学习率减半，并重新导入之前训练好的最好的模型。这样Adam能够忘记之前的信息并重新开始训练。 Denkowski &amp; Neubig (2017) show that Adam with 2 restarts and learning rate annealing is faster and performs better than SGD with annealing Ensembling Combining multiple models into an ensemble by averaging their predictions is a proven strategy to improve model performance. Ensembling很重要的一点是需要保证多样性： Ensembling is an important way to ensure that results are still reliable if the diversity of the evaluated models increases (Denkowski &amp; Neubig, 2017). While ensembling different checkpoints of a model has been shown to be effective (Jean et al., 2015; Sennrich et al., 2016) [51, 52], it comes at the cost of model diversity. Cyclical learning rates can help to mitigate this effect LSTM tricks 在initial state中我们常常使用全0向量，实际上可以将其作为参数学习。 Instead of fixing the initial state, we can learn it like any other parameter, which can improve performance 将input和output embedding的参数共享，如果是做language model或者机器翻译之类的，可以让他们共享。 Gradient Norm Clipping Rather than clipping each gradient independently, clipping the global norm of the gradient yields more significant improvements 这点我没看懂。 Classification practices关于CNN CNN filters:Combining filter sizes near the optimal filter size, e.g. (3,4,5) performs best (Kim, 2014; Kim et al., 2016). The optimal number of feature maps is in the range of 50-600 (Zhang &amp; Wallace, 2015) [59]. Aggregation function:1-max-pooling outperforms average-pooling and k-max pooling (Zhang &amp; Wallace, 2015). 这在我之前的关于CNN文本分类指南中有更详尽的分析。 Conclusion这是一篇干货满满的博客，实际上我还是有许多地方没有读懂，这适合多看几遍，慢慢理解。]]></content>
       <tags>
-        <tag>指南</tag>
-        <tag>调参</tag>
         <tag>NLP🤖</tag>
         <tag>笔记📒</tag>
+        <tag>指南</tag>
+        <tag>调参</tag>
       </tags>
   </entry>
   <entry>
@@ -478,10 +488,10 @@
     <url>%2F2018%2F08%2F25%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FCNN%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E4%BB%BB%E5%8A%A1%E6%8C%87%E5%8D%97%2F</url>
     <content type="text"><![CDATA[最近因为比赛的缘故对文本分类有一定的了解。其中使用CNN方法做情感分析任务存在着许多优势。虽然模型简单，但如何设置超参有时候对结果有很大的影响。本文记录了关于CNN文本分类的一些学习历程和指南，基本参考了论文。 做法基本上目前较为浅层的CNN文本分类的做法都是如下图： 将词向量堆积成为二维的矩阵，通过CNN的卷积单元对矩阵进行卷积处理，同时使用pooling（通常是1max-pooling）操作，将不等长的卷积结果变为等长，对不同的卷积单元的结果进行拼接后生成单个向量，最后再通过线性层转化成类别概率分布。 另一张图也说明了该流程。 建议与指导超参及其对结果的影响接下来的内容参考了论文A Sensitivity Analysis of (and Practitioners’ Guide to) ConvolutionalNeural Networks for Sentence Classification CNN文本分类的超参： 输入向量 卷积大小 输出通道（feature maps） 激活函数 池化策略 正则化 输入向量的影响实验表明，使用word2vec和GloVe不分伯仲，但将word2vec和GloVe简单拼接在一起并不能带来提升。 unfortunately, simply concatenating these representations does necessarily seem helpful 当句子长度很长（document classification）时，使用one-hot可能会有效果，但在句子长度不是很长时，效果不好。 建议对于新任务，可以word2vec或GloVe或者其他词向量都试一下，如果句子长，可以试着使用one-hot。 卷积大小由于卷积的长度是固定的，也就是词向量的长度，因此只需讨论宽度。实验表明，不同的数据集会有不同的最佳大小，但似乎对于长度越长的句子，最佳大小有越大的趋势。 However, for datasets comprising longer sentences, such as CR (maximum sentence length is 105, whereas it ranges from 36-56 on the other sentiment datasets used here), the optimal region size may be larger. 同时，当增加不同卷积大小作为组合时，如果组合的卷积核大小接近于最佳大小（optimal region size），有助于结果的提升；相反，如果卷积核大小离最佳大小很远时，反而会产生负面影响。 建议首先试着找到最优的卷积核大小，然后在这个基础上添加和该卷积核大小类似的卷积核。 feature maps也就是输出通道（out channel），表明该卷积核大小的卷积核有多少个。 实验表明，最佳的feature maps和数据集相关，但一般不超过600。 it would seem that increasing the number of maps beyond 600 yields at best very marginal returns, and often hurts performance. 建议在600内搜索最优，如果在600的边缘还没有明显的效果下降，那么可以尝试大于600的feature maps。 激活函数实验结果： 结果表明，tanh、ReLU和不使用激活函数效果较好。tanh的优点是以0为中心，ReLU能够加速拟合，至于为什么不使用的效果会好，可能是因为模型较为简单： This indicates that on some datasets, a linear transformation is enough to capture thecorrelation between the word embedding and the output label. 建议使用tanh、ReLU或者干脆不使用。但如果模型更为复杂，有多层的结构，还是需要使用激活函数的。 pooling策略所有的实验都表明了，1-max pooling的效果比其他好，如k-max pooling。在pooling这一步可以直接选择1-max pooling。 This may be because the location of predictive contexts does not matter, and certain n-grams in the sentence can be more predictive on their own than the entire sentence considered jointly. 正则化主要是dropout和l2 norm constraint。dropout就是随机将一些神经元置为0，l2 norm constraint是对参数矩阵W进行整体缩放，使其不超过一定阈值。（与通常的l2 regularization不同，最早可追溯到Hinton的Improving neural networks by preventingco-adaptation of feature detectors） the l2 norm of a weight vector is linearly scaled to a constraint c when it exceeds this threshold, so a smaller c implies stronger regularization 实验表明，dropout起的作用很小，l2 norm没有提升甚至还会导致下降。可能是因为模型参数不多，因此过拟合的可能性较低。 建议设置较小的dropout和较大的l2 norm，当feature maps增大时，可以试着调节较大的dropout以避免过拟合。 建议及结论 刚开始的使用使用word2vec或者GloVe，如果数据量够大，可以尝试one-hot 线性搜索最佳的卷积核大小，如果句子够长，那么可以扩大搜索范围。一旦确定了最佳卷积核大小，尝试在该卷积核大小的附近进行组合，如最佳卷积核宽度是5，那么尝试[3,4,5]或者[2,3,4,5]等 使用较小的dropout和较大的max norm constraint，然后在[100,600]范围内搜索feature maps，如果最佳的feature maps在600附近，可以试着选择比600更大的范围 尝试不同的激活函数，通常tanh和ReLU是较好的，但也可以尝试什么都不加。 使用1-max pooling。 如果模型复杂，比如feature maps很大，那么可以尝试更为严格的正则化，如更大的dropout rate和较小的max norm constraint。 ReferenceConvolutional Neural Networks for Sentence Classification A Sensitivity Analysis of (and Practitioners’ Guide to) ConvolutionalNeural Networks for Sentence Classification]]></content>
       <tags>
-        <tag>CNN</tag>
-        <tag>情感分析</tag>
         <tag>指南</tag>
         <tag>调参</tag>
+        <tag>CNN</tag>
+        <tag>情感分析</tag>
       </tags>
   </entry>
   <entry>
