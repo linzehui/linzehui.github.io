@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125685038.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125974795.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408126143943.jpg">
-<meta property="og:updated_time" content="2018-10-29T14:28:54.447Z">
+<meta property="og:updated_time" content="2018-11-04T00:38:59.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文3">
 <meta name="twitter:description" content="1️⃣[A Neural Probabilistic Language Model]第一篇使用神经网络获得词向量的paper。 通过对language model建模，将词映射到低维表示，在训练过程中同时训练语言模型以及每个词的词向量。  将中心词的前n个拼接起来 $x=(C(w_{t-1},C(w_{t-2}),…,C(w_{t-n+1}))$将$x$送入神经网络中获得$y=b+Wx+Utanh">
@@ -351,8 +351,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-29T22:28:54+08:00">
-                2018-10-29
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-04T08:38:59+08:00">
+                2018-11-04
               </time>
             
           </span>
@@ -428,7 +428,7 @@
 <p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408126143943.jpg" width="60%" height="50%"></p>
 <p>和普通Transformer不同的地方在于：</p>
 <ul>
-<li>加了一层Transition层，Transition可以是depth-wise separable convolution（是什么？）或者全连接层。</li>
+<li>加了一层Transition层，Transition可以是depth-wise separable convolution（<a href="https://www.cnblogs.com/adong7639/p/7918527.html" target="_blank" rel="noopener">是什么？</a>）或者全连接层。</li>
 <li>每层都添加了position embedding；以及timestep embedding，用以指示层数。</li>
 </ul>
 <h4 id="ACT"><a href="#ACT" class="headerlink" title="ACT"></a>ACT</h4><p>由于一个句子中间，有些词比其他词更难学会，需要更多计算量，但堆叠太多层会大大增加计算量，为了节省计算量，我们可以引入ACT来动态分配计算量。</p>
@@ -571,7 +571,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-count">86</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -584,7 +584,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">101</span>
+                  <span class="site-state-item-count">106</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

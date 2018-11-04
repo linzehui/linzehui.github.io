@@ -286,6 +286,476 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/碎片知识/如何训练GloVe中文词向量/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/05/碎片知识/如何训练GloVe中文词向量/" itemprop="url">如何训练GloVe中文词向量</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T11:06:05+08:00">
+                2018-08-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-10T11:33:55+08:00">
+                2018-08-10
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="准备语料"><a href="#准备语料" class="headerlink" title="准备语料"></a>准备语料</h3><p>准备好自己的语料，保存为txt，每行一个句子或一段话，注意要分好词。</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334388069130.jpg" width="60%" height="60%"></p>
+<h3 id="准备源码"><a href="#准备源码" class="headerlink" title="准备源码"></a>准备源码</h3><p>从GitHub下载代码，<a href="https://github.com/stanfordnlp/GloVe" target="_blank" rel="noopener">https://github.com/stanfordnlp/GloVe</a><br>将语料corpus.txt放入到Glove的主文件夹下。</p>
+<h3 id="修改bash"><a href="#修改bash" class="headerlink" title="修改bash"></a>修改bash</h3><p>打开demo.sh，修改相应的内容</p>
+<ol>
+<li>因为demo默认是下载网上的语料来训练的，因此如果要训练自己的语料，需要注释掉</li>
+</ol>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334390298383.jpg" width="70%" height="50%"></p>
+<ol>
+<li>修改参数设置，将CORPUS设置成语料的名字</li>
+</ol>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334391029224.jpg" width="50%" height="50%"></p>
+<h3 id="执行bash文件"><a href="#执行bash文件" class="headerlink" title="执行bash文件"></a>执行bash文件</h3><p>进入到主文件夹下</p>
+<ol>
+<li>make</li>
+</ol>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334392348665.jpg" width="70%" height="50%"></p>
+<ol>
+<li>bash demo.sh</li>
+</ol>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334392595148.jpg" width="70%" height="70%"></p>
+<p>注意，如果训练数据较大，则训练时间较长，那么建议使用nohup来运行程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup bash demo.sh &gt;output.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>坐等训练，最后会得到vectors.txt 以及其他的相应的文件。如果要用gensim的word2ve load进来，那么需要在vectors.txt的第一行加上vacob_size vector_size，第一个数指明一共有多少个向量，第二个数指明每个向量有多少维。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.cnblogs.com/echo-cheng/p/8561171.html" target="_blank" rel="noopener">https://www.cnblogs.com/echo-cheng/p/8561171.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/碎片知识/每周碎片知识2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/05/碎片知识/每周碎片知识2/" itemprop="url">每周碎片知识2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T11:02:37+08:00">
+                2018-08-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-12T19:33:41+08:00">
+                2018-08-12
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1️⃣[Pytorch]<br>避免写出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = Variable(torch.zeros(...), requires_grad=<span class="keyword">True</span>).cuda()</span><br></pre></td></tr></table></figure>
+<p>而是应该要：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = Variable(torch.zeros(...).cuda(), requires_grad=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p>Reference:<br><a href="https://discuss.pytorch.org/t/variable-grad-is-always-none-when-extending-autograd/12187" target="_blank" rel="noopener">https://discuss.pytorch.org/t/variable-grad-is-always-none-when-extending-autograd/12187</a></p>
+<hr>
+<p>2️⃣[Tf-idf]<br>本周因为比赛的原因了解了一下各种文本建模的方法。Tf-idf能够取得不错的成绩，但有一定的缺陷。</p>
+<blockquote>
+<p>TF-IDF用于向量空间模型，进行文档相似度计算是相当有效的。但在文本分类中单纯使用TF-IDF来判断一个特征是否有区分度是不够的。</p>
+<ol>
+<li>它仅仅综合考虑了该词在文档中的重要程度和文档区分度。</li>
+<li>它没有考虑特征词在类间的分布。特征选择所选择的特征应该在某类出现多，而其它类出现少，即考察各类的文档频率的差异。如果一个特征词，在各个类间分布比较均匀，这样的词对分类基本没有贡献；但是如果一个特征词比较集中的分布在某个类中，而在其它类中几乎不出现，这样的词却能够很好代表这个类的特征，而TF-IDF不能区分这两种情况。</li>
+<li>它没有考虑特征词在类内部文档中的分布情况。在类内部的文档中，如果特征词均匀分布在其中，则这个特征词能够很好的代表这个类的特征，如果只在几篇文档中出现，而在此类的其它文档中不出现，显然这样的特征词不能够代表这个类的特征。</li>
+</ol>
+</blockquote>
+<p>Reference:<br><a href="https://blog.csdn.net/mmc2015/article/details/46771791" target="_blank" rel="noopener">https://blog.csdn.net/mmc2015/article/details/46771791</a></p>
+<hr>
+<p>3️⃣[卡方检验CHI]<br>在文本分类中，用于选择最相关的特征。</p>
+<p>Reference:<br><a href="https://blog.csdn.net/blockheadls/article/details/49977361" target="_blank" rel="noopener">https://blog.csdn.net/blockheadls/article/details/49977361</a></p>
+<hr>
+<p>4️⃣[文本分类]<br>各种文本分类方法的简单介绍。</p>
+<p>Reference:<br><a href="https://github.com/wangjiang0624/Note/blob/master/MachineLearning/文本分类.md" target="_blank" rel="noopener">https://github.com/wangjiang0624/Note/blob/master/MachineLearning/文本分类.md</a></p>
+<hr>
+<p>5️⃣[Python]<br>collections的两个有用的类</p>
+<ol>
+<li>named_tuple：快速建立一个类，使得可以使用属性来访问而非索引，提高了代码可读性</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line">Point = namedtuple(<span class="string">'Point'</span>,[<span class="string">'x'</span>,<span class="string">'y'</span>])</span><br><span class="line">p = Point(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">print(p.x)  <span class="comment"># 1</span></span><br><span class="line">print(p.y)  <span class="comment"># 2</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>Counter：统计字符出现的次数</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">count = Counter([...]).most_commom()  <span class="comment">#会按照出现的次数排序，通常可用于构建词典</span></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> count:     <span class="comment"># c是一个tuple，c[0]是词，c[1]是频率</span></span><br><span class="line">    <span class="keyword">if</span> c[<span class="number">1</span>]&gt;= threshold:</span><br><span class="line">        vocab.add_word(c[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<p>Counter用法：<br><a href="https://blog.csdn.net/u014755493/article/details/69812244" target="_blank" rel="noopener">https://blog.csdn.net/u014755493/article/details/69812244</a></p>
+<hr>
+<p>6️⃣[nohup]<br>本周在服务器上跑代码的时候遇到一个问题，使用nohup执行python程序时，发现输出文件没有显示。以为是代码的问题，但经过排查并非是代码的问题。通过查阅资料，发现问题所在：<br>因为python输出有缓冲，导致output不能<strong>马上</strong>看到输出。实际上，在等待了一段时间后，输出文件终于显示出来了。</p>
+<p>解决方案：使用python的参数 -u 使得python不启用缓冲。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python -u test.py &gt; nohup.out 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>Reference:<br><a href="https://blog.csdn.net/sunlylorn/article/details/19127107" target="_blank" rel="noopener">https://blog.csdn.net/sunlylorn/article/details/19127107</a></p>
+<hr>
+<p>7️⃣[hexo配置]</p>
+<ol>
+<li>mathjax配置: <a href="https://www.jianshu.com/p/7ab21c7f0674" target="_blank" rel="noopener">https://www.jianshu.com/p/7ab21c7f0674</a></li>
+<li>配置域名:<a href="https://www.zhihu.com/question/31377141" target="_blank" rel="noopener">https://www.zhihu.com/question/31377141</a></li>
+<li>配置sitemap:<a href="http://www.yuan-ji.me/Hexo-优化：提交sitemap及解决百度爬虫抓取-GitHub-Pages-问题/" target="_blank" rel="noopener">http://www.yuan-ji.me/Hexo-优化：提交sitemap及解决百度爬虫抓取-GitHub-Pages-问题/</a></li>
+</ol>
+<hr>
+<p>8️⃣[Paper]<br><a href="http://aclweb.org/anthology/D17-1025" target="_blank" rel="noopener">Learning Chinese Word Representations From Glyphs Of Characters</a></p>
+<p>使用图像的卷积来生成词向量:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-05-15334453515509.jpg" width="60%" height="50%"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/代码相关/代码片段分享3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/05/代码相关/代码片段分享3/" itemprop="url">代码片段记录3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T10:58:30+08:00">
+                2018-08-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-23T09:30:20+08:00">
+                2018-09-23
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本周只有简单的代码。</p>
+<h3 id="1️⃣使用gensim训练word2vec"><a href="#1️⃣使用gensim训练word2vec" class="headerlink" title="1️⃣使用gensim训练word2vec"></a>1️⃣使用gensim训练word2vec</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> gensim.models <span class="keyword">import</span> word2vec</span><br><span class="line">sentences=word2vec.Text8Corpus(<span class="string">u'分词后的爽肤水评论.txt'</span>)   <span class="comment">#sentence:[ [ a b ],[c d]... ]</span></span><br><span class="line">model=word2vec.Word2Vec(sentences, size=<span class="number">50</span>)  <span class="comment">#size:dim </span></span><br><span class="line"></span><br><span class="line">y2=model.similarity(<span class="string">u"好"</span>, <span class="string">u"还行"</span>)  <span class="comment">#计算相似度</span></span><br><span class="line">print(y2)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> model.most_similar(<span class="string">u"滋润"</span>):</span><br><span class="line">    <span class="keyword">print</span> i[<span class="number">0</span>],i[<span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="comment">#保存</span></span><br><span class="line">model.save(<span class="string">'/model/word2vec_model'</span>)</span><br><span class="line"></span><br><span class="line">new_model=gensim.models.Word2Vec.load(<span class="string">'/model/word2vec_model'</span>)</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="2️⃣使用Counter建立词表"><a href="#2️⃣使用Counter建立词表" class="headerlink" title="2️⃣使用Counter建立词表"></a>2️⃣使用Counter建立词表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_dict</span><span class="params">(dataset,min_freq=<span class="number">5</span>)</span>:</span></span><br><span class="line">    dictionary=Dictionary() </span><br><span class="line">    count=Counter(flat(dataset)).most_common()  </span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> count:</span><br><span class="line">        <span class="keyword">if</span> c[<span class="number">1</span>]&gt;=min_freq:</span><br><span class="line">            dictionary.add_word(c[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> dictionary</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/诗词&句/每周诗词3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1333,461 +1803,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/07/29/杂七杂八/ssh快速登录配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/29/杂七杂八/ssh快速登录配置/" itemprop="url">ssh快速登录配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-29T10:30:05+08:00">
-                2018-07-29
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-07-29T15:05:33+08:00">
-                2018-07-29
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>分配了服务器之后，每次要ssh进入都很麻烦：<code>ssh user_name@ip_address</code> 然后还要输入密码。</p>
-<p>特别是如果分配了多个服务器，那有时候还容易忘记ip地址。因此如果能够一条命令就进入服务器能够减少麻烦。<br>主要有三点：</p>
-<ol>
-<li>创建rsa key</li>
-<li>上传public key到服务器</li>
-<li>设置alias</li>
-</ol>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="创建rsa-key"><a href="#创建rsa-key" class="headerlink" title="创建rsa key"></a>创建rsa key</h2><p>在终端输入命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-<p>当然如果以前有创建过的可以不用。</p>
-<p>结果：</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-Xnip2018-07-29_10-43-15.jpg" width="50%" height="50%"></p>
-<h2 id="上传public-key到服务器"><a href="#上传public-key到服务器" class="headerlink" title="上传public key到服务器"></a>上传public key到服务器</h2><p>使用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub user@127.0.0.1</span><br></pre></td></tr></table></figure></p>
-<p>输入密码即可</p>
-<p>结果：</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328324683354.jpg" width="60%" height="60%"></p>
-<h2 id="设置alias"><a href="#设置alias" class="headerlink" title="设置alias"></a>设置alias</h2><p>完成以上步骤就可以不输入密码登录，但还是需要输入ip地址和用户名，为了更简化操作，给命令起个别名。需要配置 .bash_profile文件。<br>输入命令:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
-<p>在文件后面添加以下文字：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># alias </span><br><span class="line">alias ssh×××=&quot;ssh user_name@ip_address&quot;</span><br><span class="line">alias ssh×××=&quot;ssh user_name@ip_address&quot;</span><br></pre></td></tr></table></figure>
-<p>其中 ×××是你自己起的名字，可以是服务器的名字，user_name和ip_address是自己服务器的用户名和地址。保存更改退出。</p>
-<p>然后还要使其生效:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
-<p>这样，输入别名，就可以直接登录了：</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-07-29-15328329815456.jpg" width="50%" height="50%"></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.jianshu.com/p/66d658c7cb9e" target="_blank" rel="noopener">https://www.jianshu.com/p/66d658c7cb9e</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/07/29/碎片知识/关于困惑度/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/29/碎片知识/关于困惑度/" itemprop="url">关于困惑度</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-29T09:43:04+08:00">
-                2018-07-29
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-05T14:42:02+08:00">
-                2018-08-05
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前几天在写新手任务<a href="https://github.com/FudanNLP/nlp-beginner" target="_blank" rel="noopener">task3</a>的时候，参考了Pytorch官方example的word language model，官方example在训练过程中计算困惑度是这样的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">math.exp(cur_loss)</span><br></pre></td></tr></table></figure>
-<p>其中，cur_loss表示交叉熵的loss，即 $-P(\hat{x})logP(x)$，$\hat{x}$表示ground truth。</p>
-<p>然而，在查阅了困惑度相关资料后，我发现，困惑度的定义是这样的：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-PP(S)= &{P(w_{1}w_{2}...w_{N})}^{-\frac{1}{N}} \\
-= &\sqrt[N]{\frac{1}{p(w_1 w_2 ... w_N)}} \\
-= & \sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }
-\end{aligned}</script><p>这是另一种形式:</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-Perplexity (W)=& 2^{H(W)} \\
-= & {P(w_{1}w_{2}...w_{N})}^{-\frac{1}{N}} \\
-= & \sqrt[N]{\frac{1}{p(w_1 w_2 ... w_N)}} \\
-= & \sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }
-\end{aligned}</script><p>可以看到，二者本质是一样的。</p>
-<p><strong>那么，为什么在代码中以e为底去计算困惑度，而不是2呢?</strong></p>
-<p>实际上，是因为在上述公式中，log是以2为底的，但在Pytorch中，log默认是以e为底的。因此在代码中，需要用e作为指数的底来还原成困惑度的原本形式： </p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\sqrt[N]{\prod_{i=1}^{N}{\frac{1}{p(w_i|(w_1 w_2... w_{i-1})}} }
-\end{aligned}</script><p>最后这是perplexity的数学推导：<br><a href="https://www.zhihu.com/question/58482430" target="_blank" rel="noopener">https://www.zhihu.com/question/58482430</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/07/29/诗词&句/每周诗词2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/29/诗词&句/每周诗词2/" itemprop="url">每周诗词2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-29T09:28:14+08:00">
-                2018-07-29
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-07-29T11:38:18+08:00">
-                2018-07-29
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本周的诗词有两篇是已经背过的，权当是复习了一遍。</p>
-<hr>
-<p>1️⃣</p>
-<h3 id="下终南山过斛斯山人宿置酒"><a href="#下终南山过斛斯山人宿置酒" class="headerlink" title="下终南山过斛斯山人宿置酒"></a>下终南山过斛斯山人宿置酒</h3><p>[唐] 李白<br>暮从碧山下，山月随人归。<br>却顾所来径，苍苍横翠微。<br>相携及田家，童稚开荆扉。<br>绿竹入幽径，青萝拂行衣。<br>欢言得所憩，美酒聊共挥。<br>长歌吟松风，曲尽河星稀。<br>我醉君复乐，陶然共忘机。</p>
-<p><a href="http://m.xichuangzhu.com/work/57b900307db2a20054269a2a" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b900307db2a20054269a2a</a></p>
-<hr>
-<p>2️⃣</p>
-<h3 id="逢入京使"><a href="#逢入京使" class="headerlink" title="逢入京使"></a>逢入京使</h3><p>[唐] 岑参<br>故园东望路漫漫，双袖龙钟泪不乾。<br><strong>马上相逢无纸笔，凭君传语报平安。</strong></p>
-<p><a href="http://m.xichuangzhu.com/work/57b92218df0eea006335f923" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b92218df0eea006335f923</a></p>
-<hr>
-<p>3️⃣</p>
-<h3 id="念奴娇·赤壁怀古"><a href="#念奴娇·赤壁怀古" class="headerlink" title="念奴娇·赤壁怀古"></a>念奴娇·赤壁怀古</h3><p>[宋] 苏轼<br>大江东去，浪淘尽、千古风流人物。故垒西边，人道是、三国周郎赤壁。乱石穿空，惊涛拍岸，卷起千堆雪。江山如画，一时多少豪杰。<br>遥想公瑾当年，小乔初嫁了，雄姿英发。羽扇纶巾，谈笑间，樯橹灰飞烟灭。故国神游，多情应笑我，早生华发。<strong>人生如梦，一尊还酹江月。</strong></p>
-<p><a href="http://m.xichuangzhu.com/work/57b8bda2df0eea006333ecd2" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b8bda2df0eea006333ecd2</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1842,7 +1857,7 @@ Perplexity (W)=& 2^{H(W)} \\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-count">86</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1855,7 +1870,7 @@ Perplexity (W)=& 2^{H(W)} \\
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">101</span>
+                  <span class="site-state-item-count">106</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

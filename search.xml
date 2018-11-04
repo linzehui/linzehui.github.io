@@ -1,13 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[每周论文4]]></title>
+    <url>%2F2018%2F11%2F04%2F%E8%AE%BA%E6%96%87%2F%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%874%2F</url>
+    <content type="text"><![CDATA[1️⃣[Character-Level Language Modeling with Deeper Self-Attention]将transformer用于character-level的语言模型中，通过添加多个loss来提高其表现以及加快拟合速度，同时加深transformer的层数，极大提升表现，12层的transformer layer能达到SOTA，而64层则有更多的提升。 普通RNN用于character-level language model：将句子按character为单位组成多个batch，每个batch预测最后一个词，然后将该batch的隐状态传入下一个batch。也即“truncated backpropagation through time” (TBTT)。 如果用在Transformer，如下图，我们只预测$t_4$。 本文的一大贡献是多加了三种loss，并且有些loss的权值会随着训练的过程而逐渐减小，每个loss都会自己的schedule。这些loss加快了拟合速度，同时也提升了表现。 LossMultiple Positions对于batch内而言，每个时间步t都要预测下一个词。 Intermediate Layer Losses要求中间层也做出预测： 在这里，越底层的layer其loss权值越低。 Multiple Targets每一个position，不仅仅要预测下一个词，还要预测下几个词，预测下一个词和预测下几个词的分类器是独立的。 Positional embedding每一层的都添加一个不共享的可学习的positional embedding。 2️⃣[Self-Attention with Relative Position Representations]提出使用相对位置替代Transformer的绝对位置信息，并在NMT上有一定的提升。 分解：在原先的self-attention中，输出为： 其中： 现在我们考虑添加相对位置，其中相对位置信息在各层都是共享的： $a_{ij}^K$的具体形式：上式为了降低复杂度，不考虑长于k的相对位置信息。 考虑到transformer的并行性，为了并行性，我们考虑如下式子：其中，第一项和原来的Transformer一致；第二项，通过reshape可以达到并行的效果，然后两项直接加起来。 实验证明，使用相对位置效果是有一定的提升的，而同时使用绝对位置和相对位置并没有提升。 3️⃣[WEIGHTED TRANSFORMER NETWORK FOR MACHINE TRANSLATION]这篇被ICLR拒了，但有审稿人打了9分的高分。 对Transformer进行改进，拥有更好的效果和更小的计算代价。 传统的Transformer： Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})Vhead_i=Attention(QW_i^Q,KW_i^K,VW_i^V)MultiHead(Q,K,V)=Concat_i (head_i)W^OFFN(x)=max(0,xW_1+b_1)W_2 + b_2在本文中，先对head进行升维并乘以权重，过了FNN后，再乘以另一个权重。其中权重$\alpha$ $ \kappa$为可学习参数： head_i=Attention(QW_i^Q,KW_i^K,VW_i^V)\overline{head_i}=head_i W^{O_i} \times \kappa_iBranchedAttention(Q,K,V)=\sum_{i=1}^{M} \alpha_i FFN(\overline{head}_i)其中要求权重之和为1。即$\sum_{i=1}^{M}\alpha_i=1$,$\sum_{i=1}^{M}\kappa_i=1$。 文中对$\kappa$和$\alpha$作了解释。 κ can be interpreted as a learned concatenation weight and α as the learned addition weight 通过实验，发现该模型会有更好的正则化特性。同时效果也有一定提升，收敛速度更快： 4️⃣[You May Not Need Attention]粗略地过了一遍，一些细节没有弄明白。 提出一种将encoder-decoder融合起来的模型，也即eager translation model，不需要attention，能够实现即时的翻译，也即读入一个词就能翻译一个词，同时不需要记录encoder的所有输出，因此需要很少的内存。 分为三步：①pre-processing进行预处理，使得源句子和目标句子满足eager feasible for every aligned pair of words $(s_i , t_j ), i ≤ j$。 首先通过现成的工具进行对齐操作(alignment)，然后对于那些不符合eager feasible的有具体算法（没认真看）进行补padding。如图 我们还可以在target sentence的开头添加b个padding，使得模型能够在开始预测之前获取更多的source sentence的词。 ②模型两层的LSTM，输入是上一次的y和当前的x拼接起来直接传进去。 ③post processing在最终结果之前，将padding去掉。 在inference（也即beam search）时，还有几个操作/trick： Padding limit Source padding injection SPI 实验表明，eager model在长的句子表现超过传统带attention的NMT，而长句子的建模正是attention-based 的模型的一大挑战；而在短句子上就不如attention-based的NMT。]]></content>
+      <tags>
+        <tag>Paper</tag>
+        <tag>每周论文阅读</tag>
+        <tag>Transformer</tag>
+        <tag>Language Modeling</tag>
+        <tag>self-attention</tag>
+        <tag>relative position</tag>
+        <tag>positional encoding</tag>
+        <tag>NMT</tag>
+        <tag>eager translation model</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[每周诗词14]]></title>
+    <url>%2F2018%2F11%2F04%2F%E8%AF%97%E8%AF%8D%26%E5%8F%A5%2F%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D14%2F</url>
+    <content type="text"><![CDATA[1️⃣鹤冲天[宋] 柳永黄金榜上，偶失龙头望。明代暂遗贤，如何向？未遂风云便，争不恣游狂荡。何须论得丧？才子词人，自是白衣卿相。烟花巷陌，依约丹靑屛障。幸有意中人，堪寻访。且恁偎红倚翠，风流事，平生畅。靑春都一饷。忍把浮名，换了浅斟低唱！ 恣（zì）：放纵，随心所欲。恁（nèn）：如此。 http://m.xichuangzhu.com/work/57aeff68a633bd0057f7d406]]></content>
+      <tags>
+        <tag>诗词</tag>
+        <tag>诗词分享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[代码片段记录9]]></title>
+    <url>%2F2018%2F11%2F04%2F%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3%2F%E4%BB%A3%E7%A0%81%E8%AE%B0%E5%BD%959%2F</url>
+    <content type="text"><![CDATA[1️⃣[collate_fn]将不等长句子组合成batch。 1234567891011121314151617def collate_fn(insts): ''' Pad the instance to the max seq length in batch ''' max_len = max(len(inst) for inst in insts) batch_seq = np.array([ inst + [Constants.PAD] * (max_len - len(inst)) for inst in insts]) batch_pos = np.array([ [pos_i + 1 if w_i != Constants.PAD else 0 for pos_i, w_i in enumerate(inst)] for inst in batch_seq]) # 位置信息 batch_seq = torch.LongTensor(batch_seq) batch_pos = torch.LongTensor(batch_pos) return batch_seq, batch_pos]]></content>
+      <tags>
+        <tag>code snippets</tag>
+        <tag>代码片段</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[“莱斯杯”挑战赛有感]]></title>
     <url>%2F2018%2F10%2F30%2F%E8%A7%81%E9%97%BB%26%E6%83%B3%E6%B3%95%2F%E2%80%9C%E8%8E%B1%E6%96%AF%E6%9D%AF%E2%80%9D%E6%8C%91%E6%88%98%E8%B5%9B%E6%9C%89%E6%84%9F%2F</url>
     <content type="text"><![CDATA[历时三个月的“莱斯杯”全国第一届“军事智能·机器阅读”挑战赛终于落下帷幕，前几日（10.26-10.28）有幸在南京青旅宾馆参与决赛，体验多多，收获满满，心中亦有一些感想。 一个是南京总带给我一种回家的感觉，对南京的事物总有亲切感。第一次来南京是一年半前，也是来参加比赛。周五晚上的夜游秦淮，让我感受到许久未曾感受到的烟火气息。 第二个是此次主办方提供的食宿令人惊喜。一开始听到青旅宾馆，我已经做好了艰苦奋战的准备了，然而酒店是星级酒店的，吃方面直接到楼下的自助。可以看出主办方此次确实用心在举办这次比赛。 第三点是关于比赛的，关于比赛的整个历程我还是颇有感触。我们是以第9名的成绩挺进决赛，其实在后期比赛中，我们都有所懈怠了，几乎没有花时间在这上面，10月初发布决赛的数据集，而我们在10月20日才得知这一事情，此时离决赛只剩一周时间。因此我们确实准备不足。当然我们也没有预料到我们的决赛成绩会这么靠前，否则我们肯定会更加充分去准备。这确实是我们的失误。 我们在比赛过程中，一直尝试在使用ELMo，这正是我负责的部分。一开始使用官方TensorFlow的代码，费了九牛二虎之力我才跑通代码，但因为队长使用的是pytorch，而二者在cuda版本上不兼容，因此在初赛我们没有使用ELMo。而在最后几天，我尝试使用哈工大的pytorch训练代码，但因为inference速度实在太慢，我们最终还是弃用了这个方案。而在决赛现场，我们发现也确实是因为速度和资源的原因，大家都没有使用ELMo，除了一组。该组正是凭借了ELMo弯道超车从第7升到了第一，拿走了20万大奖。这也是我们非常遗憾的一个地方，我们在遇到困难时没有尝试解决，而是直接弃用，最终没有取得更好的成绩。 此次我们的成绩排名第4(三等奖)，是有一定的进步的，但有一点遗憾的是，我们仅差0.18百分点，就能超过第三名拿到5万的奖金了。后面我们分析了一下，还是因为我们对比赛懈怠的态度，其他组都对数据进行了分析并有针对性的改进，而我们并没有做这一步。 Anyway，第一次组队参加比赛就有收获，增长了见识，从交流中也获得了许多。这个比赛之后，就得好好看paper了。 __(:з」∠)_]]></content>
       <tags>
         <tag>有感</tag>
-        <tag>莱斯杯</tag>
         <tag>比赛</tag>
+        <tag>莱斯杯</tag>
       </tags>
   </entry>
   <entry>
@@ -80,9 +114,9 @@
       <tags>
         <tag>Paper</tag>
         <tag>每周论文阅读</tag>
+        <tag>Transformer</tag>
         <tag>CoVe</tag>
         <tag>GCNN</tag>
-        <tag>Transformer</tag>
         <tag>BERT</tag>
       </tags>
   </entry>
@@ -216,12 +250,11 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[每周碎片知识9]]></title>
+    <title><![CDATA[每周碎片知识10]]></title>
     <url>%2F2018%2F10%2F07%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8610%2F</url>
     <content type="text"><![CDATA[1️⃣[正态分布]高维正态分布是从一维发展而来的： https://www.zhihu.com/question/36339816 2️⃣[RNN]from https://www.cs.toronto.edu/~hinton/csc2535/notes/lec10new.pdf 通常而言，我们都会将RNN的initial state设为全0，但在Hinton的slide中提到，我们可以将初始状态作为可学习的变量，和我们在学习权重矩阵一样。]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>调参</tag>
         <tag>正态分布</tag>
         <tag>RNN</tag>
       </tags>
@@ -345,8 +378,8 @@
     <content type="text"><![CDATA[前几日（周日）去了达观杯答辩现场听了前10名做了报告，有了一些感想，但一直没有抽出时间写一下自己的感想（懒）。 自己大概花了十来天做了一下比赛，实际上也就是一个文本分类的比赛，因为没有比赛经验的缘故，走了很多弯路。不过也学到了一些东西。 现记录前十名的一些idea/trick： 数据增强 因为给的句子长度很长，因此在做截断的时候后面的就没法训练到了，可以将文本倒序作为新的数据训练模型。可以充分利用到数据 将数据打乱、随机删除，实际上就是对一个句子的词进行sample再组合 打乱词序以增加数据量 使用pseudo labeling，但有的队伍使用这个做出效果了，但有的没有 特征工程 假设开头中间结尾的信息对分类有帮助，因此截取该部分信息做训练 改进baseline的tfidf的特征工程方法，使用基于熵的词权重计算 降维，留下最重要的特征。先用卡方分布降到20万，再用SVD降到8000 将word2vec和GloVe拼接起来作为deep learning模型的输入 将文章分段，每段取前20后20拼起来 模型融合 所有队伍都无一例外使用了模型融合，stacking或者简单的投票 DL+ML —&gt; lgbm model —&gt; voting 深度模型+传统模型，在深度模型最后一层加入传统模型的信息/feature 后向选择剔除冗余模型 DL&amp;其他 HAN，选择10个attention vector 对易错类增加权重，通过改变损失函数来增加权重 CNN, [1,2,3,4,5,6]*600 提出新的模型（第一名） 其实除了一些trick，我还是有些失望的，因为都是用模型融合堆出来的，这也让我对比赛失去了一些兴趣。虽然能理解现在的比赛都是这样的，但感觉实在太暴力了。当然，其中还是有一些亮点的，有一支队伍立意很高，从理解业务的角度出发而不是堆模型，也取得了很好的效果；还有一个使用了最新论文中的特征工程改进方法，令我耳目一新；以及第一名在比赛过程中提出来三个新的模型。 Anyway，我目前还是太菜了，还是安心搞科研吧。_(:з」∠)]]></content>
       <tags>
         <tag>有感</tag>
-        <tag>比赛</tag>
         <tag>达观杯</tag>
+        <tag>比赛</tag>
       </tags>
   </entry>
   <entry>
@@ -581,8 +614,8 @@
     <url>%2F2018%2F08%2F12%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E5%A6%82%E4%BD%95%E5%B0%86ELMo%E8%AF%8D%E5%90%91%E9%87%8F%E7%94%A8%E4%BA%8E%E4%B8%AD%E6%96%87%2F</url>
     <content type="text"><![CDATA[10.10更新：ELMo已经由哈工大组用PyTorch重写了，并且提供了中文的预训练好的language model，可以直接使用。 ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于一句话进入到language model获得不同的词向量。根据实验可得，使用了Elmo词向量之后，许多NLP任务都有了大幅的提高。 论文:Deep contextualized word representations AllenNLP一共release了两份ELMo的代码，一份是Pytorch版本的，另一份是Tensorflow版本的。Pytorch版本的只开放了使用预训练好的词向量的接口，但没有给出自己训练的接口，因此无法使用到中文语料中。Tensorflow版本有提供训练的代码，因此本文记录如何将ELMo用于中文语料中，但本文只记录使用到的部分，而不会分析全部的代码。 需求:使用预训练好的词向量作为句子表示直接传入到RNN中(也就是不使用代码中默认的先过CNN)，在训练完后，将模型保存，在需要用的时候load进来，对于一个特定的句子，首先将其转换成预训练的词向量，传入language model之后最终得到ELMo词向量。 准备工作: 将中文语料分词 训练好GloVe词向量或者word2vec 下载bilm-tf代码 生成词表 vocab_file （训练的时候要用到） optional:阅读Readme optional:通读bilm-tf的代码，对代码结构有一定的认识 思路: 将预训练的词向量读入 修改bilm-tf代码 option部分 添加给embedding weight赋初值 添加保存embedding weight的代码 开始训练，获得checkpoint和option文件 运行脚本，获得language model的weight文件 将embedding weight保存为hdf5文件形式 运行脚本，将语料转化成ELMo embedding。 训练GloVe或word2vec可参见我以前的博客或者网上的教程。注意到，如果要用gensim导入GloVe训好的词向量，需要在开头添加num_word embedding_dim。 如： 获得vocab词表文件注意到，词表文件的开头必须要有&lt;S&gt; &lt;/S&gt; &lt;UNK&gt;，且大小写敏感。并且应当按照单词的词频降序排列。可以通过手动添加这三个特殊符号。如： 代码：1234567891011121314model=gensim.models.KeyedVectors.load_word2vec_format( fname='/home/zhlin/GloVe/vectors.txt',binary=False)words=model.vocabwith open('vocab.txt','w') as f: f.write('&lt;S&gt;') f.write('\n'） f.write('&lt;/S&gt;') f.write('\n') f.write('&lt;UNK&gt;') f.write('\n') # bilm-tf 要求vocab有这三个符号，并且在最前面 for word in words: f.write(word) f.write('\n') 修改bilm-tf代码注意到，在使用该代码之前，需要安装好相应的环境。 如果使用的是conda作为默认的Python解释器，强烈建议使用conda安装，否则可能会出现一些莫名的错误。123conda install tensorflow-gpu=1.4conda install h5pypython setup.py install #应在bilm-tf的文件夹下执行该指令 然后再运行测试代码，通过说明安装成功。 修改train_elmo.pybin文件夹下的train_elmo.py是程序的入口。主要修改的地方： load_vocab的第二个参数应该改为None n_gpus CUDA_VISIBLE_DEVICES 根据自己需求改 n_train_tokens 可改可不改，影响的是输出信息。要查看自己语料的行数，可以通过wc -l corpus.txt 查看。 option的修改，将char_cnn部分都注释掉，其他根据自己需求修改 如： 修改LanguageModel类由于我需要传入预训练好的GloVe embedding，那么还需要修改embedding部分，这部分在bilm文件夹下的training.py，进入到LanguageModel类中_build_word_embeddings函数中。注意到，由于前三个是&lt;S&gt; &lt;/S&gt; &lt;UNK&gt;，而这三个字符在GloVe里面是没有的，因此这三个字符的embedding应当在训练的时候逐渐学习到，而正因此 embedding_weights的trainable应当设为True 如: 修改train函数添加代码，使得在train函数的最后保存embedding文件。 训练并获得weights文件训练需要语料文件corpus.txt，词表文件vocab.txt。 训练cd到bilm-tf文件夹下，运行12345export CUDA_VISIBLE_DEVICES=4nohup python -u bin/train_elmo.py \--train_prefix='/home/zhlin/bilm-tf/corpus.txt' \--vocab_file /home/zhlin/bilm-tf/glove_embedding_vocab8.10/vocab.txt \--save_dir /home/zhlin/bilm-tf/try &gt;bilm_out.txt 2&gt;&amp;1 &amp; 根据实际情况设定不同的值和路径。 运行情况： PS:运行过程中可能会有warning: ‘list’ object has no attribute ‘name’WARNING:tensorflow:Error encountered when serializing lstm_output_embeddings.Type is unsupported, or the types of the items don’t match field type in CollectionDef. 应该不用担心，还是能够继续运行的，后面也不受影响。 在等待了相当长的时间后，在save_dir文件夹内生成了几个文件，其中checkpoint和options是关键，checkpoint能够进一步生成language model的weights文件，而options记录language model的参数。 获得language model的weights接下来运行bin/dump_weights.py将checkpoint转换成hdf5文件。 123nohup python -u /home/zhlin/bilm-tf/bin/dump_weights.py \--save_dir /home/zhlin/bilm-tf/try \--outfile /home/zhlin/bilm-tf/try/weights.hdf5 &gt;outfile.txt 2&gt;&amp;1 &amp; 其中save_dir是checkpoint和option文件保存的地址。 接下来等待程序运行： 最终获得了想要的weights和option： 将语料转化成ELMo embedding由于我们有了vocab_file、与vocab_file一一对应的embedding h5py文件、以及language model的weights.hdf5和options.json。接下来参考usage_token.py将一句话转化成ELMo embedding。 参考代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273import tensorflow as tfimport osfrom bilm import TokenBatcher, BidirectionalLanguageModel, weight_layers, \ dump_token_embeddings# Our small dataset.raw_context = [ '这 是 测试 .', '好的 .']tokenized_context = [sentence.split() for sentence in raw_context]tokenized_question = [ ['这', '是', '什么'],]vocab_file='/home/zhlin/bilm-tf/glove_embedding_vocab8.10/vocab.txt'options_file='/home/zhlin/bilm-tf/try/options.json'weight_file='/home/zhlin/bilm-tf/try/weights.hdf5'token_embedding_file='/home/zhlin/bilm-tf/glove_embedding_vocab8.10/vocab_embedding.hdf5'## Now we can do inference.# Create a TokenBatcher to map text to token ids.batcher = TokenBatcher(vocab_file)# Input placeholders to the biLM.context_token_ids = tf.placeholder('int32', shape=(None, None))question_token_ids = tf.placeholder('int32', shape=(None, None))# Build the biLM graph.bilm = BidirectionalLanguageModel( options_file, weight_file, use_character_inputs=False, embedding_weight_file=token_embedding_file)# Get ops to compute the LM embeddings.context_embeddings_op = bilm(context_token_ids)question_embeddings_op = bilm(question_token_ids)elmo_context_input = weight_layers('input', context_embeddings_op, l2_coef=0.0)with tf.variable_scope('', reuse=True): # the reuse=True scope reuses weights from the context for the question elmo_question_input = weight_layers( 'input', question_embeddings_op, l2_coef=0.0 )elmo_context_output = weight_layers( 'output', context_embeddings_op, l2_coef=0.0)with tf.variable_scope('', reuse=True): # the reuse=True scope reuses weights from the context for the question elmo_question_output = weight_layers( 'output', question_embeddings_op, l2_coef=0.0 )with tf.Session() as sess: # It is necessary to initialize variables once before running inference. sess.run(tf.global_variables_initializer()) # Create batches of data. context_ids = batcher.batch_sentences(tokenized_context) question_ids = batcher.batch_sentences(tokenized_question) # Compute ELMo representations (here for the input only, for simplicity). elmo_context_input_, elmo_question_input_ = sess.run( [elmo_context_input['weighted_op'], elmo_question_input['weighted_op']], feed_dict=&#123;context_token_ids: context_ids, question_token_ids: question_ids&#125; )print(elmo_context_input_,elmo_context_input_) 可以修改代码以适应自己的需求。 Referencehttps://github.com/allenai/bilm-tf]]></content>
       <tags>
-        <tag>ELMo</tag>
         <tag>教程</tag>
+        <tag>ELMo</tag>
         <tag>词向量</tag>
       </tags>
   </entry>
@@ -621,9 +654,9 @@
     <content type="text"><![CDATA[在服务器经常要用到Vim，因此记录常用的快捷键并熟悉之。 退出:q 退出:wq 写入并退出:q! 退出并忽略所有更改:e! 放弃修改并打开原来的文件 插入i 在当前位置前插入a 在当前位置后插入 撤销:u 撤销:U 撤销整行操作Ctrl+r 重做 删除:md 删除第m行nd 删除当前行开始的n行(一共n+1行)dd 删除当前行D 删除当前字符至行尾:m,nd 删除从m到n行的内容，如: :100,10000d:m,$d 删除m行及以后所有的行:10d 移动:n 跳转到行号 如， :100gg 跳到行首G(shift+g)移动到文件尾 搜索/text 搜索text，n搜索下一个，N搜索上一个?text 反向查找:set ignorecase 忽略大小写查找:set noignorecase 不忽略大小写查找*或# 对光标处的单词搜索 复制粘贴v 从当前位置开始，光标经过的地方被选中，再按一下v结束 环境设置:set nu 显示行号:set nonu 隐藏行号:set hlsearch 设置搜索结果高亮 Referencehttps://www.cnblogs.com/wangrx/p/5907013.htmlhttps://www.cnblogs.com/yangjig/p/6014198.html]]></content>
       <tags>
         <tag>技巧</tag>
+        <tag>Vim</tag>
         <tag>杂七杂八</tag>
         <tag>快捷键</tag>
-        <tag>Vim</tag>
       </tags>
   </entry>
   <entry>
@@ -632,9 +665,9 @@
     <content type="text"><![CDATA[记录Pycharm的一些技巧，让Pycharm更顺手 快捷键0️⃣Double Shift 万能搜索可以搜索文件名、类名、方法名、目录名（在关键字前面加/ ），并不能用来搜索任意关键字 1️⃣ Command+F 在页面搜索 2️⃣ Ctrl+Shift+F Find in Path 在路径下搜索 3️⃣✨Command+E 快速查找文件显示最近打开的文件 4️⃣ Shift+Enter 任意位置换行无论光标在何处都可以直接另起一行 5️⃣ Option+Enter 自动导入模块；万能提示键自动导入如何设置见小技巧#0️⃣ 6️⃣ Ctrl+F10 运行我已经添加了Ctrl+R作为另一对运行快捷键 7️⃣ Command+Shift+ +/- 展开/收缩代码 8️⃣ Option+F 在Dash中搜索 小技巧0️⃣ Pycharm自动导入模块https://blog.csdn.net/lantian_123/article/details/78094148 1️⃣ ✨远程部署工程 强烈推荐两步走：配置服务器映射+配置服务器解释器 2️⃣跳转后如何回退开启toolbar即可https://segmentfault.com/a/1190000010205945 Referencehttps://foofish.net/pycharm-tips.htmlhttps://blog.csdn.net/lantian_123/article/details/78094148https://segmentfault.com/a/1190000010205945]]></content>
       <tags>
         <tag>技巧</tag>
-        <tag>Pycharm</tag>
         <tag>杂七杂八</tag>
         <tag>快捷键</tag>
+        <tag>Pycharm</tag>
       </tags>
   </entry>
   <entry>
@@ -668,8 +701,8 @@
     <url>%2F2018%2F08%2F05%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83GloVe%E4%B8%AD%E6%96%87%E8%AF%8D%E5%90%91%E9%87%8F%2F</url>
     <content type="text"><![CDATA[准备语料准备好自己的语料，保存为txt，每行一个句子或一段话，注意要分好词。 准备源码从GitHub下载代码，https://github.com/stanfordnlp/GloVe将语料corpus.txt放入到Glove的主文件夹下。 修改bash打开demo.sh，修改相应的内容 因为demo默认是下载网上的语料来训练的，因此如果要训练自己的语料，需要注释掉 修改参数设置，将CORPUS设置成语料的名字 执行bash文件进入到主文件夹下 make bash demo.sh 注意，如果训练数据较大，则训练时间较长，那么建议使用nohup来运行程序 1nohup bash demo.sh &gt;output.txt 2&gt;&amp;1 &amp; 坐等训练，最后会得到vectors.txt 以及其他的相应的文件。如果要用gensim的word2ve load进来，那么需要在vectors.txt的第一行加上vacob_size vector_size，第一个数指明一共有多少个向量，第二个数指明每个向量有多少维。 参考https://www.cnblogs.com/echo-cheng/p/8561171.html]]></content>
       <tags>
-        <tag>教程</tag>
         <tag>GloVe</tag>
+        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
