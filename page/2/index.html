@@ -286,6 +286,808 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/29/论文/每周论文3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/29/论文/每周论文3/" itemprop="url">每周论文3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-29T10:17:30+08:00">
+                2018-10-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-05T19:31:06+08:00">
+                2018-11-05
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1️⃣-A-Neural-Probabilistic-Language-Model"><a href="#1️⃣-A-Neural-Probabilistic-Language-Model" class="headerlink" title="1️⃣[A Neural Probabilistic Language Model]"></a>1️⃣[A Neural Probabilistic Language Model]</h2><p>第一篇使用神经网络获得词向量的paper。</p>
+<p>通过对language model建模，将词映射到低维表示，在训练过程中同时训练语言模型以及每个词的词向量。</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15407808716787.jpg" width="50%" height="50%"></p>
+<p>将中心词的前n个拼接起来 $x=(C(w_{t-1},C(w_{t-2}),…,C(w_{t-n+1}))$<br>将$x$送入神经网络中获得$y=b+Wx+Utanh(d+Hx)$，最后做一个softmax即可。</p>
+<hr>
+<h2 id="2️⃣-Adaptive-Computation-Time-for-Recurrent-Neural-Networks"><a href="#2️⃣-Adaptive-Computation-Time-for-Recurrent-Neural-Networks" class="headerlink" title="2️⃣[Adaptive Computation Time for Recurrent Neural Networks]"></a>2️⃣[Adaptive Computation Time for Recurrent Neural Networks]</h2><p>一种允许RNN动态堆叠层数的算法。</p>
+<h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>证据证明，RNN的堆叠层数多，效果会有提升。但是，对于不同的任务，要求不同的计算复杂度。我们需要先验来决定特定任务的计算复杂度。当然我们可以粗暴地直接堆叠深层的网络。ACT(Adaptive Computation Time)能够动态决定每个输入t所需的计算次数。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>将RNN每一步的输出过一个网络+sigmoid层，获得一个概率分布，也即什么时候应当停止不再继续往上堆叠，直到概率加和为1。同时为了尽可能抑制层数的无限增长，在loss添加一项惩罚。</p>
+<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><p>对于普通的RNN：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408103221289.jpg" width="30%" height="50%"></p>
+<p>s是隐藏层；y是输出。</p>
+<p>对于ACT的RNN，有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408103823681.jpg" width="40%" height="50%"></p>
+<p>上标n是指的t时刻的层数；其中：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408104201718.jpg" width="20%" height="50%"></p>
+<p>$δ$是flat，指示x是第几次输入。</p>
+<p>引入新的网络，输入时隐状态，输出是一个概率分布：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408105451770.jpg" width="30%" height="50%"></p>
+<p>那么每一层的概率是：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408105687677.jpg" width="35%" height="50%"></p>
+<p>其中$R(t)$是在每一层概率求和超过1时的剩余概率（为了保证概率和为1，可以试着举一个例子来证明）<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408106099743.jpg" width="45%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408106125837.jpg" width="25%" height="50%"></p>
+<p>ε是为了解决第一次输出时就超过1-ε的情况，ε一般取很小。</p>
+<p>最终，加权求和，作为最终的结果，传入下一个时间步：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408106649319.jpg" width="45%" height="50%"></p>
+<p>普通RNN与ACT的RNN对比：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408106950342.jpg" width="90%" height="50%"></p>
+<h4 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h4><p>为了防止模型层数无限增长，添加一项惩罚项以抑制。</p>
+<p>记每一步的惩罚项为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408107184035.jpg" width="23%" height="50%"></p>
+<p>总的惩罚项则为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408107351871.jpg" width="19%" height="50%"></p>
+<p>Loss function则为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408108024183.jpg" width="35%" height="50%"></p>
+<p>因为N(t)是不可导的，我们在实际过程中只去最小化R(t)  （<del>我觉得不甚合理</del>，一种解读是如果我们不断最小化R(t)直到变成0，那么相当于N(t)少了一层，接着R(t)就会变得很大，然后又继续最小化R(t)…）</p>
+<hr>
+<h2 id="3️⃣-Universal-Transformers"><a href="#3️⃣-Universal-Transformers" class="headerlink" title="3️⃣[Universal Transformers]"></a>3️⃣[Universal Transformers]</h2><p>提出一种新型通用的transformer。</p>
+<h3 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h3><p>Transformer的问题：RNN的归纳偏置(inductive bias)在一些任务上很重要，也即RNN的循环学习的过程；Transformer在一些问题上表现不好，可能是归纳偏置的原因。</p>
+<blockquote>
+<p>Notably, however, the Transformer foregoes the RNN’s inductive bias towards learning iterative or recursive transformations.Our experiments indicate that this inductive bias may be crucial for several algorithmic and language understanding tasks of varying complexity: in contrast to models such as the Neural Turing Machine [13], the Neural GPU [17] or Stack RNNs [16], the Transformer does not generalize well to input lengths not encountered during training.</p>
+</blockquote>
+<p>因此在Transformer内引入归纳偏置</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>每一层的权重是共享的，也即multi-head上的权重以及transition function在每一层是一致的。这一点和RNN、CNN一致。</li>
+<li>动态层数（ACT mechanism ）：对于每个词都会有不同的循环次数；也即有些词需要更多的refine；而有些词不需要。和固定层数的transformer相比，会有更好的通用性。</li>
+</ul>
+<h3 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h3><h4 id="总体架构"><a href="#总体架构" class="headerlink" title="总体架构"></a>总体架构</h4><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125098915.jpg" width="90%" height="50%"></p>
+<p>过程：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125469899.jpg" width="45%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125685038.jpg" width="70%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125974795.jpg" width="70%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408126143943.jpg" width="60%" height="50%"></p>
+<p>和普通Transformer不同的地方在于：</p>
+<ul>
+<li>加了一层Transition层，Transition可以是depth-wise separable convolution（<a href="https://www.cnblogs.com/adong7639/p/7918527.html" target="_blank" rel="noopener">是什么？</a>）或者全连接层。</li>
+<li>每层都添加了position embedding；以及timestep embedding，用以指示层数。</li>
+</ul>
+<h4 id="ACT"><a href="#ACT" class="headerlink" title="ACT"></a>ACT</h4><p>由于一个句子中间，有些词比其他词更难学会，需要更多计算量，但堆叠太多层会大大增加计算量，为了节省计算量，我们可以引入ACT来动态分配计算量。</p>
+<p>ACT原来用于RNN，在Transformer中，当halting unit指示词t应当停止时，直接讲该词的状态复制到下一个time step，直到所有的词都停止。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/21/诗词&句/每周诗词12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/21/诗词&句/每周诗词12/" itemprop="url">每周诗词12</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T10:36:14+08:00">
+                2018-10-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-21T14:53:18+08:00">
+                2018-10-21
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣望海潮"><a href="#1️⃣望海潮" class="headerlink" title="1️⃣望海潮"></a>1️⃣望海潮</h3><p>[宋] 柳永<br>东南形胜，三吴都会，钱塘自古繁华。烟柳画桥，风帘翠幕，参差十万人家。云树绕堤沙，怒涛卷霜雪，天堑无涯。市列珠玑，户盈罗绮，竞豪奢。<br>重湖叠巘清嘉，有三秋桂子，十里荷花。羌管弄晴，菱歌泛夜，嬉嬉钓叟莲娃。千骑拥高牙，乘醉听箫鼓，吟赏烟霞。异日图将好景，归去凤池夸。</p>
+<p>叠巘（yǎn）：层层叠叠的山峦。</p>
+<p><a href="http://m.xichuangzhu.com/work/57b318228ac247005f2223db" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b318228ac247005f2223db</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/21/代码相关/代码记录8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/21/代码相关/代码记录8/" itemprop="url">代码片段记录8</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T10:33:30+08:00">
+                2018-10-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-21T10:34:37+08:00">
+                2018-10-21
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣-batchify"><a href="#1️⃣-batchify" class="headerlink" title="1️⃣[batchify]"></a>1️⃣[batchify]</h3><p>快速将数据分成batch。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">batchify</span><span class="params">(data, bsz)</span>:</span></span><br><span class="line">    <span class="comment"># Work out how cleanly we can divide the dataset into bsz parts.</span></span><br><span class="line">    nbatch = data.size(<span class="number">0</span>) // bsz</span><br><span class="line">    <span class="comment"># Trim off any extra elements that wouldn't cleanly fit (remainders).</span></span><br><span class="line">    data = data.narrow(<span class="number">0</span>, <span class="number">0</span>, nbatch * bsz)</span><br><span class="line">    <span class="comment"># Evenly divide the data across the bsz batches.</span></span><br><span class="line">    data = data.view(bsz, <span class="number">-1</span>).t().contiguous()</span><br><span class="line">    <span class="keyword">return</span> data.to(device)</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/21/机器学习与深度学习算法知识/PRML第四章 分类的线性模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/21/机器学习与深度学习算法知识/PRML第四章 分类的线性模型/" itemprop="url">PRML第四章 分类的线性模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T09:21:24+08:00">
+                2018-10-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-21T14:54:13+08:00">
+                2018-10-21
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="判别函数"><a href="#判别函数" class="headerlink" title="判别函数"></a>判别函数</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-Xnip2018-10-21_09-26-42.jpg" alt="0"></p>
+<hr>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-Xnip2018-10-21_09-27-57.jpg" alt="1"></p>
+<p>—-未完—-</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/20/论文/每周论文2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/20/论文/每周论文2/" itemprop="url">每周论文2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-20T10:07:30+08:00">
+                2018-10-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-21T15:05:42+08:00">
+                2018-10-21
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣-An-Empirical-Evaluation-of-Generic-Convolutional-and-Recurrent-Networks-for-Sequence-Modeling"><a href="#1️⃣-An-Empirical-Evaluation-of-Generic-Convolutional-and-Recurrent-Networks-for-Sequence-Modeling" class="headerlink" title="1️⃣[An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling]"></a>1️⃣[An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling]</h3><p>本文贡献：提出一种新的模型<strong>TCN（Temporal Convolutional Networks）</strong>进行language model建模。</p>
+<h4 id="Dilated-convolution"><a href="#Dilated-convolution" class="headerlink" title="Dilated convolution"></a>Dilated convolution</h4><p>每一层的感受野都可以是不同的，也即，同样的kernel size，高层的可以跳着看。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-20-15400016170606.jpg" width="60%" height="50%"></p>
+<p>每层的d逐渐增大（也即跳的步数），一般按指数增大。（我觉得这样很有道理，如果每一层的d都是一样的，那capture到的信息就会有重复，能看到的视野也不如逐渐增大的多）</p>
+<h4 id="Residual-block"><a href="#Residual-block" class="headerlink" title="Residual block"></a>Residual block</h4><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-20-15400017320092.jpg" width="70%" height="50%"></p>
+<p>这边的residual block比较复杂；一个值得主意的细节是，因为感受野的不同，上层的感受野总是比下层的大很多，因此不应该直接将下层的加到上层，而是可以使用一个1*1的convolution对下层的x进行卷积，这就类似scale对输入进行放缩。</p>
+<hr>
+<h3 id="2️⃣-Dissecting-Contextual-Word-Embeddings：-Architecture-and-Representation"><a href="#2️⃣-Dissecting-Contextual-Word-Embeddings：-Architecture-and-Representation" class="headerlink" title="2️⃣[Dissecting Contextual Word Embeddings： Architecture and Representation]"></a>2️⃣[Dissecting Contextual Word Embeddings： Architecture and Representation]</h3><p>一篇分析的文章。ELMo作者的又一篇文章。</p>
+<p>对比三种不同的建模方式（LSTM/GCNN/Transformer）获得的词向量，以及在不同任务上的表现；以及不同层获得的不同信息…获得了不同的结论。</p>
+<p>①biLM 专注于word morphology词的形态；底层的LM关注local syntax；而高层的LM关注semantic content；</p>
+<p>②不同的任务会有不同的正则化s的倾向。</p>
+<hr>
+<h3 id="3️⃣-Transformer-XL-Language-modeling-with-longer-term-dependency"><a href="#3️⃣-Transformer-XL-Language-modeling-with-longer-term-dependency" class="headerlink" title="3️⃣[Transformer-XL: Language modeling with longer-term dependency]"></a>3️⃣[Transformer-XL: Language modeling with longer-term dependency]</h3><p>利用Transformer进行language model，与普通的Transformer建模不同的是，Transformer-XL添加了历史信息，能够显著提升表现。这篇还在ICLR2019审稿中。</p>
+<p>贡献：本文提出了能够进行长程依赖的基于Transformer的语言模型 Transformer-XL；引入相对位置的positional encoding。</p>
+<h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><p>原先的transformer language model是将句子分为一个一个segment。segment之间是没有联系的。（为什么不直接按原版的Transformer那样所有的词都相互做self-attention？因为考虑到效率问题，句子长度可能会很长）</p>
+<p>训练阶段：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-20-15400023645268.jpg" width="35%" height="50%"></p>
+<p>而在测试阶段，每次向右滑动一格：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-20-15400024115822.jpg" width="80%" height="50%"><br>这样每一个时间步都要重新计算一遍，历史信息没有利用到。显然速度很慢。</p>
+<p>在Transformer引入recurrence，也即引入历史信息。基于这样的想法，提出的新模型Transformer-XL。在结构上同样分为每个segment，但在每个阶段都接收上一个（甚至上L个）历史信息。</p>
+<p>训练阶段：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-20-15400026059113.jpg" width="80%" height="50%"></p>
+<p>而在测试阶段，同样分为segment，但因为接收了历史信息，不需要每次滑动一格也能获得大量信息。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-20-15400027040526.jpg" width="45%" height="50%"></p>
+<p>具体来说：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-20-15400027302545.jpg" width="120%" height="50%"><br>SG代表stop gradient，和该阶段的hidden state进行拼接。</p>
+<h4 id="RELATIVE-POSITIONAL-ENCODINGS"><a href="#RELATIVE-POSITIONAL-ENCODINGS" class="headerlink" title="RELATIVE POSITIONAL ENCODINGS"></a>RELATIVE POSITIONAL ENCODINGS</h4><p>如果我们使用了absolute positional encodings（也即原版的positional encodings）那么会出现这种情况</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-20-15400027991211.jpg" width="70%" height="50%"></p>
+<p>在同一层之间的前一个segment和后一个segment使用了同样的绝对位置信息，对于当前segment的高层，对于同一个位置i，无法区分该位置信息是来自当前segment的还是上一个segment的（因为都是同样的绝对位置）。</p>
+<p>因此我们引入相对位置信息R，其中第i行代表相对距离i的encoding。</p>
+<p>具体来说：</p>
+<p>首先我们在传统的计算$query_i$和$key_j$的attention分数时，可以拆解成：</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-20-15400030310583.jpg" width="80%" height="50%"><br>（因为query=(embedding E +positional embedding U），key也一样，将式子拆开就能获得上述式子)</p>
+<p>我们将该式子进行修改：</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-20-15400031662378.jpg" width="80%" height="50%"></p>
+<p>第一，将出现了absolute positional embedding $U$的地方，统统改成$R_{i-j}$，也即在b和d项。其中这里的R和原版的Transformer的位置计算公式相同。</p>
+<p>第二，在c项中，使用一个$u$替代了$U_i W_q$，这一项原本的意义在于，$query_i$的positional encoding对$key_j$的embedding进行attention，也就是说，该项表现了$query_i$位置对哪些$key_j$的内容有兴趣，作者认为query不管在哪个位置上都是一样的，也就是说query的位置信息应当没影响，所以统统替换成一个可学习的$u$。基于类似的理由d项换成了$v$。</p>
+<p>第三，将$W_k$细分成了两个$W_{k,E}$和$W_{k,R}$。这是根据query是Embedding还是positional encoding来区分的。for producing the content-based key vectors and location-based key vectors respectively</p>
+<p>每一项现在都有了不同的意义：</p>
+<blockquote>
+<p>Under the new parameterization, each term has an intuitive meaning: term (a) represents contentbased addressing, term (b) captures a content-dependent positional bias, term (c) governs a global content bias, and (d) encodes a global positional bias.</p>
+</blockquote>
+<p>最后总结一下整个结构：</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-20-15400040342520.jpg" width="120%" height="50%"></p>
+<p>与原版Transformer不同的是，Transformer-XL在每一层都添加了位置信息。</p>
+<hr>
+<h3 id="4️⃣-Trellis-Networks-for-Sequence-Modeling"><a href="#4️⃣-Trellis-Networks-for-Sequence-Modeling" class="headerlink" title="4️⃣[Trellis Networks for Sequence Modeling]"></a>4️⃣[Trellis Networks for Sequence Modeling]</h3><p>一种结合RNN和CNN的语言建模方式。</p>
+<p>最小的单元结构：</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400858162232.jpg" width="40%" height="50%"></p>
+<p>也即：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400860605560.jpg" width="40%" height="50%"></p>
+<p>接下来再处理非线性：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400861618655.jpg" width="30%" height="50%"></p>
+<p>因为每层都要输入x，且W是共享的，所以我们可以提前计算好这一项，后面直接用即可。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400861870898.jpg" width="35%" height="50%"></p>
+<p>最终在实现的时候是：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400862184335.jpg" width="40%" height="50%"></p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400862303741.jpg" width="40%" height="50%"></p>
+<p>总体框架：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400874987498.jpg" width="70%" height="50%"></p>
+<p>与TCN（temporal convolution network）不同之处：①filter weight不仅在time step之间共享，在不同层之间也共享；②在每一层都添加了输入</p>
+<p>优点：共享了W，显著减少了参数；‘Weight tying can be viewed as a form of regularization that can stabilize training’</p>
+<p>我们还可以扩展该网络，引入gate：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400875805208.jpg" width="40%" height="50%"></p>
+<hr>
+<h3 id="5️⃣-Towards-Decoding-as-Continuous-Optimisation-in-Neural-Machine-Translation"><a href="#5️⃣-Towards-Decoding-as-Continuous-Optimisation-in-Neural-Machine-Translation" class="headerlink" title="5️⃣[Towards Decoding as Continuous Optimisation in Neural Machine Translation]"></a>5️⃣[Towards Decoding as Continuous Optimisation in Neural Machine Translation]</h3><p>一篇很有意思的paper。用于NMT decode的inference阶段。这篇有一定的难度，以下只是我的理解。</p>
+<h4 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h4><p>Motivation：<br>NMT中的decode inference阶段，通常都是从左到右的，这样有个缺点，就是整体的target之间的依赖是没有被充分利用到的，比如说生成的词的右边是没有用到的。那么我们为什么不直接全部生成呢？然后不断更新。也就是说我们将离散（discrete）的decode过程变成一个连续的过程（continuous optimization）。</p>
+<p>假设我们已经训练好模型，给定一个句子，我们要翻译成目标句子，且假设我们已知要生成的句子长度是l，那么我们有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400876953609.jpg" width="45%" height="50%"><br>我们要找到一个最优的序列$y$，使得$-log$最小。</p>
+<p>等价于：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400877226851.jpg" width="55%" height="50%"><br>其中$\widetilde{y}_i$是one-hot。其实这里就是假设有这么一个ground truth，但实际上是没有的。</p>
+<p>我们将$\widetilde{y}_i$是one-hot这个条件放宽一些，变成是一个概率单纯型（其实就是所有元素加起来是1，且都大于等于0）。</p>
+<p>那么就变成了：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400879019592.jpg" width="50%" height="50%"></p>
+<p>这个改变的本质是：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400879379023.jpg" width="50%" height="50%"></p>
+<p>就是说原来one-hot的$\widetilde{y}_i$生成后丢到下一个时间步，取了一个词向量，接着计算。现在是一个概率分布$\hat{y}_i$丢进来，就相当于取了多个词向量的加权求和。</p>
+<p>在利用下述的更新算法更新完$\hat{y}_i$之后，对于每个时间步t，我们找$\hat{y}_i$中元素最大的值对应的词作为生成的词。</p>
+<p>有两种方法Exponentiated Gradient 和 SGD。实际上方法倒在其次了，主要是前面所述的continuous optimization这种思想。</p>
+<h4 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h4><h5 id="Exponentiated-Gradient"><a href="#Exponentiated-Gradient" class="headerlink" title="Exponentiated Gradient"></a>Exponentiated Gradient</h5><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400881918713.jpg" width="80%" height="50%"><br>具体见论文</p>
+<h5 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h5><p>因为我们要保证单纯形的约束不变，因此我们引入一个r，然后做一个softmax<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400882306948.jpg" width="80%" height="50%"></p>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p>这种连续decode可以用在哪？</p>
+<h5 id="Bidirectional-Ensemble"><a href="#Bidirectional-Ensemble" class="headerlink" title="Bidirectional Ensemble"></a>Bidirectional Ensemble</h5><p>可以很方便地进行双向的生成：</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400883321474.jpg" width="45%" height="50%"><br>而在传统的方法中没办法（很难）做到</p>
+<h5 id="Bilingual-Ensemble"><a href="#Bilingual-Ensemble" class="headerlink" title="Bilingual Ensemble"></a>Bilingual Ensemble</h5><p>我们希望源语言到目标语言和目标到源语言都生成得好</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15400883583228.jpg" width="50%" height="50%"></p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>$\hat{y}_i$的初始化很重要，一不小心就会陷入local minima；生成的速度慢</p>
+<hr>
+<h3 id="6️⃣-Universal-Language-Model-Fine-tuning-for-Text-Classiﬁcation"><a href="#6️⃣-Universal-Language-Model-Fine-tuning-for-Text-Classiﬁcation" class="headerlink" title="6️⃣[Universal Language Model Fine-tuning for Text Classiﬁcation]"></a>6️⃣[Universal Language Model Fine-tuning for Text Classiﬁcation]</h3><p>和ELMo、OpenAI GPT一样，都是预训练语言模型，迁移到其他任务上（这里是分类任务）。可以在非常小的数据集上有很好的效果。</p>
+<p>贡献：</p>
+<ol>
+<li>迁移学习模型ULMFiT</li>
+<li>提出几种trick：discriminative ﬁne-tuning, slanted triangular learning rates,gradual unfreezing ，最大保证知识的保留。</li>
+</ol>
+<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15401043145373.jpg" width="90%" height="50%"></p>
+<p>三部曲：</p>
+<ol>
+<li>通用语言模型预训练</li>
+<li>目标任务的语言模型fine-tuning</li>
+<li>目标任务的分类fine-tuning</li>
+</ol>
+<h4 id="trick"><a href="#trick" class="headerlink" title="trick"></a>trick</h4><h5 id="Discriminative-ﬁne-tuning"><a href="#Discriminative-ﬁne-tuning" class="headerlink" title="Discriminative ﬁne-tuning"></a>Discriminative ﬁne-tuning</h5><p>Motivation：不同层有不同的信息；应当fine-tune 不同程度，也即使用不同的learning rate。</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15401044160803.jpg" width="35%" height="50%"></p>
+<p>作者发现上一层的学习率是下一层的2.6倍时效果比较好。</p>
+<h5 id="Slanted-triangular-learning-rates-STLR"><a href="#Slanted-triangular-learning-rates-STLR" class="headerlink" title="Slanted triangular learning rates (STLR)"></a>Slanted triangular learning rates (STLR)</h5><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15401045153164.jpg" width="60%" height="50%"></p>
+<p>具体公式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-21-15401045316305.jpg" width="50%" height="50%"></p>
+<h5 id="Gradual-unfreezing"><a href="#Gradual-unfreezing" class="headerlink" title="Gradual unfreezing"></a>Gradual unfreezing</h5><p>从顶层到底层，一步一步unfreeze，也即从上到下fine-tune。这是因为最上一层有最少的general knowledge。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/14/论文/每周论文1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1082,742 +1884,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/诗词&句/每周诗词11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/诗词&句/每周诗词11/" itemprop="url">每周诗词11</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T16:40:14+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T16:47:35+08:00">
-                2018-10-07
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣赋得古原草送别"><a href="#1️⃣赋得古原草送别" class="headerlink" title="1️⃣赋得古原草送别"></a>1️⃣赋得古原草送别</h3><p>[唐] 白居易<br>离离原上草，一岁一枯荣。<br><strong>野火烧不尽，春风吹又生</strong>。<br>远芳侵古道，晴翠接荒城。<br>又送王孙去，萋萋满别情。</p>
-<p>萋萋（qī）：形容草木长得茂盛的样子。</p>
-<p><a href="http://m.xichuangzhu.com/work/57b8a5371532bc005b99da51" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b8a5371532bc005b99da51</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/PRML第三章 回归的线性模型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/PRML第三章 回归的线性模型/" itemprop="url">PRML第三章 回归的线性模型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T15:50:24+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-14T10:07:19+08:00">
-                2018-10-14
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="线性基函数模型"><a href="#线性基函数模型" class="headerlink" title="线性基函数模型"></a>线性基函数模型</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-Xnip2018-10-07_15-51-50.jpg" alt="0"></p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-Xnip2018-10-07_15-53-54.jpg" alt="1"></p>
-<h1 id="偏置-⽅差分解"><a href="#偏置-⽅差分解" class="headerlink" title="偏置-⽅差分解"></a>偏置-⽅差分解</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-Xnip2018-10-07_15-56-30.jpg" alt="0"></p>
-<h1 id="贝叶斯线性回归"><a href="#贝叶斯线性回归" class="headerlink" title="贝叶斯线性回归"></a>贝叶斯线性回归</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-Xnip2018-10-07_16-13-57.jpg" alt="1"></p>
-<h1 id="贝叶斯模型⽐较"><a href="#贝叶斯模型⽐较" class="headerlink" title="贝叶斯模型⽐较"></a>贝叶斯模型⽐较</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-Xnip2018-10-07_23-30-33.jpg" alt="1"></p>
-<h1 id="证据近似"><a href="#证据近似" class="headerlink" title="证据近似"></a>证据近似</h1><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-09-Xnip2018-10-09_22-06-22.jpg" alt="1"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 16: SVM/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 16: SVM/" itemprop="url">Lecture 16:SVM</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T12:49:24+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T17:08:58+08:00">
-                2018-10-07
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>Hinge Loss+kernel method = SVM</strong></p>
-<h3 id="Hinge-Loss"><a href="#Hinge-Loss" class="headerlink" title="Hinge Loss"></a>Hinge Loss</h3><p>SVM与logistic regression的区别即在于loss function的不同，logistic是cross entropy，而SVM是hinge loss<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388878731499.jpg" width="50%" height="50%"></p>
-<p>也即如果分类间隔大于1，则 $L(m_i)=max(0,1−m_i(w))$，则损失为0。因此SVM更具鲁棒性，因为对离群点不敏感。</p>
-<p>对于linear SVM：</p>
-<ul>
-<li>定义函数 $f(x)=\sum_i w_i x_i +b=w^T x$</li>
-<li>定义损失函数  $L(f)=\sum_n l(f(x^n),\hat{y}^n)+\lambda ||w||_2$，其中$l(f(x^n),\hat{y}^n)=max(0,1-\hat{y}^n f(x))$</li>
-<li><p>梯度下降求解（省略了正则化）</p>
-<script type="math/tex; mode=display">\frac{\partial{l(f(x^n),\hat{y}^n})}{\partial{w_i}}=
-  \frac{\partial{l(f(x^n),\hat{y}^n})}{\partial{f(x^n)}}  \frac{\partial{f(x^n)}}{\partial{w_i}} x_i^n</script><p>  而</p>
-<script type="math/tex; mode=display">f(x^n)=w^T \cdot x^n</script></li>
-</ul>
-<script type="math/tex; mode=display">
-\frac{\partial{max(0,1-\hat{y}^n f(x^n)})}{\partial{f(x^n)}}=
-\left\{  
-             \begin{array}{**lr**}  
-              -\hat{y}^n & if  \hat{y}^n f(x^n)<1 \\  
-               0  & otherwise &    
-             \end{array}  
-\right.</script><p>因此最终有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388891611785.jpg" width="55%" height="50%"><br>我们接下来用$c^n(w)$替代$-\delta(\hat{y}^n f(x^n)&lt;1) \hat{y}^n$</p>
-<h3 id="Kernel-Method"><a href="#Kernel-Method" class="headerlink" title="Kernel Method"></a>Kernel Method</h3><p>一个事实：$w$是$x$的线性加和，其中$α$不等于0对应的$x$就是support vectors</p>
-<p>证明：<br>我们前面说过，更新过程：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388894194698.jpg" width="30%" height="50%"></p>
-<p>将其组织成向量形式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388894627632.jpg" width="25%" height="50%"></p>
-<p><strong>如果我们将$w$初始化成0向量</strong>，那么$w$最终就是$x$的线性组合。证毕</p>
-<p>因为$c(w)$是hinge loss，因此大多数的值是0，会造成$α$稀疏。<br>如果我们将训练数据$x$组织成一个矩阵，那么有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388895570090.jpg" width="25%" height="50%"><br>也即：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388895870336.jpg" width="40%" height="50%"></p>
-<p>所以对于$f(x)$，有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388896378645.jpg" width="50%" height="50%"></p>
-<p>实际上$X^Tx$就是每个训练数据和$x$进行点积的结果，但实际上线性函数往往表达能力不强，我们希望$x$能够变成非线性的。如果我们引入kernel，将点积换成kernel，则会有：</p>
-<script type="math/tex; mode=display">f(x)=\sum_n \alpha_n (x_n\cdot x)=\sum_n \alpha_n K(x_n,x)</script><p>所以我们的问题就变成了：</p>
-<ul>
-<li>定义函数 $f(x)=\sum_n \alpha_n K(x_n,x)$</li>
-<li>找到最佳的α，最小化loss function：$L(f)=\sum_n l(f(x^n),\hat{y}^n)=\sum_n l(\sum_{n’} \alpha_{n’} K(x^{n^{‘}},x^n),\hat{y}^n)$</li>
-</ul>
-<p>实际上我们不需要真的知道$x$的非线性的具体形式，我们只需要会算$K$就行，这种绕过$x$的具体形式的方法就是<strong>kernel trick</strong>。直接计算$K$，比先将$x$非线性转化再做点积来得高效。甚至有时候，我们对$x$做的非线性是无穷多维的，是无法直接做非线性化的。比如RBF核:</p>
-<script type="math/tex; mode=display">K(x,z)=exp(-\frac{1}{2}||x-z||_2)</script><p>通过泰勒展开可以知道，RBF核是无穷维的。</p>
-<p>另一个kernel的例子是sigmoid kernel：</p>
-<script type="math/tex; mode=display">K(x,z)=tanh(x\cdot z)</script><p>当我们使用sigmoid kernel时，就相当于一层hidden layer的神经网络，如图：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388901736757.jpg" width="40%" height="50%"></p>
-<p>给定一个输入，共有n个neuron，其中的weight就是每个训练数据的向量值，然后再将这些neuron加和得到输出。当然大部分的α的值是0，因此实质上神经元的个数和support vector的个数一致。</p>
-<p>我们可以直接设计kernel，而不需要考虑x的非线性变换的形式，只要kernel符合mercer’s theory即可。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 15: Transfer Learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 15: Transfer Learning/" itemprop="url">Lecture 15:Transfer Learning</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T11:45:24+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T17:06:59+08:00">
-                2018-10-07
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Model-Fine-tuning"><a href="#Model-Fine-tuning" class="headerlink" title="Model Fine-tuning"></a>Model Fine-tuning</h3><p>假设我们有很多的source data $(x^s,y^s )$，与任务相关的target data $(x^t,y^t )$  很少。<br>我们利用source data训练一个模型，然后用target data来fine tune模型。</p>
-<h4 id="conservative-training"><a href="#conservative-training" class="headerlink" title="conservative training"></a>conservative training</h4><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388871902739.jpg" width="50%" height="50%"></p>
-<p>我们可以用source data训练好的模型的weight作为新的模型的weight，然后设定一些限制，比如source data作为输入的output应和target data作为输入的output尽量相似，或者参数尽量相似等。</p>
-<h4 id="layer-transfer"><a href="#layer-transfer" class="headerlink" title="layer transfer"></a>layer transfer</h4><p>也就是新模型有几层是直接copy旧模型的，只训练其它层。注意到不同任务所应copy的层是不同的，语音任务最后几层效果好，图像识别前面几层效果好</p>
-<h3 id="Multitask-Learning"><a href="#Multitask-Learning" class="headerlink" title="Multitask Learning"></a>Multitask Learning</h3><p>不同任务之间共享相同的中间层，如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388872452545.jpg" width="30%" height="50%"><br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388872627707.jpg" width="30%" height="50%"></p>
-<p>还有一种progressive neural networks：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388872920224.jpg" width="50%" height="50%"><br>首先训练好第一个任务的模型，然后在训练第二个模型的时候将第一个模型的隐层加入到第二个模型的隐层中；训练第三个模型则将第二个和第一个模型的隐层加入到第三个模型的隐层中，以此类推</p>
-<h3 id="Domain-adversarial-training"><a href="#Domain-adversarial-training" class="headerlink" title="Domain-adversarial training"></a>Domain-adversarial training</h3><p>source data是有标签的，而target data是无标签的，都属于同一个任务，但数据是mismatch的，如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388873325090.jpg" width="50%" height="50%"></p>
-<p>因为NN的隐层可以理解成是在抽取图像的特征，我们希望能够在训练NN的过程中去掉source data的一些domain specific的特性，这样就可以用在target data上了。因此我们在feature exactor后面连接两个模块：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388873772888.jpg" width="50%" height="50%"></p>
-<p>一方面我们希望抽取的特征能够使得分类器正确地分类，另一方面我们希望这些特征能够让domain classifier能够无法识别特征是从哪些data抽取得到的，这样得到的特征就是被去掉domain specific特征的。</p>
-<p>具体训练：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388874447304.jpg" width="50%" height="50%"></p>
-<h3 id="Zero-shot-Learning"><a href="#Zero-shot-Learning" class="headerlink" title="Zero-shot Learning"></a>Zero-shot Learning</h3><p>source data有标签，target data无标签，但任务不同，如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388874838165.jpg" width="50%" height="50%"></p>
-<h4 id="Representing-each-class-by-its-attributes"><a href="#Representing-each-class-by-its-attributes" class="headerlink" title="Representing each class by its attributes"></a>Representing each class by its attributes</h4><p>一种方法是将每一个类都用特征表示，但特征要足够丰富：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388875088114.jpg" width="50%" height="50%"></p>
-<p>在训练的时候，输入是图片，输出则是这些特征：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388875558853.jpg" width="40%" height="50%"><br>这样在将target data放入训练好的NN后也会得到一个这样的attribute，查表即可找到最相似的特征对应的类。</p>
-<h4 id="Attribute-embedding"><a href="#Attribute-embedding" class="headerlink" title="Attribute embedding"></a>Attribute embedding</h4><p>如果特征维度太高，也可以将特征压缩成一个向量表示，这样在训练的时候，输出则是这样的向量特征，输入target data，输出向量特征，找到最近的特征对应的类即可<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388875888699.jpg" width="50%" height="50%"></p>
-<h4 id="Attribute-embedding-word-embedding"><a href="#Attribute-embedding-word-embedding" class="headerlink" title="Attribute embedding + word embedding"></a>Attribute embedding + word embedding</h4><p>如果没有attribute数据，利用word embedding也可以达到不错的效果。<br>在zero-shot learning中，光是让相同类的f和g相似是不够的，还应该让不同的f和g尽量远。</p>
-<script type="math/tex; mode=display">f^∗,g^∗=arg min_{(f,g)}⁡∑_nmax(0,k−f(x^n )\cdot g(y^n )+max_{(m≠n)} ⁡f(x^m )\cdot g(x^m ) )</script>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 14: Unsupervised Learning: Generation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 14: Unsupervised Learning: Generation/" itemprop="url">Lecture 14:Unsupervised Learning:Generation</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T11:40:24+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-08T10:11:59+08:00">
-                2018-10-08
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Component-by-component"><a href="#Component-by-component" class="headerlink" title="Component-by-component"></a>Component-by-component</h3><p>对于图像来说，每次生成一个pixel：PixelRNN</p>
-<h3 id="VAE"><a href="#VAE" class="headerlink" title="VAE"></a>VAE</h3><p>架构：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388837191574.jpg" width="50%" height="50%"></p>
-<p>其中e是噪声，σ是方差，目标是最小化reconstruction error，以及一个限制。该限制的目的即防止σ=0，m是正则化项。</p>
-<p><del>中间的推导以及为什么是这样的架构我还不是很懂，之后再更新。</del><br>实际上可以这么理解，有几个要点：</p>
-<ul>
-<li>首先我们是基于这么一个假设：中间的code应当是服从正态分布的，而encoder的作用即在于拟合该正态分布的均值与方差的对数（因为方差应当恒为正，但神经网络的输出可能有正有负）</li>
-<li>如果生成出来的code不符合正态分布，会有一个惩罚项，也就是上图的constraint（可以通过KL散度推导获得）</li>
-<li>按理说，应当是在生成了均值和方差后，定义好该正态分布，然后再从中采样，但是这样没办法回传更新梯度，因此这里使用重参数技巧(Reparameterization Trick)，也即从$N(\mu,\sigma^2)$中采样$Z$，相当于从$N(0,I)$中采样$\varepsilon$，然后让$Z=\mu + \varepsilon \times \mu$</li>
-</ul>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-08-15389638077301.jpg" width="70%" height="50%"></p>
-<p><strong>Reference</strong>:<br><a href="https://www.sohu.com/a/226209674_500659" target="_blank" rel="noopener">https://www.sohu.com/a/226209674_500659</a></p>
-<p>VAE的主要问题在于，网络只试图去记住见过的图像，但没法真正去生成没见过的图像。</p>
-<h3 id="Generative-Adversarial-Network-GAN"><a href="#Generative-Adversarial-Network-GAN" class="headerlink" title="Generative Adversarial Network (GAN)"></a>Generative Adversarial Network (GAN)</h3><p>GAN包含一个discriminator和一个generator，generator试图生成能够骗过discriminator的样本，而generator试图能够将generator生成的样本和真实的样本区分。</p>
-<p>之后会有详细的介绍。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1867,7 +1938,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">86</span>
+                  <span class="site-state-item-count">91</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1880,7 +1951,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">106</span>
+                  <span class="site-state-item-count">108</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

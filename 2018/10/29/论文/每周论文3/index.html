@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125685038.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125974795.jpg">
 <meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408126143943.jpg">
-<meta property="og:updated_time" content="2018-11-04T00:38:59.521Z">
+<meta property="og:updated_time" content="2018-11-05T11:31:06.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文3">
 <meta name="twitter:description" content="1️⃣[A Neural Probabilistic Language Model]第一篇使用神经网络获得词向量的paper。 通过对language model建模，将词映射到低维表示，在训练过程中同时训练语言模型以及每个词的词向量。  将中心词的前n个拼接起来 $x=(C(w_{t-1},C(w_{t-2}),…,C(w_{t-n+1}))$将$x$送入神经网络中获得$y=b+Wx+Utanh">
@@ -351,8 +351,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-04T08:38:59+08:00">
-                2018-11-04
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-05T19:31:06+08:00">
+                2018-11-05
               </time>
             
           </span>
@@ -409,7 +409,7 @@
 <p>记每一步的惩罚项为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408107184035.jpg" width="23%" height="50%"></p>
 <p>总的惩罚项则为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408107351871.jpg" width="19%" height="50%"></p>
 <p>Loss function则为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408108024183.jpg" width="35%" height="50%"></p>
-<p>因为N(t)是不可导的，我们在实际过程中只去最小化R(t)  （我觉得不甚合理）</p>
+<p>因为N(t)是不可导的，我们在实际过程中只去最小化R(t)  （<del>我觉得不甚合理</del>，一种解读是如果我们不断最小化R(t)直到变成0，那么相当于N(t)少了一层，接着R(t)就会变得很大，然后又继续最小化R(t)…）</p>
 <hr>
 <h2 id="3️⃣-Universal-Transformers"><a href="#3️⃣-Universal-Transformers" class="headerlink" title="3️⃣[Universal Transformers]"></a>3️⃣[Universal Transformers]</h2><p>提出一种新型通用的transformer。</p>
 <h3 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h3><p>Transformer的问题：RNN的归纳偏置(inductive bias)在一些任务上很重要，也即RNN的循环学习的过程；Transformer在一些问题上表现不好，可能是归纳偏置的原因。</p>
@@ -571,7 +571,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">86</span>
+                  <span class="site-state-item-count">91</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -584,7 +584,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">106</span>
+                  <span class="site-state-item-count">108</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
