@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title></title>
+    <url>%2F2018%2F11%2F18%2F%E8%AF%97%E8%AF%8D%26%E5%8F%A5%2Ftest%2F</url>
+    <content type="text"><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[网络优化与正则化总结]]></title>
+    <url>%2F2018%2F11%2F13%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%2F%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96%E4%B8%8E%E6%AD%A3%E5%88%99%E5%8C%96%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[大量参考自《神经网络与深度学习》 优化算法对于标准的SGD，常见的改进算法从两个方面进行：学习率衰减&amp;梯度方向优化。记$g_t$为t时刻的导数： 学习率衰减AdaGrad算法通过计算历次的梯度平方累计值进行学习率衰减。$G_t$是累计值： 更新值则为： 缺点：随着迭代次数的增加学习率递减。在经过一定次数的迭代依然没有找到最优点时，由于这时的学习率已经非常小，很难再继续找到最优点。 RMSprop算法对AdaGrad的改进，唯一的区别在于$G_t$的计算，将历史信息和当前信息进行线性加权，使得学习率可以动态改变而不是单调递减： β为衰减率，通常取0.9。也即历史信息占主导。 AdaDelta算法同样是对AdaGrad的改进。每次计算： 也即历史更新差和上一时刻的更新差的加权（RMSprop是历史梯度和当前梯度）。 最终更新差值为： 其中$G_t$计算方法和RMSprop一致。 梯度方向优化利用历史的梯度（方向）调整当前时刻的梯度。 动量（Momentum）法动量法（Momentum Method）是用之前积累动量来替代真正的梯度。每次迭代的梯度可以看作是加速度。 也即上一时刻的更新差值和当前梯度共同决定当前的更新差值。$ρ$为动量因子，通常为0.9。也即动量占了主导。 当某个参数在最近一段时间内的梯度方向不一致时，其真实的参数更新幅度变小；相反，当在最近一段时间内的梯度方向都一致时，其真实的参数更新幅度变大，起到加速作用。一般而言，在迭代初期，梯度方法都比较一致，动量法会起到加速作用，可以更快地到达最优点。在迭代后期，梯度方法会取决不一致，在收敛值附近震荡，动量法会起到减速作用，增加稳定性。 Nesterov加速梯度动量法的改进版本。 前面提到的动量法，是上一步的更新方向$\Delta \theta_{t-1}$与当前梯度$-g_t$的加和。因此可以理解成，先根据$∆θ_{t−1}$更新一次得到参数θ，再用$g_t$进行更新。亦即：上式的第二步中，$g_t$是在$\theta_{t-1}$上的梯度。我们将该步改为在$_theta{t}$的梯度。因此，有： 和动量法相比，相当于提前走了一步。 Adam&amp;NadamAdam一方面计算梯度平方的加权，同时还计算梯度的加权：通常$β_1=0.9$,$β_2=0.99$也即历史信息占了主导。 在初期$M_t$与$G_t$会比真实均值和方差要小（想象$M_0=0,G_0=0$时）。因此对其进行修正，即：因此最终有： 同理有Nadam。 Adam = Momentum + RMSpropNadam = Nesterov + RMSprop 梯度截断 gradient clipping分为按值截断与按模截断。 参数初始化初始值选取很关键。假设全部初始化为0，则后续更新导致所有的激活值相同，也即对称权重现象。 原则：不能过大，否则激活值会变得饱和，如sigmoid；不能过小，否则经过多层信号会逐渐消失，并且导致sigmoid丢失非线性的能力（在0附近基本近似线性）。如果一个神经元的输入连接很多，它的每个输入连接上的权重就应该小一些，这是为了避免输出过大。 Gaussian分布初始化同时考虑输入输出，可以按$N(0,\sqrt{\frac{2}{n_{in} + n_{out}}})$高斯分布来初始化。 均匀分布初始化在$[-r,r]$区间均匀分布初始化，其中r可以按照神经元数量自适应调整。 Xavier初始化方法自动计算超参r。r的公式为：其中$n^l$代表第$l$层的神经元个数。 为什么是这个式子（推导见参考资料）：综合考虑了①输入输出的方差要一致；②反向传播中误差信号的方差不被放大或缩小。 归一化将数据分布归一化，使得分布保持稳定。假设数据有四维(N,C,H,W)。N代表batch；C代表channel；H,W代表height和width。 Batch Normalization沿着通道进行归一化，亦即每个通道都有自己的均值和方差。其中缩放平移变量是可学习的。 缺点：①对batch size敏感，batch size太小则方差均值不足以代表数据分布②对于不等长的输入如RNN来说，每一个timestep都需要保存不同的特征。 Layer Normalization对一个输入进行正则化，亦即每个输入都有自己的方差、均值。这样不依赖于batch大小和输入sequence的深度。 对RNN效果比较明显，但CNN中不如BN Instance Normalization对HW进行归一化 Group Normalization将channel分为多个group，每个group内做归一化 Reference《神经网络与深度学习》https://blog.csdn.net/liuxiao214/article/details/81037416]]></content>
+      <tags>
+        <tag>深度学习🤖</tag>
+        <tag>优化算法</tag>
+        <tag>参数初始化</tag>
+        <tag>Normalization</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[代码片段记录10]]></title>
     <url>%2F2018%2F11%2F11%2F%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3%2F%E4%BB%A3%E7%A0%81%E8%AE%B0%E5%BD%9510%2F</url>
     <content type="text"><![CDATA[1️⃣[get_sinusoid_encoding_table]Transformer绝对位置。 12345678910111213141516def get_sinusoid_encoding_table(n_position, d_hid, padding_idx=None): def cal_angle(position, hid_idx): return position / np.power(10000, 2 * (hid_idx // 2) / d_hid) def get_posi_angle_vec(position): return [cal_angle(position, hid_j) for hid_j in range(d_hid)] sinusoid_table = np.array([get_posi_angle_vec(pos_i) for pos_i in range(n_position)]) sinusoid_table[:, 0::2] = np.sin(sinusoid_table[:, 0::2]) sinusoid_table[:, 0::2] = np.cos(sinusoid_table[:, 0::2]) if padding_idx is not None: sinusoid_table[padding_idx] = 0. return torch.FloatTensor(sinusoid_table) # n_position,embed_dim]]></content>
@@ -86,8 +102,8 @@
     <content type="text"><![CDATA[历时三个月的“莱斯杯”全国第一届“军事智能·机器阅读”挑战赛终于落下帷幕，前几日（10.26-10.28）有幸在南京青旅宾馆参与决赛，体验多多，收获满满，心中亦有一些感想。 一个是南京总带给我一种回家的感觉，对南京的事物总有亲切感。第一次来南京是一年半前，也是来参加比赛。周五晚上的夜游秦淮，让我感受到许久未曾感受到的烟火气息。 第二个是此次主办方提供的食宿令人惊喜。一开始听到青旅宾馆，我已经做好了艰苦奋战的准备了，然而酒店是星级酒店的，吃方面直接到楼下的自助。可以看出主办方此次确实用心在举办这次比赛。 第三点是关于比赛的，关于比赛的整个历程我还是颇有感触。我们是以第9名的成绩挺进决赛，其实在后期比赛中，我们都有所懈怠了，几乎没有花时间在这上面，10月初发布决赛的数据集，而我们在10月20日才得知这一事情，此时离决赛只剩一周时间。因此我们确实准备不足。当然我们也没有预料到我们的决赛成绩会这么靠前，否则我们肯定会更加充分去准备。这确实是我们的失误。 我们在比赛过程中，一直尝试在使用ELMo，这正是我负责的部分。一开始使用官方TensorFlow的代码，费了九牛二虎之力我才跑通代码，但因为队长使用的是pytorch，而二者在cuda版本上不兼容，因此在初赛我们没有使用ELMo。而在最后几天，我尝试使用哈工大的pytorch训练代码，但因为inference速度实在太慢，我们最终还是弃用了这个方案。而在决赛现场，我们发现也确实是因为速度和资源的原因，大家都没有使用ELMo，除了一组。该组正是凭借了ELMo弯道超车从第7升到了第一，拿走了20万大奖。这也是我们非常遗憾的一个地方，我们在遇到困难时没有尝试解决，而是直接弃用，最终没有取得更好的成绩。 此次我们的成绩排名第4(三等奖)，是有一定的进步的，但有一点遗憾的是，我们仅差0.18百分点，就能超过第三名拿到5万的奖金了。后面我们分析了一下，还是因为我们对比赛懈怠的态度，其他组都对数据进行了分析并有针对性的改进，而我们并没有做这一步。 Anyway，第一次组队参加比赛就有收获，增长了见识，从交流中也获得了许多。这个比赛之后，就得好好看paper了。 __(:з」∠)_]]></content>
       <tags>
         <tag>有感</tag>
-        <tag>莱斯杯</tag>
         <tag>比赛</tag>
+        <tag>莱斯杯</tag>
       </tags>
   </entry>
   <entry>
@@ -424,8 +440,8 @@
     <content type="text"><![CDATA[前几日（周日）去了达观杯答辩现场听了前10名做了报告，有了一些感想，但一直没有抽出时间写一下自己的感想（懒）。 自己大概花了十来天做了一下比赛，实际上也就是一个文本分类的比赛，因为没有比赛经验的缘故，走了很多弯路。不过也学到了一些东西。 现记录前十名的一些idea/trick： 数据增强 因为给的句子长度很长，因此在做截断的时候后面的就没法训练到了，可以将文本倒序作为新的数据训练模型。可以充分利用到数据 将数据打乱、随机删除，实际上就是对一个句子的词进行sample再组合 打乱词序以增加数据量 使用pseudo labeling，但有的队伍使用这个做出效果了，但有的没有 特征工程 假设开头中间结尾的信息对分类有帮助，因此截取该部分信息做训练 改进baseline的tfidf的特征工程方法，使用基于熵的词权重计算 降维，留下最重要的特征。先用卡方分布降到20万，再用SVD降到8000 将word2vec和GloVe拼接起来作为deep learning模型的输入 将文章分段，每段取前20后20拼起来 模型融合 所有队伍都无一例外使用了模型融合，stacking或者简单的投票 DL+ML —&gt; lgbm model —&gt; voting 深度模型+传统模型，在深度模型最后一层加入传统模型的信息/feature 后向选择剔除冗余模型 DL&amp;其他 HAN，选择10个attention vector 对易错类增加权重，通过改变损失函数来增加权重 CNN, [1,2,3,4,5,6]*600 提出新的模型（第一名） 其实除了一些trick，我还是有些失望的，因为都是用模型融合堆出来的，这也让我对比赛失去了一些兴趣。虽然能理解现在的比赛都是这样的，但感觉实在太暴力了。当然，其中还是有一些亮点的，有一支队伍立意很高，从理解业务的角度出发而不是堆模型，也取得了很好的效果；还有一个使用了最新论文中的特征工程改进方法，令我耳目一新；以及第一名在比赛过程中提出来三个新的模型。 Anyway，我目前还是太菜了，还是安心搞科研吧。_(:з」∠)]]></content>
       <tags>
         <tag>有感</tag>
-        <tag>比赛</tag>
         <tag>达观杯</tag>
+        <tag>比赛</tag>
       </tags>
   </entry>
   <entry>
@@ -528,10 +544,10 @@
     <url>%2F2018%2F08%2F26%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FDeep%20Learning%20NLP%20best%20practices%E7%AC%94%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[博客地址：http://ruder.io/deep-learning-nlp-best-practices/index.html个人觉得这篇文章写得很好，有许多实践得到的经验，通过这篇可以避免走一些弯路。 PracticesWord Embedding The optimal dimensionality of word embeddings is mostly task-dependent: a smaller dimensionality works better for more syntactic tasks such as named entity recognition or part-of-speech (POS) tagging, while a larger dimensionality is more useful for more semantic tasks such as sentiment analysis. 对于偏向语法的，使用维度低一些的词向量；而对于偏向语义内容的，使用维度大一些的词向量，如情感分析。 LSTM Depth performance improvements of making the model deeper than 2 layers are minimal LSTM深度最好不要超过两层。 Optimization It is often thought that Adam clearly outperforms vanilla stochastic gradient descent (SGD). However, while it converges much faster than SGD, it has been observed that SGD with learning rate annealing slightly outperforms Adam. Recent work furthermore shows that SGD with properly tuned momentum outperforms Adam . Adam可以更早拟合，而SGD效果可能会更好一些。 可以采用优化策略，比如说使用Adam训练直到拟合，然后将学习率减半，并重新导入之前训练好的最好的模型。这样Adam能够忘记之前的信息并重新开始训练。 Denkowski &amp; Neubig (2017) show that Adam with 2 restarts and learning rate annealing is faster and performs better than SGD with annealing Ensembling Combining multiple models into an ensemble by averaging their predictions is a proven strategy to improve model performance. Ensembling很重要的一点是需要保证多样性： Ensembling is an important way to ensure that results are still reliable if the diversity of the evaluated models increases (Denkowski &amp; Neubig, 2017). While ensembling different checkpoints of a model has been shown to be effective (Jean et al., 2015; Sennrich et al., 2016) [51, 52], it comes at the cost of model diversity. Cyclical learning rates can help to mitigate this effect LSTM tricks 在initial state中我们常常使用全0向量，实际上可以将其作为参数学习。 Instead of fixing the initial state, we can learn it like any other parameter, which can improve performance 将input和output embedding的参数共享，如果是做language model或者机器翻译之类的，可以让他们共享。 Gradient Norm Clipping Rather than clipping each gradient independently, clipping the global norm of the gradient yields more significant improvements 这点我没看懂。 Classification practices关于CNN CNN filters:Combining filter sizes near the optimal filter size, e.g. (3,4,5) performs best (Kim, 2014; Kim et al., 2016). The optimal number of feature maps is in the range of 50-600 (Zhang &amp; Wallace, 2015) [59]. Aggregation function:1-max-pooling outperforms average-pooling and k-max pooling (Zhang &amp; Wallace, 2015). 这在我之前的关于CNN文本分类指南中有更详尽的分析。 Conclusion这是一篇干货满满的博客，实际上我还是有许多地方没有读懂，这适合多看几遍，慢慢理解。]]></content>
       <tags>
-        <tag>指南</tag>
-        <tag>调参</tag>
         <tag>NLP🤖</tag>
         <tag>笔记📒</tag>
+        <tag>指南</tag>
+        <tag>调参</tag>
       </tags>
   </entry>
   <entry>
@@ -567,10 +583,10 @@
     <url>%2F2018%2F08%2F25%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FCNN%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E4%BB%BB%E5%8A%A1%E6%8C%87%E5%8D%97%2F</url>
     <content type="text"><![CDATA[最近因为比赛的缘故对文本分类有一定的了解。其中使用CNN方法做情感分析任务存在着许多优势。虽然模型简单，但如何设置超参有时候对结果有很大的影响。本文记录了关于CNN文本分类的一些学习历程和指南，基本参考了论文。 做法基本上目前较为浅层的CNN文本分类的做法都是如下图： 将词向量堆积成为二维的矩阵，通过CNN的卷积单元对矩阵进行卷积处理，同时使用pooling（通常是1max-pooling）操作，将不等长的卷积结果变为等长，对不同的卷积单元的结果进行拼接后生成单个向量，最后再通过线性层转化成类别概率分布。 另一张图也说明了该流程。 建议与指导超参及其对结果的影响接下来的内容参考了论文A Sensitivity Analysis of (and Practitioners’ Guide to) ConvolutionalNeural Networks for Sentence Classification CNN文本分类的超参： 输入向量 卷积大小 输出通道（feature maps） 激活函数 池化策略 正则化 输入向量的影响实验表明，使用word2vec和GloVe不分伯仲，但将word2vec和GloVe简单拼接在一起并不能带来提升。 unfortunately, simply concatenating these representations does necessarily seem helpful 当句子长度很长（document classification）时，使用one-hot可能会有效果，但在句子长度不是很长时，效果不好。 建议对于新任务，可以word2vec或GloVe或者其他词向量都试一下，如果句子长，可以试着使用one-hot。 卷积大小由于卷积的长度是固定的，也就是词向量的长度，因此只需讨论宽度。实验表明，不同的数据集会有不同的最佳大小，但似乎对于长度越长的句子，最佳大小有越大的趋势。 However, for datasets comprising longer sentences, such as CR (maximum sentence length is 105, whereas it ranges from 36-56 on the other sentiment datasets used here), the optimal region size may be larger. 同时，当增加不同卷积大小作为组合时，如果组合的卷积核大小接近于最佳大小（optimal region size），有助于结果的提升；相反，如果卷积核大小离最佳大小很远时，反而会产生负面影响。 建议首先试着找到最优的卷积核大小，然后在这个基础上添加和该卷积核大小类似的卷积核。 feature maps也就是输出通道（out channel），表明该卷积核大小的卷积核有多少个。 实验表明，最佳的feature maps和数据集相关，但一般不超过600。 it would seem that increasing the number of maps beyond 600 yields at best very marginal returns, and often hurts performance. 建议在600内搜索最优，如果在600的边缘还没有明显的效果下降，那么可以尝试大于600的feature maps。 激活函数实验结果： 结果表明，tanh、ReLU和不使用激活函数效果较好。tanh的优点是以0为中心，ReLU能够加速拟合，至于为什么不使用的效果会好，可能是因为模型较为简单： This indicates that on some datasets, a linear transformation is enough to capture thecorrelation between the word embedding and the output label. 建议使用tanh、ReLU或者干脆不使用。但如果模型更为复杂，有多层的结构，还是需要使用激活函数的。 pooling策略所有的实验都表明了，1-max pooling的效果比其他好，如k-max pooling。在pooling这一步可以直接选择1-max pooling。 This may be because the location of predictive contexts does not matter, and certain n-grams in the sentence can be more predictive on their own than the entire sentence considered jointly. 正则化主要是dropout和l2 norm constraint。dropout就是随机将一些神经元置为0，l2 norm constraint是对参数矩阵W进行整体缩放，使其不超过一定阈值。（与通常的l2 regularization不同，最早可追溯到Hinton的Improving neural networks by preventingco-adaptation of feature detectors） the l2 norm of a weight vector is linearly scaled to a constraint c when it exceeds this threshold, so a smaller c implies stronger regularization 实验表明，dropout起的作用很小，l2 norm没有提升甚至还会导致下降。可能是因为模型参数不多，因此过拟合的可能性较低。 建议设置较小的dropout和较大的l2 norm，当feature maps增大时，可以试着调节较大的dropout以避免过拟合。 建议及结论 刚开始的使用使用word2vec或者GloVe，如果数据量够大，可以尝试one-hot 线性搜索最佳的卷积核大小，如果句子够长，那么可以扩大搜索范围。一旦确定了最佳卷积核大小，尝试在该卷积核大小的附近进行组合，如最佳卷积核宽度是5，那么尝试[3,4,5]或者[2,3,4,5]等 使用较小的dropout和较大的max norm constraint，然后在[100,600]范围内搜索feature maps，如果最佳的feature maps在600附近，可以试着选择比600更大的范围 尝试不同的激活函数，通常tanh和ReLU是较好的，但也可以尝试什么都不加。 使用1-max pooling。 如果模型复杂，比如feature maps很大，那么可以尝试更为严格的正则化，如更大的dropout rate和较小的max norm constraint。 ReferenceConvolutional Neural Networks for Sentence Classification A Sensitivity Analysis of (and Practitioners’ Guide to) ConvolutionalNeural Networks for Sentence Classification]]></content>
       <tags>
-        <tag>CNN</tag>
-        <tag>情感分析</tag>
         <tag>指南</tag>
         <tag>调参</tag>
+        <tag>CNN</tag>
+        <tag>情感分析</tag>
       </tags>
   </entry>
   <entry>
@@ -699,9 +715,9 @@
     <url>%2F2018%2F08%2F10%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2FVim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%2F</url>
     <content type="text"><![CDATA[在服务器经常要用到Vim，因此记录常用的快捷键并熟悉之。 退出:q 退出:wq 写入并退出:q! 退出并忽略所有更改:e! 放弃修改并打开原来的文件 插入i 在当前位置前插入a 在当前位置后插入 撤销:u 撤销:U 撤销整行操作Ctrl+r 重做 删除:md 删除第m行nd 删除当前行开始的n行(一共n+1行)dd 删除当前行D 删除当前字符至行尾:m,nd 删除从m到n行的内容，如: :100,10000d:m,$d 删除m行及以后所有的行:10d 移动:n 跳转到行号 如， :100gg 跳到行首G(shift+g)移动到文件尾 搜索/text 搜索text，n搜索下一个，N搜索上一个?text 反向查找:set ignorecase 忽略大小写查找:set noignorecase 不忽略大小写查找*或# 对光标处的单词搜索 复制粘贴v 从当前位置开始，光标经过的地方被选中，再按一下v结束 环境设置:set nu 显示行号:set nonu 隐藏行号:set hlsearch 设置搜索结果高亮 Referencehttps://www.cnblogs.com/wangrx/p/5907013.htmlhttps://www.cnblogs.com/yangjig/p/6014198.html]]></content>
       <tags>
-        <tag>技巧</tag>
         <tag>杂七杂八</tag>
         <tag>快捷键</tag>
+        <tag>技巧</tag>
         <tag>Vim</tag>
       </tags>
   </entry>
@@ -710,10 +726,10 @@
     <url>%2F2018%2F08%2F10%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2FPycharm%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7%2F</url>
     <content type="text"><![CDATA[记录Pycharm的一些技巧，让Pycharm更顺手 快捷键0️⃣Double Shift 万能搜索可以搜索文件名、类名、方法名、目录名（在关键字前面加/ ），并不能用来搜索任意关键字 1️⃣ Command+F 在页面搜索 2️⃣ Ctrl+Shift+F Find in Path 在路径下搜索 3️⃣✨Command+E 快速查找文件显示最近打开的文件 4️⃣ Shift+Enter 任意位置换行无论光标在何处都可以直接另起一行 5️⃣ Option+Enter 自动导入模块；万能提示键自动导入如何设置见小技巧#0️⃣ 6️⃣ Ctrl+F10 运行我已经添加了Ctrl+R作为另一对运行快捷键 7️⃣ Command+Shift+ +/- 展开/收缩代码 8️⃣ Option+F 在Dash中搜索 小技巧0️⃣ Pycharm自动导入模块https://blog.csdn.net/lantian_123/article/details/78094148 1️⃣ ✨远程部署工程 强烈推荐两步走：配置服务器映射+配置服务器解释器 2️⃣跳转后如何回退开启toolbar即可https://segmentfault.com/a/1190000010205945 Referencehttps://foofish.net/pycharm-tips.htmlhttps://blog.csdn.net/lantian_123/article/details/78094148https://segmentfault.com/a/1190000010205945]]></content>
       <tags>
-        <tag>技巧</tag>
         <tag>Pycharm</tag>
         <tag>杂七杂八</tag>
         <tag>快捷键</tag>
+        <tag>技巧</tag>
       </tags>
   </entry>
   <entry>
@@ -737,8 +753,8 @@
     <url>%2F2018%2F08%2F05%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FPython%E6%83%AF%E4%BE%8B%2F</url>
     <content type="text"><![CDATA[fork from https://github.com/jackfrued/Python-100-Days/blob/master/Python惯例.md Python惯例“惯例”这个词指的是“习惯的做法，常规的办法，一贯的做法”，与这个词对应的英文单词叫“idiom”。由于Python跟其他很多编程语言在语法和使用上还是有比较显著的差别，因此作为一个Python开发者如果不能掌握这些惯例，就无法写出“Pythonic”的代码。下面我们总结了一些在Python开发中的惯用的代码。 让代码既可以被导入又可以被执行。 1if __name__ == '__main__': 用下面的方式判断逻辑“真”或“假”。 12if x:if not x: 好的代码： 12345name = 'jackfrued'fruits = ['apple', 'orange', 'grape']owners = &#123;'1001': '骆昊', '1002': '王大锤'&#125;if name and fruits and owners: print('I love fruits!') 不好的代码： 12345name = 'jackfrued'fruits = ['apple', 'orange', 'grape']owners = &#123;'1001': '骆昊', '1002': '王大锤'&#125;if name != '' and len(fruits) &gt; 0 and owners != &#123;&#125;: print('I love fruits!') 善于使用in运算符。 12if x in items: # 包含for x in items: # 迭代 好的代码： 123name = 'Hao LUO'if 'L' in name: print('The name has an L in it.') 不好的代码： 123name = 'Hao LUO'if name.find('L') != -1: print('This name has an L in it!') 不使用临时变量交换两个值。 1a, b = b, a 用序列构建字符串。 好的代码： 123chars = ['j', 'a', 'c', 'k', 'f', 'r', 'u', 'e', 'd']name = ''.join(chars)print(name) # jackfrued 不好的代码： 12345chars = ['j', 'a', 'c', 'k', 'f', 'r', 'u', 'e', 'd']name = ''for char in chars: name += charprint(name) # jackfrued EAFP优于LBYL。 EAFP - Easier to Ask Forgiveness than Permission. LBYL - Look Before You Leap. 好的代码： 123456d = &#123;'x': '5'&#125;try: value = int(d['x']) print(value)except (KeyError, TypeError, ValueError): value = None 不好的代码： 1234567d = &#123;'x': '5'&#125;if 'x' in d and isinstance(d['x'], str) \ and d['x'].isdigit(): value = int(d['x']) print(value)else: value = None 使用enumerate进行迭代。 好的代码： 123fruits = ['orange', 'grape', 'pitaya', 'blueberry']for index, fruit in enumerate(fruits): print(index, ':', fruit) 不好的代码： 12345fruits = ['orange', 'grape', 'pitaya', 'blueberry']index = 0for fruit in fruits: print(index, ':', fruit) index += 1 用生成式生成列表。 好的代码： 123data = [7, 20, 3, 15, 11]result = [num * 3 for num in data if num &gt; 10]print(result) # [60, 45, 33] 不好的代码： 123456data = [7, 20, 3, 15, 11]result = []for i in data: if i &gt; 10: result.append(i * 3)print(result) # [60, 45, 33] 用zip组合键和值来创建字典。 好的代码： 1234keys = ['1001', '1002', '1003']values = ['骆昊', '王大锤', '白元芳']d = dict(zip(keys, values))print(d) 不好的代码： 123456keys = ['1001', '1002', '1003']values = ['骆昊', '王大锤', '白元芳']d = &#123;&#125;for i, key in enumerate(keys): d[key] = values[i]print(d) 说明：这篇文章的内容来自于网络，有兴趣的读者可以阅读原文。 注：许多原则我认为非常有意义，能够摆脱C/C++的风格，真正写出Pythonic的代码。让我有很大感触的是1、3、8，能够写出非常简洁优雅的代码。同时6我之前从没注意过，习惯了C/C++风格之后总是会在执行之前考虑所有情况，但确实不够优雅，今后可以尝试EAFP风格（什么是EAFP）。]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>杂七杂八</tag>
+        <tag>碎片知识</tag>
         <tag>Python</tag>
       </tags>
   </entry>
@@ -800,9 +816,9 @@
     <url>%2F2018%2F08%2F03%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2FLinux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
     <content type="text"><![CDATA[命令记录自己常用的命令。 1️⃣ls：显式当前目录下的文件和目录 -a 包括隐藏文件 -h 将文件的容量以易读方式列出（配合-s使用） -s 以块数形式显示每个文件分配的尺寸 -l 以较长格式列出信息，可以直接写成 ll 2️⃣cd 到达指定地址 3️⃣kill 杀死程序 -l 信息编号。当l=9时，无条件终止，其他信号可能忽略 killall -u 杀死该用户全部进程 4️⃣ps 报告当前系统的进程状态 -a 所有 -p 指定程序 -u 指定用户 -x 列出该用户的进程的详细信息(我的理解应该是) 如： 5️⃣htop 比top更优，交互更好，同时可以直观看到资源占用情况基本命令与top一致 6️⃣top：动态查看系统运行状态 -u 指定用户名 -p 指定进程 7️⃣nvidia-smi 查看显卡状态watch nvidia-smi 实时查看显卡状态，定时刷新 8️⃣tail 显示指定文件的末尾若干行 -f 显示文件最新追加的内容 -n 显示文件尾部n行内容 -c 显示文件尾部最后c个字符 如： 123tail file 显示最后10行tail -n +20 file 显示从第20行至末尾tail -c 10 file 显示文件file的最后10个字符 ------- 9️⃣echo 用于打印指定的字符串 🔟which 用于查找并显示给定命令的绝对路径，which指令会在环境变量$PATH设置的目录里查找符合条件的文件。使用which命令，可以看到某个系统命令是否存在，以及执行的是哪个位置的命令。如： 1️⃣1️⃣nohup 将程序以忽略挂起信号的方式运行，经常用于在服务器跑代码如：1nohup python xxx.py &gt;output.txt 2&gt;&amp;1 &amp; 即，将输出重定向到output.txt ；最后一个&amp;表示后台挂起 1️⃣2️⃣cp 复制文件 cp [文件] [目标文件夹] -r 递归复制，用于目录的复制 1️⃣3️⃣mv 移动文件、目录或更名 mv [文件/文件夹] [文件夹] -f 强制，当目标文件存在，直接覆盖 -i 会询问 1️⃣4️⃣rm 删除文件或目录 -f 强制删除 -r 递归删除，用于目录删除 1️⃣5️⃣file 用于判断文件的基本数据如： 1️⃣6️⃣tar 对文件打包/压缩 -t 查看打包文件的内容含有哪些文件名 -x 解压缩 -c 新建打包文件 -C 指定压缩/解压目录 -v 解压/压缩过程中将处理的文件名显示出来常用的： 123压缩：tar -jcv -f filename.tar.bz2 要被处理的文件或目录名称查询：tar -jtv -f filename.tar.bz2解压：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录 1️⃣7️⃣wc word count 统计文件内容信息，如行数、字符数 -l 显示文件行数 -c 显示字节数 -m 显示字符数 -w 显示字数 字被定义为由空白、跳格、换行字符分隔的字符串 -L 显示最长行的长度 不加参数，所有的都显示，依次是行数、单词数、字节数、文件名 1️⃣8️⃣df 显示磁盘相关信息 -h 以可读性较高的方式显示信息 1️⃣9️⃣scp 服务器之间的文件复制 如: 1scp -r /test1 zhlin@123.12.1.12:/home/zhlin ✨快捷键Ctrl+a 跳到行首Ctrl+c 退出当前进程Ctrl+e 跳到页尾Ctrl+k 删除当前光标后面的文字Ctrl+l 清屏，等价于clearCtrl+r 搜索之前打过的命令Ctrl+u 删除当前光标前面的文字✨Ctrl+左右键 单词之间跳转 在Mac上可以使用option+左右键Ctrl+y 进行恢复删除Ctrl+z 将当前进程转到后台，使用fg恢复 Referencehttps://blog.csdn.net/leo_618/article/details/53003111 ———-持续更新———-]]></content>
       <tags>
+        <tag>技巧</tag>
         <tag>Linux</tag>
         <tag>碎片知识</tag>
-        <tag>技巧</tag>
       </tags>
   </entry>
   <entry>

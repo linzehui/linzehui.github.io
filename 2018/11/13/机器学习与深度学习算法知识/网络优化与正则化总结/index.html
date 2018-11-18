@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深度学习🤖,优化算法,参数初始化,Normalization," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="大量参考自《神经网络与深度学习》 优化算法对于标准的SGD，常见的改进算法从两个方面进行：学习率衰减&amp;amp;梯度方向优化。记$g_t$为t时刻的导数： 学习率衰减AdaGrad算法通过计算历次的梯度平方累计值进行学习率衰减。$G_t$是累计值： 更新值则为： 缺点：随着迭代次数的增加学习率递减。在经过一定次数的迭代依然没有找到最优点时，由于这时的学习率已经非常小，很难再继续找到最优点。 RMSp">
+<meta name="keywords" content="深度学习🤖,优化算法,参数初始化,Normalization">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络优化与正则化总结">
+<meta property="og:url" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="大量参考自《神经网络与深度学习》 优化算法对于标准的SGD，常见的改进算法从两个方面进行：学习率衰减&amp;amp;梯度方向优化。记$g_t$为t时刻的导数： 学习率衰减AdaGrad算法通过计算历次的梯度平方累计值进行学习率衰减。$G_t$是累计值： 更新值则为： 缺点：随着迭代次数的增加学习率递减。在经过一定次数的迭代依然没有找到最优点时，由于这时的学习率已经非常小，很难再继续找到最优点。 RMSp">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421196736629.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421189802198.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421190100615.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421192344025.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421195264173.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421197355615.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421199473226.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421202426163.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421203421465.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421203910771.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421205162558.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421207635850.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421207966341.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-14-15421648119504.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-14-15421656553319.jpg">
+<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-14-15421657694248.jpg">
+<meta property="og:updated_time" content="2018-11-16T03:42:42.485Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络优化与正则化总结">
+<meta name="twitter:description" content="大量参考自《神经网络与深度学习》 优化算法对于标准的SGD，常见的改进算法从两个方面进行：学习率衰减&amp;amp;梯度方向优化。记$g_t$为t时刻的导数： 学习率衰减AdaGrad算法通过计算历次的梯度平方累计值进行学习率衰减。$G_t$是累计值： 更新值则为： 缺点：随着迭代次数的增加学习率递减。在经过一定次数的迭代依然没有找到最优点时，由于这时的学习率已经非常小，很难再继续找到最优点。 RMSp">
+<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421196736629.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/"/>
+
+
+
+
+
+  <title>网络优化与正则化总结 | Weekly Review</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网络优化与正则化总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T22:06:24+08:00">
+                2018-11-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-16T11:42:42+08:00">
+                2018-11-16
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>大量参考自<a href="https://nndl.github.io/" target="_blank" rel="noopener">《神经网络与深度学习》</a></p>
+<h1 id="优化算法"><a href="#优化算法" class="headerlink" title="优化算法"></a>优化算法</h1><p>对于标准的SGD，常见的改进算法从两个方面进行：学习率衰减&amp;梯度方向优化。<br>记$g_t$为t时刻的导数：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421196736629.jpg" width="20%" height="50%"></p>
+<h2 id="学习率衰减"><a href="#学习率衰减" class="headerlink" title="学习率衰减"></a>学习率衰减</h2><h3 id="AdaGrad算法"><a href="#AdaGrad算法" class="headerlink" title="AdaGrad算法"></a>AdaGrad算法</h3><p>通过计算历次的梯度平方累计值进行学习率衰减。<br>$G_t$是累计值：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421189802198.jpg" width="20%" height="50%"></p>
+<p>更新值则为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421190100615.jpg" width="30%" height="50%"></p>
+<p>缺点：随着迭代次数的增加学习率递减。在经过一定次数的迭代依然没有找到最优点时，由于这时的学习率已经非常小，很难再继续找到最优点。</p>
+<h3 id="RMSprop算法"><a href="#RMSprop算法" class="headerlink" title="RMSprop算法"></a>RMSprop算法</h3><p>对AdaGrad的改进，唯一的区别在于$G_t$的计算，将历史信息和当前信息进行线性加权，使得学习率可以动态改变而不是单调递减：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421192344025.jpg" width="40%" height="50%"></p>
+<p>β为衰减率，通常取0.9。也即历史信息占主导。</p>
+<h3 id="AdaDelta算法"><a href="#AdaDelta算法" class="headerlink" title="AdaDelta算法"></a>AdaDelta算法</h3><p>同样是对AdaGrad的改进。<br>每次计算：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421195264173.jpg" width="50%" height="50%"></p>
+<p>也即历史更新差和上一时刻的更新差的加权（RMSprop是历史梯度和当前梯度）。</p>
+<p>最终更新差值为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421197355615.jpg" width="30%" height="50%"></p>
+<p>其中$G_t$计算方法和RMSprop一致。</p>
+<h2 id="梯度方向优化"><a href="#梯度方向优化" class="headerlink" title="梯度方向优化"></a>梯度方向优化</h2><p>利用历史的梯度（方向）调整当前时刻的梯度。</p>
+<h3 id="动量（Momentum）法"><a href="#动量（Momentum）法" class="headerlink" title="动量（Momentum）法"></a>动量（Momentum）法</h3><p>动量法（Momentum Method）是用之前积累动量来替代真正的梯度。每次迭代的梯度可以看作是加速度。</p>
+<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421199473226.jpg" width="28%" height="50%"></p>
+<p>也即上一时刻的更新差值和当前梯度共同决定当前的更新差值。$ρ$为动量因子，通常为0.9。也即动量占了主导。</p>
+<p>当某个参数在最近一段时间内的梯度方向不一致时，其真实的参数更新幅度变小；相反，当在最近一段时间内的梯度方向都一致时，其真实的参数更新幅度变大，起到加速作用。一般而言，在迭代初期，梯度方法都比较一致，动量法会起到加速作用，可以更快地到达最优点。在迭代后期，梯度方法会取决不一致，在收敛值附近震荡，动量法会起到减速作用，增加稳定性。</p>
+<h3 id="Nesterov加速梯度"><a href="#Nesterov加速梯度" class="headerlink" title="Nesterov加速梯度"></a>Nesterov加速梯度</h3><p>动量法的改进版本。</p>
+<p>前面提到的动量法，是上一步的更新方向$\Delta \theta_{t-1}$与当前梯度$-g_t$的加和。因此可以理解成，先根据$∆θ_{t−1}$更新一次得到参数θ，再用$g_t$进行更新。亦即：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421202426163.jpg" width="27%" height="50%"><br>上式的第二步中，$g_t$是在$\theta_{t-1}$上的梯度。我们将该步改为在$_theta{t}$的梯度。<br>因此，有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421203421465.jpg" width="50%" height="50%"></p>
+<p>和动量法相比，相当于提前走了一步。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421203910771.jpg" width="70%" height="50%"></p>
+<h3 id="Adam-amp-Nadam"><a href="#Adam-amp-Nadam" class="headerlink" title="Adam&amp;Nadam"></a>Adam&amp;Nadam</h3><p>Adam一方面计算梯度平方的加权，同时还计算梯度的加权：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421205162558.jpg" width="40%" height="50%"><br>通常$β_1=0.9$,$β_2=0.99$<br>也即历史信息占了主导。</p>
+<p>在初期$M_t$与$G_t$会比真实均值和方差要小（想象$M_0=0,G_0=0$时）。因此对其进行修正，即：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421207635850.jpg" width="18%" height="50%"><br>因此最终有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421207966341.jpg" width="26%" height="50%"></p>
+<p>同理有Nadam。</p>
+<p>Adam = Momentum + RMSprop<br>Nadam = Nesterov + RMSprop</p>
+<h3 id="梯度截断-gradient-clipping"><a href="#梯度截断-gradient-clipping" class="headerlink" title="梯度截断 gradient clipping"></a>梯度截断 gradient clipping</h3><p>分为按值截断与按模截断。</p>
+<h1 id="参数初始化"><a href="#参数初始化" class="headerlink" title="参数初始化"></a>参数初始化</h1><p>初始值选取很关键。假设全部初始化为0，则后续更新导致所有的激活值相同，也即对称权重现象。</p>
+<p>原则：不能过大，否则激活值会变得饱和，如sigmoid；不能过小，否则经过多层信号会逐渐消失，并且导致sigmoid丢失非线性的能力（在0附近基本近似线性）。如果一个神经元的输入连接很多，它的每个输入连接上的权重就应该小一些，这是为了避免输出过大。</p>
+<h2 id="Gaussian分布初始化"><a href="#Gaussian分布初始化" class="headerlink" title="Gaussian分布初始化"></a>Gaussian分布初始化</h2><p>同时考虑输入输出，可以按$N(0,\sqrt{\frac{2}{n_{in} + n_{out}}})$高斯分布来初始化。</p>
+<h2 id="均匀分布初始化"><a href="#均匀分布初始化" class="headerlink" title="均匀分布初始化"></a>均匀分布初始化</h2><p>在$[-r,r]$区间均匀分布初始化，其中r可以按照神经元数量自适应调整。</p>
+<h3 id="Xavier初始化方法"><a href="#Xavier初始化方法" class="headerlink" title="Xavier初始化方法"></a>Xavier初始化方法</h3><p>自动计算超参r。r的公式为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-14-15421648119504.jpg" width="22%" height="50%"><br>其中$n^l$代表第$l$层的神经元个数。</p>
+<p>为什么是这个式子（推导见参考资料）：综合考虑了①输入输出的方差要一致；②反向传播中误差信号的方差不被放大或缩小。</p>
+<h1 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h1><p>将数据分布归一化，使得分布保持稳定。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-14-15421656553319.jpg" width="100%" height="50%"><br>假设数据有四维(N,C,H,W)。N代表batch；C代表channel；H,W代表height和width。</p>
+<h2 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h2><p>沿着通道进行归一化，亦即每个通道都有自己的均值和方差。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-14-15421657694248.jpg" width="70%" height="50%"><br>其中缩放平移变量是可学习的。</p>
+<p>缺点：<br>①对batch size敏感，batch size太小则方差均值不足以代表数据分布<br>②对于不等长的输入如RNN来说，每一个timestep都需要保存不同的特征。</p>
+<h2 id="Layer-Normalization"><a href="#Layer-Normalization" class="headerlink" title="Layer Normalization"></a>Layer Normalization</h2><p>对一个输入进行正则化，亦即每个输入都有自己的方差、均值。这样不依赖于batch大小和输入sequence的深度。</p>
+<p>对RNN效果比较明显，但CNN中不如BN</p>
+<h2 id="Instance-Normalization"><a href="#Instance-Normalization" class="headerlink" title="Instance Normalization"></a>Instance Normalization</h2><p>对HW进行归一化</p>
+<h2 id="Group-Normalization"><a href="#Group-Normalization" class="headerlink" title="Group Normalization"></a>Group Normalization</h2><p>将channel分为多个group，每个group内做归一化</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://nndl.github.io/" target="_blank" rel="noopener">《神经网络与深度学习》</a><br><a href="https://blog.csdn.net/liuxiao214/article/details/81037416" target="_blank" rel="noopener">https://blog.csdn.net/liuxiao214/article/details/81037416</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习🤖/" rel="tag"> <i class="fa fa-tag"></i> 深度学习🤖</a>
+          
+            <a href="/tags/优化算法/" rel="tag"> <i class="fa fa-tag"></i> 优化算法</a>
+          
+            <a href="/tags/参数初始化/" rel="tag"> <i class="fa fa-tag"></i> 参数初始化</a>
+          
+            <a href="/tags/Normalization/" rel="tag"> <i class="fa fa-tag"></i> Normalization</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/11/代码相关/代码记录10/" rel="next" title="代码片段记录10">
+                <i class="fa fa-chevron-left"></i> 代码片段记录10
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/18/诗词&句/test/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA0OC8xNjU3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg"
+                alt="林泽辉" />
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#优化算法"><span class="nav-number">1.</span> <span class="nav-text">优化算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#学习率衰减"><span class="nav-number">1.1.</span> <span class="nav-text">学习率衰减</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AdaGrad算法"><span class="nav-number">1.1.1.</span> <span class="nav-text">AdaGrad算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RMSprop算法"><span class="nav-number">1.1.2.</span> <span class="nav-text">RMSprop算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AdaDelta算法"><span class="nav-number">1.1.3.</span> <span class="nav-text">AdaDelta算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度方向优化"><span class="nav-number">1.2.</span> <span class="nav-text">梯度方向优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动量（Momentum）法"><span class="nav-number">1.2.1.</span> <span class="nav-text">动量（Momentum）法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nesterov加速梯度"><span class="nav-number">1.2.2.</span> <span class="nav-text">Nesterov加速梯度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adam-amp-Nadam"><span class="nav-number">1.2.3.</span> <span class="nav-text">Adam&amp;Nadam</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度截断-gradient-clipping"><span class="nav-number">1.2.4.</span> <span class="nav-text">梯度截断 gradient clipping</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数初始化"><span class="nav-number">2.</span> <span class="nav-text">参数初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gaussian分布初始化"><span class="nav-number">2.1.</span> <span class="nav-text">Gaussian分布初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#均匀分布初始化"><span class="nav-number">2.2.</span> <span class="nav-text">均匀分布初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xavier初始化方法"><span class="nav-number">2.2.1.</span> <span class="nav-text">Xavier初始化方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#归一化"><span class="nav-number">3.</span> <span class="nav-text">归一化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">3.1.</span> <span class="nav-text">Batch Normalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Layer-Normalization"><span class="nav-number">3.2.</span> <span class="nav-text">Layer Normalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Instance-Normalization"><span class="nav-number">3.3.</span> <span class="nav-text">Instance Normalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Group-Normalization"><span class="nav-number">3.4.</span> <span class="nav-text">Group Normalization</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
