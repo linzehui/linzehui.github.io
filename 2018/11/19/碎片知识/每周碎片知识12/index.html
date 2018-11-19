@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="1️⃣[Transformer]对Transformer新理解：  可以将Transformer理解成一张全连接图，其中每个节点与其他节点的关系通过attention权重表现。图关系是序列关系或者树关系的一般化。 为什么要有multi-head？不仅仅是论文的解释，或许还可以理解成，对一个向量的不同部分（如第1维到20维，第21维到40维等）施以不同的attention权重，如果不使用multi-">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-19T07:50:16.386Z">
+<meta property="og:updated_time" content="2018-11-19T15:07:44.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周碎片知识12">
 <meta name="twitter:description" content="1️⃣[Transformer]对Transformer新理解：  可以将Transformer理解成一张全连接图，其中每个节点与其他节点的关系通过attention权重表现。图关系是序列关系或者树关系的一般化。 为什么要有multi-head？不仅仅是论文的解释，或许还可以理解成，对一个向量的不同部分（如第1维到20维，第21维到40维等）施以不同的attention权重，如果不使用multi-">
@@ -332,7 +332,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T15:50:16+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T23:07:44+08:00">
                 2018-11-19
               </time>
             
@@ -372,7 +372,7 @@
 <li>为什么要有multi-head？不仅仅是论文的解释，或许还可以理解成，对一个向量的不同部分（如第1维到20维，第21维到40维等）施以不同的attention权重，如果不使用multi-head，那么对于一个query，就只会有一个权重，而不同的维度有不同的重要性。</li>
 </ul>
 <hr>
-<h3 id="2️⃣-attention-amp-capsule"><a href="#2️⃣-attention-amp-capsule" class="headerlink" title="2️⃣[attention&amp;capsule]"></a>2️⃣[attention&amp;capsule]</h3><p>attention是收信息，query从value按权重获取信息，其中所有value的权重和是1。<br>capsule是发信息，对于$l-1$层的一个capsule来说，在传入到$l$层的k个capsule的信息，其权重为1。</p>
+<h3 id="2️⃣-attention-amp-capsule"><a href="#2️⃣-attention-amp-capsule" class="headerlink" title="2️⃣[attention&amp;capsule]"></a>2️⃣[attention&amp;capsule]</h3><p>attention是收信息，query从value按权重获取信息，其中所有value的权重和是1。<br>capsule是发信息，对于$l-1$层的一个capsule来说，在传入到$l$层的k个capsule的信息，其权重和为1。</p>
 
       
     </div>
@@ -510,7 +510,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">115</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

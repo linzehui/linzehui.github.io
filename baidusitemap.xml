@@ -4,25 +4,8 @@
 
     
   <url>
-    <loc>http://www.linzehui.me/2018/11/19/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8612/</loc>
-    <lastmod>2018-11-19T07:50:16.386Z</lastmod>
-    <data>
-        <display>
-        <title>每周碎片知识12</title>
-        <pubTime>2018-11-19T07:32:14.000Z</pubTime>
-        
-        <tag>碎片知识</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.linzehui.me/2018/11/19/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%876/</loc>
-    <lastmod>2018-11-19T04:03:55.874Z</lastmod>
+    <lastmod>2018-11-19T15:17:56.798Z</lastmod>
     <data>
         <display>
         <title>每周论文6</title>
@@ -46,6 +29,42 @@
 
     
   <url>
+    <loc>http://www.linzehui.me/2018/11/11/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8Esparse%20gradient/</loc>
+    <lastmod>2018-11-19T15:09:29.575Z</lastmod>
+    <data>
+        <display>
+        <title>关于sparse gradient</title>
+        <pubTime>2018-11-11T02:35:24.000Z</pubTime>
+        
+        <tag>sparse gradient</tag>
+         
+        <tag>代码实践</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/11/19/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8612/</loc>
+    <lastmod>2018-11-19T15:07:44.751Z</lastmod>
+    <data>
+        <display>
+        <title>每周碎片知识12</title>
+        <pubTime>2018-11-19T07:32:14.000Z</pubTime>
+        
+        <tag>碎片知识</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.linzehui.me/2018/09/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2010:%20Semi-supervised/</loc>
     <lastmod>2018-11-19T03:21:35.781Z</lastmod>
     <data>
@@ -55,9 +74,9 @@
         
         <tag>机器学习🤖</tag>
          
-        <tag>Semi-supervised learning</tag>
-         
         <tag>李宏毅机器学习课程</tag>
+         
+        <tag>Semi-supervised learning</tag>
          
          
            
@@ -76,11 +95,11 @@
         
         <tag>机器学习🤖</tag>
          
-        <tag>李宏毅机器学习课程</tag>
-         
         <tag>Unsupervised Learning</tag>
          
         <tag>Linear Dimension Reduction</tag>
+         
+        <tag>李宏毅机器学习课程</tag>
          
          
            
@@ -99,9 +118,9 @@
         
         <tag>机器学习🤖</tag>
          
-        <tag>李宏毅机器学习课程</tag>
-         
         <tag>Unsupervised Learning</tag>
+         
+        <tag>李宏毅机器学习课程</tag>
          
         <tag>Neighbor Embedding</tag>
          
@@ -122,9 +141,9 @@
         
         <tag>机器学习🤖</tag>
          
-        <tag>李宏毅机器学习课程</tag>
-         
         <tag>Unsupervised Learning</tag>
+         
+        <tag>李宏毅机器学习课程</tag>
          
         <tag>Auto-encoder</tag>
          
@@ -145,9 +164,9 @@
         
         <tag>机器学习🤖</tag>
          
-        <tag>李宏毅机器学习课程</tag>
-         
         <tag>Unsupervised Learning</tag>
+         
+        <tag>李宏毅机器学习课程</tag>
          
         <tag>Generation</tag>
          
@@ -615,21 +634,6 @@
 
     
   <url>
-    <loc>http://www.linzehui.me/2018/11/11/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8Esparse%20gradient/</loc>
-    <lastmod>2018-11-19T03:21:20.119Z</lastmod>
-    <data>
-        <display>
-        <title></title>
-        <pubTime>2018-11-11T02:31:58.356Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.linzehui.me/2018/08/12/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%A6%82%E4%BD%95%E5%B0%86ELMo%E8%AF%8D%E5%90%91%E9%87%8F%E7%94%A8%E4%BA%8E%E4%B8%AD%E6%96%87/</loc>
     <lastmod>2018-11-19T03:21:19.680Z</lastmod>
     <data>
@@ -637,9 +641,9 @@
         <title>如何将ELMo词向量用于中文</title>
         <pubTime>2018-08-12T08:49:05.000Z</pubTime>
         
-        <tag>教程</tag>
-         
         <tag>ELMo</tag>
+         
+        <tag>教程</tag>
          
         <tag>词向量</tag>
          
@@ -658,9 +662,9 @@
         <title>如何训练GloVe中文词向量</title>
         <pubTime>2018-08-05T03:06:05.000Z</pubTime>
         
-        <tag>GloVe</tag>
-         
         <tag>教程</tag>
+         
+        <tag>GloVe</tag>
          
          
            
@@ -915,9 +919,9 @@
         <title>浅谈mask矩阵</title>
         <pubTime>2018-10-12T15:10:24.000Z</pubTime>
         
-        <tag>mask矩阵</tag>
-         
         <tag>代码实践</tag>
+         
+        <tag>mask矩阵</tag>
          
          
            
@@ -1081,9 +1085,9 @@
          
         <tag>Transformer</tag>
          
-        <tag>self-attention</tag>
-         
         <tag>NTM</tag>
+         
+        <tag>self-attention</tag>
          
          
            
@@ -1438,44 +1442,6 @@
 
     
   <url>
-    <loc>http://www.linzehui.me/2018/07/23/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB1/</loc>
-    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>代码片段记录1</title>
-        <pubTime>2018-07-23T10:59:30.000Z</pubTime>
-        
-        <tag>code snippets</tag>
-         
-        <tag>代码片段</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.linzehui.me/2018/08/19/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB5/</loc>
-    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>代码片段记录5</title>
-        <pubTime>2018-08-19T06:44:30.000Z</pubTime>
-        
-        <tag>code snippets</tag>
-         
-        <tag>代码片段</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.linzehui.me/2018/08/05/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB3/</loc>
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
     <data>
@@ -1495,12 +1461,50 @@
 
     
   <url>
+    <loc>http://www.linzehui.me/2018/07/23/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB1/</loc>
+    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>代码片段记录1</title>
+        <pubTime>2018-07-23T10:59:30.000Z</pubTime>
+        
+        <tag>code snippets</tag>
+         
+        <tag>代码片段</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.linzehui.me/2018/08/12/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB4/</loc>
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
     <data>
         <display>
         <title>代码片段记录4</title>
         <pubTime>2018-08-12T03:20:30.000Z</pubTime>
+        
+        <tag>code snippets</tag>
+         
+        <tag>代码片段</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/08/19/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB5/</loc>
+    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>代码片段记录5</title>
+        <pubTime>2018-08-19T06:44:30.000Z</pubTime>
         
         <tag>code snippets</tag>
          
