@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="sparse gradient,代码实践," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,20 +79,19 @@
 
 
 
-<meta name="description" content="前几天在看AllenAI在EMNLP的ppt时，有一页写道： 为什么会出现这种情况？ Embedding是一个很大的矩阵，每一次其实都只有一个小部分进行了更新，对于一些词来说，出现的频率不高，或者说，其实大部分的词在一个loop/epoch中，被更新的次数是较少的。但是，注意到一般的optimizer算法，是以matrix为单位进行更新的，也就是每一次都是$W^{t+1}=W^{t}-\eta \">
-<meta name="keywords" content="sparse gradient,代码实践">
+<meta name="description" content="—-~~~~title: 关于sparse gradientdate: 2018-11-11 10:35:24tags: - sparse gradient - 代码实践 mathjax: true  前几天在看AllenAI在EMNLP的ppt时，有一页写道： 为什么会出现这种情况？ Embedding是一个很大的矩阵，每一次其实都只有一个小部分进行了更新，对于一些词来说，出现的频率不高，或者说">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于sparse gradient">
+<meta property="og:title" content="Weekly Review">
 <meta property="og:url" content="http://www.linzehui.me/2018/11/11/碎片知识/关于sparse gradient/index.html">
 <meta property="og:site_name" content="Weekly Review">
-<meta property="og:description" content="前几天在看AllenAI在EMNLP的ppt时，有一页写道： 为什么会出现这种情况？ Embedding是一个很大的矩阵，每一次其实都只有一个小部分进行了更新，对于一些词来说，出现的频率不高，或者说，其实大部分的词在一个loop/epoch中，被更新的次数是较少的。但是，注意到一般的optimizer算法，是以matrix为单位进行更新的，也就是每一次都是$W^{t+1}=W^{t}-\eta \">
+<meta property="og:description" content="—-~~~~title: 关于sparse gradientdate: 2018-11-11 10:35:24tags: - sparse gradient - 代码实践 mathjax: true  前几天在看AllenAI在EMNLP的ppt时，有一页写道： 为什么会出现这种情况？ Embedding是一个很大的矩阵，每一次其实都只有一个小部分进行了更新，对于一些词来说，出现的频率不高，或者说">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.linzehui.me/2018/11/11/碎片知识/关于sparse%20gradient/images/2018-11-11-15419037448379.jpg">
 <meta property="og:image" content="http://www.linzehui.me/2018/11/11/碎片知识/关于sparse%20gradient/images/2018-11-11-15419038346958.jpg">
-<meta property="og:updated_time" content="2018-11-19T00:35:26.784Z">
+<meta property="og:updated_time" content="2018-11-19T00:47:42.109Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于sparse gradient">
-<meta name="twitter:description" content="前几天在看AllenAI在EMNLP的ppt时，有一页写道： 为什么会出现这种情况？ Embedding是一个很大的矩阵，每一次其实都只有一个小部分进行了更新，对于一些词来说，出现的频率不高，或者说，其实大部分的词在一个loop/epoch中，被更新的次数是较少的。但是，注意到一般的optimizer算法，是以matrix为单位进行更新的，也就是每一次都是$W^{t+1}=W^{t}-\eta \">
+<meta name="twitter:title" content="Weekly Review">
+<meta name="twitter:description" content="—-~~~~title: 关于sparse gradientdate: 2018-11-11 10:35:24tags: - sparse gradient - 代码实践 mathjax: true  前几天在看AllenAI在EMNLP的ppt时，有一页写道： 为什么会出现这种情况？ Embedding是一个很大的矩阵，每一次其实都只有一个小部分进行了更新，对于一些词来说，出现的频率不高，或者说">
 <meta name="twitter:image" content="http://www.linzehui.me/2018/11/11/碎片知识/关于sparse%20gradient/images/2018-11-11-15419037448379.jpg">
 
 
@@ -129,7 +128,7 @@
 
 
 
-  <title>关于sparse gradient | Weekly Review</title>
+  <title> | Weekly Review</title>
   
 
 
@@ -307,7 +306,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">关于sparse gradient</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -319,7 +318,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-11T10:35:24+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-11T10:31:58+08:00">
                 2018-11-11
               </time>
             
@@ -335,7 +334,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:26+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:47:42+08:00">
                 2018-11-19
               </time>
             
@@ -369,7 +368,12 @@
       
 
       
-        <p>前几天在看AllenAI在EMNLP的ppt时，有一页写道：<br><img src="images/2018-11-11-15419037448379.jpg" width="70%" height="50%"></p>
+        <p>—-~~~~<br>title: 关于sparse gradient<br>date: 2018-11-11 10:35:24<br>tags:</p>
+<pre><code>- sparse gradient
+- 代码实践
+</code></pre><p>mathjax: true</p>
+<hr>
+<p>前几天在看AllenAI在EMNLP的ppt时，有一页写道：<br><img src="images/2018-11-11-15419037448379.jpg" width="70%" height="50%"></p>
 <p>为什么会出现这种情况？</p>
 <p>Embedding是一个很大的矩阵，每一次其实都只有一个小部分进行了更新，对于一些词来说，出现的频率不高，或者说，其实大部分的词在一个loop/epoch中，被更新的次数是较少的。但是，注意到一般的optimizer算法，是以matrix为单位进行更新的，也就是每一次都是$W^{t+1}=W^{t}-\eta \frac{\partial L}{\partial{W}}$</p>
 <p>而Adam算法：<br><img src="images/2018-11-11-15419038346958.jpg" width="70%" height="50%"></p>
@@ -397,14 +401,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/sparse-gradient/" rel="tag"> <i class="fa fa-tag"></i> sparse gradient</a>
-          
-            <a href="/tags/代码实践/" rel="tag"> <i class="fa fa-tag"></i> 代码实践</a>
-          
-        </div>
-      
 
       
       
@@ -414,8 +410,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/10/论文/每周论文5/" rel="next" title="每周论文4">
-                <i class="fa fa-chevron-left"></i> 每周论文4
+              <a href="/2018/11/10/论文/每周论文5/" rel="next" title="每周论文5">
+                <i class="fa fa-chevron-left"></i> 每周论文5
               </a>
             
           </div>
@@ -1072,26 +1068,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
