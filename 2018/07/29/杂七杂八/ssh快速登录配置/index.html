@@ -87,14 +87,14 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="Motivation分配了服务器之后，每次要ssh进入都很麻烦：ssh user_name@ip_address 然后还要输入密码。 特别是如果分配了多个服务器，那有时候还容易忘记ip地址。因此如果能够一条命令就进入服务器能够减少麻烦。主要有三点：  创建rsa key 上传public key到服务器 设置alias  配置创建rsa key在终端输入命令： 1ssh-keygen -t rsa">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.linzehui.me/2018/07/29/杂七杂八/ssh快速登录配置/images/2018-07-29-Xnip2018-07-29_10-43-15.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/07/29/杂七杂八/ssh快速登录配置/images/2018-07-29-15328324683354.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/07/29/杂七杂八/ssh快速登录配置/images/2018-07-29-15328329815456.jpg">
-<meta property="og:updated_time" content="2018-11-19T00:35:29.416Z">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-07-29-Xnip2018-07-29_10-43-15.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-07-29-15328324683354.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-07-29-15328329815456.jpg">
+<meta property="og:updated_time" content="2018-11-19T03:21:22.296Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssh快速登录配置">
 <meta name="twitter:description" content="Motivation分配了服务器之后，每次要ssh进入都很麻烦：ssh user_name@ip_address 然后还要输入密码。 特别是如果分配了多个服务器，那有时候还容易忘记ip地址。因此如果能够一条命令就进入服务器能够减少麻烦。主要有三点：  创建rsa key 上传public key到服务器 设置alias  配置创建rsa key在终端输入命令： 1ssh-keygen -t rsa">
-<meta name="twitter:image" content="http://www.linzehui.me/2018/07/29/杂七杂八/ssh快速登录配置/images/2018-07-29-Xnip2018-07-29_10-43-15.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/images/2018-07-29-Xnip2018-07-29_10-43-15.jpg">
 
 
 
@@ -336,7 +336,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:29+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:22+08:00">
                 2018-11-19
               </time>
             
@@ -381,11 +381,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
 <p>当然如果以前有创建过的可以不用。</p>
 <p>结果：</p>
-<p><img src="images/2018-07-29-Xnip2018-07-29_10-43-15.jpg" width="50%" height="50%"></p>
+<p><img src="/images/2018-07-29-Xnip2018-07-29_10-43-15.jpg" width="50%" height="50%"></p>
 <h2 id="上传public-key到服务器"><a href="#上传public-key到服务器" class="headerlink" title="上传public key到服务器"></a>上传public key到服务器</h2><p>使用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub user@127.0.0.1</span><br></pre></td></tr></table></figure></p>
 <p>输入密码即可</p>
 <p>结果：</p>
-<p><img src="images/2018-07-29-15328324683354.jpg" width="60%" height="60%"></p>
+<p><img src="/images/2018-07-29-15328324683354.jpg" width="60%" height="60%"></p>
 <h2 id="设置alias"><a href="#设置alias" class="headerlink" title="设置alias"></a>设置alias</h2><p>完成以上步骤就可以不输入密码登录，但还是需要输入ip地址和用户名，为了更简化操作，给命令起个别名。需要配置 .bash_profile文件。<br>输入命令:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
 <p>在文件后面添加以下文字：</p>
@@ -394,7 +394,7 @@
 <p>然后还要使其生效:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
 <p>这样，输入别名，就可以直接登录了：</p>
-<p><img src="images/2018-07-29-15328329815456.jpg" width="50%" height="50%"></p>
+<p><img src="/images/2018-07-29-15328329815456.jpg" width="50%" height="50%"></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.jianshu.com/p/66d658c7cb9e" target="_blank" rel="noopener">https://www.jianshu.com/p/66d658c7cb9e</a></p>
 
       

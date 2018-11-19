@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Unsupervised Learning,Linear Dimension Reduction," />
+  <meta name="keywords" content="机器学习🤖,Unsupervised Learning,Linear Dimension Reduction,李宏毅机器学习课程," />
 
 
 
@@ -80,31 +80,31 @@
 
 
 <meta name="description" content="ClusteringK-means算法步骤： 迭代更新使得最后聚类中心收敛。但事先需要定好有多少类。 Hierarchical Agglomerative Clustering (HAC)自下而上，每次选两个最近的聚为一类，直到所有的都分成一类最后选择一个阈值划分，如蓝色绿色和红色的线 Dimension Reduction找到一个映射，使得x能够映射到低维z Principle Componen">
-<meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Unsupervised Learning,Linear Dimension Reduction">
+<meta name="keywords" content="机器学习🤖,Unsupervised Learning,Linear Dimension Reduction,李宏毅机器学习课程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lecture 11:Unsupervised Learning:Linear Dimension Reduction">
 <meta property="og:url" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 11: Unsupervised Learning: Linear Dimension Reduction/index.html">
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="ClusteringK-means算法步骤： 迭代更新使得最后聚类中心收敛。但事先需要定好有多少类。 Hierarchical Agglomerative Clustering (HAC)自下而上，每次选两个最近的聚为一类，直到所有的都分成一类最后选择一个阈值划分，如蓝色绿色和红色的线 Dimension Reduction找到一个映射，使得x能够映射到低维z Principle Componen">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/images/2018-10-07-15388800377875.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/images/2018-10-07-15388801021791.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/images/2018-10-07-15388801830659.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/images/2018-10-07-15388804752506.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/images/2018-10-07-15388811276042.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/images/2018-10-07-15388815546680.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/images/2018-10-07-15388815837458.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/images/2018-10-07-15388816250075.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/images/2018-10-07-15388816896369.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/images/2018-10-07-15388817393283.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/images/2018-10-07-15388817566149.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/images/2018-10-07-15388819053983.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/images/2018-10-07-15388820642382.jpg">
-<meta property="og:updated_time" content="2018-11-19T00:35:41.350Z">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388800377875.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388801021791.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388801830659.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388804752506.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388811276042.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388815546680.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388815837458.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388816250075.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388816896369.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388817393283.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388817566149.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388819053983.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388820642382.jpg">
+<meta property="og:updated_time" content="2018-11-19T03:21:34.854Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lecture 11:Unsupervised Learning:Linear Dimension Reduction">
 <meta name="twitter:description" content="ClusteringK-means算法步骤： 迭代更新使得最后聚类中心收敛。但事先需要定好有多少类。 Hierarchical Agglomerative Clustering (HAC)自下而上，每次选两个最近的聚为一类，直到所有的都分成一类最后选择一个阈值划分，如蓝色绿色和红色的线 Dimension Reduction找到一个映射，使得x能够映射到低维z Principle Componen">
-<meta name="twitter:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/images/2018-10-07-15388800377875.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/images/2018-10-07-15388800377875.jpg">
 
 
 
@@ -346,7 +346,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:41+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:34+08:00">
                 2018-11-19
               </time>
             
@@ -380,36 +380,36 @@
       
 
       
-        <h2 id="Clustering"><a href="#Clustering" class="headerlink" title="Clustering"></a>Clustering</h2><h3 id="K-means"><a href="#K-means" class="headerlink" title="K-means"></a>K-means</h3><p>算法步骤：<br><img src="images/2018-10-07-15388800377875.jpg" width="70%" height="50%"></p>
+        <h2 id="Clustering"><a href="#Clustering" class="headerlink" title="Clustering"></a>Clustering</h2><h3 id="K-means"><a href="#K-means" class="headerlink" title="K-means"></a>K-means</h3><p>算法步骤：<br><img src="/images/2018-10-07-15388800377875.jpg" width="70%" height="50%"></p>
 <p>迭代更新使得最后聚类中心收敛。但事先需要定好有多少类。</p>
-<h3 id="Hierarchical-Agglomerative-Clustering-HAC"><a href="#Hierarchical-Agglomerative-Clustering-HAC" class="headerlink" title="Hierarchical Agglomerative Clustering (HAC)"></a>Hierarchical Agglomerative Clustering (HAC)</h3><p>自下而上，每次选两个最近的聚为一类，直到所有的都分成一类<br>最后选择一个阈值划分，如蓝色绿色和红色的线<br><img src="images/2018-10-07-15388801021791.jpg" width="50%" height="50%"></p>
+<h3 id="Hierarchical-Agglomerative-Clustering-HAC"><a href="#Hierarchical-Agglomerative-Clustering-HAC" class="headerlink" title="Hierarchical Agglomerative Clustering (HAC)"></a>Hierarchical Agglomerative Clustering (HAC)</h3><p>自下而上，每次选两个最近的聚为一类，直到所有的都分成一类<br>最后选择一个阈值划分，如蓝色绿色和红色的线<br><img src="/images/2018-10-07-15388801021791.jpg" width="50%" height="50%"></p>
 <h2 id="Dimension-Reduction"><a href="#Dimension-Reduction" class="headerlink" title="Dimension Reduction"></a>Dimension Reduction</h2><p>找到一个映射，使得x能够映射到低维z</p>
-<h3 id="Principle-Component-Analysis-PCA"><a href="#Principle-Component-Analysis-PCA" class="headerlink" title="Principle Component Analysis (PCA)"></a>Principle Component Analysis (PCA)</h3><p>目的是找到一个维度，使得投影得到的variance最大，也即最大程度保留数据的差异性。<br><img src="images/2018-10-07-15388801830659.jpg" width="50%" height="50%"></p>
+<h3 id="Principle-Component-Analysis-PCA"><a href="#Principle-Component-Analysis-PCA" class="headerlink" title="Principle Component Analysis (PCA)"></a>Principle Component Analysis (PCA)</h3><p>目的是找到一个维度，使得投影得到的variance最大，也即最大程度保留数据的差异性。<br><img src="/images/2018-10-07-15388801830659.jpg" width="50%" height="50%"></p>
 <p>形式化可以写成（一维情形）：</p>
 <script type="math/tex; mode=display">Var(z_1 )=\frac{1}{N} ∑_{z_1}(z_1−\overline{z_1} )^2</script><p>其中：</p>
 <script type="math/tex; mode=display">‖w^1 ‖_2=1</script><script type="math/tex; mode=display">z_1=w^1 \cdot x</script><p>$\overline{z_1}$表示z的均值</p>
-<p>假如我们要投影到多维，其他维度也有同样的目标。其中每个维度之间都应该是相互正交的。<br><img src="images/2018-10-07-15388804752506.jpg" width="20%" height="50%"></p>
+<p>假如我们要投影到多维，其他维度也有同样的目标。其中每个维度之间都应该是相互正交的。<br><img src="/images/2018-10-07-15388804752506.jpg" width="20%" height="50%"></p>
 <h4 id="如何做？"><a href="#如何做？" class="headerlink" title="如何做？"></a>如何做？</h4><p>找到$ \frac{1}{N}∑(x−\overline{x} ) (x−\overline{x})^T$的前k个最大的特征值对应的特征向量，组合起来即是我们要找的$W$</p>
 <h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><p>—-Warning of Math—-<br>目的：$Var(z_1 )=\frac{1}{N} ∑_{z_1}(z_1−\overline{z_1} )^2 $<br>其中 $\overline{z_1} =\frac{1}{N} ∑{z_1} = \frac{1}{N} ∑ w^1 \cdot x=w^1\cdot \overline{x}$</p>
-<p>推导：<br><img src="images/2018-10-07-15388811276042.jpg" width="35%" height="50%"><br>改变符号 $S=Cov(x)$</p>
+<p>推导：<br><img src="/images/2018-10-07-15388811276042.jpg" width="35%" height="50%"><br>改变符号 $S=Cov(x)$</p>
 <p>利用拉格朗日乘数法，有：<br>$Sw^1=αw^1$<br>等式两边各左乘$(w^1)^T$，有：<br>$(w^1 )^T Sw^1=α(w^1 )^T w^1=α$</p>
 <p>也即，$α$是$S$的特征值，选择最大的特征值，就能够最大化我们的目标。</p>
 <p>同理，我们要找$w^2$，最大化$(w^2 )^T Sw^2$，其中有：<br>$(w^2 )^T w^2=1$<br>$(w^2 )^T w^1=0$ （与第一维正交）</p>
 <p>因此利用拉格朗日乘数法：</p>
 <script type="math/tex; mode=display">g(w^2 )= (w^2 )^T Sw^2−α((w^2 )^T w^2−1)−β((w^2 )^T w^1−0)</script><p>最终得到，w2对应第二大的特征值的特征向量。</p>
 <p>以此类推，其他维也同理。<br>—-End of Math—-</p>
-<h4 id="PCA的其他"><a href="#PCA的其他" class="headerlink" title="PCA的其他"></a>PCA的其他</h4><p>实际上最终得到的z，每一维之间的协方差都为0<br><img src="images/2018-10-07-15388815546680.jpg" width="50%" height="50%"></p>
-<p>证明如下：<br><img src="images/2018-10-07-15388815837458.jpg" width="50%" height="50%"></p>
-<p>PCA也可以用SVD来做：<br><img src="images/2018-10-07-15388816250075.jpg" width="60%" height="50%"></p>
+<h4 id="PCA的其他"><a href="#PCA的其他" class="headerlink" title="PCA的其他"></a>PCA的其他</h4><p>实际上最终得到的z，每一维之间的协方差都为0<br><img src="/images/2018-10-07-15388815546680.jpg" width="50%" height="50%"></p>
+<p>证明如下：<br><img src="/images/2018-10-07-15388815837458.jpg" width="50%" height="50%"></p>
+<p>PCA也可以用SVD来做：<br><img src="/images/2018-10-07-15388816250075.jpg" width="60%" height="50%"></p>
 <p>U中保存了K个特征向量。</p>
-<p>从另一种角度理解PCA，也可以认为PCA是一种autoencoder：<br><img src="images/2018-10-07-15388816896369.jpg" width="50%" height="50%"></p>
-<h4 id="PCA的问题"><a href="#PCA的问题" class="headerlink" title="PCA的问题"></a>PCA的问题</h4><p>PCA是无监督学习，如果有标签，则无法按照类别来进行正确降维，如：<br><img src="images/2018-10-07-15388817393283.jpg" width="30%" height="50%"></p>
-<p>第二就是PCA是线性变换，对于一些需要非线性变换的无能为力<br><img src="images/2018-10-07-15388817566149.jpg" width="28%" height="50%"></p>
+<p>从另一种角度理解PCA，也可以认为PCA是一种autoencoder：<br><img src="/images/2018-10-07-15388816896369.jpg" width="50%" height="50%"></p>
+<h4 id="PCA的问题"><a href="#PCA的问题" class="headerlink" title="PCA的问题"></a>PCA的问题</h4><p>PCA是无监督学习，如果有标签，则无法按照类别来进行正确降维，如：<br><img src="/images/2018-10-07-15388817393283.jpg" width="30%" height="50%"></p>
+<p>第二就是PCA是线性变换，对于一些需要非线性变换的无能为力<br><img src="/images/2018-10-07-15388817566149.jpg" width="28%" height="50%"></p>
 <h3 id="Matrix-Factorization"><a href="#Matrix-Factorization" class="headerlink" title="Matrix Factorization"></a>Matrix Factorization</h3><p>定义：矩阵分解，就是将一个矩阵D分解为U和V的乘积，即对于一个特定的规模为m*n的矩阵D，估计出规模分别为m*k和n*k的矩阵U和V，使得$UV^T$的值尽可能逼近矩阵D。常用于推荐系统。</p>
-<p>思想：<br>假如有一个矩阵：<br><img src="images/2018-10-07-15388819053983.jpg" width="60%" height="50%"></p>
+<p>思想：<br>假如有一个矩阵：<br><img src="/images/2018-10-07-15388819053983.jpg" width="60%" height="50%"></p>
 <p>假设横轴和纵轴每一维都有一个向量代表该维，矩阵的每个元素就是横轴和纵轴对应维的点积。我们的目的是尽可能减小：</p>
 <script type="math/tex; mode=display">L=\sum_{(i,j)} (r^i \cdot r^j -n_{ij})^2</script><p>其中$r_i$ $r_j$就是向量表示，$n_{ij}$就是矩阵的内容。</p>
-<p>可以使用SVD求解上式：<br><img src="images/2018-10-07-15388820642382.jpg" width="50%" height="50%"></p>
+<p>可以使用SVD求解上式：<br><img src="/images/2018-10-07-15388820642382.jpg" width="50%" height="50%"></p>
 <p>实际上，考虑每一行或列本身的特性，我们对Loss进行扩展：</p>
 <script type="math/tex; mode=display">Minimizing \ \ L=\sum_{(i,j)} (r^i \cdot r^j +b_i+b_j-n_{ij})^2</script><p>使用SGD可以求解。</p>
 
@@ -431,11 +431,11 @@
           
             <a href="/tags/机器学习🤖/" rel="tag"> <i class="fa fa-tag"></i> 机器学习🤖</a>
           
-            <a href="/tags/李宏毅机器学习课程/" rel="tag"> <i class="fa fa-tag"></i> 李宏毅机器学习课程</a>
-          
             <a href="/tags/Unsupervised-Learning/" rel="tag"> <i class="fa fa-tag"></i> Unsupervised Learning</a>
           
             <a href="/tags/Linear-Dimension-Reduction/" rel="tag"> <i class="fa fa-tag"></i> Linear Dimension Reduction</a>
+          
+            <a href="/tags/李宏毅机器学习课程/" rel="tag"> <i class="fa fa-tag"></i> 李宏毅机器学习课程</a>
           
         </div>
       

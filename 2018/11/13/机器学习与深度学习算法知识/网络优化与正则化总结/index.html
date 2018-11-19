@@ -87,27 +87,27 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="大量参考自《神经网络与深度学习》 优化算法对于标准的SGD，常见的改进算法从两个方面进行：学习率衰减&amp;amp;梯度方向优化。记$g_t$为t时刻的导数： 学习率衰减AdaGrad算法通过计算历次的梯度平方累计值进行学习率衰减。$G_t$是累计值： 更新值则为： 缺点：随着迭代次数的增加学习率递减。在经过一定次数的迭代依然没有找到最优点时，由于这时的学习率已经非常小，很难再继续找到最优点。 RMSp">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-13-15421196736629.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-13-15421189802198.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-13-15421190100615.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-13-15421192344025.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-13-15421195264173.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-13-15421197355615.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-13-15421199473226.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-13-15421202426163.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-13-15421203421465.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-13-15421203910771.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-13-15421205162558.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-13-15421207635850.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-13-15421207966341.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-14-15421648119504.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-14-15421656553319.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-14-15421657694248.jpg">
-<meta property="og:updated_time" content="2018-11-19T00:46:40.717Z">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-13-15421196736629.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-13-15421189802198.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-13-15421190100615.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-13-15421192344025.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-13-15421195264173.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-13-15421197355615.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-13-15421199473226.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-13-15421202426163.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-13-15421203421465.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-13-15421203910771.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-13-15421205162558.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-13-15421207635850.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-13-15421207966341.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-14-15421648119504.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-14-15421656553319.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-11-14-15421657694248.jpg">
+<meta property="og:updated_time" content="2018-11-19T03:21:24.284Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络优化与正则化总结">
 <meta name="twitter:description" content="大量参考自《神经网络与深度学习》 优化算法对于标准的SGD，常见的改进算法从两个方面进行：学习率衰减&amp;amp;梯度方向优化。记$g_t$为t时刻的导数： 学习率衰减AdaGrad算法通过计算历次的梯度平方累计值进行学习率衰减。$G_t$是累计值： 更新值则为： 缺点：随着迭代次数的增加学习率递减。在经过一定次数的迭代依然没有找到最优点时，由于这时的学习率已经非常小，很难再继续找到最优点。 RMSp">
-<meta name="twitter:image" content="http://www.linzehui.me/2018/11/13/机器学习与深度学习算法知识/网络优化与正则化总结/images/2018-11-13-15421196736629.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/images/2018-11-13-15421196736629.jpg">
 
 
 
@@ -349,7 +349,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:46:40+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:24+08:00">
                 2018-11-19
               </time>
             
@@ -384,26 +384,26 @@
 
       
         <p>大量参考自<a href="https://nndl.github.io/" target="_blank" rel="noopener">《神经网络与深度学习》</a></p>
-<h1 id="优化算法"><a href="#优化算法" class="headerlink" title="优化算法"></a>优化算法</h1><p>对于标准的SGD，常见的改进算法从两个方面进行：学习率衰减&amp;梯度方向优化。<br>记$g_t$为t时刻的导数：<br><img src="images/2018-11-13-15421196736629.jpg" width="20%" height="50%"></p>
-<h2 id="学习率衰减"><a href="#学习率衰减" class="headerlink" title="学习率衰减"></a>学习率衰减</h2><h3 id="AdaGrad算法"><a href="#AdaGrad算法" class="headerlink" title="AdaGrad算法"></a>AdaGrad算法</h3><p>通过计算历次的梯度平方累计值进行学习率衰减。<br>$G_t$是累计值：<br><img src="images/2018-11-13-15421189802198.jpg" width="20%" height="50%"></p>
-<p>更新值则为：<br><img src="images/2018-11-13-15421190100615.jpg" width="30%" height="50%"></p>
+<h1 id="优化算法"><a href="#优化算法" class="headerlink" title="优化算法"></a>优化算法</h1><p>对于标准的SGD，常见的改进算法从两个方面进行：学习率衰减&amp;梯度方向优化。<br>记$g_t$为t时刻的导数：<br><img src="/images/2018-11-13-15421196736629.jpg" width="20%" height="50%"></p>
+<h2 id="学习率衰减"><a href="#学习率衰减" class="headerlink" title="学习率衰减"></a>学习率衰减</h2><h3 id="AdaGrad算法"><a href="#AdaGrad算法" class="headerlink" title="AdaGrad算法"></a>AdaGrad算法</h3><p>通过计算历次的梯度平方累计值进行学习率衰减。<br>$G_t$是累计值：<br><img src="/images/2018-11-13-15421189802198.jpg" width="20%" height="50%"></p>
+<p>更新值则为：<br><img src="/images/2018-11-13-15421190100615.jpg" width="30%" height="50%"></p>
 <p>缺点：随着迭代次数的增加学习率递减。在经过一定次数的迭代依然没有找到最优点时，由于这时的学习率已经非常小，很难再继续找到最优点。</p>
-<h3 id="RMSprop算法"><a href="#RMSprop算法" class="headerlink" title="RMSprop算法"></a>RMSprop算法</h3><p>对AdaGrad的改进，唯一的区别在于$G_t$的计算，将历史信息和当前信息进行线性加权，使得学习率可以动态改变而不是单调递减：<br><img src="images/2018-11-13-15421192344025.jpg" width="40%" height="50%"></p>
+<h3 id="RMSprop算法"><a href="#RMSprop算法" class="headerlink" title="RMSprop算法"></a>RMSprop算法</h3><p>对AdaGrad的改进，唯一的区别在于$G_t$的计算，将历史信息和当前信息进行线性加权，使得学习率可以动态改变而不是单调递减：<br><img src="/images/2018-11-13-15421192344025.jpg" width="40%" height="50%"></p>
 <p>β为衰减率，通常取0.9。也即历史信息占主导。</p>
-<h3 id="AdaDelta算法"><a href="#AdaDelta算法" class="headerlink" title="AdaDelta算法"></a>AdaDelta算法</h3><p>同样是对AdaGrad的改进。<br>每次计算：<br><img src="images/2018-11-13-15421195264173.jpg" width="50%" height="50%"></p>
+<h3 id="AdaDelta算法"><a href="#AdaDelta算法" class="headerlink" title="AdaDelta算法"></a>AdaDelta算法</h3><p>同样是对AdaGrad的改进。<br>每次计算：<br><img src="/images/2018-11-13-15421195264173.jpg" width="50%" height="50%"></p>
 <p>也即历史更新差和上一时刻的更新差的加权（RMSprop是历史梯度和当前梯度）。</p>
-<p>最终更新差值为：<br><img src="images/2018-11-13-15421197355615.jpg" width="30%" height="50%"></p>
+<p>最终更新差值为：<br><img src="/images/2018-11-13-15421197355615.jpg" width="30%" height="50%"></p>
 <p>其中$G_t$计算方法和RMSprop一致。</p>
 <h2 id="梯度方向优化"><a href="#梯度方向优化" class="headerlink" title="梯度方向优化"></a>梯度方向优化</h2><p>利用历史的梯度（方向）调整当前时刻的梯度。</p>
 <h3 id="动量（Momentum）法"><a href="#动量（Momentum）法" class="headerlink" title="动量（Momentum）法"></a>动量（Momentum）法</h3><p>动量法（Momentum Method）是用之前积累动量来替代真正的梯度。每次迭代的梯度可以看作是加速度。</p>
-<p><img src="images/2018-11-13-15421199473226.jpg" width="28%" height="50%"></p>
+<p><img src="/images/2018-11-13-15421199473226.jpg" width="28%" height="50%"></p>
 <p>也即上一时刻的更新差值和当前梯度共同决定当前的更新差值。$ρ$为动量因子，通常为0.9。也即动量占了主导。</p>
 <p>当某个参数在最近一段时间内的梯度方向不一致时，其真实的参数更新幅度变小；相反，当在最近一段时间内的梯度方向都一致时，其真实的参数更新幅度变大，起到加速作用。一般而言，在迭代初期，梯度方法都比较一致，动量法会起到加速作用，可以更快地到达最优点。在迭代后期，梯度方法会取决不一致，在收敛值附近震荡，动量法会起到减速作用，增加稳定性。</p>
 <h3 id="Nesterov加速梯度"><a href="#Nesterov加速梯度" class="headerlink" title="Nesterov加速梯度"></a>Nesterov加速梯度</h3><p>动量法的改进版本。</p>
-<p>前面提到的动量法，是上一步的更新方向$\Delta \theta_{t-1}$与当前梯度$-g_t$的加和。因此可以理解成，先根据$∆θ_{t−1}$更新一次得到参数θ，再用$g_t$进行更新。亦即：<br><img src="images/2018-11-13-15421202426163.jpg" width="27%" height="50%"><br>上式的第二步中，$g_t$是在$\theta_{t-1}$上的梯度。我们将该步改为在$_theta{t}$的梯度。<br>因此，有：<br><img src="images/2018-11-13-15421203421465.jpg" width="50%" height="50%"></p>
-<p>和动量法相比，相当于提前走了一步。<br><img src="images/2018-11-13-15421203910771.jpg" width="70%" height="50%"></p>
-<h3 id="Adam-amp-Nadam"><a href="#Adam-amp-Nadam" class="headerlink" title="Adam&amp;Nadam"></a>Adam&amp;Nadam</h3><p>Adam一方面计算梯度平方的加权，同时还计算梯度的加权：<br><img src="images/2018-11-13-15421205162558.jpg" width="40%" height="50%"><br>通常$β_1=0.9$,$β_2=0.99$<br>也即历史信息占了主导。</p>
-<p>在初期$M_t$与$G_t$会比真实均值和方差要小（想象$M_0=0,G_0=0$时）。因此对其进行修正，即：<br><img src="images/2018-11-13-15421207635850.jpg" width="18%" height="50%"><br>因此最终有：<br><img src="images/2018-11-13-15421207966341.jpg" width="26%" height="50%"></p>
+<p>前面提到的动量法，是上一步的更新方向$\Delta \theta_{t-1}$与当前梯度$-g_t$的加和。因此可以理解成，先根据$∆θ_{t−1}$更新一次得到参数θ，再用$g_t$进行更新。亦即：<br><img src="/images/2018-11-13-15421202426163.jpg" width="27%" height="50%"><br>上式的第二步中，$g_t$是在$\theta_{t-1}$上的梯度。我们将该步改为在$_theta{t}$的梯度。<br>因此，有：<br><img src="/images/2018-11-13-15421203421465.jpg" width="50%" height="50%"></p>
+<p>和动量法相比，相当于提前走了一步。<br><img src="/images/2018-11-13-15421203910771.jpg" width="70%" height="50%"></p>
+<h3 id="Adam-amp-Nadam"><a href="#Adam-amp-Nadam" class="headerlink" title="Adam&amp;Nadam"></a>Adam&amp;Nadam</h3><p>Adam一方面计算梯度平方的加权，同时还计算梯度的加权：<br><img src="/images/2018-11-13-15421205162558.jpg" width="40%" height="50%"><br>通常$β_1=0.9$,$β_2=0.99$<br>也即历史信息占了主导。</p>
+<p>在初期$M_t$与$G_t$会比真实均值和方差要小（想象$M_0=0,G_0=0$时）。因此对其进行修正，即：<br><img src="/images/2018-11-13-15421207635850.jpg" width="18%" height="50%"><br>因此最终有：<br><img src="/images/2018-11-13-15421207966341.jpg" width="26%" height="50%"></p>
 <p>同理有Nadam。</p>
 <p>Adam = Momentum + RMSprop<br>Nadam = Nesterov + RMSprop</p>
 <h3 id="梯度截断-gradient-clipping"><a href="#梯度截断-gradient-clipping" class="headerlink" title="梯度截断 gradient clipping"></a>梯度截断 gradient clipping</h3><p>分为按值截断与按模截断。</p>
@@ -411,10 +411,10 @@
 <p>原则：不能过大，否则激活值会变得饱和，如sigmoid；不能过小，否则经过多层信号会逐渐消失，并且导致sigmoid丢失非线性的能力（在0附近基本近似线性）。如果一个神经元的输入连接很多，它的每个输入连接上的权重就应该小一些，这是为了避免输出过大。</p>
 <h2 id="Gaussian分布初始化"><a href="#Gaussian分布初始化" class="headerlink" title="Gaussian分布初始化"></a>Gaussian分布初始化</h2><p>同时考虑输入输出，可以按$N(0,\sqrt{\frac{2}{n_{in} + n_{out}}})$高斯分布来初始化。</p>
 <h2 id="均匀分布初始化"><a href="#均匀分布初始化" class="headerlink" title="均匀分布初始化"></a>均匀分布初始化</h2><p>在$[-r,r]$区间均匀分布初始化，其中r可以按照神经元数量自适应调整。</p>
-<h3 id="Xavier初始化方法"><a href="#Xavier初始化方法" class="headerlink" title="Xavier初始化方法"></a>Xavier初始化方法</h3><p>自动计算超参r。r的公式为：<br><img src="images/2018-11-14-15421648119504.jpg" width="22%" height="50%"><br>其中$n^l$代表第$l$层的神经元个数。</p>
+<h3 id="Xavier初始化方法"><a href="#Xavier初始化方法" class="headerlink" title="Xavier初始化方法"></a>Xavier初始化方法</h3><p>自动计算超参r。r的公式为：<br><img src="/images/2018-11-14-15421648119504.jpg" width="22%" height="50%"><br>其中$n^l$代表第$l$层的神经元个数。</p>
 <p>为什么是这个式子（推导见参考资料）：综合考虑了①输入输出的方差要一致；②反向传播中误差信号的方差不被放大或缩小。</p>
-<h1 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h1><p>将数据分布归一化，使得分布保持稳定。<br><img src="images/2018-11-14-15421656553319.jpg" width="100%" height="50%"><br>假设数据有四维(N,C,H,W)。N代表batch；C代表channel；H,W代表height和width。</p>
-<h2 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h2><p>沿着通道进行归一化，亦即每个通道都有自己的均值和方差。<br><img src="images/2018-11-14-15421657694248.jpg" width="70%" height="50%"><br>其中缩放平移变量是可学习的。</p>
+<h1 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h1><p>将数据分布归一化，使得分布保持稳定。<br><img src="/images/2018-11-14-15421656553319.jpg" width="100%" height="50%"><br>假设数据有四维(N,C,H,W)。N代表batch；C代表channel；H,W代表height和width。</p>
+<h2 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h2><p>沿着通道进行归一化，亦即每个通道都有自己的均值和方差。<br><img src="/images/2018-11-14-15421657694248.jpg" width="70%" height="50%"><br>其中缩放平移变量是可学习的。</p>
 <p>缺点：<br>①对batch size敏感，batch size太小则方差均值不足以代表数据分布<br>②对于不等长的输入如RNN来说，每一个timestep都需要保存不同的特征。</p>
 <h2 id="Layer-Normalization"><a href="#Layer-Normalization" class="headerlink" title="Layer Normalization"></a>Layer Normalization</h2><p>对一个输入进行正则化，亦即每个输入都有自己的方差、均值。这样不依赖于batch大小和输入sequence的深度。</p>
 <p>对RNN效果比较明显，但CNN中不如BN</p>

@@ -87,14 +87,14 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="1️⃣[dropout]dropout形式:RNN的形式有多种：  recurrent dropoutRNN: $h_t=f(W_h ⊙ [x_t,h_{t-1}]+b_h)$加上dropout的RNN：$h_t=f(W_h ⊙ [x_t,d(h_{t-1})]+b_h)$，其中$d(\cdot)$为dropout函数同理：LSTM:$c_t=f_t ⊙c_{t-1} + i_t ⊙ d(g_t)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/02/碎片知识/每周碎片知识6/images/2018-09-02-15358857481798.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/02/碎片知识/每周碎片知识6/images/2018-09-02-15358866404870.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/02/碎片知识/每周碎片知识6/images/2018-09-02-15358868858836.jpg">
-<meta property="og:updated_time" content="2018-11-19T00:35:19.156Z">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-02-15358857481798.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-02-15358866404870.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-02-15358868858836.jpg">
+<meta property="og:updated_time" content="2018-11-19T03:21:15.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周碎片知识6">
 <meta name="twitter:description" content="1️⃣[dropout]dropout形式:RNN的形式有多种：  recurrent dropoutRNN: $h_t=f(W_h ⊙ [x_t,h_{t-1}]+b_h)$加上dropout的RNN：$h_t=f(W_h ⊙ [x_t,d(h_{t-1})]+b_h)$，其中$d(\cdot)$为dropout函数同理：LSTM:$c_t=f_t ⊙c_{t-1} + i_t ⊙ d(g_t)">
-<meta name="twitter:image" content="http://www.linzehui.me/2018/09/02/碎片知识/每周碎片知识6/images/2018-09-02-15358857481798.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/images/2018-09-02-15358857481798.jpg">
 
 
 
@@ -336,7 +336,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:19+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:15+08:00">
                 2018-11-19
               </time>
             
@@ -370,16 +370,16 @@
       
 
       
-        <h3 id="1️⃣-dropout"><a href="#1️⃣-dropout" class="headerlink" title="1️⃣[dropout]"></a>1️⃣[dropout]</h3><p>dropout形式:<br><img src="images/2018-09-02-15358857481798.jpg" width="70%" height="50%"><br>RNN的形式有多种：</p>
+        <h3 id="1️⃣-dropout"><a href="#1️⃣-dropout" class="headerlink" title="1️⃣[dropout]"></a>1️⃣[dropout]</h3><p>dropout形式:<br><img src="/images/2018-09-02-15358857481798.jpg" width="70%" height="50%"><br>RNN的形式有多种：</p>
 <ul>
 <li><p>recurrent dropout<br>RNN: $h_t=f(W_h ⊙ [x_t,h_{t-1}]+b_h)$<br>加上dropout的RNN：$h_t=f(W_h ⊙ [x_t,d(h_{t-1})]+b_h)$，其中$d(\cdot)$为dropout函数<br>同理：<br>LSTM:$c_t=f_t ⊙c_{t-1} + i_t ⊙ d(g_t)$<br>GRU:$h_t=(1-z_t)⊙c_{t-1}+z_t⊙d(g_t)$</p>
 </li>
-<li><p>垂直连接的dropout<br>dropout的作用即是否允许L层某个LSTM单元的隐状态信息流入L+1层对应单元。<br><img src="images/2018-09-02-15358866404870.jpg" width="50%" height="50%"></p>
+<li><p>垂直连接的dropout<br>dropout的作用即是否允许L层某个LSTM单元的隐状态信息流入L+1层对应单元。<br><img src="/images/2018-09-02-15358866404870.jpg" width="50%" height="50%"></p>
 </li>
 </ul>
 <p>Reference:<br><a href="https://blog.csdn.net/falianghuang/article/details/72910161" target="_blank" rel="noopener">https://blog.csdn.net/falianghuang/article/details/72910161</a></p>
 <hr>
-<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>pack_padded_sequence用于RNN中，将padding矩阵压缩:<br><img src="images/2018-09-02-15358868858836.jpg" width="60%" height="50%"><br>这样就可以实现在RNN传输过程中短句提前结束。</p>
+<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>pack_padded_sequence用于RNN中，将padding矩阵压缩:<br><img src="/images/2018-09-02-15358868858836.jpg" width="60%" height="50%"><br>这样就可以实现在RNN传输过程中短句提前结束。</p>
 <p>pad_packed_sequence是pack_padded_sequence的逆运算。</p>
 
       

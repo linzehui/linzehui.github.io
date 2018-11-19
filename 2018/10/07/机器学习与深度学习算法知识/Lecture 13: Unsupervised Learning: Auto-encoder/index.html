@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Unsupervised Learning,Auto-encoder," />
+  <meta name="keywords" content="机器学习🤖,Unsupervised Learning,李宏毅机器学习课程,Auto-encoder," />
 
 
 
@@ -80,25 +80,25 @@
 
 
 <meta name="description" content="Auto-encoder由一个encoder和一个decoder组成，encoder负责将输入转成一个向量表示（维度通常小于输入），decoder负责将这段向量表示恢复成原来的输入。那么中间的code就可以作为输入的一个低维表示： Auto-encoder for CNN Unpooling有两种方法，一种在pooling的时候记录最大值的位置，在unpooling时在相对位置填充最大值，其他位置">
-<meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Unsupervised Learning,Auto-encoder">
+<meta name="keywords" content="机器学习🤖,Unsupervised Learning,李宏毅机器学习课程,Auto-encoder">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lecture 13:Unsupervised Learning:Auto-encoder">
 <meta property="og:url" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 13: Unsupervised Learning: Auto-encoder/index.html">
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="Auto-encoder由一个encoder和一个decoder组成，encoder负责将输入转成一个向量表示（维度通常小于输入），decoder负责将这段向量表示恢复成原来的输入。那么中间的code就可以作为输入的一个低维表示： Auto-encoder for CNN Unpooling有两种方法，一种在pooling的时候记录最大值的位置，在unpooling时在相对位置填充最大值，其他位置">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2013:%20Unsupervised%20Learning:%20Auto-encoder/images/2018-10-07-15388832782913.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2013:%20Unsupervised%20Learning:%20Auto-encoder/images/2018-10-07-15388833149617.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2013:%20Unsupervised%20Learning:%20Auto-encoder/images/2018-10-07-15388833530548.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2013:%20Unsupervised%20Learning:%20Auto-encoder/images/2018-10-07-15388834044149.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2013:%20Unsupervised%20Learning:%20Auto-encoder/images/2018-10-07-15388834434741.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2013:%20Unsupervised%20Learning:%20Auto-encoder/images/2018-10-07-15388834751493.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2013:%20Unsupervised%20Learning:%20Auto-encoder/images/2018-10-07-15388835335550.jpg">
-<meta property="og:updated_time" content="2018-11-19T00:35:38.905Z">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388832782913.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388833149617.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388833530548.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388834044149.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388834434741.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388834751493.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388835335550.jpg">
+<meta property="og:updated_time" content="2018-11-19T03:21:31.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lecture 13:Unsupervised Learning:Auto-encoder">
 <meta name="twitter:description" content="Auto-encoder由一个encoder和一个decoder组成，encoder负责将输入转成一个向量表示（维度通常小于输入），decoder负责将这段向量表示恢复成原来的输入。那么中间的code就可以作为输入的一个低维表示： Auto-encoder for CNN Unpooling有两种方法，一种在pooling的时候记录最大值的位置，在unpooling时在相对位置填充最大值，其他位置">
-<meta name="twitter:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2013:%20Unsupervised%20Learning:%20Auto-encoder/images/2018-10-07-15388832782913.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/images/2018-10-07-15388832782913.jpg">
 
 
 
@@ -340,7 +340,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:38+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:31+08:00">
                 2018-11-19
               </time>
             
@@ -374,15 +374,15 @@
       
 
       
-        <h3 id="Auto-encoder"><a href="#Auto-encoder" class="headerlink" title="Auto-encoder"></a>Auto-encoder</h3><p>由一个encoder和一个decoder组成，encoder负责将输入转成一个向量表示（维度通常小于输入），decoder负责将这段向量表示恢复成原来的输入。那么中间的code就可以作为输入的一个低维表示：<br><img src="images/2018-10-07-15388832782913.jpg" width="50%" height="50%"></p>
-<h3 id="Auto-encoder-for-CNN"><a href="#Auto-encoder-for-CNN" class="headerlink" title="Auto-encoder for CNN"></a>Auto-encoder for CNN</h3><p><img src="images/2018-10-07-15388833149617.jpg" width="50%" height="50%"></p>
-<h4 id="Unpooling"><a href="#Unpooling" class="headerlink" title="Unpooling"></a>Unpooling</h4><p>有两种方法，一种在pooling的时候记录最大值的位置，在unpooling时在相对位置填充最大值，其他位置填充0；另一种不记录最大值位置，直接在pooling区域全部填充最大值。<br><img src="images/2018-10-07-15388833530548.jpg" width="50%" height="50%"></p>
+        <h3 id="Auto-encoder"><a href="#Auto-encoder" class="headerlink" title="Auto-encoder"></a>Auto-encoder</h3><p>由一个encoder和一个decoder组成，encoder负责将输入转成一个向量表示（维度通常小于输入），decoder负责将这段向量表示恢复成原来的输入。那么中间的code就可以作为输入的一个低维表示：<br><img src="/images/2018-10-07-15388832782913.jpg" width="50%" height="50%"></p>
+<h3 id="Auto-encoder-for-CNN"><a href="#Auto-encoder-for-CNN" class="headerlink" title="Auto-encoder for CNN"></a>Auto-encoder for CNN</h3><p><img src="/images/2018-10-07-15388833149617.jpg" width="50%" height="50%"></p>
+<h4 id="Unpooling"><a href="#Unpooling" class="headerlink" title="Unpooling"></a>Unpooling</h4><p>有两种方法，一种在pooling的时候记录最大值的位置，在unpooling时在相对位置填充最大值，其他位置填充0；另一种不记录最大值位置，直接在pooling区域全部填充最大值。<br><img src="/images/2018-10-07-15388833530548.jpg" width="50%" height="50%"></p>
 <h4 id="Deconvolution"><a href="#Deconvolution" class="headerlink" title="Deconvolution"></a>Deconvolution</h4><p>其实本质就是convolution。</p>
 <p>这是convolution:</p>
-<p><img src="images/2018-10-07-15388834044149.jpg" width="10%" height="50%"></p>
-<p>我们期待的convolution：<br><img src="images/2018-10-07-15388834434741.jpg" width="15%" height="50%"></p>
-<p>实际上就等价在两边做padding，然后直接convolution：<br><img src="images/2018-10-07-15388834751493.jpg" width="15%" height="50%"></p>
-<h3 id="Auto-encoder的用处"><a href="#Auto-encoder的用处" class="headerlink" title="Auto-encoder的用处"></a>Auto-encoder的用处</h3><p>可以预训练每一层的DNN：<br><img src="images/2018-10-07-15388835335550.jpg" width="50%" height="50%"></p>
+<p><img src="/images/2018-10-07-15388834044149.jpg" width="10%" height="50%"></p>
+<p>我们期待的convolution：<br><img src="/images/2018-10-07-15388834434741.jpg" width="15%" height="50%"></p>
+<p>实际上就等价在两边做padding，然后直接convolution：<br><img src="/images/2018-10-07-15388834751493.jpg" width="15%" height="50%"></p>
+<h3 id="Auto-encoder的用处"><a href="#Auto-encoder的用处" class="headerlink" title="Auto-encoder的用处"></a>Auto-encoder的用处</h3><p>可以预训练每一层的DNN：<br><img src="/images/2018-10-07-15388835335550.jpg" width="50%" height="50%"></p>
 <p>同理其它层也是一样，每次fix住其他层然后做Auto-encoder。那么在bp的时候只需要fine-tune就行。</p>
 
       
@@ -403,9 +403,9 @@
           
             <a href="/tags/机器学习🤖/" rel="tag"> <i class="fa fa-tag"></i> 机器学习🤖</a>
           
-            <a href="/tags/李宏毅机器学习课程/" rel="tag"> <i class="fa fa-tag"></i> 李宏毅机器学习课程</a>
-          
             <a href="/tags/Unsupervised-Learning/" rel="tag"> <i class="fa fa-tag"></i> Unsupervised Learning</a>
+          
+            <a href="/tags/李宏毅机器学习课程/" rel="tag"> <i class="fa fa-tag"></i> 李宏毅机器学习课程</a>
           
             <a href="/tags/Auto-encoder/" rel="tag"> <i class="fa fa-tag"></i> Auto-encoder</a>
           

@@ -87,34 +87,34 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="Gradient Descent tipstip 1：Adaptive Learning RatesAdagrad基本思想  其中σ是之前所有的梯度的平方根 化简形式： 为什么要怎么做？考虑一个开口向上的二次函数 也即，最好的步长是一次导除以二次导，但二次导计算量大，因此使用近似的方式：对一次导作多次的sample。下图显示，如果二次导小，那么多次sample获得的一次导也小，反之则大，也就是说，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370654467771.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370654502774.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370654728457.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370654853172.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370655091732.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370655850876.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370656836724.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370657785697.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370658066669.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370658167935.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370658315314.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370658494091.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370658736683.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370658623258.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370658855882.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370658981519.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370659061025.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370659680601.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370659747339.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370660126195.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370660243469.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370660628961.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370660794436.jpg">
-<meta property="og:updated_time" content="2018-11-19T00:35:35.936Z">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370654467771.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370654502774.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370654728457.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370654853172.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370655091732.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370655850876.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370656836724.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370657785697.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370658066669.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370658167935.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370658315314.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370658494091.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370658736683.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370658623258.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370658855882.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370658981519.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370659061025.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370659680601.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370659747339.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370660126195.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370660243469.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370660628961.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-09-16-15370660794436.jpg">
+<meta property="og:updated_time" content="2018-11-19T03:21:28.540Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lecture 3:Gradient Descent">
 <meta name="twitter:description" content="Gradient Descent tipstip 1：Adaptive Learning RatesAdagrad基本思想  其中σ是之前所有的梯度的平方根 化简形式： 为什么要怎么做？考虑一个开口向上的二次函数 也即，最好的步长是一次导除以二次导，但二次导计算量大，因此使用近似的方式：对一次导作多次的sample。下图显示，如果二次导小，那么多次sample获得的一次导也小，反之则大，也就是说，">
-<meta name="twitter:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%203%20Gradient%20Descent/images/2018-09-16-15370654467771.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/images/2018-09-16-15370654467771.jpg">
 
 
 
@@ -356,7 +356,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:35+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:28+08:00">
                 2018-11-19
               </time>
             
@@ -390,33 +390,33 @@
       
 
       
-        <h2 id="Gradient-Descent-tips"><a href="#Gradient-Descent-tips" class="headerlink" title="Gradient Descent tips"></a>Gradient Descent tips</h2><h3 id="tip-1：Adaptive-Learning-Rates"><a href="#tip-1：Adaptive-Learning-Rates" class="headerlink" title="tip 1：Adaptive Learning Rates"></a>tip 1：Adaptive Learning Rates</h3><h4 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h4><h5 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h5><p><img src="images/2018-09-16-15370654467771.jpg" width="30%" height="50%"></p>
-<p><img src="images/2018-09-16-15370654502774.jpg" width="20%" height="50%"></p>
-<p>其中σ是之前所有的梯度的平方根<br><img src="images/2018-09-16-15370654728457.jpg" width="30%" height="50%"></p>
-<p>化简形式：<br><img src="images/2018-09-16-15370654853172.jpg" width="50%" height="50%"></p>
-<h5 id="为什么要怎么做？"><a href="#为什么要怎么做？" class="headerlink" title="为什么要怎么做？"></a>为什么要怎么做？</h5><p>考虑一个开口向上的二次函数<br><img src="images/2018-09-16-15370655091732.jpg" width="50%" height="50%"></p>
+        <h2 id="Gradient-Descent-tips"><a href="#Gradient-Descent-tips" class="headerlink" title="Gradient Descent tips"></a>Gradient Descent tips</h2><h3 id="tip-1：Adaptive-Learning-Rates"><a href="#tip-1：Adaptive-Learning-Rates" class="headerlink" title="tip 1：Adaptive Learning Rates"></a>tip 1：Adaptive Learning Rates</h3><h4 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h4><h5 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h5><p><img src="/images/2018-09-16-15370654467771.jpg" width="30%" height="50%"></p>
+<p><img src="/images/2018-09-16-15370654502774.jpg" width="20%" height="50%"></p>
+<p>其中σ是之前所有的梯度的平方根<br><img src="/images/2018-09-16-15370654728457.jpg" width="30%" height="50%"></p>
+<p>化简形式：<br><img src="/images/2018-09-16-15370654853172.jpg" width="50%" height="50%"></p>
+<h5 id="为什么要怎么做？"><a href="#为什么要怎么做？" class="headerlink" title="为什么要怎么做？"></a>为什么要怎么做？</h5><p>考虑一个开口向上的二次函数<br><img src="/images/2018-09-16-15370655091732.jpg" width="50%" height="50%"></p>
 <p>也即，最好的步长是一次导除以二次导，但二次导计算量大，因此使用近似的方式：<br><strong>对一次导作多次的sample</strong>。<br>下图显示，如果二次导小，那么多次sample获得的一次导也小，反之则大，也就是说，一次导在某种程度上可以反映二次导的大小，所以直接用一次导近似，可以减少计算量。</p>
-<p><img src="images/2018-09-16-15370655850876.jpg" width="50%" height="50%"></p>
-<h3 id="tip-2：feature-scaling"><a href="#tip-2：feature-scaling" class="headerlink" title="tip 2：feature scaling"></a>tip 2：feature scaling</h3><p><img src="images/2018-09-16-15370656836724.jpg" width="50%" height="50%"></p>
+<p><img src="/images/2018-09-16-15370655850876.jpg" width="50%" height="50%"></p>
+<h3 id="tip-2：feature-scaling"><a href="#tip-2：feature-scaling" class="headerlink" title="tip 2：feature scaling"></a>tip 2：feature scaling</h3><p><img src="/images/2018-09-16-15370656836724.jpg" width="50%" height="50%"></p>
 <p>能够改变loss的分布，上图1中w2对loss的影响较大，则较陡峭，参数更新就较困难，需要adaptive learning rate；如果进行feature scaling，能够更好达到local optimal</p>
 <h2 id="Gradient-Descent-Theory"><a href="#Gradient-Descent-Theory" class="headerlink" title="Gradient Descent Theory"></a>Gradient Descent Theory</h2><p>另一种角度看gradient descent：</p>
-<p>基本思想：<br>我们希望每一次都在当前点附近找到一个最小的点，即在一个范围内：<br><img src="images/2018-09-16-15370657785697.jpg" width="40%" height="50%"></p>
+<p>基本思想：<br>我们希望每一次都在当前点附近找到一个最小的点，即在一个范围内：<br><img src="/images/2018-09-16-15370657785697.jpg" width="40%" height="50%"></p>
 <p>应该如何找到该最小点？</p>
-<p>我们知道，泰勒级数的形式：<br><img src="images/2018-09-16-15370658066669.jpg" width="50%" height="50%"></p>
-<p>当x接近x0时，会有如下近似：<br><img src="images/2018-09-16-15370658167935.jpg" width="30%" height="50%"></p>
-<p>推广到多元泰勒级数则有：<br><img src="images/2018-09-16-15370658315314.jpg" width="60%" height="50%"></p>
-<p>那么，如前所述，x接近x0，对于图中，即圆圈足够小时：<br><img src="images/2018-09-16-15370658494091.jpg" width="50%" height="50%"></p>
-<p>简化符号：<br><img src="images/2018-09-16-15370658736683.jpg" width="12%" height="50%"></p>
-<p><img src="images/2018-09-16-15370658623258.jpg" width="30%" height="50%"></p>
-<p>所以可以简写成：<br><img src="images/2018-09-16-15370658855882.jpg" width="30%" height="50%"></p>
-<p>由于s,u,v都是常数，在圆圈范围内寻找最小值对应的参数可以简化成：<br><img src="images/2018-09-16-15370658981519.jpg" width="40%" height="50%"></p>
-<p><img src="images/2018-09-16-15370659061025.jpg" width="30%" height="50%"></p>
-<p>再度简化，可以表达成：<br><img src="images/2018-09-16-15370659680601.jpg" width="40%" height="50%"></p>
-<p><img src="images/2018-09-16-15370659747339.jpg" width="30%" height="50%"></p>
-<p>在图中可以画为两个向量的点积<br><img src="images/2018-09-16-15370660126195.jpg" width="40%" height="50%"></p>
-<p>显然，当反方向时，最小：<br><img src="images/2018-09-16-15370660243469.jpg" width="40%" height="50%"></p>
-<p>也即：<br><img src="images/2018-09-16-15370660628961.jpg" width="50%" height="50%"></p>
-<p>最终完整的式子：<br><img src="images/2018-09-16-15370660794436.jpg" width="55%" height="50%"></p>
+<p>我们知道，泰勒级数的形式：<br><img src="/images/2018-09-16-15370658066669.jpg" width="50%" height="50%"></p>
+<p>当x接近x0时，会有如下近似：<br><img src="/images/2018-09-16-15370658167935.jpg" width="30%" height="50%"></p>
+<p>推广到多元泰勒级数则有：<br><img src="/images/2018-09-16-15370658315314.jpg" width="60%" height="50%"></p>
+<p>那么，如前所述，x接近x0，对于图中，即圆圈足够小时：<br><img src="/images/2018-09-16-15370658494091.jpg" width="50%" height="50%"></p>
+<p>简化符号：<br><img src="/images/2018-09-16-15370658736683.jpg" width="12%" height="50%"></p>
+<p><img src="/images/2018-09-16-15370658623258.jpg" width="30%" height="50%"></p>
+<p>所以可以简写成：<br><img src="/images/2018-09-16-15370658855882.jpg" width="30%" height="50%"></p>
+<p>由于s,u,v都是常数，在圆圈范围内寻找最小值对应的参数可以简化成：<br><img src="/images/2018-09-16-15370658981519.jpg" width="40%" height="50%"></p>
+<p><img src="/images/2018-09-16-15370659061025.jpg" width="30%" height="50%"></p>
+<p>再度简化，可以表达成：<br><img src="/images/2018-09-16-15370659680601.jpg" width="40%" height="50%"></p>
+<p><img src="/images/2018-09-16-15370659747339.jpg" width="30%" height="50%"></p>
+<p>在图中可以画为两个向量的点积<br><img src="/images/2018-09-16-15370660126195.jpg" width="40%" height="50%"></p>
+<p>显然，当反方向时，最小：<br><img src="/images/2018-09-16-15370660243469.jpg" width="40%" height="50%"></p>
+<p>也即：<br><img src="/images/2018-09-16-15370660628961.jpg" width="50%" height="50%"></p>
+<p>最终完整的式子：<br><img src="/images/2018-09-16-15370660794436.jpg" width="55%" height="50%"></p>
 <p>因此，当learning rate不够小时，是不满足泰勒级数近似的。</p>
 
       

@@ -87,22 +87,22 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="Model Fine-tuning假设我们有很多的source data $(x^s,y^s )$，与任务相关的target data $(x^t,y^t )$  很少。我们利用source data训练一个模型，然后用target data来fine tune模型。 conservative training 我们可以用source data训练好的模型的weight作为新的模型的weight，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2015:%20Transfer%20Learning/images/2018-10-07-15388871902739.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2015:%20Transfer%20Learning/images/2018-10-07-15388872452545.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2015:%20Transfer%20Learning/images/2018-10-07-15388872627707.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2015:%20Transfer%20Learning/images/2018-10-07-15388872920224.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2015:%20Transfer%20Learning/images/2018-10-07-15388873325090.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2015:%20Transfer%20Learning/images/2018-10-07-15388873772888.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2015:%20Transfer%20Learning/images/2018-10-07-15388874447304.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2015:%20Transfer%20Learning/images/2018-10-07-15388874838165.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2015:%20Transfer%20Learning/images/2018-10-07-15388875088114.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2015:%20Transfer%20Learning/images/2018-10-07-15388875558853.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2015:%20Transfer%20Learning/images/2018-10-07-15388875888699.jpg">
-<meta property="og:updated_time" content="2018-11-19T00:35:37.896Z">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388871902739.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388872452545.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388872627707.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388872920224.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388873325090.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388873772888.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388874447304.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388874838165.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388875088114.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388875558853.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388875888699.jpg">
+<meta property="og:updated_time" content="2018-11-19T03:21:30.428Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lecture 15:Transfer Learning">
 <meta name="twitter:description" content="Model Fine-tuning假设我们有很多的source data $(x^s,y^s )$，与任务相关的target data $(x^t,y^t )$  很少。我们利用source data训练一个模型，然后用target data来fine tune模型。 conservative training 我们可以用source data训练好的模型的weight作为新的模型的weight，">
-<meta name="twitter:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2015:%20Transfer%20Learning/images/2018-10-07-15388871902739.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/images/2018-10-07-15388871902739.jpg">
 
 
 
@@ -344,7 +344,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:37+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:30+08:00">
                 2018-11-19
               </time>
             
@@ -379,19 +379,19 @@
 
       
         <h3 id="Model-Fine-tuning"><a href="#Model-Fine-tuning" class="headerlink" title="Model Fine-tuning"></a>Model Fine-tuning</h3><p>假设我们有很多的source data $(x^s,y^s )$，与任务相关的target data $(x^t,y^t )$  很少。<br>我们利用source data训练一个模型，然后用target data来fine tune模型。</p>
-<h4 id="conservative-training"><a href="#conservative-training" class="headerlink" title="conservative training"></a>conservative training</h4><p><img src="images/2018-10-07-15388871902739.jpg" width="50%" height="50%"></p>
+<h4 id="conservative-training"><a href="#conservative-training" class="headerlink" title="conservative training"></a>conservative training</h4><p><img src="/images/2018-10-07-15388871902739.jpg" width="50%" height="50%"></p>
 <p>我们可以用source data训练好的模型的weight作为新的模型的weight，然后设定一些限制，比如source data作为输入的output应和target data作为输入的output尽量相似，或者参数尽量相似等。</p>
 <h4 id="layer-transfer"><a href="#layer-transfer" class="headerlink" title="layer transfer"></a>layer transfer</h4><p>也就是新模型有几层是直接copy旧模型的，只训练其它层。注意到不同任务所应copy的层是不同的，语音任务最后几层效果好，图像识别前面几层效果好</p>
-<h3 id="Multitask-Learning"><a href="#Multitask-Learning" class="headerlink" title="Multitask Learning"></a>Multitask Learning</h3><p>不同任务之间共享相同的中间层，如：<br><img src="images/2018-10-07-15388872452545.jpg" width="30%" height="50%"><br><img src="images/2018-10-07-15388872627707.jpg" width="30%" height="50%"></p>
-<p>还有一种progressive neural networks：<br><img src="images/2018-10-07-15388872920224.jpg" width="50%" height="50%"><br>首先训练好第一个任务的模型，然后在训练第二个模型的时候将第一个模型的隐层加入到第二个模型的隐层中；训练第三个模型则将第二个和第一个模型的隐层加入到第三个模型的隐层中，以此类推</p>
-<h3 id="Domain-adversarial-training"><a href="#Domain-adversarial-training" class="headerlink" title="Domain-adversarial training"></a>Domain-adversarial training</h3><p>source data是有标签的，而target data是无标签的，都属于同一个任务，但数据是mismatch的，如：<br><img src="images/2018-10-07-15388873325090.jpg" width="50%" height="50%"></p>
-<p>因为NN的隐层可以理解成是在抽取图像的特征，我们希望能够在训练NN的过程中去掉source data的一些domain specific的特性，这样就可以用在target data上了。因此我们在feature exactor后面连接两个模块：<br><img src="images/2018-10-07-15388873772888.jpg" width="50%" height="50%"></p>
+<h3 id="Multitask-Learning"><a href="#Multitask-Learning" class="headerlink" title="Multitask Learning"></a>Multitask Learning</h3><p>不同任务之间共享相同的中间层，如：<br><img src="/images/2018-10-07-15388872452545.jpg" width="30%" height="50%"><br><img src="/images/2018-10-07-15388872627707.jpg" width="30%" height="50%"></p>
+<p>还有一种progressive neural networks：<br><img src="/images/2018-10-07-15388872920224.jpg" width="50%" height="50%"><br>首先训练好第一个任务的模型，然后在训练第二个模型的时候将第一个模型的隐层加入到第二个模型的隐层中；训练第三个模型则将第二个和第一个模型的隐层加入到第三个模型的隐层中，以此类推</p>
+<h3 id="Domain-adversarial-training"><a href="#Domain-adversarial-training" class="headerlink" title="Domain-adversarial training"></a>Domain-adversarial training</h3><p>source data是有标签的，而target data是无标签的，都属于同一个任务，但数据是mismatch的，如：<br><img src="/images/2018-10-07-15388873325090.jpg" width="50%" height="50%"></p>
+<p>因为NN的隐层可以理解成是在抽取图像的特征，我们希望能够在训练NN的过程中去掉source data的一些domain specific的特性，这样就可以用在target data上了。因此我们在feature exactor后面连接两个模块：<br><img src="/images/2018-10-07-15388873772888.jpg" width="50%" height="50%"></p>
 <p>一方面我们希望抽取的特征能够使得分类器正确地分类，另一方面我们希望这些特征能够让domain classifier能够无法识别特征是从哪些data抽取得到的，这样得到的特征就是被去掉domain specific特征的。</p>
-<p>具体训练：<br><img src="images/2018-10-07-15388874447304.jpg" width="50%" height="50%"></p>
-<h3 id="Zero-shot-Learning"><a href="#Zero-shot-Learning" class="headerlink" title="Zero-shot Learning"></a>Zero-shot Learning</h3><p>source data有标签，target data无标签，但任务不同，如：<br><img src="images/2018-10-07-15388874838165.jpg" width="50%" height="50%"></p>
-<h4 id="Representing-each-class-by-its-attributes"><a href="#Representing-each-class-by-its-attributes" class="headerlink" title="Representing each class by its attributes"></a>Representing each class by its attributes</h4><p>一种方法是将每一个类都用特征表示，但特征要足够丰富：<br><img src="images/2018-10-07-15388875088114.jpg" width="50%" height="50%"></p>
-<p>在训练的时候，输入是图片，输出则是这些特征：<br><img src="images/2018-10-07-15388875558853.jpg" width="40%" height="50%"><br>这样在将target data放入训练好的NN后也会得到一个这样的attribute，查表即可找到最相似的特征对应的类。</p>
-<h4 id="Attribute-embedding"><a href="#Attribute-embedding" class="headerlink" title="Attribute embedding"></a>Attribute embedding</h4><p>如果特征维度太高，也可以将特征压缩成一个向量表示，这样在训练的时候，输出则是这样的向量特征，输入target data，输出向量特征，找到最近的特征对应的类即可<br><img src="images/2018-10-07-15388875888699.jpg" width="50%" height="50%"></p>
+<p>具体训练：<br><img src="/images/2018-10-07-15388874447304.jpg" width="50%" height="50%"></p>
+<h3 id="Zero-shot-Learning"><a href="#Zero-shot-Learning" class="headerlink" title="Zero-shot Learning"></a>Zero-shot Learning</h3><p>source data有标签，target data无标签，但任务不同，如：<br><img src="/images/2018-10-07-15388874838165.jpg" width="50%" height="50%"></p>
+<h4 id="Representing-each-class-by-its-attributes"><a href="#Representing-each-class-by-its-attributes" class="headerlink" title="Representing each class by its attributes"></a>Representing each class by its attributes</h4><p>一种方法是将每一个类都用特征表示，但特征要足够丰富：<br><img src="/images/2018-10-07-15388875088114.jpg" width="50%" height="50%"></p>
+<p>在训练的时候，输入是图片，输出则是这些特征：<br><img src="/images/2018-10-07-15388875558853.jpg" width="40%" height="50%"><br>这样在将target data放入训练好的NN后也会得到一个这样的attribute，查表即可找到最相似的特征对应的类。</p>
+<h4 id="Attribute-embedding"><a href="#Attribute-embedding" class="headerlink" title="Attribute embedding"></a>Attribute embedding</h4><p>如果特征维度太高，也可以将特征压缩成一个向量表示，这样在训练的时候，输出则是这样的向量特征，输入target data，输出向量特征，找到最近的特征对应的类即可<br><img src="/images/2018-10-07-15388875888699.jpg" width="50%" height="50%"></p>
 <h4 id="Attribute-embedding-word-embedding"><a href="#Attribute-embedding-word-embedding" class="headerlink" title="Attribute embedding + word embedding"></a>Attribute embedding + word embedding</h4><p>如果没有attribute数据，利用word embedding也可以达到不错的效果。<br>在zero-shot learning中，光是让相同类的f和g相似是不够的，还应该让不同的f和g尽量远。</p>
 <script type="math/tex; mode=display">f^∗,g^∗=arg min_{(f,g)}⁡∑_nmax(0,k−f(x^n )\cdot g(y^n )+max_{(m≠n)} ⁡f(x^m )\cdot g(x^m ) )</script>
       

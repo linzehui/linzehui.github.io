@@ -87,15 +87,15 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="1️⃣[Paper]Joint Embeddings of Chinese Words, Characters, and Fine-grained Subcharacter Components 基本框架和CBOW一致，主要贡献在于针对中文词向量添加了偏旁、字的组件作为训练信息。   2️⃣[Paper]Highway Networks 为了解决神经网络深度过深时导致的反向传播困难的问题。前向传播">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.linzehui.me/2018/08/26/碎片知识/每周碎片知识5/images/2018-08-26-15352530482345.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/08/26/碎片知识/每周碎片知识5/images/2018-08-26-15352871548330.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/08/26/碎片知识/每周碎片知识5/images/2018-08-26-15352873283890.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/08/26/碎片知识/每周碎片知识5/images/2018-08-26-15352891425729.jpg">
-<meta property="og:updated_time" content="2018-11-19T00:35:19.977Z">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-08-26-15352530482345.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-08-26-15352871548330.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-08-26-15352873283890.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-08-26-15352891425729.jpg">
+<meta property="og:updated_time" content="2018-11-19T03:21:16.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周碎片知识5">
 <meta name="twitter:description" content="1️⃣[Paper]Joint Embeddings of Chinese Words, Characters, and Fine-grained Subcharacter Components 基本框架和CBOW一致，主要贡献在于针对中文词向量添加了偏旁、字的组件作为训练信息。   2️⃣[Paper]Highway Networks 为了解决神经网络深度过深时导致的反向传播困难的问题。前向传播">
-<meta name="twitter:image" content="http://www.linzehui.me/2018/08/26/碎片知识/每周碎片知识5/images/2018-08-26-15352530482345.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/images/2018-08-26-15352530482345.jpg">
 
 
 
@@ -337,7 +337,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:19+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:16+08:00">
                 2018-11-19
               </time>
             
@@ -373,7 +373,7 @@
       
         <p>1️⃣[Paper]<br>Joint Embeddings of Chinese Words, Characters, and Fine-grained Subcharacter Components</p>
 <p>基本框架和CBOW一致，主要贡献在于针对中文词向量添加了偏旁、字的组件作为训练信息。</p>
-<p><img src="images/2018-08-26-15352530482345.jpg" width="50%" height="50%"></p>
+<p><img src="/images/2018-08-26-15352530482345.jpg" width="50%" height="50%"></p>
 <hr>
 <p>2️⃣[Paper]<br>Highway Networks</p>
 <p>为了解决神经网络深度过深时导致的反向传播困难的问题。<br>前向传播的公式：</p>
@@ -387,13 +387,13 @@
 </ul>
 <p>一条原则：当validation loss开始上升时，减少学习率。</p>
 <p>如何减少？</p>
-<p><img src="images/2018-08-26-15352871548330.jpg" width="50%" height="50%"></p>
+<p><img src="/images/2018-08-26-15352871548330.jpg" width="50%" height="50%"></p>
 <p>或者：</p>
-<p><img src="images/2018-08-26-15352873283890.jpg" width="50%" height="50%"><br>设定一定的epoch作为一个stepsize，在训练过程中线性增加学习率，然后在到达最大值后再线性减小。<br>实验表明，使用该方法可以在一半的epoch内达到相同的效果。</p>
+<p><img src="/images/2018-08-26-15352873283890.jpg" width="50%" height="50%"><br>设定一定的epoch作为一个stepsize，在训练过程中线性增加学习率，然后在到达最大值后再线性减小。<br>实验表明，使用该方法可以在一半的epoch内达到相同的效果。</p>
 <ul>
 <li><strong>batch size</strong>：</li>
 </ul>
-<p><img src="images/2018-08-26-15352891425729.jpg" width="50%" height="50%"></p>
+<p><img src="/images/2018-08-26-15352891425729.jpg" width="50%" height="50%"></p>
 <p>由于batch size和学习率的强相关性，<a href="https://arxiv.org/pdf/1711.00489.pdf" target="_blank" rel="noopener">相关论文</a>提出提高batch size而不是降低学习率的方法来提升模型表现。</p>
 <blockquote>
 <p>increasing the batch size during training, instead of decaying learning rate. — L. Smith<br><a href="https://arxiv.org/pdf/1711.00489.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1711.00489.pdf</a></p>

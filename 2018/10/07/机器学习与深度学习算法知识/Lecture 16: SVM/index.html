@@ -87,19 +87,19 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="Hinge Loss+kernel method = SVM Hinge LossSVM与logistic regression的区别即在于loss function的不同，logistic是cross entropy，而SVM是hinge loss 也即如果分类间隔大于1，则 $L(m_i)=max(0,1−m_i(w))$，则损失为0。因此SVM更具鲁棒性，因为对离群点不敏感。 对于linea">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2016:%20SVM/images/2018-10-07-15388878731499.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2016:%20SVM/images/2018-10-07-15388891611785.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2016:%20SVM/images/2018-10-07-15388894194698.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2016:%20SVM/images/2018-10-07-15388894627632.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2016:%20SVM/images/2018-10-07-15388895570090.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2016:%20SVM/images/2018-10-07-15388895870336.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2016:%20SVM/images/2018-10-07-15388896378645.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2016:%20SVM/images/2018-10-07-15388901736757.jpg">
-<meta property="og:updated_time" content="2018-11-19T00:35:37.411Z">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388878731499.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388891611785.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388894194698.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388894627632.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388895570090.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388895870336.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388896378645.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388901736757.jpg">
+<meta property="og:updated_time" content="2018-11-19T03:21:29.909Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lecture 16:SVM">
 <meta name="twitter:description" content="Hinge Loss+kernel method = SVM Hinge LossSVM与logistic regression的区别即在于loss function的不同，logistic是cross entropy，而SVM是hinge loss 也即如果分类间隔大于1，则 $L(m_i)=max(0,1−m_i(w))$，则损失为0。因此SVM更具鲁棒性，因为对离群点不敏感。 对于linea">
-<meta name="twitter:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2016:%20SVM/images/2018-10-07-15388878731499.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/images/2018-10-07-15388878731499.jpg">
 
 
 
@@ -341,7 +341,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:37+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:29+08:00">
                 2018-11-19
               </time>
             
@@ -376,7 +376,7 @@
 
       
         <p><strong>Hinge Loss+kernel method = SVM</strong></p>
-<h3 id="Hinge-Loss"><a href="#Hinge-Loss" class="headerlink" title="Hinge Loss"></a>Hinge Loss</h3><p>SVM与logistic regression的区别即在于loss function的不同，logistic是cross entropy，而SVM是hinge loss<br><img src="images/2018-10-07-15388878731499.jpg" width="50%" height="50%"></p>
+<h3 id="Hinge-Loss"><a href="#Hinge-Loss" class="headerlink" title="Hinge Loss"></a>Hinge Loss</h3><p>SVM与logistic regression的区别即在于loss function的不同，logistic是cross entropy，而SVM是hinge loss<br><img src="/images/2018-10-07-15388878731499.jpg" width="50%" height="50%"></p>
 <p>也即如果分类间隔大于1，则 $L(m_i)=max(0,1−m_i(w))$，则损失为0。因此SVM更具鲁棒性，因为对离群点不敏感。</p>
 <p>对于linear SVM：</p>
 <ul>
@@ -394,13 +394,13 @@
               -\hat{y}^n & if  \hat{y}^n f(x^n)<1 \\  
                0  & otherwise &    
              \end{array}  
-\right.</script><p>因此最终有：<br><img src="images/2018-10-07-15388891611785.jpg" width="55%" height="50%"><br>我们接下来用$c^n(w)$替代$-\delta(\hat{y}^n f(x^n)&lt;1) \hat{y}^n$</p>
+\right.</script><p>因此最终有：<br><img src="/images/2018-10-07-15388891611785.jpg" width="55%" height="50%"><br>我们接下来用$c^n(w)$替代$-\delta(\hat{y}^n f(x^n)&lt;1) \hat{y}^n$</p>
 <h3 id="Kernel-Method"><a href="#Kernel-Method" class="headerlink" title="Kernel Method"></a>Kernel Method</h3><p>一个事实：$w$是$x$的线性加和，其中$α$不等于0对应的$x$就是support vectors</p>
-<p>证明：<br>我们前面说过，更新过程：<br><img src="images/2018-10-07-15388894194698.jpg" width="30%" height="50%"></p>
-<p>将其组织成向量形式：<br><img src="images/2018-10-07-15388894627632.jpg" width="25%" height="50%"></p>
+<p>证明：<br>我们前面说过，更新过程：<br><img src="/images/2018-10-07-15388894194698.jpg" width="30%" height="50%"></p>
+<p>将其组织成向量形式：<br><img src="/images/2018-10-07-15388894627632.jpg" width="25%" height="50%"></p>
 <p><strong>如果我们将$w$初始化成0向量</strong>，那么$w$最终就是$x$的线性组合。证毕</p>
-<p>因为$c(w)$是hinge loss，因此大多数的值是0，会造成$α$稀疏。<br>如果我们将训练数据$x$组织成一个矩阵，那么有：<br><img src="images/2018-10-07-15388895570090.jpg" width="25%" height="50%"><br>也即：<br><img src="images/2018-10-07-15388895870336.jpg" width="40%" height="50%"></p>
-<p>所以对于$f(x)$，有：<br><img src="images/2018-10-07-15388896378645.jpg" width="50%" height="50%"></p>
+<p>因为$c(w)$是hinge loss，因此大多数的值是0，会造成$α$稀疏。<br>如果我们将训练数据$x$组织成一个矩阵，那么有：<br><img src="/images/2018-10-07-15388895570090.jpg" width="25%" height="50%"><br>也即：<br><img src="/images/2018-10-07-15388895870336.jpg" width="40%" height="50%"></p>
+<p>所以对于$f(x)$，有：<br><img src="/images/2018-10-07-15388896378645.jpg" width="50%" height="50%"></p>
 <p>实际上$X^Tx$就是每个训练数据和$x$进行点积的结果，但实际上线性函数往往表达能力不强，我们希望$x$能够变成非线性的。如果我们引入kernel，将点积换成kernel，则会有：</p>
 <script type="math/tex; mode=display">f(x)=\sum_n \alpha_n (x_n\cdot x)=\sum_n \alpha_n K(x_n,x)</script><p>所以我们的问题就变成了：</p>
 <ul>
@@ -410,7 +410,7 @@
 <p>实际上我们不需要真的知道$x$的非线性的具体形式，我们只需要会算$K$就行，这种绕过$x$的具体形式的方法就是<strong>kernel trick</strong>。直接计算$K$，比先将$x$非线性转化再做点积来得高效。甚至有时候，我们对$x$做的非线性是无穷多维的，是无法直接做非线性化的。比如RBF核:</p>
 <script type="math/tex; mode=display">K(x,z)=exp(-\frac{1}{2}||x-z||_2)</script><p>通过泰勒展开可以知道，RBF核是无穷维的。</p>
 <p>另一个kernel的例子是sigmoid kernel：</p>
-<script type="math/tex; mode=display">K(x,z)=tanh(x\cdot z)</script><p>当我们使用sigmoid kernel时，就相当于一层hidden layer的神经网络，如图：<br><img src="images/2018-10-07-15388901736757.jpg" width="40%" height="50%"></p>
+<script type="math/tex; mode=display">K(x,z)=tanh(x\cdot z)</script><p>当我们使用sigmoid kernel时，就相当于一层hidden layer的神经网络，如图：<br><img src="/images/2018-10-07-15388901736757.jpg" width="40%" height="50%"></p>
 <p>给定一个输入，共有n个neuron，其中的weight就是每个训练数据的向量值，然后再将这些neuron加和得到输出。当然大部分的α的值是0，因此实质上神经元的个数和support vector的个数一致。</p>
 <p>我们可以直接设计kernel，而不需要考虑x的非线性变换的形式，只要kernel符合mercer’s theory即可。</p>
 

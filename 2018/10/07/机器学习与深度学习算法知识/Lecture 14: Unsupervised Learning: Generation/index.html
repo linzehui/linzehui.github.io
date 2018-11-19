@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Unsupervised Learning,Generation," />
+  <meta name="keywords" content="机器学习🤖,Unsupervised Learning,李宏毅机器学习课程,Generation," />
 
 
 
@@ -80,20 +80,20 @@
 
 
 <meta name="description" content="Component-by-component对于图像来说，每次生成一个pixel：PixelRNN VAE架构： 其中e是噪声，σ是方差，目标是最小化reconstruction error，以及一个限制。该限制的目的即防止σ=0，m是正则化项。 中间的推导以及为什么是这样的架构我还不是很懂，之后再更新。实际上可以这么理解，有几个要点：  首先我们是基于这么一个假设：中间的code应当是服从正态分">
-<meta name="keywords" content="机器学习🤖,李宏毅机器学习课程,Unsupervised Learning,Generation">
+<meta name="keywords" content="机器学习🤖,Unsupervised Learning,李宏毅机器学习课程,Generation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lecture 14:Unsupervised Learning:Generation">
 <meta property="og:url" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 14: Unsupervised Learning: Generation/index.html">
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="Component-by-component对于图像来说，每次生成一个pixel：PixelRNN VAE架构： 其中e是噪声，σ是方差，目标是最小化reconstruction error，以及一个限制。该限制的目的即防止σ=0，m是正则化项。 中间的推导以及为什么是这样的架构我还不是很懂，之后再更新。实际上可以这么理解，有几个要点：  首先我们是基于这么一个假设：中间的code应当是服从正态分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2014:%20Unsupervised%20Learning:%20Generation/images/2018-10-07-15388837191574.jpg">
-<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2014:%20Unsupervised%20Learning:%20Generation/images/2018-10-08-15389638077301.jpg">
-<meta property="og:updated_time" content="2018-11-19T00:35:38.408Z">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-07-15388837191574.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/2018-10-08-15389638077301.jpg">
+<meta property="og:updated_time" content="2018-11-19T03:21:30.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lecture 14:Unsupervised Learning:Generation">
 <meta name="twitter:description" content="Component-by-component对于图像来说，每次生成一个pixel：PixelRNN VAE架构： 其中e是噪声，σ是方差，目标是最小化reconstruction error，以及一个限制。该限制的目的即防止σ=0，m是正则化项。 中间的推导以及为什么是这样的架构我还不是很懂，之后再更新。实际上可以这么理解，有几个要点：  首先我们是基于这么一个假设：中间的code应当是服从正态分">
-<meta name="twitter:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2014:%20Unsupervised%20Learning:%20Generation/images/2018-10-07-15388837191574.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/images/2018-10-07-15388837191574.jpg">
 
 
 
@@ -335,7 +335,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:38+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:30+08:00">
                 2018-11-19
               </time>
             
@@ -370,7 +370,7 @@
 
       
         <h3 id="Component-by-component"><a href="#Component-by-component" class="headerlink" title="Component-by-component"></a>Component-by-component</h3><p>对于图像来说，每次生成一个pixel：PixelRNN</p>
-<h3 id="VAE"><a href="#VAE" class="headerlink" title="VAE"></a>VAE</h3><p>架构：<br><img src="images/2018-10-07-15388837191574.jpg" width="50%" height="50%"></p>
+<h3 id="VAE"><a href="#VAE" class="headerlink" title="VAE"></a>VAE</h3><p>架构：<br><img src="/images/2018-10-07-15388837191574.jpg" width="50%" height="50%"></p>
 <p>其中e是噪声，σ是方差，目标是最小化reconstruction error，以及一个限制。该限制的目的即防止σ=0，m是正则化项。</p>
 <p><del>中间的推导以及为什么是这样的架构我还不是很懂，之后再更新。</del><br>实际上可以这么理解，有几个要点：</p>
 <ul>
@@ -378,7 +378,7 @@
 <li>如果生成出来的code不符合正态分布，会有一个惩罚项，也就是上图的constraint（可以通过KL散度推导获得）</li>
 <li>按理说，应当是在生成了均值和方差后，定义好该正态分布，然后再从中采样，但是这样没办法回传更新梯度，因此这里使用重参数技巧(Reparameterization Trick)，也即从$N(\mu,\sigma^2)$中采样$Z$，相当于从$N(0,I)$中采样$\varepsilon$，然后让$Z=\mu + \varepsilon \times \mu$</li>
 </ul>
-<p><img src="images/2018-10-08-15389638077301.jpg" width="70%" height="50%"></p>
+<p><img src="/images/2018-10-08-15389638077301.jpg" width="70%" height="50%"></p>
 <p><strong>Reference</strong>:<br><a href="https://www.sohu.com/a/226209674_500659" target="_blank" rel="noopener">https://www.sohu.com/a/226209674_500659</a></p>
 <p>VAE的主要问题在于，网络只试图去记住见过的图像，但没法真正去生成没见过的图像。</p>
 <h3 id="Generative-Adversarial-Network-GAN"><a href="#Generative-Adversarial-Network-GAN" class="headerlink" title="Generative Adversarial Network (GAN)"></a>Generative Adversarial Network (GAN)</h3><p>GAN包含一个discriminator和一个generator，generator试图生成能够骗过discriminator的样本，而generator试图能够将generator生成的样本和真实的样本区分。</p>
@@ -402,9 +402,9 @@
           
             <a href="/tags/机器学习🤖/" rel="tag"> <i class="fa fa-tag"></i> 机器学习🤖</a>
           
-            <a href="/tags/李宏毅机器学习课程/" rel="tag"> <i class="fa fa-tag"></i> 李宏毅机器学习课程</a>
-          
             <a href="/tags/Unsupervised-Learning/" rel="tag"> <i class="fa fa-tag"></i> Unsupervised Learning</a>
+          
+            <a href="/tags/李宏毅机器学习课程/" rel="tag"> <i class="fa fa-tag"></i> 李宏毅机器学习课程</a>
           
             <a href="/tags/Generation/" rel="tag"> <i class="fa fa-tag"></i> Generation</a>
           
