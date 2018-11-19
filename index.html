@@ -286,6 +286,144 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/11/19/碎片知识/每周碎片知识12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/19/碎片知识/每周碎片知识12/" itemprop="url">每周碎片知识12</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-19T15:32:14+08:00">
+                2018-11-19
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T15:50:16+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣-Transformer"><a href="#1️⃣-Transformer" class="headerlink" title="1️⃣[Transformer]"></a>1️⃣[Transformer]</h3><p>对Transformer新理解：</p>
+<ul>
+<li>可以将Transformer理解成一张全连接图，其中每个节点与其他节点的关系通过attention权重表现。图关系是序列关系或者树关系的一般化。</li>
+<li>为什么要有multi-head？不仅仅是论文的解释，或许还可以理解成，对一个向量的不同部分（如第1维到20维，第21维到40维等）施以不同的attention权重，如果不使用multi-head，那么对于一个query，就只会有一个权重，而不同的维度有不同的重要性。</li>
+</ul>
+<hr>
+<h3 id="2️⃣-attention-amp-capsule"><a href="#2️⃣-attention-amp-capsule" class="headerlink" title="2️⃣[attention&amp;capsule]"></a>2️⃣[attention&amp;capsule]</h3><p>attention是收信息，query从value按权重获取信息，其中所有value的权重和是1。<br>capsule是发信息，对于$l-1$层的一个capsule来说，在传入到$l$层的k个capsule的信息，其权重为1。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/11/19/论文/每周论文6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -333,7 +471,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:10+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T12:03:55+08:00">
                 2018-11-19
               </time>
             
@@ -375,18 +513,32 @@
 <li>将sentence embedding扩展为矩阵形式，能够获得更多的信息。</li>
 <li>引入正则化，使得sentence matrix具有更丰富的多样性。</li>
 </ul>
-<p><img src="//images/15425908639518.jpg" width="70%" height="50%"></p>
+<p><img src="/images/15425908639518.jpg" width="70%" height="50%"></p>
 <h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>双向LSTM+self-attention。</p>
-<p>双向的LSTM获得上下文的表示：<br>&lt;img src=”//images/15425911302081.jpg” width=30%” height=”50%”&gt;<br><img src="//images/15425911849931.jpg" width="30%" height="50%"></p>
-<p>因此可以获得attention权重向量：<br><img src="//images/15425912555350.jpg" width="50%" height="50%"><br>其中$H:n\times2u,W_{s1}:d\times2u ,w_{s2}:d_a$ ，$d_a$是超参。</p>
-<p>现将向量$w_{s2}$扩展为矩阵，亦即有Multi-hop attention：<br><img src="//images/15425914364548.jpg" width="50%" height="50%"></p>
+<p>双向的LSTM获得上下文的表示：<br>&lt;img src=”/images/15425911302081.jpg” width=30%” height=”50%”&gt;<br><img src="/images/15425911849931.jpg" width="30%" height="50%"></p>
+<p>因此可以获得attention权重向量：<br><img src="/images/15425912555350.jpg" width="50%" height="50%"><br>其中$H:n\times2u,W_{s1}:d\times2u ,w_{s2}:d_a$ ，$d_a$是超参。</p>
+<p>现将向量$w_{s2}$扩展为矩阵，亦即有Multi-hop attention：<br><img src="/images/15425914364548.jpg" width="50%" height="50%"></p>
 <p>$W_{s2}$维度为$r\times d_a$，$r$代表了head的个数。</p>
-<p>因此最终的sentence embedding矩阵为：<br><img src="//images/15425915371381.jpg" width="18%" height="50%"></p>
-<h3 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h3><p>为了让A尽可能有多样性（因为如果都是相似的，那么则会有冗余性），引入如下的正则化：<br><img src="//images/15425915930785.jpg" width="30%" height="50%"></p>
-<p>原因：<br>对于不同的head $a^i$与$a^j$，$A A^T$有：<br><img src="//images/15425918790543.jpg" width="33%" height="50%"></p>
+<p>因此最终的sentence embedding矩阵为：<br><img src="/images/15425915371381.jpg" width="18%" height="50%"></p>
+<h3 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h3><p>为了让A尽可能有多样性（因为如果都是相似的，那么则会有冗余性），引入如下的正则化：<br><img src="/images/15425915930785.jpg" width="30%" height="50%"></p>
+<p>原因：<br>对于不同的head $a^i$与$a^j$，$A A^T$有：<br><img src="/images/15425918790543.jpg" width="33%" height="50%"></p>
 <p>如果$a^i$与$a^j$很相似那么就会接近于1，如果非常不相似(no overlay)则会接近于0。<br>因此整个式子就是:希望对角线部分接近于0（因为减了单位阵），这就相当于尽可能focus小部分的词；同时其他部分尽可能接近于0，也即不同的head之间没有overlap。</p>
 <h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>文章提到，在做分类的时候可以直接将矩阵M展开，过全连接层即可。</p>
-<h2 id="2️⃣-Attention-over-Attention-Neural-Networks-for-Reading-Comprehension"><a href="#2️⃣-Attention-over-Attention-Neural-Networks-for-Reading-Comprehension" class="headerlink" title="2️⃣[Attention-over-Attention Neural Networks for Reading Comprehension]"></a>2️⃣[Attention-over-Attention Neural Networks for Reading Comprehension]</h2>
+<hr>
+<h2 id="2️⃣-Attention-over-Attention-Neural-Networks-for-Reading-Comprehension"><a href="#2️⃣-Attention-over-Attention-Neural-Networks-for-Reading-Comprehension" class="headerlink" title="2️⃣[Attention-over-Attention Neural Networks for Reading Comprehension]"></a>2️⃣[Attention-over-Attention Neural Networks for Reading Comprehension]</h2><p>在完形填空任务(Cloze-style Reading Comprehension)上提出一种新的attention，即nested-attention。</p>
+<h3 id="任务描述"><a href="#任务描述" class="headerlink" title="任务描述"></a>任务描述</h3><p>三元组$<d,q,a>$，document，question，answer。其中answer一般是document的一个词。</d,q,a></p>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><p>本文提出的attention机制，是通过一个新的attention去指示另一个attention的重要程度。</p>
+<p>首先通过一层共享的embedding层，将document和query都encode成word embedding，然后通过双向的GRU，将隐层拼接起来成为新的表示。</p>
+<p>接着获得pair-wise matching matrix：<br><img src="/images/15425993645945.jpg" width="50%" height="50%"></p>
+<p>其中$h$代表上述提到的拼接起来的表示，$M(i,j)$代表了document的词$i$和question的词$j$之间的匹配程度。</p>
+<p>接着对<strong>column</strong>做softmax：<br><img src="/images/15425994692189.jpg" width="60%" height="50%"><br>其代表的意义即query-to-document attention，亦即<strong>对于一个query内的词，document的每个词与其匹配的权重</strong>。</p>
+<p>接下来，对row进行softmax操作：<br><img src="/images/15425995482827.jpg" width="50%" height="50%"><br>代表的是<strong>给定一个document的词，query的哪个词更为重要</strong>。</p>
+<p>接下来我们将β平均起来，获得一个向量：<br><img src="/images/15425996847558.jpg" width="30%" height="50%"><br>这个向量仍有attention的性质，即所有元素加和为1。代表的是<strong>从平均来看，query词的重要性</strong>。</p>
+<p>最后，我们对α和β做点积以获得attended document-level attention：<br><img src="/images/15425997529193.jpg" width="20%" height="50%"></p>
+<p>其中$s$的维度是$D\times 1$。s代表的意义即“a weighted sum of each individual document-level attention α(t) when looking at query word at time t”，也就是说，对α进行加权，代表query word的平均重要程度。</p>
+<p>最终在做完型填空的预测时：<br><img src="/images/15425999965777.jpg" width="50%" height="50%"></p>
+<p>个人觉得这种attention-over-attention的想法还是挺有创新的。</p>
+
           
         
       
@@ -1637,139 +1789,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/11/04/代码相关/代码记录9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/04/代码相关/代码记录9/" itemprop="url">代码片段记录9</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T08:09:30+08:00">
-                2018-11-04
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-04T08:11:16+08:00">
-                2018-11-04
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-collate-fn"><a href="#1️⃣-collate-fn" class="headerlink" title="1️⃣[collate_fn]"></a>1️⃣[collate_fn]</h3><p>将不等长句子组合成batch。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">collate_fn</span><span class="params">(insts)</span>:</span></span><br><span class="line">    <span class="string">''' Pad the instance to the max seq length in batch '''</span></span><br><span class="line"></span><br><span class="line">    max_len = max(len(inst) <span class="keyword">for</span> inst <span class="keyword">in</span> insts)</span><br><span class="line"></span><br><span class="line">    batch_seq = np.array([</span><br><span class="line">        inst + [Constants.PAD] * (max_len - len(inst))</span><br><span class="line">        <span class="keyword">for</span> inst <span class="keyword">in</span> insts])</span><br><span class="line"></span><br><span class="line">    batch_pos = np.array([</span><br><span class="line">        [pos_i + <span class="number">1</span> <span class="keyword">if</span> w_i != Constants.PAD <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">         <span class="keyword">for</span> pos_i, w_i <span class="keyword">in</span> enumerate(inst)] <span class="keyword">for</span> inst <span class="keyword">in</span> batch_seq]) <span class="comment"># 位置信息</span></span><br><span class="line"></span><br><span class="line">    batch_seq = torch.LongTensor(batch_seq)</span><br><span class="line">    batch_pos = torch.LongTensor(batch_pos)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> batch_seq, batch_pos</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1824,7 +1843,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1837,7 +1856,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">115</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

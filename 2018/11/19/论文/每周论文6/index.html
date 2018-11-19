@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Paper,每周论文阅读," />
+  <meta name="keywords" content="Paper,每周论文阅读,attention,sentence embedding,nested attention," />
 
 
 
@@ -80,25 +80,31 @@
 
 
 <meta name="description" content="1️⃣[A STRUCTURED SELF ATTENTIVE SENTENCE EMBEDDING]介绍了一种生成sentence embedding的方法。与其他sentence embedding不同的地方在于，生成的是一个矩阵而不是一个向量。通过矩阵的形式，能够关注不同部分的语义表示，类似于Transformer的multi-head。 Contribution:  将sentence e">
-<meta name="keywords" content="Paper,每周论文阅读">
+<meta name="keywords" content="Paper,每周论文阅读,attention,sentence embedding,nested attention">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每周论文6">
 <meta property="og:url" content="http://www.linzehui.me/2018/11/19/论文/每周论文6/index.html">
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="1️⃣[A STRUCTURED SELF ATTENTIVE SENTENCE EMBEDDING]介绍了一种生成sentence embedding的方法。与其他sentence embedding不同的地方在于，生成的是一个矩阵而不是一个向量。通过矩阵的形式，能够关注不同部分的语义表示，类似于Transformer的multi-head。 Contribution:  将sentence e">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://images/15425908639518.jpg">
-<meta property="og:image" content="http://images/15425911849931.jpg">
-<meta property="og:image" content="http://images/15425912555350.jpg">
-<meta property="og:image" content="http://images/15425914364548.jpg">
-<meta property="og:image" content="http://images/15425915371381.jpg">
-<meta property="og:image" content="http://images/15425915930785.jpg">
-<meta property="og:image" content="http://images/15425918790543.jpg">
-<meta property="og:updated_time" content="2018-11-19T03:21:10.952Z">
+<meta property="og:image" content="http://www.linzehui.me/images/15425908639518.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15425911849931.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15425912555350.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15425914364548.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15425915371381.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15425915930785.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15425918790543.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15425993645945.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15425994692189.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15425995482827.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15425996847558.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15425997529193.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15425999965777.jpg">
+<meta property="og:updated_time" content="2018-11-19T04:03:55.874Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文6">
 <meta name="twitter:description" content="1️⃣[A STRUCTURED SELF ATTENTIVE SENTENCE EMBEDDING]介绍了一种生成sentence embedding的方法。与其他sentence embedding不同的地方在于，生成的是一个矩阵而不是一个向量。通过矩阵的形式，能够关注不同部分的语义表示，类似于Transformer的multi-head。 Contribution:  将sentence e">
-<meta name="twitter:image" content="http://images/15425908639518.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/images/15425908639518.jpg">
 
 
 
@@ -340,7 +346,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:10+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T12:03:55+08:00">
                 2018-11-19
               </time>
             
@@ -380,18 +386,32 @@
 <li>将sentence embedding扩展为矩阵形式，能够获得更多的信息。</li>
 <li>引入正则化，使得sentence matrix具有更丰富的多样性。</li>
 </ul>
-<p><img src="//images/15425908639518.jpg" width="70%" height="50%"></p>
+<p><img src="/images/15425908639518.jpg" width="70%" height="50%"></p>
 <h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>双向LSTM+self-attention。</p>
-<p>双向的LSTM获得上下文的表示：<br>&lt;img src=”//images/15425911302081.jpg” width=30%” height=”50%”&gt;<br><img src="//images/15425911849931.jpg" width="30%" height="50%"></p>
-<p>因此可以获得attention权重向量：<br><img src="//images/15425912555350.jpg" width="50%" height="50%"><br>其中$H:n\times2u,W_{s1}:d\times2u ,w_{s2}:d_a$ ，$d_a$是超参。</p>
-<p>现将向量$w_{s2}$扩展为矩阵，亦即有Multi-hop attention：<br><img src="//images/15425914364548.jpg" width="50%" height="50%"></p>
+<p>双向的LSTM获得上下文的表示：<br>&lt;img src=”/images/15425911302081.jpg” width=30%” height=”50%”&gt;<br><img src="/images/15425911849931.jpg" width="30%" height="50%"></p>
+<p>因此可以获得attention权重向量：<br><img src="/images/15425912555350.jpg" width="50%" height="50%"><br>其中$H:n\times2u,W_{s1}:d\times2u ,w_{s2}:d_a$ ，$d_a$是超参。</p>
+<p>现将向量$w_{s2}$扩展为矩阵，亦即有Multi-hop attention：<br><img src="/images/15425914364548.jpg" width="50%" height="50%"></p>
 <p>$W_{s2}$维度为$r\times d_a$，$r$代表了head的个数。</p>
-<p>因此最终的sentence embedding矩阵为：<br><img src="//images/15425915371381.jpg" width="18%" height="50%"></p>
-<h3 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h3><p>为了让A尽可能有多样性（因为如果都是相似的，那么则会有冗余性），引入如下的正则化：<br><img src="//images/15425915930785.jpg" width="30%" height="50%"></p>
-<p>原因：<br>对于不同的head $a^i$与$a^j$，$A A^T$有：<br><img src="//images/15425918790543.jpg" width="33%" height="50%"></p>
+<p>因此最终的sentence embedding矩阵为：<br><img src="/images/15425915371381.jpg" width="18%" height="50%"></p>
+<h3 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h3><p>为了让A尽可能有多样性（因为如果都是相似的，那么则会有冗余性），引入如下的正则化：<br><img src="/images/15425915930785.jpg" width="30%" height="50%"></p>
+<p>原因：<br>对于不同的head $a^i$与$a^j$，$A A^T$有：<br><img src="/images/15425918790543.jpg" width="33%" height="50%"></p>
 <p>如果$a^i$与$a^j$很相似那么就会接近于1，如果非常不相似(no overlay)则会接近于0。<br>因此整个式子就是:希望对角线部分接近于0（因为减了单位阵），这就相当于尽可能focus小部分的词；同时其他部分尽可能接近于0，也即不同的head之间没有overlap。</p>
 <h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>文章提到，在做分类的时候可以直接将矩阵M展开，过全连接层即可。</p>
-<h2 id="2️⃣-Attention-over-Attention-Neural-Networks-for-Reading-Comprehension"><a href="#2️⃣-Attention-over-Attention-Neural-Networks-for-Reading-Comprehension" class="headerlink" title="2️⃣[Attention-over-Attention Neural Networks for Reading Comprehension]"></a>2️⃣[Attention-over-Attention Neural Networks for Reading Comprehension]</h2>
+<hr>
+<h2 id="2️⃣-Attention-over-Attention-Neural-Networks-for-Reading-Comprehension"><a href="#2️⃣-Attention-over-Attention-Neural-Networks-for-Reading-Comprehension" class="headerlink" title="2️⃣[Attention-over-Attention Neural Networks for Reading Comprehension]"></a>2️⃣[Attention-over-Attention Neural Networks for Reading Comprehension]</h2><p>在完形填空任务(Cloze-style Reading Comprehension)上提出一种新的attention，即nested-attention。</p>
+<h3 id="任务描述"><a href="#任务描述" class="headerlink" title="任务描述"></a>任务描述</h3><p>三元组$<d,q,a>$，document，question，answer。其中answer一般是document的一个词。</d,q,a></p>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><p>本文提出的attention机制，是通过一个新的attention去指示另一个attention的重要程度。</p>
+<p>首先通过一层共享的embedding层，将document和query都encode成word embedding，然后通过双向的GRU，将隐层拼接起来成为新的表示。</p>
+<p>接着获得pair-wise matching matrix：<br><img src="/images/15425993645945.jpg" width="50%" height="50%"></p>
+<p>其中$h$代表上述提到的拼接起来的表示，$M(i,j)$代表了document的词$i$和question的词$j$之间的匹配程度。</p>
+<p>接着对<strong>column</strong>做softmax：<br><img src="/images/15425994692189.jpg" width="60%" height="50%"><br>其代表的意义即query-to-document attention，亦即<strong>对于一个query内的词，document的每个词与其匹配的权重</strong>。</p>
+<p>接下来，对row进行softmax操作：<br><img src="/images/15425995482827.jpg" width="50%" height="50%"><br>代表的是<strong>给定一个document的词，query的哪个词更为重要</strong>。</p>
+<p>接下来我们将β平均起来，获得一个向量：<br><img src="/images/15425996847558.jpg" width="30%" height="50%"><br>这个向量仍有attention的性质，即所有元素加和为1。代表的是<strong>从平均来看，query词的重要性</strong>。</p>
+<p>最后，我们对α和β做点积以获得attended document-level attention：<br><img src="/images/15425997529193.jpg" width="20%" height="50%"></p>
+<p>其中$s$的维度是$D\times 1$。s代表的意义即“a weighted sum of each individual document-level attention α(t) when looking at query word at time t”，也就是说，对α进行加权，代表query word的平均重要程度。</p>
+<p>最终在做完型填空的预测时：<br><img src="/images/15425999965777.jpg" width="50%" height="50%"></p>
+<p>个人觉得这种attention-over-attention的想法还是挺有创新的。</p>
+
       
     </div>
     
@@ -411,6 +431,12 @@
             <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
           
             <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
+          
+            <a href="/tags/attention/" rel="tag"> <i class="fa fa-tag"></i> attention</a>
+          
+            <a href="/tags/sentence-embedding/" rel="tag"> <i class="fa fa-tag"></i> sentence embedding</a>
+          
+            <a href="/tags/nested-attention/" rel="tag"> <i class="fa fa-tag"></i> nested attention</a>
           
         </div>
       
@@ -432,6 +458,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/19/碎片知识/每周碎片知识12/" rel="prev" title="每周碎片知识12">
+                每周碎片知识12 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -517,7 +547,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -530,7 +560,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">115</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -563,7 +593,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1️⃣-A-STRUCTURED-SELF-ATTENTIVE-SENTENCE-EMBEDDING"><span class="nav-number">1.</span> <span class="nav-text">1️⃣[A STRUCTURED SELF ATTENTIVE SENTENCE EMBEDDING]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则化"><span class="nav-number">1.2.</span> <span class="nav-text">正则化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何使用"><span class="nav-number">1.3.</span> <span class="nav-text">如何使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2️⃣-Attention-over-Attention-Neural-Networks-for-Reading-Comprehension"><span class="nav-number">2.</span> <span class="nav-text">2️⃣[Attention-over-Attention Neural Networks for Reading Comprehension]</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1️⃣-A-STRUCTURED-SELF-ATTENTIVE-SENTENCE-EMBEDDING"><span class="nav-number">1.</span> <span class="nav-text">1️⃣[A STRUCTURED SELF ATTENTIVE SENTENCE EMBEDDING]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则化"><span class="nav-number">1.2.</span> <span class="nav-text">正则化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何使用"><span class="nav-number">1.3.</span> <span class="nav-text">如何使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2️⃣-Attention-over-Attention-Neural-Networks-for-Reading-Comprehension"><span class="nav-number">2.</span> <span class="nav-text">2️⃣[Attention-over-Attention Neural Networks for Reading Comprehension]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#任务描述"><span class="nav-number">2.1.</span> <span class="nav-text">任务描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-1"><span class="nav-number">2.2.</span> <span class="nav-text">方法</span></a></li></ol></li></ol></div>
             
 
           </div>
