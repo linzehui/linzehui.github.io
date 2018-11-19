@@ -87,13 +87,13 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="1️⃣[Python]在服务器上跑代码时，如 python project/folder1/a.py，如果a.py引用了一个自定义的模块但又不在folder1内，此时interpreter就会报错，提示找不到该模块。这是因为解释器默认只会在同一个folder下查找。解决方案是在运行前显式添加查找范围。如：1export PYTHONPATH=/home/zhlin/bilm-tf:$PYTHONP">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-12-15340420442670.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-12-15340434326365.jpg">
-<meta property="og:updated_time" content="2018-09-01T13:04:40.980Z">
+<meta property="og:image" content="http://www.linzehui.me/2018/08/12/碎片知识/每周碎片知识3/images/2018-08-12-15340420442670.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/08/12/碎片知识/每周碎片知识3/images/2018-08-12-15340434326365.jpg">
+<meta property="og:updated_time" content="2018-11-19T00:35:21.440Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周碎片知识3">
 <meta name="twitter:description" content="1️⃣[Python]在服务器上跑代码时，如 python project/folder1/a.py，如果a.py引用了一个自定义的模块但又不在folder1内，此时interpreter就会报错，提示找不到该模块。这是因为解释器默认只会在同一个folder下查找。解决方案是在运行前显式添加查找范围。如：1export PYTHONPATH=/home/zhlin/bilm-tf:$PYTHONP">
-<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-08-12-15340420442670.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/2018/08/12/碎片知识/每周碎片知识3/images/2018-08-12-15340420442670.jpg">
 
 
 
@@ -335,8 +335,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-01T21:04:40+08:00">
-                2018-09-01
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:21+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -372,7 +372,7 @@
         <p>1️⃣[Python]<br>在服务器上跑代码时，如 <code>python project/folder1/a.py</code>，如果a.py引用了一个自定义的模块但又不在folder1内，此时interpreter就会报错，提示找不到该模块。这是因为解释器默认只会在同一个folder下查找。解决方案是在运行前显式添加查找范围。如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PYTHONPATH=/home/zhlin/bilm-tf:<span class="variable">$PYTHONPATH</span></span><br></pre></td></tr></table></figure></p>
 <p>那么python解释器就会到该目录下去找。</p>
 <hr>
-<p>2️⃣[度量标准]<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-12-15340420442670.jpg" alt=""></p>
+<p>2️⃣[度量标准]<br><img src="images/2018-08-12-15340420442670.jpg" alt=""></p>
 <ul>
 <li>准确率(accuracy):  $ACC=\frac{TP+TN}{TP+TN+FP+FN}$<br> 衡量的是分类器预测准确的比例</li>
 <li>召回率(recall): $Recall=\frac{TP}{TP+FN}$<br>  正例中被分对的比例，衡量了分类器对正例的识别能力。</li>
@@ -382,7 +382,7 @@
 <hr>
 <p>3️⃣[调参技巧]<br>在google发布的一份关于text-classification的<a href="https://developers.google.com/machine-learning/guides/text-classification/" target="_blank" rel="noopener">guide</a>中，提到了几个调参的trick。</p>
 <ol>
-<li>在feature selection步骤中，卡方检验chi2和方差分析的F值 f_classif的表现相当，在大约选择20k的feature时，准确率达到顶峰，当feature越多，效果并没有提升甚至会下降。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-12-15340434326365.jpg" width="90%" height="50%"></li>
+<li>在feature selection步骤中，卡方检验chi2和方差分析的F值 f_classif的表现相当，在大约选择20k的feature时，准确率达到顶峰，当feature越多，效果并没有提升甚至会下降。<br><img src="images/2018-08-12-15340434326365.jpg" width="90%" height="50%"></li>
 <li>在文本分类中，似乎使用normalization并没有多少用处，建议跳过。<blockquote>
 <p>Normalization converts all feature/sample values to small and similar values. This simplifies gradient descent convergence in learning algorithms. From what we have seen, normalization during data preprocessing does not seem to add much value in text classification problems; we recommend skipping this step.</p>
 </blockquote>

@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="个人目前对mask矩阵的一点理解。  是什么mask矩阵是什么？是一个由0和1组成的矩阵。一个例子是，在自然语言处理(NLP)中，句子的长度是不等长的，但因为我们经常将句子组成mini-batch用以训练，因此那些长度较短的句子都会在句尾进行填充0，也即padding的操作。一个mask矩阵即用以指示哪些是真正的数据，哪些是padding。如：图片来源：Theano：LSTM源码解析 其中mask">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-12-15393574958961.jpg">
-<meta property="og:updated_time" content="2018-10-14T04:41:01.825Z">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/12/碎片知识/浅谈mask矩阵/images/2018-10-12-15393574958961.jpg">
+<meta property="og:updated_time" content="2018-11-19T00:35:13.216Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈mask矩阵">
 <meta name="twitter:description" content="个人目前对mask矩阵的一点理解。  是什么mask矩阵是什么？是一个由0和1组成的矩阵。一个例子是，在自然语言处理(NLP)中，句子的长度是不等长的，但因为我们经常将句子组成mini-batch用以训练，因此那些长度较短的句子都会在句尾进行填充0，也即padding的操作。一个mask矩阵即用以指示哪些是真正的数据，哪些是padding。如：图片来源：Theano：LSTM源码解析 其中mask">
-<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-12-15393574958961.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/2018/10/12/碎片知识/浅谈mask矩阵/images/2018-10-12-15393574958961.jpg">
 
 
 
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-14T12:41:01+08:00">
-                2018-10-14
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:13+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -370,7 +370,7 @@
       
         <p>个人目前对mask矩阵的一点理解。</p>
 <hr>
-<h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><p>mask矩阵是什么？是一个由0和1组成的矩阵。一个例子是，在自然语言处理(NLP)中，句子的长度是不等长的，但因为我们经常将句子组成mini-batch用以训练，因此那些长度较短的句子都会在句尾进行填充0，也即padding的操作。一个mask矩阵即用以指示哪些是真正的数据，哪些是padding。如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-12-15393574958961.jpg" width="50%" height="50%"><br>图片来源：<a href="https://www.cnblogs.com/neopenx/p/4806006.html" target="_blank" rel="noopener">Theano：LSTM源码解析</a></p>
+<h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><p>mask矩阵是什么？是一个由0和1组成的矩阵。一个例子是，在自然语言处理(NLP)中，句子的长度是不等长的，但因为我们经常将句子组成mini-batch用以训练，因此那些长度较短的句子都会在句尾进行填充0，也即padding的操作。一个mask矩阵即用以指示哪些是真正的数据，哪些是padding。如：<br><img src="images/2018-10-12-15393574958961.jpg" width="50%" height="50%"><br>图片来源：<a href="https://www.cnblogs.com/neopenx/p/4806006.html" target="_blank" rel="noopener">Theano：LSTM源码解析</a></p>
 <p>其中mask矩阵中1代表真实数据；0代表padding数据。</p>
 <h2 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h2><p>为什么要使用mask矩阵？使用mask矩阵是为了让那些被mask掉的tensor不会被更新。考虑一个tensor T的size(a,b)，同样大小的mask矩阵M，相乘后，在反向回传的时候在T对应mask为0的地方，0的梯度仍为0。因此不会被更新。</p>
 <h2 id="怎么做"><a href="#怎么做" class="headerlink" title="怎么做"></a>怎么做</h2><p>接下来介绍几种（可能不全）使用mask的场景。</p>

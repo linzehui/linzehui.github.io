@@ -333,7 +333,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-18T11:40:40+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-18T12:03:05+08:00">
                 2018-11-18
               </time>
             
@@ -369,8 +369,7 @@
       
         
           
-            <h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><p><img src="https://lh3.googleusercontent.com/-hai1WXOkImw/W_DYT7vqznI/AAAAAAAAAAc/BWVAel1GIZ0QaknPH1c9Fxn-vv9LhC2PACHMYCw/I/15425106642470.jpg" alt=""></p>
-<p><img src="/image/15425124255463.jpg" alt="-w900"></p>
+            <p><img src="/images/15425137819649.jpg" alt="-w605"></p>
 
           
         
@@ -466,8 +465,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-16T11:42:42+08:00">
-                2018-11-16
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:31+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -503,26 +502,26 @@
         
           
             <p>大量参考自<a href="https://nndl.github.io/" target="_blank" rel="noopener">《神经网络与深度学习》</a></p>
-<h1 id="优化算法"><a href="#优化算法" class="headerlink" title="优化算法"></a>优化算法</h1><p>对于标准的SGD，常见的改进算法从两个方面进行：学习率衰减&amp;梯度方向优化。<br>记$g_t$为t时刻的导数：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421196736629.jpg" width="20%" height="50%"></p>
-<h2 id="学习率衰减"><a href="#学习率衰减" class="headerlink" title="学习率衰减"></a>学习率衰减</h2><h3 id="AdaGrad算法"><a href="#AdaGrad算法" class="headerlink" title="AdaGrad算法"></a>AdaGrad算法</h3><p>通过计算历次的梯度平方累计值进行学习率衰减。<br>$G_t$是累计值：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421189802198.jpg" width="20%" height="50%"></p>
-<p>更新值则为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421190100615.jpg" width="30%" height="50%"></p>
+<h1 id="优化算法"><a href="#优化算法" class="headerlink" title="优化算法"></a>优化算法</h1><p>对于标准的SGD，常见的改进算法从两个方面进行：学习率衰减&amp;梯度方向优化。<br>记$g_t$为t时刻的导数：<br><img src="images/2018-11-13-15421196736629.jpg" width="20%" height="50%"></p>
+<h2 id="学习率衰减"><a href="#学习率衰减" class="headerlink" title="学习率衰减"></a>学习率衰减</h2><h3 id="AdaGrad算法"><a href="#AdaGrad算法" class="headerlink" title="AdaGrad算法"></a>AdaGrad算法</h3><p>通过计算历次的梯度平方累计值进行学习率衰减。<br>$G_t$是累计值：<br><img src="images/2018-11-13-15421189802198.jpg" width="20%" height="50%"></p>
+<p>更新值则为：<br><img src="images/2018-11-13-15421190100615.jpg" width="30%" height="50%"></p>
 <p>缺点：随着迭代次数的增加学习率递减。在经过一定次数的迭代依然没有找到最优点时，由于这时的学习率已经非常小，很难再继续找到最优点。</p>
-<h3 id="RMSprop算法"><a href="#RMSprop算法" class="headerlink" title="RMSprop算法"></a>RMSprop算法</h3><p>对AdaGrad的改进，唯一的区别在于$G_t$的计算，将历史信息和当前信息进行线性加权，使得学习率可以动态改变而不是单调递减：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421192344025.jpg" width="40%" height="50%"></p>
+<h3 id="RMSprop算法"><a href="#RMSprop算法" class="headerlink" title="RMSprop算法"></a>RMSprop算法</h3><p>对AdaGrad的改进，唯一的区别在于$G_t$的计算，将历史信息和当前信息进行线性加权，使得学习率可以动态改变而不是单调递减：<br><img src="images/2018-11-13-15421192344025.jpg" width="40%" height="50%"></p>
 <p>β为衰减率，通常取0.9。也即历史信息占主导。</p>
-<h3 id="AdaDelta算法"><a href="#AdaDelta算法" class="headerlink" title="AdaDelta算法"></a>AdaDelta算法</h3><p>同样是对AdaGrad的改进。<br>每次计算：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421195264173.jpg" width="50%" height="50%"></p>
+<h3 id="AdaDelta算法"><a href="#AdaDelta算法" class="headerlink" title="AdaDelta算法"></a>AdaDelta算法</h3><p>同样是对AdaGrad的改进。<br>每次计算：<br><img src="images/2018-11-13-15421195264173.jpg" width="50%" height="50%"></p>
 <p>也即历史更新差和上一时刻的更新差的加权（RMSprop是历史梯度和当前梯度）。</p>
-<p>最终更新差值为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421197355615.jpg" width="30%" height="50%"></p>
+<p>最终更新差值为：<br><img src="images/2018-11-13-15421197355615.jpg" width="30%" height="50%"></p>
 <p>其中$G_t$计算方法和RMSprop一致。</p>
 <h2 id="梯度方向优化"><a href="#梯度方向优化" class="headerlink" title="梯度方向优化"></a>梯度方向优化</h2><p>利用历史的梯度（方向）调整当前时刻的梯度。</p>
 <h3 id="动量（Momentum）法"><a href="#动量（Momentum）法" class="headerlink" title="动量（Momentum）法"></a>动量（Momentum）法</h3><p>动量法（Momentum Method）是用之前积累动量来替代真正的梯度。每次迭代的梯度可以看作是加速度。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421199473226.jpg" width="28%" height="50%"></p>
+<p><img src="images/2018-11-13-15421199473226.jpg" width="28%" height="50%"></p>
 <p>也即上一时刻的更新差值和当前梯度共同决定当前的更新差值。$ρ$为动量因子，通常为0.9。也即动量占了主导。</p>
 <p>当某个参数在最近一段时间内的梯度方向不一致时，其真实的参数更新幅度变小；相反，当在最近一段时间内的梯度方向都一致时，其真实的参数更新幅度变大，起到加速作用。一般而言，在迭代初期，梯度方法都比较一致，动量法会起到加速作用，可以更快地到达最优点。在迭代后期，梯度方法会取决不一致，在收敛值附近震荡，动量法会起到减速作用，增加稳定性。</p>
 <h3 id="Nesterov加速梯度"><a href="#Nesterov加速梯度" class="headerlink" title="Nesterov加速梯度"></a>Nesterov加速梯度</h3><p>动量法的改进版本。</p>
-<p>前面提到的动量法，是上一步的更新方向$\Delta \theta_{t-1}$与当前梯度$-g_t$的加和。因此可以理解成，先根据$∆θ_{t−1}$更新一次得到参数θ，再用$g_t$进行更新。亦即：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421202426163.jpg" width="27%" height="50%"><br>上式的第二步中，$g_t$是在$\theta_{t-1}$上的梯度。我们将该步改为在$_theta{t}$的梯度。<br>因此，有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421203421465.jpg" width="50%" height="50%"></p>
-<p>和动量法相比，相当于提前走了一步。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421203910771.jpg" width="70%" height="50%"></p>
-<h3 id="Adam-amp-Nadam"><a href="#Adam-amp-Nadam" class="headerlink" title="Adam&amp;Nadam"></a>Adam&amp;Nadam</h3><p>Adam一方面计算梯度平方的加权，同时还计算梯度的加权：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421205162558.jpg" width="40%" height="50%"><br>通常$β_1=0.9$,$β_2=0.99$<br>也即历史信息占了主导。</p>
-<p>在初期$M_t$与$G_t$会比真实均值和方差要小（想象$M_0=0,G_0=0$时）。因此对其进行修正，即：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421207635850.jpg" width="18%" height="50%"><br>因此最终有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-13-15421207966341.jpg" width="26%" height="50%"></p>
+<p>前面提到的动量法，是上一步的更新方向$\Delta \theta_{t-1}$与当前梯度$-g_t$的加和。因此可以理解成，先根据$∆θ_{t−1}$更新一次得到参数θ，再用$g_t$进行更新。亦即：<br><img src="images/2018-11-13-15421202426163.jpg" width="27%" height="50%"><br>上式的第二步中，$g_t$是在$\theta_{t-1}$上的梯度。我们将该步改为在$_theta{t}$的梯度。<br>因此，有：<br><img src="images/2018-11-13-15421203421465.jpg" width="50%" height="50%"></p>
+<p>和动量法相比，相当于提前走了一步。<br><img src="images/2018-11-13-15421203910771.jpg" width="70%" height="50%"></p>
+<h3 id="Adam-amp-Nadam"><a href="#Adam-amp-Nadam" class="headerlink" title="Adam&amp;Nadam"></a>Adam&amp;Nadam</h3><p>Adam一方面计算梯度平方的加权，同时还计算梯度的加权：<br><img src="images/2018-11-13-15421205162558.jpg" width="40%" height="50%"><br>通常$β_1=0.9$,$β_2=0.99$<br>也即历史信息占了主导。</p>
+<p>在初期$M_t$与$G_t$会比真实均值和方差要小（想象$M_0=0,G_0=0$时）。因此对其进行修正，即：<br><img src="images/2018-11-13-15421207635850.jpg" width="18%" height="50%"><br>因此最终有：<br><img src="images/2018-11-13-15421207966341.jpg" width="26%" height="50%"></p>
 <p>同理有Nadam。</p>
 <p>Adam = Momentum + RMSprop<br>Nadam = Nesterov + RMSprop</p>
 <h3 id="梯度截断-gradient-clipping"><a href="#梯度截断-gradient-clipping" class="headerlink" title="梯度截断 gradient clipping"></a>梯度截断 gradient clipping</h3><p>分为按值截断与按模截断。</p>
@@ -530,10 +529,10 @@
 <p>原则：不能过大，否则激活值会变得饱和，如sigmoid；不能过小，否则经过多层信号会逐渐消失，并且导致sigmoid丢失非线性的能力（在0附近基本近似线性）。如果一个神经元的输入连接很多，它的每个输入连接上的权重就应该小一些，这是为了避免输出过大。</p>
 <h2 id="Gaussian分布初始化"><a href="#Gaussian分布初始化" class="headerlink" title="Gaussian分布初始化"></a>Gaussian分布初始化</h2><p>同时考虑输入输出，可以按$N(0,\sqrt{\frac{2}{n_{in} + n_{out}}})$高斯分布来初始化。</p>
 <h2 id="均匀分布初始化"><a href="#均匀分布初始化" class="headerlink" title="均匀分布初始化"></a>均匀分布初始化</h2><p>在$[-r,r]$区间均匀分布初始化，其中r可以按照神经元数量自适应调整。</p>
-<h3 id="Xavier初始化方法"><a href="#Xavier初始化方法" class="headerlink" title="Xavier初始化方法"></a>Xavier初始化方法</h3><p>自动计算超参r。r的公式为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-14-15421648119504.jpg" width="22%" height="50%"><br>其中$n^l$代表第$l$层的神经元个数。</p>
+<h3 id="Xavier初始化方法"><a href="#Xavier初始化方法" class="headerlink" title="Xavier初始化方法"></a>Xavier初始化方法</h3><p>自动计算超参r。r的公式为：<br><img src="images/2018-11-14-15421648119504.jpg" width="22%" height="50%"><br>其中$n^l$代表第$l$层的神经元个数。</p>
 <p>为什么是这个式子（推导见参考资料）：综合考虑了①输入输出的方差要一致；②反向传播中误差信号的方差不被放大或缩小。</p>
-<h1 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h1><p>将数据分布归一化，使得分布保持稳定。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-14-15421656553319.jpg" width="100%" height="50%"><br>假设数据有四维(N,C,H,W)。N代表batch；C代表channel；H,W代表height和width。</p>
-<h2 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h2><p>沿着通道进行归一化，亦即每个通道都有自己的均值和方差。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-14-15421657694248.jpg" width="70%" height="50%"><br>其中缩放平移变量是可学习的。</p>
+<h1 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h1><p>将数据分布归一化，使得分布保持稳定。<br><img src="images/2018-11-14-15421656553319.jpg" width="100%" height="50%"><br>假设数据有四维(N,C,H,W)。N代表batch；C代表channel；H,W代表height和width。</p>
+<h2 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h2><p>沿着通道进行归一化，亦即每个通道都有自己的均值和方差。<br><img src="images/2018-11-14-15421657694248.jpg" width="70%" height="50%"><br>其中缩放平移变量是可学习的。</p>
 <p>缺点：<br>①对batch size敏感，batch size太小则方差均值不足以代表数据分布<br>②对于不等长的输入如RNN来说，每一个timestep都需要保存不同的特征。</p>
 <h2 id="Layer-Normalization"><a href="#Layer-Normalization" class="headerlink" title="Layer Normalization"></a>Layer Normalization</h2><p>对一个输入进行正则化，亦即每个输入都有自己的方差、均值。这样不依赖于batch大小和输入sequence的深度。</p>
 <p>对RNN效果比较明显，但CNN中不如BN</p>
@@ -767,8 +766,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-11T11:14:29+08:00">
-                2018-11-11
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:22+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -807,7 +806,7 @@
 <p>Adam等自适应学习率算法对于稀疏数据具有优势，且收敛速度很快；但精调参数的SGD（+Momentum）往往能够取得更好的最终结果。</p>
 <p>建议：<br>前期用Adam，享受Adam快速收敛的优势；后期切换到SGD，慢慢寻找最优解。<br>什么时候从Adam切换到SGD？当SGD的相应学习率的移动平均值基本不变的时候。</p>
 <hr>
-<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>LongTensor除以整数，会对除数进行取整，再做除法。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419055399325.jpg" width="30%" height="50%"></p>
+<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>LongTensor除以整数，会对除数进行取整，再做除法。<br><img src="images/2018-11-11-15419055399325.jpg" width="30%" height="50%"></p>
 <hr>
 <h3 id="3️⃣-Pytorch"><a href="#3️⃣-Pytorch" class="headerlink" title="3️⃣[Pytorch]"></a>3️⃣[Pytorch]</h3><p>使用Pytorch的DataParallel</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">device = torch.device(<span class="string">'cuda:'</span> + str(</span><br><span class="line">    config.CUDA_VISIBLE_DEVICES[<span class="number">0</span>]) <span class="keyword">if</span> config.use_cuda <span class="keyword">else</span> <span class="string">'cpu'</span>)   <span class="comment"># 指定第一个设备</span></span><br><span class="line"></span><br><span class="line">model = ClassifyModel(</span><br><span class="line">    vocab_size=len(vocab), max_seq_len=config.max_sent_len,</span><br><span class="line">    embed_dim=config.embed_dim, n_layers=config.n_layers,</span><br><span class="line">    n_head=config.n_head, d_k=config.d_k,</span><br><span class="line">    d_v=config.d_v,</span><br><span class="line">    d_model=config.d_model, d_inner=config.d_inner_hid,</span><br><span class="line">    n_label=config.n_label,</span><br><span class="line">    dropout=config.dropout</span><br><span class="line">).to(device)</span><br><span class="line"></span><br><span class="line">model = DataParallel(model, device_ids=config.CUDA_VISIBLE_DEVICES)  <span class="comment"># 显式定义device_ids</span></span><br></pre></td></tr></table></figure>
@@ -909,8 +908,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-11T10:46:27+08:00">
-                2018-11-11
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:26+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -945,10 +944,10 @@
       
         
           
-            <p>前几天在看AllenAI在EMNLP的ppt时，有一页写道：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419037448379.jpg" width="70%" height="50%"></p>
+            <p>前几天在看AllenAI在EMNLP的ppt时，有一页写道：<br><img src="images/2018-11-11-15419037448379.jpg" width="70%" height="50%"></p>
 <p>为什么会出现这种情况？</p>
 <p>Embedding是一个很大的矩阵，每一次其实都只有一个小部分进行了更新，对于一些词来说，出现的频率不高，或者说，其实大部分的词在一个loop/epoch中，被更新的次数是较少的。但是，注意到一般的optimizer算法，是以matrix为单位进行更新的，也就是每一次都是$W^{t+1}=W^{t}-\eta \frac{\partial L}{\partial{W}}$</p>
-<p>而Adam算法：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419038346958.jpg" width="70%" height="50%"></p>
+<p>而Adam算法：<br><img src="images/2018-11-11-15419038346958.jpg" width="70%" height="50%"></p>
 <p>动量占了主导。但这样，每次batch更新，那些没被更新的词（也即gradient=0）的动量仍然会被衰减，所以这样当到这个词更新的时候，他的动量已经被衰减完了，所以更新的gradient就很小。</p>
 <p>解决方案：</p>
 <p>①在PyTorch中，Embedding的API：<br><code>torch.nn.Embedding(num_embeddings, embedding_dim, padding_idx=None, max_norm=None, norm_type=2, scale_grad_by_freq=False, sparse=False, _weight=None)</code></p>
@@ -1053,8 +1052,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-11T14:52:00+08:00">
-                2018-11-11
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:06+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -1089,56 +1088,56 @@
       
         
           
-            <h2 id="1️⃣-Neural-Turing-Machine"><a href="#1️⃣-Neural-Turing-Machine" class="headerlink" title="1️⃣[Neural Turing Machine]"></a>1️⃣[Neural Turing Machine]</h2><p>通过模仿冯诺依曼机，引入外部内存(externel memory)。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-10-15418626837026.jpg" width="70%" height="50%"></p>
+            <h2 id="1️⃣-Neural-Turing-Machine"><a href="#1️⃣-Neural-Turing-Machine" class="headerlink" title="1️⃣[Neural Turing Machine]"></a>1️⃣[Neural Turing Machine]</h2><p>通过模仿冯诺依曼机，引入外部内存(externel memory)。<br><img src="images/2018-11-10-15418626837026.jpg" width="70%" height="50%"></p>
 <p>和普通神经网络一样，与外界交互，获得一个输入，产生一个输出。但不同的是，内部还有一个memory进行读写。<br>假设memory是一个N × M的矩阵，N是内存的位置数量。</p>
-<h3 id="读写memory"><a href="#读写memory" class="headerlink" title="读写memory"></a>读写memory</h3><p>①读<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-10-15418627403268.jpg" width="25%" height="50%"><br>其中读的时候对各内存位置线性加权。w是归一化权重。</p>
-<p>②写<br>$e_t$是擦除向量（erase vector）<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-10-15418627941358.jpg" width="35%" height="50%"></p>
-<p>$a_t$是加和向量(add vector)<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-10-15418628323343.jpg" width="30%" height="50%"></p>
+<h3 id="读写memory"><a href="#读写memory" class="headerlink" title="读写memory"></a>读写memory</h3><p>①读<br><img src="images/2018-11-10-15418627403268.jpg" width="25%" height="50%"><br>其中读的时候对各内存位置线性加权。w是归一化权重。</p>
+<p>②写<br>$e_t$是擦除向量（erase vector）<br><img src="images/2018-11-10-15418627941358.jpg" width="35%" height="50%"></p>
+<p>$a_t$是加和向量(add vector)<br><img src="images/2018-11-10-15418628323343.jpg" width="30%" height="50%"></p>
 <p>具体如何获得权重就不说了。</p>
 <h3 id="Controller-network"><a href="#Controller-network" class="headerlink" title="Controller network"></a>Controller network</h3><p>中间的controller network可以是一个普通的feed forward或者RNN。</p>
 <p>在实际中NTM用得并不多。</p>
 <hr>
 <h2 id="2️⃣-Efficient-Contextualized-Representation-Language-Model-Pruning-for-Sequence-Labeling"><a href="#2️⃣-Efficient-Contextualized-Representation-Language-Model-Pruning-for-Sequence-Labeling" class="headerlink" title="2️⃣[Efficient Contextualized Representation: Language Model Pruning for Sequence Labeling]"></a>2️⃣[Efficient Contextualized Representation: Language Model Pruning for Sequence Labeling]</h2><p>ELMo的精简版，通过即插即用的方法来压缩语言模型，对特定任务剪枝不同的层，使得能够减少inference的时间。<br>这篇的idea挺有创新的，但似乎有些trivial的感觉。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15418977712883.jpg" width="70%" height="50%"></p>
-<h3 id="RNN-and-Dense-Connectivity"><a href="#RNN-and-Dense-Connectivity" class="headerlink" title="RNN and Dense Connectivity"></a>RNN and Dense Connectivity</h3><p>每一层的输出都会传到所有层作为输入，因此对于L层的输入：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15418979328482.jpg" width="35%" height="50%"></p>
+<p><img src="images/2018-11-11-15418977712883.jpg" width="70%" height="50%"></p>
+<h3 id="RNN-and-Dense-Connectivity"><a href="#RNN-and-Dense-Connectivity" class="headerlink" title="RNN and Dense Connectivity"></a>RNN and Dense Connectivity</h3><p>每一层的输出都会传到所有层作为输入，因此对于L层的输入：<br><img src="images/2018-11-11-15418979328482.jpg" width="35%" height="50%"></p>
 <p>这样我们就能够随意地去掉任意中间层了。同时一些语言信息也分散到各个层，即使去掉某些层也没有关系。</p>
-<p>则最终的output为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15418991345288.jpg" width="33%" height="50%"></p>
-<p>最终作projection到正常维度（在每层都会这么做，将输入降维到正常维度再输入）：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15418992517849.jpg" width="37%" height="50%"></p>
-<p>再做一个softmax：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15418993146246.jpg" width="32%" height="50%"></p>
+<p>则最终的output为：<br><img src="images/2018-11-11-15418991345288.jpg" width="33%" height="50%"></p>
+<p>最终作projection到正常维度（在每层都会这么做，将输入降维到正常维度再输入）：<br><img src="images/2018-11-11-15418992517849.jpg" width="37%" height="50%"></p>
+<p>再做一个softmax：<br><img src="images/2018-11-11-15418993146246.jpg" width="32%" height="50%"></p>
 <p>由于 $h^{※}$ 用于softmax，所以可能和target word，也即下一个词比较相似，<strong>因此可能没有很多的上下文信息</strong>。</p>
-<p>所以最终我们使用$h_t$，以及反向的$h_t^r$，再过一层线性层获得最终的embedding（和ELMo有些不同，ELMo是直接拼起来）：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15418994541442.jpg" width="40%" height="50%"></p>
-<h3 id="Layer-Selection"><a href="#Layer-Selection" class="headerlink" title="Layer Selection"></a>Layer Selection</h3><p>我们在每层的output都加一个权重系数。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15418996081852.jpg" width="30%" height="50%"></p>
+<p>所以最终我们使用$h_t$，以及反向的$h_t^r$，再过一层线性层获得最终的embedding（和ELMo有些不同，ELMo是直接拼起来）：<br><img src="images/2018-11-11-15418994541442.jpg" width="40%" height="50%"></p>
+<h3 id="Layer-Selection"><a href="#Layer-Selection" class="headerlink" title="Layer Selection"></a>Layer Selection</h3><p>我们在每层的output都加一个权重系数。<br><img src="images/2018-11-11-15418996081852.jpg" width="30%" height="50%"></p>
 <p>我们希望在target task上用的时候，部分z能够变成0，达到layer selection的效果，加快inference的速度。</p>
-<p>亦即：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15418996697208.jpg" width="20%" height="50%"></p>
-<p>一种理想的方法是L0正则化：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15418997294756.jpg" width="17%" height="50%"></p>
-<p>但由于没办法求导，因此，采用L1正则化：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15418997747882.jpg" width="15%" height="50%"><br>但使用L1正则化有一定的风险，因为如果让所有z都远离1，那么会影响performance。</p>
+<p>亦即：<br><img src="images/2018-11-11-15418996697208.jpg" width="20%" height="50%"></p>
+<p>一种理想的方法是L0正则化：<br><img src="images/2018-11-11-15418997294756.jpg" width="17%" height="50%"></p>
+<p>但由于没办法求导，因此，采用L1正则化：<br><img src="images/2018-11-11-15418997747882.jpg" width="15%" height="50%"><br>但使用L1正则化有一定的风险，因为如果让所有z都远离1，那么会影响performance。</p>
 <p>引入新的正则化方法$R_2 =\delta(|z|_0&gt;\lambda_1) |z|_1$<br>亦即，只有在非零z的个数大于某个阈值时，才能有正则化效果，保证非零的个数。’it can be “turned-off” after achieving a satisfying sparsity’.</p>
 <p>进一步引入$R_3=\delta(|z|_0&gt;\lambda_1) |z|_1 + |z(1-z)|_1$<br>其中第二项为了鼓励z向0或1走。</p>
-<h3 id="Layer-wise-Dropout"><a href="#Layer-wise-Dropout" class="headerlink" title="Layer-wise Dropout"></a>Layer-wise Dropout</h3><p>随机删除部分layer，这些layer的输出不会传入之后的层，但仍然会参与最后的representation计算。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419000928057.jpg" width="70%" height="50%"></p>
+<h3 id="Layer-wise-Dropout"><a href="#Layer-wise-Dropout" class="headerlink" title="Layer-wise Dropout"></a>Layer-wise Dropout</h3><p>随机删除部分layer，这些layer的输出不会传入之后的层，但仍然会参与最后的representation计算。<br><img src="images/2018-11-11-15419000928057.jpg" width="70%" height="50%"></p>
 <p>这种dropout会让perplexity更高，但对生成更好的representation有帮助。</p>
 <hr>
-<h2 id="3️⃣-Constituency-Parsing-with-a-Self-Attentive-Encoder"><a href="#3️⃣-Constituency-Parsing-with-a-Self-Attentive-Encoder" class="headerlink" title="3️⃣[Constituency Parsing with a Self-Attentive Encoder]"></a>3️⃣[Constituency Parsing with a Self-Attentive Encoder]</h2><p>其中的positional encoding我比较感兴趣。<br>原版的positional encoding是直接和embedding相加的。<br>亦即：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419002563338.jpg" width="22%" height="50%"><br>那么在selt-attention时，有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419002855901.jpg" width="45%" height="50%"><br>这样会有交叉项：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419003111684.jpg" width="13%" height="50%"><br>该项没有什么意义，且可能会带来过拟合。</p>
-<p>因此在这边将positional encoding和embedding拼起来，亦即：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419003740409.jpg" width="23%" height="50%"></p>
-<p>并且，在进入multi-head时的线性层也做改变：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419004269693.jpg" width="24%" height="50%"></p>
+<h2 id="3️⃣-Constituency-Parsing-with-a-Self-Attentive-Encoder"><a href="#3️⃣-Constituency-Parsing-with-a-Self-Attentive-Encoder" class="headerlink" title="3️⃣[Constituency Parsing with a Self-Attentive Encoder]"></a>3️⃣[Constituency Parsing with a Self-Attentive Encoder]</h2><p>其中的positional encoding我比较感兴趣。<br>原版的positional encoding是直接和embedding相加的。<br>亦即：<br><img src="images/2018-11-11-15419002563338.jpg" width="22%" height="50%"><br>那么在selt-attention时，有：<br><img src="images/2018-11-11-15419002855901.jpg" width="45%" height="50%"><br>这样会有交叉项：<br><img src="images/2018-11-11-15419003111684.jpg" width="13%" height="50%"><br>该项没有什么意义，且可能会带来过拟合。</p>
+<p>因此在这边将positional encoding和embedding拼起来，亦即：<br><img src="images/2018-11-11-15419003740409.jpg" width="23%" height="50%"></p>
+<p>并且，在进入multi-head时的线性层也做改变：<br><img src="images/2018-11-11-15419004269693.jpg" width="24%" height="50%"></p>
 <p>这样在相乘的时候就不会有交叉项了。</p>
 <p>实验证明，该方法有一定的提升。</p>
 <hr>
 <h2 id="4️⃣-DropBlock-A-regularization-method-for-convolutional-networks"><a href="#4️⃣-DropBlock-A-regularization-method-for-convolutional-networks" class="headerlink" title="4️⃣[DropBlock: A regularization method for convolutional networks]"></a>4️⃣[DropBlock: A regularization method for convolutional networks]</h2><p>大致翻了一下。<br>Motivation:在CNN中，dropout对convolutional layer的作用不大，一般都只用在全连接层。作者推测，因为每个feature map都有一个感受野范围，仅仅对单个像素进行dropout并不能降低feature map学习的特征范围，亦即网络仍可以通过该位置的相邻位置元素去学习对应的语义信息，也就不会促使网络去学习更加鲁棒的特征。</p>
-<p>因此作者的做法是，dropout一整块位置。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419007355875.jpg" width="80%" height="50%"></p>
+<p>因此作者的做法是，dropout一整块位置。<br><img src="images/2018-11-11-15419007355875.jpg" width="80%" height="50%"></p>
 <hr>
 <h2 id="5️⃣-Accelerating-Neural-Transformer-via-an-Average-Attention-Network"><a href="#5️⃣-Accelerating-Neural-Transformer-via-an-Average-Attention-Network" class="headerlink" title="5️⃣[Accelerating Neural Transformer via an Average Attention Network]"></a>5️⃣[Accelerating Neural Transformer via an Average Attention Network]</h2><p>提出了AAN(average attention network)，对transformer翻译模型的decode部分进行改进，加速了过程。</p>
 <p>由于Transformer在decode阶段需要用到前面所有的y，也即自回归(auto-regressive)的性质，所以无法并行：</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419009098650.jpg" width="50%" height="50%"></p>
-<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p>给定y：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419010325049.jpg" width="27%" height="50%"></p>
-<p>首先将他们加起来，过一层全连接：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419010603010.jpg" width="27%" height="50%"><br>这也相当于就是让所有的y有相同的权重，此时g就是上下文相关的表示。</p>
-<p>接下来添加一个gating：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419011154221.jpg" width="27%" height="50%"><br>控制了从过去保存多少信息和获取多少新的信息。</p>
-<p>和Transformer原版论文一样，添加一个residual connection：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419011595237.jpg" width="30%" height="50%"></p>
-<p>如图整个过程：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419011840751.jpg" width="55%" height="50%"></p>
+<p><img src="images/2018-11-11-15419009098650.jpg" width="50%" height="50%"></p>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p>给定y：<br><img src="images/2018-11-11-15419010325049.jpg" width="27%" height="50%"></p>
+<p>首先将他们加起来，过一层全连接：<br><img src="images/2018-11-11-15419010603010.jpg" width="27%" height="50%"><br>这也相当于就是让所有的y有相同的权重，此时g就是上下文相关的表示。</p>
+<p>接下来添加一个gating：<br><img src="images/2018-11-11-15419011154221.jpg" width="27%" height="50%"><br>控制了从过去保存多少信息和获取多少新的信息。</p>
+<p>和Transformer原版论文一样，添加一个residual connection：<br><img src="images/2018-11-11-15419011595237.jpg" width="30%" height="50%"></p>
+<p>如图整个过程：<br><img src="images/2018-11-11-15419011840751.jpg" width="55%" height="50%"></p>
 <p>总结：AAN=average layer+gating layer</p>
-<h3 id="加速"><a href="#加速" class="headerlink" title="加速"></a>加速</h3><p>①考虑到加和操作是序列化的，只能一个一个来，不能并行，在这里使用一个mask的trick，使得在训练时也能够并行：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419013219526.jpg" width="60%" height="50%"></p>
-<p>②在inference时的加速：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419019335926.jpg" width="20%" height="50%"></p>
+<h3 id="加速"><a href="#加速" class="headerlink" title="加速"></a>加速</h3><p>①考虑到加和操作是序列化的，只能一个一个来，不能并行，在这里使用一个mask的trick，使得在训练时也能够并行：<br><img src="images/2018-11-11-15419013219526.jpg" width="60%" height="50%"></p>
+<p>②在inference时的加速：<br><img src="images/2018-11-11-15419019335926.jpg" width="20%" height="50%"></p>
 <p>这样Transformer就能够类似RNN，只考虑前一个的state，而不是前面所有的state。</p>
-<p>最终的模型：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419023032628.jpg" width="60%" height="50%"></p>
+<p>最终的模型：<br><img src="images/2018-11-11-15419023032628.jpg" width="60%" height="50%"></p>
 
           
         
@@ -1367,8 +1366,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-04T09:31:43+08:00">
-                2018-11-04
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:07+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -1405,40 +1404,40 @@
           
             <h2 id="1️⃣-Character-Level-Language-Modeling-with-Deeper-Self-Attention"><a href="#1️⃣-Character-Level-Language-Modeling-with-Deeper-Self-Attention" class="headerlink" title="1️⃣[Character-Level Language Modeling with Deeper Self-Attention]"></a>1️⃣[Character-Level Language Modeling with Deeper Self-Attention]</h2><p>将transformer用于character-level的语言模型中，通过添加多个loss来提高其表现以及加快拟合速度，同时加深transformer的层数，极大提升表现，12层的transformer layer能达到SOTA，而64层则有更多的提升。</p>
 <p>普通RNN用于character-level language model：<br>将句子按character为单位组成多个batch，每个batch预测最后一个词，然后将该batch的隐状态传入下一个batch。也即“truncated backpropagation through time” (TBTT)。</p>
-<p>如果用在Transformer，如下图，我们只预测$t_4$。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412915431327.jpg" width="90%" height="50%"></p>
+<p>如果用在Transformer，如下图，我们只预测$t_4$。<br><img src="images/2018-11-04-15412915431327.jpg" width="90%" height="50%"></p>
 <p>本文的一大贡献是多加了三种loss，并且有些loss的权值会随着训练的过程而逐渐减小，每个loss都会自己的schedule。这些loss加快了拟合速度，同时也提升了表现。</p>
-<h3 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h3><h4 id="Multiple-Positions"><a href="#Multiple-Positions" class="headerlink" title="Multiple Positions"></a>Multiple Positions</h4><p>对于batch内而言，每个时间步t都要预测下一个词。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412916429104.jpg" width="90%" height="50%"></p>
-<h4 id="Intermediate-Layer-Losses"><a href="#Intermediate-Layer-Losses" class="headerlink" title="Intermediate Layer Losses"></a>Intermediate Layer Losses</h4><p>要求中间层也做出预测：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412916704097.jpg" width="95%" height="50%"></p>
+<h3 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h3><h4 id="Multiple-Positions"><a href="#Multiple-Positions" class="headerlink" title="Multiple Positions"></a>Multiple Positions</h4><p>对于batch内而言，每个时间步t都要预测下一个词。<br><img src="images/2018-11-04-15412916429104.jpg" width="90%" height="50%"></p>
+<h4 id="Intermediate-Layer-Losses"><a href="#Intermediate-Layer-Losses" class="headerlink" title="Intermediate Layer Losses"></a>Intermediate Layer Losses</h4><p>要求中间层也做出预测：<br><img src="images/2018-11-04-15412916704097.jpg" width="95%" height="50%"></p>
 <p>在这里，越底层的layer其loss权值越低。</p>
 <h4 id="Multiple-Targets"><a href="#Multiple-Targets" class="headerlink" title="Multiple Targets"></a>Multiple Targets</h4><p>每一个position，不仅仅要预测下一个词，还要预测下几个词，预测下一个词和预测下几个词的分类器是独立的。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412917374689.jpg" width="70%" height="50%"></p>
+<p><img src="images/2018-11-04-15412917374689.jpg" width="70%" height="50%"></p>
 <h3 id="Positional-embedding"><a href="#Positional-embedding" class="headerlink" title="Positional embedding"></a>Positional embedding</h3><p>每一层的都添加一个不共享的可学习的positional embedding。</p>
 <hr>
 <h2 id="2️⃣-Self-Attention-with-Relative-Position-Representations"><a href="#2️⃣-Self-Attention-with-Relative-Position-Representations" class="headerlink" title="2️⃣[Self-Attention with Relative Position Representations]"></a>2️⃣[Self-Attention with Relative Position Representations]</h2><p>提出使用相对位置替代Transformer的绝对位置信息，并在NMT上有一定的提升。</p>
-<p>分解：<br>在原先的self-attention中，输出为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412923510664.jpg" width="25%" height="50%"></p>
-<p>其中：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412923744647.jpg" width="25%" height="50%"><br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412923773686.jpg" width="25%" height="50%"></p>
-<p>现在我们考虑添加相对位置，其中相对位置信息在各层都是共享的：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412924279426.jpg" width="30%" height="50%"><br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412924396468.jpg" width="30%" height="50%"></p>
-<p>$a_{ij}^K$的具体形式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412925792994.jpg" width="40%" height="50%"><br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412925910424.jpg" width="55%" height="50%"><br>上式为了降低复杂度，不考虑长于k的相对位置信息。</p>
-<p>考虑到transformer的并行性，为了并行性，我们考虑如下式子：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412926687951.jpg" width="50%" height="50%"><br>其中，第一项和原来的Transformer一致；第二项，通过reshape可以达到并行的效果，然后两项直接加起来。</p>
-<p>实验证明，使用相对位置效果是有一定的提升的，而同时使用绝对位置和相对位置并没有提升。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412930642978.jpg" width="90%" height="50%"></p>
+<p>分解：<br>在原先的self-attention中，输出为：<br><img src="images/2018-11-04-15412923510664.jpg" width="25%" height="50%"></p>
+<p>其中：<br><img src="images/2018-11-04-15412923744647.jpg" width="25%" height="50%"><br><img src="images/2018-11-04-15412923773686.jpg" width="25%" height="50%"></p>
+<p>现在我们考虑添加相对位置，其中相对位置信息在各层都是共享的：<br><img src="images/2018-11-04-15412924279426.jpg" width="30%" height="50%"><br><img src="images/2018-11-04-15412924396468.jpg" width="30%" height="50%"></p>
+<p>$a_{ij}^K$的具体形式：<br><img src="images/2018-11-04-15412925792994.jpg" width="40%" height="50%"><br><img src="images/2018-11-04-15412925910424.jpg" width="55%" height="50%"><br>上式为了降低复杂度，不考虑长于k的相对位置信息。</p>
+<p>考虑到transformer的并行性，为了并行性，我们考虑如下式子：<br><img src="images/2018-11-04-15412926687951.jpg" width="50%" height="50%"><br>其中，第一项和原来的Transformer一致；第二项，通过reshape可以达到并行的效果，然后两项直接加起来。</p>
+<p>实验证明，使用相对位置效果是有一定的提升的，而同时使用绝对位置和相对位置并没有提升。<br><img src="images/2018-11-04-15412930642978.jpg" width="90%" height="50%"></p>
 <hr>
 <h2 id="3️⃣-WEIGHTED-TRANSFORMER-NETWORK-FOR-MACHINE-TRANSLATION"><a href="#3️⃣-WEIGHTED-TRANSFORMER-NETWORK-FOR-MACHINE-TRANSLATION" class="headerlink" title="3️⃣[WEIGHTED TRANSFORMER NETWORK FOR MACHINE TRANSLATION]"></a>3️⃣[WEIGHTED TRANSFORMER NETWORK FOR MACHINE TRANSLATION]</h2><p>这篇被ICLR拒了，但有审稿人打了9分的高分。</p>
 <p>对Transformer进行改进，拥有更好的效果和更小的计算代价。</p>
 <p>传统的Transformer：</p>
 <script type="math/tex; mode=display">Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V</script><script type="math/tex; mode=display">head_i=Attention(QW_i^Q,KW_i^K,VW_i^V)</script><script type="math/tex; mode=display">MultiHead(Q,K,V)=Concat_i (head_i)W^O</script><script type="math/tex; mode=display">FFN(x)=max(0,xW_1+b_1)W_2 + b_2</script><p>在本文中，先对head进行升维并乘以权重，过了FNN后，再乘以另一个权重。其中权重$\alpha$ $ \kappa$为可学习参数：</p>
 <script type="math/tex; mode=display">head_i=Attention(QW_i^Q,KW_i^K,VW_i^V)</script><script type="math/tex; mode=display">\overline{head_i}=head_i W^{O_i} \times \kappa_i</script><script type="math/tex; mode=display">BranchedAttention(Q,K,V)=\sum_{i=1}^{M} \alpha_i FFN(\overline{head}_i)</script><p>其中要求权重之和为1。即$\sum_{i=1}^{M}\alpha_i=1$,$\sum_{i=1}^{M}\kappa_i=1$。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412939412047.jpg" width="90%" height="50%"></p>
+<p><img src="images/2018-11-04-15412939412047.jpg" width="90%" height="50%"></p>
 <p>文中对$\kappa$和$\alpha$作了解释。</p>
 <blockquote>
 <p>κ can be interpreted as a learned concatenation weight and α as the learned addition weight</p>
 </blockquote>
-<p>通过实验，发现该模型会有更好的正则化特性。同时效果也有一定提升，收敛速度更快：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412940966579.jpg" width="80%" height="50%"></p>
+<p>通过实验，发现该模型会有更好的正则化特性。同时效果也有一定提升，收敛速度更快：<br><img src="images/2018-11-04-15412940966579.jpg" width="80%" height="50%"></p>
 <hr>
 <h2 id="4️⃣-You-May-Not-Need-Attention"><a href="#4️⃣-You-May-Not-Need-Attention" class="headerlink" title="4️⃣[You May Not Need Attention]"></a>4️⃣[You May Not Need Attention]</h2><p>粗略地过了一遍，一些细节没有弄明白。</p>
 <p>提出一种将encoder-decoder融合起来的模型，也即eager translation model，不需要attention，能够实现即时的翻译，也即读入一个词就能翻译一个词，同时不需要记录encoder的所有输出，因此需要很少的内存。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412942175720.jpg" width="50%" height="50%"></p>
+<p><img src="images/2018-11-04-15412942175720.jpg" width="50%" height="50%"></p>
 <p>分为三步：<br>①pre-processing<br>进行预处理，使得源句子和目标句子满足<strong>eager feasible</strong> for every aligned pair of words $(s_i , t_j ), i ≤ j$。</p>
-<p>首先通过现成的工具进行对齐操作(alignment)，然后对于那些不符合eager feasible的有具体算法（没认真看）进行补padding。如图<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412945231042.jpg" width="60%" height="50%"></p>
+<p>首先通过现成的工具进行对齐操作(alignment)，然后对于那些不符合eager feasible的有具体算法（没认真看）进行补padding。如图<br><img src="images/2018-11-04-15412945231042.jpg" width="60%" height="50%"></p>
 <p>我们还可以在target sentence的开头添加b个padding，使得模型能够在开始预测之前获取更多的source sentence的词。</p>
 <p>②模型<br>两层的LSTM，输入是上一次的y和当前的x拼接起来直接传进去。</p>
 <p>③post processing<br>在最终结果之前，将padding去掉。</p>
@@ -1447,7 +1446,7 @@
 <li>Padding limit</li>
 <li>Source padding injection SPI</li>
 </ul>
-<p>实验表明，eager model在长的句子表现超过传统带attention的NMT，而长句子的建模正是attention-based 的模型的一大挑战；而在短句子上就不如attention-based的NMT。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-04-15412946442983.jpg" width="50%" height="50%"></p>
+<p>实验表明，eager model在长的句子表现超过传统带attention的NMT，而长句子的建模正是attention-based 的模型的一大挑战；而在短句子上就不如attention-based的NMT。<br><img src="images/2018-11-04-15412946442983.jpg" width="50%" height="50%"></p>
 
           
         

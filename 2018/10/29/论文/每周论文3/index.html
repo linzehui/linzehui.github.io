@@ -87,29 +87,29 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="1️⃣[A Neural Probabilistic Language Model]第一篇使用神经网络获得词向量的paper。 通过对language model建模，将词映射到低维表示，在训练过程中同时训练语言模型以及每个词的词向量。  将中心词的前n个拼接起来 $x=(C(w_{t-1},C(w_{t-2}),…,C(w_{t-n+1}))$将$x$送入神经网络中获得$y=b+Wx+Utanh">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15407808716787.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408103221289.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408103823681.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408104201718.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408105451770.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408105687677.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408106099743.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408106125837.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408106649319.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408106950342.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408107184035.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408107351871.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408108024183.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125098915.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125469899.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125685038.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125974795.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408126143943.jpg">
-<meta property="og:updated_time" content="2018-11-05T11:31:06.903Z">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15407808716787.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408103221289.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408103823681.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408104201718.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408105451770.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408105687677.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408106099743.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408106125837.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408106649319.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408106950342.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408107184035.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408107351871.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408108024183.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408125098915.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408125469899.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408125685038.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408125974795.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15408126143943.jpg">
+<meta property="og:updated_time" content="2018-11-19T00:35:10.320Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文3">
 <meta name="twitter:description" content="1️⃣[A Neural Probabilistic Language Model]第一篇使用神经网络获得词向量的paper。 通过对language model建模，将词映射到低维表示，在训练过程中同时训练语言模型以及每个词的词向量。  将中心词的前n个拼接起来 $x=(C(w_{t-1},C(w_{t-2}),…,C(w_{t-n+1}))$将$x$送入神经网络中获得$y=b+Wx+Utanh">
-<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15407808716787.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/2018/10/29/论文/每周论文3/images/2018-10-29-15407808716787.jpg">
 
 
 
@@ -351,8 +351,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-05T19:31:06+08:00">
-                2018-11-05
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:10+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -387,28 +387,28 @@
       
         <h2 id="1️⃣-A-Neural-Probabilistic-Language-Model"><a href="#1️⃣-A-Neural-Probabilistic-Language-Model" class="headerlink" title="1️⃣[A Neural Probabilistic Language Model]"></a>1️⃣[A Neural Probabilistic Language Model]</h2><p>第一篇使用神经网络获得词向量的paper。</p>
 <p>通过对language model建模，将词映射到低维表示，在训练过程中同时训练语言模型以及每个词的词向量。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15407808716787.jpg" width="50%" height="50%"></p>
+<p><img src="images/2018-10-29-15407808716787.jpg" width="50%" height="50%"></p>
 <p>将中心词的前n个拼接起来 $x=(C(w_{t-1},C(w_{t-2}),…,C(w_{t-n+1}))$<br>将$x$送入神经网络中获得$y=b+Wx+Utanh(d+Hx)$，最后做一个softmax即可。</p>
 <hr>
 <h2 id="2️⃣-Adaptive-Computation-Time-for-Recurrent-Neural-Networks"><a href="#2️⃣-Adaptive-Computation-Time-for-Recurrent-Neural-Networks" class="headerlink" title="2️⃣[Adaptive Computation Time for Recurrent Neural Networks]"></a>2️⃣[Adaptive Computation Time for Recurrent Neural Networks]</h2><p>一种允许RNN动态堆叠层数的算法。</p>
 <h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>证据证明，RNN的堆叠层数多，效果会有提升。但是，对于不同的任务，要求不同的计算复杂度。我们需要先验来决定特定任务的计算复杂度。当然我们可以粗暴地直接堆叠深层的网络。ACT(Adaptive Computation Time)能够动态决定每个输入t所需的计算次数。</p>
 <h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>将RNN每一步的输出过一个网络+sigmoid层，获得一个概率分布，也即什么时候应当停止不再继续往上堆叠，直到概率加和为1。同时为了尽可能抑制层数的无限增长，在loss添加一项惩罚。</p>
-<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><p>对于普通的RNN：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408103221289.jpg" width="30%" height="50%"></p>
+<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><p>对于普通的RNN：<br><img src="images/2018-10-29-15408103221289.jpg" width="30%" height="50%"></p>
 <p>s是隐藏层；y是输出。</p>
-<p>对于ACT的RNN，有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408103823681.jpg" width="40%" height="50%"></p>
-<p>上标n是指的t时刻的层数；其中：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408104201718.jpg" width="20%" height="50%"></p>
+<p>对于ACT的RNN，有：<br><img src="images/2018-10-29-15408103823681.jpg" width="40%" height="50%"></p>
+<p>上标n是指的t时刻的层数；其中：<br><img src="images/2018-10-29-15408104201718.jpg" width="20%" height="50%"></p>
 <p>$δ$是flat，指示x是第几次输入。</p>
-<p>引入新的网络，输入时隐状态，输出是一个概率分布：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408105451770.jpg" width="30%" height="50%"></p>
-<p>那么每一层的概率是：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408105687677.jpg" width="35%" height="50%"></p>
-<p>其中$R(t)$是在每一层概率求和超过1时的剩余概率（为了保证概率和为1，可以试着举一个例子来证明）<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408106099743.jpg" width="45%" height="50%"></p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408106125837.jpg" width="25%" height="50%"></p>
+<p>引入新的网络，输入时隐状态，输出是一个概率分布：<br><img src="images/2018-10-29-15408105451770.jpg" width="30%" height="50%"></p>
+<p>那么每一层的概率是：<br><img src="images/2018-10-29-15408105687677.jpg" width="35%" height="50%"></p>
+<p>其中$R(t)$是在每一层概率求和超过1时的剩余概率（为了保证概率和为1，可以试着举一个例子来证明）<br><img src="images/2018-10-29-15408106099743.jpg" width="45%" height="50%"></p>
+<p><img src="images/2018-10-29-15408106125837.jpg" width="25%" height="50%"></p>
 <p>ε是为了解决第一次输出时就超过1-ε的情况，ε一般取很小。</p>
-<p>最终，加权求和，作为最终的结果，传入下一个时间步：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408106649319.jpg" width="45%" height="50%"></p>
-<p>普通RNN与ACT的RNN对比：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408106950342.jpg" width="90%" height="50%"></p>
+<p>最终，加权求和，作为最终的结果，传入下一个时间步：<br><img src="images/2018-10-29-15408106649319.jpg" width="45%" height="50%"></p>
+<p>普通RNN与ACT的RNN对比：<br><img src="images/2018-10-29-15408106950342.jpg" width="90%" height="50%"></p>
 <h4 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h4><p>为了防止模型层数无限增长，添加一项惩罚项以抑制。</p>
-<p>记每一步的惩罚项为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408107184035.jpg" width="23%" height="50%"></p>
-<p>总的惩罚项则为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408107351871.jpg" width="19%" height="50%"></p>
-<p>Loss function则为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408108024183.jpg" width="35%" height="50%"></p>
+<p>记每一步的惩罚项为：<br><img src="images/2018-10-29-15408107184035.jpg" width="23%" height="50%"></p>
+<p>总的惩罚项则为：<br><img src="images/2018-10-29-15408107351871.jpg" width="19%" height="50%"></p>
+<p>Loss function则为：<br><img src="images/2018-10-29-15408108024183.jpg" width="35%" height="50%"></p>
 <p>因为N(t)是不可导的，我们在实际过程中只去最小化R(t)  （<del>我觉得不甚合理</del>，一种解读是如果我们不断最小化R(t)直到变成0，那么相当于N(t)少了一层，接着R(t)就会变得很大，然后又继续最小化R(t)…）</p>
 <hr>
 <h2 id="3️⃣-Universal-Transformers"><a href="#3️⃣-Universal-Transformers" class="headerlink" title="3️⃣[Universal Transformers]"></a>3️⃣[Universal Transformers]</h2><p>提出一种新型通用的transformer。</p>
@@ -421,11 +421,11 @@
 <li>每一层的权重是共享的，也即multi-head上的权重以及transition function在每一层是一致的。这一点和RNN、CNN一致。</li>
 <li>动态层数（ACT mechanism ）：对于每个词都会有不同的循环次数；也即有些词需要更多的refine；而有些词不需要。和固定层数的transformer相比，会有更好的通用性。</li>
 </ul>
-<h3 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h3><h4 id="总体架构"><a href="#总体架构" class="headerlink" title="总体架构"></a>总体架构</h4><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125098915.jpg" width="90%" height="50%"></p>
-<p>过程：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125469899.jpg" width="45%" height="50%"></p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125685038.jpg" width="70%" height="50%"></p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408125974795.jpg" width="70%" height="50%"></p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-29-15408126143943.jpg" width="60%" height="50%"></p>
+<h3 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h3><h4 id="总体架构"><a href="#总体架构" class="headerlink" title="总体架构"></a>总体架构</h4><p><img src="images/2018-10-29-15408125098915.jpg" width="90%" height="50%"></p>
+<p>过程：<br><img src="images/2018-10-29-15408125469899.jpg" width="45%" height="50%"></p>
+<p><img src="images/2018-10-29-15408125685038.jpg" width="70%" height="50%"></p>
+<p><img src="images/2018-10-29-15408125974795.jpg" width="70%" height="50%"></p>
+<p><img src="images/2018-10-29-15408126143943.jpg" width="60%" height="50%"></p>
 <p>和普通Transformer不同的地方在于：</p>
 <ul>
 <li>加了一层Transition层，Transition可以是depth-wise separable convolution（<a href="https://www.cnblogs.com/adong7639/p/7918527.html" target="_blank" rel="noopener">是什么？</a>）或者全连接层。</li>

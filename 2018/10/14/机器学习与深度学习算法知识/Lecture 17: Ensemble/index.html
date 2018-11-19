@@ -87,15 +87,15 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="Bagging对于复杂模型，往往variance会大，通过对多个模型的平均，能够减小variance： bagging的思想是多次有放回地采样N’个点（通常N’=N），然后对采样的几个数据集分别训练一个模型 测试的时候再对几个模型进行平均或投票 Boosting基本思想是对几个弱分类器线性加权，得到强分类器。分类器按先后顺序训练，每次训练完，对新模型分类错误的数据进行调高权重，而正确的数据则降低权">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394832736339.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394833007835.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394833255306.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394833971028.jpg">
-<meta property="og:updated_time" content="2018-10-14T02:16:48.502Z">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/14/机器学习与深度学习算法知识/Lecture%2017:%20Ensemble/images/2018-10-14-15394832736339.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/14/机器学习与深度学习算法知识/Lecture%2017:%20Ensemble/images/2018-10-14-15394833007835.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/14/机器学习与深度学习算法知识/Lecture%2017:%20Ensemble/images/2018-10-14-15394833255306.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/14/机器学习与深度学习算法知识/Lecture%2017:%20Ensemble/images/2018-10-14-15394833971028.jpg">
+<meta property="og:updated_time" content="2018-11-19T00:35:36.927Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lecture 17:Ensemble">
 <meta name="twitter:description" content="Bagging对于复杂模型，往往variance会大，通过对多个模型的平均，能够减小variance： bagging的思想是多次有放回地采样N’个点（通常N’=N），然后对采样的几个数据集分别训练一个模型 测试的时候再对几个模型进行平均或投票 Boosting基本思想是对几个弱分类器线性加权，得到强分类器。分类器按先后顺序训练，每次训练完，对新模型分类错误的数据进行调高权重，而正确的数据则降低权">
-<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394832736339.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/2018/10/14/机器学习与深度学习算法知识/Lecture%2017:%20Ensemble/images/2018-10-14-15394832736339.jpg">
 
 
 
@@ -337,8 +337,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-14T10:16:48+08:00">
-                2018-10-14
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:36+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -371,13 +371,13 @@
       
 
       
-        <h2 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h2><p>对于复杂模型，往往variance会大，通过对多个模型的平均，能够减小variance：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394832736339.jpg" width="50%" height="50%"></p>
-<p>bagging的思想是多次有放回地采样N’个点（通常N’=N），然后对采样的几个数据集分别训练一个模型<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394833007835.jpg" width="50%" height="50%"></p>
-<p>测试的时候再对几个模型进行平均或投票<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394833255306.jpg" width="50%" height="50%"></p>
+        <h2 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h2><p>对于复杂模型，往往variance会大，通过对多个模型的平均，能够减小variance：<br><img src="images/2018-10-14-15394832736339.jpg" width="50%" height="50%"></p>
+<p>bagging的思想是多次有放回地采样N’个点（通常N’=N），然后对采样的几个数据集分别训练一个模型<br><img src="images/2018-10-14-15394833007835.jpg" width="50%" height="50%"></p>
+<p>测试的时候再对几个模型进行平均或投票<br><img src="images/2018-10-14-15394833255306.jpg" width="50%" height="50%"></p>
 <h2 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h2><p>基本思想是对几个弱分类器线性加权，得到强分类器。分类器按先后顺序训练，每次训练完，对新模型分类错误的数据进行调高权重，而正确的数据则降低权重。</p>
 <p>可以保证：只要分类器的错误率小于50%，在boosting后能够有100%的正确率（在训练集）。</p>
 <p>证明过程略。</p>
-<h2 id="Ensemble-Stacking"><a href="#Ensemble-Stacking" class="headerlink" title="Ensemble: Stacking"></a>Ensemble: Stacking</h2><p>基本思想：使用训练数据训练多个初级分类器，将初级分类器的输出作为次级分类器的输入，获得最终的输出。我们应当使用不同的训练数据来训练次级分类器<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-14-15394833971028.jpg" width="50%" height="50%"></p>
+<h2 id="Ensemble-Stacking"><a href="#Ensemble-Stacking" class="headerlink" title="Ensemble: Stacking"></a>Ensemble: Stacking</h2><p>基本思想：使用训练数据训练多个初级分类器，将初级分类器的输出作为次级分类器的输入，获得最终的输出。我们应当使用不同的训练数据来训练次级分类器<br><img src="images/2018-10-14-15394833971028.jpg" width="50%" height="50%"></p>
 
       
     </div>

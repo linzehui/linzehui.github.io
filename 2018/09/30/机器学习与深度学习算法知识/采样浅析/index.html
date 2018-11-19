@@ -87,13 +87,13 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="总结在NLP中的采样方法（持续更新）。 采样方法1️⃣逆变换采样(Inverse Sampling)目的：已知任意概率分布的累积分布函数时，用于从该分布中生成随机样本。 —-什么是累积分布函数(CDF)—-是概率密度函数(PDF)的积分，定义： F_X(x)=P(X≤x)=\int_{-∞}^{x}f_X(t)dt—-END—- 想象我们知道高斯分布的概率密度函数，我们应该如何采样？本质上我们只能">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382714567064.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382715821631.jpg">
-<meta property="og:updated_time" content="2018-09-30T07:26:06.743Z">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/30/机器学习与深度学习算法知识/采样浅析/images/2018-09-30-15382714567064.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/30/机器学习与深度学习算法知识/采样浅析/images/2018-09-30-15382715821631.jpg">
+<meta property="og:updated_time" content="2018-11-19T00:35:30.807Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="采样浅析">
 <meta name="twitter:description" content="总结在NLP中的采样方法（持续更新）。 采样方法1️⃣逆变换采样(Inverse Sampling)目的：已知任意概率分布的累积分布函数时，用于从该分布中生成随机样本。 —-什么是累积分布函数(CDF)—-是概率密度函数(PDF)的积分，定义： F_X(x)=P(X≤x)=\int_{-∞}^{x}f_X(t)dt—-END—- 想象我们知道高斯分布的概率密度函数，我们应该如何采样？本质上我们只能">
-<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382714567064.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/2018/09/30/机器学习与深度学习算法知识/采样浅析/images/2018-09-30-15382714567064.jpg">
 
 
 
@@ -335,8 +335,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-30T15:26:06+08:00">
-                2018-09-30
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:30+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -374,7 +374,7 @@
 <p>—-什么是累积分布函数(CDF)—-<br>是概率密度函数(PDF)的积分，定义：</p>
 <script type="math/tex; mode=display">F_X(x)=P(X≤x)=\int_{-∞}^{x}f_X(t)dt</script><p>—-END—-</p>
 <p>想象我们知道高斯分布的概率密度函数，我们应该如何采样？本质上我们只能对均匀分布进行直接采样（高斯分布有<a href="https://www.zhihu.com/question/29971598" target="_blank" rel="noopener">算法</a>可以生成采样，但无法一般化）。对于这种连续的随机变量，我们只能通过间接的方法进行采样。</p>
-<p>逆变换采样即是通过累积分布函数的反函数来采样。因为累积分布函数的值域为$[0,1]$，因此我们通过在$[0,1]$上进行采样，再映射到原分布。<br>例子:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382714567064.jpg" width="80%" height="50%"><br>映射关系如图：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-30-15382715821631.jpg" width="50%" height="50%"></p>
+<p>逆变换采样即是通过累积分布函数的反函数来采样。因为累积分布函数的值域为$[0,1]$，因此我们通过在$[0,1]$上进行采样，再映射到原分布。<br>例子:<br><img src="images/2018-09-30-15382714567064.jpg" width="80%" height="50%"><br>映射关系如图：<br><img src="images/2018-09-30-15382715821631.jpg" width="50%" height="50%"></p>
 <h3 id="2️⃣重要性采样-Importance-Sampling"><a href="#2️⃣重要性采样-Importance-Sampling" class="headerlink" title="2️⃣重要性采样(Importance Sampling)"></a>2️⃣重要性采样(Importance Sampling)</h3><p>目的：已知某个分布$P$，希望能估计$f(x)$的期望。亦即：</p>
 <script type="math/tex; mode=display">E[f(x)]=\int_{x}f(x)p(x)dx≈\frac{1}{n}\sum_{i=1}^{n}f(x_i)</script><p>其中$x\sim p$。<br>假设$p(x)$的分布复杂或样本不好生成，另一分布$q(x)$方便生成样本。因此我们引入$q(x)$对原先分布进行估计。</p>
 <script type="math/tex; mode=display">E[f(x)]=\int_{x}f(x)p(x)dx=\int_{x}f(x)\frac{p(x)}{q(x)}q(x)dx≈\frac{1}{n}\sum_{i=1}^{n}f(x_i)\frac{p(x_i)}{q(x_i)}</script><p>其中，$x \sim q$。$w(x)=\frac{p(x)}{q(x)}$称为Importance Weight</p>

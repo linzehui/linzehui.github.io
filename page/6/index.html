@@ -757,8 +757,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-02T19:52:28+08:00">
-                2018-09-02
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:19+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -793,16 +793,16 @@
       
         
           
-            <h3 id="1️⃣-dropout"><a href="#1️⃣-dropout" class="headerlink" title="1️⃣[dropout]"></a>1️⃣[dropout]</h3><p>dropout形式:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-02-15358857481798.jpg" width="70%" height="50%"><br>RNN的形式有多种：</p>
+            <h3 id="1️⃣-dropout"><a href="#1️⃣-dropout" class="headerlink" title="1️⃣[dropout]"></a>1️⃣[dropout]</h3><p>dropout形式:<br><img src="images/2018-09-02-15358857481798.jpg" width="70%" height="50%"><br>RNN的形式有多种：</p>
 <ul>
 <li><p>recurrent dropout<br>RNN: $h_t=f(W_h ⊙ [x_t,h_{t-1}]+b_h)$<br>加上dropout的RNN：$h_t=f(W_h ⊙ [x_t,d(h_{t-1})]+b_h)$，其中$d(\cdot)$为dropout函数<br>同理：<br>LSTM:$c_t=f_t ⊙c_{t-1} + i_t ⊙ d(g_t)$<br>GRU:$h_t=(1-z_t)⊙c_{t-1}+z_t⊙d(g_t)$</p>
 </li>
-<li><p>垂直连接的dropout<br>dropout的作用即是否允许L层某个LSTM单元的隐状态信息流入L+1层对应单元。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-02-15358866404870.jpg" width="50%" height="50%"></p>
+<li><p>垂直连接的dropout<br>dropout的作用即是否允许L层某个LSTM单元的隐状态信息流入L+1层对应单元。<br><img src="images/2018-09-02-15358866404870.jpg" width="50%" height="50%"></p>
 </li>
 </ul>
 <p>Reference:<br><a href="https://blog.csdn.net/falianghuang/article/details/72910161" target="_blank" rel="noopener">https://blog.csdn.net/falianghuang/article/details/72910161</a></p>
 <hr>
-<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>pack_padded_sequence用于RNN中，将padding矩阵压缩:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-02-15358868858836.jpg" width="60%" height="50%"><br>这样就可以实现在RNN传输过程中短句提前结束。</p>
+<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>pack_padded_sequence用于RNN中，将padding矩阵压缩:<br><img src="images/2018-09-02-15358868858836.jpg" width="60%" height="50%"><br>这样就可以实现在RNN传输过程中短句提前结束。</p>
 <p>pad_packed_sequence是pack_padded_sequence的逆运算。</p>
 
           
@@ -1209,8 +1209,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-26T22:20:28+08:00">
-                2018-08-26
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:19+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -1247,7 +1247,7 @@
           
             <p>1️⃣[Paper]<br>Joint Embeddings of Chinese Words, Characters, and Fine-grained Subcharacter Components</p>
 <p>基本框架和CBOW一致，主要贡献在于针对中文词向量添加了偏旁、字的组件作为训练信息。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-26-15352530482345.jpg" width="50%" height="50%"></p>
+<p><img src="images/2018-08-26-15352530482345.jpg" width="50%" height="50%"></p>
 <hr>
 <p>2️⃣[Paper]<br>Highway Networks</p>
 <p>为了解决神经网络深度过深时导致的反向传播困难的问题。<br>前向传播的公式：</p>
@@ -1261,13 +1261,13 @@
 </ul>
 <p>一条原则：当validation loss开始上升时，减少学习率。</p>
 <p>如何减少？</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-26-15352871548330.jpg" width="50%" height="50%"></p>
+<p><img src="images/2018-08-26-15352871548330.jpg" width="50%" height="50%"></p>
 <p>或者：</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-26-15352873283890.jpg" width="50%" height="50%"><br>设定一定的epoch作为一个stepsize，在训练过程中线性增加学习率，然后在到达最大值后再线性减小。<br>实验表明，使用该方法可以在一半的epoch内达到相同的效果。</p>
+<p><img src="images/2018-08-26-15352873283890.jpg" width="50%" height="50%"><br>设定一定的epoch作为一个stepsize，在训练过程中线性增加学习率，然后在到达最大值后再线性减小。<br>实验表明，使用该方法可以在一半的epoch内达到相同的效果。</p>
 <ul>
 <li><strong>batch size</strong>：</li>
 </ul>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-26-15352891425729.jpg" width="50%" height="50%"></p>
+<p><img src="images/2018-08-26-15352891425729.jpg" width="50%" height="50%"></p>
 <p>由于batch size和学习率的强相关性，<a href="https://arxiv.org/pdf/1711.00489.pdf" target="_blank" rel="noopener">相关论文</a>提出提高batch size而不是降低学习率的方法来提升模型表现。</p>
 <blockquote>
 <p>increasing the batch size during training, instead of decaying learning rate. — L. Smith<br><a href="https://arxiv.org/pdf/1711.00489.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1711.00489.pdf</a></p>
@@ -1634,8 +1634,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-26T22:29:09+08:00">
-                2018-08-26
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:28+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -1671,10 +1671,10 @@
         
           
             <p>最近因为比赛的缘故对文本分类有一定的了解。其中使用CNN方法做情感分析任务存在着许多优势。虽然模型简单，但如何设置超参有时候对结果有很大的影响。本文记录了关于CNN文本分类的一些学习历程和指南，基本参考了论文。</p>
-<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>基本上目前较为浅层的CNN文本分类的做法都是如下图：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-25-15351860103617.jpg" alt=""></p>
+<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>基本上目前较为浅层的CNN文本分类的做法都是如下图：<br><img src="images/2018-08-25-15351860103617.jpg" alt=""></p>
 <p>将词向量堆积成为二维的矩阵，通过CNN的卷积单元对矩阵进行卷积处理，同时使用pooling（通常是1max-pooling）操作，将不等长的卷积结果变为等长，对不同的卷积单元的结果进行拼接后生成单个向量，最后再通过线性层转化成类别概率分布。</p>
 <p>另一张图也说明了该流程。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-25-15351863867337.jpg" alt=""></p>
+<p><img src="images/2018-08-25-15351863867337.jpg" alt=""></p>
 <h2 id="建议与指导"><a href="#建议与指导" class="headerlink" title="建议与指导"></a>建议与指导</h2><h3 id="超参及其对结果的影响"><a href="#超参及其对结果的影响" class="headerlink" title="超参及其对结果的影响"></a>超参及其对结果的影响</h3><p>接下来的内容参考了论文<a href="https://arxiv.org/pdf/1510.03820.pdf" target="_blank" rel="noopener">A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional<br>Neural Networks for Sentence Classification</a></p>
 <p>CNN文本分类的超参：</p>
 <ul>
@@ -1703,7 +1703,7 @@
 <p>it would seem that increasing the number of maps beyond 600 yields at best very marginal returns, and often hurts performance.</p>
 </blockquote>
 <h5 id="建议-2"><a href="#建议-2" class="headerlink" title="建议"></a>建议</h5><p>在600内搜索最优，如果在600的边缘还没有明显的效果下降，那么可以尝试大于600的feature maps。</p>
-<h4 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h4><p>实验结果：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-25-15351889835594.jpg" alt=""></p>
+<h4 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h4><p>实验结果：<br><img src="images/2018-08-25-15351889835594.jpg" alt=""></p>
 <p>结果表明，tanh、ReLU和不使用激活函数效果较好。tanh的优点是以0为中心，ReLU能够加速拟合，至于为什么不使用的效果会好，可能是因为模型较为简单：</p>
 <blockquote>
 <p>This indicates that on some datasets, a linear transformation is enough to capture the<br>correlation between the word embedding and the output label.</p>

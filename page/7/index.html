@@ -948,8 +948,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-01T21:15:02+08:00">
-                2018-09-01
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:27+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -987,41 +987,41 @@
             <p>原文地址:<a href="https://hackernoon.com/python-tricks-101-2836251922e0" target="_blank" rel="noopener">https://hackernoon.com/python-tricks-101-2836251922e0</a></p>
 <p>我觉得这个介绍Python一些tricks的文章很好，能够更加熟悉Python的一些非常方便的用法。<br>以下是我觉得有用的几个点。</p>
 <p>1️⃣Reverse a String/List</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-19-15346465152976.jpg" width="70%" height="50%"></p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-19-15346467215597.jpg" width="70%" height="50%"></p>
+<p><img src="images/2018-08-19-15346465152976.jpg" width="70%" height="50%"></p>
+<p><img src="images/2018-08-19-15346467215597.jpg" width="70%" height="50%"></p>
 <p>[::-1]解释：<br>[:]表示取所有的元素，-1表示步进。[1:5:2]表示的就是从元素1到元素5，每2个距离取一个。</p>
 <hr>
 <p>2️⃣transpose 2d array</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-19-15346470165919.jpg" width="70%" height="50%"></p>
+<p><img src="images/2018-08-19-15346470165919.jpg" width="70%" height="50%"></p>
 <p>zip()相当于压缩，zip(*)相当于解压。</p>
 <hr>
 <p>3️⃣Chained function call</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-19-15346471756442.jpg" width="70%" height="50%"></p>
+<p><img src="images/2018-08-19-15346471756442.jpg" width="70%" height="50%"></p>
 <p>非常简洁的写法。</p>
 <hr>
 <p>4️⃣Copy List</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-19-15346472744350.jpg" width="50%" height="50%"></p>
+<p><img src="images/2018-08-19-15346472744350.jpg" width="50%" height="50%"></p>
 <p>之前谈过的Python的赋值、浅拷贝、深拷贝。</p>
 <hr>
 <p>5️⃣Dictionary get</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-19-15346473929918.jpg" width="70%" height="50%"></p>
+<p><img src="images/2018-08-19-15346473929918.jpg" width="70%" height="50%"></p>
 <p>避免了dict不存在该元素的问题。</p>
 <hr>
 <p>6️⃣✨Sort Dictionary by Value</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-19-15346475170316.jpg" width="90%" height="50%"></p>
+<p><img src="images/2018-08-19-15346475170316.jpg" width="90%" height="50%"></p>
 <p>其中第三种返回的是[‘watermelon’, ‘banana’, ‘apple’, ‘orange’]，没有value了。</p>
 <hr>
 <p>7️⃣For…else</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-19-15346481408714.jpg" width="90%" height="50%"></p>
+<p><img src="images/2018-08-19-15346481408714.jpg" width="90%" height="50%"></p>
 <p>注意到如果for在中途break了，就不会进入到else了；只有顺利循环完才会进入到else。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> e <span class="keyword">in</span> a:</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">if</span> e==<span class="number">0</span>:</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">break</span></span><br><span class="line"><span class="meta">... </span><span class="keyword">else</span>:</span><br><span class="line"><span class="meta">... </span>    print(<span class="string">'hello'</span>)</span><br><span class="line"><span class="meta">... </span><span class="comment">#什么都没有print</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> e <span class="keyword">in</span> a:</span><br><span class="line"><span class="meta">... </span>    print(e)</span><br><span class="line"><span class="meta">... </span><span class="keyword">else</span>:</span><br><span class="line"><span class="meta">... </span>    print(<span class="string">'hello'</span>)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
 <hr>
 <p>8️⃣Merge dict’s</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-19-15346483785515.jpg" width="90%" height="50%"></p>
+<p><img src="images/2018-08-19-15346483785515.jpg" width="90%" height="50%"></p>
 <p>合并dict的方法。</p>
 <hr>
 <p>9️⃣Min and Max index in List</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-19-15346487918895.jpg" width="80%" height="50%"></p>
+<p><img src="images/2018-08-19-15346487918895.jpg" width="80%" height="50%"></p>
 
           
         
@@ -1117,8 +1117,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-19T15:08:48+08:00">
-                2018-08-19
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:20+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -1156,7 +1156,7 @@
             <p>1️⃣[概率校准(Probability Calibration)]<br>一种对机器学习算法输出结果的校准，通过几个实验可以发现，概率校准能够一定程度提高表现。<br>几个参考资料：<br>直观理解:  <a href="http://www.bubuko.com/infodetail-2133893.html" target="_blank" rel="noopener">http://www.bubuko.com/infodetail-2133893.html</a><br>SVC的概率校准在sklearn上的应用: <a href="https://blog.csdn.net/ericcchen/article/details/79337716" target="_blank" rel="noopener">https://blog.csdn.net/ericcchen/article/details/79337716</a><br>✨完全手册: <a href="http://users.dsic.upv.es/~flip/papers/BFHRHandbook2010.pdf" target="_blank" rel="noopener">Calibration of Machine Learning Models</a></p>
 <hr>
 <p>2️⃣[Paper]<br><a href="https://www.cs.cmu.edu/~hovy/papers/16HLT-hierarchical-attention-networks.pdf" target="_blank" rel="noopener">Hierarchical Attention Networks for Document Classification</a></p>
-<p>亮点在使用层次的RNN结构，以及使用了attention方法。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-19-15346447273228.jpg" width="50%" height="50%"></p>
+<p>亮点在使用层次的RNN结构，以及使用了attention方法。<br><img src="images/2018-08-19-15346447273228.jpg" width="50%" height="50%"></p>
 <p>参考了其他人的代码自己也试着实现了一个，GitHub地址：<a href="https://github.com/linzehui/pytorch-hierarchical-attention-network" target="_blank" rel="noopener">https://github.com/linzehui/pytorch-hierarchical-attention-network</a></p>
 <hr>
 <p>3️⃣[XGBoost]<br>kaggle神器XGBoost，一篇原理的详细介绍：<br><a href="http://www.cnblogs.com/willnote/p/6801496.html" target="_blank" rel="noopener">http://www.cnblogs.com/willnote/p/6801496.html</a><br>虽然还是有好些地方没搞懂，有必要从头学起。</p>
@@ -1575,8 +1575,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-12T23:04:35+08:00">
-                2018-10-12
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:26+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -1640,11 +1640,11 @@
 <li>将embedding weight保存为hdf5文件形式</li>
 <li>运行脚本，将语料转化成ELMo embedding。</li>
 </ol>
-<h3 id="训练GloVe或word2vec"><a href="#训练GloVe或word2vec" class="headerlink" title="训练GloVe或word2vec"></a>训练GloVe或word2vec</h3><p>可参见我以前的博客或者网上的教程。<br>注意到，如果要用gensim导入GloVe训好的词向量，需要在开头添加num_word embedding_dim。 如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338861462682.jpg" width="70%" height="50%"></p>
-<h3 id="获得vocab词表文件"><a href="#获得vocab词表文件" class="headerlink" title="获得vocab词表文件"></a>获得vocab词表文件</h3><p>注意到，词表文件的开头必须要有<code>&lt;S&gt; &lt;/S&gt; &lt;UNK&gt;</code>，且大小写敏感。并且应当按照单词的词频降序排列。可以通过手动添加这三个特殊符号。<br>如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-11-15339757184030.jpg" width="10%" height="50%"></p>
+<h3 id="训练GloVe或word2vec"><a href="#训练GloVe或word2vec" class="headerlink" title="训练GloVe或word2vec"></a>训练GloVe或word2vec</h3><p>可参见我以前的博客或者网上的教程。<br>注意到，如果要用gensim导入GloVe训好的词向量，需要在开头添加num_word embedding_dim。 如：<br><img src="images/2018-08-10-15338861462682.jpg" width="70%" height="50%"></p>
+<h3 id="获得vocab词表文件"><a href="#获得vocab词表文件" class="headerlink" title="获得vocab词表文件"></a>获得vocab词表文件</h3><p>注意到，词表文件的开头必须要有<code>&lt;S&gt; &lt;/S&gt; &lt;UNK&gt;</code>，且大小写敏感。并且应当按照单词的词频降序排列。可以通过手动添加这三个特殊符号。<br>如：<br><img src="images/2018-08-11-15339757184030.jpg" width="10%" height="50%"></p>
 <p>代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">model=gensim.models.KeyedVectors.load_word2vec_format(</span><br><span class="line">    fname=<span class="string">'/home/zhlin/GloVe/vectors.txt'</span>,binary=<span class="keyword">False</span></span><br><span class="line">)</span><br><span class="line">words=model.vocab</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'vocab.txt'</span>,<span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">'&lt;S&gt;'</span>)</span><br><span class="line">    f.write(<span class="string">'\n'</span>）</span><br><span class="line">    f.write(<span class="string">'&lt;/S&gt;'</span>)</span><br><span class="line">    f.write(<span class="string">'\n'</span>)</span><br><span class="line">    f.write(<span class="string">'&lt;UNK&gt;'</span>)</span><br><span class="line">    f.write(<span class="string">'\n'</span>)    <span class="comment"># bilm-tf 要求vocab有这三个符号，并且在最前面</span></span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> words:</span><br><span class="line">        f.write(word)</span><br><span class="line">        f.write(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure></p>
 <h3 id="修改bilm-tf代码"><a href="#修改bilm-tf代码" class="headerlink" title="修改bilm-tf代码"></a>修改bilm-tf代码</h3><p>注意到，在使用该代码之前，需要安装好相应的环境。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338879402377.jpg" width="50%" height="50%"></p>
+<p><img src="images/2018-08-10-15338879402377.jpg" width="50%" height="50%"></p>
 <p>如果使用的是conda作为默认的Python解释器，强烈建议使用conda安装，否则可能会出现一些莫名的错误。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda install tensorflow-gpu=1.4</span><br><span class="line">conda install h5py</span><br><span class="line">python setup.py install <span class="comment">#应在bilm-tf的文件夹下执行该指令</span></span><br></pre></td></tr></table></figure></p>
 <p>然后再运行测试代码，通过说明安装成功。</p>
 <h4 id="修改train-elmo-py"><a href="#修改train-elmo-py" class="headerlink" title="修改train_elmo.py"></a>修改train_elmo.py</h4><p>bin文件夹下的train_elmo.py是程序的入口。<br>主要修改的地方：</p>
@@ -1654,29 +1654,29 @@
 <li>n_train_tokens 可改可不改，影响的是输出信息。要查看自己语料的行数，可以通过<code>wc -l corpus.txt</code> 查看。</li>
 <li><strong>option的修改</strong>，将char_cnn部分都注释掉，其他根据自己需求修改</li>
 </ol>
-<p>如：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15338888745894.jpg" width="70%" height="50%"></p>
+<p>如：<br><img src="images/2018-08-10-15338888745894.jpg" width="70%" height="50%"></p>
 <h4 id="修改LanguageModel类"><a href="#修改LanguageModel类" class="headerlink" title="修改LanguageModel类"></a>修改LanguageModel类</h4><p>由于我需要传入预训练好的GloVe embedding，那么还需要修改embedding部分，这部分在bilm文件夹下的training.py，进入到LanguageModel类中_build_word_embeddings函数中。注意到，由于前三个是<code>&lt;S&gt; &lt;/S&gt; &lt;UNK&gt;</code>，而这三个字符在GloVe里面是没有的，因此这三个字符的embedding应当在训练的时候逐渐学习到，而正因此 <code>embedding_weights</code>的<code>trainable</code>应当设为<code>True</code></p>
 <p>如:</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-12-15340585073779.jpg" alt=""></p>
-<h4 id="修改train函数"><a href="#修改train函数" class="headerlink" title="修改train函数"></a>修改train函数</h4><p>添加代码，使得在train函数的最后保存embedding文件。<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-12-15340607132103.jpg" alt=""></p>
+<p><img src="images/2018-08-12-15340585073779.jpg" alt=""></p>
+<h4 id="修改train函数"><a href="#修改train函数" class="headerlink" title="修改train函数"></a>修改train函数</h4><p>添加代码，使得在train函数的最后保存embedding文件。<br><img src="images/2018-08-12-15340607132103.jpg" alt=""></p>
 <h3 id="训练并获得weights文件"><a href="#训练并获得weights文件" class="headerlink" title="训练并获得weights文件"></a>训练并获得weights文件</h3><p>训练需要语料文件corpus.txt，词表文件vocab.txt。</p>
 <h4 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h4><p>cd到bilm-tf文件夹下，运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> CUDA_VISIBLE_DEVICES=4</span><br><span class="line">nohup python -u bin/train_elmo.py \</span><br><span class="line">--train_prefix=<span class="string">'/home/zhlin/bilm-tf/corpus.txt'</span> \</span><br><span class="line">--vocab_file /home/zhlin/bilm-tf/glove_embedding_vocab8.10/vocab.txt \</span><br><span class="line">--save_dir /home/zhlin/bilm-tf/try &gt;bilm_out.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure></p>
 <p>根据实际情况设定不同的值和路径。</p>
-<p>运行情况：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-10-15339015862848.jpg" width="50%" height="50%"></p>
+<p>运行情况：<br><img src="images/2018-08-10-15339015862848.jpg" width="50%" height="50%"></p>
 <p>PS:运行过程中可能会有warning:</p>
 <blockquote>
 <p>‘list’ object has no attribute ‘name’<br>WARNING:tensorflow:Error encountered when serializing lstm_output_embeddings.<br>Type is unsupported, or the types of the items don’t match field type in CollectionDef.</p>
 </blockquote>
 <p>应该不用担心，还是能够继续运行的，后面也不受影响。</p>
 <p>在等待了相当长的时间后，在save_dir文件夹内生成了几个文件，其中checkpoint和options是关键，checkpoint能够进一步生成language model的weights文件，而options记录language model的参数。</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-11-15339734319058.jpg" alt=""></p>
+<p><img src="images/2018-08-11-15339734319058.jpg" alt=""></p>
 <h4 id="获得language-model的weights"><a href="#获得language-model的weights" class="headerlink" title="获得language model的weights"></a>获得language model的weights</h4><p>接下来运行bin/dump_weights.py将checkpoint转换成hdf5文件。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nohup python -u  /home/zhlin/bilm-tf/bin/dump_weights.py  \</span><br><span class="line">--save_dir /home/zhlin/bilm-tf/try  \</span><br><span class="line">--outfile /home/zhlin/bilm-tf/try/weights.hdf5 &gt;outfile.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
 <p>其中save_dir是checkpoint和option文件保存的地址。</p>
 <p>接下来等待程序运行：</p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-11-15339740970081.jpg" width="70%" height="50%"></p>
-<p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-11-15339745511775.jpg" width="70%" height="50%"></p>
-<p>最终获得了想要的weights和option：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-08-11-15339978499136.jpg" alt=""></p>
+<p><img src="images/2018-08-11-15339740970081.jpg" width="70%" height="50%"></p>
+<p><img src="images/2018-08-11-15339745511775.jpg" width="70%" height="50%"></p>
+<p>最终获得了想要的weights和option：<br><img src="images/2018-08-11-15339978499136.jpg" alt=""></p>
 <h3 id="将语料转化成ELMo-embedding"><a href="#将语料转化成ELMo-embedding" class="headerlink" title="将语料转化成ELMo embedding"></a>将语料转化成ELMo embedding</h3><p>由于我们有了vocab_file、与vocab_file一一对应的embedding h5py文件、以及language model的weights.hdf5和options.json。<br>接下来参考usage_token.py将一句话转化成ELMo embedding。</p>
 <p>参考代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> bilm <span class="keyword">import</span> TokenBatcher, BidirectionalLanguageModel, weight_layers, \</span><br><span class="line">    dump_token_embeddings</span><br><span class="line"></span><br><span class="line"><span class="comment"># Our small dataset.</span></span><br><span class="line">raw_context = [</span><br><span class="line">    <span class="string">'这 是 测试 .'</span>,</span><br><span class="line">    <span class="string">'好的 .'</span></span><br><span class="line">]</span><br><span class="line">tokenized_context = [sentence.split() <span class="keyword">for</span> sentence <span class="keyword">in</span> raw_context]</span><br><span class="line">tokenized_question = [</span><br><span class="line">    [<span class="string">'这'</span>, <span class="string">'是'</span>, <span class="string">'什么'</span>],</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">vocab_file=<span class="string">'/home/zhlin/bilm-tf/glove_embedding_vocab8.10/vocab.txt'</span></span><br><span class="line">options_file=<span class="string">'/home/zhlin/bilm-tf/try/options.json'</span></span><br><span class="line">weight_file=<span class="string">'/home/zhlin/bilm-tf/try/weights.hdf5'</span></span><br><span class="line">token_embedding_file=<span class="string">'/home/zhlin/bilm-tf/glove_embedding_vocab8.10/vocab_embedding.hdf5'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Now we can do inference.</span></span><br><span class="line"><span class="comment"># Create a TokenBatcher to map text to token ids.</span></span><br><span class="line">batcher = TokenBatcher(vocab_file)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Input placeholders to the biLM.</span></span><br><span class="line">context_token_ids = tf.placeholder(<span class="string">'int32'</span>, shape=(<span class="keyword">None</span>, <span class="keyword">None</span>))</span><br><span class="line">question_token_ids = tf.placeholder(<span class="string">'int32'</span>, shape=(<span class="keyword">None</span>, <span class="keyword">None</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Build the biLM graph.</span></span><br><span class="line">bilm = BidirectionalLanguageModel(</span><br><span class="line">    options_file,</span><br><span class="line">    weight_file,</span><br><span class="line">    use_character_inputs=<span class="keyword">False</span>,</span><br><span class="line">    embedding_weight_file=token_embedding_file</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get ops to compute the LM embeddings.</span></span><br><span class="line">context_embeddings_op = bilm(context_token_ids)</span><br><span class="line">question_embeddings_op = bilm(question_token_ids)</span><br><span class="line"></span><br><span class="line">elmo_context_input = weight_layers(<span class="string">'input'</span>, context_embeddings_op, l2_coef=<span class="number">0.0</span>)</span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">''</span>, reuse=<span class="keyword">True</span>):</span><br><span class="line">    <span class="comment"># the reuse=True scope reuses weights from the context for the question</span></span><br><span class="line">    elmo_question_input = weight_layers(</span><br><span class="line">        <span class="string">'input'</span>, question_embeddings_op, l2_coef=<span class="number">0.0</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">elmo_context_output = weight_layers(</span><br><span class="line">    <span class="string">'output'</span>, context_embeddings_op, l2_coef=<span class="number">0.0</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">''</span>, reuse=<span class="keyword">True</span>):</span><br><span class="line">    <span class="comment"># the reuse=True scope reuses weights from the context for the question</span></span><br><span class="line">    elmo_question_output = weight_layers(</span><br><span class="line">        <span class="string">'output'</span>, question_embeddings_op, l2_coef=<span class="number">0.0</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="comment"># It is necessary to initialize variables once before running inference.</span></span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Create batches of data.</span></span><br><span class="line">    context_ids = batcher.batch_sentences(tokenized_context)</span><br><span class="line">    question_ids = batcher.batch_sentences(tokenized_question)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute ELMo representations (here for the input only, for simplicity).</span></span><br><span class="line">    elmo_context_input_, elmo_question_input_ = sess.run(</span><br><span class="line">        [elmo_context_input[<span class="string">'weighted_op'</span>], elmo_question_input[<span class="string">'weighted_op'</span>]],</span><br><span class="line">        feed_dict=&#123;context_token_ids: context_ids,</span><br><span class="line">                   question_token_ids: question_ids&#125;</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">print(elmo_context_input_,elmo_context_input_)</span><br></pre></td></tr></table></figure></p>
 <p>可以修改代码以适应自己的需求。</p>

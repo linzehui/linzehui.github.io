@@ -87,13 +87,13 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="前几天在看AllenAI在EMNLP的ppt时，有一页写道： 为什么会出现这种情况？ Embedding是一个很大的矩阵，每一次其实都只有一个小部分进行了更新，对于一些词来说，出现的频率不高，或者说，其实大部分的词在一个loop/epoch中，被更新的次数是较少的。但是，注意到一般的optimizer算法，是以matrix为单位进行更新的，也就是每一次都是$W^{t+1}=W^{t}-\eta \">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419037448379.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419038346958.jpg">
-<meta property="og:updated_time" content="2018-11-11T02:46:27.320Z">
+<meta property="og:image" content="http://www.linzehui.me/2018/11/11/碎片知识/关于sparse%20gradient/images/2018-11-11-15419037448379.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/11/11/碎片知识/关于sparse%20gradient/images/2018-11-11-15419038346958.jpg">
+<meta property="og:updated_time" content="2018-11-19T00:35:26.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于sparse gradient">
 <meta name="twitter:description" content="前几天在看AllenAI在EMNLP的ppt时，有一页写道： 为什么会出现这种情况？ Embedding是一个很大的矩阵，每一次其实都只有一个小部分进行了更新，对于一些词来说，出现的频率不高，或者说，其实大部分的词在一个loop/epoch中，被更新的次数是较少的。但是，注意到一般的optimizer算法，是以matrix为单位进行更新的，也就是每一次都是$W^{t+1}=W^{t}-\eta \">
-<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419037448379.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/2018/11/11/碎片知识/关于sparse%20gradient/images/2018-11-11-15419037448379.jpg">
 
 
 
@@ -335,8 +335,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-11T10:46:27+08:00">
-                2018-11-11
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:26+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -369,10 +369,10 @@
       
 
       
-        <p>前几天在看AllenAI在EMNLP的ppt时，有一页写道：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419037448379.jpg" width="70%" height="50%"></p>
+        <p>前几天在看AllenAI在EMNLP的ppt时，有一页写道：<br><img src="images/2018-11-11-15419037448379.jpg" width="70%" height="50%"></p>
 <p>为什么会出现这种情况？</p>
 <p>Embedding是一个很大的矩阵，每一次其实都只有一个小部分进行了更新，对于一些词来说，出现的频率不高，或者说，其实大部分的词在一个loop/epoch中，被更新的次数是较少的。但是，注意到一般的optimizer算法，是以matrix为单位进行更新的，也就是每一次都是$W^{t+1}=W^{t}-\eta \frac{\partial L}{\partial{W}}$</p>
-<p>而Adam算法：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-11-11-15419038346958.jpg" width="70%" height="50%"></p>
+<p>而Adam算法：<br><img src="images/2018-11-11-15419038346958.jpg" width="70%" height="50%"></p>
 <p>动量占了主导。但这样，每次batch更新，那些没被更新的词（也即gradient=0）的动量仍然会被衰减，所以这样当到这个词更新的时候，他的动量已经被衰减完了，所以更新的gradient就很小。</p>
 <p>解决方案：</p>
 <p>①在PyTorch中，Embedding的API：<br><code>torch.nn.Embedding(num_embeddings, embedding_dim, padding_idx=None, max_norm=None, norm_type=2, scale_grad_by_freq=False, sparse=False, _weight=None)</code></p>

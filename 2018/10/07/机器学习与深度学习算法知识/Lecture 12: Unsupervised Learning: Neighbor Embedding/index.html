@@ -87,16 +87,16 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="Locally Linear Embedding (LLE)一种降维方法思想：假设每个点可以由其周围的点来表示 我们需要找到这样的$w_{ij}$，使得： ∑_i‖x^i−∑_j w_{ij} x^j ‖_2这样在降维的时候，我们仍然保持x之间的这样的关系: Laplacian Eigenmaps一种降维方法基本思想：如果$x^1$与$x^2$在高维空间中相近，则降维后也应该接近： S=1/2 ∑">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388822769215.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388823792351.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388824984809.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388826477983.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388830652023.jpg">
-<meta property="og:updated_time" content="2018-10-07T09:03:55.629Z">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2012:%20Unsupervised%20Learning:%20Neighbor%20Embedding/images/2018-10-07-15388822769215.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2012:%20Unsupervised%20Learning:%20Neighbor%20Embedding/images/2018-10-07-15388823792351.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2012:%20Unsupervised%20Learning:%20Neighbor%20Embedding/images/2018-10-07-15388824984809.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2012:%20Unsupervised%20Learning:%20Neighbor%20Embedding/images/2018-10-07-15388826477983.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2012:%20Unsupervised%20Learning:%20Neighbor%20Embedding/images/2018-10-07-15388830652023.jpg">
+<meta property="og:updated_time" content="2018-11-19T00:35:39.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lecture 12:Unsupervised Learning:Neighbor Embedding">
 <meta name="twitter:description" content="Locally Linear Embedding (LLE)一种降维方法思想：假设每个点可以由其周围的点来表示 我们需要找到这样的$w_{ij}$，使得： ∑_i‖x^i−∑_j w_{ij} x^j ‖_2这样在降维的时候，我们仍然保持x之间的这样的关系: Laplacian Eigenmaps一种降维方法基本思想：如果$x^1$与$x^2$在高维空间中相近，则降维后也应该接近： S=1/2 ∑">
-<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388822769215.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture%2012:%20Unsupervised%20Learning:%20Neighbor%20Embedding/images/2018-10-07-15388822769215.jpg">
 
 
 
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T17:03:55+08:00">
-                2018-10-07
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:39+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -372,20 +372,20 @@
       
 
       
-        <h3 id="Locally-Linear-Embedding-LLE"><a href="#Locally-Linear-Embedding-LLE" class="headerlink" title="Locally Linear Embedding (LLE)"></a>Locally Linear Embedding (LLE)</h3><p>一种降维方法<br>思想：假设每个点可以由其周围的点来表示<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388822769215.jpg" width="25%" height="50%"></p>
+        <h3 id="Locally-Linear-Embedding-LLE"><a href="#Locally-Linear-Embedding-LLE" class="headerlink" title="Locally Linear Embedding (LLE)"></a>Locally Linear Embedding (LLE)</h3><p>一种降维方法<br>思想：假设每个点可以由其周围的点来表示<br><img src="images/2018-10-07-15388822769215.jpg" width="25%" height="50%"></p>
 <p>我们需要找到这样的$w_{ij}$，使得：</p>
-<script type="math/tex; mode=display">∑_i‖x^i−∑_j w_{ij} x^j ‖_2</script><p>这样在降维的时候，我们仍然保持x之间的这样的关系:<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388823792351.jpg" width="50%" height="50%"></p>
+<script type="math/tex; mode=display">∑_i‖x^i−∑_j w_{ij} x^j ‖_2</script><p>这样在降维的时候，我们仍然保持x之间的这样的关系:<br><img src="images/2018-10-07-15388823792351.jpg" width="50%" height="50%"></p>
 <h3 id="Laplacian-Eigenmaps"><a href="#Laplacian-Eigenmaps" class="headerlink" title="Laplacian Eigenmaps"></a>Laplacian Eigenmaps</h3><p>一种降维方法<br>基本思想：如果$x^1$与$x^2$在高维空间中相近，则降维后也应该接近：</p>
-<script type="math/tex; mode=display">S=1/2 ∑_{i,j} w_{i,j} (z^i−z^j )^2</script><p>其中：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388824984809.jpg" width="30%" height="50%"></p>
+<script type="math/tex; mode=display">S=1/2 ∑_{i,j} w_{i,j} (z^i−z^j )^2</script><p>其中：<br><img src="images/2018-10-07-15388824984809.jpg" width="30%" height="50%"></p>
 <p>如果将z全设为0，显然S最小，因此我们需要给z一个限制：z应当充满空间，也即假如z是M维，那么$\{z^1,z^2…,z^N\}$的秩应该等于M</p>
-<h3 id="T-distributed-Stochastic-Neighbor-Embedding-t-SNE"><a href="#T-distributed-Stochastic-Neighbor-Embedding-t-SNE" class="headerlink" title="T-distributed Stochastic Neighbor Embedding (t-SNE)"></a>T-distributed Stochastic Neighbor Embedding (t-SNE)</h3><p>也是一种降维方法<br>前面提到的方法有一个问题：同一类的点确实聚在一起，但不同类的点并没有尽量分开<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388826477983.jpg" width="50%" height="50%"></p>
+<h3 id="T-distributed-Stochastic-Neighbor-Embedding-t-SNE"><a href="#T-distributed-Stochastic-Neighbor-Embedding-t-SNE" class="headerlink" title="T-distributed Stochastic Neighbor Embedding (t-SNE)"></a>T-distributed Stochastic Neighbor Embedding (t-SNE)</h3><p>也是一种降维方法<br>前面提到的方法有一个问题：同一类的点确实聚在一起，但不同类的点并没有尽量分开<br><img src="images/2018-10-07-15388826477983.jpg" width="50%" height="50%"></p>
 <p>t-SNE的主要思想：将数据点映射到概率分布，我们希望降维前和降维后，数据分布的概率应当尽可能一致。<br>t-SNE构建一个高维对象之间的概率分布，使得相似的对象有更高的概率被选择，而不相似的对象有较低的概率被选择。t-SNE在低维空间里在构建这些点的概率分布，使得这两个概率分布之间尽可能的相似。</p>
 <p>如何做？<br>在高维空间中，我们定义：</p>
 <script type="math/tex; mode=display">P(x^j |x^i )=\frac{S(x^i,x^j )}{∑_{k≠i}S(x^i,x^k )}</script><p>其中S表示i与j之间的相似度。</p>
 <p>在低维空间中，同样有：</p>
 <script type="math/tex; mode=display">Q(z^j |z^i )=\frac{S′(z^i,z^j )}{∑_{k≠i}S′(z^i,z^k )}</script><p>使用KL散度去计算两个分布之间的差异：</p>
 <script type="math/tex; mode=display">L=∑_i KL(P(∗|x^i )||Q(∗|z^i )) =∑_i∑_j P(x^j |x^i )\frac{log P(x^j |x^i )}{Q(z^j |z^i )}</script><p>t-SNE中，高维空间和低维空间计算相似度的公式不大一样：</p>
-<script type="math/tex; mode=display">S(x^i,x^j )=exp(−‖x^i−x^j ‖_2 )</script><script type="math/tex; mode=display">S′(z^i,z^j )=\frac{1}{(1+‖z^i−z^j ‖_2)}</script><p>两个公式的图示：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-10-07-15388830652023.jpg" width="70%" height="50%"></p>
+<script type="math/tex; mode=display">S(x^i,x^j )=exp(−‖x^i−x^j ‖_2 )</script><script type="math/tex; mode=display">S′(z^i,z^j )=\frac{1}{(1+‖z^i−z^j ‖_2)}</script><p>两个公式的图示：<br><img src="images/2018-10-07-15388830652023.jpg" width="70%" height="50%"></p>
 <p>也即<strong>低维空间会拉长距离，使得距离远的点尽可能被拉开</strong>。</p>
 <p>t-SNE的问题在于：t-SNE无法对新的数据点进行降维。</p>
 

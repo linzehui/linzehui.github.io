@@ -87,35 +87,35 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="为什么不使用regression来分类？1️⃣如果使用regression的思想来分类，会对离边界较远的点进行惩罚： 2️⃣如果多分类使用regression，如class 1, class 2, class 3；则隐式地假设了class 1 和 class 2较为接近，如果没有这种接近关系，则分类会不正确。 问题描述与定义 当P大于0.5则是C1类，反之是C2类先验P(C1)和P(C2)都好计算">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370662150910.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370662762802.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370663099515.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370663870205.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370664041246.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370664355955.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665362081.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665553962.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665888683.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370666092459.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370666567324.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667000974.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667135868.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667376312.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667582564.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667763267.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667880942.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668274551.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668394919.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668522531.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668957564.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669103562.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669221472.jpg">
-<meta property="og:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669594744.jpg">
-<meta property="og:updated_time" content="2018-10-01T03:24:09.704Z">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370662150910.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370662762802.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370663099515.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370663870205.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370664041246.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370664355955.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370665362081.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370665553962.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370665888683.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370666092459.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370666567324.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370667000974.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370667135868.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370667376312.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370667582564.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370667763267.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370667880942.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370668274551.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370668394919.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370668522531.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370668957564.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370669103562.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370669221472.jpg">
+<meta property="og:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370669594744.jpg">
+<meta property="og:updated_time" content="2018-11-19T00:35:35.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lecture 4:Classification:Probabilistic Generative Model">
 <meta name="twitter:description" content="为什么不使用regression来分类？1️⃣如果使用regression的思想来分类，会对离边界较远的点进行惩罚： 2️⃣如果多分类使用regression，如class 1, class 2, class 3；则隐式地假设了class 1 和 class 2较为接近，如果没有这种接近关系，则分类会不正确。 问题描述与定义 当P大于0.5则是C1类，反之是C2类先验P(C1)和P(C2)都好计算">
-<meta name="twitter:image" content="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370662150910.jpg">
+<meta name="twitter:image" content="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/images/2018-09-16-15370662150910.jpg">
 
 
 
@@ -357,8 +357,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-01T11:24:09+08:00">
-                2018-10-01
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T08:35:35+08:00">
+                2018-11-19
               </time>
             
           </span>
@@ -391,35 +391,35 @@
       
 
       
-        <h3 id="为什么不使用regression来分类？"><a href="#为什么不使用regression来分类？" class="headerlink" title="为什么不使用regression来分类？"></a>为什么不使用regression来分类？</h3><p>1️⃣如果使用regression的思想来分类，会对离边界较远的点进行惩罚：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370662150910.jpg" width="70%" height="50%"></p>
+        <h3 id="为什么不使用regression来分类？"><a href="#为什么不使用regression来分类？" class="headerlink" title="为什么不使用regression来分类？"></a>为什么不使用regression来分类？</h3><p>1️⃣如果使用regression的思想来分类，会对离边界较远的点进行惩罚：<br><img src="images/2018-09-16-15370662150910.jpg" width="70%" height="50%"></p>
 <p>2️⃣如果多分类使用regression，如class 1, class 2, class 3；则隐式地假设了class 1 和 class 2较为接近，如果没有这种接近关系，则分类会不正确。</p>
-<h3 id="问题描述与定义"><a href="#问题描述与定义" class="headerlink" title="问题描述与定义"></a>问题描述与定义</h3><p><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370662762802.jpg" width="70%" height="50%"></p>
+<h3 id="问题描述与定义"><a href="#问题描述与定义" class="headerlink" title="问题描述与定义"></a>问题描述与定义</h3><p><img src="images/2018-09-16-15370662762802.jpg" width="70%" height="50%"></p>
 <p>当P大于0.5则是C1类，反之是C2类<br>先验P(C1)和P(C2)都好计算，计算C1占总的比例即可<br>因此，我们需要计算的就是p(x|C)</p>
-<p>这一想法，本质是得到了生成式模型：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370663099515.jpg" width="70%" height="50%"></p>
-<h3 id="原理概述"><a href="#原理概述" class="headerlink" title="原理概述"></a>原理概述</h3><p>现<strong>假设训练数据点的分布服从高斯分布</strong>：（显然可以自己设任何分布）<br>即数据从高斯分布采样得到：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370663870205.jpg" width="55%" height="50%"></p>
-<p>根据最大似然估计，可以获得每个类别的μ和Σ：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370664041246.jpg" width="70%" height="50%"></p>
-<p>得到了参数后，即可代入得到P(C|x) ：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370664355955.jpg" width="80%" height="50%"></p>
+<p>这一想法，本质是得到了生成式模型：<br><img src="images/2018-09-16-15370663099515.jpg" width="70%" height="50%"></p>
+<h3 id="原理概述"><a href="#原理概述" class="headerlink" title="原理概述"></a>原理概述</h3><p>现<strong>假设训练数据点的分布服从高斯分布</strong>：（显然可以自己设任何分布）<br>即数据从高斯分布采样得到：<br><img src="images/2018-09-16-15370663870205.jpg" width="55%" height="50%"></p>
+<p>根据最大似然估计，可以获得每个类别的μ和Σ：<br><img src="images/2018-09-16-15370664041246.jpg" width="70%" height="50%"></p>
+<p>得到了参数后，即可代入得到P(C|x) ：<br><img src="images/2018-09-16-15370664355955.jpg" width="80%" height="50%"></p>
 <p>刚刚假设$Σ$对于不同类别不同，现我们<strong>令不同类别共享相同$Σ$</strong>：<br>（因为协方差代表的是不同feature之间的联系，可以认为是和类别无关的）</p>
-<p>$Σ$的计算公式是加权求和：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665362081.jpg" width="24%" height="50%"></p>
-<p>在使用了相同的协方差矩阵后，边界就是线性的（后面会提到为什么是这样）：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665553962.jpg" alt=""></p>
-<p> 总结：<br> 三步走，定义function set，计算μ和协方差矩阵，得到best function：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370665888683.jpg" width="60%" height="50%"></p>
-<p>注意到，如果我们认为，不同feature之间没有关系，每个feature符合特定的高斯分布，则该分类器则是朴素贝叶斯分类器：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370666092459.jpg" width="60%" height="50%"></p>
-<h3 id="分类与logistics-regression"><a href="#分类与logistics-regression" class="headerlink" title="分类与logistics regression"></a>分类与logistics regression</h3><p>现推导，该分类问题与logistics regression之间的联系：<br>即：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370666567324.jpg" width="60%" height="50%"></p>
+<p>$Σ$的计算公式是加权求和：<br><img src="images/2018-09-16-15370665362081.jpg" width="24%" height="50%"></p>
+<p>在使用了相同的协方差矩阵后，边界就是线性的（后面会提到为什么是这样）：<br><img src="images/2018-09-16-15370665553962.jpg" alt=""></p>
+<p> 总结：<br> 三步走，定义function set，计算μ和协方差矩阵，得到best function：<br><img src="images/2018-09-16-15370665888683.jpg" width="60%" height="50%"></p>
+<p>注意到，如果我们认为，不同feature之间没有关系，每个feature符合特定的高斯分布，则该分类器则是朴素贝叶斯分类器：<br><img src="images/2018-09-16-15370666092459.jpg" width="60%" height="50%"></p>
+<h3 id="分类与logistics-regression"><a href="#分类与logistics-regression" class="headerlink" title="分类与logistics regression"></a>分类与logistics regression</h3><p>现推导，该分类问题与logistics regression之间的联系：<br>即：<br><img src="images/2018-09-16-15370666567324.jpg" width="60%" height="50%"></p>
 <h4 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h4><p>数据服从高斯分布，共享$Σ$</p>
-<h4 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h4><p>①总框架：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667000974.jpg" width="50%" height="50%"></p>
-<p>令<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667135868.jpg" width="24%" height="50%"></p>
-<p>则有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667376312.jpg" width="50%" height="50%"></p>
-<p>②z的进一步推导与简化：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667582564.jpg" width="30%" height="50%"></p>
-<p>将z展开：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667763267.jpg" width="50%" height="50%"></p>
-<p>而第一部分有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370667880942.jpg" width="50%" height="50%"></p>
-<p>第一部分相除，有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668274551.jpg" width="50%" height="50%"></p>
-<p>再进行展开，有：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668394919.jpg" width="50%" height="50%"></p>
-<p>最终z的公式为：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668522531.jpg" width="50%" height="50%"></p>
-<p>由于共享协方差矩阵，则可以消去部分，得到：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370668957564.jpg" width="50%" height="50%"></p>
-<p>替换成w和b：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669103562.jpg" width="50%" height="50%"></p>
-<p>③最终，将z带回到原式：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669221472.jpg" width="25%" height="50%"></p>
+<h4 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h4><p>①总框架：<br><img src="images/2018-09-16-15370667000974.jpg" width="50%" height="50%"></p>
+<p>令<br><img src="images/2018-09-16-15370667135868.jpg" width="24%" height="50%"></p>
+<p>则有：<br><img src="images/2018-09-16-15370667376312.jpg" width="50%" height="50%"></p>
+<p>②z的进一步推导与简化：<br><img src="images/2018-09-16-15370667582564.jpg" width="30%" height="50%"></p>
+<p>将z展开：<br><img src="images/2018-09-16-15370667763267.jpg" width="50%" height="50%"></p>
+<p>而第一部分有：<br><img src="images/2018-09-16-15370667880942.jpg" width="50%" height="50%"></p>
+<p>第一部分相除，有：<br><img src="images/2018-09-16-15370668274551.jpg" width="50%" height="50%"></p>
+<p>再进行展开，有：<br><img src="images/2018-09-16-15370668394919.jpg" width="50%" height="50%"></p>
+<p>最终z的公式为：<br><img src="images/2018-09-16-15370668522531.jpg" width="50%" height="50%"></p>
+<p>由于共享协方差矩阵，则可以消去部分，得到：<br><img src="images/2018-09-16-15370668957564.jpg" width="50%" height="50%"></p>
+<p>替换成w和b：<br><img src="images/2018-09-16-15370669103562.jpg" width="50%" height="50%"></p>
+<p>③最终，将z带回到原式：<br><img src="images/2018-09-16-15370669221472.jpg" width="25%" height="50%"></p>
 <p>所以我们不需要再估计N1,N2,μ和Σ，直接计算w和b即可。也因此，分界线是线性的。</p>
-<p>全过程：<br><img src="http://pcaqhp90s.bkt.clouddn.com/2018-09-16-15370669594744.jpg" alt=""></p>
+<p>全过程：<br><img src="images/2018-09-16-15370669594744.jpg" alt=""></p>
 
       
     </div>
