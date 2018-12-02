@@ -7,7 +7,7 @@
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Paper,每周论文阅读,attention,sentence embedding,nested attention," />
+  <meta name="keywords" content="Paper,attention,每周论文阅读,sentence embedding,nested attention," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="1️⃣[A STRUCTURED SELF ATTENTIVE SENTENCE EMBEDDING]介绍了一种生成sentence embedding的方法。与其他sentence embedding不同的地方在于，生成的是一个矩阵而不是一个向量。通过矩阵的形式，能够关注不同部分的语义表示，类似于Transformer的multi-head。 Contribution:  将sentence e">
-<meta name="keywords" content="Paper,每周论文阅读,attention,sentence embedding,nested attention">
+<meta name="keywords" content="Paper,attention,每周论文阅读,sentence embedding,nested attention">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每周论文6">
 <meta property="og:url" content="http://www.linzehui.me/2018/11/19/论文/每周论文6/index.html">
@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15425996847558.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15425997529193.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15425999965777.jpg">
-<meta property="og:updated_time" content="2018-11-19T15:17:56.798Z">
+<meta property="og:updated_time" content="2018-12-01T07:47:04.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文6">
 <meta name="twitter:description" content="1️⃣[A STRUCTURED SELF ATTENTIVE SENTENCE EMBEDDING]介绍了一种生成sentence embedding的方法。与其他sentence embedding不同的地方在于，生成的是一个矩阵而不是一个向量。通过矩阵的形式，能够关注不同部分的语义表示，类似于Transformer的multi-head。 Contribution:  将sentence e">
@@ -141,7 +141,7 @@
 
 
 
-  <title>每周论文6 | Weekly Review</title>
+  <title>每周论文6 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -160,7 +160,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -347,8 +347,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T23:17:56+08:00">
-                2018-11-19
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-01T15:47:04+08:00">
+                2018-12-01
               </time>
             
           </span>
@@ -393,7 +393,7 @@
 <p><img src="/images/15425911302081.jpg" width="27%" height="50%"></p>
 <p><img src="/images/15425911849931.jpg" width="27%" height="50%"></p>
 <p>因此可以获得attention权重向量：<br><img src="/images/15425912555350.jpg" width="50%" height="50%"></p>
-<p>其中$H:n\times2u,W_{s1}:d\times2u ,w_{s2}:d_a$ ，$d_a$是超参。</p>
+<p>其中$H:n\times2u,W_{s1}:d_a\times2u ,w_{s2}:d_a$ ，$d_a$是超参。</p>
 <p>现将向量$w_{s2}$扩展为矩阵，亦即有Multi-hop attention：<br><img src="/images/15425914364548.jpg" width="50%" height="50%"></p>
 <p>$W_{s2}$维度为$r\times d_a$，$r$代表了head的个数。</p>
 <p>因此最终的sentence embedding矩阵为：<br><img src="/images/15425915371381.jpg" width="15%" height="50%"></p>
@@ -403,7 +403,7 @@
 <h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>文章提到，在做分类的时候可以直接将矩阵M展开，过全连接层即可。</p>
 <hr>
 <h2 id="2️⃣-Attention-over-Attention-Neural-Networks-for-Reading-Comprehension"><a href="#2️⃣-Attention-over-Attention-Neural-Networks-for-Reading-Comprehension" class="headerlink" title="2️⃣[Attention-over-Attention Neural Networks for Reading Comprehension]"></a>2️⃣[Attention-over-Attention Neural Networks for Reading Comprehension]</h2><p>在完形填空任务(Cloze-style Reading Comprehension)上提出一种新的attention，即nested-attention。</p>
-<h3 id="任务描述"><a href="#任务描述" class="headerlink" title="任务描述"></a>任务描述</h3><p>三元组$D,Q,A$，document，question，answer。其中answer一般是document的一个词。</p>
+<h3 id="任务描述"><a href="#任务描述" class="headerlink" title="任务描述"></a>任务描述</h3><p>三元组 $ D,Q,A $，document，question，answer。其中answer一般是document的一个词。</p>
 <h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><p>本文提出的attention机制，是通过一个新的attention去指示另一个attention的重要程度。</p>
 <p>首先通过一层共享的embedding层，将document和query都encode成word embedding，然后通过双向的GRU，将隐层拼接起来成为新的表示。</p>
 <p>接着获得pair-wise matching matrix：<br><img src="/images/15425993645945.jpg" width="40%" height="50%"></p>
@@ -434,9 +434,9 @@
           
             <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
           
-            <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
-          
             <a href="/tags/attention/" rel="tag"> <i class="fa fa-tag"></i> attention</a>
+          
+            <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
           
             <a href="/tags/sentence-embedding/" rel="tag"> <i class="fa fa-tag"></i> sentence embedding</a>
           
@@ -551,7 +551,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">99</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -564,7 +564,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">120</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1155,7 +1155,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

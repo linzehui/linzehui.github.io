@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Paper,attention,capsule,每周论文阅读,self-attention,NMT,locality modeling,dropblock,contextualized embedding," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1️⃣[Convolutional Self-Attention Network]对self-attention进行改进，引入CNN的local-bias，也即对query的邻近词进行attention而不是所有词；将self-attention扩展到2D，也即让不同的head之间也有attention交互。 Motivation1️⃣the normalization in Softmax ma">
+<meta name="keywords" content="Paper,attention,capsule,每周论文阅读,self-attention,NMT,locality modeling,dropblock,contextualized embedding">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周论文7">
+<meta property="og:url" content="http://www.linzehui.me/2018/12/02/论文/每周论文7/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="1️⃣[Convolutional Self-Attention Network]对self-attention进行改进，引入CNN的local-bias，也即对query的邻近词进行attention而不是所有词；将self-attention扩展到2D，也即让不同的head之间也有attention交互。 Motivation1️⃣the normalization in Softmax ma">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.linzehui.me/images/15437126353758.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437128149700.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437128476725.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437133932791.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437134105761.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437135769000.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437138514005.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437139914993.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437140367683.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437141387365.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437141719564.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437142078121.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437143753188.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437143893418.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437144396133.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437145076271.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437145588496.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437147612512.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437150115321.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437150721538.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437151043916.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437152269151.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437164176973.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437164440500.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437164654931.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437165067165.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437165382025.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437166827481.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437167374470.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437167607085.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437168111687.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437168668191.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437168888967.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437170173072.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437170840909.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437172746112.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437174940381.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437175991019.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437176650871.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15437177090697.jpg">
+<meta property="og:updated_time" content="2018-12-02T03:47:07.038Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每周论文7">
+<meta name="twitter:description" content="1️⃣[Convolutional Self-Attention Network]对self-attention进行改进，引入CNN的local-bias，也即对query的邻近词进行attention而不是所有词；将self-attention扩展到2D，也即让不同的head之间也有attention交互。 Motivation1️⃣the normalization in Softmax ma">
+<meta name="twitter:image" content="http://www.linzehui.me/images/15437126353758.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2018/12/02/论文/每周论文7/"/>
+
+
+
+
+
+  <title>每周论文7 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/02/论文/每周论文7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">每周论文7</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-02T08:48:30+08:00">
+                2018-12-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-02T11:47:07+08:00">
+                2018-12-02
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1️⃣-Convolutional-Self-Attention-Network"><a href="#1️⃣-Convolutional-Self-Attention-Network" class="headerlink" title="1️⃣[Convolutional Self-Attention Network]"></a>1️⃣[Convolutional Self-Attention Network]</h2><p>对self-attention进行改进，引入CNN的local-bias，也即对query的邻近词进行attention而不是所有词；将self-attention扩展到2D，也即让不同的head之间也有attention交互。</p>
+<h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>1️⃣the normalization in Softmax may inhibits the attention to neighboring information 也即邻居的信息更重要，要加强邻居的重要性</p>
+<p>2️⃣features can be better captured by modeling dependencies across different channels 对于不同的channel/head也增加他们之间的交互。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p><img src="/images/15437126353758.jpg" width="80%" height="50%"></p>
+<p>对于1D的convolution：选取中心词周围一个window：<br><img src="/images/15437128149700.jpg" width="28%" height="50%"></p>
+<p>对于2D的convolution，则有：<br><img src="/images/15437128476725.jpg" width="45%" height="50%"></p>
+<p>在具体实践中，只对前三层添加local bias，这是因为modeling locality在底层更有效，对于高层应该捕获更远的信息。</p>
+<hr>
+<h2 id="2️⃣-Modeling-Localness-for-Self-Attention-Networks"><a href="#2️⃣-Modeling-Localness-for-Self-Attention-Networks" class="headerlink" title="2️⃣[Modeling Localness for Self-Attention Networks]"></a>2️⃣[Modeling Localness for Self-Attention Networks]</h2><p>和上文一样，引入local bias对self-attention进行改进，从而提升了翻译表现。和上文是同一作者，发在EMNLP上。</p>
+<h3 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h3><p>1️⃣self-attention存在的问题：虽然能够增加长程关注，但因此会导致注意力的分散，对邻居的信号会忽略。实践证明，对local bias建模在self-attention有提升。</p>
+<p>2️⃣从直觉上来说，在翻译模型中，当目标词i与源语言词j有对齐关系时，我们希望词i能同时对词j周围的词进行对齐，使得能够捕获上下文信息，如phrase的信息。</p>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><p>在原来的公式上添加G：<br><img src="/images/15437133932791.jpg" width="45%" height="50%"><br>也即：<br><img src="/images/15437134105761.jpg" width="70%" height="50%"></p>
+<p>G是一个alignment position matrix（对齐位置矩阵），元素ij代表目标词i与源语言词j之间的紧密程度。<br>我们每次根据目标词i预测一个源语言的中心词，则$G_{ij}$则为：</p>
+<p><img src="/images/15437135769000.jpg" width="23%" height="50%"></p>
+<p>$P_i$就是对于目标词j而言源语言的中心词。 $\sigma$ 手动设定，通常是$\frac{D}{2}$，D代表窗口大小。</p>
+<p>也即最终我们需要计算的是，中心词$P_i$和窗口$D$。</p>
+<h4 id="计算-P-i"><a href="#计算-P-i" class="headerlink" title="计算$P_i$"></a>计算$P_i$</h4><p>利用对应的目标词i的query即可：<br><img src="/images/15437138514005.jpg" width="28%" height="50%"><br>$p_i$是一个实数。</p>
+<h4 id="计算window-size"><a href="#计算window-size" class="headerlink" title="计算window size"></a>计算window size</h4><p>①固定窗口，将其作为一个超参。</p>
+<p>②Layer-Speciﬁc Window<br>将该层所有的key平均，计算出一个共享的window size：<br><img src="/images/15437139914993.jpg" width="28%" height="50%"></p>
+<p>③Query-Speciﬁc Window<br>每个query都有自己的window size<br><img src="/images/15437140367683.jpg" width="30%" height="50%"></p>
+<h3 id="实验分析与结论"><a href="#实验分析与结论" class="headerlink" title="实验分析与结论"></a>实验分析与结论</h3><p>①将model locality用于低层效果会更好，这是因为低层对相邻建模，而越高层越关注更远的词。</p>
+<p><img src="/images/15437141387365.jpg" width="50%" height="50%"></p>
+<p>②将model locality放在encoder和encoder-decoder部分会更好（transformer有三个地方可以放）</p>
+<p><img src="/images/15437141719564.jpg" width="50%" height="50%"><br>因为decoder本身就倾向关注临近的词，如果继续让其关注临近的词，那么就难以进行长程建模。</p>
+<p>③越高层，window size（scope）越大。</p>
+<p><img src="/images/15437142078121.jpg" width="70%" height="50%"></p>
+<p>也即，在底层更倾向于捕获邻近词的语义；而高层倾向捕获长程依赖。但这不包括第一层，第一层是embedding，还没有上下文信息，因此倾向于捕获全局信息。</p>
+<hr>
+<h2 id="3️⃣-Effective-Approaches-to-Attention-based-Neural-Machine-Translation"><a href="#3️⃣-Effective-Approaches-to-Attention-based-Neural-Machine-Translation" class="headerlink" title="3️⃣[Effective Approaches to Attention-based Neural Machine Translation]"></a>3️⃣[Effective Approaches to Attention-based Neural Machine Translation]</h2><p>提出两种attention机制的翻译模型，global和local。</p>
+<p>本文与原版的翻译模型略有不同：<br><img src="/images/15437143753188.jpg" width="40%" height="50%"><br><img src="/images/15437143893418.jpg" width="30%" height="50%"></p>
+<p>c是context，h是decode的隐层。</p>
+<h3 id="global-attention"><a href="#global-attention" class="headerlink" title="global attention"></a>global attention</h3><p><img src="/images/15437144396133.jpg" width="45%" height="50%"></p>
+<p>计算attention分数：<br><img src="/images/15437145076271.jpg" width="40%" height="50%"></p>
+<p>score有多种选择：<br><img src="/images/15437145588496.jpg" width="52%" height="50%"></p>
+<p>注意到该模型与第一个提出attention based的模型不同之处：<br>$h_t -&gt; a_t -&gt; c_t -&gt; \tilde{h_t}$<br>原版是：<br>$h_{t-1} -&gt; a_t -&gt; c_t -&gt; h_t$</p>
+<h3 id="local-attention"><a href="#local-attention" class="headerlink" title="local attention"></a>local attention</h3><p><img src="/images/15437147612512.jpg" width="45%" height="50%"></p>
+<p>由于global attention计算代价高，且对于长句效果不好，我们可以选择一部分来做attention。<br>首先生成一个对齐位置$p_t$，再选择一个窗口$[p_t - D,p_t + D]$，其中D是超参。</p>
+<p>如何获得$p_t$?<br>①直接假设$p_t=t$，也即source和target的位置大致一一对应。</p>
+<p>②做预测：<br><img src="/images/15437150115321.jpg" width="43%" height="50%"><br>其中S是source的句子长度。</p>
+<p>接着，以$p_t$为中心，添加一个高斯分布。最终attention计算公式：<br><img src="/images/15437150721538.jpg" width="50%" height="50%"></p>
+<p>其中align和上面一致：<br><img src="/images/15437151043916.jpg" width="45%" height="50%"></p>
+<p>也就是说，将位置信息也考虑进来。</p>
+<h3 id="Input-feeding-Approach"><a href="#Input-feeding-Approach" class="headerlink" title="Input-feeding Approach"></a>Input-feeding Approach</h3><p>motivation：在下一次的alignment（也就是计算attention）之前，应当知道之前的alignment情况，所以应当作为输入信息传进下一层：<br><img src="/images/15437152269151.jpg" width="50%" height="50%"></p>
+<p>注意这里和Bahdanau的不同。Bahdanau是直接用上下文去构造隐层。这里提出的模型相对更为通用，也可以被应用于非attention的模型中（也就是每次将encoder的最后一层作为输入在每个time step都输入）</p>
+<hr>
+<h2 id="4️⃣-Towards-Linear-Time-Neural-Machine-Translation-with-Capsule-Networks"><a href="#4️⃣-Towards-Linear-Time-Neural-Machine-Translation-with-Capsule-Networks" class="headerlink" title="4️⃣[Towards Linear Time Neural Machine Translation with Capsule Networks]"></a>4️⃣[Towards Linear Time Neural Machine Translation with Capsule Networks]</h2><p>思想：利用capsule提前生成source sentence的固定长度的表示，在decode的时候直接使用，而不需要attention，以达到线性时间NMT的目的。</p>
+<p>Motivation：attention-based的NMT时间复杂度为$|S|\times |T|$，而本文希望能够将NMT减少到线性时间。而传统不加attention的NMT通常使用LSTM最后一层隐层作为源语言的encode信息传入decode，但这样的信息并不能很好地代表整个句子，因此本文使用capsule作为提取source sentence信息的方法，利用capsule生成固定长度表示，直接传入decode端，以达到线性时间的目的。</p>
+<p><img src="/images/15437164176973.jpg" width="50%" height="50%"></p>
+<h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><p>对于embedding：<br><img src="/images/15437164440500.jpg" width="37%" height="50%"><br>希望能够转换成固定长度的表示C：<br><img src="/images/15437164654931.jpg" width="37%" height="50%"></p>
+<p>我们首先通过一个双向的LSTM：<br><img src="/images/15437165067165.jpg" width="28%" height="50%"></p>
+<p>一种简单的获取C的方法：<br><img src="/images/15437165382025.jpg" width="30%" height="50%"><br>其中$h_1$和$h_L$有互补关系。</p>
+<p>本文使用capsule提取更丰富的信息。</p>
+<p>在decode阶段，由于拥有固定表示，那么就不需要attention：</p>
+<p><img src="/images/15437166827481.jpg" width="35%" height="50%"><br><img src="/images/15437167374470.jpg" width="37%" height="50%"></p>
+<p>总体架构：<br><img src="/images/15437167607085.jpg" width="60%" height="50%"></p>
+<h3 id="Aggregation-layers-with-Capsule-Networks"><a href="#Aggregation-layers-with-Capsule-Networks" class="headerlink" title="Aggregation layers with Capsule Networks"></a>Aggregation layers with Capsule Networks</h3><p><img src="/images/15437168111687.jpg" width="65%" height="50%"><br>实际上就是dynamic routing那一套，对信息进行提取（论文公式有误就不贴图了）</p>
+<p>算法：<br><img src="/images/15437168668191.jpg" width="55%" height="50%"></p>
+<p>最终获得了：<br><img src="/images/15437168888967.jpg" width="27%" height="50%"></p>
+<hr>
+<h2 id="5️⃣-DropBlock-A-regularization-method-for-convolutional-networks"><a href="#5️⃣-DropBlock-A-regularization-method-for-convolutional-networks" class="headerlink" title="5️⃣[DropBlock: A regularization method for convolutional networks]"></a>5️⃣[DropBlock: A regularization method for convolutional networks]</h2><p>重读了一遍。<br>介绍一种新型的dropout，可用于卷积层提高表现。通过大量的实验得出许多有意义的结论。本文发表于NIPS2018。</p>
+<h3 id="Motivation-2"><a href="#Motivation-2" class="headerlink" title="Motivation"></a>Motivation</h3><p>由于卷积层的feature相互之间有联系，即使使用了dropout，信息也能够根据周围的feature传到下一层。因此使用dropblock，一次将一个方块内的都drop掉。</p>
+<p><img src="/images/15437170173072.jpg" width="50%" height="50%"></p>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p><img src="/images/15437170840909.jpg" width="80%" height="50%"></p>
+<p>其中有两个超参：①block_size表示块的大小；γ表示有多少个unit要drop掉，等价传统的dropout的p。当block_size=1时等价dropout；当block size=整个feature map，等价于spatial dropout。</p>
+<p>在实践中，通过以下公式计算γ：<br><img src="/images/15437172746112.jpg" width="55%" height="50%"></p>
+<p>(why? 通过计算期望的方式将传统dropout的keep_prob与当前的γ联系起来，得到一个等式，整理即可获得上式）</p>
+<p>在实验中，还可以逐渐减小keep_prob使得更加鲁棒性。</p>
+<h3 id="实验-amp-结论"><a href="#实验-amp-结论" class="headerlink" title="实验&amp;结论"></a>实验&amp;结论</h3><p>①效果:dropout&lt; spatial dropout &lt; dropblock</p>
+<p>②dropblock能有效去掉semantic information</p>
+<p>③dropblock是一个更加强的regularization</p>
+<p>④使用dropblock的模型，能够学习更多的区域，而不是只专注于一个区域<br><img src="/images/15437174940381.jpg" width="70%" height="50%"></p>
+<p>对于resnet，直接将dropblock应用于添加完skip connection后的feature能够有更高的表现。</p>
+<hr>
+<h2 id="6️⃣-Contextual-String-Embeddings-for-Sequence-Labeling"><a href="#6️⃣-Contextual-String-Embeddings-for-Sequence-Labeling" class="headerlink" title="6️⃣[Contextual String Embeddings for Sequence Labeling]"></a>6️⃣[Contextual String Embeddings for Sequence Labeling]</h2><p>提出一种建立在character基础上的新型的上下文embedding(contextualized embedding）。用于sequence labeling。本文发表于coling2018。</p>
+<h3 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h3><p>整体架构：<br><img src="/images/15437175991019.jpg" width="100%" height="50%"></p>
+<p>首先将character作为基本单位，过一个双向LSTM，进行language model的建模。</p>
+<p>如何提取一个词的词向量：<br><img src="/images/15437176650871.jpg" width="100%" height="50%"><br>提取前向LSTM中该词的最后一个character的后一个hidden state，以及后向LSTM中第一个词的前一个hidden state， 如上图所示。最终拼起来即可：<br><img src="/images/15437177090697.jpg" width="28%" height="50%"><br>因此该词不仅与词内部的character相关，还跟其周围的context有关。</p>
+<p>sequence labeling我不感兴趣，该部分没看。</p>
+<h3 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h3><p>相比word level的language model，character-level独立于tokenization和fixed vocabulary，模型更容易被训练，因为词表小且训练时间短。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
+          
+            <a href="/tags/attention/" rel="tag"> <i class="fa fa-tag"></i> attention</a>
+          
+            <a href="/tags/capsule/" rel="tag"> <i class="fa fa-tag"></i> capsule</a>
+          
+            <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
+          
+            <a href="/tags/self-attention/" rel="tag"> <i class="fa fa-tag"></i> self-attention</a>
+          
+            <a href="/tags/NMT/" rel="tag"> <i class="fa fa-tag"></i> NMT</a>
+          
+            <a href="/tags/locality-modeling/" rel="tag"> <i class="fa fa-tag"></i> locality modeling</a>
+          
+            <a href="/tags/dropblock/" rel="tag"> <i class="fa fa-tag"></i> dropblock</a>
+          
+            <a href="/tags/contextualized-embedding/" rel="tag"> <i class="fa fa-tag"></i> contextualized embedding</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/01/诗词&句/每周诗词16/" rel="next" title="每周诗词16">
+                <i class="fa fa-chevron-left"></i> 每周诗词16
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/02/代码相关/代码记录11/" rel="prev" title="代码片段记录11">
+                代码片段记录11 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA0OC8xNjU3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg"
+                alt="林泽辉" />
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">120</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1️⃣-Convolutional-Self-Attention-Network"><span class="nav-number">1.</span> <span class="nav-text">1️⃣[Convolutional Self-Attention Network]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation"><span class="nav-number">1.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">1.2.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2️⃣-Modeling-Localness-for-Self-Attention-Networks"><span class="nav-number">2.</span> <span class="nav-text">2️⃣[Modeling Localness for Self-Attention Networks]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation-1"><span class="nav-number">2.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-1"><span class="nav-number">2.2.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#计算-P-i"><span class="nav-number">2.2.1.</span> <span class="nav-text">计算$P_i$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算window-size"><span class="nav-number">2.2.2.</span> <span class="nav-text">计算window size</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验分析与结论"><span class="nav-number">2.3.</span> <span class="nav-text">实验分析与结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3️⃣-Effective-Approaches-to-Attention-based-Neural-Machine-Translation"><span class="nav-number">3.</span> <span class="nav-text">3️⃣[Effective Approaches to Attention-based Neural Machine Translation]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#global-attention"><span class="nav-number">3.1.</span> <span class="nav-text">global attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#local-attention"><span class="nav-number">3.2.</span> <span class="nav-text">local attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Input-feeding-Approach"><span class="nav-number">3.3.</span> <span class="nav-text">Input-feeding Approach</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4️⃣-Towards-Linear-Time-Neural-Machine-Translation-with-Capsule-Networks"><span class="nav-number">4.</span> <span class="nav-text">4️⃣[Towards Linear Time Neural Machine Translation with Capsule Networks]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题定义"><span class="nav-number">4.1.</span> <span class="nav-text">问题定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Aggregation-layers-with-Capsule-Networks"><span class="nav-number">4.2.</span> <span class="nav-text">Aggregation layers with Capsule Networks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5️⃣-DropBlock-A-regularization-method-for-convolutional-networks"><span class="nav-number">5.</span> <span class="nav-text">5️⃣[DropBlock: A regularization method for convolutional networks]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation-2"><span class="nav-number">5.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">5.2.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验-amp-结论"><span class="nav-number">5.3.</span> <span class="nav-text">实验&amp;结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6️⃣-Contextual-String-Embeddings-for-Sequence-Labeling"><span class="nav-number">6.</span> <span class="nav-text">6️⃣[Contextual String Embeddings for Sequence Labeling]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-2"><span class="nav-number">6.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Discussion"><span class="nav-number">6.2.</span> <span class="nav-text">Discussion</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

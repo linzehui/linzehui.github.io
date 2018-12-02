@@ -7,7 +7,7 @@
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -88,7 +88,7 @@
 <meta property="og:description" content="1️⃣[Optimizer]https://zhuanlan.zhihu.com/p/32262540https://zhuanlan.zhihu.com/p/32338983 Adam等自适应学习率算法对于稀疏数据具有优势，且收敛速度很快；但精调参数的SGD（+Momentum）往往能够取得更好的最终结果。 建议：前期用Adam，享受Adam快速收敛的优势；后期切换到SGD，慢慢寻找最优解。什么">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.linzehui.me/images/2018-11-11-15419055399325.jpg">
-<meta property="og:updated_time" content="2018-11-19T03:21:17.813Z">
+<meta property="og:updated_time" content="2018-12-01T07:35:06.408Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周碎片知识11">
 <meta name="twitter:description" content="1️⃣[Optimizer]https://zhuanlan.zhihu.com/p/32262540https://zhuanlan.zhihu.com/p/32338983 Adam等自适应学习率算法对于稀疏数据具有优势，且收敛速度很快；但精调参数的SGD（+Momentum）往往能够取得更好的最终结果。 建议：前期用Adam，享受Adam快速收敛的优势；后期切换到SGD，慢慢寻找最优解。什么">
@@ -128,7 +128,7 @@
 
 
 
-  <title>每周碎片知识11 | Weekly Review</title>
+  <title>每周碎片知识11 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -147,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:17+08:00">
-                2018-11-19
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-01T15:35:06+08:00">
+                2018-12-01
               </time>
             
           </span>
@@ -372,7 +372,7 @@
 <p>Adam等自适应学习率算法对于稀疏数据具有优势，且收敛速度很快；但精调参数的SGD（+Momentum）往往能够取得更好的最终结果。</p>
 <p>建议：<br>前期用Adam，享受Adam快速收敛的优势；后期切换到SGD，慢慢寻找最优解。<br>什么时候从Adam切换到SGD？当SGD的相应学习率的移动平均值基本不变的时候。</p>
 <hr>
-<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>LongTensor除以整数，会对除数进行取整，再做除法。<br><img src="/images/2018-11-11-15419055399325.jpg" width="30%" height="50%"></p>
+<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>LongTensor除以浮点数，会对除数进行取整，再做除法。<br><img src="/images/2018-11-11-15419055399325.jpg" width="30%" height="50%"></p>
 <hr>
 <h3 id="3️⃣-Pytorch"><a href="#3️⃣-Pytorch" class="headerlink" title="3️⃣[Pytorch]"></a>3️⃣[Pytorch]</h3><p>使用Pytorch的DataParallel</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">device = torch.device(<span class="string">'cuda:'</span> + str(</span><br><span class="line">    config.CUDA_VISIBLE_DEVICES[<span class="number">0</span>]) <span class="keyword">if</span> config.use_cuda <span class="keyword">else</span> <span class="string">'cpu'</span>)   <span class="comment"># 指定第一个设备</span></span><br><span class="line"></span><br><span class="line">model = ClassifyModel(</span><br><span class="line">    vocab_size=len(vocab), max_seq_len=config.max_sent_len,</span><br><span class="line">    embed_dim=config.embed_dim, n_layers=config.n_layers,</span><br><span class="line">    n_head=config.n_head, d_k=config.d_k,</span><br><span class="line">    d_v=config.d_v,</span><br><span class="line">    d_model=config.d_model, d_inner=config.d_inner_hid,</span><br><span class="line">    n_label=config.n_label,</span><br><span class="line">    dropout=config.dropout</span><br><span class="line">).to(device)</span><br><span class="line"></span><br><span class="line">model = DataParallel(model, device_ids=config.CUDA_VISIBLE_DEVICES)  <span class="comment"># 显式定义device_ids</span></span><br></pre></td></tr></table></figure>
@@ -511,7 +511,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">99</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -524,7 +524,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">120</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1115,7 +1115,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

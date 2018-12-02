@@ -7,7 +7,7 @@
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -124,7 +124,7 @@
 
 
 
-  <title>Weekly Review</title>
+  <title>Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -143,7 +143,7 @@
     
   
 
-  <div class="container sidebar-position-left 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -286,6 +286,764 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/19/见闻&想法/听达观杯现场答辩有感/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/19/见闻&想法/听达观杯现场答辩有感/" itemprop="url">听达观杯现场答辩有感</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-19T22:26:14+08:00">
+                2018-09-19
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-26T16:03:34+08:00">
+                2018-09-26
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前几日（周日）去了达观杯答辩现场听了前10名做了报告，有了一些感想，但一直没有抽出时间写一下自己的感想（懒）。</p>
+<p>自己大概花了十来天做了一下比赛，实际上也就是一个文本分类的<a href="http://www.dcjingsai.com/common/cmpt/%E2%80%9C%E8%BE%BE%E8%A7%82%E6%9D%AF%E2%80%9D%E6%96%87%E6%9C%AC%E6%99%BA%E8%83%BD%E5%A4%84%E7%90%86%E6%8C%91%E6%88%98%E8%B5%9B_%E8%B5%9B%E4%BD%93%E4%B8%8E%E6%95%B0%E6%8D%AE.html" target="_blank" rel="noopener">比赛</a>，因为没有比赛经验的缘故，走了很多弯路。不过也学到了一些东西。</p>
+<p>现记录前十名的一些idea/trick：</p>
+<ul>
+<li>数据增强<ul>
+<li>因为给的句子长度很长，因此在做截断的时候后面的就没法训练到了，可以将文本倒序作为新的数据训练模型。可以充分利用到数据</li>
+<li>将数据打乱、随机删除，实际上就是对一个句子的词进行sample再组合</li>
+<li>打乱词序以增加数据量</li>
+<li>使用pseudo labeling，但有的队伍使用这个做出效果了，但有的没有</li>
+</ul>
+</li>
+<li>特征工程<ul>
+<li>假设开头中间结尾的信息对分类有帮助，因此截取该部分信息做训练</li>
+<li>改进baseline的tfidf的特征工程方法，使用基于熵的词权重计算</li>
+<li>降维，留下最重要的特征。先用卡方分布降到20万，再用SVD降到8000</li>
+<li>将word2vec和GloVe拼接起来作为deep learning模型的输入</li>
+<li>将文章分段，每段取前20后20拼起来</li>
+</ul>
+</li>
+<li>模型融合<br>  所有队伍都无一例外使用了模型融合，stacking或者简单的投票<ul>
+<li>DL+ML —&gt; lgbm model —&gt; voting</li>
+<li>深度模型+传统模型，在深度模型最后一层加入传统模型的信息/feature</li>
+<li>后向选择剔除冗余模型</li>
+</ul>
+</li>
+<li>DL&amp;其他<ul>
+<li>HAN，选择10个attention vector</li>
+<li>对易错类增加权重，通过改变损失函数来增加权重</li>
+<li>CNN, [1,2,3,4,5,6]*600</li>
+<li>提出新的模型（第一名）</li>
+</ul>
+</li>
+</ul>
+<p>其实除了一些trick，我还是有些失望的，因为都是用模型融合堆出来的，这也让我对比赛失去了一些兴趣。虽然能理解现在的比赛都是这样的，但感觉实在太暴力了。<br>当然，其中还是有一些亮点的，有一支队伍立意很高，从理解业务的角度出发而不是堆模型，也取得了很好的效果；还有一个使用了最新论文中的特征工程改进方法，令我耳目一新；以及第一名在比赛过程中提出来三个新的模型。</p>
+<p>Anyway，我目前还是太菜了，还是安心搞科研吧。_(:з」∠)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/碎片知识/每周碎片知识7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/16/碎片知识/每周碎片知识7/" itemprop="url">每周碎片知识7</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T11:04:14+08:00">
+                2018-09-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:15+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>只有一个元素的tensor，可用.item()来获取元素</p>
+<p>tensor &lt;—&gt; numpy 相互转化会共享内部数据，因此改变其中一个会改变另一个</p>
+<p>可用使用 .to 来移动到设备<br><img src="/images/2018-09-16-15370671350548.jpg" alt=""></p>
+<p>.detech()  detach it from the computation history, and to prevent future computation from being tracked. 将其从计算图中分离，变为叶子节点，并且requires_grad=False</p>
+<p>Function 记录了这个tensor是怎么来的，所有的tensor都有，除非是用户自定义的：<br><img src="/images/2018-09-16-15370672806253.jpg" width="65%" height="50%"></p>
+<hr>
+<h3 id="2️⃣-协方差"><a href="#2️⃣-协方差" class="headerlink" title="2️⃣[协方差]"></a>2️⃣[协方差]</h3><p>关于协方差的理解，x与y关于某个自变量的变化程度，即度量了x与y之间的联系。<br><a href="https://www.zhihu.com/question/20852004" target="_blank" rel="noopener">https://www.zhihu.com/question/20852004</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture 4 Classification  Probabilistic Generative Model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/16/机器学习与深度学习算法知识/Lecture 4 Classification  Probabilistic Generative Model/" itemprop="url">Lecture 4:Classification:Probabilistic Generative Model</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T10:49:24+08:00">
+                2018-09-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:28+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="为什么不使用regression来分类？"><a href="#为什么不使用regression来分类？" class="headerlink" title="为什么不使用regression来分类？"></a>为什么不使用regression来分类？</h3><p>1️⃣如果使用regression的思想来分类，会对离边界较远的点进行惩罚：<br><img src="/images/2018-09-16-15370662150910.jpg" width="70%" height="50%"></p>
+<p>2️⃣如果多分类使用regression，如class 1, class 2, class 3；则隐式地假设了class 1 和 class 2较为接近，如果没有这种接近关系，则分类会不正确。</p>
+<h3 id="问题描述与定义"><a href="#问题描述与定义" class="headerlink" title="问题描述与定义"></a>问题描述与定义</h3><p><img src="/images/2018-09-16-15370662762802.jpg" width="70%" height="50%"></p>
+<p>当P大于0.5则是C1类，反之是C2类<br>先验P(C1)和P(C2)都好计算，计算C1占总的比例即可<br>因此，我们需要计算的就是p(x|C)</p>
+<p>这一想法，本质是得到了生成式模型：<br><img src="/images/2018-09-16-15370663099515.jpg" width="70%" height="50%"></p>
+<h3 id="原理概述"><a href="#原理概述" class="headerlink" title="原理概述"></a>原理概述</h3><p>现<strong>假设训练数据点的分布服从高斯分布</strong>：（显然可以自己设任何分布）<br>即数据从高斯分布采样得到：<br><img src="/images/2018-09-16-15370663870205.jpg" width="55%" height="50%"></p>
+<p>根据最大似然估计，可以获得每个类别的μ和Σ：<br><img src="/images/2018-09-16-15370664041246.jpg" width="70%" height="50%"></p>
+<p>得到了参数后，即可代入得到P(C|x) ：<br><img src="/images/2018-09-16-15370664355955.jpg" width="80%" height="50%"></p>
+<p>刚刚假设$Σ$对于不同类别不同，现我们<strong>令不同类别共享相同$Σ$</strong>：<br>（因为协方差代表的是不同feature之间的联系，可以认为是和类别无关的）</p>
+<p>$Σ$的计算公式是加权求和：<br><img src="/images/2018-09-16-15370665362081.jpg" width="24%" height="50%"></p>
+<p>在使用了相同的协方差矩阵后，边界就是线性的（后面会提到为什么是这样）：<br><img src="/images/2018-09-16-15370665553962.jpg" alt=""></p>
+<p> 总结：<br> 三步走，定义function set，计算μ和协方差矩阵，得到best function：<br><img src="/images/2018-09-16-15370665888683.jpg" width="60%" height="50%"></p>
+<p>注意到，如果我们认为，不同feature之间没有关系，每个feature符合特定的高斯分布，则该分类器则是朴素贝叶斯分类器：<br><img src="/images/2018-09-16-15370666092459.jpg" width="60%" height="50%"></p>
+<h3 id="分类与logistics-regression"><a href="#分类与logistics-regression" class="headerlink" title="分类与logistics regression"></a>分类与logistics regression</h3><p>现推导，该分类问题与logistics regression之间的联系：<br>即：<br><img src="/images/2018-09-16-15370666567324.jpg" width="60%" height="50%"></p>
+<h4 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h4><p>数据服从高斯分布，共享$Σ$</p>
+<h4 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h4><p>①总框架：<br><img src="/images/2018-09-16-15370667000974.jpg" width="50%" height="50%"></p>
+<p>令<br><img src="/images/2018-09-16-15370667135868.jpg" width="24%" height="50%"></p>
+<p>则有：<br><img src="/images/2018-09-16-15370667376312.jpg" width="50%" height="50%"></p>
+<p>②z的进一步推导与简化：<br><img src="/images/2018-09-16-15370667582564.jpg" width="30%" height="50%"></p>
+<p>将z展开：<br><img src="/images/2018-09-16-15370667763267.jpg" width="50%" height="50%"></p>
+<p>而第一部分有：<br><img src="/images/2018-09-16-15370667880942.jpg" width="50%" height="50%"></p>
+<p>第一部分相除，有：<br><img src="/images/2018-09-16-15370668274551.jpg" width="50%" height="50%"></p>
+<p>再进行展开，有：<br><img src="/images/2018-09-16-15370668394919.jpg" width="50%" height="50%"></p>
+<p>最终z的公式为：<br><img src="/images/2018-09-16-15370668522531.jpg" width="50%" height="50%"></p>
+<p>由于共享协方差矩阵，则可以消去部分，得到：<br><img src="/images/2018-09-16-15370668957564.jpg" width="50%" height="50%"></p>
+<p>替换成w和b：<br><img src="/images/2018-09-16-15370669103562.jpg" width="50%" height="50%"></p>
+<p>③最终，将z带回到原式：<br><img src="/images/2018-09-16-15370669221472.jpg" width="25%" height="50%"></p>
+<p>所以我们不需要再估计N1,N2,μ和Σ，直接计算w和b即可。也因此，分界线是线性的。</p>
+<p>全过程：<br><img src="/images/2018-09-16-15370669594744.jpg" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture 3 Gradient Descent/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/16/机器学习与深度学习算法知识/Lecture 3 Gradient Descent/" itemprop="url">Lecture 3:Gradient Descent</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T10:39:24+08:00">
+                2018-09-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:28+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Gradient-Descent-tips"><a href="#Gradient-Descent-tips" class="headerlink" title="Gradient Descent tips"></a>Gradient Descent tips</h2><h3 id="tip-1：Adaptive-Learning-Rates"><a href="#tip-1：Adaptive-Learning-Rates" class="headerlink" title="tip 1：Adaptive Learning Rates"></a>tip 1：Adaptive Learning Rates</h3><h4 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h4><h5 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h5><p><img src="/images/2018-09-16-15370654467771.jpg" width="30%" height="50%"></p>
+<p><img src="/images/2018-09-16-15370654502774.jpg" width="20%" height="50%"></p>
+<p>其中σ是之前所有的梯度的平方根<br><img src="/images/2018-09-16-15370654728457.jpg" width="30%" height="50%"></p>
+<p>化简形式：<br><img src="/images/2018-09-16-15370654853172.jpg" width="50%" height="50%"></p>
+<h5 id="为什么要怎么做？"><a href="#为什么要怎么做？" class="headerlink" title="为什么要怎么做？"></a>为什么要怎么做？</h5><p>考虑一个开口向上的二次函数<br><img src="/images/2018-09-16-15370655091732.jpg" width="50%" height="50%"></p>
+<p>也即，最好的步长是一次导除以二次导，但二次导计算量大，因此使用近似的方式：<br><strong>对一次导作多次的sample</strong>。<br>下图显示，如果二次导小，那么多次sample获得的一次导也小，反之则大，也就是说，一次导在某种程度上可以反映二次导的大小，所以直接用一次导近似，可以减少计算量。</p>
+<p><img src="/images/2018-09-16-15370655850876.jpg" width="50%" height="50%"></p>
+<h3 id="tip-2：feature-scaling"><a href="#tip-2：feature-scaling" class="headerlink" title="tip 2：feature scaling"></a>tip 2：feature scaling</h3><p><img src="/images/2018-09-16-15370656836724.jpg" width="50%" height="50%"></p>
+<p>能够改变loss的分布，上图1中w2对loss的影响较大，则较陡峭，参数更新就较困难，需要adaptive learning rate；如果进行feature scaling，能够更好达到local optimal</p>
+<h2 id="Gradient-Descent-Theory"><a href="#Gradient-Descent-Theory" class="headerlink" title="Gradient Descent Theory"></a>Gradient Descent Theory</h2><p>另一种角度看gradient descent：</p>
+<p>基本思想：<br>我们希望每一次都在当前点附近找到一个最小的点，即在一个范围内：<br><img src="/images/2018-09-16-15370657785697.jpg" width="40%" height="50%"></p>
+<p>应该如何找到该最小点？</p>
+<p>我们知道，泰勒级数的形式：<br><img src="/images/2018-09-16-15370658066669.jpg" width="50%" height="50%"></p>
+<p>当x接近x0时，会有如下近似：<br><img src="/images/2018-09-16-15370658167935.jpg" width="30%" height="50%"></p>
+<p>推广到多元泰勒级数则有：<br><img src="/images/2018-09-16-15370658315314.jpg" width="60%" height="50%"></p>
+<p>那么，如前所述，x接近x0，对于图中，即圆圈足够小时：<br><img src="/images/2018-09-16-15370658494091.jpg" width="50%" height="50%"></p>
+<p>简化符号：<br><img src="/images/2018-09-16-15370658736683.jpg" width="12%" height="50%"></p>
+<p><img src="/images/2018-09-16-15370658623258.jpg" width="30%" height="50%"></p>
+<p>所以可以简写成：<br><img src="/images/2018-09-16-15370658855882.jpg" width="30%" height="50%"></p>
+<p>由于s,u,v都是常数，在圆圈范围内寻找最小值对应的参数可以简化成：<br><img src="/images/2018-09-16-15370658981519.jpg" width="40%" height="50%"></p>
+<p><img src="/images/2018-09-16-15370659061025.jpg" width="30%" height="50%"></p>
+<p>再度简化，可以表达成：<br><img src="/images/2018-09-16-15370659680601.jpg" width="40%" height="50%"></p>
+<p><img src="/images/2018-09-16-15370659747339.jpg" width="30%" height="50%"></p>
+<p>在图中可以画为两个向量的点积<br><img src="/images/2018-09-16-15370660126195.jpg" width="40%" height="50%"></p>
+<p>显然，当反方向时，最小：<br><img src="/images/2018-09-16-15370660243469.jpg" width="40%" height="50%"></p>
+<p>也即：<br><img src="/images/2018-09-16-15370660628961.jpg" width="50%" height="50%"></p>
+<p>最终完整的式子：<br><img src="/images/2018-09-16-15370660794436.jpg" width="55%" height="50%"></p>
+<p>因此，当learning rate不够小时，是不满足泰勒级数近似的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture 2 Bias and Variance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/16/机器学习与深度学习算法知识/Lecture 2 Bias and Variance/" itemprop="url">Lecture 2:Bias and Variance</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T10:29:24+08:00">
+                2018-09-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:29+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="如何理解bias-amp-variance"><a href="#如何理解bias-amp-variance" class="headerlink" title="如何理解bias&amp;variance"></a>如何理解bias&amp;variance</h3><p><img src="/images/2018-09-16-15370650140053.jpg" width="40%" height="50%"><br>bias是function space中心离optimal model的差距，variance是某次实验所得模型离function space中心的距离。</p>
+<p>比如说，简单地模型的function space小，随机性小，因此variance小，但也因为function space小，表示能力有限，因此bias大。</p>
+<p>如图：<br><img src="/images/2018-09-16-15370651353167.jpg" width="70%" height="50%"><br>该图中蓝色圈代表模型所能表达的范围。</p>
+<h3 id="如何解决variance大的问题"><a href="#如何解决variance大的问题" class="headerlink" title="如何解决variance大的问题"></a>如何解决variance大的问题</h3><p>①更多的data<br>②regularization：强迫function更平滑，因此减小variance，但因为调整了function space，可能会增加bias。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/诗词&句/每周诗词9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -333,8 +1091,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-30T08:54:14+08:00">
-                2018-09-30
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-16T10:17:44+08:00">
+                2018-09-16
               </time>
             
           </span>
@@ -974,741 +1732,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/29/诗词&句/我没有说话/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/29/诗词&句/我没有说话/" itemprop="url">我没有说话</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T22:37:32+08:00">
-                2018-08-29
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-29T22:46:53+08:00">
-                2018-08-29
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>《我没有说话》</p>
-<p>纳粹杀共产党时，<br>我没有出声<br>——因为我不是共产党员；<br>接着他们迫害犹太人，<br>我没有出声<br>——因为我不是犹太人；<br>然后他们杀工会成员，<br>我没有出声<br>——因为我不是工会成员；<br>后来他们迫害天主教徒，<br>我没有出声<br>——因为我是新教徒；<br>最后当他们开始对付我的时候，<br>已经没有人能站出来为我发声了</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/26/碎片知识/Deep Learning NLP best practices笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/26/碎片知识/Deep Learning NLP best practices笔记/" itemprop="url">Deep Learning NLP best practices笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T11:35:24+08:00">
-                2018-08-26
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-01T21:22:51+08:00">
-                2018-09-01
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>博客地址：<a href="http://ruder.io/deep-learning-nlp-best-practices/index.html" target="_blank" rel="noopener">http://ruder.io/deep-learning-nlp-best-practices/index.html</a><br>个人觉得这篇文章写得很好，有许多实践得到的经验，通过这篇可以避免走一些弯路。</p>
-<h2 id="Practices"><a href="#Practices" class="headerlink" title="Practices"></a>Practices</h2><h3 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h3><blockquote>
-<p>The optimal dimensionality of word embeddings is mostly task-dependent: a smaller dimensionality works better for more syntactic tasks such as named entity recognition or part-of-speech (POS) tagging, while a larger dimensionality is more useful for more semantic tasks such as sentiment analysis.</p>
-</blockquote>
-<p>对于偏向语法的，使用维度低一些的词向量；而对于偏向语义内容的，使用维度大一些的词向量，如情感分析。</p>
-<h3 id="LSTM-Depth"><a href="#LSTM-Depth" class="headerlink" title="LSTM Depth"></a>LSTM Depth</h3><blockquote>
-<p>performance improvements of making the model deeper than 2 layers are minimal </p>
-</blockquote>
-<p>LSTM深度最好不要超过两层。</p>
-<h3 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h3><blockquote>
-<p>It is often thought that Adam clearly outperforms vanilla stochastic gradient descent (SGD). However, while it converges much faster than SGD, it has been observed that SGD with learning rate annealing slightly outperforms Adam. Recent work furthermore shows that SGD with properly tuned momentum outperforms Adam .</p>
-</blockquote>
-<p>Adam可以更早拟合，而SGD效果可能会更好一些。</p>
-<p>可以采用优化策略，比如说使用Adam训练直到拟合，然后将学习率减半，并重新导入之前训练好的最好的模型。这样Adam能够忘记之前的信息并重新开始训练。</p>
-<blockquote>
-<p>Denkowski &amp; Neubig (2017) show that Adam with 2 restarts and learning rate annealing is faster and performs better than SGD with annealing</p>
-</blockquote>
-<h3 id="Ensembling"><a href="#Ensembling" class="headerlink" title="Ensembling"></a>Ensembling</h3><blockquote>
-<p>Combining multiple models into an ensemble by averaging their predictions is a proven strategy to improve model performance.</p>
-</blockquote>
-<p>Ensembling很重要的一点是需要保证多样性：</p>
-<blockquote>
-<p>Ensembling is an important way to ensure that results are still reliable if the diversity of the evaluated models increases (Denkowski &amp; Neubig, 2017). While ensembling different checkpoints of a model has been shown to be effective (Jean et al., 2015; Sennrich et al., 2016) [51, 52], it comes at the cost of model diversity. Cyclical learning rates can help to mitigate this effect</p>
-</blockquote>
-<h3 id="LSTM-tricks"><a href="#LSTM-tricks" class="headerlink" title="LSTM tricks"></a>LSTM tricks</h3><ul>
-<li><p>在initial state中我们常常使用全0向量，实际上可以将其作为参数学习。</p>
-<blockquote>
-<p>Instead of fixing the initial state, we can learn it like any other parameter, which can improve performance</p>
-</blockquote>
-</li>
-<li><p>将input和output embedding的参数共享，如果是做language model或者机器翻译之类的，可以让他们共享。</p>
-</li>
-<li><p>Gradient Norm Clipping</p>
-<blockquote>
-<p>Rather than clipping each gradient independently, clipping the global norm of the gradient yields more significant improvements</p>
-</blockquote>
-</li>
-</ul>
-<p>这点我没看懂。</p>
-<h3 id="Classification-practices"><a href="#Classification-practices" class="headerlink" title="Classification practices"></a>Classification practices</h3><p>关于CNN</p>
-<blockquote>
-<p>CNN filters:Combining filter sizes near the optimal filter size, e.g. (3,4,5) performs best (Kim, 2014; Kim et al., 2016). The optimal number of feature maps is in the range of 50-600 (Zhang &amp; Wallace, 2015) [59].</p>
-<p>Aggregation function:1-max-pooling outperforms average-pooling and k-max pooling (Zhang &amp; Wallace, 2015).</p>
-</blockquote>
-<p>这在我之前的关于CNN文本分类指南中有更详尽的分析。</p>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这是一篇干货满满的博客，实际上我还是有许多地方没有读懂，这适合多看几遍，慢慢理解。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/26/碎片知识/每周碎片知识5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/26/碎片知识/每周碎片知识5/" itemprop="url">每周碎片知识5</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T11:20:14+08:00">
-                2018-08-26
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:16+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1️⃣[Paper]<br>Joint Embeddings of Chinese Words, Characters, and Fine-grained Subcharacter Components</p>
-<p>基本框架和CBOW一致，主要贡献在于针对中文词向量添加了偏旁、字的组件作为训练信息。</p>
-<p><img src="/images/2018-08-26-15352530482345.jpg" width="50%" height="50%"></p>
-<hr>
-<p>2️⃣[Paper]<br>Highway Networks</p>
-<p>为了解决神经网络深度过深时导致的反向传播困难的问题。<br>前向传播的公式：</p>
-<script type="math/tex; mode=display">y=H(x,W_H)</script><p>而论文所做的改进：</p>
-<script type="math/tex; mode=display">y=H(x,W_H) \cdot T(x,W_T)+ x \cdot C(x,W_C)</script><p>其中$T$是transform gate，$C$是carry gate。方便起见，可以将 $C=1-T$，最终有：</p>
-<script type="math/tex; mode=display">y=H(x,W_H) \cdot T(x,W_T)+ x \cdot (1-T(x,W_T))</script><p>可以看出思想和LSTM很类似，都是gate的思想。</p>
-<hr>
-<p>3️⃣[调参方法]<br>博客：<a href="https://blog.goodaudience.com/how-to-make-your-model-happy-again-part-1-40d94a9ffb41" target="_blank" rel="noopener">https://blog.goodaudience.com/how-to-make-your-model-happy-again-part-1-40d94a9ffb41</a></p>
-<ul>
-<li><strong>学习率</strong>：</li>
-</ul>
-<p>一条原则：当validation loss开始上升时，减少学习率。</p>
-<p>如何减少？</p>
-<p><img src="/images/2018-08-26-15352871548330.jpg" width="50%" height="50%"></p>
-<p>或者：</p>
-<p><img src="/images/2018-08-26-15352873283890.jpg" width="50%" height="50%"><br>设定一定的epoch作为一个stepsize，在训练过程中线性增加学习率，然后在到达最大值后再线性减小。<br>实验表明，使用该方法可以在一半的epoch内达到相同的效果。</p>
-<ul>
-<li><strong>batch size</strong>：</li>
-</ul>
-<p><img src="/images/2018-08-26-15352891425729.jpg" width="50%" height="50%"></p>
-<p>由于batch size和学习率的强相关性，<a href="https://arxiv.org/pdf/1711.00489.pdf" target="_blank" rel="noopener">相关论文</a>提出提高batch size而不是降低学习率的方法来提升模型表现。</p>
-<blockquote>
-<p>increasing the batch size during training, instead of decaying learning rate. — L. Smith<br><a href="https://arxiv.org/pdf/1711.00489.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1711.00489.pdf</a></p>
-</blockquote>
-<p>一个trick：保持学习率不变，提高batch size，直到batch size~训练集/10，接下来再采用学习率下降的策略。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/26/代码相关/代码分享6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/26/代码相关/代码分享6/" itemprop="url">代码片段记录6</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T11:07:30+08:00">
-                2018-08-26
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-23T09:30:20+08:00">
-                2018-09-23
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣将数据整理成batch"><a href="#1️⃣将数据整理成batch" class="headerlink" title="1️⃣将数据整理成batch"></a>1️⃣将数据整理成batch</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_iter_batch</span><span class="params">(paras,labels,batch_size,shuffle=True)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :param paras:</span></span><br><span class="line"><span class="string">    :param labels:</span></span><br><span class="line"><span class="string">    :param batch_size:</span></span><br><span class="line"><span class="string">    :param shuffle:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">assert</span> len(paras)==len(labels)</span><br><span class="line">    paras_size=len(paras)</span><br><span class="line">    <span class="keyword">if</span> shuffle:</span><br><span class="line">        indices=np.arange(paras_size)</span><br><span class="line">        np.random.shuffle(indices)</span><br><span class="line">    <span class="keyword">for</span> start_idx <span class="keyword">in</span> range(<span class="number">0</span>,paras_size-batch_size+<span class="number">1</span>,batch_size):</span><br><span class="line">        <span class="keyword">if</span> shuffle:</span><br><span class="line">            excerpt=indices[start_idx:start_idx+batch_size]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            excerpt=slice(start_idx,start_idx+batch_size)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">yield</span> paras[excerpt],labels[excerpt]</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/26/诗词&句/每周诗词6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/26/诗词&句/每周诗词6/" itemprop="url">每周诗词6</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T10:58:00+08:00">
-                2018-08-26
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-26T11:00:16+08:00">
-                2018-08-26
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1️⃣</p>
-<h3 id="戏为六绝句"><a href="#戏为六绝句" class="headerlink" title="戏为六绝句"></a>戏为六绝句</h3><p>[唐] 杜甫<br>【其二】<br>王杨卢骆当时体，轻薄为文哂未休。<br><strong>尔曹身与名俱灭，不废江河万古流</strong>。</p>
-<p>哂（shěn）：讥笑。</p>
-<p><a href="http://m.xichuangzhu.com/work/57b9658c0a2b58005c95d2a7" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b9658c0a2b58005c95d2a7</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1763,7 +1786,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">99</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1776,7 +1799,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">120</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2336,7 +2359,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
