@@ -286,6 +286,148 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/碎片知识/Pytorch backward()浅析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/16/碎片知识/Pytorch backward()浅析/" itemprop="url">Pytorch backward()浅析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T09:26:24+08:00">
+                2018-09-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-16T11:46:54+08:00">
+                2018-09-16
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近在看pytorch文档的时候，看到backward内有一个参数gradient，在经过查阅了相关资料和进行了实验后，对backward有了更深的认识。</p>
+<h2 id="backward"><a href="#backward" class="headerlink" title="backward"></a>backward</h2><p>1️⃣如果调用backward的是一个标量，如：<code>loss.backward()</code><br>则gradient不需要手动传入，会自动求导。<br>例子:<br>$a=[x_1,x_2],b=\frac{x_1+x_2}{2}$<br>则b对a求导，有：<br>$\dfrac {\partial b}{\partial x_{1}}=\frac{1}{2}，\dfrac {\partial b}{\partial x_{2}}=\frac{1}{2}$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">a=torch.Tensor([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">a.requires_grad=<span class="keyword">True</span></span><br><span class="line">b=torch.mean(a)  <span class="comment">#tensor(2.5000, grad_fn=&lt;MeanBackward1&gt;)</span></span><br><span class="line">b.backward()</span><br><span class="line">a.grad   <span class="comment">#tensor([0.5000, 0.5000])</span></span><br></pre></td></tr></table></figure>
+<p>gradient此时只是在缩放原grad的大小，也即不指定gradient和gradient=1是等价的</p>
+<p>当然，也可以指定gradient，其中指定gradient的shape必须和b的维度相同<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gradient=torch.tensor(<span class="number">10.0</span>)</span><br><span class="line">b.backward(gradient)</span><br><span class="line">a.grad   <span class="comment">#tensor([5., 5.])</span></span><br></pre></td></tr></table></figure></p>
+<p>2️⃣如果调用backward的是一个向量<br>例子：<br>$a=[x_1,x_2],b=[b_1,b_2]$, 其中 $b_1=x_1+x_2,b_2=x_1*x_2$<br>b对a求导，有：<br>$\dfrac {\partial b_1}{\partial x_{1}}=1,\dfrac {\partial b_1}{\partial x_{2}}=1$</p>
+<p>$\dfrac {\partial b_2}{\partial x_{1}}=x_2,\dfrac {\partial b_2}{\partial x_{2}}=x_1$</p>
+<p>在backward的时候则必须指定gradient。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">a=torch.FloatTensor([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">a.requires_grad=<span class="keyword">True</span></span><br><span class="line">b=torch.zeros(<span class="number">2</span>)</span><br><span class="line">b[<span class="number">0</span>]=a[<span class="number">0</span>]+a[<span class="number">1</span>]</span><br><span class="line">b[<span class="number">1</span>]=a[<span class="number">0</span>]*a[<span class="number">1</span>]    <span class="comment"># b=tensor([5., 6.], grad_fn=&lt;CopySlices&gt;)</span></span><br><span class="line">gradient=torch.tensor([<span class="number">1.0</span>,<span class="number">0.0</span>])</span><br><span class="line">b.backward(gradient,retain_graph=<span class="keyword">True</span>)</span><br><span class="line">a.grad   <span class="comment">#tensor([1., 1.])，说明是对b_1进行求导</span></span><br><span class="line">a.grad.zero_()  <span class="comment">#将梯度清空，否则会叠加</span></span><br><span class="line"><span class="comment">#-------------- #</span></span><br><span class="line">gradient=torch.tensor([<span class="number">0.0</span>,<span class="number">1.0</span>])</span><br><span class="line">b.backward(gradient,retain_graph=<span class="keyword">True</span>)</span><br><span class="line">a.grad  <span class="comment"># tensor([3., 2.])，说明对b_2进行求导</span></span><br><span class="line">a.grad.zero_()</span><br><span class="line"><span class="comment"># ------------- #</span></span><br><span class="line">gradient=torch.tensor([<span class="number">1.0</span>,<span class="number">1.0</span>])</span><br><span class="line">b.backward(gradient,retain_graph=<span class="keyword">True</span>)</span><br><span class="line">a.grad   <span class="comment"># tensor([4., 3.])，即b_1,b_2的导数的叠加</span></span><br><span class="line">a.grad.zero_()</span><br></pre></td></tr></table></figure>
+<p>注意到b.backward()时需要retain_graph设为True，否则在计算完后会自动释放计算图的内存，这样就没法进行二次反向传播了。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.pytorchtutorial.com/pytorch-backward/" target="_blank" rel="noopener">https://www.pytorchtutorial.com/pytorch-backward/</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/09/诗词&句/每周诗词8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1622,153 +1764,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/20/碎片知识/关于Pytorch中in-place的操作/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/20/碎片知识/关于Pytorch中in-place的操作/" itemprop="url">关于Pytorch中的inplace的操作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-20T09:53:11+08:00">
-                2018-08-20
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-20T10:09:46+08:00">
-                2018-08-20
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近在写Hierarchical attention network的时候遇到了如下的bug：</p>
-<blockquote>
-<p>one of the variables needed for gradient computation has been modified by an inplace operation</p>
-</blockquote>
-<p>在查阅了文档和请教了其他人之后，最终找到了bug。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(seq_len):</span><br><span class="line">    h_i = rnn_outputs[i]  <span class="comment"># batch,hidden*2</span></span><br><span class="line">    a_i = attn_weights[i].unsqueeze_(<span class="number">1</span>)  <span class="comment"># take in-place opt may cause an error</span></span><br><span class="line">    a_i = a_i.expand_as(h_i)  <span class="comment"># batch,hidden*2</span></span><br></pre></td></tr></table></figure>
-<p>这是我原来的逻辑，我在无意中做了inplace操作，导致了bug的发生。正确的做法应该是这样的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(seq_len):</span><br><span class="line">    h_i = rnn_outputs[i]  <span class="comment"># batch,hidden*2</span></span><br><span class="line">    <span class="comment"># a_i = attn_weights[i].unsqueeze_(1)  # take in-place opt may cause an error</span></span><br><span class="line">    a_i = attn_weights[i].unsqueeze(<span class="number">1</span>)  <span class="comment"># batch,1</span></span><br><span class="line">    a_i = a_i.expand_as(h_i)  <span class="comment"># batch,hidden*2</span></span><br></pre></td></tr></table></figure>
-<p>实际上，在实践过程中应当尽量避免inplace操作，在官方文档中也提到了（存疑）这点，虽然提供了inplace操作，但并不推荐使用。</p>
-<p>具体的原因是，在Pytorch构建计算图的过程中，会记录每个节点是怎么来的，但inplace会破坏这种关系，使得在回传的时候没法正常求导。</p>
-<p>特别地，有两种情况不应该使用inplace操作（摘自知乎）：</p>
-<ol>
-<li>对于requires_grad=True的叶子张量(leaf tensor)不能使用inplace operation</li>
-<li>对于在求梯度阶段需要用到的张量不能使用inplace operation</li>
-</ol>
-<p>Reference:<br><a href="https://zhuanlan.zhihu.com/p/38475183" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/38475183</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1823,7 +1818,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-count">103</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

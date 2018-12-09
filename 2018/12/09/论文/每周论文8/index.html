@@ -119,7 +119,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15443230115907.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15443230641691.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15443232642402.jpg">
-<meta property="og:updated_time" content="2018-12-09T10:49:48.756Z">
+<meta property="og:updated_time" content="2018-12-09T11:03:59.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文8">
 <meta name="twitter:description" content="1️⃣[DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding]提出了两种attention机制，即 multi-dimentional attention和directional self-attention，在此基础上提出有向自注意力网络（directional self-attenti">
@@ -365,7 +365,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-09T18:49:48+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-09T19:03:59+08:00">
                 2018-12-09
               </time>
             
@@ -417,7 +417,8 @@
 <p>首先mask掉自己，第二：分别mask掉forward和backward，类似biLSTM，只和前面或后面的交互。</p>
 <h3 id="Directional-Self-Attention-Network"><a href="#Directional-Self-Attention-Network" class="headerlink" title="Directional Self-Attention Network"></a>Directional Self-Attention Network</h3><p>在上述两个方法的基础上，此时已获得了上下文相关的$s_i$，再引入fusion gate：<br><img src="/images/15443250617220.jpg" width="45%" height="50%"></p>
 <p>整个流程：<br><img src="/images/15443250338890.jpg" width="50%" height="50%"></p>
-<p>最后将前向和反向的表示拼接起来。获得最终的表示$[u^{fw};u^{bw}]$：<br><img src="/images/15443251919096.jpg" width="50%" height="50%"></p>
+<p>将前向和反向的表示拼接起来，获得最终的表示$[u^{fw};u^{bw}]$：<br><img src="/images/15443251919096.jpg" width="50%" height="50%"></p>
+<p>对于所获得的每一个表示，通过source2token，获得最终的句子表示。</p>
 <p>这一点论文也提到了，非常类似bi-LSTM。</p>
 <hr>
 <h2 id="2️⃣-Targeted-Dropout"><a href="#2️⃣-Targeted-Dropout" class="headerlink" title="2️⃣[Targeted Dropout]"></a>2️⃣[Targeted Dropout]</h2><p>一种网络剪枝方法，想法简单易实现。<br>简单说，在每次更新时对最不重要的weight或者unit进行随机dropout。</p>
@@ -506,6 +507,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/12/09/碎片知识/Python中的+=操作/" rel="prev" title="Python中的+=操作">
+                Python中的+=操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -590,7 +595,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-count">103</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

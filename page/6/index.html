@@ -286,6 +286,145 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/23/机器学习与深度学习算法知识/Lecture 6: Backpropagation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/23/机器学习与深度学习算法知识/Lecture 6: Backpropagation/" itemprop="url">Lecture 6:Backpropagation</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-23T10:03:24+08:00">
+                2018-09-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:27+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Chain-Rule"><a href="#Chain-Rule" class="headerlink" title="Chain Rule"></a>Chain Rule</h3><p>基本公式<br><img src="/images/2018-09-23-15376684598125.jpg" width="50%" height="50%"><br><img src="/images/2018-09-23-15376684674095.jpg" width="50%" height="50%"></p>
+<h3 id="forward-pass和backward-pass"><a href="#forward-pass和backward-pass" class="headerlink" title="forward pass和backward pass"></a>forward pass和backward pass</h3><p>可以将backpropagation分为两步</p>
+<h4 id="forward-pass"><a href="#forward-pass" class="headerlink" title="forward pass"></a>forward pass</h4><p>在前向传播的时候提前计算/保存好，因为该梯度很简单<br><img src="/images/2018-09-23-15376686358832.jpg" width="50%" height="50%"></p>
+<p>比如z对w1的梯度就是x1，就是和w1相连的项<br><img src="/images/2018-09-23-15376687025289.jpg" width="20%" height="50%"></p>
+<h4 id="backward-pass"><a href="#backward-pass" class="headerlink" title="backward pass"></a>backward pass</h4><p>回传的时候逐层相乘下去，类似动态规划，获得了后一层的梯度才能求出前一层的梯度。<br><img src="/images/2018-09-23-15376687488493.jpg" width="50%" height="50%"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="/images/2018-09-23-15376687824826.jpg" width="50%" height="50%"></p>
+<p>先前向，提前算出最邻近的梯度，直到output layer，计算完该梯度，再不断回传逐层相乘获得output对各层的梯度。</p>
+<h3 id="代码实现例子"><a href="#代码实现例子" class="headerlink" title="代码实现例子"></a>代码实现例子</h3><p>relu实现forward pass和backward pass<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyReLU</span><span class="params">(torch.autograd.Function)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    We can implement our own custom autograd Functions by subclassing</span></span><br><span class="line"><span class="string">    torch.autograd.Function and implementing the forward and backward passes</span></span><br><span class="line"><span class="string">    which operate on Tensors.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(ctx, input)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        In the forward pass we receive a Tensor containing the input and return</span></span><br><span class="line"><span class="string">        a Tensor containing the output. ctx is a context object that can be used</span></span><br><span class="line"><span class="string">        to stash information for backward computation. You can cache arbitrary</span></span><br><span class="line"><span class="string">        objects for use in the backward pass using the ctx.save_for_backward method.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        ctx.save_for_backward(input)  <span class="comment">#为了之后的backward计算</span></span><br><span class="line">        <span class="keyword">return</span> input.clamp(min=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(ctx, grad_output)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        In the backward pass we receive a Tensor containing the gradient of the loss</span></span><br><span class="line"><span class="string">        with respect to the output, and we need to compute the gradient of the loss</span></span><br><span class="line"><span class="string">        with respect to the input.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        input, = ctx.saved_tensors</span><br><span class="line">        grad_input = grad_output.clone()</span><br><span class="line">        grad_input[input &lt; <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> grad_input</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/23/机器学习与深度学习算法知识/Lecture 5 Classification: Logistic Regression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1594,148 +1733,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/碎片知识/Pytorch backward()浅析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/16/碎片知识/Pytorch backward()浅析/" itemprop="url">Pytorch backward()浅析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T09:26:24+08:00">
-                2018-09-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-16T11:46:54+08:00">
-                2018-09-16
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近在看pytorch文档的时候，看到backward内有一个参数gradient，在经过查阅了相关资料和进行了实验后，对backward有了更深的认识。</p>
-<h2 id="backward"><a href="#backward" class="headerlink" title="backward"></a>backward</h2><p>1️⃣如果调用backward的是一个标量，如：<code>loss.backward()</code><br>则gradient不需要手动传入，会自动求导。<br>例子:<br>$a=[x_1,x_2],b=\frac{x_1+x_2}{2}$<br>则b对a求导，有：<br>$\dfrac {\partial b}{\partial x_{1}}=\frac{1}{2}，\dfrac {\partial b}{\partial x_{2}}=\frac{1}{2}$</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">a=torch.Tensor([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">a.requires_grad=<span class="keyword">True</span></span><br><span class="line">b=torch.mean(a)  <span class="comment">#tensor(2.5000, grad_fn=&lt;MeanBackward1&gt;)</span></span><br><span class="line">b.backward()</span><br><span class="line">a.grad   <span class="comment">#tensor([0.5000, 0.5000])</span></span><br></pre></td></tr></table></figure>
-<p>gradient此时只是在缩放原grad的大小，也即不指定gradient和gradient=1是等价的</p>
-<p>当然，也可以指定gradient，其中指定gradient的shape必须和b的维度相同<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gradient=torch.tensor(<span class="number">10.0</span>)</span><br><span class="line">b.backward(gradient)</span><br><span class="line">a.grad   <span class="comment">#tensor([5., 5.])</span></span><br></pre></td></tr></table></figure></p>
-<p>2️⃣如果调用backward的是一个向量<br>例子：<br>$a=[x_1,x_2],b=[b_1,b_2]$, 其中 $b_1=x_1+x_2,b_2=x_1*x_2$<br>b对a求导，有：<br>$\dfrac {\partial b_1}{\partial x_{1}}=1,\dfrac {\partial b_1}{\partial x_{2}}=1$</p>
-<p>$\dfrac {\partial b_2}{\partial x_{1}}=x_2,\dfrac {\partial b_2}{\partial x_{2}}=x_1$</p>
-<p>在backward的时候则必须指定gradient。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">a=torch.FloatTensor([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">a.requires_grad=<span class="keyword">True</span></span><br><span class="line">b=torch.zeros(<span class="number">2</span>)</span><br><span class="line">b[<span class="number">0</span>]=a[<span class="number">0</span>]+a[<span class="number">1</span>]</span><br><span class="line">b[<span class="number">1</span>]=a[<span class="number">0</span>]*a[<span class="number">1</span>]    <span class="comment"># b=tensor([5., 6.], grad_fn=&lt;CopySlices&gt;)</span></span><br><span class="line">gradient=torch.tensor([<span class="number">1.0</span>,<span class="number">0.0</span>])</span><br><span class="line">b.backward(gradient,retain_graph=<span class="keyword">True</span>)</span><br><span class="line">a.grad   <span class="comment">#tensor([1., 1.])，说明是对b_1进行求导</span></span><br><span class="line">a.grad.zero_()  <span class="comment">#将梯度清空，否则会叠加</span></span><br><span class="line"><span class="comment">#-------------- #</span></span><br><span class="line">gradient=torch.tensor([<span class="number">0.0</span>,<span class="number">1.0</span>])</span><br><span class="line">b.backward(gradient,retain_graph=<span class="keyword">True</span>)</span><br><span class="line">a.grad  <span class="comment"># tensor([3., 2.])，说明对b_2进行求导</span></span><br><span class="line">a.grad.zero_()</span><br><span class="line"><span class="comment"># ------------- #</span></span><br><span class="line">gradient=torch.tensor([<span class="number">1.0</span>,<span class="number">1.0</span>])</span><br><span class="line">b.backward(gradient,retain_graph=<span class="keyword">True</span>)</span><br><span class="line">a.grad   <span class="comment"># tensor([4., 3.])，即b_1,b_2的导数的叠加</span></span><br><span class="line">a.grad.zero_()</span><br></pre></td></tr></table></figure>
-<p>注意到b.backward()时需要retain_graph设为True，否则在计算完后会自动释放计算图的内存，这样就没法进行二次反向传播了。</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.pytorchtutorial.com/pytorch-backward/" target="_blank" rel="noopener">https://www.pytorchtutorial.com/pytorch-backward/</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1790,7 +1787,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-count">103</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

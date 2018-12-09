@@ -286,6 +286,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/20/碎片知识/关于Pytorch中in-place的操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/20/碎片知识/关于Pytorch中in-place的操作/" itemprop="url">关于Pytorch中的inplace的操作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-20T09:53:11+08:00">
+                2018-08-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-20T10:09:46+08:00">
+                2018-08-20
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近在写Hierarchical attention network的时候遇到了如下的bug：</p>
+<blockquote>
+<p>one of the variables needed for gradient computation has been modified by an inplace operation</p>
+</blockquote>
+<p>在查阅了文档和请教了其他人之后，最终找到了bug。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(seq_len):</span><br><span class="line">    h_i = rnn_outputs[i]  <span class="comment"># batch,hidden*2</span></span><br><span class="line">    a_i = attn_weights[i].unsqueeze_(<span class="number">1</span>)  <span class="comment"># take in-place opt may cause an error</span></span><br><span class="line">    a_i = a_i.expand_as(h_i)  <span class="comment"># batch,hidden*2</span></span><br></pre></td></tr></table></figure>
+<p>这是我原来的逻辑，我在无意中做了inplace操作，导致了bug的发生。正确的做法应该是这样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(seq_len):</span><br><span class="line">    h_i = rnn_outputs[i]  <span class="comment"># batch,hidden*2</span></span><br><span class="line">    <span class="comment"># a_i = attn_weights[i].unsqueeze_(1)  # take in-place opt may cause an error</span></span><br><span class="line">    a_i = attn_weights[i].unsqueeze(<span class="number">1</span>)  <span class="comment"># batch,1</span></span><br><span class="line">    a_i = a_i.expand_as(h_i)  <span class="comment"># batch,hidden*2</span></span><br></pre></td></tr></table></figure>
+<p>实际上，在实践过程中应当尽量避免inplace操作，在官方文档中也提到了（存疑）这点，虽然提供了inplace操作，但并不推荐使用。</p>
+<p>具体的原因是，在Pytorch构建计算图的过程中，会记录每个节点是怎么来的，但inplace会破坏这种关系，使得在回传的时候没法正常求导。</p>
+<p>特别地，有两种情况不应该使用inplace操作（摘自知乎）：</p>
+<ol>
+<li>对于requires_grad=True的叶子张量(leaf tensor)不能使用inplace operation</li>
+<li>对于在求梯度阶段需要用到的张量不能使用inplace operation</li>
+</ol>
+<p>Reference:<br><a href="https://zhuanlan.zhihu.com/p/38475183" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/38475183</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/19/诗词&句/愿中国青年都摆脱冷气/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1704,157 +1851,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/12/碎片知识/每周碎片知识3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/12/碎片知识/每周碎片知识3/" itemprop="url">每周碎片知识3</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-12T10:13:37+08:00">
-                2018-08-12
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:16+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1️⃣[Python]<br>在服务器上跑代码时，如 <code>python project/folder1/a.py</code>，如果a.py引用了一个自定义的模块但又不在folder1内，此时interpreter就会报错，提示找不到该模块。这是因为解释器默认只会在同一个folder下查找。解决方案是在运行前显式添加查找范围。如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PYTHONPATH=/home/zhlin/bilm-tf:<span class="variable">$PYTHONPATH</span></span><br></pre></td></tr></table></figure></p>
-<p>那么python解释器就会到该目录下去找。</p>
-<hr>
-<p>2️⃣[度量标准]<br><img src="/images/2018-08-12-15340420442670.jpg" alt=""></p>
-<ul>
-<li>准确率(accuracy):  $ACC=\frac{TP+TN}{TP+TN+FP+FN}$<br> 衡量的是分类器预测准确的比例</li>
-<li>召回率(recall): $Recall=\frac{TP}{TP+FN}$<br>  正例中被分对的比例，衡量了分类器对正例的识别能力。</li>
-<li>精确率(Precision): $P=\frac{TP}{TP+FP}$<br>度量了被分为正例的示例中实际为正例的比例。</li>
-<li>F-Measure: $F=\frac{(\alpha^2 +1)P*R}{\alpha^2 (P+R)}$<br>  其中P是Precision,R是Recall。综合考量了两种度量。<br>  当$\alpha=1$时，称为F1值 $F1=\frac{2PR}{P+R}$</li>
-</ul>
-<hr>
-<p>3️⃣[调参技巧]<br>在google发布的一份关于text-classification的<a href="https://developers.google.com/machine-learning/guides/text-classification/" target="_blank" rel="noopener">guide</a>中，提到了几个调参的trick。</p>
-<ol>
-<li>在feature selection步骤中，卡方检验chi2和方差分析的F值 f_classif的表现相当，在大约选择20k的feature时，准确率达到顶峰，当feature越多，效果并没有提升甚至会下降。<br><img src="/images/2018-08-12-15340434326365.jpg" width="90%" height="50%"></li>
-<li>在文本分类中，似乎使用normalization并没有多少用处，建议跳过。<blockquote>
-<p>Normalization converts all feature/sample values to small and similar values. This simplifies gradient descent convergence in learning algorithms. From what we have seen, normalization during data preprocessing does not seem to add much value in text classification problems; we recommend skipping this step.</p>
-</blockquote>
-</li>
-</ol>
-<p>实际上我也测试过，发现确实normalization对于准确率的提高没什么帮助，甚至还有一点下降。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1909,7 +1905,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-count">103</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

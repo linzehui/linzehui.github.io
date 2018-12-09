@@ -286,6 +286,219 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/12/碎片知识/浅谈mask矩阵/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/12/碎片知识/浅谈mask矩阵/" itemprop="url">浅谈mask矩阵</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-12T23:10:24+08:00">
+                2018-10-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:14+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>个人目前对mask矩阵的一点理解。</p>
+<hr>
+<h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><p>mask矩阵是什么？是一个由0和1组成的矩阵。一个例子是，在自然语言处理(NLP)中，句子的长度是不等长的，但因为我们经常将句子组成mini-batch用以训练，因此那些长度较短的句子都会在句尾进行填充0，也即padding的操作。一个mask矩阵即用以指示哪些是真正的数据，哪些是padding。如：<br><img src="/images/2018-10-12-15393574958961.jpg" width="50%" height="50%"><br>图片来源：<a href="https://www.cnblogs.com/neopenx/p/4806006.html" target="_blank" rel="noopener">Theano：LSTM源码解析</a></p>
+<p>其中mask矩阵中1代表真实数据；0代表padding数据。</p>
+<h2 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h2><p>为什么要使用mask矩阵？使用mask矩阵是为了让那些被mask掉的tensor不会被更新。考虑一个tensor T的size(a,b)，同样大小的mask矩阵M，相乘后，在反向回传的时候在T对应mask为0的地方，0的梯度仍为0。因此不会被更新。</p>
+<h2 id="怎么做"><a href="#怎么做" class="headerlink" title="怎么做"></a>怎么做</h2><p>接下来介绍几种（可能不全）使用mask的场景。</p>
+<h3 id="对输入进行mask"><a href="#对输入进行mask" class="headerlink" title="对输入进行mask"></a>对输入进行mask</h3><p>考虑NLP中常见的句子不等长的情况。设我们的输入的batch I:(batch_size,max_seqlen)，我们在过一层Embedding层之前，<br>在过了一层Embedding层，则有 E:(batch_size,max_seqlen,embed_dim)，如果我们希望Embedding是更新的(比如我们的Embedding是随机初始化的，那当然Embedding需要更新)，但我们又不希望padding更新。<br>一种方法即令E与M相乘。其中M是mask矩阵(batch_size,max_seqlen,1) (1是因为要broadcast），这样在Embedding更新梯度时，因为mask矩阵的关系，padding位置上的梯度就是0。<br>当然在Pytorch中还可以直接显式地写：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.embedding = nn.Embedding(vocab_size, embed_dim,padding_idx=<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<p>而此时应当将padding显式添加到词典的第一个。</p>
+<h3 id="对模型中间进行mask"><a href="#对模型中间进行mask" class="headerlink" title="对模型中间进行mask"></a>对模型中间进行mask</h3><p>一个很经典的场景就是dropout。<br>对于参数矩阵W:(h,w)，同样大小的mask矩阵M，在前向传播时令W’=W*M，则在反向传播时，M中为0的部分不被更新。<br>当然，我们可以直接调用PyTorch中的包<code>nn.Dropout()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">m = nn.Dropout(p=<span class="number">0.2</span>)</span><br><span class="line">input = torch.randn(<span class="number">20</span>, <span class="number">16</span>)</span><br><span class="line">output = m(input)</span><br></pre></td></tr></table></figure>
+<h3 id="对loss进行mask"><a href="#对loss进行mask" class="headerlink" title="对loss进行mask"></a>对loss进行mask</h3><p>考虑NLP中的language model，每个词都需要预测下一个词，在一个batch中句子总是有长有短，对于一个短句，此时在计算loss的时候，会出现这样的场景：<code>&lt;pad&gt;</code>词要预测下一个<code>&lt;pad&gt;</code>词。举个例子：三个句子[a,b,c,d],[e,f,g],[h,i]，在组成batch后，会变成<br>X：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>b</td>
+<td>c</td>
+<td>d</td>
+</tr>
+<tr>
+<td>e</td>
+<td>f</td>
+<td>g</td>
+<td><code>&lt;pad&gt;</code></td>
+</tr>
+<tr>
+<td>h</td>
+<td>i</td>
+<td><code>&lt;pad&gt;</code></td>
+<td><code>&lt;pad&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Y：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>b</td>
+<td>c</td>
+<td>d</td>
+<td><code>&lt;pad&gt;</code></td>
+</tr>
+<tr>
+<td>f</td>
+<td>g</td>
+<td><code>&lt;eos&gt;</code></td>
+<td><code>&lt;pad&gt;</code></td>
+</tr>
+<tr>
+<td>i</td>
+<td><code>&lt;eos&gt;</code></td>
+<td><code>&lt;pad&gt;</code></td>
+<td><code>&lt;pad&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>X是输入，Y是预测。那么从第三行可以看出，<code>&lt;pad&gt;</code>在预测下一个<code>&lt;pad&gt;</code>。这显然是有问题的。<br>一种解决方案就是使用mask矩阵，在loss的计算时，将那些本不应该计算的mask掉，使得其loss为0，这样就不会反向回传了。<br>具体实践：在PyTorch中，以CrossEntropy为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">torch</span>.<span class="title">nn</span>.<span class="title">CrossEntropyLoss</span><span class="params">(weight=None, size_average=None, ignore_index=<span class="number">-100</span>, </span></span></span><br><span class="line"><span class="class"><span class="params">reduce=None, reduction=’elementwise_mean’</span></span></span><br></pre></td></tr></table></figure>
+<p>如果<code>reduction=None</code>则会返回一个与输入同样大小的矩阵。在与mask矩阵相乘后，再对新矩阵进行mean操作。<br>在PyTorch实践上还可以可以这么写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">masked_outputs = torch.masked_select(dec_outputs, mask)</span><br><span class="line">masked_targets = torch.masked_select(targets, mask)</span><br><span class="line">loss = my_criterion(masked_outputs, masked_targets)</span><br></pre></td></tr></table></figure>
+<p>另一种更为简单的解决方案是，直接在CrossEntropy中设<code>ignore_index=0</code>，这样，在计算loss的时候，发现target=0时，会自动不对其进行loss的计算。其本质和mask矩阵是一致的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>mask矩阵可以用在任何地方，只要希望与之相乘的tensor相对应的地方不更新就可以进行mask操作。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/碎片知识/深度炼丹tricks合集/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1605,152 +1818,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/碎片知识/梯度消失与梯度爆炸的推导/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/碎片知识/梯度消失与梯度爆炸的推导/" itemprop="url">梯度消失与梯度爆炸的推导</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T09:53:24+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-08T12:21:18+08:00">
-                2018-10-08
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p> 记RNN中每一步的损失为$E_t$，则损失对$h_{t-1}$的权重$W$的导数有：</p>
-<script type="math/tex; mode=display">\frac{\partial{E_t}}{\partial{W}}=\sum_{k=1}^{t}
-    \frac{\partial{E_t}}{\partial{y_t}} \frac{\partial{y_t}}{\partial{h_t}} \frac{\partial{h_t}}{\partial{h_k}} \frac{\partial{h_k}}{\partial{W}}</script><p>其中$\frac{\partial{h_t}}{\partial{h_k}}$使用链式法则有：</p>
-<script type="math/tex; mode=display">\frac{\partial{h_t}}{\partial{h_k}} = 
-    \prod_{j=k+1}^{t} \frac{\partial{h_j}}{\partial{h_{j-1}}} =
-    \prod_{j=k+1}^{t} W^T \times diag[f^{\prime}(h_{j-1})]</script><p>其中$\frac{\partial{h_j}}{\partial{h_{j-1}}}$ 是雅克比矩阵。对其取模(norm)，有：</p>
-<script type="math/tex; mode=display">\rVert \frac{\partial{h_j}}{\partial{h_{j-1}}}\rVert ≤ 
-\rVert W^T \rVert \rVert diag[f^{\prime}(h_{j-1})] \rVert 
-≤ \beta_W \beta_h</script><p>当$f$为sigmoid时，$f^{\prime}(h_{j-1})$最大值为1。</p>
-<p>最终我们有：</p>
-<script type="math/tex; mode=display">\rVert \frac{\partial{h_t}}{\partial{h_{k}}}\rVert ≤ 
-\rVert \prod_{j=k+1}^{t} \frac{\partial{h_j}}{\partial{h_{j-1}}} \rVert 
-≤ (\beta_W \beta_h)^{t-k}</script><p>从上式可以看出，当t-k足够大时，如果$(\beta_W \beta_h)$小于1则$(\beta_W \beta_h)^{t-k}$则会变得非常小，相反，若$(\beta_W \beta_h)$大于1则$(\beta_W \beta_h)^{t-k}$则会变得非常大。</p>
-<p>在计算机中，当梯度值很大时，会造成上溢(NaN)，也即梯度爆炸问题，当梯度值很小时，会变成0，也即梯度消失。注意到，t-k的损失实际上评估的是一个较远的词对当前t的贡献，梯度消失也即意味着对当前的贡献消失。</p>
-<p>Reference:<br>CS224d: Deep Learning for NLP Lecture4</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1805,7 +1872,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-count">103</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Python中的+=操作]]></title>
+    <url>%2F2018%2F12%2F09%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FPython%E4%B8%AD%E7%9A%84%2B%3D%E6%93%8D%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[前几日在写一段Pytorch代码时，又一次遇到了in-place操作的问题。 1output+=pos # pos是不可更新的tensor，output是可更新的tensor 程序报错：“one of the variables needed for gradient computation has been modified by an inplace operation”。 无意中将代码改成output=output+pos，程序就不会报错了。 在查阅了相关资料后，将我的思考整理下来。 在Python中，i=i+1和i+=1是不同的，如果被操作数没有部署 ’iadd‘方法，则i=i+1和i+=1是等价的，’+=‘并不会产生in-place操作；当被操作数有部署该方法且正确部署，则是会产生in-place操作的。当没有in-place操作时，i=i+1表示对i重分配，也即i指向了另一个空间而不是原来的空间。 所以，这样的例子就能解释清楚了： 12345678910import numpy as npA = np.arange(12).reshape(4,3)for a in A: a = a + 1# A并没有被改变B = np.arange(12).reshape(4,3)for b in B: b += 1# B被改变了 在Pytorch中，也有部署’iadd()‘操作，所以对于output+=pos，output内部的值被改变了，也即在计算图中引入了环，在反向求导时则会出错。 因此，在Pytorch中，应当避免in-place的操作。 Reference:https://stackoverflow.com/questions/41446833/what-is-the-difference-between-i-i-1-and-i-1-in-a-for-loop]]></content>
+      <tags>
+        <tag>Pytorch</tag>
+        <tag>Python</tag>
+        <tag>碎片知识</tag>
+        <tag>遇到的问题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[每周论文8]]></title>
     <url>%2F2018%2F12%2F09%2F%E8%AE%BA%E6%96%87%2F%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%878%2F</url>
-    <content type="text"><![CDATA[1️⃣[DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding]提出了两种attention机制，即 multi-dimentional attention和directional self-attention，在此基础上提出有向自注意力网络（directional self-attention network) Multi-dimensional Attention与传统的方法不同的是，对于每个词对，attention出来的不是标量而是向量。 计算公式： $f$的维度与$q$相同，每一维代表的是$x_i$在该维对$q$的重要性。也即feature-wise的attention。因此对于$q$而言，其获得的加权求和向量为： 使用feature-wise的attention能够解决一次多义的问题，因为能够计算每一维的重要性，在不同的context下有不同的重要性。 将其应用于self-attention中，有两种变体：①token2token 因此x在交互完有： ②source2token 也即$x_i$没有和其他元素有交互。可用作获得sentence encoding： Directional Self-Attention使用mask达到有向性这一目的。首先将x过一层获得新的h表示： 接着使用token2token求attention，这里为了减少参数作了一定改动，将W换成c，tanh替换σ。 $\textbf{1}$是全1的向量。M就是mask矩阵，代表i与j是否连通，Mask矩阵有： 也即： 首先mask掉自己，第二：分别mask掉forward和backward，类似biLSTM，只和前面或后面的交互。 Directional Self-Attention Network在上述两个方法的基础上，此时已获得了上下文相关的$s_i$，再引入fusion gate： 整个流程： 最后将前向和反向的表示拼接起来。获得最终的表示$[u^{fw};u^{bw}]$： 这一点论文也提到了，非常类似bi-LSTM。 2️⃣[Targeted Dropout]一种网络剪枝方法，想法简单易实现。简单说，在每次更新时对最不重要的weight或者unit进行随机dropout。 Targeted DropoutDropout给定输入X，权重W，输出Y M为dropout的mask矩阵。unit dropout： weight dropout： 也即drop掉的是layer之间的connection。 Magnitude-based pruning剪枝通常对权重最小的进行剪枝，也即保留topk个最大的权重。 Unit pruning：直接剪掉的是一整列，也即一个unit Weight pruning：对W的每个元素进行剪枝。注意是对每行的topk进行保留 可以理解成对一个unit来说，保留最高的k个connection。 方法结合dropout和剪枝。主要思想：首先选择N-k最不重要的element，由于我们希望这些low-value的元素有机会在训练过程中变得重要，因此我们对这些element进行随机dropout。 引入targeting proportion γ和drop probability α，亦即：选择最低的γ|θ|个weight，再根据α进行dropout。这样做的结果是：减少重要的子网络对不重要的子网络的依赖。 附录①dropout的intuition：减少unit之间的相互适应。when dropout is applied to a unit, the remaining network can no longer depend on that unit’s contribution to the function and must learn to propagate that unit’s information through a more reliable channel。也可以理解成：使得unit之间的交互信息达到最大，在失去某个unit的时候影响不会那么大。 ②targeted dropout intuition：the important subnetwork is completely separated from the unimportant one。假设一个网络由两个不相交的子网络组成，每个都能输出正确的结果，总的网络是这两个网络的平均。我们通过对不重要的子网络进行dropout（也即往子网络里加noise，会破坏该子网络的输出，由于重要的子网络已经能够输出正确的结果，因此为了减少损失，我们需要减少不重要网络的输出到0，也即kill掉该子网络，并且加强这两个网络的分离。（为什么不直接舍弃呢？因为是在训练过程中，有可能会有变化）这个解释还是没完全懂。 3️⃣[A2-Nets: Double Attention Networks]发表于NIPS2018，个人认为很有启发。提出一种新的attention机制，基于“收集-分发”的思想，能够让CNN获得更大的感受野。 MotivationCNN本身主要是捕获局部特征与关系，但对于长距离之间的关系只能通过堆叠多几层才能实现。但这样需要更高的计算量，且容易过拟合；同时，远处的特征实际上是来自好几层的延迟，导致推理的困难。 通过将feature收集起来，然后分发下去，使得feature之间有交互，让CNN获得更大的感受野，能够捕获长距离的特征。 方法 也即： X是所有输入，$v_i是$local feature。 The First Attention Step: Feature Gathering对于两个feature map A,B，有： 其中： 如果A、B都来自同一个X，将B归一化softmax，就类似transformer的attention。其中上式的最右边是外积的形式。 我们将G拆分成向量形式：同时将B重写成行向量形式，则有： 则会有： 上式让我们有一个新的理解角度：G实际上就是 a bag of visual primitives。每个$g_i$是所有local feature加权求和，其中$b_i$是求和的weight。 因此我们对B做softmax，保证权重为1： The Second Attention Step: Feature Distribution在获得了全局的feature G后，现在根据local feature去获取全局feature的部分，这通过一个权重控制，也即$v_i$（local feature)的每一维作为权重。可以不将local feature $v_i$归一化，但归一化能更好地converge。 The Double Attention Block最终得到double attention block： 整个流程： 所以其实是有三个convolution layer。 上式还可以写成：数学上等价，但计算上差很多。第一个式子会有更低的复杂度。 思考虽然用了attention，但这里和Transformer还是有非常大的区别的。Transformer每个元素都和其他元素有交互，通过直接的计算得到权重。而这边的权重由feature本身来决定。并没有直接的交互。]]></content>
+    <content type="text"><![CDATA[1️⃣[DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding]提出了两种attention机制，即 multi-dimentional attention和directional self-attention，在此基础上提出有向自注意力网络（directional self-attention network) Multi-dimensional Attention与传统的方法不同的是，对于每个词对，attention出来的不是标量而是向量。 计算公式： $f$的维度与$q$相同，每一维代表的是$x_i$在该维对$q$的重要性。也即feature-wise的attention。因此对于$q$而言，其获得的加权求和向量为： 使用feature-wise的attention能够解决一次多义的问题，因为能够计算每一维的重要性，在不同的context下有不同的重要性。 将其应用于self-attention中，有两种变体：①token2token 因此x在交互完有： ②source2token 也即$x_i$没有和其他元素有交互。可用作获得sentence encoding： Directional Self-Attention使用mask达到有向性这一目的。首先将x过一层获得新的h表示： 接着使用token2token求attention，这里为了减少参数作了一定改动，将W换成c，tanh替换σ。 $\textbf{1}$是全1的向量。M就是mask矩阵，代表i与j是否连通，Mask矩阵有： 也即： 首先mask掉自己，第二：分别mask掉forward和backward，类似biLSTM，只和前面或后面的交互。 Directional Self-Attention Network在上述两个方法的基础上，此时已获得了上下文相关的$s_i$，再引入fusion gate： 整个流程： 将前向和反向的表示拼接起来，获得最终的表示$[u^{fw};u^{bw}]$： 对于所获得的每一个表示，通过source2token，获得最终的句子表示。 这一点论文也提到了，非常类似bi-LSTM。 2️⃣[Targeted Dropout]一种网络剪枝方法，想法简单易实现。简单说，在每次更新时对最不重要的weight或者unit进行随机dropout。 Targeted DropoutDropout给定输入X，权重W，输出Y M为dropout的mask矩阵。unit dropout： weight dropout： 也即drop掉的是layer之间的connection。 Magnitude-based pruning剪枝通常对权重最小的进行剪枝，也即保留topk个最大的权重。 Unit pruning：直接剪掉的是一整列，也即一个unit Weight pruning：对W的每个元素进行剪枝。注意是对每行的topk进行保留 可以理解成对一个unit来说，保留最高的k个connection。 方法结合dropout和剪枝。主要思想：首先选择N-k最不重要的element，由于我们希望这些low-value的元素有机会在训练过程中变得重要，因此我们对这些element进行随机dropout。 引入targeting proportion γ和drop probability α，亦即：选择最低的γ|θ|个weight，再根据α进行dropout。这样做的结果是：减少重要的子网络对不重要的子网络的依赖。 附录①dropout的intuition：减少unit之间的相互适应。when dropout is applied to a unit, the remaining network can no longer depend on that unit’s contribution to the function and must learn to propagate that unit’s information through a more reliable channel。也可以理解成：使得unit之间的交互信息达到最大，在失去某个unit的时候影响不会那么大。 ②targeted dropout intuition：the important subnetwork is completely separated from the unimportant one。假设一个网络由两个不相交的子网络组成，每个都能输出正确的结果，总的网络是这两个网络的平均。我们通过对不重要的子网络进行dropout（也即往子网络里加noise，会破坏该子网络的输出，由于重要的子网络已经能够输出正确的结果，因此为了减少损失，我们需要减少不重要网络的输出到0，也即kill掉该子网络，并且加强这两个网络的分离。（为什么不直接舍弃呢？因为是在训练过程中，有可能会有变化）这个解释还是没完全懂。 3️⃣[A2-Nets: Double Attention Networks]发表于NIPS2018，个人认为很有启发。提出一种新的attention机制，基于“收集-分发”的思想，能够让CNN获得更大的感受野。 MotivationCNN本身主要是捕获局部特征与关系，但对于长距离之间的关系只能通过堆叠多几层才能实现。但这样需要更高的计算量，且容易过拟合；同时，远处的特征实际上是来自好几层的延迟，导致推理的困难。 通过将feature收集起来，然后分发下去，使得feature之间有交互，让CNN获得更大的感受野，能够捕获长距离的特征。 方法 也即： X是所有输入，$v_i是$local feature。 The First Attention Step: Feature Gathering对于两个feature map A,B，有： 其中： 如果A、B都来自同一个X，将B归一化softmax，就类似transformer的attention。其中上式的最右边是外积的形式。 我们将G拆分成向量形式：同时将B重写成行向量形式，则有： 则会有： 上式让我们有一个新的理解角度：G实际上就是 a bag of visual primitives。每个$g_i$是所有local feature加权求和，其中$b_i$是求和的weight。 因此我们对B做softmax，保证权重为1： The Second Attention Step: Feature Distribution在获得了全局的feature G后，现在根据local feature去获取全局feature的部分，这通过一个权重控制，也即$v_i$（local feature)的每一维作为权重。可以不将local feature $v_i$归一化，但归一化能更好地converge。 The Double Attention Block最终得到double attention block： 整个流程： 所以其实是有三个convolution layer。 上式还可以写成：数学上等价，但计算上差很多。第一个式子会有更低的复杂度。 思考虽然用了attention，但这里和Transformer还是有非常大的区别的。Transformer每个元素都和其他元素有交互，通过直接的计算得到权重。而这边的权重由feature本身来决定。并没有直接的交互。]]></content>
       <tags>
         <tag>Paper</tag>
         <tag>attention</tag>
@@ -19,8 +30,8 @@
     <url>%2F2018%2F12%2F09%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8614%2F</url>
     <content type="text"><![CDATA[1️⃣[Pytorch]Pytorch的tensor和Tensor是有区别的： 123import torcha = torch.tensor(2) # 是标量，size为[]b = torch.Tensor(2) # 是向量，size为[2]]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Pytorch</tag>
+        <tag>碎片知识</tag>
       </tags>
   </entry>
   <entry>
@@ -37,8 +48,8 @@
     <url>%2F2018%2F12%2F02%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8613%2F</url>
     <content type="text"><![CDATA[1️⃣[attention]所有attention的总结：Attention? Attention! 2️⃣[Pytorch]①torch.no_grad能够显著减少内存使用，model.eval不能。因为eval不会关闭历史追踪。 model.eval() will notify all your layers that you are in eval mode, that way, batchnorm or dropout layers will work in eval model instead of training mode.torch.no_grad() impacts the autograd engine and deactivate it. It will reduce memory usage and speed up computations but you won’t be able to backprop (which you don’t want in an eval script). Reference:Does model.eval() &amp; with torch.set_grad_enabled(is_train) have the same effect for grad history? ‘model.eval()’ vs ‘with torch.no_grad()’ ②torch.full(…) returns a tensor filled with value.]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Pytorch</tag>
+        <tag>碎片知识</tag>
         <tag>attention</tag>
       </tags>
   </entry>
@@ -132,8 +143,8 @@
     <url>%2F2018%2F11%2F11%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8611%2F</url>
     <content type="text"><![CDATA[1️⃣[Optimizer]https://zhuanlan.zhihu.com/p/32262540https://zhuanlan.zhihu.com/p/32338983 Adam等自适应学习率算法对于稀疏数据具有优势，且收敛速度很快；但精调参数的SGD（+Momentum）往往能够取得更好的最终结果。 建议：前期用Adam，享受Adam快速收敛的优势；后期切换到SGD，慢慢寻找最优解。什么时候从Adam切换到SGD？当SGD的相应学习率的移动平均值基本不变的时候。 2️⃣[Pytorch]LongTensor除以浮点数，会对除数进行取整，再做除法。 3️⃣[Pytorch]使用Pytorch的DataParallel 1234567891011121314device = torch.device('cuda:' + str( config.CUDA_VISIBLE_DEVICES[0]) if config.use_cuda else 'cpu') # 指定第一个设备model = ClassifyModel( vocab_size=len(vocab), max_seq_len=config.max_sent_len, embed_dim=config.embed_dim, n_layers=config.n_layers, n_head=config.n_head, d_k=config.d_k, d_v=config.d_v, d_model=config.d_model, d_inner=config.d_inner_hid, n_label=config.n_label, dropout=config.dropout).to(device)model = DataParallel(model, device_ids=config.CUDA_VISIBLE_DEVICES) # 显式定义device_ids 注意到：device_ids的起始编号要与之前定义的device中的“cuda:0”相一致，不然会报错。 如果不显式在代码中的DataParallel指定设备，那么需要在命令行内指定。如果是在命令行里面运行的，且device不是从0开始，应当显式设置GPU_id，否则会出错‘AssertionError: Invalid device id’，正确的命令： 1CUDA_VISIBLE_DEVICES=4,5 python -u classify_main.py --gpu_id 0,1]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Pytorch</tag>
+        <tag>碎片知识</tag>
         <tag>Optimizer</tag>
       </tags>
   </entry>
@@ -471,8 +482,8 @@
     <url>%2F2018%2F09%2F30%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%869%2F</url>
     <content type="text"><![CDATA[1️⃣[Pytorch]Pytorch中保存checkpoint是一个dict形式，可以保存任意多个模型到一个checkpoint中。1234567import torch#savetorch.save(&#123; 'epoch': epoch, 'model_state_dict': model.state_dict(), 'optimizer_state_dict': optimizer.state_dict(), 'loss': loss, ... &#125;, PATH)#loadmodel = TheModelClass(*args, **kwargs) optimizer = TheOptimizerClass(*args, **kwargs)checkpoint = torch.load(PATH) model.load_state_dict(checkpoint['model_state_dict']) optimizer.load_state_dict(checkpoint['optimizer_state_dict']) epoch = checkpoint['epoch'] loss = checkpoint['loss']model.eval() # - or - model.train() 2️⃣[Pytorch]Pytorch可以load部分模型，也就是只load进来部分我们需要的层，这在transfer learning中用到。123torch.save(modelA.state_dict(), PATH)modelB = TheModelBClass(*args, **kwargs) modelB.load_state_dict(torch.load(PATH), strict=False)]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Pytorch</tag>
+        <tag>碎片知识</tag>
       </tags>
   </entry>
   <entry>
@@ -527,8 +538,8 @@
     <url>%2F2018%2F09%2F23%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%868%2F</url>
     <content type="text"><![CDATA[1️⃣[Pytorch]torch.max()有两种不同写法。torch.max(input) → Tensor 返回其中最大的元素torch.max(input, dim, keepdim=False, out=None) → (Tensor, LongTensor) 返回该维度上最大值，以及对应的index 2️⃣[Pytorch]将模型同时部署到多张卡上训练，本质就是将一个batch的数据split，送到各个model，然后合并结果。 123456model = nn.DataParallel(model)device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")model.to(device)for data in rand_loader: input = data.to(device) output = model(input) 3️⃣[求导]标量、向量、矩阵之间的求导有两种布局，即分子布局和分母布局。分子布局和分母布局只差一个转置。我的记法：在求导过程中，假设分母为m*n，分子为 k*n，则导数矩阵应该为 k*m 。一些特殊的如标量对矩阵求导等除外。具体直接查表：https://en.m.wikipedia.org/wiki/Matrix_calculus 按位计算求导：假设一个函数$f(x)$的输入是标量$x$。对于一组K个标量$x_1,··· ,x_K$，我们可以通过$f(x)$得到另外一组K个标量$z_1,··· ,z_K$，$z_k = f(x_k),∀k = 1,··· ,K$其中，$f(x)$是按位运算的，即$[f(x)]_i = f(x_i)$其导数是一个对角矩阵： Reference：https://en.m.wikipedia.org/wiki/Matrix_calculushttps://blog.csdn.net/uncle_gy/article/details/78879131https://nndl.github.io/chap-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80.pdf]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Pytorch</tag>
+        <tag>碎片知识</tag>
         <tag>求导</tag>
       </tags>
   </entry>
@@ -556,8 +567,8 @@
     <url>%2F2018%2F09%2F16%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%867%2F</url>
     <content type="text"><![CDATA[1️⃣[Pytorch]只有一个元素的tensor，可用.item()来获取元素 tensor &lt;—&gt; numpy 相互转化会共享内部数据，因此改变其中一个会改变另一个 可用使用 .to 来移动到设备 .detech() detach it from the computation history, and to prevent future computation from being tracked. 将其从计算图中分离，变为叶子节点，并且requires_grad=False Function 记录了这个tensor是怎么来的，所有的tensor都有，除非是用户自定义的： 2️⃣[协方差]关于协方差的理解，x与y关于某个自变量的变化程度，即度量了x与y之间的联系。https://www.zhihu.com/question/20852004]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Pytorch</tag>
+        <tag>碎片知识</tag>
         <tag>协方差</tag>
       </tags>
   </entry>
@@ -633,8 +644,8 @@
     <url>%2F2018%2F09%2F02%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%866%2F</url>
     <content type="text"><![CDATA[1️⃣[dropout]dropout形式:RNN的形式有多种： recurrent dropoutRNN: $h_t=f(W_h ⊙ [x_t,h_{t-1}]+b_h)$加上dropout的RNN：$h_t=f(W_h ⊙ [x_t,d(h_{t-1})]+b_h)$，其中$d(\cdot)$为dropout函数同理：LSTM:$c_t=f_t ⊙c_{t-1} + i_t ⊙ d(g_t)$GRU:$h_t=(1-z_t)⊙c_{t-1}+z_t⊙d(g_t)$ 垂直连接的dropoutdropout的作用即是否允许L层某个LSTM单元的隐状态信息流入L+1层对应单元。 Reference:https://blog.csdn.net/falianghuang/article/details/72910161 2️⃣[Pytorch]pack_padded_sequence用于RNN中，将padding矩阵压缩:这样就可以实现在RNN传输过程中短句提前结束。 pad_packed_sequence是pack_padded_sequence的逆运算。]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Pytorch</tag>
+        <tag>碎片知识</tag>
         <tag>dropout</tag>
       </tags>
   </entry>
@@ -701,9 +712,9 @@
     <url>%2F2018%2F08%2F20%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADin-place%E7%9A%84%E6%93%8D%E4%BD%9C%2F</url>
     <content type="text"><![CDATA[最近在写Hierarchical attention network的时候遇到了如下的bug： one of the variables needed for gradient computation has been modified by an inplace operation 在查阅了文档和请教了其他人之后，最终找到了bug。 1234for i in range(seq_len): h_i = rnn_outputs[i] # batch,hidden*2 a_i = attn_weights[i].unsqueeze_(1) # take in-place opt may cause an error a_i = a_i.expand_as(h_i) # batch,hidden*2 这是我原来的逻辑，我在无意中做了inplace操作，导致了bug的发生。正确的做法应该是这样的： 12345for i in range(seq_len): h_i = rnn_outputs[i] # batch,hidden*2 # a_i = attn_weights[i].unsqueeze_(1) # take in-place opt may cause an error a_i = attn_weights[i].unsqueeze(1) # batch,1 a_i = a_i.expand_as(h_i) # batch,hidden*2 实际上，在实践过程中应当尽量避免inplace操作，在官方文档中也提到了（存疑）这点，虽然提供了inplace操作，但并不推荐使用。 具体的原因是，在Pytorch构建计算图的过程中，会记录每个节点是怎么来的，但inplace会破坏这种关系，使得在回传的时候没法正常求导。 特别地，有两种情况不应该使用inplace操作（摘自知乎）： 对于requires_grad=True的叶子张量(leaf tensor)不能使用inplace operation 对于在求梯度阶段需要用到的张量不能使用inplace operation Reference:https://zhuanlan.zhihu.com/p/38475183]]></content>
       <tags>
+        <tag>Pytorch</tag>
         <tag>碎片知识</tag>
         <tag>遇到的问题</tag>
-        <tag>Pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -728,8 +739,8 @@
     <url>%2F2018%2F08%2F19%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADEmbedding%E7%9A%84padding%2F</url>
     <content type="text"><![CDATA[在Pytorch中，nn.Embedding()代表embedding矩阵，其中有一个参数padding_idx指定用以padding的索引位置。所谓padding，就是在将不等长的句子组成一个batch时，对那些空缺的位置补0，以形成一个统一的矩阵。 用法：1self.embedding = nn.Embedding(vocab_size, embed_dim,padding_idx=0) #也可以是别的数值 在显式设定padding_idx=0后，在自定义的词典内也应当在相应位置添加&lt;pad&gt;作为一个词。如： 1234567class Dictionary(): def __init__(self): self.word2idx = &#123;&#125; self.idx2word = [] self.__vocab_size = 0 self.add_word('&lt;pad&gt;') # should add &lt;pad&gt; first self.add_word('&lt;UNK&gt;') 那么对于padding_idx，内部是如何操作的呢？ 在查看了Embedding的源码后，发现设置了padding_idx，类内部会有如下操作： 12345678910#-----Embedding __init__ 内部--------------if _weight is None: self.weight = Parameter(torch.Tensor(num_embeddings, embedding_dim)) self.reset_parameters() #---------reset_parameters()--------def reset_parameters(self): self.weight.data.normal_(0, 1) if self.padding_idx is not None: self.weight.data[self.padding_idx].fill_(0) 也就是说，当Embedding是随机初始化的矩阵时，会对padding_idx所在的行进行填0。保证了padding行为的正确性。 那么，还需要保证一个问题，就是在反向回传的时候，padding_idx是不会更新的. 在查看了源码后发现在Embedding类内有如下注释： .. note:: With :attr:padding_idx set, the embedding vector at :attr:padding_idx is initialized to all zeros. However, note that this vector can be modified afterwards, e.g., using a customized initialization method, and thus changing the vector used to pad the output. The gradient for this vector from :class:~torch.nn.Embedding is always zero. 并且在查阅了其他资料后，发现该行确实会不更新。有意思的是，查阅源码并没有找到如何使其不更新的机制，因为在F.embedding函数中，返回： 1return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse) 但我并不能跳转到torch.embedding中，大概是因为这部分被隐藏了吧。我也没有再深究下去。我猜测有可能是在autograd内部有对该部分进行单独的处理，用mask屏蔽这部分的更新；或者一个更简单的方法，就是任其更新，但每一次都reset，将第一行手动设为全0。 附记： 假如说没有显式设置该行，是否padding就没有效果呢？我认为是的。 一般来说，我们都是以0作为padding的填充，如： 12 44 22 67 85 12 13 534 31 0 87 23 0 0 0 每一行代表一个句子，其中0作为填充。然后将该矩阵送入到embedding_lookup中，获得三维的tensor，那么0填充的部分，所获得的embedding表示应当是要全0。 假如不显式设置padding_idx=0，就可能会出现两个结果（个人推测)： ①本应该全0的地方，被词典中第一个词的词向量表示给替代了，因为将0作为索引去embedding矩阵获取到的词向量，就是第一个词的词向量，而该词并不全0。 ②词典的最后一个词被全0覆盖。F.embedding中有如下片段： 12345678if padding_idx is not None: if padding_idx &gt; 0: assert padding_idx &lt; weight.size(0), 'Padding_idx must be within num_embeddings' elif padding_idx &lt; 0: assert padding_idx &gt;= -weight.size(0), 'Padding_idx must be within num_embeddings' padding_idx = weight.size(0) + padding_idxelif padding_idx is None: padding_idx = -1 上面片段显示，padding_idx被设置为-1，也就是最后一个单词。做完这步紧接着就返回： 1return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse) 还是由于torch.embedding无法查看的原因，我不知道内部是如何实现的，但应该来说，最后一个词就是被覆盖了。]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Pytorch</tag>
+        <tag>碎片知识</tag>
         <tag>Embedding</tag>
         <tag>padding</tag>
       </tags>
@@ -739,8 +750,8 @@
     <url>%2F2018%2F08%2F19%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FPython%20Tricks%5B%E8%BD%AC%5D%2F</url>
     <content type="text"><![CDATA[原文地址:https://hackernoon.com/python-tricks-101-2836251922e0 我觉得这个介绍Python一些tricks的文章很好，能够更加熟悉Python的一些非常方便的用法。以下是我觉得有用的几个点。 1️⃣Reverse a String/List [::-1]解释：[:]表示取所有的元素，-1表示步进。[1:5:2]表示的就是从元素1到元素5，每2个距离取一个。 2️⃣transpose 2d array zip()相当于压缩，zip(*)相当于解压。 3️⃣Chained function call 非常简洁的写法。 4️⃣Copy List 之前谈过的Python的赋值、浅拷贝、深拷贝。 5️⃣Dictionary get 避免了dict不存在该元素的问题。 6️⃣✨Sort Dictionary by Value 其中第三种返回的是[‘watermelon’, ‘banana’, ‘apple’, ‘orange’]，没有value了。 7️⃣For…else 注意到如果for在中途break了，就不会进入到else了；只有顺利循环完才会进入到else。 1234567891011121314151617&gt;&gt;&gt; a=[1,2,0]&gt;&gt;&gt; for e in a:... if e==0:... break... else:... print('hello')... #什么都没有print&gt;&gt;&gt; for e in a:... print(e)... else:... print('hello')... 120hello 8️⃣Merge dict’s 合并dict的方法。 9️⃣Min and Max index in List]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Python</tag>
+        <tag>碎片知识</tag>
         <tag>Python tricks</tag>
       </tags>
   </entry>
@@ -749,9 +760,9 @@
     <url>%2F2018%2F08%2F19%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%864%2F</url>
     <content type="text"><![CDATA[1️⃣[概率校准(Probability Calibration)]一种对机器学习算法输出结果的校准，通过几个实验可以发现，概率校准能够一定程度提高表现。几个参考资料：直观理解: http://www.bubuko.com/infodetail-2133893.htmlSVC的概率校准在sklearn上的应用: https://blog.csdn.net/ericcchen/article/details/79337716✨完全手册: Calibration of Machine Learning Models 2️⃣[Paper]Hierarchical Attention Networks for Document Classification 亮点在使用层次的RNN结构，以及使用了attention方法。 参考了其他人的代码自己也试着实现了一个，GitHub地址：https://github.com/linzehui/pytorch-hierarchical-attention-network 3️⃣[XGBoost]kaggle神器XGBoost，一篇原理的详细介绍：http://www.cnblogs.com/willnote/p/6801496.html虽然还是有好些地方没搞懂，有必要从头学起。 4️⃣[Python]关于函数列表中单星号(*)和双星号(**)单星号： 代表接收任意多个非关键字参数，将其转换成元组： 1234def one(a,*b): """a是一个普通传入参数，*b是一个非关键字星号参数""" print(b)one(1,2,3,4,5,6) #输出：(2, 3, 4, 5, 6) 对一个普通变量使用单星号，表示对该变量拆分成单个元素 1234def fun(a,b): print(a,b)l=[1,2]fun(*l) #输出 1,2 双星号： 获得字典值 1234def two(a=1,**b): """a是一个普通关键字参数，**b是一个关键字双星号参数""" print(b)two(a=1,b=2,c=3,d=4,e=5,f=6) #输出&#123;'b': 2, 'c': 3, 'e': 5, 'f': 6, 'd': 4&#125; 5️⃣[Pytorch]在Pytorch中，只要一个tensor的requires_grad是true，那么两个tensor的加减乘除后的结果的requires_grad也会是true。]]></content>
       <tags>
-        <tag>碎片知识</tag>
-        <tag>Python</tag>
         <tag>Pytorch</tag>
+        <tag>Python</tag>
+        <tag>碎片知识</tag>
         <tag>Paper</tag>
         <tag>概率校准</tag>
         <tag>Probability Calibration</tag>
@@ -773,8 +784,8 @@
     <url>%2F2018%2F08%2F18%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FPython%E4%B8%AD%E7%9A%84%E6%8B%B7%E8%B4%9D%2F</url>
     <content type="text"><![CDATA[Python的拷贝和C/C++的差别很大，很经常就容易搞混，因此记录一下。 赋值、拷贝 赋值：实际上就是对象的引用，没有开辟新的内存空间12lst=[1,2,3]l=lst 浅拷贝:创建了新对象，但是内容是对原对象的引用，有三种形式 切片 12l=lst[:]l=[i for i in lst] 工厂 1l=list(lst) copy 12import copyl=copy.copy(lst) 深拷贝:copy中的deepcopy，生成一个全新的对象，与原来的对象无关 12import copyl=copy.deepcopy(lst) 例子12345678910111213141516171819202122232425262728293031### 引用https://www.cnblogs.com/huangbiquan/p/7795152.html 的例子###&gt;&gt;&gt; import copy&gt;&gt;&gt; a = [1,2,3,4,['a','b']] #定义一个列表a&gt;&gt;&gt; b = a #赋值&gt;&gt;&gt; c = copy.copy(a) #浅拷贝&gt;&gt;&gt; d = copy.deepcopy(a) #深拷贝&gt;&gt;&gt; a.append(5)&gt;&gt;&gt; print(a)[1, 2, 3, 4, ['a', 'b'], 5] #a添加一个元素5&gt;&gt;&gt; print(b) [1, 2, 3, 4, ['a', 'b'], 5] #b跟着添加一个元素5 &gt;&gt;&gt; print(c)[1, 2, 3, 4, ['a', 'b']] #c保持不变&gt;&gt;&gt; print(d)[1, 2, 3, 4, ['a', 'b']] #d保持不变&gt;&gt;&gt; a[4].append('c') &gt;&gt;&gt; print(a)[1, 2, 3, 4, ['a', 'b', 'c'], 5] #a中的list(即a[4])添加一个元素c&gt;&gt;&gt; print(b)[1, 2, 3, 4, ['a', 'b', 'c'], 5] #b跟着添加一个元素c&gt;&gt;&gt; print(c)[1, 2, 3, 4, ['a', 'b', 'c']] #c跟着添加一个元素c&gt;&gt;&gt; print(d)[1, 2, 3, 4, ['a', 'b']] #d保持不变#说明如下：#1.外层添加元素时， 浅拷贝c不会随原列表a变化而变化；内层list添加元素时，浅拷贝c才会变化。#2.无论原列表a如何变化，深拷贝d都保持不变。#3.赋值对象随着原列表一起变化 Referencehttps://www.cnblogs.com/huangbiquan/p/7795152.htmlhttps://www.cnblogs.com/xueli/p/4952063.html]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Python</tag>
+        <tag>碎片知识</tag>
         <tag>拷贝</tag>
       </tags>
   </entry>
@@ -802,8 +813,8 @@
     <url>%2F2018%2F08%2F12%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%863%2F</url>
     <content type="text"><![CDATA[1️⃣[Python]在服务器上跑代码时，如 python project/folder1/a.py，如果a.py引用了一个自定义的模块但又不在folder1内，此时interpreter就会报错，提示找不到该模块。这是因为解释器默认只会在同一个folder下查找。解决方案是在运行前显式添加查找范围。如：1export PYTHONPATH=/home/zhlin/bilm-tf:$PYTHONPATH 那么python解释器就会到该目录下去找。 2️⃣[度量标准] 准确率(accuracy): $ACC=\frac{TP+TN}{TP+TN+FP+FN}$ 衡量的是分类器预测准确的比例 召回率(recall): $Recall=\frac{TP}{TP+FN}$ 正例中被分对的比例，衡量了分类器对正例的识别能力。 精确率(Precision): $P=\frac{TP}{TP+FP}$度量了被分为正例的示例中实际为正例的比例。 F-Measure: $F=\frac{(\alpha^2 +1)P*R}{\alpha^2 (P+R)}$ 其中P是Precision,R是Recall。综合考量了两种度量。 当$\alpha=1$时，称为F1值 $F1=\frac{2PR}{P+R}$ 3️⃣[调参技巧]在google发布的一份关于text-classification的guide中，提到了几个调参的trick。 在feature selection步骤中，卡方检验chi2和方差分析的F值 f_classif的表现相当，在大约选择20k的feature时，准确率达到顶峰，当feature越多，效果并没有提升甚至会下降。 在文本分类中，似乎使用normalization并没有多少用处，建议跳过。 Normalization converts all feature/sample values to small and similar values. This simplifies gradient descent convergence in learning algorithms. From what we have seen, normalization during data preprocessing does not seem to add much value in text classification problems; we recommend skipping this step. 实际上我也测试过，发现确实normalization对于准确率的提高没什么帮助，甚至还有一点下降。]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Python</tag>
+        <tag>碎片知识</tag>
         <tag>度量标准</tag>
         <tag>调参技巧</tag>
       </tags>
@@ -822,10 +833,10 @@
     <url>%2F2018%2F08%2F10%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2FVim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%2F</url>
     <content type="text"><![CDATA[在服务器经常要用到Vim，因此记录常用的快捷键并熟悉之。 退出:q 退出:wq 写入并退出:q! 退出并忽略所有更改:e! 放弃修改并打开原来的文件 插入i 在当前位置前插入a 在当前位置后插入 撤销:u 撤销:U 撤销整行操作Ctrl+r 重做 删除:md 删除第m行nd 删除当前行开始的n行(一共n+1行)dd 删除当前行D 删除当前字符至行尾:m,nd 删除从m到n行的内容，如: :100,10000d:m,$d 删除m行及以后所有的行:10d 移动:n 跳转到行号 如， :100gg 跳到行首G(shift+g)移动到文件尾 搜索/text 搜索text，n搜索下一个，N搜索上一个?text 反向查找:set ignorecase 忽略大小写查找:set noignorecase 不忽略大小写查找*或# 对光标处的单词搜索 复制粘贴v 从当前位置开始，光标经过的地方被选中，再按一下v结束 环境设置:set nu 显示行号:set nonu 隐藏行号:set hlsearch 设置搜索结果高亮 Referencehttps://www.cnblogs.com/wangrx/p/5907013.htmlhttps://www.cnblogs.com/yangjig/p/6014198.html]]></content>
       <tags>
-        <tag>技巧</tag>
-        <tag>Vim</tag>
         <tag>杂七杂八</tag>
         <tag>快捷键</tag>
+        <tag>技巧</tag>
+        <tag>Vim</tag>
       </tags>
   </entry>
   <entry>
@@ -833,10 +844,10 @@
     <url>%2F2018%2F08%2F10%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2FPycharm%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7%2F</url>
     <content type="text"><![CDATA[记录Pycharm的一些技巧，让Pycharm更顺手 快捷键0️⃣Double Shift 万能搜索可以搜索文件名、类名、方法名、目录名（在关键字前面加/ ），并不能用来搜索任意关键字 1️⃣ Command+F 在页面搜索 2️⃣ Ctrl+Shift+F Find in Path 在路径下搜索 3️⃣✨Command+E 快速查找文件显示最近打开的文件 4️⃣ Shift+Enter 任意位置换行无论光标在何处都可以直接另起一行 5️⃣ Option+Enter 自动导入模块；万能提示键自动导入如何设置见小技巧#0️⃣ 6️⃣ Ctrl+F10 运行我已经添加了Ctrl+R作为另一对运行快捷键 7️⃣ Command+Shift+ +/- 展开/收缩代码 8️⃣ Option+F 在Dash中搜索 9️⃣ Ctrl+J 不跳转查看代码 小技巧0️⃣ Pycharm自动导入模块https://blog.csdn.net/lantian_123/article/details/78094148 1️⃣ ✨远程部署工程 强烈推荐两步走：配置服务器映射+配置服务器解释器 2️⃣跳转后如何回退开启toolbar即可https://segmentfault.com/a/1190000010205945 Referencehttps://foofish.net/pycharm-tips.htmlhttps://blog.csdn.net/lantian_123/article/details/78094148https://segmentfault.com/a/1190000010205945]]></content>
       <tags>
-        <tag>技巧</tag>
         <tag>杂七杂八</tag>
-        <tag>快捷键</tag>
         <tag>Pycharm</tag>
+        <tag>快捷键</tag>
+        <tag>技巧</tag>
       </tags>
   </entry>
   <entry>
@@ -860,9 +871,9 @@
     <url>%2F2018%2F08%2F05%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FPython%E6%83%AF%E4%BE%8B%2F</url>
     <content type="text"><![CDATA[fork from https://github.com/jackfrued/Python-100-Days/blob/master/Python惯例.md Python惯例“惯例”这个词指的是“习惯的做法，常规的办法，一贯的做法”，与这个词对应的英文单词叫“idiom”。由于Python跟其他很多编程语言在语法和使用上还是有比较显著的差别，因此作为一个Python开发者如果不能掌握这些惯例，就无法写出“Pythonic”的代码。下面我们总结了一些在Python开发中的惯用的代码。 让代码既可以被导入又可以被执行。 1if __name__ == '__main__': 用下面的方式判断逻辑“真”或“假”。 12if x:if not x: 好的代码： 12345name = 'jackfrued'fruits = ['apple', 'orange', 'grape']owners = &#123;'1001': '骆昊', '1002': '王大锤'&#125;if name and fruits and owners: print('I love fruits!') 不好的代码： 12345name = 'jackfrued'fruits = ['apple', 'orange', 'grape']owners = &#123;'1001': '骆昊', '1002': '王大锤'&#125;if name != '' and len(fruits) &gt; 0 and owners != &#123;&#125;: print('I love fruits!') 善于使用in运算符。 12if x in items: # 包含for x in items: # 迭代 好的代码： 123name = 'Hao LUO'if 'L' in name: print('The name has an L in it.') 不好的代码： 123name = 'Hao LUO'if name.find('L') != -1: print('This name has an L in it!') 不使用临时变量交换两个值。 1a, b = b, a 用序列构建字符串。 好的代码： 123chars = ['j', 'a', 'c', 'k', 'f', 'r', 'u', 'e', 'd']name = ''.join(chars)print(name) # jackfrued 不好的代码： 12345chars = ['j', 'a', 'c', 'k', 'f', 'r', 'u', 'e', 'd']name = ''for char in chars: name += charprint(name) # jackfrued EAFP优于LBYL。 EAFP - Easier to Ask Forgiveness than Permission. LBYL - Look Before You Leap. 好的代码： 123456d = &#123;'x': '5'&#125;try: value = int(d['x']) print(value)except (KeyError, TypeError, ValueError): value = None 不好的代码： 1234567d = &#123;'x': '5'&#125;if 'x' in d and isinstance(d['x'], str) \ and d['x'].isdigit(): value = int(d['x']) print(value)else: value = None 使用enumerate进行迭代。 好的代码： 123fruits = ['orange', 'grape', 'pitaya', 'blueberry']for index, fruit in enumerate(fruits): print(index, ':', fruit) 不好的代码： 12345fruits = ['orange', 'grape', 'pitaya', 'blueberry']index = 0for fruit in fruits: print(index, ':', fruit) index += 1 用生成式生成列表。 好的代码： 123data = [7, 20, 3, 15, 11]result = [num * 3 for num in data if num &gt; 10]print(result) # [60, 45, 33] 不好的代码： 123456data = [7, 20, 3, 15, 11]result = []for i in data: if i &gt; 10: result.append(i * 3)print(result) # [60, 45, 33] 用zip组合键和值来创建字典。 好的代码： 1234keys = ['1001', '1002', '1003']values = ['骆昊', '王大锤', '白元芳']d = dict(zip(keys, values))print(d) 不好的代码： 123456keys = ['1001', '1002', '1003']values = ['骆昊', '王大锤', '白元芳']d = &#123;&#125;for i, key in enumerate(keys): d[key] = values[i]print(d) 说明：这篇文章的内容来自于网络，有兴趣的读者可以阅读原文。 注：许多原则我认为非常有意义，能够摆脱C/C++的风格，真正写出Pythonic的代码。让我有很大感触的是1、3、8，能够写出非常简洁优雅的代码。同时6我之前从没注意过，习惯了C/C++风格之后总是会在执行之前考虑所有情况，但确实不够优雅，今后可以尝试EAFP风格（什么是EAFP）。]]></content>
       <tags>
+        <tag>Python</tag>
         <tag>碎片知识</tag>
         <tag>杂七杂八</tag>
-        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -879,8 +890,8 @@
     <url>%2F2018%2F08%2F05%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%862%2F</url>
     <content type="text"><![CDATA[1️⃣[Pytorch]避免写出： 1x = Variable(torch.zeros(...), requires_grad=True).cuda() 而是应该要： 1x = Variable(torch.zeros(...).cuda(), requires_grad=True) Reference:https://discuss.pytorch.org/t/variable-grad-is-always-none-when-extending-autograd/12187 2️⃣[Tf-idf]本周因为比赛的原因了解了一下各种文本建模的方法。Tf-idf能够取得不错的成绩，但有一定的缺陷。 TF-IDF用于向量空间模型，进行文档相似度计算是相当有效的。但在文本分类中单纯使用TF-IDF来判断一个特征是否有区分度是不够的。 它仅仅综合考虑了该词在文档中的重要程度和文档区分度。 它没有考虑特征词在类间的分布。特征选择所选择的特征应该在某类出现多，而其它类出现少，即考察各类的文档频率的差异。如果一个特征词，在各个类间分布比较均匀，这样的词对分类基本没有贡献；但是如果一个特征词比较集中的分布在某个类中，而在其它类中几乎不出现，这样的词却能够很好代表这个类的特征，而TF-IDF不能区分这两种情况。 它没有考虑特征词在类内部文档中的分布情况。在类内部的文档中，如果特征词均匀分布在其中，则这个特征词能够很好的代表这个类的特征，如果只在几篇文档中出现，而在此类的其它文档中不出现，显然这样的特征词不能够代表这个类的特征。 Reference:https://blog.csdn.net/mmc2015/article/details/46771791 3️⃣[卡方检验CHI]在文本分类中，用于选择最相关的特征。 Reference:https://blog.csdn.net/blockheadls/article/details/49977361 4️⃣[文本分类]各种文本分类方法的简单介绍。 Reference:https://github.com/wangjiang0624/Note/blob/master/MachineLearning/文本分类.md 5️⃣[Python]collections的两个有用的类 named_tuple：快速建立一个类，使得可以使用属性来访问而非索引，提高了代码可读性 12345from collections import namedtuplePoint = namedtuple('Point',['x','y'])p = Point(1,2)print(p.x) # 1print(p.y) # 2 Counter：统计字符出现的次数 1234567from collections import Countercount = Counter([...]).most_commom() #会按照出现的次数排序，通常可用于构建词典for c in count: # c是一个tuple，c[0]是词，c[1]是频率 if c[1]&gt;= threshold: vocab.add_word(c[0]) else: break Counter用法：https://blog.csdn.net/u014755493/article/details/69812244 6️⃣[nohup]本周在服务器上跑代码的时候遇到一个问题，使用nohup执行python程序时，发现输出文件没有显示。以为是代码的问题，但经过排查并非是代码的问题。通过查阅资料，发现问题所在：因为python输出有缓冲，导致output不能马上看到输出。实际上，在等待了一段时间后，输出文件终于显示出来了。 解决方案：使用python的参数 -u 使得python不启用缓冲。 1nohup python -u test.py &gt; nohup.out 2&gt;&amp;1 &amp; Reference:https://blog.csdn.net/sunlylorn/article/details/19127107 7️⃣[hexo配置] mathjax配置: https://www.jianshu.com/p/7ab21c7f0674 配置域名:https://www.zhihu.com/question/31377141 配置sitemap:http://www.yuan-ji.me/Hexo-优化：提交sitemap及解决百度爬虫抓取-GitHub-Pages-问题/ 8️⃣[Paper]Learning Chinese Word Representations From Glyphs Of Characters 使用图像的卷积来生成词向量:]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Pytorch</tag>
+        <tag>碎片知识</tag>
         <tag>Paper</tag>
         <tag>Tf-idf</tag>
         <tag>文本分类</tag>
@@ -912,8 +923,8 @@
     <url>%2F2018%2F08%2F03%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADgrad%E7%9A%84%E7%90%86%E8%A7%A3%2F</url>
     <content type="text"><![CDATA[事情起源于我写了一个CNN用于文本分类，但loss一直没降，因此我尝试print(loss.grad)的grad，发现神奇的是loss grad显示为None，接着尝试print(y_pred.grad)，同样是None，但再print loss和y_pred的requires_grad发现是正常的True。 在查阅了资料，以及问了学长之后发现原来并不是bug，而是因为，Pytorch默认不会保存中间节点(intermediate variable)的grad，此举是为了节省内存。 By default, gradients are only retained for leaf variables. non-leaf variables’ gradients are not retained to be inspected later. This was done by design, to save memory. https://discuss.pytorch.org/t/why-cant-i-see-grad-of-an-intermediate-variable/94 实际上可以通过retain_grad()或者hook来查看中间节点的grad。 我后面尝试print了叶子节点，如 print(CNN_model.fc.weight.grad)，最终获得了正确的grad。 ps：所谓中间节点，是由其他节点计算所得的tensor，而叶子节点则是自己定义出来的。 最后我发现，原来loss一直没降的原因是因为我定义的CNN过于复杂，并且数据集偏小，无法快速收敛导致的。]]></content>
       <tags>
-        <tag>遇到的问题</tag>
         <tag>Pytorch</tag>
+        <tag>遇到的问题</tag>
         <tag>grad</tag>
         <tag>bug</tag>
       </tags>
@@ -923,9 +934,9 @@
     <url>%2F2018%2F08%2F03%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2FLinux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
     <content type="text"><![CDATA[命令记录自己常用的命令。 1️⃣ls：显式当前目录下的文件和目录 -a 包括隐藏文件 -h 将文件的容量以易读方式列出（配合-s使用） -s 以块数形式显示每个文件分配的尺寸 -l 以较长格式列出信息，可以直接写成 ll 2️⃣cd 到达指定地址 3️⃣kill 杀死程序 -l 信息编号。当l=9时，无条件终止，其他信号可能忽略 killall -u 杀死该用户全部进程 4️⃣ps 报告当前系统的进程状态 -a 所有 -p 指定程序 -u 指定用户 -x 列出该用户的进程的详细信息(我的理解应该是) 如： 5️⃣htop 比top更优，交互更好，同时可以直观看到资源占用情况基本命令与top一致 6️⃣top：动态查看系统运行状态 -u 指定用户名 -p 指定进程 7️⃣nvidia-smi 查看显卡状态watch nvidia-smi 实时查看显卡状态，定时刷新 8️⃣tail 显示指定文件的末尾若干行 -f 显示文件最新追加的内容 -n 显示文件尾部n行内容 -c 显示文件尾部最后c个字符 如： 123tail file 显示最后10行tail -n +20 file 显示从第20行至末尾tail -c 10 file 显示文件file的最后10个字符 ------- 9️⃣echo 用于打印指定的字符串 🔟which 用于查找并显示给定命令的绝对路径，which指令会在环境变量$PATH设置的目录里查找符合条件的文件。使用which命令，可以看到某个系统命令是否存在，以及执行的是哪个位置的命令。如： 1️⃣1️⃣nohup 将程序以忽略挂起信号的方式运行，经常用于在服务器跑代码如：1nohup python xxx.py &gt;output.txt 2&gt;&amp;1 &amp; 即，将输出重定向到output.txt ；最后一个&amp;表示后台挂起 1️⃣2️⃣cp 复制文件 cp [文件] [目标文件夹] -r 递归复制，用于目录的复制 1️⃣3️⃣mv 移动文件、目录或更名 mv [文件/文件夹] [文件夹] -f 强制，当目标文件存在，直接覆盖 -i 会询问 1️⃣4️⃣rm 删除文件或目录 -f 强制删除 -r 递归删除，用于目录删除 1️⃣5️⃣file 用于判断文件的基本数据如： 1️⃣6️⃣tar 对文件打包/压缩 -t 查看打包文件的内容含有哪些文件名 -x 解压缩 -c 新建打包文件 -C 指定压缩/解压目录 -v 解压/压缩过程中将处理的文件名显示出来常用的： 123压缩：tar -jcv -f filename.tar.bz2 要被处理的文件或目录名称查询：tar -jtv -f filename.tar.bz2解压：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录 1️⃣7️⃣wc word count 统计文件内容信息，如行数、字符数 -l 显示文件行数 -c 显示字节数 -m 显示字符数 -w 显示字数 字被定义为由空白、跳格、换行字符分隔的字符串 -L 显示最长行的长度 不加参数，所有的都显示，依次是行数、单词数、字节数、文件名 1️⃣8️⃣df 显示磁盘相关信息 -h 以可读性较高的方式显示信息 1️⃣9️⃣scp 服务器之间的文件复制 如: 1scp -r /test1 zhlin@123.12.1.12:/home/zhlin ✨快捷键Ctrl+a 跳到行首Ctrl+c 退出当前进程Ctrl+e 跳到页尾Ctrl+k 删除当前光标后面的文字Ctrl+l 清屏，等价于clearCtrl+r 搜索之前打过的命令Ctrl+u 删除当前光标前面的文字✨Ctrl+左右键 单词之间跳转 在Mac上可以使用option+左右键Ctrl+y 进行恢复删除Ctrl+z 将当前进程转到后台，使用fg恢复 Referencehttps://blog.csdn.net/leo_618/article/details/53003111 ———-持续更新———-]]></content>
       <tags>
-        <tag>Linux</tag>
         <tag>碎片知识</tag>
         <tag>技巧</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -933,8 +944,8 @@
     <url>%2F2018%2F07%2F31%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E4%B8%80%E4%B8%AA%E5%85%B3%E4%BA%8Eyield%E7%9A%84%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%2F</url>
     <content type="text"><![CDATA[今天遇到了一个神奇的”bug”，让我对yield的理解更深一步。 这是一个函数，我本来打算试着print一下line内部的格式和内容。 这是调用的主函数： 结果跑出的结果是： ？？？ 我尝试在函数的开头添加print： 结果仍然没有任何的输出。 我试着在main函数添加print： 结果： 也就是说，根本没有进入到get_dataset_from_txt函数啊。 我以为是pycharm的问题还重启了一遍，然而并没有任何作用。问了其他人，他们也觉得很神奇。最后一个同学看了一下函数，发现了问题所在：yield 我突然想起来，yield返回的是一个generator，只有在对generator进行遍历时，才会开始运行… 于是，我试着这么写，试着对generator遍历： 虽然报错了，但函数终于是进去了… 结论：有yield的函数会返回一个generator，当对其进行遍历时，函数才会开始运行。]]></content>
       <tags>
-        <tag>遇到的问题</tag>
         <tag>Python</tag>
+        <tag>遇到的问题</tag>
         <tag>yield</tag>
       </tags>
   </entry>
@@ -952,9 +963,9 @@
     <url>%2F2018%2F07%2F29%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%861%2F</url>
     <content type="text"><![CDATA[1️⃣[Python]assert用法： assert expression等价于if not expression: raise AssertionError 2️⃣[Pytorch]Pytorch view：创建一个新的tensor，但他们的data是共享的。 3️⃣[Pytorch]在Pytorch中，embedding的index是不能requires_grad=True的，否则会出错。https://github.com/pytorch/pytorch/issues/7021 之前看过一份代码，设置volatile=false但没有出错，是因为在Pytorch0.4之后volatile已经被弃用了，因此volatile=false不起作用，而默认requires_grad=false 4️⃣[Pytorch]在Pytorch中，nn.Linear(self.hidden_dim,self.vocab_size)的维度是vocab_sizehidden_dim，之前居然没有注意到这个问题。因为nn.Linear的*第一个参数表示输入维度，第二个参数表示输出维度 5️⃣[Pytorch]Pytorch中，使用view一般来说必须要用 .contiguous()。也即： 1batch.view(batch_size, -1).t().contiguous() contiguous()的官方解释：https://discuss.pytorch.org/t/runtimeerror-input-is-not-contiguous/930 It means that your tensor is not a single block of memory, but a block with holes. view can be only used with contiguous tensors, so if you need to use it here, just call .contiguous() before. 也就是说，contiguous会将数据存到一个连续的空间内（block）。 6️⃣[Pytorch]调用Cross_entropy时，Pytorch会帮助你加log和softmax。 7️⃣[Paper]Sliced_RNN 将RNN分块以提高并行性，甚至每层的RNN都可以不一样，达到抽取不同程度的抽象语义信息的目的。实验证明，在不同任务上都有一定的提升，但速度的提升很大。 8️⃣[Tf-idf]计算词语对于句子的重要程度 https://zh.wikipedia.org/wiki/Tf-idf tf是词频，idf是逆向文件频率。也即如果词在该句出现的次数越多，在所有文本的出现次数越少，则词对于句子的重要程度越高。 9️⃣[Numpy]在Numpy中，一个列表虽然是横着表示的，但它是列向量。我之前居然没有注意到这个问题。]]></content>
       <tags>
-        <tag>碎片知识</tag>
-        <tag>Python</tag>
         <tag>Pytorch</tag>
+        <tag>Python</tag>
+        <tag>碎片知识</tag>
         <tag>Paper</tag>
         <tag>Tf-idf</tag>
         <tag>Numpy</tag>
@@ -965,8 +976,8 @@
     <url>%2F2018%2F07%2F29%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2FMac%E9%85%8D%E7%BD%AE%E5%A4%8D%E6%97%A6%E6%9C%89%E7%BA%BF%E7%BD%91%2F</url>
     <content type="text"><![CDATA[配置ip、子网掩码、DNS、路由器有线似乎不支持DHCP，因此只好自己设置。首先连接上有线，将配置iPv4选为手动。问实验室的学长具体的ip地址、子网掩码、路由器、DNS服务器。其中ip地址最后三位要自己设定，只要不和其他人冲突就好。 手动认证到认证平台，下载Mac客户端，其实就是一个.sh文件：http://10.108.255.249/srun_portal_pc.php?ac_id=1&amp;&amp;phone=1 然后，打开文件配置用户名密码，注意到等号后面要有双引号： 保存并放入终端运行，接下来就可以使用有线网了。 其他似乎，每次重新连接都要这样配置，我没有试过不清楚；有线网好像也没有比无线网快多少，但应该会稳定一些。]]></content>
       <tags>
-        <tag>网络</tag>
         <tag>配置</tag>
+        <tag>网络</tag>
       </tags>
   </entry>
   <entry>
@@ -974,8 +985,8 @@
     <url>%2F2018%2F07%2F29%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2Fssh%E5%BF%AB%E9%80%9F%E7%99%BB%E5%BD%95%E9%85%8D%E7%BD%AE%2F</url>
     <content type="text"><![CDATA[Motivation分配了服务器之后，每次要ssh进入都很麻烦：ssh user_name@ip_address 然后还要输入密码。 特别是如果分配了多个服务器，那有时候还容易忘记ip地址。因此如果能够一条命令就进入服务器能够减少麻烦。主要有三点： 创建rsa key 上传public key到服务器 设置alias 配置创建rsa key在终端输入命令： 1ssh-keygen -t rsa 当然如果以前有创建过的可以不用。 结果： 上传public key到服务器使用命令：1ssh-copy-id -i ~/.ssh/id_rsa.pub user@127.0.0.1 输入密码即可 结果： 设置alias完成以上步骤就可以不输入密码登录，但还是需要输入ip地址和用户名，为了更简化操作，给命令起个别名。需要配置 .bash_profile文件。输入命令: 1vim ~/.bash_profile 在文件后面添加以下文字： 123# alias alias ssh×××=&quot;ssh user_name@ip_address&quot;alias ssh×××=&quot;ssh user_name@ip_address&quot; 其中 ×××是你自己起的名字，可以是服务器的名字，user_name和ip_address是自己服务器的用户名和地址。保存更改退出。 然后还要使其生效: 1source ~/.bash_profile 这样，输入别名，就可以直接登录了： 参考https://www.jianshu.com/p/66d658c7cb9e]]></content>
       <tags>
-        <tag>配置</tag>
         <tag>ssh</tag>
+        <tag>配置</tag>
       </tags>
   </entry>
   <entry>
@@ -1019,9 +1030,9 @@
     <url>%2F2018%2F07%2F23%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2F%E5%AE%89%E8%A3%85conda%E9%94%99%E8%AF%AF%2F</url>
     <content type="text"><![CDATA[在服务器上安装conda的时候，一开始使用了pip安装pip install conda在安装好conda之后想要使用conda命令，出现： ERROR: The install method you used for conda—probably either pip install conda or easy_install conda—is not compatible with using conda as an application. If your intention is to install conda as a standalone application, currently supported install methods include the Anaconda installer and the miniconda installer. You can download the miniconda installer from https://conda.io/miniconda.html. 然后到官网下载.sh文件并bash安装，仍然没有解决该问题；接着尝试pip uninstall conda，出现 最后在查阅了网上之后，使用 which conda找到conda的地址，并删除rm ××× 最后重新bash安装即可。]]></content>
       <tags>
+        <tag>遇到的问题</tag>
         <tag>杂七杂八</tag>
         <tag>conda</tag>
-        <tag>遇到的问题</tag>
       </tags>
   </entry>
 </search>
