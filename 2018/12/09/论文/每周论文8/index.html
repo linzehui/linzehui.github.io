@@ -119,7 +119,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15443230115907.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15443230641691.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15443232642402.jpg">
-<meta property="og:updated_time" content="2018-12-09T11:03:59.515Z">
+<meta property="og:updated_time" content="2018-12-16T03:08:16.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文8">
 <meta name="twitter:description" content="1️⃣[DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding]提出了两种attention机制，即 multi-dimentional attention和directional self-attention，在此基础上提出有向自注意力网络（directional self-attenti">
@@ -365,8 +365,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-09T19:03:59+08:00">
-                2018-12-09
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-16T11:08:16+08:00">
+                2018-12-16
               </time>
             
           </span>
@@ -409,7 +409,7 @@
 <p>因此x在交互完有：<br><img src="/images/15443242733208.jpg" width="35%" height="50%"></p>
 <p>②source2token<br><img src="/images/15443243090328.jpg" width="40%" height="50%"></p>
 <p>也即$x_i$没有和其他元素有交互。<br>可用作获得sentence encoding：<br><img src="/images/15443243968731.jpg" width="20%" height="50%"></p>
-<h3 id="Directional-Self-Attention"><a href="#Directional-Self-Attention" class="headerlink" title="Directional Self-Attention"></a>Directional Self-Attention</h3><p>使用mask达到有向性这一目的。<br>首先将x过一层获得新的h表示：<br><img src="/images/15443244421489.jpg" width="27%" height="50%"></p>
+<h3 id="Directional-Self-Attention"><a href="#Directional-Self-Attention" class="headerlink" title="Directional Self-Attention"></a>Directional Self-Attention</h3><p>使用mask达到有向性这一目的：<strong>通过mask矩阵将位置/方向编码进attention，解决时序丢失问题</strong>。<br>首先将x过一层获得新的h表示：<br><img src="/images/15443244421489.jpg" width="27%" height="50%"></p>
 <p>接着使用token2token求attention，这里为了减少参数作了一定改动，将W换成c，tanh替换σ。<br><img src="/images/15443245099821.jpg" width="53%" height="50%"></p>
 <p>$\textbf{1}$是全1的向量。M就是mask矩阵，代表i与j是否连通，Mask矩阵有：<br><img src="/images/15443248745747.jpg" width="28%" height="50%"></p>
 <p><img src="/images/15443248908199.jpg" width="31%" height="50%"></p>
@@ -595,7 +595,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">106</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -608,7 +608,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">124</span>
+                  <span class="site-state-item-count">126</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
