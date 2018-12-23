@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="1️⃣[Pytorch]在0.41的pytorch中，bernoulli的速度会比随机sample的速度慢很多；在1.0中修复了该bug，但速度上还是随机sample快一点点。 1234567# Pytorch0.41Bernoulli  0.430371046066sample  0.24411702156# Pytorch1.0Bernoulli  0.256921529sample  0.2">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-16T03:17:23.625Z">
+<meta property="og:updated_time" content="2018-12-18T10:18:09.454Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周碎片知识15">
 <meta name="twitter:description" content="1️⃣[Pytorch]在0.41的pytorch中，bernoulli的速度会比随机sample的速度慢很多；在1.0中修复了该bug，但速度上还是随机sample快一点点。 1234567# Pytorch0.41Bernoulli  0.430371046066sample  0.24411702156# Pytorch1.0Bernoulli  0.256921529sample  0.2">
@@ -332,8 +332,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-16T11:17:23+08:00">
-                2018-12-16
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-18T18:18:09+08:00">
+                2018-12-18
               </time>
             
           </span>
@@ -369,6 +369,7 @@
         <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>在0.41的pytorch中，bernoulli的速度会比随机sample的速度慢很多；<br>在1.0中修复了该bug，但速度上还是随机sample快一点点。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Pytorch0.41</span><br><span class="line">Bernoulli  0.430371046066</span><br><span class="line">sample  0.24411702156</span><br><span class="line"></span><br><span class="line"># Pytorch1.0</span><br><span class="line">Bernoulli  0.256921529</span><br><span class="line">sample  0.25317035184</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以下二者等价</span></span><br><span class="line">mask = Bernoulli(gamma).sample(x.size()) <span class="comment"># slow</span></span><br><span class="line">mask = (torch.rand_like(x)&lt;gamma).float() <span class="comment"># faster</span></span><br></pre></td></tr></table></figure>
+<p>Reference:<br><a href="https://github.com/pytorch/pytorch/issues/6940" target="_blank" rel="noopener">https://github.com/pytorch/pytorch/issues/6940</a></p>
 
       
     </div>
@@ -499,7 +500,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">106</span>
+                  <span class="site-state-item-count">110</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -512,7 +513,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">126</span>
+                  <span class="site-state-item-count">129</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
