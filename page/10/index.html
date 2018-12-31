@@ -286,6 +286,436 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/12/碎片知识/每周碎片知识3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/12/碎片知识/每周碎片知识3/" itemprop="url">每周碎片知识3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-12T10:13:37+08:00">
+                2018-08-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:16+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1️⃣[Python]<br>在服务器上跑代码时，如 <code>python project/folder1/a.py</code>，如果a.py引用了一个自定义的模块但又不在folder1内，此时interpreter就会报错，提示找不到该模块。这是因为解释器默认只会在同一个folder下查找。解决方案是在运行前显式添加查找范围。如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PYTHONPATH=/home/zhlin/bilm-tf:<span class="variable">$PYTHONPATH</span></span><br></pre></td></tr></table></figure></p>
+<p>那么python解释器就会到该目录下去找。</p>
+<hr>
+<p>2️⃣[度量标准]<br><img src="/images/2018-08-12-15340420442670.jpg" alt=""></p>
+<ul>
+<li>准确率(accuracy):  $ACC=\frac{TP+TN}{TP+TN+FP+FN}$<br> 衡量的是分类器预测准确的比例</li>
+<li>召回率(recall): $Recall=\frac{TP}{TP+FN}$<br>  正例中被分对的比例，衡量了分类器对正例的识别能力。</li>
+<li>精确率(Precision): $P=\frac{TP}{TP+FP}$<br>度量了被分为正例的示例中实际为正例的比例。</li>
+<li>F-Measure: $F=\frac{(\alpha^2 +1)P*R}{\alpha^2 (P+R)}$<br>  其中P是Precision,R是Recall。综合考量了两种度量。<br>  当$\alpha=1$时，称为F1值 $F1=\frac{2PR}{P+R}$</li>
+</ul>
+<hr>
+<p>3️⃣[调参技巧]<br>在google发布的一份关于text-classification的<a href="https://developers.google.com/machine-learning/guides/text-classification/" target="_blank" rel="noopener">guide</a>中，提到了几个调参的trick。</p>
+<ol>
+<li>在feature selection步骤中，卡方检验chi2和方差分析的F值 f_classif的表现相当，在大约选择20k的feature时，准确率达到顶峰，当feature越多，效果并没有提升甚至会下降。<br><img src="/images/2018-08-12-15340434326365.jpg" width="90%" height="50%"></li>
+<li>在文本分类中，似乎使用normalization并没有多少用处，建议跳过。<blockquote>
+<p>Normalization converts all feature/sample values to small and similar values. This simplifies gradient descent convergence in learning algorithms. From what we have seen, normalization during data preprocessing does not seem to add much value in text classification problems; we recommend skipping this step.</p>
+</blockquote>
+</li>
+</ol>
+<p>实际上我也测试过，发现确实normalization对于准确率的提高没什么帮助，甚至还有一点下降。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/12/诗词&句/每周诗词4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/12/诗词&句/每周诗词4/" itemprop="url">每周诗词4</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-12T09:51:00+08:00">
+                2018-08-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-12T10:09:54+08:00">
+                2018-08-12
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1️⃣</p>
+<h3 id="灞上秋居"><a href="#灞上秋居" class="headerlink" title="灞上秋居"></a>灞上秋居</h3><p>[唐] 马戴<br>灞原风雨定，晚见雁行频。<br>落叶他乡树，寒灯独夜人。<br>空园白露滴，孤壁野僧邻。<br><strong>寄卧郊扉久，何年致此身。</strong></p>
+<p><a href="http://m.xichuangzhu.com/work/57b8a4080a2b58005c9108d9" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b8a4080a2b58005c9108d9</a></p>
+<hr>
+<p>2️⃣</p>
+<h3 id="唐多令"><a href="#唐多令" class="headerlink" title="唐多令"></a>唐多令</h3><p>[宋] 刘过<br>芦叶满汀洲，寒沙带浅流。二十年重过南楼。柳下系船犹未稳，能几日，又中秋。<br>黄鹤断矶头，故人今在否？旧江山浑是新愁。<strong>欲买桂花同载酒，终不似、少年游。</strong></p>
+<p><a href="http://m.xichuangzhu.com/work/57b922e7c4c9710055904842" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b922e7c4c9710055904842</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/10/杂七杂八/Vim常用快捷键/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/10/杂七杂八/Vim常用快捷键/" itemprop="url">Vim常用快捷键</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-10T19:50:13+08:00">
+                2018-08-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-18T19:58:59+08:00">
+                2018-08-18
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在服务器经常要用到Vim，因此记录常用的快捷键并熟悉之。</p>
+<h3 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h3><p>:q 退出<br>:wq 写入并退出<br>:q! 退出并忽略所有更改<br>:e! 放弃修改并打开原来的文件</p>
+<h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>i 在当前位置前插入<br>a 在当前位置后插入</p>
+<h3 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h3><p>:u 撤销<br>:U 撤销整行操作<br>Ctrl+r 重做</p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>:md 删除第m行<br>nd 删除当前行开始的n行(一共n+1行)<br>dd 删除当前行<br>D 删除当前字符至行尾<br>:m,nd 删除从m到n行的内容，如: <code>:100,10000d</code><br>:m,$d 删除m行及以后所有的行<br>:10d</p>
+<h3 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h3><p>:n 跳转到行号  如， :100<br>gg 跳到行首<br>G(shift+g)移动到文件尾</p>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>/text 搜索text，n搜索下一个，N搜索上一个<br>?text 反向查找<br>:set ignorecase 忽略大小写查找<br>:set noignorecase 不忽略大小写查找<br>*或# 对光标处的单词搜索</p>
+<h3 id="复制粘贴"><a href="#复制粘贴" class="headerlink" title="复制粘贴"></a>复制粘贴</h3><p>v 从当前位置开始，光标经过的地方被选中，再按一下v结束</p>
+<h3 id="环境设置"><a href="#环境设置" class="headerlink" title="环境设置"></a>环境设置</h3><p>:set nu 显示行号<br>:set nonu 隐藏行号<br>:set hlsearch 设置搜索结果高亮</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://www.cnblogs.com/wangrx/p/5907013.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangrx/p/5907013.html</a><br><a href="https://www.cnblogs.com/yangjig/p/6014198.html" target="_blank" rel="noopener">https://www.cnblogs.com/yangjig/p/6014198.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/10/杂七杂八/Pycharm常用技巧/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1353,484 +1783,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/诗词&句/每周诗词3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/05/诗词&句/每周诗词3/" itemprop="url">每周诗词3</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T10:52:00+08:00">
-                2018-08-05
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-05T14:26:01+08:00">
-                2018-08-05
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本周背的都是比较简单的。</p>
-<p>1️⃣</p>
-<h3 id="把酒问月"><a href="#把酒问月" class="headerlink" title="把酒问月"></a>把酒问月</h3><p>[唐] 李白<br>青天有月来几时？我今停杯一问之。<br>人攀明月不可得，月行却与人相随。<br>皎如飞镜临丹阙，绿烟灭尽清辉发。<br>但见宵从海上来，宁知晓向云间没。<br>白兔捣药秋复春，嫦娥孤栖与谁邻？<br><strong>今人不见古时月，今月曾经照古人。<br>古人今人若流水，共看明月皆如此。</strong><br><strong>唯愿当歌对酒时，月光长照金樽里。</strong></p>
-<p><a href="http://m.xichuangzhu.com/work/57b8f6f4165abd0054bf8c13" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b8f6f4165abd0054bf8c13</a></p>
-<hr>
-<p>2️⃣</p>
-<h3 id="金缕衣"><a href="#金缕衣" class="headerlink" title="金缕衣"></a>金缕衣</h3><p>[唐] 杜秋娘<br>劝君莫惜金缕衣，劝君惜取少年时。<br><strong>花开堪折直须折，莫待无花空折枝。</strong></p>
-<p><a href="http://m.xichuangzhu.com/work/57b92bdca633bd00665eb99e" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b92bdca633bd00665eb99e</a></p>
-<hr>
-<p>3️⃣</p>
-<h3 id="北青萝"><a href="#北青萝" class="headerlink" title="北青萝"></a>北青萝</h3><p>[唐] 李商隐<br>残阳西入崦，茅屋访孤僧。<br>落叶人何在，寒云路几层。<br>独敲初夜磬，闲倚一枝藤。<br><strong>世界微尘里，吾宁爱与憎。</strong></p>
-<p>崦（yān）：即“崦嵫（zī）”，山名，在甘肃。古时常用来指太阳落山的地方。<br><strong>磬（qìng）</strong>：古代打击乐器，形状像曲尺，用玉、石制成，可悬挂。</p>
-<p><a href="http://m.xichuangzhu.com/work/57b8ee240a2b58005c91c99e" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b8ee240a2b58005c91c99e</a></p>
-<hr>
-<p>4️⃣</p>
-<h3 id="夏日绝句"><a href="#夏日绝句" class="headerlink" title="夏日绝句"></a>夏日绝句</h3><p>[宋] 李清照<br>生当作人杰，死亦为鬼雄。<br><strong>至今思项羽，不肯过江东。</strong></p>
-<p><a href="http://m.xichuangzhu.com/work/57b911dac4c97100558fb30e" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b911dac4c97100558fb30e</a></p>
-<hr>
-<p>5️⃣</p>
-<h3 id="雨霖铃"><a href="#雨霖铃" class="headerlink" title="雨霖铃"></a>雨霖铃</h3><p>[宋] 柳永<br>寒蝉凄切，对长亭晚，骤雨初歇。都门帐饮无绪，留恋处，兰舟催发。执手相看泪眼，竟无语凝噎。念去去，千里烟波，暮霭沉沉楚天阔。<br><strong>多情自古伤离别</strong>，更那堪、冷落清秋节。今宵酒醒何处？杨柳岸，晓风残月。此去经年，应是良辰好景虚设。<strong>便纵有千种风情，更与何人说</strong>？</p>
-<p><a href="http://m.xichuangzhu.com/work/57ad742f5bbb500062bc7c9c" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57ad742f5bbb500062bc7c9c</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/03/碎片知识/关于Pytorch中grad的理解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/03/碎片知识/关于Pytorch中grad的理解/" itemprop="url">关于Pytorch中grad的理解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-03T19:44:20+08:00">
-                2018-08-03
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-03T19:56:51+08:00">
-                2018-08-03
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>事情起源于我写了一个CNN用于文本分类，但loss一直没降，因此我尝试<code>print(loss.grad)</code>的grad，发现神奇的是loss grad显示为None，接着尝试<code>print(y_pred.grad)</code>，同样是None，但再print loss和y_pred的requires_grad发现是正常的True。</p>
-<p>在查阅了资料，以及问了学长之后发现原来并不是bug，而是因为，Pytorch默认不会保存中间节点(intermediate variable)的grad，此举是为了节省内存。</p>
-<blockquote>
-<p>By default, gradients are only retained for leaf variables. non-leaf variables’ gradients are not retained to be inspected later. This was done by design, to save memory.</p>
-</blockquote>
-<p><a href="https://discuss.pytorch.org/t/why-cant-i-see-grad-of-an-intermediate-variable/94" target="_blank" rel="noopener">https://discuss.pytorch.org/t/why-cant-i-see-grad-of-an-intermediate-variable/94</a></p>
-<p>实际上可以通过retain_grad()或者hook来查看中间节点的grad。</p>
-<p>我后面尝试print了叶子节点，如 <code>print(CNN_model.fc.weight.grad)</code>，最终获得了正确的grad。</p>
-<p>ps：所谓中间节点，是<strong>由其他节点计算所得</strong>的tensor，而叶子节点则是<strong>自己定义</strong>出来的。</p>
-<p>最后我发现，原来loss一直没降的原因是因为我定义的CNN过于复杂，并且数据集偏小，无法快速收敛导致的。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/03/杂七杂八/Linux常用命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/03/杂七杂八/Linux常用命令/" itemprop="url">Linux常用命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-03T13:48:13+08:00">
-                2018-08-03
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:23+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><p>记录自己常用的命令。</p>
-<p>1️⃣ls：显式当前目录下的文件和目录<br>    -a 包括隐藏文件<br>    -h 将文件的容量以易读方式列出（配合-s使用）<br>    -s 以块数形式显示每个文件分配的尺寸<br>    -l 以较长格式列出信息，可以直接写成 <code>ll</code><br><img src="/images/2018-08-10-15339070264416.jpg" width="70%" height="50%"></p>
-<hr>
-<p>2️⃣cd 到达指定地址</p>
-<hr>
-<p>3️⃣kill 杀死程序<br>    -l 信息编号。<strong>当l=9时，无条件终止，其他信号可能忽略</strong><br>    killall -u <user_name> 杀死该用户全部进程</user_name></p>
-<p><img src="/images/2018-08-03-15332830170623.jpg" width="50%" height="50%"></p>
-<hr>
-<p>4️⃣ps 报告当前系统的进程状态<br>    -a 所有<br>    -p 指定程序<br>    -u 指定用户<br>    -x 列出该用户的进程的详细信息(我的理解应该是)<br>    如：<br><img src="/images/2018-08-10-15339036207642.jpg" width="70%" height="50%"></p>
-<hr>
-<p>5️⃣htop 比top更优，交互更好，同时可以直观看到资源占用情况<br>基本命令与top一致<br><img src="/images/2018-08-04-15333484387393.jpg" width="70%" height="50%"></p>
-<hr>
-<p>6️⃣top：动态查看系统运行状态<br>    -u 指定用户名<br>    -p 指定进程</p>
-<p>7️⃣nvidia-smi 查看显卡状态<br>watch nvidia-smi 实时查看显卡状态，定时刷新</p>
-<hr>
-<p>8️⃣tail 显示指定文件的末尾若干行<br>    -f 显示文件最新追加的内容<br>    -n 显示文件尾部n行内容<br>    -c 显示文件尾部最后c个字符</p>
-<p>如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tail file 显示最后10行</span><br><span class="line">tail -n +20 file 显示从第20行至末尾</span><br><span class="line">tail -c 10 file 显示文件file的最后10个字符</span><br></pre></td></tr></table></figure>
-<pre><code>-------
-</code></pre><p>9️⃣echo 用于打印指定的字符串<br><img src="/images/2018-08-04-15333497266470.jpg" width="50%" height="50%"></p>
-<hr>
-<p>🔟which 用于查找并显示给定命令的绝对路径，which指令会在环境变量$PATH设置的目录里查找符合条件的文件。使用which命令，可以看到某个系统命令是否存在，以及执行的是哪个位置的命令。如：</p>
-<p><img src="/images/2018-08-04-15333500837235.jpg" width="50%" height="50%"></p>
-<hr>
-<p>1️⃣1️⃣nohup 将程序以忽略挂起信号的方式运行，经常用于在服务器跑代码<br>如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python xxx.py &gt;output.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure></p>
-<p>即，将输出重定向到output.txt ；最后一个<code>&amp;</code>表示后台挂起</p>
-<hr>
-<p>1️⃣2️⃣cp 复制文件   cp [文件] [目标文件夹]<br>    -r 递归复制，用于目录的复制</p>
-<hr>
-<p>1️⃣3️⃣mv 移动文件、目录或更名  mv [文件/文件夹] [文件夹]<br>    -f 强制，当目标文件存在，直接覆盖<br>    -i 会询问</p>
-<hr>
-<p>1️⃣4️⃣rm 删除文件或目录<br>    -f 强制删除<br>    -r 递归删除，用于目录删除</p>
-<hr>
-<p>1️⃣5️⃣file 用于判断文件的基本数据<br>如：</p>
-<p><img src="/images/2018-08-05-15334547949248.jpg" width="80%" height="50%"></p>
-<hr>
-<p>1️⃣6️⃣tar 对文件打包/压缩<br>    -t 查看打包文件的内容含有哪些文件名<br>    -x 解压缩<br>    -c 新建打包文件<br>    -C 指定压缩/解压目录<br>    -v 解压/压缩过程中将处理的文件名显示出来<br>常用的：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">压缩：tar -jcv -f filename.tar.bz2 要被处理的文件或目录名称</span><br><span class="line">查询：tar -jtv -f filename.tar.bz2</span><br><span class="line">解压：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录</span><br></pre></td></tr></table></figure>
-<hr>
-<p>1️⃣7️⃣wc word count 统计文件内容信息，如行数、字符数<br>    -l 显示文件行数<br>    -c 显示字节数<br>    -m 显示字符数<br>    -w 显示字数  字被定义为由空白、跳格、换行字符分隔的字符串<br>    -L 显示最长行的长度<br>    不加参数，所有的都显示，依次是行数、单词数、字节数、文件名</p>
-<hr>
-<p>1️⃣8️⃣df 显示磁盘相关信息<br>    -h 以可读性较高的方式显示信息</p>
-<hr>
-<p>1️⃣9️⃣scp 服务器之间的文件复制<br>    如:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r /test1 zhlin@123.12.1.12:/home/zhlin</span><br></pre></td></tr></table></figure>
-<h3 id="✨快捷键"><a href="#✨快捷键" class="headerlink" title="✨快捷键"></a>✨快捷键</h3><p>Ctrl+a 跳到行首<br>Ctrl+c 退出当前进程<br>Ctrl+e 跳到页尾<br>Ctrl+k 删除当前光标后面的文字<br>Ctrl+l 清屏，等价于clear<br>Ctrl+r 搜索之前打过的命令<br>Ctrl+u 删除当前光标前面的文字<br>✨Ctrl+左右键 单词之间跳转 在Mac上可以使用option+左右键<br>Ctrl+y 进行恢复删除<br>Ctrl+z 将当前进程转到后台，使用fg恢复</p>
-<hr>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://blog.csdn.net/leo_618/article/details/53003111" target="_blank" rel="noopener">https://blog.csdn.net/leo_618/article/details/53003111</a></p>
-<p>———-持续更新———-</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1880,7 +1837,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">113</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1893,7 +1850,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">129</span>
+                  <span class="site-state-item-count">130</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
