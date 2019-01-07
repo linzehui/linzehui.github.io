@@ -286,6 +286,288 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/14/机器学习与深度学习算法知识/Lecture 18: Deep Reinforcement Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/14/机器学习与深度学习算法知识/Lecture 18: Deep Reinforcement Learning/" itemprop="url">Lecture 18:Deep Reinforcement Learning</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-14T10:17:24+08:00">
+                2018-10-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-14T10:59:14+08:00">
+                2018-10-14
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>记号： $a$是action，$s$即外部状态state，$\pi_{\theta}(s)$也即从$s$映射到$a$的函数；$r$是reward，每采取一个动作，会有一个reward，则总的reward为</p>
+<script type="math/tex; mode=display">R_\theta = \sum_{t=1}^{T} r_t</script><p>我们使用神经网络来拟合$\pi$，一个eposide $\tau$是一个流程下来的的所有state、action和reward的集合。</p>
+<script type="math/tex; mode=display">\tau = \{s_1,a_1,r_1,s_2,a_2,r_2,...,s_T,a_T,r_T \}</script><p>如果我们使用相同的actor运行n次，则每个$\tau$会有一定的概率被采样到，采样概率记为$P(\tau|\theta)$，则我们可以通过采样的方式来对期望reward进行估计：</p>
+<script type="math/tex; mode=display">\overline{R}_\theta = \sum_\tau R(\tau) P(\tau|\theta) ≈ \frac{1}{N} \sum_{n=1}^{N} R(\tau^n)</script><p>那么我们接下来的<strong>目标</strong>就是最大化期望reward，其中期望reward是：</p>
+<script type="math/tex; mode=display">\overline{R}_\theta = \sum_\tau R(\tau) P(\tau|\theta)</script><p>我们同样使用梯度上升：其中与$θ$相关的是$P$，则可以写成：</p>
+<script type="math/tex; mode=display">\nabla \overline{R}_\theta = \sum_\tau R(\tau) \nabla P(\tau|\theta)= \sum_\tau R(\tau) P(\tau|\theta) \frac{\nabla P(\tau|\theta)}{P(\tau|\theta)}</script><p>由于$\dfrac {d\log \left( f\left( x\right) \right) }{dx}=\dfrac {1}{f\left( x\right) }\dfrac {df(x)}{dx}$，则前式可写成：</p>
+<script type="math/tex; mode=display">\nabla \overline{R}_\theta = \sum_\tau R(\tau) P(\tau|\theta) \nabla log P(\tau | \theta) ≈ \frac{1}{N} \sum_{n=1}^{N} R(\tau^n) log P(\tau ^n| \theta)</script><p>如何求梯度？<br>由于：</p>
+<script type="math/tex; mode=display">P(\tau | \theta)=p(s_1)p(a_1|s_1,\theta)p(r_1,s_2|s_1,a_1)p(a_2|s_2,\theta)p(r_2,s_3|s_2,a_2)...
+\\=p(s_1)\prod_{t=1}^{T}p(a_t|s_t,\theta)p(r_t , s_{t+1}| s_t,a_t)</script><p>实际上，其中与梯度相关的只有中间项$p(a_t|s_t,\theta)$，该项也即$π$函数，从state到action的映射。<br>取log并求导，有：</p>
+<script type="math/tex; mode=display">\nabla log P(\tau | \theta)= \sum_{t=1}^{T} \nabla log p(a_t|s_t,\theta)</script><p>代回，因此最终$\overline{R}_\theta$的梯度为：</p>
+<script type="math/tex; mode=display">\nabla \overline{R}_\theta = \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_n} R(\tau^n) \nabla log p(a_{t}^n | s_t^n,\theta)</script><p>注意到该式子告诉我们，应考虑整体的reward而不应该只考虑每一步的reward；并且取log的原因可以理解成是对action取归一化，因为：</p>
+<script type="math/tex; mode=display">\frac{\nabla p(a_t^n | s_t^n,\theta)}{p(a_t^n | s_t^n,\theta)}</script><p>也就是说对于那些出现次数较多的action，要衡量他们对reward的真正影响，应当对他们归一化。</p>
+<p>为了让那些出现可能性较低的action不会因为没被sample到而在更新后被降低他们的概率，可以添加一个baseline，只有超过$b$的reward才会增加他们出现的概率。</p>
+<script type="math/tex; mode=display">\nabla \overline{R}_\theta = \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_n} (R(\tau^n)-b) \nabla log p(a_{t}^n | s_t^n,\theta)</script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/14/机器学习与深度学习算法知识/Lecture 17: Ensemble/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/14/机器学习与深度学习算法知识/Lecture 17: Ensemble/" itemprop="url">Lecture 17:Ensemble</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-14T10:09:24+08:00">
+                2018-10-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:29+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h2><p>对于复杂模型，往往variance会大，通过对多个模型的平均，能够减小variance：<br><img src="/images/2018-10-14-15394832736339.jpg" width="50%" height="50%"></p>
+<p>bagging的思想是多次有放回地采样N’个点（通常N’=N），然后对采样的几个数据集分别训练一个模型<br><img src="/images/2018-10-14-15394833007835.jpg" width="50%" height="50%"></p>
+<p>测试的时候再对几个模型进行平均或投票<br><img src="/images/2018-10-14-15394833255306.jpg" width="50%" height="50%"></p>
+<h2 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h2><p>基本思想是对几个弱分类器线性加权，得到强分类器。分类器按先后顺序训练，每次训练完，对新模型分类错误的数据进行调高权重，而正确的数据则降低权重。</p>
+<p>可以保证：只要分类器的错误率小于50%，在boosting后能够有100%的正确率（在训练集）。</p>
+<p>证明过程略。</p>
+<h2 id="Ensemble-Stacking"><a href="#Ensemble-Stacking" class="headerlink" title="Ensemble: Stacking"></a>Ensemble: Stacking</h2><p>基本思想：使用训练数据训练多个初级分类器，将初级分类器的输出作为次级分类器的输入，获得最终的输出。我们应当使用不同的训练数据来训练次级分类器<br><img src="/images/2018-10-14-15394833971028.jpg" width="50%" height="50%"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/12/碎片知识/浅谈mask矩阵/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1508,316 +1790,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 12: Unsupervised Learning: Neighbor Embedding/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 12: Unsupervised Learning: Neighbor Embedding/" itemprop="url">Lecture 12:Unsupervised Learning:Neighbor Embedding</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T11:17:24+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:34+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Locally-Linear-Embedding-LLE"><a href="#Locally-Linear-Embedding-LLE" class="headerlink" title="Locally Linear Embedding (LLE)"></a>Locally Linear Embedding (LLE)</h3><p>一种降维方法<br>思想：假设每个点可以由其周围的点来表示<br><img src="/images/2018-10-07-15388822769215.jpg" width="25%" height="50%"></p>
-<p>我们需要找到这样的$w_{ij}$，使得：</p>
-<script type="math/tex; mode=display">∑_i‖x^i−∑_j w_{ij} x^j ‖_2</script><p>这样在降维的时候，我们仍然保持x之间的这样的关系:<br><img src="/images/2018-10-07-15388823792351.jpg" width="50%" height="50%"></p>
-<h3 id="Laplacian-Eigenmaps"><a href="#Laplacian-Eigenmaps" class="headerlink" title="Laplacian Eigenmaps"></a>Laplacian Eigenmaps</h3><p>一种降维方法<br>基本思想：如果$x^1$与$x^2$在高维空间中相近，则降维后也应该接近：</p>
-<script type="math/tex; mode=display">S=1/2 ∑_{i,j} w_{i,j} (z^i−z^j )^2</script><p>其中：<br><img src="/images/2018-10-07-15388824984809.jpg" width="30%" height="50%"></p>
-<p>如果将z全设为0，显然S最小，因此我们需要给z一个限制：z应当充满空间，也即假如z是M维，那么$\{z^1,z^2…,z^N\}$的秩应该等于M</p>
-<h3 id="T-distributed-Stochastic-Neighbor-Embedding-t-SNE"><a href="#T-distributed-Stochastic-Neighbor-Embedding-t-SNE" class="headerlink" title="T-distributed Stochastic Neighbor Embedding (t-SNE)"></a>T-distributed Stochastic Neighbor Embedding (t-SNE)</h3><p>也是一种降维方法<br>前面提到的方法有一个问题：同一类的点确实聚在一起，但不同类的点并没有尽量分开<br><img src="/images/2018-10-07-15388826477983.jpg" width="50%" height="50%"></p>
-<p>t-SNE的主要思想：将数据点映射到概率分布，我们希望降维前和降维后，数据分布的概率应当尽可能一致。<br>t-SNE构建一个高维对象之间的概率分布，使得相似的对象有更高的概率被选择，而不相似的对象有较低的概率被选择。t-SNE在低维空间里在构建这些点的概率分布，使得这两个概率分布之间尽可能的相似。</p>
-<p>如何做？<br>在高维空间中，我们定义：</p>
-<script type="math/tex; mode=display">P(x^j |x^i )=\frac{S(x^i,x^j )}{∑_{k≠i}S(x^i,x^k )}</script><p>其中S表示i与j之间的相似度。</p>
-<p>在低维空间中，同样有：</p>
-<script type="math/tex; mode=display">Q(z^j |z^i )=\frac{S′(z^i,z^j )}{∑_{k≠i}S′(z^i,z^k )}</script><p>使用KL散度去计算两个分布之间的差异：</p>
-<script type="math/tex; mode=display">L=∑_i KL(P(∗|x^i )||Q(∗|z^i )) =∑_i∑_j P(x^j |x^i )\frac{log P(x^j |x^i )}{Q(z^j |z^i )}</script><p>t-SNE中，高维空间和低维空间计算相似度的公式不大一样：</p>
-<script type="math/tex; mode=display">S(x^i,x^j )=exp(−‖x^i−x^j ‖_2 )</script><script type="math/tex; mode=display">S′(z^i,z^j )=\frac{1}{(1+‖z^i−z^j ‖_2)}</script><p>两个公式的图示：<br><img src="/images/2018-10-07-15388830652023.jpg" width="70%" height="50%"></p>
-<p>也即<strong>低维空间会拉长距离，使得距离远的点尽可能被拉开</strong>。</p>
-<p>t-SNE的问题在于：t-SNE无法对新的数据点进行降维。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 11: Unsupervised Learning: Linear Dimension Reduction/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 11: Unsupervised Learning: Linear Dimension Reduction/" itemprop="url">Lecture 11:Unsupervised Learning:Linear Dimension Reduction</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T10:38:24+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:34+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Clustering"><a href="#Clustering" class="headerlink" title="Clustering"></a>Clustering</h2><h3 id="K-means"><a href="#K-means" class="headerlink" title="K-means"></a>K-means</h3><p>算法步骤：<br><img src="/images/2018-10-07-15388800377875.jpg" width="70%" height="50%"></p>
-<p>迭代更新使得最后聚类中心收敛。但事先需要定好有多少类。</p>
-<h3 id="Hierarchical-Agglomerative-Clustering-HAC"><a href="#Hierarchical-Agglomerative-Clustering-HAC" class="headerlink" title="Hierarchical Agglomerative Clustering (HAC)"></a>Hierarchical Agglomerative Clustering (HAC)</h3><p>自下而上，每次选两个最近的聚为一类，直到所有的都分成一类<br>最后选择一个阈值划分，如蓝色绿色和红色的线<br><img src="/images/2018-10-07-15388801021791.jpg" width="50%" height="50%"></p>
-<h2 id="Dimension-Reduction"><a href="#Dimension-Reduction" class="headerlink" title="Dimension Reduction"></a>Dimension Reduction</h2><p>找到一个映射，使得x能够映射到低维z</p>
-<h3 id="Principle-Component-Analysis-PCA"><a href="#Principle-Component-Analysis-PCA" class="headerlink" title="Principle Component Analysis (PCA)"></a>Principle Component Analysis (PCA)</h3><p>目的是找到一个维度，使得投影得到的variance最大，也即最大程度保留数据的差异性。<br><img src="/images/2018-10-07-15388801830659.jpg" width="50%" height="50%"></p>
-<p>形式化可以写成（一维情形）：</p>
-<script type="math/tex; mode=display">Var(z_1 )=\frac{1}{N} ∑_{z_1}(z_1−\overline{z_1} )^2</script><p>其中：</p>
-<script type="math/tex; mode=display">‖w^1 ‖_2=1</script><script type="math/tex; mode=display">z_1=w^1 \cdot x</script><p>$\overline{z_1}$表示z的均值</p>
-<p>假如我们要投影到多维，其他维度也有同样的目标。其中每个维度之间都应该是相互正交的。<br><img src="/images/2018-10-07-15388804752506.jpg" width="20%" height="50%"></p>
-<h4 id="如何做？"><a href="#如何做？" class="headerlink" title="如何做？"></a>如何做？</h4><p>找到$ \frac{1}{N}∑(x−\overline{x} ) (x−\overline{x})^T$的前k个最大的特征值对应的特征向量，组合起来即是我们要找的$W$</p>
-<h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><p>—-Warning of Math—-<br>目的：$Var(z_1 )=\frac{1}{N} ∑_{z_1}(z_1−\overline{z_1} )^2 $<br>其中 $\overline{z_1} =\frac{1}{N} ∑{z_1} = \frac{1}{N} ∑ w^1 \cdot x=w^1\cdot \overline{x}$</p>
-<p>推导：<br><img src="/images/2018-10-07-15388811276042.jpg" width="35%" height="50%"><br>改变符号 $S=Cov(x)$</p>
-<p>利用拉格朗日乘数法，有：<br>$Sw^1=αw^1$<br>等式两边各左乘$(w^1)^T$，有：<br>$(w^1 )^T Sw^1=α(w^1 )^T w^1=α$</p>
-<p>也即，$α$是$S$的特征值，选择最大的特征值，就能够最大化我们的目标。</p>
-<p>同理，我们要找$w^2$，最大化$(w^2 )^T Sw^2$，其中有：<br>$(w^2 )^T w^2=1$<br>$(w^2 )^T w^1=0$ （与第一维正交）</p>
-<p>因此利用拉格朗日乘数法：</p>
-<script type="math/tex; mode=display">g(w^2 )= (w^2 )^T Sw^2−α((w^2 )^T w^2−1)−β((w^2 )^T w^1−0)</script><p>最终得到，w2对应第二大的特征值的特征向量。</p>
-<p>以此类推，其他维也同理。<br>—-End of Math—-</p>
-<h4 id="PCA的其他"><a href="#PCA的其他" class="headerlink" title="PCA的其他"></a>PCA的其他</h4><p>实际上最终得到的z，每一维之间的协方差都为0<br><img src="/images/2018-10-07-15388815546680.jpg" width="50%" height="50%"></p>
-<p>证明如下：<br><img src="/images/2018-10-07-15388815837458.jpg" width="50%" height="50%"></p>
-<p>PCA也可以用SVD来做：<br><img src="/images/2018-10-07-15388816250075.jpg" width="60%" height="50%"></p>
-<p>U中保存了K个特征向量。</p>
-<p>从另一种角度理解PCA，也可以认为PCA是一种autoencoder：<br><img src="/images/2018-10-07-15388816896369.jpg" width="50%" height="50%"></p>
-<h4 id="PCA的问题"><a href="#PCA的问题" class="headerlink" title="PCA的问题"></a>PCA的问题</h4><p>PCA是无监督学习，如果有标签，则无法按照类别来进行正确降维，如：<br><img src="/images/2018-10-07-15388817393283.jpg" width="30%" height="50%"></p>
-<p>第二就是PCA是线性变换，对于一些需要非线性变换的无能为力<br><img src="/images/2018-10-07-15388817566149.jpg" width="28%" height="50%"></p>
-<h3 id="Matrix-Factorization"><a href="#Matrix-Factorization" class="headerlink" title="Matrix Factorization"></a>Matrix Factorization</h3><p>定义：矩阵分解，就是将一个矩阵D分解为U和V的乘积，即对于一个特定的规模为m*n的矩阵D，估计出规模分别为m*k和n*k的矩阵U和V，使得$UV^T$的值尽可能逼近矩阵D。常用于推荐系统。</p>
-<p>思想：<br>假如有一个矩阵：<br><img src="/images/2018-10-07-15388819053983.jpg" width="60%" height="50%"></p>
-<p>假设横轴和纵轴每一维都有一个向量代表该维，矩阵的每个元素就是横轴和纵轴对应维的点积。我们的目的是尽可能减小：</p>
-<script type="math/tex; mode=display">L=\sum_{(i,j)} (r^i \cdot r^j -n_{ij})^2</script><p>其中$r_i$ $r_j$就是向量表示，$n_{ij}$就是矩阵的内容。</p>
-<p>可以使用SVD求解上式：<br><img src="/images/2018-10-07-15388820642382.jpg" width="50%" height="50%"></p>
-<p>实际上，考虑每一行或列本身的特性，我们对Loss进行扩展：</p>
-<script type="math/tex; mode=display">Minimizing \ \ L=\sum_{(i,j)} (r^i \cdot r^j +b_i+b_j-n_{ij})^2</script><p>使用SGD可以求解。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1872,7 +1844,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-count">115</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1885,7 +1857,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">130</span>
+                  <span class="site-state-item-count">135</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1922,7 +1894,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

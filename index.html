@@ -286,6 +286,288 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/01/06/代码相关/代码记录15/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/06/代码相关/代码记录15/" itemprop="url">代码片段记录15</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T10:18:30+08:00">
+                2019-01-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-06T10:24:16+08:00">
+                2019-01-06
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣-flatten-multi-dimentional-list"><a href="#1️⃣-flatten-multi-dimentional-list" class="headerlink" title="1️⃣[flatten multi-dimentional list]"></a>1️⃣[flatten multi-dimentional list]</h3><p>对多层嵌套的list进行展平。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flatten</span><span class="params">(nestedList)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">aux</span><span class="params">(listOrItem)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(listOrItem, list):</span><br><span class="line">            <span class="keyword">for</span> elem <span class="keyword">in</span> listOrItem:</span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> aux(elem):</span><br><span class="line">                    <span class="keyword">yield</span> item</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">yield</span> listOrItem</span><br><span class="line">    <span class="keyword">return</span> list(aux(nestedList))</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="2️⃣-sorted-index"><a href="#2️⃣-sorted-index" class="headerlink" title="2️⃣[sorted index]"></a>2️⃣[sorted index]</h3><p>使用内置方法获得排好序的index</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sorted_index=[i[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> sorted(enumerate(sent_length),</span><br><span class="line">                                    key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>],</span><br><span class="line">                                    reverse=self.reverse)]</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/01/06/论文/每周论文11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/06/论文/每周论文11/" itemprop="url">每周论文11</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T09:58:30+08:00">
+                2019-01-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-07T10:11:24+08:00">
+                2019-01-07
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1️⃣-Multi-Head-Attention-with-Disagreement-Regularization"><a href="#1️⃣-Multi-Head-Attention-with-Disagreement-Regularization" class="headerlink" title="1️⃣[Multi-Head Attention with Disagreement Regularization]"></a>1️⃣[Multi-Head Attention with Disagreement Regularization]</h2><p>EMNLP的短文。</p>
+<p>鼓励transformer中head与head之间的差异。</p>
+<p>加了三种正则化方法：<br>①on subspace<br><img src="/images/15467399912055.jpg" width="40%" height="50%"></p>
+<p>②on attention position<br><img src="/images/15467400218650.jpg" width="40%" height="50%"></p>
+<p>③on output<br><img src="/images/15467400417247.jpg" width="40%" height="50%"></p>
+<p>没什么亮点。</p>
+<hr>
+<h2 id="2️⃣-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overﬁtting"><a href="#2️⃣-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overﬁtting" class="headerlink" title="2️⃣[Dropout: A Simple Way to Prevent Neural Networks from Overﬁtting]"></a>2️⃣[Dropout: A Simple Way to Prevent Neural Networks from Overﬁtting]</h2><p>经典论文。<br>dropout方法很简单，但如何想到，其背后的intuition，以及一些现象很有启发意义。<br>仅罗列一些intuition/motivation以及现象：</p>
+<ol>
+<li>网络复杂关系学到很多噪声，导致overfitting</li>
+<li>最好的regularization方法是对所有的parameter setting的结果进行average。这就是贝叶斯方法， dropout是对该方法进行近似，论文也提到了model combination</li>
+<li>dropout能够减少unit之间复杂的co-adaptation，能够更鲁棒，也就是说，不需要依赖其他unit去纠正自己的错误。each hidden unit in a neural network trained with dropout must learn to work with a randomly chosen sample of other units. This should make each hidden unit more robust and drive it towards creating useful features on its own without relying on other hidden units to correct its mistakes</li>
+<li>dropout的特性：sparsity。标准的网络在训练过程中会固化其他unit的错误，导致复杂的co-adaptation，但这种复杂的adaptation会导致泛化性的降低，因为对于未见到的数据这种复杂的adaptation是没用的。因此dropout的网络中每个unit都要学会自己纠正自己的错误，因此每个unit能够独立学到数据的一部分特性。dropout会导致稀疏化，每次都只会有一小部分的activation高。使用dropout配合高的学习率比较好，因为dropout可能会导致gradient之间互相cancel，同时也可以使用高的momentum。</li>
+</ol>
+<p><img src="/images/15467404963033.jpg" width="80%" height="50%"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/31/碎片知识/关于Pytorch中index_copy_及其思考/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -915,8 +1197,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-23T10:28:45+08:00">
-                2018-12-23
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-06T10:19:35+08:00">
+                2019-01-06
               </time>
             
           </span>
@@ -1417,279 +1699,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/16/碎片知识/每周碎片知识15/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/16/碎片知识/每周碎片知识15/" itemprop="url">每周碎片知识15</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-16T10:55:14+08:00">
-                2018-12-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-18T18:18:09+08:00">
-                2018-12-18
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>在0.41的pytorch中，bernoulli的速度会比随机sample的速度慢很多；<br>在1.0中修复了该bug，但速度上还是随机sample快一点点。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Pytorch0.41</span><br><span class="line">Bernoulli  0.430371046066</span><br><span class="line">sample  0.24411702156</span><br><span class="line"></span><br><span class="line"># Pytorch1.0</span><br><span class="line">Bernoulli  0.256921529</span><br><span class="line">sample  0.25317035184</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以下二者等价</span></span><br><span class="line">mask = Bernoulli(gamma).sample(x.size()) <span class="comment"># slow</span></span><br><span class="line">mask = (torch.rand_like(x)&lt;gamma).float() <span class="comment"># faster</span></span><br></pre></td></tr></table></figure>
-<p>Reference:<br><a href="https://github.com/pytorch/pytorch/issues/6940" target="_blank" rel="noopener">https://github.com/pytorch/pytorch/issues/6940</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/16/论文/每周论文9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/16/论文/每周论文9/" itemprop="url">每周论文9</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-16T10:43:30+08:00">
-                2018-12-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-16T11:14:52+08:00">
-                2018-12-16
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1️⃣-Sentence-State-LSTM-for-Text-Representation"><a href="#1️⃣-Sentence-State-LSTM-for-Text-Representation" class="headerlink" title="1️⃣[Sentence-State LSTM for Text Representation]"></a>1️⃣[Sentence-State LSTM for Text Representation]</h2><p>提出一种新型的encode句子的方法。有点类似gather-distribute的想法。</p>
-<p><img src="/images/15449283844319.jpg" width="45%" height="50%"></p>
-<p>每个时间步t所有的h一起更新。更新方式是与其左右的点进行交互，同时与一个global representation进行交互。这样即考虑了local的信息也考虑了global的信息。每次更新都增加了信息交互，从3gram到5gram再到7gram…</p>
-<p>具体来说：<br>①如何求$h_i$<br><img src="/images/15449285619763.jpg" width="45%" height="50%"></p>
-<p>从公式可以看出，对于一个特定的$h_i$，同时考虑左右两点，以及global信息$g$，以及输入$x$。</p>
-<p>②如何求g<br><img src="/images/15449286595709.jpg" width="50%" height="50%"></p>
-<p>通过average同时考虑所有的词，同时考虑自己上一个状态。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1744,7 +1753,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-count">115</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1757,7 +1766,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">130</span>
+                  <span class="site-state-item-count">135</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1794,7 +1803,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
