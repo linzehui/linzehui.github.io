@@ -286,6 +286,139 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/16/代码相关/代码记录12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/16/代码相关/代码记录12/" itemprop="url">代码片段记录12</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-16T10:59:30+08:00">
+                2018-12-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-16T11:01:18+08:00">
+                2018-12-16
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣-CUDA-time"><a href="#1️⃣-CUDA-time" class="headerlink" title="1️⃣[CUDA time]"></a>1️⃣[CUDA time]</h3><p>正确测试代码在cuda运行时间。需要加上<code>torch.cuda.synchronize()</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">a = torch.randint(high=<span class="number">1000</span>, size=(<span class="number">20</span>, <span class="number">200</span>, <span class="number">256</span>)).double().cuda()</span><br><span class="line">b = torch.randint(high=<span class="number">1000</span>, size=(<span class="number">20</span>, <span class="number">200</span>, <span class="number">256</span>)).double().cuda()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">torch.cuda.synchronize()</span><br><span class="line">start = time.time()</span><br><span class="line"></span><br><span class="line">M = torch.bmm(a, b.transpose(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">torch.cuda.synchronize()</span><br><span class="line">end = time.time()</span><br><span class="line"></span><br><span class="line">print(<span class="string">"bmm"</span>, end - start)</span><br><span class="line">print(<span class="string">"max_mem"</span>, torch.cuda.max_memory_allocated())</span><br><span class="line"></span><br><span class="line">torch.cuda.synchronize()</span><br><span class="line">start = time.time()</span><br><span class="line"></span><br><span class="line">local_a = a.unsqueeze(<span class="number">2</span>)</span><br><span class="line">local_b = b.unsqueeze(<span class="number">1</span>)</span><br><span class="line">N = (local_a*local_b).sum(<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">torch.cuda.synchronize()</span><br><span class="line">end = time.time()</span><br><span class="line"></span><br><span class="line">print(<span class="string">"element-wise"</span>, end - start)</span><br><span class="line">print(<span class="string">"max_mem"</span>, torch.cuda.max_memory_allocated())</span><br><span class="line"></span><br><span class="line">print(<span class="string">"output difference (should be 0)"</span>, (N - M).abs().max())</span><br><span class="line">print(<span class="string">"In single precision this can fail because of the size of the tensors."</span>)</span><br><span class="line">print(<span class="string">"Using double should always work"</span>)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/16/碎片知识/每周碎片知识15/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1637,141 +1770,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/01/诗词&句/每周诗词16/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/01/诗词&句/每周诗词16/" itemprop="url">每周诗词16</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-01T23:08:14+08:00">
-                2018-12-01
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-01T23:08:49+08:00">
-                2018-12-01
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣菩萨蛮"><a href="#1️⃣菩萨蛮" class="headerlink" title="1️⃣菩萨蛮"></a>1️⃣菩萨蛮</h3><p>[五代十国] 李煜<br>人生愁恨何能免，销魂独我情何限！故国梦重归，觉来双泪垂。<br>髙楼谁与上？长记秋晴望。<strong>往事已成空，还如一梦中</strong>。</p>
-<p>觉(jue)来：醒来。</p>
-<hr>
-<h3 id="2️⃣南乡子-·-和杨元素，时移守密州"><a href="#2️⃣南乡子-·-和杨元素，时移守密州" class="headerlink" title="2️⃣南乡子 · 和杨元素，时移守密州"></a>2️⃣南乡子 · 和杨元素，时移守密州</h3><p>[宋] 苏轼<br>东武望馀杭，云海天涯两杳茫。<strong>何日功成名遂了，还乡，醉笑陪公三万场</strong>。<br><strong>不用诉离觞，痛饮从来别有肠</strong>。今夜送归灯火冷，河塘，堕泪羊公却姓杨。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1826,7 +1824,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">115</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1839,7 +1837,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">135</span>
+                  <span class="site-state-item-count">137</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

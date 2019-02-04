@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/2018-08-05-15334391029224.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/2018-08-05-15334392348665.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/2018-08-05-15334392595148.jpg">
-<meta property="og:updated_time" content="2018-11-19T03:21:19.000Z">
+<meta property="og:updated_time" content="2019-01-15T11:39:53.139Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何训练GloVe中文词向量">
 <meta name="twitter:description" content="准备语料准备好自己的语料，保存为txt，每行一个句子或一段话，注意要分好词。  准备源码从GitHub下载代码，https://github.com/stanfordnlp/GloVe将语料corpus.txt放入到Glove的主文件夹下。 修改bash打开demo.sh，修改相应的内容  因为demo默认是下载网上的语料来训练的，因此如果要训练自己的语料，需要注释掉    修改参数设置，将COR">
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:19+08:00">
-                2018-11-19
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-15T19:39:53+08:00">
+                2019-01-15
               </time>
             
           </span>
@@ -395,7 +395,7 @@
 <p><img src="/images/2018-08-05-15334392595148.jpg" width="70%" height="70%"></p>
 <p>注意，如果训练数据较大，则训练时间较长，那么建议使用nohup来运行程序</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup bash demo.sh &gt;output.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>坐等训练，最后会得到vectors.txt 以及其他的相应的文件。如果要用gensim的word2ve load进来，那么需要在vectors.txt的第一行加上vacob_size vector_size，第一个数指明一共有多少个向量，第二个数指明每个向量有多少维。</p>
+<p>坐等训练，最后会得到vectors.txt 以及其他的相应的文件。如果要用gensim的word2vec load进来，那么需要在vectors.txt的第一行加上vacob_size vector_size，第一个数指明一共有多少个向量，第二个数指明每个向量有多少维。</p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.cnblogs.com/echo-cheng/p/8561171.html" target="_blank" rel="noopener">https://www.cnblogs.com/echo-cheng/p/8561171.html</a></p>
 
       
@@ -527,7 +527,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">115</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -540,7 +540,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">135</span>
+                  <span class="site-state-item-count">137</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
