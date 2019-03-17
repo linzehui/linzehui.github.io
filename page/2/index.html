@@ -286,6 +286,302 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/29/碎片知识/每周碎片知识17/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/29/碎片知识/每周碎片知识17/" itemprop="url">每周碎片知识17</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-29T19:28:14+08:00">
+                2018-12-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-29T19:28:42+08:00">
+                2018-12-29
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>在有RNN的代码中，如果出现</p>
+<blockquote>
+<p>Cuda Error : RuntimeError: CUDNN_STATUS_EXECUTION_FAILED</p>
+</blockquote>
+<p>那么可能的出错原因是没有将init state放入cuda中。</p>
+<p>Reference: <a href="https://discuss.pytorch.org/t/cuda-error-runtimeerror-cudnn-status-execution-failed/17625" target="_blank" rel="noopener">https://discuss.pytorch.org/t/cuda-error-runtimeerror-cudnn-status-execution-failed/17625</a></p>
+<hr>
+<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>clone() → Tensor<br>Returns a copy of the self tensor. The copy has the same size and data type as self.<br><strong>Unlike copy_(), this function is recorded in the computation graph. Gradients propagating to the cloned tensor will propagate to the original tensor.</strong></p>
+<p>如果需要另一个相同的tensor做其他计算，则使用clone()而不是copy_()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">forward_vec=sent_vec</span><br><span class="line"><span class="comment"># backward_vec=sent_vec   wrong</span></span><br><span class="line">backward_vec=sent_vec.clone()</span><br></pre></td></tr></table></figure>
+<p>当然也不能直接赋值，因为赋的只是指针，改变backward_vec也会改变原来的值。</p>
+<hr>
+<h3 id="3️⃣-Python"><a href="#3️⃣-Python" class="headerlink" title="3️⃣[Python]"></a>3️⃣[Python]</h3><p>Python中<code>==</code>和<code>is</code>的区别：<br>is表示是否是同一个object；而==表示是否是同一个值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">str=<span class="string">'GRU'</span></span><br><span class="line">str == <span class="string">'GRU'</span>  <span class="comment"># True</span></span><br><span class="line">str <span class="keyword">is</span> <span class="string">'GRU'</span>  <span class="comment"># True</span></span><br><span class="line">str=str.upper()</span><br><span class="line">str == <span class="string">'GRU'</span>  <span class="comment"># False</span></span><br><span class="line">str <span class="keyword">is</span> <span class="string">'GRU'</span>  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="4️⃣-RNN"><a href="#4️⃣-RNN" class="headerlink" title="4️⃣[RNN]"></a>4️⃣[RNN]</h3><p>在RNN的初始化中，使用正交初始化会比其他方法好一些（待对比实验测验）。<br>Reference: <a href="https://smerity.com/articles/2016/orthogonal_init.html" target="_blank" rel="noopener">https://smerity.com/articles/2016/orthogonal_init.html</a></p>
+<hr>
+<h3 id="5️⃣-Pytorch"><a href="#5️⃣-Pytorch" class="headerlink" title="5️⃣[Pytorch]"></a>5️⃣[Pytorch]</h3><p>在提供预训练embedding作为初始化时，正确做法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> pretrained_matrix <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">    pretrained_matrix=torch.from_numpy(pretrained_matrix).type(torch.FloatTensor)</span><br><span class="line">    self.embedding.weight= nn.Parameter(pretrained_matrix,</span><br><span class="line">                                                requires_grad=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p>必须要有<code>.type(torch.FloatTensor)</code>，否则会出错：CuDNN error: CUDNN_STATUS_EXECUTION_FAILED</p>
+<hr>
+<h3 id="6️⃣-Pytorch"><a href="#6️⃣-Pytorch" class="headerlink" title="6️⃣[Pytorch]"></a>6️⃣[Pytorch]</h3><p>Pytorch中，将初始hidden state作为可学习参数实践：<br><a href="https://discuss.pytorch.org/t/solved-train-initial-hidden-state-of-rnns/2589/9" target="_blank" rel="noopener">https://discuss.pytorch.org/t/solved-train-initial-hidden-state-of-rnns/2589/9</a><br><a href="https://discuss.pytorch.org/t/learn-initial-hidden-state-h0-for-rnn/10013/7" target="_blank" rel="noopener">https://discuss.pytorch.org/t/learn-initial-hidden-state-h0-for-rnn/10013/7</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/23/见闻&想法/A Day with Google/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/23/见闻&想法/A Day with Google/" itemprop="url">A Day with Google</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-23T10:06:14+08:00">
+                2018-12-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-23T10:27:28+08:00">
+                2018-12-23
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本周一乡下人终于再次进城了🙈<br><img src="/images/IMG_2243.jpg" width="70%" height="50%"></p>
+<p><img src="/images/IMG_8631.jpg" width="70%" height="50%"></p>
+<p>本次的目的是来参观Google。</p>
+<p>高楼林立：<br><img src="/images/IMG_2273.jpg" width="70%" height="50%"></p>
+<p>Here We are:<br><img src="/images/IMG_9209-1.jpg" width="70%" height="50%"></p>
+<p>咕果是什么鬼？<br><img src="/images/IMG_3389.jpg" width="70%" height="50%"></p>
+<p>宣讲：<br><img src="/images/IMG_1782.jpg" width="70%" height="50%"></p>
+<p><img src="/images/IMG_1075.jpg" width="70%" height="50%"></p>
+<p>不得不感慨食堂真好🦆，还有专门吃面的食堂。而且还都不用钱🙉，对比张江的食堂🙉：</p>
+<p><img src="/images/IMG_0546.jpg" width="70%" height="50%"></p>
+<p>溜了溜了：<br><img src="/images/IMG_1255.jpg" width="70%" height="50%"></p>
+<p><img src="/images/IMG_1256.jpg" width="70%" height="50%"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/23/论文/每周论文10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1437,276 +1733,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/09/碎片知识/每周碎片知识14/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/09/碎片知识/每周碎片知识14/" itemprop="url">每周碎片知识14</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T09:41:14+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-09T09:55:28+08:00">
-                2018-12-09
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>Pytorch的tensor和Tensor是有区别的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">a = torch.tensor(<span class="number">2</span>)  <span class="comment"># 是标量，size为[]</span></span><br><span class="line">b = torch.Tensor(<span class="number">2</span>)  <span class="comment"># 是向量，size为[2]</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/09/诗词&句/每周诗词17/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/09/诗词&句/每周诗词17/" itemprop="url">每周诗词17</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T09:38:14+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-09T09:39:18+08:00">
-                2018-12-09
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣虞美人"><a href="#1️⃣虞美人" class="headerlink" title="1️⃣虞美人"></a>1️⃣虞美人</h3><p>[宋] 叶梦得<br>落花已作风前舞，又送黄昏雨。晓来庭院半残红，惟有游丝，千丈袅晴空。<br>殷勤花下同携手，更尽杯中酒。美人不用敛蛾眉，<strong>我亦多情，无奈酒阑时</strong>。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1756,7 +1787,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-count">121</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1769,7 +1800,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">141</span>
+                  <span class="site-state-item-count">144</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

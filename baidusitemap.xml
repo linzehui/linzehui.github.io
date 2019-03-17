@@ -4,8 +4,75 @@
 
     
   <url>
+    <loc>http://www.linzehui.me/2019/03/10/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8713/</loc>
+    <lastmod>2019-03-17T14:29:26.979Z</lastmod>
+    <data>
+        <display>
+        <title>每周论文13</title>
+        <pubTime>2019-03-10T02:52:30.000Z</pubTime>
+        
+        <tag>CNN</tag>
+         
+        <tag>Paper</tag>
+         
+        <tag>每周论文阅读</tag>
+         
+        <tag>NMT</tag>
+         
+        <tag>SE-Net</tag>
+         
+        <tag>Non-local</tag>
+         
+        <tag>Bilinear</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2019/03/09/%E8%AF%97%E8%AF%8D&%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D18/</loc>
+    <lastmod>2019-03-17T01:29:39.473Z</lastmod>
+    <data>
+        <display>
+        <title>每周诗词18</title>
+        <pubTime>2019-03-09T13:04:14.000Z</pubTime>
+        
+        <tag>诗词</tag>
+         
+        <tag>诗词分享</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2019/03/17/%E8%AF%97%E8%AF%8D&%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D19/</loc>
+    <lastmod>2019-03-17T01:29:38.499Z</lastmod>
+    <data>
+        <display>
+        <title>每周诗词19</title>
+        <pubTime>2019-03-17T01:26:14.000Z</pubTime>
+        
+        <tag>诗词</tag>
+         
+        <tag>诗词分享</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.linzehui.me/2019/03/10/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8712/</loc>
-    <lastmod>2019-03-10T02:56:36.329Z</lastmod>
+    <lastmod>2019-03-12T13:44:42.894Z</lastmod>
     <data>
         <display>
         <title>每周论文12</title>
@@ -43,25 +110,6 @@
         <tag>Convolution</tag>
          
         <tag>learning rate</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.linzehui.me/2019/03/09/%E8%AF%97%E8%AF%8D&%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D18/</loc>
-    <lastmod>2019-03-09T13:05:58.137Z</lastmod>
-    <data>
-        <display>
-        <title>每周诗词17</title>
-        <pubTime>2019-03-09T13:04:14.000Z</pubTime>
-        
-        <tag>诗词</tag>
-         
-        <tag>诗词分享</tag>
          
          
            
@@ -686,13 +734,13 @@
         <title>Pycharm常用技巧</title>
         <pubTime>2018-08-10T11:05:13.000Z</pubTime>
         
-        <tag>技巧</tag>
-         
         <tag>Pycharm</tag>
          
         <tag>杂七杂八</tag>
          
         <tag>快捷键</tag>
+         
+        <tag>技巧</tag>
          
          
            
@@ -765,29 +813,6 @@
 
     
   <url>
-    <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2012:%20Unsupervised%20Learning:%20Neighbor%20Embedding/</loc>
-    <lastmod>2018-11-19T03:21:34.000Z</lastmod>
-    <data>
-        <display>
-        <title>Lecture 12:Unsupervised Learning:Neighbor Embedding</title>
-        <pubTime>2018-10-07T03:17:24.000Z</pubTime>
-        
-        <tag>机器学习🤖</tag>
-         
-        <tag>李宏毅机器学习课程</tag>
-         
-        <tag>Unsupervised Learning</tag>
-         
-        <tag>Neighbor Embedding</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/</loc>
     <lastmod>2018-11-19T03:21:34.000Z</lastmod>
     <data>
@@ -802,6 +827,29 @@
         <tag>Unsupervised Learning</tag>
          
         <tag>Linear Dimension Reduction</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2012:%20Unsupervised%20Learning:%20Neighbor%20Embedding/</loc>
+    <lastmod>2018-11-19T03:21:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>Lecture 12:Unsupervised Learning:Neighbor Embedding</title>
+        <pubTime>2018-10-07T03:17:24.000Z</pubTime>
+        
+        <tag>机器学习🤖</tag>
+         
+        <tag>李宏毅机器学习课程</tag>
+         
+        <tag>Unsupervised Learning</tag>
+         
+        <tag>Neighbor Embedding</tag>
          
          
            
@@ -878,6 +926,27 @@
 
     
   <url>
+    <loc>http://www.linzehui.me/2018/10/14/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2017:%20Ensemble/</loc>
+    <lastmod>2018-11-19T03:21:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>Lecture 17:Ensemble</title>
+        <pubTime>2018-10-14T02:09:24.000Z</pubTime>
+        
+        <tag>机器学习🤖</tag>
+         
+        <tag>李宏毅机器学习课程</tag>
+         
+        <tag>Ensemble</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.linzehui.me/2018/09/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%202%20Bias%20and%20Variance/</loc>
     <lastmod>2018-11-19T03:21:29.000Z</lastmod>
     <data>
@@ -911,27 +980,6 @@
         <tag>李宏毅机器学习课程</tag>
          
         <tag>SVM</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.linzehui.me/2018/10/14/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2017:%20Ensemble/</loc>
-    <lastmod>2018-11-19T03:21:29.000Z</lastmod>
-    <data>
-        <display>
-        <title>Lecture 17:Ensemble</title>
-        <pubTime>2018-10-14T02:09:24.000Z</pubTime>
-        
-        <tag>机器学习🤖</tag>
-         
-        <tag>李宏毅机器学习课程</tag>
-         
-        <tag>Ensemble</tag>
          
          
            
@@ -985,6 +1033,27 @@
 
     
   <url>
+    <loc>http://www.linzehui.me/2018/09/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%206:%20Backpropagation/</loc>
+    <lastmod>2018-11-19T03:21:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>Lecture 6:Backpropagation</title>
+        <pubTime>2018-09-23T02:03:24.000Z</pubTime>
+        
+        <tag>机器学习🤖</tag>
+         
+        <tag>李宏毅机器学习课程</tag>
+         
+        <tag>Backpropagation</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.linzehui.me/2018/09/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%205%20Classification:%20Logistic%20Regression/</loc>
     <lastmod>2018-11-19T03:21:27.000Z</lastmod>
     <data>
@@ -999,27 +1068,6 @@
         <tag>Classification</tag>
          
         <tag>Logistic Regression</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.linzehui.me/2018/09/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%206:%20Backpropagation/</loc>
-    <lastmod>2018-11-19T03:21:27.000Z</lastmod>
-    <data>
-        <display>
-        <title>Lecture 6:Backpropagation</title>
-        <pubTime>2018-09-23T02:03:24.000Z</pubTime>
-        
-        <tag>机器学习🤖</tag>
-         
-        <tag>李宏毅机器学习课程</tag>
-         
-        <tag>Backpropagation</tag>
          
          
            
@@ -1133,11 +1181,11 @@
         <title>Linux常用命令</title>
         <pubTime>2018-08-03T05:48:13.000Z</pubTime>
         
+        <tag>技巧</tag>
+         
         <tag>Linux</tag>
          
         <tag>碎片知识</tag>
-         
-        <tag>技巧</tag>
          
          
            
@@ -1204,6 +1252,27 @@
 
     
   <url>
+    <loc>http://www.linzehui.me/2018/07/23/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E5%AE%89%E8%A3%85conda%E9%94%99%E8%AF%AF/</loc>
+    <lastmod>2018-11-19T03:21:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>安装conda错误</title>
+        <pubTime>2018-07-23T02:41:13.000Z</pubTime>
+        
+        <tag>杂七杂八</tag>
+         
+        <tag>conda</tag>
+         
+        <tag>遇到的问题</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.linzehui.me/2018/08/25/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/CNN%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E4%BB%BB%E5%8A%A1%E6%8C%87%E5%8D%97/</loc>
     <lastmod>2018-11-19T03:21:21.000Z</lastmod>
     <data>
@@ -1218,27 +1287,6 @@
         <tag>指南</tag>
          
         <tag>调参</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.linzehui.me/2018/07/23/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E5%AE%89%E8%A3%85conda%E9%94%99%E8%AF%AF/</loc>
-    <lastmod>2018-11-19T03:21:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>安装conda错误</title>
-        <pubTime>2018-07-23T02:41:13.000Z</pubTime>
-        
-        <tag>杂七杂八</tag>
-         
-        <tag>conda</tag>
-         
-        <tag>遇到的问题</tag>
          
          
            
@@ -1392,6 +1440,27 @@
 
     
   <url>
+    <loc>http://www.linzehui.me/2018/08/26/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%865/</loc>
+    <lastmod>2018-11-19T03:21:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>每周碎片知识5</title>
+        <pubTime>2018-08-26T03:20:14.000Z</pubTime>
+        
+        <tag>碎片知识</tag>
+         
+        <tag>Paper</tag>
+         
+        <tag>调参方法</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.linzehui.me/2018/08/19/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%864/</loc>
     <lastmod>2018-11-19T03:21:16.000Z</lastmod>
     <data>
@@ -1423,18 +1492,18 @@
 
     
   <url>
-    <loc>http://www.linzehui.me/2018/08/26/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%865/</loc>
-    <lastmod>2018-11-19T03:21:16.000Z</lastmod>
+    <loc>http://www.linzehui.me/2018/09/02/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%866/</loc>
+    <lastmod>2018-11-19T03:21:15.000Z</lastmod>
     <data>
         <display>
-        <title>每周碎片知识5</title>
-        <pubTime>2018-08-26T03:20:14.000Z</pubTime>
+        <title>每周碎片知识6</title>
+        <pubTime>2018-09-02T10:49:14.000Z</pubTime>
         
         <tag>碎片知识</tag>
          
-        <tag>Paper</tag>
+        <tag>Pytorch</tag>
          
-        <tag>调参方法</tag>
+        <tag>dropout</tag>
          
          
            
@@ -1456,27 +1525,6 @@
         <tag>Pytorch</tag>
          
         <tag>协方差</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.linzehui.me/2018/09/02/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%866/</loc>
-    <lastmod>2018-11-19T03:21:15.000Z</lastmod>
-    <data>
-        <display>
-        <title>每周碎片知识6</title>
-        <pubTime>2018-09-02T10:49:14.000Z</pubTime>
-        
-        <tag>碎片知识</tag>
-         
-        <tag>Pytorch</tag>
-         
-        <tag>dropout</tag>
          
          
            
@@ -1526,6 +1574,27 @@
 
     
   <url>
+    <loc>http://www.linzehui.me/2018/10/30/%E8%A7%81%E9%97%BB&%E6%83%B3%E6%B3%95/%E2%80%9C%E8%8E%B1%E6%96%AF%E6%9D%AF%E2%80%9D%E6%8C%91%E6%88%98%E8%B5%9B%E6%9C%89%E6%84%9F/</loc>
+    <lastmod>2018-11-19T03:21:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>“莱斯杯”挑战赛有感</title>
+        <pubTime>2018-10-30T00:44:14.000Z</pubTime>
+        
+        <tag>有感</tag>
+         
+        <tag>莱斯杯</tag>
+         
+        <tag>比赛</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.linzehui.me/2018/10/14/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%871/</loc>
     <lastmod>2018-11-19T03:21:13.000Z</lastmod>
     <data>
@@ -1544,27 +1613,6 @@
         <tag>GCNN</tag>
          
         <tag>BERT</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.linzehui.me/2018/10/30/%E8%A7%81%E9%97%BB&%E6%83%B3%E6%B3%95/%E2%80%9C%E8%8E%B1%E6%96%AF%E6%9D%AF%E2%80%9D%E6%8C%91%E6%88%98%E8%B5%9B%E6%9C%89%E6%84%9F/</loc>
-    <lastmod>2018-11-19T03:21:13.000Z</lastmod>
-    <data>
-        <display>
-        <title>“莱斯杯”挑战赛有感</title>
-        <pubTime>2018-10-30T00:44:14.000Z</pubTime>
-        
-        <tag>有感</tag>
-         
-        <tag>莱斯杯</tag>
-         
-        <tag>比赛</tag>
          
          
            
@@ -1961,69 +2009,12 @@
 
     
   <url>
-    <loc>http://www.linzehui.me/2018/08/05/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB3/</loc>
-    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>代码片段记录3</title>
-        <pubTime>2018-08-05T02:58:30.000Z</pubTime>
-        
-        <tag>code snippets</tag>
-         
-        <tag>代码片段</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.linzehui.me/2018/08/19/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB5/</loc>
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
     <data>
         <display>
         <title>代码片段记录5</title>
         <pubTime>2018-08-19T06:44:30.000Z</pubTime>
-        
-        <tag>code snippets</tag>
-         
-        <tag>代码片段</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.linzehui.me/2018/08/26/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB6/</loc>
-    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>代码片段记录6</title>
-        <pubTime>2018-08-26T03:07:30.000Z</pubTime>
-        
-        <tag>code snippets</tag>
-         
-        <tag>代码片段</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.linzehui.me/2018/07/23/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB1/</loc>
-    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>代码片段记录1</title>
-        <pubTime>2018-07-23T10:59:30.000Z</pubTime>
         
         <tag>code snippets</tag>
          
@@ -2056,12 +2047,69 @@
 
     
   <url>
+    <loc>http://www.linzehui.me/2018/08/05/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB3/</loc>
+    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>代码片段记录3</title>
+        <pubTime>2018-08-05T02:58:30.000Z</pubTime>
+        
+        <tag>code snippets</tag>
+         
+        <tag>代码片段</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/07/23/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB1/</loc>
+    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>代码片段记录1</title>
+        <pubTime>2018-07-23T10:59:30.000Z</pubTime>
+        
+        <tag>code snippets</tag>
+         
+        <tag>代码片段</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.linzehui.me/2018/08/12/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB4/</loc>
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
     <data>
         <display>
         <title>代码片段记录4</title>
         <pubTime>2018-08-12T03:20:30.000Z</pubTime>
+        
+        <tag>code snippets</tag>
+         
+        <tag>代码片段</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.linzehui.me/2018/08/26/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB6/</loc>
+    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>代码片段记录6</title>
+        <pubTime>2018-08-26T03:07:30.000Z</pubTime>
         
         <tag>code snippets</tag>
          
@@ -2200,9 +2248,9 @@
         <title>Python惯例[转]</title>
         <pubTime>2018-08-05T03:28:05.000Z</pubTime>
         
-        <tag>碎片知识</tag>
-         
         <tag>杂七杂八</tag>
+         
+        <tag>碎片知识</tag>
          
         <tag>Python</tag>
          
@@ -2358,11 +2406,11 @@
         <title>Vim常用快捷键</title>
         <pubTime>2018-08-10T11:50:13.000Z</pubTime>
         
-        <tag>技巧</tag>
-         
         <tag>杂七杂八</tag>
          
         <tag>快捷键</tag>
+         
+        <tag>技巧</tag>
          
         <tag>Vim</tag>
          

@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.linzehui.me/images/15521843619624.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15521854844061.jpg">
-<meta property="og:updated_time" content="2019-03-10T02:56:36.329Z">
+<meta property="og:updated_time" content="2019-03-12T13:44:42.894Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文12">
 <meta name="twitter:description" content="1️⃣[PAY LESS ATTENTION WITH LIGHTWEIGHT AND DYNAMIC CONVOLUTIONS]Facebook研究人员提出的两种基于卷积的方法尝试替代self-attention在transformer中的作用，拥有更少的参数以及更快的速度，并且能够达到很好的效果。  Lightweight convolution背景：depthwise convolution">
@@ -335,8 +335,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-10T10:56:36+08:00">
-                2019-03-10
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T21:44:42+08:00">
+                2019-03-12
               </time>
             
           </span>
@@ -371,7 +371,7 @@
       
         <h2 id="1️⃣-PAY-LESS-ATTENTION-WITH-LIGHTWEIGHT-AND-DYNAMIC-CONVOLUTIONS"><a href="#1️⃣-PAY-LESS-ATTENTION-WITH-LIGHTWEIGHT-AND-DYNAMIC-CONVOLUTIONS" class="headerlink" title="1️⃣[PAY LESS ATTENTION WITH LIGHTWEIGHT AND DYNAMIC CONVOLUTIONS]"></a>1️⃣[PAY LESS ATTENTION WITH LIGHTWEIGHT AND DYNAMIC CONVOLUTIONS]</h2><p>Facebook研究人员提出的两种基于卷积的方法尝试替代self-attention在transformer中的作用，拥有更少的参数以及更快的速度，并且能够达到很好的效果。</p>
 <p><img src="/images/15521843619624.jpg" width="80%" height="80%"></p>
-<h3 id="Lightweight-convolution"><a href="#Lightweight-convolution" class="headerlink" title="Lightweight convolution"></a>Lightweight convolution</h3><p>背景：depthwise convolution<br>每个channel独立进行卷积，注意到放到NLP任务上channel是指每个词。</p>
+<h3 id="Lightweight-convolution"><a href="#Lightweight-convolution" class="headerlink" title="Lightweight convolution"></a>Lightweight convolution</h3><p>背景：depthwise convolution<br>每个channel独立进行卷积，注意到放到NLP任务上channel是指embedding的每一维。</p>
 <script type="math/tex; mode=display">O_{i, c}=\text{DepthwiseConv}\left(X, W_{c, :}, i, c\right)=\sum_{j=1}^{k} W_{c, j} \cdot X_{\left(i+j-\left\lceil\frac{k+1}{2}\right]\right), c}</script><p>因此Lightweight convolution的计算方法为：</p>
 <script type="math/tex; mode=display">\operatorname{LightConv}\left(X, W_{\left\lceil\frac{c H}{d}\right\rceil,:}, i, c\right)=\text { DepthwiseConv}\left(X, \text{softmax}(W_{\left\lceil\frac{c H}{d}\right\rceil,:}), i, c\right)</script><p>每一层都有固定的window size，这和self-attention不同，self-attention是所有的context都进行交互。</p>
 <ul>
@@ -432,8 +432,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/10/碎片知识/每周碎片知识18/" rel="next" title="每周碎片知识18">
-                <i class="fa fa-chevron-left"></i> 每周碎片知识18
+              <a href="/2019/03/10/论文/每周论文13/" rel="next" title="每周论文13">
+                <i class="fa fa-chevron-left"></i> 每周论文13
               </a>
             
           </div>
@@ -441,6 +441,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/17/诗词&句/每周诗词19/" rel="prev" title="每周诗词19">
+                每周诗词19 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -526,7 +530,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-count">121</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -539,7 +543,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">141</span>
+                  <span class="site-state-item-count">144</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
