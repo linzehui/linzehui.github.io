@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15528285519609.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15528297540165.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15528310057673.jpg">
-<meta property="og:updated_time" content="2019-03-17T14:32:09.901Z">
+<meta property="og:updated_time" content="2019-03-19T07:41:14.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文13">
 <meta name="twitter:description" content="1️⃣[Depthwise Separable Convolutions for Neural Machine Translation]将depthwise separable convolution 深度可分离卷积 用于翻译任务，并在此基础上对depthwise separable进行更进一步的参数量优化，也即super-separable。（其实我觉得并没有啥创新性的感觉）  首先介绍什么是d">
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-17T22:32:09+08:00">
-                2019-03-17
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-19T15:41:14+08:00">
+                2019-03-19
               </time>
             
           </span>
@@ -390,7 +390,7 @@
 <blockquote>
 <p>To make use of the information aggregated in the squeeze operation, we follow it with a second operation which aims to fully capture channel-wise dependencies. To fulfill this objective, the function must meet two criteria: first, it must be ﬂexible (in particular, it must be capable of learning a nonlinear interaction between channels) and second, it must learn a non-mutually-exclusive relationship since we would like to ensure that multiple channels are allowed to be emphasised (rather than enforcing a one-hot activation). To meet these criteria, we opt to employ a simple gating mechanism with a sigmoid activation.</p>
 </blockquote>
-<p>最后对每个channel进行加权：</p>
+<p>最后对每个channel进行<strong>放缩</strong>，获得新的表示：</p>
 <script type="math/tex; mode=display">\widetilde{\mathbf{x}}_{c}=\mathbf{F}_{\text {scale}}\left(\mathbf{u}_{c}, s_{c}\right)=s_{c} \cdot \mathbf{u}_{c}</script><hr>
 <h2 id="3️⃣-Non-local-Neural-Networks"><a href="#3️⃣-Non-local-Neural-Networks" class="headerlink" title="3️⃣[Non-local Neural Networks]"></a>3️⃣[Non-local Neural Networks]</h2><p>提出一种新的结构，与上一篇类似，希望模型的每个位置都能感知到其他位置，从而捕获长程依赖，拥有全局信息。</p>
 <p><img src="/images/15528297540165.jpg" width="60%" height="50%"></p>
@@ -471,6 +471,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/23/诗词&句/每周诗词20/" rel="prev" title="每周诗词20">
+                每周诗词20 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -556,7 +560,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">121</span>
+                  <span class="site-state-item-count">125</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -569,7 +573,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">144</span>
+                  <span class="site-state-item-count">148</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

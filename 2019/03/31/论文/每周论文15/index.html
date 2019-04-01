@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Paper,每周论文阅读,second-order,pooling,SK-Net,attentional pooling," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本周论文:  Selective Kernel Networks Attentional pooling for action recognition  1️⃣[Selective Kernel Networks]通过对不同kernel size的feature map之间进行信息筛选获得更为鲁棒的表示，能够对不同的感受野进行整合，实现动态调整感受野。其思路还挺有意思的。 Introduction">
+<meta name="keywords" content="Paper,每周论文阅读,second-order,pooling,SK-Net,attentional pooling">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周论文15">
+<meta property="og:url" content="http://www.linzehui.me/2019/03/31/论文/每周论文15/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="本周论文:  Selective Kernel Networks Attentional pooling for action recognition  1️⃣[Selective Kernel Networks]通过对不同kernel size的feature map之间进行信息筛选获得更为鲁棒的表示，能够对不同的感受野进行整合，实现动态调整感受野。其思路还挺有意思的。 Introduction">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.linzehui.me/images/15540416698404.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15540862875594.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15540869385196.jpg">
+<meta property="og:updated_time" content="2019-04-01T03:21:55.179Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每周论文15">
+<meta name="twitter:description" content="本周论文:  Selective Kernel Networks Attentional pooling for action recognition  1️⃣[Selective Kernel Networks]通过对不同kernel size的feature map之间进行信息筛选获得更为鲁棒的表示，能够对不同的感受野进行整合，实现动态调整感受野。其思路还挺有意思的。 Introduction">
+<meta name="twitter:image" content="http://www.linzehui.me/images/15540416698404.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2019/03/31/论文/每周论文15/"/>
+
+
+
+
+
+  <title>每周论文15 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/03/31/论文/每周论文15/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">每周论文15</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T22:04:30+08:00">
+                2019-03-31
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-01T11:21:55+08:00">
+                2019-04-01
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本周论文:</p>
+<ol>
+<li>Selective Kernel Networks</li>
+<li>Attentional pooling for action recognition</li>
+</ol>
+<h2 id="1️⃣-Selective-Kernel-Networks"><a href="#1️⃣-Selective-Kernel-Networks" class="headerlink" title="1️⃣[Selective Kernel Networks]"></a>1️⃣[Selective Kernel Networks]</h2><p>通过对不同kernel size的feature map之间进行信息筛选获得更为鲁棒的表示，能够对不同的感受野进行整合，实现动态调整感受野。其思路还挺有意思的。</p>
+<p>Introduction将该模型与视觉神经的理论结合在一起，也即，对于人类而言，在看不同尺寸不同远近的物体时，视觉皮层神经元<strong>感受野大小</strong>是会根据刺激来进行调节的，但一般而言在CNN中卷积核的大小是固定的。该模型正是从这一现象中获得灵感。</p>
+<p>整个模型一共分为三个步骤：split，fuse，select</p>
+<p>split生成多个不同kernel size的feature map，也即对应不同的感受野大小；fuse将不同feature map结合起来，获得一个全局的综合的向量表示；select根据不同的weight选择不同感受野的feature map。</p>
+<p><img src="/images/15540416698404.jpg" width="80%" height="50%"></p>
+<p>以上图为例。</p>
+<h3 id="SK-Net"><a href="#SK-Net" class="headerlink" title="SK-Net"></a>SK-Net</h3><h4 id="第一步split"><a href="#第一步split" class="headerlink" title="第一步split"></a>第一步split</h4><p>给定输入$\mathbf{X} \in \mathbb{R}^{H^{\prime} \times W^{\prime} \times C^{\prime}}$，通过不同的kernel size的CNN的卷积获得不同的feature map，上图是$3\times 3$与$5\times 5$的卷积核。卷积可以是传统的convolution卷积，也可以是空洞卷积（dilated convolution），或者深度卷积（depthwise convolution）。则有：<br>$\widetilde{\mathcal{F}} : \mathbf{X} \rightarrow \widetilde{\mathbf{U}} \in \mathbb{R}^{H \times W \times C}$ 与 $\widehat{\mathcal{F}} : \mathbf{X} \rightarrow \widehat{\mathbf{U}} \in \mathbb{R}^{H \times W \times C}$，其中$\widetilde{\mathcal{F}},\widehat{\mathcal{F}}$是卷积变换。</p>
+<h4 id="第二步fuse"><a href="#第二步fuse" class="headerlink" title="第二步fuse"></a>第二步fuse</h4><p>直接将不同的feature map结合起来以获得全局信息，用以之后的动态调整。这里采用简单的求和以及global average pooling以获得channel-wise的信息$\mathbf{s} \in \mathbb{R}^{C}$：</p>
+<script type="math/tex; mode=display">\mathbf{U}=\widetilde{\mathbf{U}}+\widehat{\mathbf{U}} \\ s_{c}=\mathcal{F}_{g p}\left(\mathbf{U}_{c}\right)=\frac{1}{H \times W} \sum_{i=1}^{H} \sum_{j=1}^{W} \mathbf{U}_{c}(i, j)</script><p>在获得$\mathbf{s}$后再通过MLP获得$\mathbf{z}$：</p>
+<script type="math/tex; mode=display">\mathbf{z}=\mathcal{F}_{f c}(\mathbf{s})=\delta(\mathcal{B}(\mathbf{W} \mathbf{s}))</script><p>其中$\mathcal{B}$是batch normalization；$\delta$是Relu。</p>
+<h4 id="第三步select"><a href="#第三步select" class="headerlink" title="第三步select"></a>第三步select</h4><p>使用soft attention去选择不同kernel size的feature map并结合在一起。也即：</p>
+<script type="math/tex; mode=display">a_{c}=\frac{e^{\mathbf{A}_{c} \mathbf{z}}}{e^{\mathbf{A}_{c} \mathbf{z}}+e^{\mathbf{B}_{c} \mathbf{z}}}, b_{c}=\frac{e^{\mathbf{B}_{c} \mathbf{z}}}{e^{\mathbf{A}_{c} \mathbf{z}}+e^{\mathbf{B}_{c} \mathbf{z}}}</script><p>其中$\mathbf{A}_{c}$是对应$\widetilde{\mathbf{U}}$第$c$个channel的参数，$\mathbf{B}_{c}$是对应$\widehat{\mathbf{U}}$第$c$个channel的参数。$\mathbf{A}, \mathbf{B} \in \mathbb{R}^{C \times d}$，那么$a_{c},b_{c}$就对应不同feature map的weight。</p>
+<p>因此，最终的feature map $\mathbf{V}$：</p>
+<script type="math/tex; mode=display">\mathbf{V}_{c}=a_{c} \cdot \tilde{\mathbf{U}}_{c}+b_{c} \cdot \widehat{\mathbf{U}}_{c}, \quad a_{c}+b_{c}=1 \\ \mathbf{V}=\left[\mathbf{V}_{1}, \mathbf{V}_{2}, \dots, \mathbf{V}_{C}\right], \mathbf{V}_{c} \in \mathbb{R}^{H \times W}</script><h3 id="对比-amp-思考"><a href="#对比-amp-思考" class="headerlink" title="对比&amp;思考"></a>对比&amp;思考</h3><h4 id="与SE-Net"><a href="#与SE-Net" class="headerlink" title="与SE-Net"></a>与SE-Net</h4><p>SE-Net是通过不同channel之间的交互，使得channel获得全局的感受野，使用的是对channel的放缩（详见上一篇论文笔记）；而SK-Net是不同的感受野之间的同一channel在通过全局信息的指导下以soft-attention的形式加权平均，这就和论文中提到的人类视觉对不同物体进行动态调整感受野的思路一致。</p>
+<h4 id="与dynamic-convolution"><a href="#与dynamic-convolution" class="headerlink" title="与dynamic convolution"></a>与dynamic convolution</h4><p>在论文[PAY LESS ATTENTION WITH LIGHTWEIGHT AND DYNAMIC CONVOLUTIONS]中，研究人员提出动态感受野的convolution，通过利用当前词预测一个卷积窗口，增加了模型的灵活性，并在机器翻译上取得了很好的结果。</p>
+<p>虽然目的与本篇论文一致，但思路是完全不同的。一个是通过预测；另一个是在全局信息的指导下进行加权。在我的理解看来，或许本篇论文的思路更加合理一些，第一，在有了全局信息的指导下能够更好的进行加权，而通过预测，似乎有些盲目，可能需要更多的数据才能学得更好；第二，dynamic convolution论文中也提到了，如果不使用如深度可分离卷积等轻量级卷积方法，dynamic convolution不大现实（A dynamic version of standard convolutions would be impractical for current GPUs due to their large memory requirements），而SK-Net则不会有这个问题。</p>
+<h4 id="其他思考"><a href="#其他思考" class="headerlink" title="其他思考"></a>其他思考</h4><p>从另一个角度去思考，SK-Net通过人工定义好的几种不同大小的卷积，相当于在模型中引入更强的先验（inductive bias），也即假设了数据不会超过这几种大小的卷积的处理范围，这或许比不引入先验，完全靠数据去学某种特定pattern的dynamic convolution对小数据集更友好，因此可以不需要更多的数据来使得模型表现良好。类似的理解可以在CNN/RNN与Transformer的对比中看见，因为CNN/RNN引入了较强的local bias，因此对于小数据集更友好，但同时其上限或许不如Transformer高；而Transformer一开始就是全局感受野，使得需要更多数据来帮助模型学到某种特定pattern（如某种local bias），但当数据充足时，Transformer的上限更高，近期非常火的pretrained model GPT/GPT-2.0/Bert似乎也印证了这点。</p>
+<hr>
+<h2 id="2️⃣-Attentional-pooling-for-action-recognition"><a href="#2️⃣-Attentional-pooling-for-action-recognition" class="headerlink" title="2️⃣[Attentional pooling for action recognition]"></a>2️⃣[Attentional pooling for action recognition]</h2><p>提出一种基于attention的pooling策略，采用低秩近似的方法，使得模型能够在计算量不增加很多的情况下达到更好的效果。可以将该方法理解成对二阶pooling的低秩近似。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h4 id="一阶pooling"><a href="#一阶pooling" class="headerlink" title="一阶pooling"></a>一阶pooling</h4><p>记$X \in R^{n \times f}$为被pooling的层，其中n为空间位置的个数，如$16\times 16$，$f$为channel个数。标准的sum/max pooling将该矩阵缩减为$R^{f \times 1}$，然后使用全连接的权重$\mathbf{w} \in R^{f \times 1}$获得一个分类的分数。这里假设的是二分类，但可以很容易推广为多分类。</p>
+<p>上述操作形式化可以写成：</p>
+<script type="math/tex; mode=display">\operatorname{score}_{p o o l}(X)=\mathbf{1}^{T} X \mathbf{w}, \quad \text { where } \quad X \in R^{n \times f}, \mathbf{1} \in R^{n \times 1}, \mathbf{w} \in R^{f \times 1}</script><p>其中$\mathbf{1}$为全1向量，$\mathbf{x}=\mathbf{1}^{T} X \in R^{1 \times f}$就是通过sum pooling后的feature。</p>
+<h4 id="二阶pooling"><a href="#二阶pooling" class="headerlink" title="二阶pooling"></a>二阶pooling</h4><p>构建二阶feature $X^{T} X \in R^{f \times f}$，在获得二阶feature后，通常或向量化该矩阵，再送入全连接以做分类。也即我们会学习一个$f\times f$的全连接权重向量。若保持二阶feature与对应的全连接权重向量的形式为矩阵，矩阵相乘，其中的迹实际上就是这两个向量化后的矩阵所做内积获得的分数。形式化可以写成：</p>
+<script type="math/tex; mode=display">\text {score}_{order2}(X)=\operatorname{Tr}\left(X^{T} X W^{T}\right), \quad \text { where } \quad X \in R^{n \times f}, W \in R^{f \times f}</script><p>这可以用迹的定义去证明：示意图<br><img src="/images/15540862875594.jpg" width="100%" height="50%"></p>
+<h4 id="低秩二阶pooling"><a href="#低秩二阶pooling" class="headerlink" title="低秩二阶pooling"></a>低秩二阶pooling</h4><p>现尝试使用低秩去近似该二阶pooling，也即对$W$近似，将$W$写成两个向量的乘积，也即：</p>
+<script type="math/tex; mode=display">W=\mathbf{a b}^{T} \text { where } \mathbf{a}, \mathbf{b} \in R^{f \times 1}</script><p>将上式代入二阶pooling，可获得：</p>
+<script type="math/tex; mode=display">\begin{aligned} \text {score}_{\text {attention}}(X) &=\operatorname{Tr}\left(X^{T} X \mathbf{b a}^{T}\right), \quad \text { where } \quad X \in R^{n \times f}, \mathbf{a}, \mathbf{b} \in R^{f \times 1} \\ &=\operatorname{Tr}\left(\mathbf{a}^{T} X^{T} X \mathbf{b}\right) \\ &=\mathbf{a}^{T} X^{T} X \mathbf{b} \\ &=\mathbf{a}^{T}\left(X^{T}(X \mathbf{b})\right) \end{aligned}</script><p>第二行使用的是迹的定理：$\operatorname{Tr}(A B C)=\operatorname{Tr}(C A B)$<br>第三行使用的是标量的迹等于标量本身。<br>最后一行表明整个流程：给定一个feature map $X$，首先计算一个对所有空间位置的attentional map：$\mathbf{h}= {X \mathbf{b} \in R^{n \times 1}}$；然后根据该attentional map计算加权平均的feature：$\mathbf{x}=X^{T} \mathbf{h} \in R^{f \times 1}$。该feature再通过线性层获得最终的分数。</p>
+<p>实际上上式还有其他理解的角度：</p>
+<script type="math/tex; mode=display">\begin{aligned} \text {score}_{\text {attention}}(X) &=\left((X \mathbf{a})^{T} X\right) \mathbf{b} \\ &=(X \mathbf{a})^{T}(X \mathbf{b}) \end{aligned}</script><p>第一行表明attentional map也可以通过$X \mathbf{a} \in R^{n \times 1}$来计算，$\mathbf{b}$来做classifier。<br>第二行表明，该式子本质上是对称的，可以看成<strong>两个attentional heapmap的内积</strong>。</p>
+<p>下图是整个流程：<br><img src="/images/15540869385196.jpg" width="80%" height="50%"></p>
+<h4 id="Top-down-attention"><a href="#Top-down-attention" class="headerlink" title="Top-down attention"></a>Top-down attention</h4><p>现将二分类推广为多分类：</p>
+<script type="math/tex; mode=display">\text {score}_{order2}(X, k)=\operatorname{Tr}\left(X^{T} X W_{k}^{T}\right), \quad \text { where } \quad X \in R^{n \times f}, W_{k} \in R^{f \times f}</script><p>也即将$W$替换成类相关的参数，仿照上面的推导，可以推出每个类都有特定的$\boldsymbol{a}_{k}$与$\boldsymbol{b}_{k}$。</p>
+<p>但在这里通过固定其中一个参数为与类无关的参数，也即$\boldsymbol{b}_{k}=\boldsymbol{b}$。实际上就等价于一个是类相关的top-down attention；另一个是类无关的bottom-up attention。一个获得类特定的特征；另一个获得全局通用的特征。</p>
+<p>因此最终低秩attention model为：</p>
+<script type="math/tex; mode=display">\text {score}_{attention}(X, k)=\mathbf{t}_{k}^{T} \mathbf{h}, \quad \text { where } \quad \mathbf{t}_{k}=X \mathbf{a}_{k}, \mathbf{h}=X \mathbf{b}</script><h4 id="Average-pooling-Revisited"><a href="#Average-pooling-Revisited" class="headerlink" title="Average-pooling Revisited"></a>Average-pooling Revisited</h4><p>当然在给定了上述一系列的推导，我们对average-pooling重新进行形式化：</p>
+<script type="math/tex; mode=display">\text {score}_{top-down}(X, k)=\mathbf{1}^{T} X \mathbf{w}_{k}=\mathbf{1}^{T} \mathbf{t}_{k} \quad \text { where } \quad \mathbf{t}_{k}=X \mathbf{w}_{k}</script><p>将$\mathbf{w}$替换成类相关的$\mathbf{w}_{k}$，实际上就是将二分类推广为多分类。但该形式赋予了average-pooling新的理解。</p>
+<p>当然，我们还可以将rank-1推广为rank-k，实验证明对于大数据集使用大的秩会更好。</p>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><h4 id="与Self-attentive的联系"><a href="#与Self-attentive的联系" class="headerlink" title="与Self-attentive的联系"></a>与Self-attentive的联系</h4><p>论文[A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING]就提出了利用可学习的head对feature进行attention加权平均的方法，并且将一个head推广到多个head。<br>实际上在$\mathbf{h}= {X \mathbf{b} \in R^{n \times 1}}$我们就可以看出，$\mathbf{b}$在这里扮演的角色就是self-attentive的head的角色。对于秩为1的近似，就是head为1的情况，若将秩为1推广为秩为k，也即等价于在Self-attentive中多个head的情况。</p>
+<p>本文巧妙的地方在于head有两个作用，一种是top-down的head，获得的是类相关的feature；另一个是bottom-up的feature，获得的是通用的feature。并且本文通过巧妙的数学推导来获得新的解释，本来仅仅是二阶feature过一个全连接，但通过公式推导赋予了attention的解释，这点让人眼前一亮。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
+          
+            <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
+          
+            <a href="/tags/second-order/" rel="tag"> <i class="fa fa-tag"></i> second-order</a>
+          
+            <a href="/tags/pooling/" rel="tag"> <i class="fa fa-tag"></i> pooling</a>
+          
+            <a href="/tags/SK-Net/" rel="tag"> <i class="fa fa-tag"></i> SK-Net</a>
+          
+            <a href="/tags/attentional-pooling/" rel="tag"> <i class="fa fa-tag"></i> attentional pooling</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/31/诗词&句/每周诗词21/" rel="next" title="每周诗词21">
+                <i class="fa fa-chevron-left"></i> 每周诗词21
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA0OC8xNjU3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg"
+                alt="林泽辉" />
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">125</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">148</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1️⃣-Selective-Kernel-Networks"><span class="nav-number">1.</span> <span class="nav-text">1️⃣[Selective Kernel Networks]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SK-Net"><span class="nav-number">1.1.</span> <span class="nav-text">SK-Net</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一步split"><span class="nav-number">1.1.1.</span> <span class="nav-text">第一步split</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二步fuse"><span class="nav-number">1.1.2.</span> <span class="nav-text">第二步fuse</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三步select"><span class="nav-number">1.1.3.</span> <span class="nav-text">第三步select</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对比-amp-思考"><span class="nav-number">1.2.</span> <span class="nav-text">对比&amp;思考</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与SE-Net"><span class="nav-number">1.2.1.</span> <span class="nav-text">与SE-Net</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#与dynamic-convolution"><span class="nav-number">1.2.2.</span> <span class="nav-text">与dynamic convolution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他思考"><span class="nav-number">1.2.3.</span> <span class="nav-text">其他思考</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2️⃣-Attentional-pooling-for-action-recognition"><span class="nav-number">2.</span> <span class="nav-text">2️⃣[Attentional pooling for action recognition]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">2.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一阶pooling"><span class="nav-number">2.1.1.</span> <span class="nav-text">一阶pooling</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二阶pooling"><span class="nav-number">2.1.2.</span> <span class="nav-text">二阶pooling</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#低秩二阶pooling"><span class="nav-number">2.1.3.</span> <span class="nav-text">低秩二阶pooling</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Top-down-attention"><span class="nav-number">2.1.4.</span> <span class="nav-text">Top-down attention</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Average-pooling-Revisited"><span class="nav-number">2.1.5.</span> <span class="nav-text">Average-pooling Revisited</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对比"><span class="nav-number">2.2.</span> <span class="nav-text">对比</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与Self-attentive的联系"><span class="nav-number">2.2.1.</span> <span class="nav-text">与Self-attentive的联系</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

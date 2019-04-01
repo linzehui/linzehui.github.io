@@ -286,6 +286,623 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/03/31/论文/每周论文15/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/31/论文/每周论文15/" itemprop="url">每周论文15</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T22:04:30+08:00">
+                2019-03-31
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-01T11:21:55+08:00">
+                2019-04-01
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本周论文:</p>
+<ol>
+<li>Selective Kernel Networks</li>
+<li>Attentional pooling for action recognition</li>
+</ol>
+<h2 id="1️⃣-Selective-Kernel-Networks"><a href="#1️⃣-Selective-Kernel-Networks" class="headerlink" title="1️⃣[Selective Kernel Networks]"></a>1️⃣[Selective Kernel Networks]</h2><p>通过对不同kernel size的feature map之间进行信息筛选获得更为鲁棒的表示，能够对不同的感受野进行整合，实现动态调整感受野。其思路还挺有意思的。</p>
+<p>Introduction将该模型与视觉神经的理论结合在一起，也即，对于人类而言，在看不同尺寸不同远近的物体时，视觉皮层神经元<strong>感受野大小</strong>是会根据刺激来进行调节的，但一般而言在CNN中卷积核的大小是固定的。该模型正是从这一现象中获得灵感。</p>
+<p>整个模型一共分为三个步骤：split，fuse，select</p>
+<p>split生成多个不同kernel size的feature map，也即对应不同的感受野大小；fuse将不同feature map结合起来，获得一个全局的综合的向量表示；select根据不同的weight选择不同感受野的feature map。</p>
+<p><img src="/images/15540416698404.jpg" width="80%" height="50%"></p>
+<p>以上图为例。</p>
+<h3 id="SK-Net"><a href="#SK-Net" class="headerlink" title="SK-Net"></a>SK-Net</h3><h4 id="第一步split"><a href="#第一步split" class="headerlink" title="第一步split"></a>第一步split</h4><p>给定输入$\mathbf{X} \in \mathbb{R}^{H^{\prime} \times W^{\prime} \times C^{\prime}}$，通过不同的kernel size的CNN的卷积获得不同的feature map，上图是$3\times 3$与$5\times 5$的卷积核。卷积可以是传统的convolution卷积，也可以是空洞卷积（dilated convolution），或者深度卷积（depthwise convolution）。则有：<br>$\widetilde{\mathcal{F}} : \mathbf{X} \rightarrow \widetilde{\mathbf{U}} \in \mathbb{R}^{H \times W \times C}$ 与 $\widehat{\mathcal{F}} : \mathbf{X} \rightarrow \widehat{\mathbf{U}} \in \mathbb{R}^{H \times W \times C}$，其中$\widetilde{\mathcal{F}},\widehat{\mathcal{F}}$是卷积变换。</p>
+<h4 id="第二步fuse"><a href="#第二步fuse" class="headerlink" title="第二步fuse"></a>第二步fuse</h4><p>直接将不同的feature map结合起来以获得全局信息，用以之后的动态调整。这里采用简单的求和以及global average pooling以获得channel-wise的信息$\mathbf{s} \in \mathbb{R}^{C}$：</p>
+<script type="math/tex; mode=display">\mathbf{U}=\widetilde{\mathbf{U}}+\widehat{\mathbf{U}} \\ s_{c}=\mathcal{F}_{g p}\left(\mathbf{U}_{c}\right)=\frac{1}{H \times W} \sum_{i=1}^{H} \sum_{j=1}^{W} \mathbf{U}_{c}(i, j)</script><p>在获得$\mathbf{s}$后再通过MLP获得$\mathbf{z}$：</p>
+<script type="math/tex; mode=display">\mathbf{z}=\mathcal{F}_{f c}(\mathbf{s})=\delta(\mathcal{B}(\mathbf{W} \mathbf{s}))</script><p>其中$\mathcal{B}$是batch normalization；$\delta$是Relu。</p>
+<h4 id="第三步select"><a href="#第三步select" class="headerlink" title="第三步select"></a>第三步select</h4><p>使用soft attention去选择不同kernel size的feature map并结合在一起。也即：</p>
+<script type="math/tex; mode=display">a_{c}=\frac{e^{\mathbf{A}_{c} \mathbf{z}}}{e^{\mathbf{A}_{c} \mathbf{z}}+e^{\mathbf{B}_{c} \mathbf{z}}}, b_{c}=\frac{e^{\mathbf{B}_{c} \mathbf{z}}}{e^{\mathbf{A}_{c} \mathbf{z}}+e^{\mathbf{B}_{c} \mathbf{z}}}</script><p>其中$\mathbf{A}_{c}$是对应$\widetilde{\mathbf{U}}$第$c$个channel的参数，$\mathbf{B}_{c}$是对应$\widehat{\mathbf{U}}$第$c$个channel的参数。$\mathbf{A}, \mathbf{B} \in \mathbb{R}^{C \times d}$，那么$a_{c},b_{c}$就对应不同feature map的weight。</p>
+<p>因此，最终的feature map $\mathbf{V}$：</p>
+<script type="math/tex; mode=display">\mathbf{V}_{c}=a_{c} \cdot \tilde{\mathbf{U}}_{c}+b_{c} \cdot \widehat{\mathbf{U}}_{c}, \quad a_{c}+b_{c}=1 \\ \mathbf{V}=\left[\mathbf{V}_{1}, \mathbf{V}_{2}, \dots, \mathbf{V}_{C}\right], \mathbf{V}_{c} \in \mathbb{R}^{H \times W}</script><h3 id="对比-amp-思考"><a href="#对比-amp-思考" class="headerlink" title="对比&amp;思考"></a>对比&amp;思考</h3><h4 id="与SE-Net"><a href="#与SE-Net" class="headerlink" title="与SE-Net"></a>与SE-Net</h4><p>SE-Net是通过不同channel之间的交互，使得channel获得全局的感受野，使用的是对channel的放缩（详见上一篇论文笔记）；而SK-Net是不同的感受野之间的同一channel在通过全局信息的指导下以soft-attention的形式加权平均，这就和论文中提到的人类视觉对不同物体进行动态调整感受野的思路一致。</p>
+<h4 id="与dynamic-convolution"><a href="#与dynamic-convolution" class="headerlink" title="与dynamic convolution"></a>与dynamic convolution</h4><p>在论文[PAY LESS ATTENTION WITH LIGHTWEIGHT AND DYNAMIC CONVOLUTIONS]中，研究人员提出动态感受野的convolution，通过利用当前词预测一个卷积窗口，增加了模型的灵活性，并在机器翻译上取得了很好的结果。</p>
+<p>虽然目的与本篇论文一致，但思路是完全不同的。一个是通过预测；另一个是在全局信息的指导下进行加权。在我的理解看来，或许本篇论文的思路更加合理一些，第一，在有了全局信息的指导下能够更好的进行加权，而通过预测，似乎有些盲目，可能需要更多的数据才能学得更好；第二，dynamic convolution论文中也提到了，如果不使用如深度可分离卷积等轻量级卷积方法，dynamic convolution不大现实（A dynamic version of standard convolutions would be impractical for current GPUs due to their large memory requirements），而SK-Net则不会有这个问题。</p>
+<h4 id="其他思考"><a href="#其他思考" class="headerlink" title="其他思考"></a>其他思考</h4><p>从另一个角度去思考，SK-Net通过人工定义好的几种不同大小的卷积，相当于在模型中引入更强的先验（inductive bias），也即假设了数据不会超过这几种大小的卷积的处理范围，这或许比不引入先验，完全靠数据去学某种特定pattern的dynamic convolution对小数据集更友好，因此可以不需要更多的数据来使得模型表现良好。类似的理解可以在CNN/RNN与Transformer的对比中看见，因为CNN/RNN引入了较强的local bias，因此对于小数据集更友好，但同时其上限或许不如Transformer高；而Transformer一开始就是全局感受野，使得需要更多数据来帮助模型学到某种特定pattern（如某种local bias），但当数据充足时，Transformer的上限更高，近期非常火的pretrained model GPT/GPT-2.0/Bert似乎也印证了这点。</p>
+<hr>
+<h2 id="2️⃣-Attentional-pooling-for-action-recognition"><a href="#2️⃣-Attentional-pooling-for-action-recognition" class="headerlink" title="2️⃣[Attentional pooling for action recognition]"></a>2️⃣[Attentional pooling for action recognition]</h2><p>提出一种基于attention的pooling策略，采用低秩近似的方法，使得模型能够在计算量不增加很多的情况下达到更好的效果。可以将该方法理解成对二阶pooling的低秩近似。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h4 id="一阶pooling"><a href="#一阶pooling" class="headerlink" title="一阶pooling"></a>一阶pooling</h4><p>记$X \in R^{n \times f}$为被pooling的层，其中n为空间位置的个数，如$16\times 16$，$f$为channel个数。标准的sum/max pooling将该矩阵缩减为$R^{f \times 1}$，然后使用全连接的权重$\mathbf{w} \in R^{f \times 1}$获得一个分类的分数。这里假设的是二分类，但可以很容易推广为多分类。</p>
+<p>上述操作形式化可以写成：</p>
+<script type="math/tex; mode=display">\operatorname{score}_{p o o l}(X)=\mathbf{1}^{T} X \mathbf{w}, \quad \text { where } \quad X \in R^{n \times f}, \mathbf{1} \in R^{n \times 1}, \mathbf{w} \in R^{f \times 1}</script><p>其中$\mathbf{1}$为全1向量，$\mathbf{x}=\mathbf{1}^{T} X \in R^{1 \times f}$就是通过sum pooling后的feature。</p>
+<h4 id="二阶pooling"><a href="#二阶pooling" class="headerlink" title="二阶pooling"></a>二阶pooling</h4><p>构建二阶feature $X^{T} X \in R^{f \times f}$，在获得二阶feature后，通常或向量化该矩阵，再送入全连接以做分类。也即我们会学习一个$f\times f$的全连接权重向量。若保持二阶feature与对应的全连接权重向量的形式为矩阵，矩阵相乘，其中的迹实际上就是这两个向量化后的矩阵所做内积获得的分数。形式化可以写成：</p>
+<script type="math/tex; mode=display">\text {score}_{order2}(X)=\operatorname{Tr}\left(X^{T} X W^{T}\right), \quad \text { where } \quad X \in R^{n \times f}, W \in R^{f \times f}</script><p>这可以用迹的定义去证明：示意图<br><img src="/images/15540862875594.jpg" width="100%" height="50%"></p>
+<h4 id="低秩二阶pooling"><a href="#低秩二阶pooling" class="headerlink" title="低秩二阶pooling"></a>低秩二阶pooling</h4><p>现尝试使用低秩去近似该二阶pooling，也即对$W$近似，将$W$写成两个向量的乘积，也即：</p>
+<script type="math/tex; mode=display">W=\mathbf{a b}^{T} \text { where } \mathbf{a}, \mathbf{b} \in R^{f \times 1}</script><p>将上式代入二阶pooling，可获得：</p>
+<script type="math/tex; mode=display">\begin{aligned} \text {score}_{\text {attention}}(X) &=\operatorname{Tr}\left(X^{T} X \mathbf{b a}^{T}\right), \quad \text { where } \quad X \in R^{n \times f}, \mathbf{a}, \mathbf{b} \in R^{f \times 1} \\ &=\operatorname{Tr}\left(\mathbf{a}^{T} X^{T} X \mathbf{b}\right) \\ &=\mathbf{a}^{T} X^{T} X \mathbf{b} \\ &=\mathbf{a}^{T}\left(X^{T}(X \mathbf{b})\right) \end{aligned}</script><p>第二行使用的是迹的定理：$\operatorname{Tr}(A B C)=\operatorname{Tr}(C A B)$<br>第三行使用的是标量的迹等于标量本身。<br>最后一行表明整个流程：给定一个feature map $X$，首先计算一个对所有空间位置的attentional map：$\mathbf{h}= {X \mathbf{b} \in R^{n \times 1}}$；然后根据该attentional map计算加权平均的feature：$\mathbf{x}=X^{T} \mathbf{h} \in R^{f \times 1}$。该feature再通过线性层获得最终的分数。</p>
+<p>实际上上式还有其他理解的角度：</p>
+<script type="math/tex; mode=display">\begin{aligned} \text {score}_{\text {attention}}(X) &=\left((X \mathbf{a})^{T} X\right) \mathbf{b} \\ &=(X \mathbf{a})^{T}(X \mathbf{b}) \end{aligned}</script><p>第一行表明attentional map也可以通过$X \mathbf{a} \in R^{n \times 1}$来计算，$\mathbf{b}$来做classifier。<br>第二行表明，该式子本质上是对称的，可以看成<strong>两个attentional heapmap的内积</strong>。</p>
+<p>下图是整个流程：<br><img src="/images/15540869385196.jpg" width="80%" height="50%"></p>
+<h4 id="Top-down-attention"><a href="#Top-down-attention" class="headerlink" title="Top-down attention"></a>Top-down attention</h4><p>现将二分类推广为多分类：</p>
+<script type="math/tex; mode=display">\text {score}_{order2}(X, k)=\operatorname{Tr}\left(X^{T} X W_{k}^{T}\right), \quad \text { where } \quad X \in R^{n \times f}, W_{k} \in R^{f \times f}</script><p>也即将$W$替换成类相关的参数，仿照上面的推导，可以推出每个类都有特定的$\boldsymbol{a}_{k}$与$\boldsymbol{b}_{k}$。</p>
+<p>但在这里通过固定其中一个参数为与类无关的参数，也即$\boldsymbol{b}_{k}=\boldsymbol{b}$。实际上就等价于一个是类相关的top-down attention；另一个是类无关的bottom-up attention。一个获得类特定的特征；另一个获得全局通用的特征。</p>
+<p>因此最终低秩attention model为：</p>
+<script type="math/tex; mode=display">\text {score}_{attention}(X, k)=\mathbf{t}_{k}^{T} \mathbf{h}, \quad \text { where } \quad \mathbf{t}_{k}=X \mathbf{a}_{k}, \mathbf{h}=X \mathbf{b}</script><h4 id="Average-pooling-Revisited"><a href="#Average-pooling-Revisited" class="headerlink" title="Average-pooling Revisited"></a>Average-pooling Revisited</h4><p>当然在给定了上述一系列的推导，我们对average-pooling重新进行形式化：</p>
+<script type="math/tex; mode=display">\text {score}_{top-down}(X, k)=\mathbf{1}^{T} X \mathbf{w}_{k}=\mathbf{1}^{T} \mathbf{t}_{k} \quad \text { where } \quad \mathbf{t}_{k}=X \mathbf{w}_{k}</script><p>将$\mathbf{w}$替换成类相关的$\mathbf{w}_{k}$，实际上就是将二分类推广为多分类。但该形式赋予了average-pooling新的理解。</p>
+<p>当然，我们还可以将rank-1推广为rank-k，实验证明对于大数据集使用大的秩会更好。</p>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><h4 id="与Self-attentive的联系"><a href="#与Self-attentive的联系" class="headerlink" title="与Self-attentive的联系"></a>与Self-attentive的联系</h4><p>论文[A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING]就提出了利用可学习的head对feature进行attention加权平均的方法，并且将一个head推广到多个head。<br>实际上在$\mathbf{h}= {X \mathbf{b} \in R^{n \times 1}}$我们就可以看出，$\mathbf{b}$在这里扮演的角色就是self-attentive的head的角色。对于秩为1的近似，就是head为1的情况，若将秩为1推广为秩为k，也即等价于在Self-attentive中多个head的情况。</p>
+<p>本文巧妙的地方在于head有两个作用，一种是top-down的head，获得的是类相关的feature；另一个是bottom-up的feature，获得的是通用的feature。并且本文通过巧妙的数学推导来获得新的解释，本来仅仅是二阶feature过一个全连接，但通过公式推导赋予了attention的解释，这点让人眼前一亮。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/03/31/诗词&句/每周诗词21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/31/诗词&句/每周诗词21/" itemprop="url">每周诗词21</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T11:00:14+08:00">
+                2019-03-31
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-31T11:02:39+08:00">
+                2019-03-31
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣醉落魄-·-席上呈元素"><a href="#1️⃣醉落魄-·-席上呈元素" class="headerlink" title="1️⃣醉落魄 · 席上呈元素"></a>1️⃣醉落魄 · 席上呈元素</h3><p>[宋] 苏轼<br>分携如昨，人生到处萍飘泊。偶然相聚还离索。多病多愁，须信从来错。<br><strong>尊前一笑休辞却，天涯同是伤沦落</strong>。故山犹负平生约。西望峨嵋，长羡归飞鹤。</p>
+<p><a href="http://lib.xcz.im/work/57c467a86be3ff0058452840" target="_blank" rel="noopener">http://lib.xcz.im/work/57c467a86be3ff0058452840</a></p>
+<hr>
+<h3 id="2️⃣戏为六绝句"><a href="#2️⃣戏为六绝句" class="headerlink" title="2️⃣戏为六绝句"></a>2️⃣戏为六绝句</h3><p>[唐] 杜甫<br>【其一】<br>庾信文章老更成，凌云健笔意纵横。<br>今人嗤点流传赋，不觉前贤畏后生。</p>
+<p>【其三】<br>纵使卢王操翰墨，劣于汉魏近风骚。<br>龙文虎脊皆君驭，历块过都见尔曹。</p>
+<p>过都历块 (guò dōu lì kuài)<br>解释：越过都市，经过山阜。意指纵横驰骋，施展才能。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/03/24/论文/每周论文14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/24/论文/每周论文14/" itemprop="url">每周论文14</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-24T09:57:30+08:00">
+                2019-03-24
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-24T10:54:54+08:00">
+                2019-03-24
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本周论文:</p>
+<ol>
+<li>Is Second-order Information Helpful for Large-scale Visual Recognition?</li>
+<li>The Treasure beneath Convolutional Layers: Cross-convolutional-layer Pooling for Image Classification</li>
+</ol>
+<h2 id="1️⃣-Is-Second-order-Information-Helpful-for-Large-scale-Visual-Recognition"><a href="#1️⃣-Is-Second-order-Information-Helpful-for-Large-scale-Visual-Recognition" class="headerlink" title="1️⃣[Is Second-order Information Helpful for Large-scale Visual Recognition?]"></a>1️⃣[Is Second-order Information Helpful for Large-scale Visual Recognition?]</h2><p>通过协方差的方法获得图像的二阶信息。<br>参考了<a href="https://zhuanlan.zhihu.com/p/46864160" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/46864160</a></p>
+<p>深度分类网络主要分为两个部分：特征提取和分类器。无论是VGG还是GoogleNet，后来的Resnet、Densenet，在连接分类器之前，一般都连接了一个Pooling层。<br>但pooling只获得了feature的一阶信息，对于细分类问题中类间差异不显著，一阶信息可能有一些不适用，因此我们可以通过一阶信息获得二阶信息，从而获取更有价值的信息。</p>
+<p>本文通过获取<strong>特征协方差</strong>的方法，以达到该目的。</p>
+<p>输入:$\mathbf{X} \in \mathbb{R}^{d \times N}$</p>
+<p>则协方差矩阵为$\mathbf{X} \mapsto \mathbf{P}, \quad \mathbf{P}=\mathbf{X} \overline{\mathbf{I}} \mathbf{X}^{T}$，其中$\overline{\mathbf{I}}=\frac{1}{N}\left(\mathbf{I}-\frac{1}{N} \mathbf{1} \mathbf{1}^{T}\right)$, $\mathbf{I}$是单位阵，$\mathbf{1}$是全1的向量。</p>
+<p>协方差矩阵是半正定矩阵，因此可写成$\mathbf{P} \mapsto(\mathbf{U}, \mathbf{\Lambda}), \quad \mathbf{P}=\mathbf{U} \mathbf{\Lambda} \mathbf{U}^{T}$，其中$\boldsymbol{\Lambda}=\operatorname{diag}\left(\lambda_{1}, \ldots, \lambda_{d}\right)$，$\mathbf{U}=\left[\mathbf{u}_{1}, \dots, \mathbf{u}_{d}\right]$，$\mathbf{U}$是对应的特征向量。</p>
+<p>最终可获得$\mathbf{Q}$矩阵：$(\mathbf{U}, \boldsymbol{\Lambda}) \mapsto \mathbf{Q}, \mathbf{Q} \triangleq \mathbf{P}^{\alpha}=\mathbf{U F}(\mathbf{\Lambda}) \mathbf{U}^{T}$，其中$\alpha$是一个正实数，$\mathbf{F}(\boldsymbol{\Lambda})=\operatorname{diag}\left(f\left(\lambda_{1}\right), \ldots, f\left(\lambda_{d}\right)\right)$，其中$f\left(\lambda_{i}\right)=\lambda_{i}^{\alpha}$，是特征值的幂，如果要做归一化，那么可以有：</p>
+<script type="math/tex; mode=display">f\left(\lambda_{i}\right)=\left\{\begin{array}{cc}{\lambda_{i}^{\alpha} / \lambda_{1}^{\alpha}} & {\text { for MPN+M }-\ell_{2}} \\ {\lambda_{i}^{\alpha} /\left(\sum_{k} \lambda_{k}^{2 \alpha}\right)^{\frac{1}{2}}} & {\text { for MPN+M-Fro }}\end{array}\right.</script><p>之所以取幂，是为了解决在协方差估计中小样本高维度的问题，以resnet为例，最后得到的feature为7X7X512，也就是49个512维的feature，这样估计出来的协方差矩阵是不靠谱的，而通过幂这个操作，可以解决这一问题。通过实验可以发现，当幂次为0.5也就是平方根操作时，效果最优。（似乎类似的有word2vec的平滑）</p>
+<p>（虽然这篇有些看不大懂，但一个启发就是，可以通过协方差的方式进行特征之间的交互）</p>
+<hr>
+<h2 id="2️⃣-The-Treasure-beneath-Convolutional-Layers-Cross-convolutional-layer-Pooling-for-Image-Classification"><a href="#2️⃣-The-Treasure-beneath-Convolutional-Layers-Cross-convolutional-layer-Pooling-for-Image-Classification" class="headerlink" title="2️⃣[The Treasure beneath Convolutional Layers: Cross-convolutional-layer Pooling for Image Classification]"></a>2️⃣[The Treasure beneath Convolutional Layers: Cross-convolutional-layer Pooling for Image Classification]</h2><p>提出使用卷积出来后的feature经过pooling作为最后的图像特征表示而不是全连接后的特征表示。</p>
+<p>Motivation：只使用最后一层fc的特征有一个缺点，就是丢失位置信息，而convolution layer包含了丰富的空间信息。在pooling完后每个local区域都能获得一个特征，并拼接起来作为最后的表示。</p>
+<p><img src="/images/15533936911589.jpg" width="60%" height="50%"></p>
+<p>prerequisite:<br>①首先有一个预训练好的模型<br>②有两层一样$H\times W$的convolution。论文以AlexNet作为例子</p>
+<p>假设卷积后的feature map是$H × W × D$，那么可以理解成，我们将图片分为$H × W$的区域，每个区域的特征用$D$维表示。我们称每个$D$维特征一个spatial unit。当使用全连接时，这部分的空间信息就丢失了，并且无法还原。</p>
+<p>本文提出，将每个区域提取出一个特征，然后拼起来组成一整张图的特征，如下图，每个长条（也即$1\times 1\times channel$）作为一个特征：</p>
+<p><img src="/images/15533939765641.jpg" width="50%" height="50%"></p>
+<p>如何判断区域？一种方法是首先检测出多个区域，每个区域对应一种object part，然后对于落入该区域的特征进行pooling，给定D种human-specified object parts，那么可以获得D个feature且拼在一起。</p>
+<script type="math/tex; mode=display">\mathbf{P}_{k}^{t}=\sum_{i=1} \mathbf{x}_{i} I_{i, k}</script><p>具体而言，$\mathbf{x}_{i}$是特征，$I_{i, k}$是二元的indicator，表明$\mathbf{x}_{i}$是否落入该区域，每个$I$实际上定义了一个池化通道。当然，这里可以进一步将indicator从二元扩展为权重。</p>
+<p>但在实现的过程中，并没有human-specified的区域。这里我们就借助下一层的卷积作为indicator。</p>
+<blockquote>
+<p>By doing so, D t+1 pooling channels are created for the local features extracted from the tth convolutional layer</p>
+</blockquote>
+<p>这也就被称为cross-convolutional-layer pooling。</p>
+<p>如何做？</p>
+<blockquote>
+<p>the filter of a convolutional layer works as a part detector and its feature map serves a similar role as the part region indicator map.</p>
+</blockquote>
+<p>具体而言，有：</p>
+<script type="math/tex; mode=display">\begin{array}{l}{\mathbf{P}^{t}=\left[\mathbf{P}_{1}^{t}, \mathbf{P}_{2}^{t}, \cdots, \mathbf{P}_{k}^{t}, \cdots, \mathbf{P}_{D_{t+1}}^{t}\right]} \\ {\text { where, } \mathbf{P}_{k}^{t}=\sum_{i=1}^{N_{t}} \mathbf{x}_{i}^{t} a_{i, k}^{t+1}}\end{array}</script><p>$\mathbf{P}^{t}$表示第t层convolution在卷积过后做cross-pooling后的特征集合，也即我们要获得的表示，该表示通过$D_{t+1}$次pooling后的结果拼接而成。$D_{t+1}$具体来说，就是第t+1层的卷积的channel维数。假设$\mathbf{a}_{i}^{t+1} \in \mathbb{R}^{D_{t+1}}$是第t+1层convolution的第i个空间单位（spatial unit）的feature vector，其中$a_{i, k}^{t+1}$是该向量的一个值，该值就作为pooling的权重。</p>
+<p>上述有些绕口且难懂，直接看例子：<br><img src="/images/15533957004853.jpg" width="80%" height="50%"><br><img src="/images/15533957336100.jpg" width="80%" height="50%"></p>
+<p>即，第t+1层convolution的channel维度为多少，则pooling后的特征个数即为多少。因为第t层与第t+1层的$H\times W$是一致的，那么可以用t+1层的每个slice去对第t层的convolution进行加权。</p>
+<p>为什么这样是合理的？<br>因为第t+1层的convolution提取了$D_{t+1}$个特征，使用的是$m\times n$的kernel size，如果$x$是被$m\times n$的某个kernel提取了，那么很自然的，$x$就是对应该kernel提取出来的feature的一个spatial unit。说白了就是第t层与第t+1层的空间对应。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/03/23/诗词&句/每周诗词20/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/23/诗词&句/每周诗词20/" itemprop="url">每周诗词20</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-23T17:32:14+08:00">
+                2019-03-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-23T17:35:11+08:00">
+                2019-03-23
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣杂诗七首（其四）"><a href="#1️⃣杂诗七首（其四）" class="headerlink" title="1️⃣杂诗七首（其四）"></a>1️⃣杂诗七首（其四）</h3><p>[三国] 曹植<br>南国有佳人，容华若桃李。<br>朝游江北岸，夕宿潇湘沚。<br>时俗薄朱颜，谁为发皓齿？<br>俯仰岁将暮，荣耀难久恃。</p>
+<p><a href="http://lib.xcz.im/work/58ad4c78ac502e007e9f6f9f" target="_blank" rel="noopener">http://lib.xcz.im/work/58ad4c78ac502e007e9f6f9f</a></p>
+<hr>
+<h3 id="2️⃣梦江南"><a href="#2️⃣梦江南" class="headerlink" title="2️⃣梦江南"></a>2️⃣梦江南</h3><p>[唐] 温庭筠<br>千万恨，恨极在天涯。山月不知心里事，水风空落眼前花，摇曳碧云斜。</p>
+<p><a href="http://lib.xcz.im/work/57b8d0c77db2a2005425c856" target="_blank" rel="noopener">http://lib.xcz.im/work/57b8d0c77db2a2005425c856</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/03/17/论文/每周论文13/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -333,8 +950,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-17T22:32:09+08:00">
-                2019-03-17
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-19T15:41:14+08:00">
+                2019-03-19
               </time>
             
           </span>
@@ -387,7 +1004,7 @@
 <blockquote>
 <p>To make use of the information aggregated in the squeeze operation, we follow it with a second operation which aims to fully capture channel-wise dependencies. To fulfill this objective, the function must meet two criteria: first, it must be ﬂexible (in particular, it must be capable of learning a nonlinear interaction between channels) and second, it must learn a non-mutually-exclusive relationship since we would like to ensure that multiple channels are allowed to be emphasised (rather than enforcing a one-hot activation). To meet these criteria, we opt to employ a simple gating mechanism with a sigmoid activation.</p>
 </blockquote>
-<p>最后对每个channel进行加权：</p>
+<p>最后对每个channel进行<strong>放缩</strong>，获得新的表示：</p>
 <script type="math/tex; mode=display">\widetilde{\mathbf{x}}_{c}=\mathbf{F}_{\text {scale}}\left(\mathbf{u}_{c}, s_{c}\right)=s_{c} \cdot \mathbf{u}_{c}</script><hr>
 <h2 id="3️⃣-Non-local-Neural-Networks"><a href="#3️⃣-Non-local-Neural-Networks" class="headerlink" title="3️⃣[Non-local Neural Networks]"></a>3️⃣[Non-local Neural Networks]</h2><p>提出一种新的结构，与上一篇类似，希望模型的每个位置都能感知到其他位置，从而捕获长程依赖，拥有全局信息。</p>
 <p><img src="/images/15528297540165.jpg" width="60%" height="50%"></p>
@@ -1203,574 +1820,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/01/06/代码相关/代码记录15/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/06/代码相关/代码记录15/" itemprop="url">代码片段记录15</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T10:18:30+08:00">
-                2019-01-06
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-06T10:24:16+08:00">
-                2019-01-06
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-flatten-multi-dimentional-list"><a href="#1️⃣-flatten-multi-dimentional-list" class="headerlink" title="1️⃣[flatten multi-dimentional list]"></a>1️⃣[flatten multi-dimentional list]</h3><p>对多层嵌套的list进行展平。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flatten</span><span class="params">(nestedList)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">aux</span><span class="params">(listOrItem)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(listOrItem, list):</span><br><span class="line">            <span class="keyword">for</span> elem <span class="keyword">in</span> listOrItem:</span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> aux(elem):</span><br><span class="line">                    <span class="keyword">yield</span> item</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">yield</span> listOrItem</span><br><span class="line">    <span class="keyword">return</span> list(aux(nestedList))</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="2️⃣-sorted-index"><a href="#2️⃣-sorted-index" class="headerlink" title="2️⃣[sorted index]"></a>2️⃣[sorted index]</h3><p>使用内置方法获得排好序的index</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sorted_index=[i[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> sorted(enumerate(sent_length),</span><br><span class="line">                                    key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>],</span><br><span class="line">                                    reverse=self.reverse)]</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/01/06/论文/每周论文11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/06/论文/每周论文11/" itemprop="url">每周论文11</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T09:58:30+08:00">
-                2019-01-06
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-07T10:11:24+08:00">
-                2019-01-07
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1️⃣-Multi-Head-Attention-with-Disagreement-Regularization"><a href="#1️⃣-Multi-Head-Attention-with-Disagreement-Regularization" class="headerlink" title="1️⃣[Multi-Head Attention with Disagreement Regularization]"></a>1️⃣[Multi-Head Attention with Disagreement Regularization]</h2><p>EMNLP的短文。</p>
-<p>鼓励transformer中head与head之间的差异。</p>
-<p>加了三种正则化方法：<br>①on subspace<br><img src="/images/15467399912055.jpg" width="40%" height="50%"></p>
-<p>②on attention position<br><img src="/images/15467400218650.jpg" width="40%" height="50%"></p>
-<p>③on output<br><img src="/images/15467400417247.jpg" width="40%" height="50%"></p>
-<p>没什么亮点。</p>
-<hr>
-<h2 id="2️⃣-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overﬁtting"><a href="#2️⃣-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overﬁtting" class="headerlink" title="2️⃣[Dropout: A Simple Way to Prevent Neural Networks from Overﬁtting]"></a>2️⃣[Dropout: A Simple Way to Prevent Neural Networks from Overﬁtting]</h2><p>经典论文。<br>dropout方法很简单，但如何想到，其背后的intuition，以及一些现象很有启发意义。<br>仅罗列一些intuition/motivation以及现象：</p>
-<ol>
-<li>网络复杂关系学到很多噪声，导致overfitting</li>
-<li>最好的regularization方法是对所有的parameter setting的结果进行average。这就是贝叶斯方法， dropout是对该方法进行近似，论文也提到了model combination</li>
-<li>dropout能够减少unit之间复杂的co-adaptation，能够更鲁棒，也就是说，不需要依赖其他unit去纠正自己的错误。each hidden unit in a neural network trained with dropout must learn to work with a randomly chosen sample of other units. This should make each hidden unit more robust and drive it towards creating useful features on its own without relying on other hidden units to correct its mistakes</li>
-<li>dropout的特性：sparsity。标准的网络在训练过程中会固化其他unit的错误，导致复杂的co-adaptation，但这种复杂的adaptation会导致泛化性的降低，因为对于未见到的数据这种复杂的adaptation是没用的。因此dropout的网络中每个unit都要学会自己纠正自己的错误，因此每个unit能够独立学到数据的一部分特性。dropout会导致稀疏化，每次都只会有一小部分的activation高。使用dropout配合高的学习率比较好，因为dropout可能会导致gradient之间互相cancel，同时也可以使用高的momentum。</li>
-</ol>
-<p><img src="/images/15467404963033.jpg" width="80%" height="50%"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/31/碎片知识/关于Pytorch中index_copy_及其思考/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/31/碎片知识/关于Pytorch中index_copy_及其思考/" itemprop="url">关于Pytorch中index_copy_及其思考</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T17:39:14+08:00">
-                2018-12-31
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-31T17:53:21+08:00">
-                2018-12-31
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前几日因为in-place操作的问题，debug了好几天，最终才发现问题。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">output,_=pad_packed_sequence(output,batch_first=<span class="keyword">True</span>)</span><br><span class="line">output=output.index_copy(<span class="number">0</span>,torch.tensor(sorted_index),output)</span><br></pre></td></tr></table></figure>
-<p>因为Pytorch中pack_sequence需要将batch按长度排列，我在过完GRU后需要将其顺序还原，在这边sorted_index即是记录原来index映射。</p>
-<p>然而我在写的时候，参考的是官方的example：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.zeros(<span class="number">5</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t = torch.tensor([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]], dtype=torch.float)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>index = torch.tensor([<span class="number">0</span>, <span class="number">4</span>, <span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.index_copy_(<span class="number">0</span>, index, t)</span><br><span class="line">tensor([[ <span class="number">1.</span>,  <span class="number">2.</span>,  <span class="number">3.</span>],</span><br><span class="line">        [ <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>],</span><br><span class="line">        [ <span class="number">7.</span>,  <span class="number">8.</span>,  <span class="number">9.</span>],</span><br><span class="line">        [ <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>],</span><br><span class="line">        [ <span class="number">4.</span>,  <span class="number">5.</span>,  <span class="number">6.</span>]])</span><br></pre></td></tr></table></figure>
-<p>因此我也不假思索地写：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">output,_=pad_packed_sequence(output,batch_first=<span class="keyword">True</span>)</span><br><span class="line">output=output.index_copy_(<span class="number">0</span>,torch.tensor(sorted_index),output)</span><br></pre></td></tr></table></figure></p>
-<p>就因为多了一个_，导致逻辑和我想象中的不一样。</p>
-<p>一个简单的例子展示为什么这么是错的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x=torch.Tensor([<span class="number">21</span>,<span class="number">42</span>,<span class="number">45</span>,<span class="number">59</span>])</span><br><span class="line"></span><br><span class="line">print(x)  <span class="comment"># tensor([21., 42., 45., 59.])</span></span><br><span class="line"></span><br><span class="line">index=torch.tensor([<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">x=x.index_copy_(<span class="number">0</span>,index,x)</span><br><span class="line"></span><br><span class="line">print(x)  <span class="comment"># tensor([21., 21., 21., 59.])</span></span><br></pre></td></tr></table></figure>
-<p>由于是in-place操作，第一步，将index=0的数值（也即21）复制到index=1的地方，此时变成[21,21,45,59]；接着将index=1的数值复制到index=2的位置上，注意到之前已经是in-place操作，因此此时取的不是想象中的42，而是已经被替换的21。后面的也是如此。</p>
-<p>正确的做法只需要去掉in-place即可。</p>
-<hr>
-<p>已经好几次遇到in-place的问题了，在每次做in-place操作时，都要警惕。应尽可能避免in-place操作。实际上Pytorch官方也不建议使用in-place操作。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/29/代码相关/代码记录14/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/29/代码相关/代码记录14/" itemprop="url">代码片段记录14</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-29T19:29:30+08:00">
-                2018-12-29
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-29T22:34:20+08:00">
-                2018-12-29
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-shuffle-list"><a href="#1️⃣-shuffle-list" class="headerlink" title="1️⃣[shuffle list]"></a>1️⃣[shuffle list]</h3><p>shuffle list可以使用random的shuffle函数，亦即：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">l=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">shuffle(l)  <span class="comment"># in place operation</span></span><br></pre></td></tr></table></figure>
-<p>而想要shuffle两个对应list，也即等长且一一对应的list，则可以：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># borrow from stackoverflow</span></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shuffle</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    <span class="keyword">assert</span> len(a) == len(b)</span><br><span class="line">    start_state = random.getstate()</span><br><span class="line">    random.shuffle(a)</span><br><span class="line">    random.setstate(start_state)</span><br><span class="line">    random.shuffle(b)</span><br><span class="line"></span><br><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line">b = [<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">15</span>,<span class="number">16</span>,<span class="number">17</span>,<span class="number">18</span>,<span class="number">19</span>]</span><br><span class="line">shuffle(a,b)</span><br><span class="line">print(a) <span class="comment"># [9, 7, 3, 1, 2, 5, 4, 8, 6]</span></span><br><span class="line">print(b) <span class="comment"># [19, 17, 13, 11, 12, 15, 14, 18, 16]</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="2️⃣-inverse-tensor"><a href="#2️⃣-inverse-tensor" class="headerlink" title="2️⃣[inverse tensor]"></a>2️⃣[inverse tensor]</h3><p>Pytorch目前还不支持步进为负的情况，因此不能使用类似Python的<code>l[::-1]</code>的方法reverse tensor。<br>一种解决方案：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">inv_idx = torch.arange(tensor.size(<span class="number">0</span>)<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>).long()</span><br><span class="line"><span class="comment"># or equivalently torch.range(tensor.size(0)-1, 0, -1).long()</span></span><br><span class="line">inv_tensor = tensor.index_select(<span class="number">0</span>, inv_idx)</span><br><span class="line"><span class="comment"># or equivalently</span></span><br><span class="line">inv_tensor = tensor[inv_idx]</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="3️⃣-GRU-initialization"><a href="#3️⃣-GRU-initialization" class="headerlink" title="3️⃣[GRU initialization]"></a>3️⃣[GRU initialization]</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_gru_init</span><span class="params">(self)</span>:</span>   <span class="comment"># use orthogonal seems better</span></span><br><span class="line">    nn.init.orthogonal_(self.word_RNN.weight_ih_l0.data)  <span class="comment">#没有data不行，会报leaf variable in-place错误，可能weight_ih_l0不是parameter</span></span><br><span class="line">    nn.init.orthogonal_(self.word_RNN.weight_hh_l0.data)</span><br><span class="line">    self.word_RNN.bias_ih_l0.data.zero_()</span><br><span class="line">    self.word_RNN.bias_hh_l0.data.zero_()</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="4️⃣-sort-counter"><a href="#4️⃣-sort-counter" class="headerlink" title="4️⃣[sort counter]"></a>4️⃣[sort counter]</h3><p>需求：统计document的句子个数的分布，并按照长度顺序排列。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">n_sents=[len(sentences) <span class="keyword">for</span> sentences <span class="keyword">in</span> documents]</span><br><span class="line">n_lengths=Counter(n_sents)</span><br><span class="line">n_lengths=sorted(n_lengths.items())</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1825,7 +1874,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">121</span>
+                  <span class="site-state-item-count">125</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1838,7 +1887,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">144</span>
+                  <span class="site-state-item-count">148</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

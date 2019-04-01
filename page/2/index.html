@@ -286,6 +286,574 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/01/06/代码相关/代码记录15/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/06/代码相关/代码记录15/" itemprop="url">代码片段记录15</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T10:18:30+08:00">
+                2019-01-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-06T10:24:16+08:00">
+                2019-01-06
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣-flatten-multi-dimentional-list"><a href="#1️⃣-flatten-multi-dimentional-list" class="headerlink" title="1️⃣[flatten multi-dimentional list]"></a>1️⃣[flatten multi-dimentional list]</h3><p>对多层嵌套的list进行展平。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flatten</span><span class="params">(nestedList)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">aux</span><span class="params">(listOrItem)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(listOrItem, list):</span><br><span class="line">            <span class="keyword">for</span> elem <span class="keyword">in</span> listOrItem:</span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> aux(elem):</span><br><span class="line">                    <span class="keyword">yield</span> item</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">yield</span> listOrItem</span><br><span class="line">    <span class="keyword">return</span> list(aux(nestedList))</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="2️⃣-sorted-index"><a href="#2️⃣-sorted-index" class="headerlink" title="2️⃣[sorted index]"></a>2️⃣[sorted index]</h3><p>使用内置方法获得排好序的index</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sorted_index=[i[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> sorted(enumerate(sent_length),</span><br><span class="line">                                    key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>],</span><br><span class="line">                                    reverse=self.reverse)]</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/01/06/论文/每周论文11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/06/论文/每周论文11/" itemprop="url">每周论文11</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T09:58:30+08:00">
+                2019-01-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-07T10:11:24+08:00">
+                2019-01-07
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1️⃣-Multi-Head-Attention-with-Disagreement-Regularization"><a href="#1️⃣-Multi-Head-Attention-with-Disagreement-Regularization" class="headerlink" title="1️⃣[Multi-Head Attention with Disagreement Regularization]"></a>1️⃣[Multi-Head Attention with Disagreement Regularization]</h2><p>EMNLP的短文。</p>
+<p>鼓励transformer中head与head之间的差异。</p>
+<p>加了三种正则化方法：<br>①on subspace<br><img src="/images/15467399912055.jpg" width="40%" height="50%"></p>
+<p>②on attention position<br><img src="/images/15467400218650.jpg" width="40%" height="50%"></p>
+<p>③on output<br><img src="/images/15467400417247.jpg" width="40%" height="50%"></p>
+<p>没什么亮点。</p>
+<hr>
+<h2 id="2️⃣-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overﬁtting"><a href="#2️⃣-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overﬁtting" class="headerlink" title="2️⃣[Dropout: A Simple Way to Prevent Neural Networks from Overﬁtting]"></a>2️⃣[Dropout: A Simple Way to Prevent Neural Networks from Overﬁtting]</h2><p>经典论文。<br>dropout方法很简单，但如何想到，其背后的intuition，以及一些现象很有启发意义。<br>仅罗列一些intuition/motivation以及现象：</p>
+<ol>
+<li>网络复杂关系学到很多噪声，导致overfitting</li>
+<li>最好的regularization方法是对所有的parameter setting的结果进行average。这就是贝叶斯方法， dropout是对该方法进行近似，论文也提到了model combination</li>
+<li>dropout能够减少unit之间复杂的co-adaptation，能够更鲁棒，也就是说，不需要依赖其他unit去纠正自己的错误。each hidden unit in a neural network trained with dropout must learn to work with a randomly chosen sample of other units. This should make each hidden unit more robust and drive it towards creating useful features on its own without relying on other hidden units to correct its mistakes</li>
+<li>dropout的特性：sparsity。标准的网络在训练过程中会固化其他unit的错误，导致复杂的co-adaptation，但这种复杂的adaptation会导致泛化性的降低，因为对于未见到的数据这种复杂的adaptation是没用的。因此dropout的网络中每个unit都要学会自己纠正自己的错误，因此每个unit能够独立学到数据的一部分特性。dropout会导致稀疏化，每次都只会有一小部分的activation高。使用dropout配合高的学习率比较好，因为dropout可能会导致gradient之间互相cancel，同时也可以使用高的momentum。</li>
+</ol>
+<p><img src="/images/15467404963033.jpg" width="80%" height="50%"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/31/碎片知识/关于Pytorch中index_copy_及其思考/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/31/碎片知识/关于Pytorch中index_copy_及其思考/" itemprop="url">关于Pytorch中index_copy_及其思考</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T17:39:14+08:00">
+                2018-12-31
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-31T17:53:21+08:00">
+                2018-12-31
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前几日因为in-place操作的问题，debug了好几天，最终才发现问题。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">output,_=pad_packed_sequence(output,batch_first=<span class="keyword">True</span>)</span><br><span class="line">output=output.index_copy(<span class="number">0</span>,torch.tensor(sorted_index),output)</span><br></pre></td></tr></table></figure>
+<p>因为Pytorch中pack_sequence需要将batch按长度排列，我在过完GRU后需要将其顺序还原，在这边sorted_index即是记录原来index映射。</p>
+<p>然而我在写的时候，参考的是官方的example：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.zeros(<span class="number">5</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t = torch.tensor([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]], dtype=torch.float)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>index = torch.tensor([<span class="number">0</span>, <span class="number">4</span>, <span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.index_copy_(<span class="number">0</span>, index, t)</span><br><span class="line">tensor([[ <span class="number">1.</span>,  <span class="number">2.</span>,  <span class="number">3.</span>],</span><br><span class="line">        [ <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>],</span><br><span class="line">        [ <span class="number">7.</span>,  <span class="number">8.</span>,  <span class="number">9.</span>],</span><br><span class="line">        [ <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>],</span><br><span class="line">        [ <span class="number">4.</span>,  <span class="number">5.</span>,  <span class="number">6.</span>]])</span><br></pre></td></tr></table></figure>
+<p>因此我也不假思索地写：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">output,_=pad_packed_sequence(output,batch_first=<span class="keyword">True</span>)</span><br><span class="line">output=output.index_copy_(<span class="number">0</span>,torch.tensor(sorted_index),output)</span><br></pre></td></tr></table></figure></p>
+<p>就因为多了一个_，导致逻辑和我想象中的不一样。</p>
+<p>一个简单的例子展示为什么这么是错的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x=torch.Tensor([<span class="number">21</span>,<span class="number">42</span>,<span class="number">45</span>,<span class="number">59</span>])</span><br><span class="line"></span><br><span class="line">print(x)  <span class="comment"># tensor([21., 42., 45., 59.])</span></span><br><span class="line"></span><br><span class="line">index=torch.tensor([<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">x=x.index_copy_(<span class="number">0</span>,index,x)</span><br><span class="line"></span><br><span class="line">print(x)  <span class="comment"># tensor([21., 21., 21., 59.])</span></span><br></pre></td></tr></table></figure>
+<p>由于是in-place操作，第一步，将index=0的数值（也即21）复制到index=1的地方，此时变成[21,21,45,59]；接着将index=1的数值复制到index=2的位置上，注意到之前已经是in-place操作，因此此时取的不是想象中的42，而是已经被替换的21。后面的也是如此。</p>
+<p>正确的做法只需要去掉in-place即可。</p>
+<hr>
+<p>已经好几次遇到in-place的问题了，在每次做in-place操作时，都要警惕。应尽可能避免in-place操作。实际上Pytorch官方也不建议使用in-place操作。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/29/代码相关/代码记录14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/29/代码相关/代码记录14/" itemprop="url">代码片段记录14</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-29T19:29:30+08:00">
+                2018-12-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-29T22:34:20+08:00">
+                2018-12-29
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣-shuffle-list"><a href="#1️⃣-shuffle-list" class="headerlink" title="1️⃣[shuffle list]"></a>1️⃣[shuffle list]</h3><p>shuffle list可以使用random的shuffle函数，亦即：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">l=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">shuffle(l)  <span class="comment"># in place operation</span></span><br></pre></td></tr></table></figure>
+<p>而想要shuffle两个对应list，也即等长且一一对应的list，则可以：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># borrow from stackoverflow</span></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shuffle</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    <span class="keyword">assert</span> len(a) == len(b)</span><br><span class="line">    start_state = random.getstate()</span><br><span class="line">    random.shuffle(a)</span><br><span class="line">    random.setstate(start_state)</span><br><span class="line">    random.shuffle(b)</span><br><span class="line"></span><br><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line">b = [<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">15</span>,<span class="number">16</span>,<span class="number">17</span>,<span class="number">18</span>,<span class="number">19</span>]</span><br><span class="line">shuffle(a,b)</span><br><span class="line">print(a) <span class="comment"># [9, 7, 3, 1, 2, 5, 4, 8, 6]</span></span><br><span class="line">print(b) <span class="comment"># [19, 17, 13, 11, 12, 15, 14, 18, 16]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="2️⃣-inverse-tensor"><a href="#2️⃣-inverse-tensor" class="headerlink" title="2️⃣[inverse tensor]"></a>2️⃣[inverse tensor]</h3><p>Pytorch目前还不支持步进为负的情况，因此不能使用类似Python的<code>l[::-1]</code>的方法reverse tensor。<br>一种解决方案：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">inv_idx = torch.arange(tensor.size(<span class="number">0</span>)<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>).long()</span><br><span class="line"><span class="comment"># or equivalently torch.range(tensor.size(0)-1, 0, -1).long()</span></span><br><span class="line">inv_tensor = tensor.index_select(<span class="number">0</span>, inv_idx)</span><br><span class="line"><span class="comment"># or equivalently</span></span><br><span class="line">inv_tensor = tensor[inv_idx]</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="3️⃣-GRU-initialization"><a href="#3️⃣-GRU-initialization" class="headerlink" title="3️⃣[GRU initialization]"></a>3️⃣[GRU initialization]</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_gru_init</span><span class="params">(self)</span>:</span>   <span class="comment"># use orthogonal seems better</span></span><br><span class="line">    nn.init.orthogonal_(self.word_RNN.weight_ih_l0.data)  <span class="comment">#没有data不行，会报leaf variable in-place错误，可能weight_ih_l0不是parameter</span></span><br><span class="line">    nn.init.orthogonal_(self.word_RNN.weight_hh_l0.data)</span><br><span class="line">    self.word_RNN.bias_ih_l0.data.zero_()</span><br><span class="line">    self.word_RNN.bias_hh_l0.data.zero_()</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="4️⃣-sort-counter"><a href="#4️⃣-sort-counter" class="headerlink" title="4️⃣[sort counter]"></a>4️⃣[sort counter]</h3><p>需求：统计document的句子个数的分布，并按照长度顺序排列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">n_sents=[len(sentences) <span class="keyword">for</span> sentences <span class="keyword">in</span> documents]</span><br><span class="line">n_lengths=Counter(n_sents)</span><br><span class="line">n_lengths=sorted(n_lengths.items())</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/29/碎片知识/每周碎片知识17/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1131,608 +1699,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/16/碎片知识/每周碎片知识15/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/16/碎片知识/每周碎片知识15/" itemprop="url">每周碎片知识15</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-16T10:55:14+08:00">
-                2018-12-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-18T18:18:09+08:00">
-                2018-12-18
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>在0.41的pytorch中，bernoulli的速度会比随机sample的速度慢很多；<br>在1.0中修复了该bug，但速度上还是随机sample快一点点。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Pytorch0.41</span><br><span class="line">Bernoulli  0.430371046066</span><br><span class="line">sample  0.24411702156</span><br><span class="line"></span><br><span class="line"># Pytorch1.0</span><br><span class="line">Bernoulli  0.256921529</span><br><span class="line">sample  0.25317035184</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以下二者等价</span></span><br><span class="line">mask = Bernoulli(gamma).sample(x.size()) <span class="comment"># slow</span></span><br><span class="line">mask = (torch.rand_like(x)&lt;gamma).float() <span class="comment"># faster</span></span><br></pre></td></tr></table></figure>
-<p>Reference:<br><a href="https://github.com/pytorch/pytorch/issues/6940" target="_blank" rel="noopener">https://github.com/pytorch/pytorch/issues/6940</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/16/论文/每周论文9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/16/论文/每周论文9/" itemprop="url">每周论文9</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-16T10:43:30+08:00">
-                2018-12-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-16T11:14:52+08:00">
-                2018-12-16
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1️⃣-Sentence-State-LSTM-for-Text-Representation"><a href="#1️⃣-Sentence-State-LSTM-for-Text-Representation" class="headerlink" title="1️⃣[Sentence-State LSTM for Text Representation]"></a>1️⃣[Sentence-State LSTM for Text Representation]</h2><p>提出一种新型的encode句子的方法。有点类似gather-distribute的想法。</p>
-<p><img src="/images/15449283844319.jpg" width="45%" height="50%"></p>
-<p>每个时间步t所有的h一起更新。更新方式是与其左右的点进行交互，同时与一个global representation进行交互。这样即考虑了local的信息也考虑了global的信息。每次更新都增加了信息交互，从3gram到5gram再到7gram…</p>
-<p>具体来说：<br>①如何求$h_i$<br><img src="/images/15449285619763.jpg" width="45%" height="50%"></p>
-<p>从公式可以看出，对于一个特定的$h_i$，同时考虑左右两点，以及global信息$g$，以及输入$x$。</p>
-<p>②如何求g<br><img src="/images/15449286595709.jpg" width="50%" height="50%"></p>
-<p>通过average同时考虑所有的词，同时考虑自己上一个状态。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/09/碎片知识/Python中的+=操作/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/09/碎片知识/Python中的+=操作/" itemprop="url">Python中的+=操作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T20:14:11+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-09T20:35:29+08:00">
-                2018-12-09
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前几日在写一段Pytorch代码时，又一次遇到了in-place操作的问题。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">output+=pos  <span class="comment"># pos是不可更新的tensor，output是可更新的tensor</span></span><br></pre></td></tr></table></figure>
-<p>程序报错：“one of the variables needed for gradient computation has been modified by an inplace operation”。</p>
-<p>无意中将代码改成<code>output=output+pos</code>，程序就不会报错了。</p>
-<p>在查阅了相关资料后，将我的思考整理下来。</p>
-<p>在Python中，<code>i=i+1</code>和<code>i+=1</code>是不同的，如果被操作数没有部署 ’<strong>iadd</strong>‘方法，则<code>i=i+1</code>和<code>i+=1</code>是等价的，’+=‘并不会产生in-place操作；当被操作数有部署该方法且正确部署，则是会产生in-place操作的。当没有in-place操作时，<code>i=i+1</code>表示对i重分配，也即i指向了另一个空间而不是原来的空间。</p>
-<p>所以，这样的例子就能解释清楚了：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">A = np.arange(<span class="number">12</span>).reshape(<span class="number">4</span>,<span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> A:</span><br><span class="line">    a = a + <span class="number">1</span></span><br><span class="line"><span class="comment"># A并没有被改变</span></span><br><span class="line">B = np.arange(<span class="number">12</span>).reshape(<span class="number">4</span>,<span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> b <span class="keyword">in</span> B:</span><br><span class="line">    b += <span class="number">1</span></span><br><span class="line"><span class="comment"># B被改变了</span></span><br></pre></td></tr></table></figure>
-<p>在Pytorch中，也有部署’<strong>iadd</strong>()‘操作，所以对于<code>output+=pos</code>，output内部的值被改变了，也即在计算图中引入了环，在反向求导时则会出错。</p>
-<p>因此，在Pytorch中，应当避免in-place的操作。</p>
-<p>Reference:<br><a href="https://stackoverflow.com/questions/41446833/what-is-the-difference-between-i-i-1-and-i-1-in-a-for-loop" target="_blank" rel="noopener">https://stackoverflow.com/questions/41446833/what-is-the-difference-between-i-i-1-and-i-1-in-a-for-loop</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/09/论文/每周论文8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/09/论文/每周论文8/" itemprop="url">每周论文8</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T09:57:30+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-16T11:08:16+08:00">
-                2018-12-16
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1️⃣-DiSAN-Directional-Self-Attention-Network-for-RNN-CNN-Free-Language-Understanding"><a href="#1️⃣-DiSAN-Directional-Self-Attention-Network-for-RNN-CNN-Free-Language-Understanding" class="headerlink" title="1️⃣[DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding]"></a>1️⃣[DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding]</h2><p>提出了两种attention机制，即 multi-dimentional attention和directional self-attention，在此基础上提出有向自注意力网络（directional self-attention network)</p>
-<h3 id="Multi-dimensional-Attention"><a href="#Multi-dimensional-Attention" class="headerlink" title="Multi-dimensional Attention"></a>Multi-dimensional Attention</h3><p>与传统的方法不同的是，对于每个词对，attention出来的不是标量而是向量。<br><img src="/images/15443239891184.jpg" width="60%" height="50%"></p>
-<p>计算公式：<br><img src="/images/15443240335179.jpg" width="40%" height="50%"></p>
-<p>$f$的维度与$q$相同，每一维代表的是$x_i$在该维对$q$的重要性。也即feature-wise的attention。因此对于$q$而言，其获得的加权求和向量为：<br><img src="/images/15443241367138.jpg" width="55%" height="50%"></p>
-<p>使用feature-wise的attention能够解决一次多义的问题，因为能够计算每一维的重要性，在不同的context下有不同的重要性。</p>
-<p>将其应用于self-attention中，有两种变体：<br>①token2token<br><img src="/images/15443242128118.jpg" width="58%" height="50%"></p>
-<p><img src="/images/15443242249947.jpg" width="20%" height="50%"></p>
-<p>因此x在交互完有：<br><img src="/images/15443242733208.jpg" width="35%" height="50%"></p>
-<p>②source2token<br><img src="/images/15443243090328.jpg" width="40%" height="50%"></p>
-<p>也即$x_i$没有和其他元素有交互。<br>可用作获得sentence encoding：<br><img src="/images/15443243968731.jpg" width="20%" height="50%"></p>
-<h3 id="Directional-Self-Attention"><a href="#Directional-Self-Attention" class="headerlink" title="Directional Self-Attention"></a>Directional Self-Attention</h3><p>使用mask达到有向性这一目的：<strong>通过mask矩阵将位置/方向编码进attention，解决时序丢失问题</strong>。<br>首先将x过一层获得新的h表示：<br><img src="/images/15443244421489.jpg" width="27%" height="50%"></p>
-<p>接着使用token2token求attention，这里为了减少参数作了一定改动，将W换成c，tanh替换σ。<br><img src="/images/15443245099821.jpg" width="53%" height="50%"></p>
-<p>$\textbf{1}$是全1的向量。M就是mask矩阵，代表i与j是否连通，Mask矩阵有：<br><img src="/images/15443248745747.jpg" width="28%" height="50%"></p>
-<p><img src="/images/15443248908199.jpg" width="31%" height="50%"></p>
-<p>也即：<br><img src="/images/15443249388350.jpg" width="50%" height="50%"></p>
-<p>首先mask掉自己，第二：分别mask掉forward和backward，类似biLSTM，只和前面或后面的交互。</p>
-<h3 id="Directional-Self-Attention-Network"><a href="#Directional-Self-Attention-Network" class="headerlink" title="Directional Self-Attention Network"></a>Directional Self-Attention Network</h3><p>在上述两个方法的基础上，此时已获得了上下文相关的$s_i$，再引入fusion gate：<br><img src="/images/15443250617220.jpg" width="45%" height="50%"></p>
-<p>整个流程：<br><img src="/images/15443250338890.jpg" width="50%" height="50%"></p>
-<p>将前向和反向的表示拼接起来，获得最终的表示$[u^{fw};u^{bw}]$：<br><img src="/images/15443251919096.jpg" width="50%" height="50%"></p>
-<p>对于所获得的每一个表示，通过source2token，获得最终的句子表示。</p>
-<p>这一点论文也提到了，非常类似bi-LSTM。</p>
-<hr>
-<h2 id="2️⃣-Targeted-Dropout"><a href="#2️⃣-Targeted-Dropout" class="headerlink" title="2️⃣[Targeted Dropout]"></a>2️⃣[Targeted Dropout]</h2><p>一种网络剪枝方法，想法简单易实现。<br>简单说，在每次更新时对最不重要的weight或者unit进行随机dropout。</p>
-<h3 id="Targeted-Dropout"><a href="#Targeted-Dropout" class="headerlink" title="Targeted Dropout"></a>Targeted Dropout</h3><h4 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h4><p>给定输入X，权重W，输出Y M为dropout的mask矩阵。<br>unit dropout：<br><img src="/images/15443218016315.jpg" width="22%" height="50%"></p>
-<p>weight dropout：<br><img src="/images/15443218315803.jpg" width="22%" height="50%"></p>
-<p>也即drop掉的是layer之间的connection。</p>
-<h4 id="Magnitude-based-pruning"><a href="#Magnitude-based-pruning" class="headerlink" title="Magnitude-based pruning"></a>Magnitude-based pruning</h4><p>剪枝通常对权重最小的进行剪枝，也即保留topk个最大的权重。</p>
-<p>Unit pruning：直接剪掉的是一整列，也即一个unit<br><img src="/images/15443218793541.jpg" width="43%" height="50%"></p>
-<p>Weight pruning：对W的每个元素进行剪枝。注意是对每行的topk进行保留<br><img src="/images/15443219325533.jpg" width="58%" height="50%"></p>
-<p>可以理解成对一个unit来说，保留最高的k个connection。</p>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>结合dropout和剪枝。<br>主要思想：首先选择N-k最不重要的element，由于我们希望这些low-value的元素有机会在训练过程中变得重要，因此我们对这些element进行随机dropout。</p>
-<p>引入targeting proportion γ和drop probability α，亦即：选择最低的γ|θ|个weight，再根据α进行dropout。<br>这样做的结果是：减少重要的子网络对不重要的子网络的依赖。</p>
-<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><p>①dropout的intuition：减少unit之间的相互适应。when dropout is applied to a unit, the remaining network can no longer depend on that unit’s contribution to the function and must learn to propagate that unit’s information through a more reliable channel。<br>也可以理解成：使得unit之间的交互信息达到最大，在失去某个unit的时候影响不会那么大。</p>
-<p>②targeted dropout intuition：the important subnetwork is completely separated from the unimportant one。假设一个网络由两个不相交的子网络组成，每个都能输出正确的结果，总的网络是这两个网络的平均。我们通过对不重要的子网络进行dropout（也即往子网络里加noise，会破坏该子网络的输出，由于重要的子网络已经能够输出正确的结果，因此为了减少损失，我们需要减少不重要网络的输出到0，也即kill掉该子网络，并且加强这两个网络的分离。（为什么不直接舍弃呢？因为是在训练过程中，有可能会有变化）<br>这个解释还是没完全懂。</p>
-<hr>
-<h2 id="3️⃣-A2-Nets-Double-Attention-Networks"><a href="#3️⃣-A2-Nets-Double-Attention-Networks" class="headerlink" title="3️⃣[A2-Nets: Double Attention Networks]"></a>3️⃣[A2-Nets: Double Attention Networks]</h2><p>发表于NIPS2018，个人认为很有启发。提出一种新的attention机制，基于“收集-分发”的思想，能够让CNN获得更大的感受野。</p>
-<h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>CNN本身主要是捕获局部特征与关系，但对于长距离之间的关系只能通过堆叠多几层才能实现。但这样需要更高的计算量，且容易过拟合；同时，远处的特征实际上是来自好几层的延迟，导致推理的困难。</p>
-<p>通过将feature收集起来，然后分发下去，使得feature之间有交互，让CNN获得更大的感受野，能够捕获长距离的特征。</p>
-<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><p><img src="/images/15443223814542.jpg" width="80%" height="50%"></p>
-<p>也即：<br><img src="/images/15443224194279.jpg" width="34%" height="50%"></p>
-<p>X是所有输入，$v_i是$local feature。</p>
-<h4 id="The-First-Attention-Step-Feature-Gathering"><a href="#The-First-Attention-Step-Feature-Gathering" class="headerlink" title="The First Attention Step: Feature Gathering"></a>The First Attention Step: Feature Gathering</h4><p>对于两个feature map A,B，有：<br><img src="/images/15443225280678.jpg" width="40%" height="50%"></p>
-<p>其中：<br><img src="/images/15443226145868.jpg" width="35%" height="50%"></p>
-<p><img src="/images/15443226262919.jpg" width="35%" height="50%"></p>
-<p>如果A、B都来自同一个X，将B归一化softmax，就类似transformer的attention。其中上式的最右边是外积的形式。</p>
-<p>我们将G拆分成向量形式：<br><img src="/images/15443226708983.jpg" width="33%" height="50%"><br>同时将B重写成行向量形式，则有：<br><img src="/images/15443227241595.jpg" width="22%" height="50%"></p>
-<p>则会有：<br><img src="/images/15443227868015.jpg" width="28%" height="50%"></p>
-<p>上式让我们有一个新的理解角度：G实际上就是 a bag of visual primitives。每个$g_i$是所有local feature加权求和，其中$b_i$是求和的weight。</p>
-<p>因此我们对B做softmax，保证权重为1：<br><img src="/images/15443228682403.jpg" width="28%" height="50%"></p>
-<h4 id="The-Second-Attention-Step-Feature-Distribution"><a href="#The-Second-Attention-Step-Feature-Distribution" class="headerlink" title="The Second Attention Step: Feature Distribution"></a>The Second Attention Step: Feature Distribution</h4><p>在获得了全局的feature G后，现在根据local feature去获取全局feature的部分，这通过一个权重控制，也即$v_i$（local feature)的每一维作为权重。可以不将local feature $v_i$归一化，但归一化能更好地converge。</p>
-<h4 id="The-Double-Attention-Block"><a href="#The-Double-Attention-Block" class="headerlink" title="The Double Attention Block"></a>The Double Attention Block</h4><p>最终得到double attention block：<br><img src="/images/15443230115907.jpg" width="68%" height="50%"></p>
-<p>整个流程：<br><img src="/images/15443230641691.jpg" width="80%" height="50%"></p>
-<p>所以其实是有三个convolution layer。</p>
-<p>上式还可以写成：<br><img src="/images/15443232642402.jpg" width="70%" height="50%"><br>数学上等价，但计算上差很多。第一个式子会有更低的复杂度。</p>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>虽然用了attention，但这里和Transformer还是有非常大的区别的。Transformer每个元素都和其他元素有交互，通过直接的计算得到权重。而这边的权重由feature本身来决定。并没有直接的交互。</p>
-<hr>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1787,7 +1753,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">121</span>
+                  <span class="site-state-item-count">125</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1800,7 +1766,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">144</span>
+                  <span class="site-state-item-count">148</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
