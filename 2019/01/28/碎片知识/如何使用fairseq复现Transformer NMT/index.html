@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15492022604000.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15492023879130.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15492024686078.jpg">
-<meta property="og:updated_time" content="2019-02-03T14:02:57.769Z">
+<meta property="og:updated_time" content="2019-04-17T09:54:32.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何使用fairseq复现Transformer NMT">
 <meta name="twitter:description" content="基于Transformer的NMT虽然结果好，但超参非常难调，只要有一两个参数和论文不一样，就有可能得到和论文相去甚远的结果。fairseq是现有比较完善的seq2seq库，由于是大公司出品，因此也写得较为完善，不论是代码还是文档。 本文讨论如何使用fairseq复现基于Transformer的翻译任务，也即复现Vaswani, et al. 的论文结果。本文尽量不讨论实现细节，只讨论如何复现出结">
@@ -342,8 +342,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-03T22:02:57+08:00">
-                2019-02-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-17T17:54:32+08:00">
+                2019-04-17
               </time>
             
           </span>
@@ -397,7 +397,7 @@
 <p>如果没有这么多卡，那么可以设置<code>update freq</code>以模拟8卡行为。如：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CUDA_VISIBLE_DEVICES=0,1,2,3  python -m torch.distributed.launch --nproc_per_node 4 \</span><br><span class="line">train.py data-bin/wmt16_en_de_bpe32k    \</span><br><span class="line"> --arch transformer_wmt_en_de --share-all-embeddings \</span><br><span class="line">--optimizer adam --adam-betas <span class="string">'(0.9, 0.98)'</span> \</span><br><span class="line">--clip-norm 0.0   --lr-scheduler inverse_sqrt --warmup-init-lr 1e-07 --warmup-updates 4000  \</span><br><span class="line">--lr 0.0007 --min-lr 1e-09 --criterion label_smoothed_cross_entropy \</span><br><span class="line">--label-smoothing 0.1 --weight-decay 0.0 --max-tokens  4096   \</span><br><span class="line">--save-dir checkpoints/en-de-16-base   \ </span><br><span class="line">--no-progress-bar --<span class="built_in">log</span>-format json --<span class="built_in">log</span>-interval 50 --save-interval-updates  1000 \</span><br><span class="line">--keep-interval-updates 20  --update-freq 2 |tee exp2.log</span><br></pre></td></tr></table></figure>
 <p>4张卡则设<code>update freq=2</code>，2张卡则设<code>update freq=4</code>，以此类推。</p>
-<p>大概在100个epoch内能够收敛，也即在475000个step。8张1080Ti在大概两天能够训练完成，4张1080Ti大概4天训练完成。</p>
+<p>大概在100个epoch内能够收敛(实际上应该在150-200个epoch收敛，100epoch的BLEU是27.3，150-200epoch的结果是27.67)，也即在475000个step。8张1080Ti在大概两天能够训练完成，4张1080Ti大概4天训练完成。</p>
 <p>开始训练…<br><img src="/images/15491934129135.jpg" width="80%" height="50%"></p>
 <p>最后则会获得checkpoint：<br><img src="/images/15491934935157.jpg" width="80%" height="50%"></p>
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>测试分为几个阶段：首先将几个checkpoint进行平均，实验表明，进行平均能够有一定的提升；其次，使用平均后的模型对test集的句子进行翻译；最终将生成的句子和正确的句子计算bleu值。</p>
@@ -566,7 +566,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">125</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -579,7 +579,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">148</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

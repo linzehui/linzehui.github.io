@@ -286,6 +286,464 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/19/碎片知识/每周碎片知识4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/19/碎片知识/每周碎片知识4/" itemprop="url">每周碎片知识4</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T09:45:37+08:00">
+                2018-08-19
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:16+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1️⃣[概率校准(Probability Calibration)]<br>一种对机器学习算法输出结果的校准，通过几个实验可以发现，概率校准能够一定程度提高表现。<br>几个参考资料：<br>直观理解:  <a href="http://www.bubuko.com/infodetail-2133893.html" target="_blank" rel="noopener">http://www.bubuko.com/infodetail-2133893.html</a><br>SVC的概率校准在sklearn上的应用: <a href="https://blog.csdn.net/ericcchen/article/details/79337716" target="_blank" rel="noopener">https://blog.csdn.net/ericcchen/article/details/79337716</a><br>✨完全手册: <a href="http://users.dsic.upv.es/~flip/papers/BFHRHandbook2010.pdf" target="_blank" rel="noopener">Calibration of Machine Learning Models</a></p>
+<hr>
+<p>2️⃣[Paper]<br><a href="https://www.cs.cmu.edu/~hovy/papers/16HLT-hierarchical-attention-networks.pdf" target="_blank" rel="noopener">Hierarchical Attention Networks for Document Classification</a></p>
+<p>亮点在使用层次的RNN结构，以及使用了attention方法。<br><img src="/images/2018-08-19-15346447273228.jpg" width="50%" height="50%"></p>
+<p>参考了其他人的代码自己也试着实现了一个，GitHub地址：<a href="https://github.com/linzehui/pytorch-hierarchical-attention-network" target="_blank" rel="noopener">https://github.com/linzehui/pytorch-hierarchical-attention-network</a></p>
+<hr>
+<p>3️⃣[XGBoost]<br>kaggle神器XGBoost，一篇原理的详细介绍：<br><a href="http://www.cnblogs.com/willnote/p/6801496.html" target="_blank" rel="noopener">http://www.cnblogs.com/willnote/p/6801496.html</a><br>虽然还是有好些地方没搞懂，有必要从头学起。</p>
+<hr>
+<p>4️⃣[Python]<br>关于函数列表中单星号(*)和双星号(**)<br>单星号：</p>
+<ul>
+<li>代表接收任意多个非关键字参数，将其转换成元组：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">one</span><span class="params">(a,*b)</span>:</span></span><br><span class="line">    <span class="string">"""a是一个普通传入参数，*b是一个非关键字星号参数"""</span></span><br><span class="line">    print(b)</span><br><span class="line">one(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)  <span class="comment">#输出：(2, 3, 4, 5, 6)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>对一个普通变量使用单星号，表示对该变量拆分成单个元素</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    print(a,b)</span><br><span class="line">l=[<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">fun(*l)  <span class="comment">#输出 1,2</span></span><br></pre></td></tr></table></figure>
+<p>双星号：</p>
+<ul>
+<li>获得字典值</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">two</span><span class="params">(a=<span class="number">1</span>,**b)</span>:</span></span><br><span class="line">    <span class="string">"""a是一个普通关键字参数，**b是一个关键字双星号参数"""</span></span><br><span class="line">    print(b)</span><br><span class="line">two(a=<span class="number">1</span>,b=<span class="number">2</span>,c=<span class="number">3</span>,d=<span class="number">4</span>,e=<span class="number">5</span>,f=<span class="number">6</span>)  <span class="comment">#输出&#123;'b': 2, 'c': 3, 'e': 5, 'f': 6, 'd': 4&#125;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>5️⃣[Pytorch]<br>在Pytorch中，只要一个tensor的requires_grad是true，那么两个tensor的加减乘除后的结果的requires_grad也会是true。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/19/诗词&句/每周诗词5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/19/诗词&句/每周诗词5/" itemprop="url">每周诗词5</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T09:09:00+08:00">
+                2018-08-19
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-19T09:40:58+08:00">
+                2018-08-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本周太忙了，没背什么诗词，只背（复习）了部分的《滕王阁序》。</p>
+<p>1️⃣</p>
+<h3 id="滕王阁序"><a href="#滕王阁序" class="headerlink" title="滕王阁序"></a>滕王阁序</h3><p>嗟乎！时运不齐，命途多舛。冯唐易老，李广难封。屈贾谊于长沙，非无圣主；窜梁鸿于海曲，岂乏明时？所赖<strong>君子见机，达人知命</strong>。老当益壮，宁移白首之心？<strong>穷且益坚，不坠青云之志</strong>。酌贪泉而觉爽，处涸辙以犹欢。<strong>北海虽赊，扶摇可接；东隅已逝，桑榆非晚。</strong>孟尝高洁，空馀报国之情；阮籍猖狂，岂效穷途之哭！</p>
+<p>勃，三尺微命，一介书生。无路请缨，等终军之弱冠；有怀投笔，慕宗慤之长风。舍簪笏于百龄，奉晨昏于万里。非谢家之宝树，接孟氏之芳邻。他日趋庭，叨陪鲤对；今兹捧袂，喜托龙门。杨意不逢，抚凌云而自惜；锺期既遇，奏流水以何惭？</p>
+<hr>
+<p><strong>注释：</strong><br>冯唐：西汉人，有才能却一直不受重用。汉武帝时选求贤良，有人举荐冯唐，可是他已九十多岁，难再做官了。李广：汉武帝时的名将，多年抗击匈奴，军功很大，却终身没有封侯。</p>
+<p>贾谊：汉文帝本想任贾谊为公卿，但因朝中权贵反对，就疏远了贾谊，任他为长沙王太傅。梁鸿：东汉人，因作诗讽刺君王，得罪了汉章帝，被迫逃到齐鲁一带躲避。</p>
+<p>酌（zhuó）贪泉而觉爽：喝下贪泉的水，仍觉得心境清爽。古代传说广州有水名贪泉，人喝了这里的水就会变得贪婪。这句是说有德行的人在污浊的环境中也能保持纯正，不被污染。处涸辙以犹欢：处在奄奄待毙的时候，仍然乐观开朗。处河辙：原指鲋鱼处在干涸的车辙旦。比喻人陷入危急之中。</p>
+<p>孟尝：东汉人，为官清正贤能，但不被重用，后来归田。阮籍：三国魏诗人，他有时独自驾车出行，到无路处便恸哭而返，借此宣泄不满于现实的苦闷心情。</p>
+<p>终军：《汉书·终军传》记载，汉武帝想让南越（今广东、广西一带）王归顺，派终军前往劝说，终军请求给他长缨，必缚住南越王，带回到皇宫门前（意思是一定完成使命）。后来用“请缨”指投军报国。</p>
+<p>宗悫（què）：南朝宋人，少年时很有抱负，说“愿乘长风破万里浪”。</p>
+<p>簪（zān）笏（hù）：这里代指官职。晨昏：晨昏定省，出自 《礼记·曲礼上》，释义为旧时侍奉父母的日常礼节。</p>
+<p>非谢家之宝树，接孟氏之芳邻：自己并不是像谢玄那样出色的人才，却能在今日的宴会上结识各位名士。谢家之宝树：指谢玄。《晋书·谢玄传》记载，晋朝谢安曾问子侄们：为什么人们总希望自己的子弟好？侄子谢玄回答：“譬如芝兰玉树，欲使其生于庭阶耳。”后来就称谢玄为谢家宝树。孟氏之芳邻：这里借孟子的母亲为寻找邻居而三次搬家的故事，来指赴宴的嘉宾。</p>
+<p>他日趋庭，叨陪鲤对：过些时候自己将到父亲那里陪侍和聆听教诲。趋庭：快步走过庭院，这是表示对长辈的恭敬。叨：惭愧地承受，表示自谦。鲤对：孔鲤是孔子的儿子，鲤对指接受父亲教诲。事见《论语·季氏》：（孔子）尝独立，（孔）鲤趋而过庭。（子）曰：“学诗乎？”对曰：“未也。”“不学诗，无以言。”鲤退而学诗。他日，又独立，鲤趋而过庭。（子）曰：“学礼乎？”对曰：‘未也。”“不学礼，无以立。”鲤退而学礼。</p>
+<p>捧袂（mèi）：举起双袖作揖，指谒见阎公。喜托龙门：（受到阎公的接待）十分高兴，好像登上龙门一样。</p>
+<p>杨意：即蜀人杨得意，任掌管天子猎犬的官，西汉辞赋家司马相如是由他推荐给汉武帝的。凌云：这里指司马相如的赋，《史记·司马相如传》说，相如献《大人赋》，“天子大悦，飘飘有凌云之气，似游天地之间”。钟期：即钟子期。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/18/碎片知识/Python中的拷贝/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/18/碎片知识/Python中的拷贝/" itemprop="url">Python中的拷贝</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-18T10:47:05+08:00">
+                2018-08-18
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-19T11:26:51+08:00">
+                2018-08-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Python的拷贝和C/C++的差别很大，很经常就容易搞混，因此记录一下。</p>
+<h3 id="赋值、拷贝"><a href="#赋值、拷贝" class="headerlink" title="赋值、拷贝"></a>赋值、拷贝</h3><ul>
+<li>赋值：实际上就是对象的引用，没有开辟新的内存空间<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lst=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">l=lst</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>浅拷贝:创建了新对象，但是<strong>内容是对原对象的引用</strong>，有三种形式</p>
+<ol>
+<li><p>切片  </p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">l=lst[:]</span><br><span class="line">l=[i <span class="keyword">for</span> i <span class="keyword">in</span> lst]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>工厂</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">l=list(lst)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>copy </p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">l=copy.copy(lst)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>深拷贝:copy中的deepcopy，生成一个全新的对象，与原来的对象无关</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">l=copy.deepcopy(lst)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 引用https://www.cnblogs.com/huangbiquan/p/7795152.html 的例子###</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> copy</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,[<span class="string">'a'</span>,<span class="string">'b'</span>]] <span class="comment">#定义一个列表a</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a <span class="comment">#赋值</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = copy.copy(a) <span class="comment">#浅拷贝</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = copy.deepcopy(a) <span class="comment">#深拷贝</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.append(<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>], <span class="number">5</span>] <span class="comment">#a添加一个元素5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(b) </span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>], <span class="number">5</span>] <span class="comment">#b跟着添加一个元素5 </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(c)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]] <span class="comment">#c保持不变</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(d)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]] <span class="comment">#d保持不变</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">4</span>].append(<span class="string">'c'</span>) </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>], <span class="number">5</span>] <span class="comment">#a中的list(即a[4])添加一个元素c</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(b)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>], <span class="number">5</span>] <span class="comment">#b跟着添加一个元素c</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(c)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]] <span class="comment">#c跟着添加一个元素c</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(d)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]] <span class="comment">#d保持不变</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#说明如下：</span></span><br><span class="line"><span class="comment">#1.外层添加元素时， 浅拷贝c不会随原列表a变化而变化；内层list添加元素时，浅拷贝c才会变化。</span></span><br><span class="line"><span class="comment">#2.无论原列表a如何变化，深拷贝d都保持不变。</span></span><br><span class="line"><span class="comment">#3.赋值对象随着原列表一起变化</span></span><br></pre></td></tr></table></figure>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://www.cnblogs.com/huangbiquan/p/7795152.html" target="_blank" rel="noopener">https://www.cnblogs.com/huangbiquan/p/7795152.html</a><br><a href="https://www.cnblogs.com/xueli/p/4952063.html" target="_blank" rel="noopener">https://www.cnblogs.com/xueli/p/4952063.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/12/碎片知识/如何将ELMo词向量用于中文/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -333,8 +791,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-12T10:15:13+08:00">
-                2018-12-12
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-07T10:54:53+08:00">
+                2019-04-07
               </time>
             
           </span>
@@ -370,6 +828,7 @@
         
           
             <p>10.10更新：ELMo已经由哈工大组用PyTorch重写了，并且提供了中文的预训练好的language model，可以直接使用。</p>
+<p>2019.4.7更新：年代过于久远，本人于细节方面早已记不大清楚了。遇到bug或问题烦请自行查阅解决，请不必在评论区提问或邮件提问，不会再回复。</p>
 <hr>
 <p>ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于一句话进入到language model获得不同的词向量。根据实验可得，使用了Elmo词向量之后，许多NLP任务都有了大幅的提高。</p>
 <p>论文:<a href="https://arxiv.org/pdf/1802.05365.pdf" target="_blank" rel="noopener">Deep contextualized word representations</a></p>
@@ -1320,491 +1779,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/诗词&句/人可以卑微如尘土,不可扭曲如蛆虫/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/05/诗词&句/人可以卑微如尘土,不可扭曲如蛆虫/" itemprop="url">人可以卑微如尘土,不可扭曲如蛆虫</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T13:21:00+08:00">
-                2018-08-05
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-06T13:11:49+08:00">
-                2018-08-06
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>如果天总也不亮，那就摸黑过生活; </p>
-<p>如果发出声音是危险的，那就保持沉默; </p>
-<p>如果自觉无力发光，那就别去照亮别人。 </p>
-<p>但是——不要习惯了黑暗就为黑暗辩护; </p>
-<p>不要为自己的苟且而得意洋洋; </p>
-<p>不要嘲讽那些比自己更勇敢、更有热量的人们。 </p>
-<p><strong>可以卑微如尘土，不可扭曲如蛆虫</strong>。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/碎片知识/Python惯例/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/05/碎片知识/Python惯例/" itemprop="url">Python惯例[转]</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T11:28:05+08:00">
-                2018-08-05
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-01T20:54:39+08:00">
-                2018-09-01
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>fork from <a href="https://github.com/jackfrued/Python-100-Days/blob/master/Python惯例.md" target="_blank" rel="noopener">https://github.com/jackfrued/Python-100-Days/blob/master/Python惯例.md</a></p>
-<h2 id="Python惯例"><a href="#Python惯例" class="headerlink" title="Python惯例"></a>Python惯例</h2><p>“惯例”这个词指的是“习惯的做法，常规的办法，一贯的做法”，与这个词对应的英文单词叫“idiom”。由于Python跟其他很多编程语言在语法和使用上还是有比较显著的差别，因此作为一个Python开发者如果不能掌握这些惯例，就无法写出“Pythonic”的代码。下面我们总结了一些在Python开发中的惯用的代码。</p>
-<ol>
-<li><p>让代码既可以被导入又可以被执行。 </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>用下面的方式判断逻辑“真”或“假”。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x:</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> x:</span><br></pre></td></tr></table></figure>
-<p><strong>好</strong>的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">'jackfrued'</span></span><br><span class="line">fruits = [<span class="string">'apple'</span>, <span class="string">'orange'</span>, <span class="string">'grape'</span>]</span><br><span class="line">owners = &#123;<span class="string">'1001'</span>: <span class="string">'骆昊'</span>, <span class="string">'1002'</span>: <span class="string">'王大锤'</span>&#125;</span><br><span class="line"><span class="keyword">if</span> name <span class="keyword">and</span> fruits <span class="keyword">and</span> owners:</span><br><span class="line">    print(<span class="string">'I love fruits!'</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>不好</strong>的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">'jackfrued'</span></span><br><span class="line">fruits = [<span class="string">'apple'</span>, <span class="string">'orange'</span>, <span class="string">'grape'</span>]</span><br><span class="line">owners = &#123;<span class="string">'1001'</span>: <span class="string">'骆昊'</span>, <span class="string">'1002'</span>: <span class="string">'王大锤'</span>&#125;</span><br><span class="line"><span class="keyword">if</span> name != <span class="string">''</span> <span class="keyword">and</span> len(fruits) &gt; <span class="number">0</span> <span class="keyword">and</span> owners != &#123;&#125;:</span><br><span class="line">    print(<span class="string">'I love fruits!'</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>善于使用in运算符。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x <span class="keyword">in</span> items: <span class="comment"># 包含</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> items: <span class="comment"># 迭代</span></span><br></pre></td></tr></table></figure>
-<p><strong>好</strong>的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">'Hao LUO'</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">'L'</span> <span class="keyword">in</span> name:</span><br><span class="line">    print(<span class="string">'The name has an L in it.'</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>不好</strong>的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">'Hao LUO'</span></span><br><span class="line"><span class="keyword">if</span> name.find(<span class="string">'L'</span>) != <span class="number">-1</span>:</span><br><span class="line">    print(<span class="string">'This name has an L in it!'</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>不使用临时变量交换两个值。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b = b, a</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>用序列构建字符串</strong>。</p>
-<p><strong>好</strong>的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chars = [<span class="string">'j'</span>, <span class="string">'a'</span>, <span class="string">'c'</span>, <span class="string">'k'</span>, <span class="string">'f'</span>, <span class="string">'r'</span>, <span class="string">'u'</span>, <span class="string">'e'</span>, <span class="string">'d'</span>]</span><br><span class="line">name = <span class="string">''</span>.join(chars)</span><br><span class="line">print(name)  <span class="comment"># jackfrued</span></span><br></pre></td></tr></table></figure>
-<p><strong>不好</strong>的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chars = [<span class="string">'j'</span>, <span class="string">'a'</span>, <span class="string">'c'</span>, <span class="string">'k'</span>, <span class="string">'f'</span>, <span class="string">'r'</span>, <span class="string">'u'</span>, <span class="string">'e'</span>, <span class="string">'d'</span>]</span><br><span class="line">name = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> char <span class="keyword">in</span> chars:</span><br><span class="line">    name += char</span><br><span class="line">print(name)  <span class="comment"># jackfrued</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>EAFP优于LBYL</strong>。</p>
-<p>EAFP - <strong>E</strong>asier to <strong>A</strong>sk <strong>F</strong>orgiveness than <strong>P</strong>ermission.</p>
-<p>LBYL - <strong>L</strong>ook <strong>B</strong>efore <strong>Y</strong>ou <strong>L</strong>eap.</p>
-<p><strong>好</strong>的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">'x'</span>: <span class="string">'5'</span>&#125;</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    value = int(d[<span class="string">'x'</span>])</span><br><span class="line">    print(value)</span><br><span class="line"><span class="keyword">except</span> (KeyError, TypeError, ValueError):</span><br><span class="line">    value = <span class="keyword">None</span></span><br></pre></td></tr></table></figure>
-<p><strong>不好</strong>的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">'x'</span>: <span class="string">'5'</span>&#125;</span><br><span class="line"><span class="keyword">if</span> <span class="string">'x'</span> <span class="keyword">in</span> d <span class="keyword">and</span> isinstance(d[<span class="string">'x'</span>], str) \</span><br><span class="line">		<span class="keyword">and</span> d[<span class="string">'x'</span>].isdigit():</span><br><span class="line">    value = int(d[<span class="string">'x'</span>])</span><br><span class="line">    print(value)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    value = <span class="keyword">None</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用enumerate进行迭代。</p>
-<p><strong>好</strong>的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fruits = [<span class="string">'orange'</span>, <span class="string">'grape'</span>, <span class="string">'pitaya'</span>, <span class="string">'blueberry'</span>]</span><br><span class="line"><span class="keyword">for</span> index, fruit <span class="keyword">in</span> enumerate(fruits):</span><br><span class="line">	print(index, <span class="string">':'</span>, fruit)</span><br></pre></td></tr></table></figure>
-<p><strong>不好</strong>的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fruits = [<span class="string">'orange'</span>, <span class="string">'grape'</span>, <span class="string">'pitaya'</span>, <span class="string">'blueberry'</span>]</span><br><span class="line">index = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> fruit <span class="keyword">in</span> fruits:</span><br><span class="line">    print(index, <span class="string">':'</span>, fruit)</span><br><span class="line">    index += <span class="number">1</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>用生成式生成列表。</p>
-<p><strong>好</strong>的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="number">7</span>, <span class="number">20</span>, <span class="number">3</span>, <span class="number">15</span>, <span class="number">11</span>]</span><br><span class="line">result = [num * <span class="number">3</span> <span class="keyword">for</span> num <span class="keyword">in</span> data <span class="keyword">if</span> num &gt; <span class="number">10</span>]</span><br><span class="line">print(result)  <span class="comment"># [60, 45, 33]</span></span><br></pre></td></tr></table></figure>
-<p><strong>不好</strong>的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="number">7</span>, <span class="number">20</span>, <span class="number">3</span>, <span class="number">15</span>, <span class="number">11</span>]</span><br><span class="line">result = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> data:</span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">10</span>:</span><br><span class="line">        result.append(i * <span class="number">3</span>)</span><br><span class="line">print(result)  <span class="comment"># [60, 45, 33]</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>用zip组合键和值来创建字典。</p>
-<p><strong>好</strong>的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">keys = [<span class="string">'1001'</span>, <span class="string">'1002'</span>, <span class="string">'1003'</span>]</span><br><span class="line">values = [<span class="string">'骆昊'</span>, <span class="string">'王大锤'</span>, <span class="string">'白元芳'</span>]</span><br><span class="line">d = dict(zip(keys, values))</span><br><span class="line">print(d)</span><br></pre></td></tr></table></figure>
-<p><strong>不好</strong>的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">keys = [<span class="string">'1001'</span>, <span class="string">'1002'</span>, <span class="string">'1003'</span>]</span><br><span class="line">values = [<span class="string">'骆昊'</span>, <span class="string">'王大锤'</span>, <span class="string">'白元芳'</span>]</span><br><span class="line">d = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> i, key <span class="keyword">in</span> enumerate(keys):</span><br><span class="line">    d[key] = values[i]</span><br><span class="line">print(d)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
-<p><strong>说明</strong>：这篇文章的内容来自于网络，有兴趣的读者可以阅读<a href="http://safehammad.com/downloads/python-idioms-2014-01-16.pdf" target="_blank" rel="noopener">原文</a>。</p>
-</blockquote>
-<p>注：<br>许多原则我认为非常有意义，能够摆脱C/C++的风格，真正写出Pythonic的代码。让我有很大感触的是1、3、8，能够写出非常简洁优雅的代码。同时6我之前从没注意过，习惯了C/C++风格之后总是会在执行之前考虑所有情况，但确实不够优雅，今后可以尝试EAFP风格（<a href="https://stackoverflow.com/questions/11360858/what-is-the-eafp-principle-in-python" target="_blank" rel="noopener">什么是EAFP</a>）。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/05/碎片知识/如何训练GloVe中文词向量/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/05/碎片知识/如何训练GloVe中文词向量/" itemprop="url">如何训练GloVe中文词向量</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T11:06:05+08:00">
-                2018-08-05
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-15T19:39:53+08:00">
-                2019-01-15
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="准备语料"><a href="#准备语料" class="headerlink" title="准备语料"></a>准备语料</h3><p>准备好自己的语料，保存为txt，每行一个句子或一段话，注意要分好词。</p>
-<p><img src="/images/2018-08-05-15334388069130.jpg" width="60%" height="60%"></p>
-<h3 id="准备源码"><a href="#准备源码" class="headerlink" title="准备源码"></a>准备源码</h3><p>从GitHub下载代码，<a href="https://github.com/stanfordnlp/GloVe" target="_blank" rel="noopener">https://github.com/stanfordnlp/GloVe</a><br>将语料corpus.txt放入到Glove的主文件夹下。</p>
-<h3 id="修改bash"><a href="#修改bash" class="headerlink" title="修改bash"></a>修改bash</h3><p>打开demo.sh，修改相应的内容</p>
-<ol>
-<li>因为demo默认是下载网上的语料来训练的，因此如果要训练自己的语料，需要注释掉</li>
-</ol>
-<p><img src="/images/2018-08-05-15334390298383.jpg" width="70%" height="50%"></p>
-<ol>
-<li>修改参数设置，将CORPUS设置成语料的名字</li>
-</ol>
-<p><img src="/images/2018-08-05-15334391029224.jpg" width="50%" height="50%"></p>
-<h3 id="执行bash文件"><a href="#执行bash文件" class="headerlink" title="执行bash文件"></a>执行bash文件</h3><p>进入到主文件夹下</p>
-<ol>
-<li>make</li>
-</ol>
-<p><img src="/images/2018-08-05-15334392348665.jpg" width="70%" height="50%"></p>
-<ol>
-<li>bash demo.sh</li>
-</ol>
-<p><img src="/images/2018-08-05-15334392595148.jpg" width="70%" height="70%"></p>
-<p>注意，如果训练数据较大，则训练时间较长，那么建议使用nohup来运行程序</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup bash demo.sh &gt;output.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>坐等训练，最后会得到vectors.txt 以及其他的相应的文件。如果要用gensim的word2vec load进来，那么需要在vectors.txt的第一行加上vacob_size vector_size，第一个数指明一共有多少个向量，第二个数指明每个向量有多少维。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.cnblogs.com/echo-cheng/p/8561171.html" target="_blank" rel="noopener">https://www.cnblogs.com/echo-cheng/p/8561171.html</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1859,7 +1833,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">125</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1872,7 +1846,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">148</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -286,6 +286,496 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/11/10/论文/每周论文5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/10/论文/每周论文5/" itemprop="url">每周论文5</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-10T23:10:30+08:00">
+                2018-11-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:11+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1️⃣-Neural-Turing-Machine"><a href="#1️⃣-Neural-Turing-Machine" class="headerlink" title="1️⃣[Neural Turing Machine]"></a>1️⃣[Neural Turing Machine]</h2><p>通过模仿冯诺依曼机，引入外部内存(externel memory)。<br><img src="/images/2018-11-10-15418626837026.jpg" width="70%" height="50%"></p>
+<p>和普通神经网络一样，与外界交互，获得一个输入，产生一个输出。但不同的是，内部还有一个memory进行读写。<br>假设memory是一个N × M的矩阵，N是内存的位置数量。</p>
+<h3 id="读写memory"><a href="#读写memory" class="headerlink" title="读写memory"></a>读写memory</h3><p>①读<br><img src="/images/2018-11-10-15418627403268.jpg" width="25%" height="50%"><br>其中读的时候对各内存位置线性加权。w是归一化权重。</p>
+<p>②写<br>$e_t$是擦除向量（erase vector）<br><img src="/images/2018-11-10-15418627941358.jpg" width="35%" height="50%"></p>
+<p>$a_t$是加和向量(add vector)<br><img src="/images/2018-11-10-15418628323343.jpg" width="30%" height="50%"></p>
+<p>具体如何获得权重就不说了。</p>
+<h3 id="Controller-network"><a href="#Controller-network" class="headerlink" title="Controller network"></a>Controller network</h3><p>中间的controller network可以是一个普通的feed forward或者RNN。</p>
+<p>在实际中NTM用得并不多。</p>
+<hr>
+<h2 id="2️⃣-Efficient-Contextualized-Representation-Language-Model-Pruning-for-Sequence-Labeling"><a href="#2️⃣-Efficient-Contextualized-Representation-Language-Model-Pruning-for-Sequence-Labeling" class="headerlink" title="2️⃣[Efficient Contextualized Representation: Language Model Pruning for Sequence Labeling]"></a>2️⃣[Efficient Contextualized Representation: Language Model Pruning for Sequence Labeling]</h2><p>ELMo的精简版，通过即插即用的方法来压缩语言模型，对特定任务剪枝不同的层，使得能够减少inference的时间。<br>这篇的idea挺有创新的，但似乎有些trivial的感觉。</p>
+<p><img src="/images/2018-11-11-15418977712883.jpg" width="70%" height="50%"></p>
+<h3 id="RNN-and-Dense-Connectivity"><a href="#RNN-and-Dense-Connectivity" class="headerlink" title="RNN and Dense Connectivity"></a>RNN and Dense Connectivity</h3><p>每一层的输出都会传到所有层作为输入，因此对于L层的输入：<br><img src="/images/2018-11-11-15418979328482.jpg" width="35%" height="50%"></p>
+<p>这样我们就能够随意地去掉任意中间层了。同时一些语言信息也分散到各个层，即使去掉某些层也没有关系。</p>
+<p>则最终的output为：<br><img src="/images/2018-11-11-15418991345288.jpg" width="33%" height="50%"></p>
+<p>最终作projection到正常维度（在每层都会这么做，将输入降维到正常维度再输入）：<br><img src="/images/2018-11-11-15418992517849.jpg" width="37%" height="50%"></p>
+<p>再做一个softmax：<br><img src="/images/2018-11-11-15418993146246.jpg" width="32%" height="50%"></p>
+<p>由于 $h^{※}$ 用于softmax，所以可能和target word，也即下一个词比较相似，<strong>因此可能没有很多的上下文信息</strong>。</p>
+<p>所以最终我们使用$h_t$，以及反向的$h_t^r$，再过一层线性层获得最终的embedding（和ELMo有些不同，ELMo是直接拼起来）：<br><img src="/images/2018-11-11-15418994541442.jpg" width="40%" height="50%"></p>
+<h3 id="Layer-Selection"><a href="#Layer-Selection" class="headerlink" title="Layer Selection"></a>Layer Selection</h3><p>我们在每层的output都加一个权重系数。<br><img src="/images/2018-11-11-15418996081852.jpg" width="30%" height="50%"></p>
+<p>我们希望在target task上用的时候，部分z能够变成0，达到layer selection的效果，加快inference的速度。</p>
+<p>亦即：<br><img src="/images/2018-11-11-15418996697208.jpg" width="20%" height="50%"></p>
+<p>一种理想的方法是L0正则化：<br><img src="/images/2018-11-11-15418997294756.jpg" width="17%" height="50%"></p>
+<p>但由于没办法求导，因此，采用L1正则化：<br><img src="/images/2018-11-11-15418997747882.jpg" width="15%" height="50%"><br>但使用L1正则化有一定的风险，因为如果让所有z都远离1，那么会影响performance。</p>
+<p>引入新的正则化方法$R_2 =\delta(|z|_0&gt;\lambda_1) |z|_1$<br>亦即，只有在非零z的个数大于某个阈值时，才能有正则化效果，保证非零的个数。’it can be “turned-off” after achieving a satisfying sparsity’.</p>
+<p>进一步引入$R_3=\delta(|z|_0&gt;\lambda_1) |z|_1 + |z(1-z)|_1$<br>其中第二项为了鼓励z向0或1走。</p>
+<h3 id="Layer-wise-Dropout"><a href="#Layer-wise-Dropout" class="headerlink" title="Layer-wise Dropout"></a>Layer-wise Dropout</h3><p>随机删除部分layer，这些layer的输出不会传入之后的层，但仍然会参与最后的representation计算。<br><img src="/images/2018-11-11-15419000928057.jpg" width="70%" height="50%"></p>
+<p>这种dropout会让perplexity更高，但对生成更好的representation有帮助。</p>
+<hr>
+<h2 id="3️⃣-Constituency-Parsing-with-a-Self-Attentive-Encoder"><a href="#3️⃣-Constituency-Parsing-with-a-Self-Attentive-Encoder" class="headerlink" title="3️⃣[Constituency Parsing with a Self-Attentive Encoder]"></a>3️⃣[Constituency Parsing with a Self-Attentive Encoder]</h2><p>其中的positional encoding我比较感兴趣。<br>原版的positional encoding是直接和embedding相加的。<br>亦即：<br><img src="/images/2018-11-11-15419002563338.jpg" width="22%" height="50%"><br>那么在selt-attention时，有：<br><img src="/images/2018-11-11-15419002855901.jpg" width="45%" height="50%"><br>这样会有交叉项：<br><img src="/images/2018-11-11-15419003111684.jpg" width="13%" height="50%"><br>该项没有什么意义，且可能会带来过拟合。</p>
+<p>因此在这边将positional encoding和embedding拼起来，亦即：<br><img src="/images/2018-11-11-15419003740409.jpg" width="23%" height="50%"></p>
+<p>并且，在进入multi-head时的线性层也做改变：<br><img src="/images/2018-11-11-15419004269693.jpg" width="24%" height="50%"></p>
+<p>这样在相乘的时候就不会有交叉项了。</p>
+<p>实验证明，该方法有一定的提升。</p>
+<hr>
+<h2 id="4️⃣-DropBlock-A-regularization-method-for-convolutional-networks"><a href="#4️⃣-DropBlock-A-regularization-method-for-convolutional-networks" class="headerlink" title="4️⃣[DropBlock: A regularization method for convolutional networks]"></a>4️⃣[DropBlock: A regularization method for convolutional networks]</h2><p>大致翻了一下。<br>Motivation:在CNN中，dropout对convolutional layer的作用不大，一般都只用在全连接层。作者推测，因为每个feature map都有一个感受野范围，仅仅对单个像素进行dropout并不能降低feature map学习的特征范围，亦即网络仍可以通过该位置的相邻位置元素去学习对应的语义信息，也就不会促使网络去学习更加鲁棒的特征。</p>
+<p>因此作者的做法是，dropout一整块位置。<br><img src="/images/2018-11-11-15419007355875.jpg" width="80%" height="50%"></p>
+<hr>
+<h2 id="5️⃣-Accelerating-Neural-Transformer-via-an-Average-Attention-Network"><a href="#5️⃣-Accelerating-Neural-Transformer-via-an-Average-Attention-Network" class="headerlink" title="5️⃣[Accelerating Neural Transformer via an Average Attention Network]"></a>5️⃣[Accelerating Neural Transformer via an Average Attention Network]</h2><p>提出了AAN(average attention network)，对transformer翻译模型的decode部分进行改进，加速了过程。</p>
+<p>由于Transformer在decode阶段需要用到前面所有的y，也即自回归(auto-regressive)的性质，所以无法并行：</p>
+<p><img src="/images/2018-11-11-15419009098650.jpg" width="50%" height="50%"></p>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p>给定y：<br><img src="/images/2018-11-11-15419010325049.jpg" width="27%" height="50%"></p>
+<p>首先将他们加起来，过一层全连接：<br><img src="/images/2018-11-11-15419010603010.jpg" width="27%" height="50%"><br>这也相当于就是让所有的y有相同的权重，此时g就是上下文相关的表示。</p>
+<p>接下来添加一个gating：<br><img src="/images/2018-11-11-15419011154221.jpg" width="27%" height="50%"><br>控制了从过去保存多少信息和获取多少新的信息。</p>
+<p>和Transformer原版论文一样，添加一个residual connection：<br><img src="/images/2018-11-11-15419011595237.jpg" width="30%" height="50%"></p>
+<p>如图整个过程：<br><img src="/images/2018-11-11-15419011840751.jpg" width="55%" height="50%"></p>
+<p>总结：AAN=average layer+gating layer</p>
+<h3 id="加速"><a href="#加速" class="headerlink" title="加速"></a>加速</h3><p>①考虑到加和操作是序列化的，只能一个一个来，不能并行，在这里使用一个mask的trick，使得在训练时也能够并行：<br><img src="/images/2018-11-11-15419013219526.jpg" width="60%" height="50%"></p>
+<p>②在inference时的加速：<br><img src="/images/2018-11-11-15419019335926.jpg" width="20%" height="50%"></p>
+<p>这样Transformer就能够类似RNN，只考虑前一个的state，而不是前面所有的state。</p>
+<p>最终的模型：<br><img src="/images/2018-11-11-15419023032628.jpg" width="60%" height="50%"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/11/10/诗词&句/每周诗词15/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/10/诗词&句/每周诗词15/" itemprop="url">每周诗词15</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-10T23:08:14+08:00">
+                2018-11-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-10T23:08:57+08:00">
+                2018-11-10
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣蜀相"><a href="#1️⃣蜀相" class="headerlink" title="1️⃣蜀相"></a>1️⃣蜀相</h3><p>[唐] 杜甫<br>丞相祠堂何处寻，锦官城外柏森森。<br>映阶碧草自春色，隔叶黄鹂空好音。<br>三顾频烦天下计，两朝开济老臣心。<br><strong>出师未捷身先死，长使英雄泪满襟</strong>。</p>
+<p><a href="http://m.xichuangzhu.com/work/57b93410a633bd00665efd4a" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b93410a633bd00665efd4a</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/11/04/论文/每周论文4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/论文/每周论文4/" itemprop="url">每周论文4</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T08:18:30+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:12+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1️⃣-Character-Level-Language-Modeling-with-Deeper-Self-Attention"><a href="#1️⃣-Character-Level-Language-Modeling-with-Deeper-Self-Attention" class="headerlink" title="1️⃣[Character-Level Language Modeling with Deeper Self-Attention]"></a>1️⃣[Character-Level Language Modeling with Deeper Self-Attention]</h2><p>将transformer用于character-level的语言模型中，通过添加多个loss来提高其表现以及加快拟合速度，同时加深transformer的层数，极大提升表现，12层的transformer layer能达到SOTA，而64层则有更多的提升。</p>
+<p>普通RNN用于character-level language model：<br>将句子按character为单位组成多个batch，每个batch预测最后一个词，然后将该batch的隐状态传入下一个batch。也即“truncated backpropagation through time” (TBTT)。</p>
+<p>如果用在Transformer，如下图，我们只预测$t_4$。<br><img src="/images/2018-11-04-15412915431327.jpg" width="90%" height="50%"></p>
+<p>本文的一大贡献是多加了三种loss，并且有些loss的权值会随着训练的过程而逐渐减小，每个loss都会自己的schedule。这些loss加快了拟合速度，同时也提升了表现。</p>
+<h3 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h3><h4 id="Multiple-Positions"><a href="#Multiple-Positions" class="headerlink" title="Multiple Positions"></a>Multiple Positions</h4><p>对于batch内而言，每个时间步t都要预测下一个词。<br><img src="/images/2018-11-04-15412916429104.jpg" width="90%" height="50%"></p>
+<h4 id="Intermediate-Layer-Losses"><a href="#Intermediate-Layer-Losses" class="headerlink" title="Intermediate Layer Losses"></a>Intermediate Layer Losses</h4><p>要求中间层也做出预测：<br><img src="/images/2018-11-04-15412916704097.jpg" width="95%" height="50%"></p>
+<p>在这里，越底层的layer其loss权值越低。</p>
+<h4 id="Multiple-Targets"><a href="#Multiple-Targets" class="headerlink" title="Multiple Targets"></a>Multiple Targets</h4><p>每一个position，不仅仅要预测下一个词，还要预测下几个词，预测下一个词和预测下几个词的分类器是独立的。</p>
+<p><img src="/images/2018-11-04-15412917374689.jpg" width="70%" height="50%"></p>
+<h3 id="Positional-embedding"><a href="#Positional-embedding" class="headerlink" title="Positional embedding"></a>Positional embedding</h3><p>每一层的都添加一个不共享的可学习的positional embedding。</p>
+<hr>
+<h2 id="2️⃣-Self-Attention-with-Relative-Position-Representations"><a href="#2️⃣-Self-Attention-with-Relative-Position-Representations" class="headerlink" title="2️⃣[Self-Attention with Relative Position Representations]"></a>2️⃣[Self-Attention with Relative Position Representations]</h2><p>提出使用相对位置替代Transformer的绝对位置信息，并在NMT上有一定的提升。</p>
+<p>分解：<br>在原先的self-attention中，输出为：<br><img src="/images/2018-11-04-15412923510664.jpg" width="25%" height="50%"></p>
+<p>其中：<br><img src="/images/2018-11-04-15412923744647.jpg" width="25%" height="50%"><br><img src="/images/2018-11-04-15412923773686.jpg" width="25%" height="50%"></p>
+<p>现在我们考虑添加相对位置，其中相对位置信息在各层都是共享的：<br><img src="/images/2018-11-04-15412924279426.jpg" width="30%" height="50%"><br><img src="/images/2018-11-04-15412924396468.jpg" width="30%" height="50%"></p>
+<p>$a_{ij}^K$的具体形式：<br><img src="/images/2018-11-04-15412925792994.jpg" width="40%" height="50%"><br><img src="/images/2018-11-04-15412925910424.jpg" width="55%" height="50%"><br>上式为了降低复杂度，不考虑长于k的相对位置信息。</p>
+<p>考虑到transformer的并行性，为了并行性，我们考虑如下式子：<br><img src="/images/2018-11-04-15412926687951.jpg" width="50%" height="50%"><br>其中，第一项和原来的Transformer一致；第二项，通过reshape可以达到并行的效果，然后两项直接加起来。</p>
+<p>实验证明，使用相对位置效果是有一定的提升的，而同时使用绝对位置和相对位置并没有提升。<br><img src="/images/2018-11-04-15412930642978.jpg" width="90%" height="50%"></p>
+<hr>
+<h2 id="3️⃣-WEIGHTED-TRANSFORMER-NETWORK-FOR-MACHINE-TRANSLATION"><a href="#3️⃣-WEIGHTED-TRANSFORMER-NETWORK-FOR-MACHINE-TRANSLATION" class="headerlink" title="3️⃣[WEIGHTED TRANSFORMER NETWORK FOR MACHINE TRANSLATION]"></a>3️⃣[WEIGHTED TRANSFORMER NETWORK FOR MACHINE TRANSLATION]</h2><p>这篇被ICLR拒了，但有审稿人打了9分的高分。</p>
+<p>对Transformer进行改进，拥有更好的效果和更小的计算代价。</p>
+<p>传统的Transformer：</p>
+<script type="math/tex; mode=display">Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V</script><script type="math/tex; mode=display">head_i=Attention(QW_i^Q,KW_i^K,VW_i^V)</script><script type="math/tex; mode=display">MultiHead(Q,K,V)=Concat_i (head_i)W^O</script><script type="math/tex; mode=display">FFN(x)=max(0,xW_1+b_1)W_2 + b_2</script><p>在本文中，先对head进行升维并乘以权重，过了FNN后，再乘以另一个权重。其中权重$\alpha$ $ \kappa$为可学习参数：</p>
+<script type="math/tex; mode=display">head_i=Attention(QW_i^Q,KW_i^K,VW_i^V)</script><script type="math/tex; mode=display">\overline{head_i}=head_i W^{O_i} \times \kappa_i</script><script type="math/tex; mode=display">BranchedAttention(Q,K,V)=\sum_{i=1}^{M} \alpha_i FFN(\overline{head}_i)</script><p>其中要求权重之和为1。即$\sum_{i=1}^{M}\alpha_i=1$,$\sum_{i=1}^{M}\kappa_i=1$。</p>
+<p><img src="/images/2018-11-04-15412939412047.jpg" width="90%" height="50%"></p>
+<p>文中对$\kappa$和$\alpha$作了解释。</p>
+<blockquote>
+<p>κ can be interpreted as a learned concatenation weight and α as the learned addition weight</p>
+</blockquote>
+<p>通过实验，发现该模型会有更好的正则化特性。同时效果也有一定提升，收敛速度更快：<br><img src="/images/2018-11-04-15412940966579.jpg" width="80%" height="50%"></p>
+<hr>
+<h2 id="4️⃣-You-May-Not-Need-Attention"><a href="#4️⃣-You-May-Not-Need-Attention" class="headerlink" title="4️⃣[You May Not Need Attention]"></a>4️⃣[You May Not Need Attention]</h2><p>粗略地过了一遍，一些细节没有弄明白。</p>
+<p>提出一种将encoder-decoder融合起来的模型，也即eager translation model，不需要attention，能够实现即时的翻译，也即读入一个词就能翻译一个词，同时不需要记录encoder的所有输出，因此需要很少的内存。</p>
+<p><img src="/images/2018-11-04-15412942175720.jpg" width="50%" height="50%"></p>
+<p>分为三步：<br>①pre-processing<br>进行预处理，使得源句子和目标句子满足<strong>eager feasible</strong> for every aligned pair of words $(s_i , t_j ), i ≤ j$。</p>
+<p>首先通过现成的工具进行对齐操作(alignment)，然后对于那些不符合eager feasible的有具体算法（没认真看）进行补padding。如图<br><img src="/images/2018-11-04-15412945231042.jpg" width="60%" height="50%"></p>
+<p>我们还可以在target sentence的开头添加b个padding，使得模型能够在开始预测之前获取更多的source sentence的词。</p>
+<p>②模型<br>两层的LSTM，输入是上一次的y和当前的x拼接起来直接传进去。</p>
+<p>③post processing<br>在最终结果之前，将padding去掉。</p>
+<p>在inference（也即beam search）时，还有几个操作/trick：</p>
+<ul>
+<li>Padding limit</li>
+<li>Source padding injection SPI</li>
+</ul>
+<p>实验表明，eager model在长的句子表现超过传统带attention的NMT，而长句子的建模正是attention-based 的模型的一大挑战；而在短句子上就不如attention-based的NMT。<br><img src="/images/2018-11-04-15412946442983.jpg" width="50%" height="50%"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/11/04/诗词&句/每周诗词14/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1263,527 +1753,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/21/机器学习与深度学习算法知识/PRML第四章 分类的线性模型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/21/机器学习与深度学习算法知识/PRML第四章 分类的线性模型/" itemprop="url">PRML第四章 分类的线性模型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T09:21:24+08:00">
-                2018-10-21
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:24+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="判别函数"><a href="#判别函数" class="headerlink" title="判别函数"></a>判别函数</h1><p><img src="/images/2018-10-21-Xnip2018-10-21_09-26-42.jpg" alt="0"></p>
-<hr>
-<p><img src="/images/2018-10-21-Xnip2018-10-21_09-27-57.jpg" alt="1"></p>
-<p>—-未完—-</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/20/论文/每周论文2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/20/论文/每周论文2/" itemprop="url">每周论文2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-20T10:07:30+08:00">
-                2018-10-20
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:12+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-An-Empirical-Evaluation-of-Generic-Convolutional-and-Recurrent-Networks-for-Sequence-Modeling"><a href="#1️⃣-An-Empirical-Evaluation-of-Generic-Convolutional-and-Recurrent-Networks-for-Sequence-Modeling" class="headerlink" title="1️⃣[An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling]"></a>1️⃣[An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling]</h3><p>本文贡献：提出一种新的模型<strong>TCN（Temporal Convolutional Networks）</strong>进行language model建模。</p>
-<h4 id="Dilated-convolution"><a href="#Dilated-convolution" class="headerlink" title="Dilated convolution"></a>Dilated convolution</h4><p>每一层的感受野都可以是不同的，也即，同样的kernel size，高层的可以跳着看。<br><img src="/images/2018-10-20-15400016170606.jpg" width="60%" height="50%"></p>
-<p>每层的d逐渐增大（也即跳的步数），一般按指数增大。（我觉得这样很有道理，如果每一层的d都是一样的，那capture到的信息就会有重复，能看到的视野也不如逐渐增大的多）</p>
-<h4 id="Residual-block"><a href="#Residual-block" class="headerlink" title="Residual block"></a>Residual block</h4><p><img src="/images/2018-10-20-15400017320092.jpg" width="70%" height="50%"></p>
-<p>这边的residual block比较复杂；一个值得主意的细节是，因为感受野的不同，上层的感受野总是比下层的大很多，因此不应该直接将下层的加到上层，而是可以使用一个1*1的convolution对下层的x进行卷积，这就类似scale对输入进行放缩。</p>
-<hr>
-<h3 id="2️⃣-Dissecting-Contextual-Word-Embeddings：-Architecture-and-Representation"><a href="#2️⃣-Dissecting-Contextual-Word-Embeddings：-Architecture-and-Representation" class="headerlink" title="2️⃣[Dissecting Contextual Word Embeddings： Architecture and Representation]"></a>2️⃣[Dissecting Contextual Word Embeddings： Architecture and Representation]</h3><p>一篇分析的文章。ELMo作者的又一篇文章。</p>
-<p>对比三种不同的建模方式（LSTM/GCNN/Transformer）获得的词向量，以及在不同任务上的表现；以及不同层获得的不同信息…获得了不同的结论。</p>
-<p>①biLM 专注于word morphology词的形态；底层的LM关注local syntax；而高层的LM关注semantic content；</p>
-<p>②不同的任务会有不同的正则化s的倾向。</p>
-<hr>
-<h3 id="3️⃣-Transformer-XL-Language-modeling-with-longer-term-dependency"><a href="#3️⃣-Transformer-XL-Language-modeling-with-longer-term-dependency" class="headerlink" title="3️⃣[Transformer-XL: Language modeling with longer-term dependency]"></a>3️⃣[Transformer-XL: Language modeling with longer-term dependency]</h3><p>利用Transformer进行language model，与普通的Transformer建模不同的是，Transformer-XL添加了历史信息，能够显著提升表现。这篇还在ICLR2019审稿中。</p>
-<p>贡献：本文提出了能够进行长程依赖的基于Transformer的语言模型 Transformer-XL；引入相对位置的positional encoding。</p>
-<h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><p>原先的transformer language model是将句子分为一个一个segment。segment之间是没有联系的。（为什么不直接按原版的Transformer那样所有的词都相互做self-attention？因为考虑到效率问题，句子长度可能会很长）</p>
-<p>训练阶段：<br><img src="/images/2018-10-20-15400023645268.jpg" width="35%" height="50%"></p>
-<p>而在测试阶段，每次向右滑动一格：<br><img src="/images/2018-10-20-15400024115822.jpg" width="80%" height="50%"><br>这样每一个时间步都要重新计算一遍，历史信息没有利用到。显然速度很慢。</p>
-<p>在Transformer引入recurrence，也即引入历史信息。基于这样的想法，提出的新模型Transformer-XL。在结构上同样分为每个segment，但在每个阶段都接收上一个（甚至上L个）历史信息。</p>
-<p>训练阶段：<br><img src="/images/2018-10-20-15400026059113.jpg" width="80%" height="50%"></p>
-<p>而在测试阶段，同样分为segment，但因为接收了历史信息，不需要每次滑动一格也能获得大量信息。<br><img src="/images/2018-10-20-15400027040526.jpg" width="45%" height="50%"></p>
-<p>具体来说：<br><img src="/images/2018-10-20-15400027302545.jpg" width="120%" height="50%"><br>SG代表stop gradient，和该阶段的hidden state进行拼接。</p>
-<h4 id="RELATIVE-POSITIONAL-ENCODINGS"><a href="#RELATIVE-POSITIONAL-ENCODINGS" class="headerlink" title="RELATIVE POSITIONAL ENCODINGS"></a>RELATIVE POSITIONAL ENCODINGS</h4><p>如果我们使用了absolute positional encodings（也即原版的positional encodings）那么会出现这种情况</p>
-<p><img src="/images/2018-10-20-15400027991211.jpg" width="70%" height="50%"></p>
-<p>在同一层之间的前一个segment和后一个segment使用了同样的绝对位置信息，对于当前segment的高层，对于同一个位置i，无法区分该位置信息是来自当前segment的还是上一个segment的（因为都是同样的绝对位置）。</p>
-<p>因此我们引入相对位置信息R，其中第i行代表相对距离i的encoding。</p>
-<p>具体来说：</p>
-<p>首先我们在传统的计算$query_i$和$key_j$的attention分数时，可以拆解成：</p>
-<p><img src="/images/2018-10-20-15400030310583.jpg" width="80%" height="50%"><br>（因为query=(embedding E +positional embedding U），key也一样，将式子拆开就能获得上述式子)</p>
-<p>我们将该式子进行修改：</p>
-<p><img src="/images/2018-10-20-15400031662378.jpg" width="80%" height="50%"></p>
-<p>第一，将出现了absolute positional embedding $U$的地方，统统改成$R_{i-j}$，也即在b和d项。其中这里的R和原版的Transformer的位置计算公式相同。</p>
-<p>第二，在c项中，使用一个$u$替代了$U_i W_q$，这一项原本的意义在于，$query_i$的positional encoding对$key_j$的embedding进行attention，也就是说，该项表现了$query_i$位置对哪些$key_j$的内容有兴趣，作者认为query不管在哪个位置上都是一样的，也就是说query的位置信息应当没影响，所以统统替换成一个可学习的$u$。基于类似的理由d项换成了$v$。</p>
-<p>第三，将$W_k$细分成了两个$W_{k,E}$和$W_{k,R}$。这是根据query是Embedding还是positional encoding来区分的。for producing the content-based key vectors and location-based key vectors respectively</p>
-<p>每一项现在都有了不同的意义：</p>
-<blockquote>
-<p>Under the new parameterization, each term has an intuitive meaning: term (a) represents contentbased addressing, term (b) captures a content-dependent positional bias, term (c) governs a global content bias, and (d) encodes a global positional bias.</p>
-</blockquote>
-<p>最后总结一下整个结构：</p>
-<p><img src="/images/2018-10-20-15400040342520.jpg" width="120%" height="50%"></p>
-<p>与原版Transformer不同的是，Transformer-XL在每一层都添加了位置信息。</p>
-<hr>
-<h3 id="4️⃣-Trellis-Networks-for-Sequence-Modeling"><a href="#4️⃣-Trellis-Networks-for-Sequence-Modeling" class="headerlink" title="4️⃣[Trellis Networks for Sequence Modeling]"></a>4️⃣[Trellis Networks for Sequence Modeling]</h3><p>一种结合RNN和CNN的语言建模方式。</p>
-<p>最小的单元结构：</p>
-<p><img src="/images/2018-10-21-15400858162232.jpg" width="40%" height="50%"></p>
-<p>也即：<br><img src="/images/2018-10-21-15400860605560.jpg" width="40%" height="50%"></p>
-<p>接下来再处理非线性：<br><img src="/images/2018-10-21-15400861618655.jpg" width="30%" height="50%"></p>
-<p>因为每层都要输入x，且W是共享的，所以我们可以提前计算好这一项，后面直接用即可。<br><img src="/images/2018-10-21-15400861870898.jpg" width="35%" height="50%"></p>
-<p>最终在实现的时候是：<br><img src="/images/2018-10-21-15400862184335.jpg" width="40%" height="50%"></p>
-<p><img src="/images/2018-10-21-15400862303741.jpg" width="40%" height="50%"></p>
-<p>总体框架：<br><img src="/images/2018-10-21-15400874987498.jpg" width="70%" height="50%"></p>
-<p>与TCN（temporal convolution network）不同之处：①filter weight不仅在time step之间共享，在不同层之间也共享；②在每一层都添加了输入</p>
-<p>优点：共享了W，显著减少了参数；‘Weight tying can be viewed as a form of regularization that can stabilize training’</p>
-<p>我们还可以扩展该网络，引入gate：<br><img src="/images/2018-10-21-15400875805208.jpg" width="40%" height="50%"></p>
-<hr>
-<h3 id="5️⃣-Towards-Decoding-as-Continuous-Optimisation-in-Neural-Machine-Translation"><a href="#5️⃣-Towards-Decoding-as-Continuous-Optimisation-in-Neural-Machine-Translation" class="headerlink" title="5️⃣[Towards Decoding as Continuous Optimisation in Neural Machine Translation]"></a>5️⃣[Towards Decoding as Continuous Optimisation in Neural Machine Translation]</h3><p>一篇很有意思的paper。用于NMT decode的inference阶段。这篇有一定的难度，以下只是我的理解。</p>
-<h4 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h4><p>Motivation：<br>NMT中的decode inference阶段，通常都是从左到右的，这样有个缺点，就是整体的target之间的依赖是没有被充分利用到的，比如说生成的词的右边是没有用到的。那么我们为什么不直接全部生成呢？然后不断更新。也就是说我们将离散（discrete）的decode过程变成一个连续的过程（continuous optimization）。</p>
-<p>假设我们已经训练好模型，给定一个句子，我们要翻译成目标句子，且假设我们已知要生成的句子长度是l，那么我们有：<br><img src="/images/2018-10-21-15400876953609.jpg" width="45%" height="50%"><br>我们要找到一个最优的序列$y$，使得$-log$最小。</p>
-<p>等价于：<br><img src="/images/2018-10-21-15400877226851.jpg" width="55%" height="50%"><br>其中$\widetilde{y}_i$是one-hot。其实这里就是假设有这么一个ground truth，但实际上是没有的。</p>
-<p>我们将$\widetilde{y}_i$是one-hot这个条件放宽一些，变成是一个概率单纯型（其实就是所有元素加起来是1，且都大于等于0）。</p>
-<p>那么就变成了：<br><img src="/images/2018-10-21-15400879019592.jpg" width="50%" height="50%"></p>
-<p>这个改变的本质是：<br><img src="/images/2018-10-21-15400879379023.jpg" width="50%" height="50%"></p>
-<p>就是说原来one-hot的$\widetilde{y}_i$生成后丢到下一个时间步，取了一个词向量，接着计算。现在是一个概率分布$\hat{y}_i$丢进来，就相当于取了多个词向量的加权求和。</p>
-<p>在利用下述的更新算法更新完$\hat{y}_i$之后，对于每个时间步t，我们找$\hat{y}_i$中元素最大的值对应的词作为生成的词。</p>
-<p>有两种方法Exponentiated Gradient 和 SGD。实际上方法倒在其次了，主要是前面所述的continuous optimization这种思想。</p>
-<h4 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h4><h5 id="Exponentiated-Gradient"><a href="#Exponentiated-Gradient" class="headerlink" title="Exponentiated Gradient"></a>Exponentiated Gradient</h5><p><img src="/images/2018-10-21-15400881918713.jpg" width="80%" height="50%"><br>具体见论文</p>
-<h5 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h5><p>因为我们要保证单纯形的约束不变，因此我们引入一个r，然后做一个softmax<br><img src="/images/2018-10-21-15400882306948.jpg" width="80%" height="50%"></p>
-<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p>这种连续decode可以用在哪？</p>
-<h5 id="Bidirectional-Ensemble"><a href="#Bidirectional-Ensemble" class="headerlink" title="Bidirectional Ensemble"></a>Bidirectional Ensemble</h5><p>可以很方便地进行双向的生成：</p>
-<p><img src="/images/2018-10-21-15400883321474.jpg" width="45%" height="50%"><br>而在传统的方法中没办法（很难）做到</p>
-<h5 id="Bilingual-Ensemble"><a href="#Bilingual-Ensemble" class="headerlink" title="Bilingual Ensemble"></a>Bilingual Ensemble</h5><p>我们希望源语言到目标语言和目标到源语言都生成得好</p>
-<p><img src="/images/2018-10-21-15400883583228.jpg" width="50%" height="50%"></p>
-<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>$\hat{y}_i$的初始化很重要，一不小心就会陷入local minima；生成的速度慢</p>
-<hr>
-<h3 id="6️⃣-Universal-Language-Model-Fine-tuning-for-Text-Classiﬁcation"><a href="#6️⃣-Universal-Language-Model-Fine-tuning-for-Text-Classiﬁcation" class="headerlink" title="6️⃣[Universal Language Model Fine-tuning for Text Classiﬁcation]"></a>6️⃣[Universal Language Model Fine-tuning for Text Classiﬁcation]</h3><p>和ELMo、OpenAI GPT一样，都是预训练语言模型，迁移到其他任务上（这里是分类任务）。可以在非常小的数据集上有很好的效果。</p>
-<p>贡献：</p>
-<ol>
-<li>迁移学习模型ULMFiT</li>
-<li>提出几种trick：discriminative ﬁne-tuning, slanted triangular learning rates,gradual unfreezing ，最大保证知识的保留。</li>
-</ol>
-<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><p><img src="/images/2018-10-21-15401043145373.jpg" width="90%" height="50%"></p>
-<p>三部曲：</p>
-<ol>
-<li>通用语言模型预训练</li>
-<li>目标任务的语言模型fine-tuning</li>
-<li>目标任务的分类fine-tuning</li>
-</ol>
-<h4 id="trick"><a href="#trick" class="headerlink" title="trick"></a>trick</h4><h5 id="Discriminative-ﬁne-tuning"><a href="#Discriminative-ﬁne-tuning" class="headerlink" title="Discriminative ﬁne-tuning"></a>Discriminative ﬁne-tuning</h5><p>Motivation：不同层有不同的信息；应当fine-tune 不同程度，也即使用不同的learning rate。</p>
-<p><img src="/images/2018-10-21-15401044160803.jpg" width="35%" height="50%"></p>
-<p>作者发现上一层的学习率是下一层的2.6倍时效果比较好。</p>
-<h5 id="Slanted-triangular-learning-rates-STLR"><a href="#Slanted-triangular-learning-rates-STLR" class="headerlink" title="Slanted triangular learning rates (STLR)"></a>Slanted triangular learning rates (STLR)</h5><p><img src="/images/2018-10-21-15401045153164.jpg" width="60%" height="50%"></p>
-<p>具体公式：<br><img src="/images/2018-10-21-15401045316305.jpg" width="50%" height="50%"></p>
-<h5 id="Gradual-unfreezing"><a href="#Gradual-unfreezing" class="headerlink" title="Gradual unfreezing"></a>Gradual unfreezing</h5><p>从顶层到底层，一步一步unfreeze，也即从上到下fine-tune。这是因为最上一层有最少的general knowledge。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/14/论文/每周论文1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/14/论文/每周论文1/" itemprop="url">每周论文1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-14T11:09:30+08:00">
-                2018-10-14
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:13+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-Learned-in-Translation-Contextualized-Word-Vectors"><a href="#1️⃣-Learned-in-Translation-Contextualized-Word-Vectors" class="headerlink" title="1️⃣[Learned in Translation: Contextualized Word Vectors]"></a>1️⃣[Learned in Translation: Contextualized Word Vectors]</h3><p>CoVe是第一个引入动态词向量的模型。<br>Motivation：翻译模型能够保存最多的信息，因为如果保存信息不够多，decoder接收到的信息不足，翻译效果就不会好。（但实际上，我个人认为，decoder的表现还和language model有关，如果decoder是一个好的language model，也有可能翻译出不错的结果）</p>
-<p>做法：使用传统NMT的encoder-decoder的做法翻译模型，只是将(bi)LSTM所得到的隐层状态表示取出来和embedding拼接起来，作为一个词的表示：</p>
-<script type="math/tex; mode=display">w=[GloVe(w); CoVe(w)]</script><hr>
-<h3 id="2️⃣-Language-Modeling-with-Gated-Convolutional-Networks"><a href="#2️⃣-Language-Modeling-with-Gated-Convolutional-Networks" class="headerlink" title="2️⃣[Language Modeling with Gated Convolutional Networks]"></a>2️⃣[Language Modeling with Gated Convolutional Networks]</h3><p>使用CNN对语言模型进行建模，提高并行性。</p>
-<p>贡献：使用了CNN进行language model建模；提出了简化版的gate机制应用在CNN中。</p>
-<p>做法：<br><img src="/images/2018-10-14-15394870930257.jpg" width="50%" height="50%"></p>
-<p>实际上就是一个输入两个filter，卷积出来的做一个gate的操作$H_0 = A⊗σ(B)$，控制流向下一层的数据。</p>
-<p>一个小细节是，为了不让language model看到下一个词，每一层在开始卷积的时候会在左边添加kernel_size-1个padding。</p>
-<p>扩展：因为CNN的并行性高，可以使用CNN来对language model建模替代ELMo，同样可以获得动态词向量。这个想法已经由提出ELMo的团队做出来并进行对比了。论文：Dissecting Contextual Word Embeddings: Architecture and Representation</p>
-<p>目前正在<a href="https://github.com/linzehui/Gated-Convolutional-Networks" target="_blank" rel="noopener">复现</a>该论文 。</p>
-<hr>
-<h3 id="3️⃣-Attention-is-All-you-need"><a href="#3️⃣-Attention-is-All-you-need" class="headerlink" title="3️⃣[Attention is All you need]"></a>3️⃣[Attention is All you need]</h3><p>非常经典的论文。提出了Transformer。为了读BERT重温了一遍。<br><img src="/images/2018-10-14-15394876881322.jpg" width="70%" height="50%"></p>
-<p><img src="/images/2018-10-14-15394877200390.jpg" width="70%" height="50%"></p>
-<p><img src="/images/2018-10-14-15394877478814.jpg" width="70%" height="50%"></p>
-<hr>
-<h3 id="4️⃣-Improving-Language-Understanding-by-Generative-Pre-Training"><a href="#4️⃣-Improving-Language-Understanding-by-Generative-Pre-Training" class="headerlink" title="4️⃣[Improving Language Understanding by Generative Pre-Training]"></a>4️⃣[Improving Language Understanding by Generative Pre-Training]</h3><p>BERT就是follow这篇文章的工作。<br>使用Transformer预训练一个language model进行迁移学习。</p>
-<p>训练过程分为两步：①使用未标记数据训练language model；②使用有标记数据进行fine-tune</p>
-<p>Motivation：ELMo是训练好language model，然后获得动态词向量再用到其他任务上，这样就会多了很多参数。和ELMo不同的是，这里使用一个Transformer模型解决多种任务（利用迁移学习）。</p>
-<p>贡献：使用Transformer进行language model建模；尝试利用language model进行迁移学习而不是另一种思路（ELMo）只提取词向量。</p>
-<p>①无监督学习language model<br><img src="/images/2018-10-14-15395044176746.jpg" width="40%" height="50%"></p>
-<p>具体到Transformer就是：<br><img src="/images/2018-10-14-15395044608239.jpg" width="50%" height="50%"></p>
-<p>②监督学习（fine-tune）<br>根据输入预测标签<br><img src="/images/2018-10-14-15395045508824.jpg" width="35%" height="50%"></p>
-<p>具体就是：<br><img src="/images/2018-10-14-15395045734859.jpg" width="40%" height="50%"></p>
-<p>将两个任务一起训练，则有：<br><img src="/images/2018-10-14-15395045932795.jpg" width="30%" height="50%"></p>
-<p>对于不同任务，对输入进行一定的改动以适应Transformer结构：<br><img src="/images/2018-10-14-15395046364928.jpg" width="90%" height="50%"></p>
-<hr>
-<h3 id="5️⃣-BERT-Pre-training-of-Deep-Bidirectional-Transformers-for-Language-Understanding"><a href="#5️⃣-BERT-Pre-training-of-Deep-Bidirectional-Transformers-for-Language-Understanding" class="headerlink" title="5️⃣[BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding]"></a>5️⃣[BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding]</h3><p>刷爆各榜单的一篇神文。使用Transformer预训练一个language model进行迁移学习。</p>
-<p>Motivation：之前的language model只能根据前面的词来预测下一个（即使ELMo是双向的LSTM，也是分别训练一个前向和一个后向的），限制了双向的context；因此提出了双向的language model。</p>
-<h4 id="做法："><a href="#做法：" class="headerlink" title="做法："></a>做法：</h4><p>模型分为两个部分：<br>①masked LM：因为使用了两边的context，而language model的目的是预测下一个词，这样模型会提前看到下一个词，为了解决该问题，训练的时候讲部分词mask掉，最终只预测被mask掉的词。</p>
-<p>②Next Sentence Prediction：随机50%生成两个句子是有上下句关系的，50%两个句子是没有关系的，然后做分类；具体来说是拿第一个词[CLS]（这是手动添加的）的表示，过一个softmax层得到。<br><img src="/images/2018-10-14-15394891973653.jpg" width="50%" height="50%"></p>
-<p>联合训练这两个任务。</p>
-<p>接下来是通过具体的任务进行fine-tune。一个模型解决多种问题：<br><img src="/images/2018-10-14-15395038593955.jpg" width="80%" height="50%"></p>
-<p>本文贡献：使用Transformer进行双向的language model建模。论文提到的一些细节/tricks非常值得讨论，比如对token embedding添加了许多信息，非常简单粗暴。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1838,7 +1807,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">125</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1851,7 +1820,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">148</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

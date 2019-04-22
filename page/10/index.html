@@ -286,6 +286,473 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/26/碎片知识/Deep Learning NLP best practices笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/26/碎片知识/Deep Learning NLP best practices笔记/" itemprop="url">Deep Learning NLP best practices笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T11:35:24+08:00">
+                2018-08-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-01T21:22:51+08:00">
+                2018-09-01
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>博客地址：<a href="http://ruder.io/deep-learning-nlp-best-practices/index.html" target="_blank" rel="noopener">http://ruder.io/deep-learning-nlp-best-practices/index.html</a><br>个人觉得这篇文章写得很好，有许多实践得到的经验，通过这篇可以避免走一些弯路。</p>
+<h2 id="Practices"><a href="#Practices" class="headerlink" title="Practices"></a>Practices</h2><h3 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h3><blockquote>
+<p>The optimal dimensionality of word embeddings is mostly task-dependent: a smaller dimensionality works better for more syntactic tasks such as named entity recognition or part-of-speech (POS) tagging, while a larger dimensionality is more useful for more semantic tasks such as sentiment analysis.</p>
+</blockquote>
+<p>对于偏向语法的，使用维度低一些的词向量；而对于偏向语义内容的，使用维度大一些的词向量，如情感分析。</p>
+<h3 id="LSTM-Depth"><a href="#LSTM-Depth" class="headerlink" title="LSTM Depth"></a>LSTM Depth</h3><blockquote>
+<p>performance improvements of making the model deeper than 2 layers are minimal </p>
+</blockquote>
+<p>LSTM深度最好不要超过两层。</p>
+<h3 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h3><blockquote>
+<p>It is often thought that Adam clearly outperforms vanilla stochastic gradient descent (SGD). However, while it converges much faster than SGD, it has been observed that SGD with learning rate annealing slightly outperforms Adam. Recent work furthermore shows that SGD with properly tuned momentum outperforms Adam .</p>
+</blockquote>
+<p>Adam可以更早拟合，而SGD效果可能会更好一些。</p>
+<p>可以采用优化策略，比如说使用Adam训练直到拟合，然后将学习率减半，并重新导入之前训练好的最好的模型。这样Adam能够忘记之前的信息并重新开始训练。</p>
+<blockquote>
+<p>Denkowski &amp; Neubig (2017) show that Adam with 2 restarts and learning rate annealing is faster and performs better than SGD with annealing</p>
+</blockquote>
+<h3 id="Ensembling"><a href="#Ensembling" class="headerlink" title="Ensembling"></a>Ensembling</h3><blockquote>
+<p>Combining multiple models into an ensemble by averaging their predictions is a proven strategy to improve model performance.</p>
+</blockquote>
+<p>Ensembling很重要的一点是需要保证多样性：</p>
+<blockquote>
+<p>Ensembling is an important way to ensure that results are still reliable if the diversity of the evaluated models increases (Denkowski &amp; Neubig, 2017). While ensembling different checkpoints of a model has been shown to be effective (Jean et al., 2015; Sennrich et al., 2016) [51, 52], it comes at the cost of model diversity. Cyclical learning rates can help to mitigate this effect</p>
+</blockquote>
+<h3 id="LSTM-tricks"><a href="#LSTM-tricks" class="headerlink" title="LSTM tricks"></a>LSTM tricks</h3><ul>
+<li><p>在initial state中我们常常使用全0向量，实际上可以将其作为参数学习。</p>
+<blockquote>
+<p>Instead of fixing the initial state, we can learn it like any other parameter, which can improve performance</p>
+</blockquote>
+</li>
+<li><p>将input和output embedding的参数共享，如果是做language model或者机器翻译之类的，可以让他们共享。</p>
+</li>
+<li><p>Gradient Norm Clipping</p>
+<blockquote>
+<p>Rather than clipping each gradient independently, clipping the global norm of the gradient yields more significant improvements</p>
+</blockquote>
+</li>
+</ul>
+<p>这点我没看懂。</p>
+<h3 id="Classification-practices"><a href="#Classification-practices" class="headerlink" title="Classification practices"></a>Classification practices</h3><p>关于CNN</p>
+<blockquote>
+<p>CNN filters:Combining filter sizes near the optimal filter size, e.g. (3,4,5) performs best (Kim, 2014; Kim et al., 2016). The optimal number of feature maps is in the range of 50-600 (Zhang &amp; Wallace, 2015) [59].</p>
+<p>Aggregation function:1-max-pooling outperforms average-pooling and k-max pooling (Zhang &amp; Wallace, 2015).</p>
+</blockquote>
+<p>这在我之前的关于CNN文本分类指南中有更详尽的分析。</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这是一篇干货满满的博客，实际上我还是有许多地方没有读懂，这适合多看几遍，慢慢理解。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/26/碎片知识/每周碎片知识5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/26/碎片知识/每周碎片知识5/" itemprop="url">每周碎片知识5</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T11:20:14+08:00">
+                2018-08-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:16+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1️⃣[Paper]<br>Joint Embeddings of Chinese Words, Characters, and Fine-grained Subcharacter Components</p>
+<p>基本框架和CBOW一致，主要贡献在于针对中文词向量添加了偏旁、字的组件作为训练信息。</p>
+<p><img src="/images/2018-08-26-15352530482345.jpg" width="50%" height="50%"></p>
+<hr>
+<p>2️⃣[Paper]<br>Highway Networks</p>
+<p>为了解决神经网络深度过深时导致的反向传播困难的问题。<br>前向传播的公式：</p>
+<script type="math/tex; mode=display">y=H(x,W_H)</script><p>而论文所做的改进：</p>
+<script type="math/tex; mode=display">y=H(x,W_H) \cdot T(x,W_T)+ x \cdot C(x,W_C)</script><p>其中$T$是transform gate，$C$是carry gate。方便起见，可以将 $C=1-T$，最终有：</p>
+<script type="math/tex; mode=display">y=H(x,W_H) \cdot T(x,W_T)+ x \cdot (1-T(x,W_T))</script><p>可以看出思想和LSTM很类似，都是gate的思想。</p>
+<hr>
+<p>3️⃣[调参方法]<br>博客：<a href="https://blog.goodaudience.com/how-to-make-your-model-happy-again-part-1-40d94a9ffb41" target="_blank" rel="noopener">https://blog.goodaudience.com/how-to-make-your-model-happy-again-part-1-40d94a9ffb41</a></p>
+<ul>
+<li><strong>学习率</strong>：</li>
+</ul>
+<p>一条原则：当validation loss开始上升时，减少学习率。</p>
+<p>如何减少？</p>
+<p><img src="/images/2018-08-26-15352871548330.jpg" width="50%" height="50%"></p>
+<p>或者：</p>
+<p><img src="/images/2018-08-26-15352873283890.jpg" width="50%" height="50%"><br>设定一定的epoch作为一个stepsize，在训练过程中线性增加学习率，然后在到达最大值后再线性减小。<br>实验表明，使用该方法可以在一半的epoch内达到相同的效果。</p>
+<ul>
+<li><strong>batch size</strong>：</li>
+</ul>
+<p><img src="/images/2018-08-26-15352891425729.jpg" width="50%" height="50%"></p>
+<p>由于batch size和学习率的强相关性，<a href="https://arxiv.org/pdf/1711.00489.pdf" target="_blank" rel="noopener">相关论文</a>提出提高batch size而不是降低学习率的方法来提升模型表现。</p>
+<blockquote>
+<p>increasing the batch size during training, instead of decaying learning rate. — L. Smith<br><a href="https://arxiv.org/pdf/1711.00489.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1711.00489.pdf</a></p>
+</blockquote>
+<p>一个trick：保持学习率不变，提高batch size，直到batch size~训练集/10，接下来再采用学习率下降的策略。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/26/代码相关/代码分享6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/26/代码相关/代码分享6/" itemprop="url">代码片段记录6</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T11:07:30+08:00">
+                2018-08-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-23T09:30:20+08:00">
+                2018-09-23
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣将数据整理成batch"><a href="#1️⃣将数据整理成batch" class="headerlink" title="1️⃣将数据整理成batch"></a>1️⃣将数据整理成batch</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_iter_batch</span><span class="params">(paras,labels,batch_size,shuffle=True)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :param paras:</span></span><br><span class="line"><span class="string">    :param labels:</span></span><br><span class="line"><span class="string">    :param batch_size:</span></span><br><span class="line"><span class="string">    :param shuffle:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">assert</span> len(paras)==len(labels)</span><br><span class="line">    paras_size=len(paras)</span><br><span class="line">    <span class="keyword">if</span> shuffle:</span><br><span class="line">        indices=np.arange(paras_size)</span><br><span class="line">        np.random.shuffle(indices)</span><br><span class="line">    <span class="keyword">for</span> start_idx <span class="keyword">in</span> range(<span class="number">0</span>,paras_size-batch_size+<span class="number">1</span>,batch_size):</span><br><span class="line">        <span class="keyword">if</span> shuffle:</span><br><span class="line">            excerpt=indices[start_idx:start_idx+batch_size]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            excerpt=slice(start_idx,start_idx+batch_size)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">yield</span> paras[excerpt],labels[excerpt]</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/26/诗词&句/每周诗词6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1382,464 +1849,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/19/碎片知识/每周碎片知识4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/19/碎片知识/每周碎片知识4/" itemprop="url">每周碎片知识4</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T09:45:37+08:00">
-                2018-08-19
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:16+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1️⃣[概率校准(Probability Calibration)]<br>一种对机器学习算法输出结果的校准，通过几个实验可以发现，概率校准能够一定程度提高表现。<br>几个参考资料：<br>直观理解:  <a href="http://www.bubuko.com/infodetail-2133893.html" target="_blank" rel="noopener">http://www.bubuko.com/infodetail-2133893.html</a><br>SVC的概率校准在sklearn上的应用: <a href="https://blog.csdn.net/ericcchen/article/details/79337716" target="_blank" rel="noopener">https://blog.csdn.net/ericcchen/article/details/79337716</a><br>✨完全手册: <a href="http://users.dsic.upv.es/~flip/papers/BFHRHandbook2010.pdf" target="_blank" rel="noopener">Calibration of Machine Learning Models</a></p>
-<hr>
-<p>2️⃣[Paper]<br><a href="https://www.cs.cmu.edu/~hovy/papers/16HLT-hierarchical-attention-networks.pdf" target="_blank" rel="noopener">Hierarchical Attention Networks for Document Classification</a></p>
-<p>亮点在使用层次的RNN结构，以及使用了attention方法。<br><img src="/images/2018-08-19-15346447273228.jpg" width="50%" height="50%"></p>
-<p>参考了其他人的代码自己也试着实现了一个，GitHub地址：<a href="https://github.com/linzehui/pytorch-hierarchical-attention-network" target="_blank" rel="noopener">https://github.com/linzehui/pytorch-hierarchical-attention-network</a></p>
-<hr>
-<p>3️⃣[XGBoost]<br>kaggle神器XGBoost，一篇原理的详细介绍：<br><a href="http://www.cnblogs.com/willnote/p/6801496.html" target="_blank" rel="noopener">http://www.cnblogs.com/willnote/p/6801496.html</a><br>虽然还是有好些地方没搞懂，有必要从头学起。</p>
-<hr>
-<p>4️⃣[Python]<br>关于函数列表中单星号(*)和双星号(**)<br>单星号：</p>
-<ul>
-<li>代表接收任意多个非关键字参数，将其转换成元组：</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">one</span><span class="params">(a,*b)</span>:</span></span><br><span class="line">    <span class="string">"""a是一个普通传入参数，*b是一个非关键字星号参数"""</span></span><br><span class="line">    print(b)</span><br><span class="line">one(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)  <span class="comment">#输出：(2, 3, 4, 5, 6)</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>对一个普通变量使用单星号，表示对该变量拆分成单个元素</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    print(a,b)</span><br><span class="line">l=[<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">fun(*l)  <span class="comment">#输出 1,2</span></span><br></pre></td></tr></table></figure>
-<p>双星号：</p>
-<ul>
-<li>获得字典值</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">two</span><span class="params">(a=<span class="number">1</span>,**b)</span>:</span></span><br><span class="line">    <span class="string">"""a是一个普通关键字参数，**b是一个关键字双星号参数"""</span></span><br><span class="line">    print(b)</span><br><span class="line">two(a=<span class="number">1</span>,b=<span class="number">2</span>,c=<span class="number">3</span>,d=<span class="number">4</span>,e=<span class="number">5</span>,f=<span class="number">6</span>)  <span class="comment">#输出&#123;'b': 2, 'c': 3, 'e': 5, 'f': 6, 'd': 4&#125;</span></span><br></pre></td></tr></table></figure>
-<hr>
-<p>5️⃣[Pytorch]<br>在Pytorch中，只要一个tensor的requires_grad是true，那么两个tensor的加减乘除后的结果的requires_grad也会是true。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/19/诗词&句/每周诗词5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/19/诗词&句/每周诗词5/" itemprop="url">每周诗词5</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T09:09:00+08:00">
-                2018-08-19
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-19T09:40:58+08:00">
-                2018-08-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本周太忙了，没背什么诗词，只背（复习）了部分的《滕王阁序》。</p>
-<p>1️⃣</p>
-<h3 id="滕王阁序"><a href="#滕王阁序" class="headerlink" title="滕王阁序"></a>滕王阁序</h3><p>嗟乎！时运不齐，命途多舛。冯唐易老，李广难封。屈贾谊于长沙，非无圣主；窜梁鸿于海曲，岂乏明时？所赖<strong>君子见机，达人知命</strong>。老当益壮，宁移白首之心？<strong>穷且益坚，不坠青云之志</strong>。酌贪泉而觉爽，处涸辙以犹欢。<strong>北海虽赊，扶摇可接；东隅已逝，桑榆非晚。</strong>孟尝高洁，空馀报国之情；阮籍猖狂，岂效穷途之哭！</p>
-<p>勃，三尺微命，一介书生。无路请缨，等终军之弱冠；有怀投笔，慕宗慤之长风。舍簪笏于百龄，奉晨昏于万里。非谢家之宝树，接孟氏之芳邻。他日趋庭，叨陪鲤对；今兹捧袂，喜托龙门。杨意不逢，抚凌云而自惜；锺期既遇，奏流水以何惭？</p>
-<hr>
-<p><strong>注释：</strong><br>冯唐：西汉人，有才能却一直不受重用。汉武帝时选求贤良，有人举荐冯唐，可是他已九十多岁，难再做官了。李广：汉武帝时的名将，多年抗击匈奴，军功很大，却终身没有封侯。</p>
-<p>贾谊：汉文帝本想任贾谊为公卿，但因朝中权贵反对，就疏远了贾谊，任他为长沙王太傅。梁鸿：东汉人，因作诗讽刺君王，得罪了汉章帝，被迫逃到齐鲁一带躲避。</p>
-<p>酌（zhuó）贪泉而觉爽：喝下贪泉的水，仍觉得心境清爽。古代传说广州有水名贪泉，人喝了这里的水就会变得贪婪。这句是说有德行的人在污浊的环境中也能保持纯正，不被污染。处涸辙以犹欢：处在奄奄待毙的时候，仍然乐观开朗。处河辙：原指鲋鱼处在干涸的车辙旦。比喻人陷入危急之中。</p>
-<p>孟尝：东汉人，为官清正贤能，但不被重用，后来归田。阮籍：三国魏诗人，他有时独自驾车出行，到无路处便恸哭而返，借此宣泄不满于现实的苦闷心情。</p>
-<p>终军：《汉书·终军传》记载，汉武帝想让南越（今广东、广西一带）王归顺，派终军前往劝说，终军请求给他长缨，必缚住南越王，带回到皇宫门前（意思是一定完成使命）。后来用“请缨”指投军报国。</p>
-<p>宗悫（què）：南朝宋人，少年时很有抱负，说“愿乘长风破万里浪”。</p>
-<p>簪（zān）笏（hù）：这里代指官职。晨昏：晨昏定省，出自 《礼记·曲礼上》，释义为旧时侍奉父母的日常礼节。</p>
-<p>非谢家之宝树，接孟氏之芳邻：自己并不是像谢玄那样出色的人才，却能在今日的宴会上结识各位名士。谢家之宝树：指谢玄。《晋书·谢玄传》记载，晋朝谢安曾问子侄们：为什么人们总希望自己的子弟好？侄子谢玄回答：“譬如芝兰玉树，欲使其生于庭阶耳。”后来就称谢玄为谢家宝树。孟氏之芳邻：这里借孟子的母亲为寻找邻居而三次搬家的故事，来指赴宴的嘉宾。</p>
-<p>他日趋庭，叨陪鲤对：过些时候自己将到父亲那里陪侍和聆听教诲。趋庭：快步走过庭院，这是表示对长辈的恭敬。叨：惭愧地承受，表示自谦。鲤对：孔鲤是孔子的儿子，鲤对指接受父亲教诲。事见《论语·季氏》：（孔子）尝独立，（孔）鲤趋而过庭。（子）曰：“学诗乎？”对曰：“未也。”“不学诗，无以言。”鲤退而学诗。他日，又独立，鲤趋而过庭。（子）曰：“学礼乎？”对曰：‘未也。”“不学礼，无以立。”鲤退而学礼。</p>
-<p>捧袂（mèi）：举起双袖作揖，指谒见阎公。喜托龙门：（受到阎公的接待）十分高兴，好像登上龙门一样。</p>
-<p>杨意：即蜀人杨得意，任掌管天子猎犬的官，西汉辞赋家司马相如是由他推荐给汉武帝的。凌云：这里指司马相如的赋，《史记·司马相如传》说，相如献《大人赋》，“天子大悦，飘飘有凌云之气，似游天地之间”。钟期：即钟子期。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/18/碎片知识/Python中的拷贝/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/18/碎片知识/Python中的拷贝/" itemprop="url">Python中的拷贝</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-18T10:47:05+08:00">
-                2018-08-18
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-19T11:26:51+08:00">
-                2018-08-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Python的拷贝和C/C++的差别很大，很经常就容易搞混，因此记录一下。</p>
-<h3 id="赋值、拷贝"><a href="#赋值、拷贝" class="headerlink" title="赋值、拷贝"></a>赋值、拷贝</h3><ul>
-<li>赋值：实际上就是对象的引用，没有开辟新的内存空间<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lst=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">l=lst</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>浅拷贝:创建了新对象，但是<strong>内容是对原对象的引用</strong>，有三种形式</p>
-<ol>
-<li><p>切片  </p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">l=lst[:]</span><br><span class="line">l=[i <span class="keyword">for</span> i <span class="keyword">in</span> lst]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>工厂</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">l=list(lst)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>copy </p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">l=copy.copy(lst)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>深拷贝:copy中的deepcopy，生成一个全新的对象，与原来的对象无关</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">l=copy.deepcopy(lst)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 引用https://www.cnblogs.com/huangbiquan/p/7795152.html 的例子###</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> copy</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,[<span class="string">'a'</span>,<span class="string">'b'</span>]] <span class="comment">#定义一个列表a</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a <span class="comment">#赋值</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = copy.copy(a) <span class="comment">#浅拷贝</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = copy.deepcopy(a) <span class="comment">#深拷贝</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.append(<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>], <span class="number">5</span>] <span class="comment">#a添加一个元素5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(b) </span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>], <span class="number">5</span>] <span class="comment">#b跟着添加一个元素5 </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(c)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]] <span class="comment">#c保持不变</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(d)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]] <span class="comment">#d保持不变</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">4</span>].append(<span class="string">'c'</span>) </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>], <span class="number">5</span>] <span class="comment">#a中的list(即a[4])添加一个元素c</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(b)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>], <span class="number">5</span>] <span class="comment">#b跟着添加一个元素c</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(c)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]] <span class="comment">#c跟着添加一个元素c</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(d)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]] <span class="comment">#d保持不变</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#说明如下：</span></span><br><span class="line"><span class="comment">#1.外层添加元素时， 浅拷贝c不会随原列表a变化而变化；内层list添加元素时，浅拷贝c才会变化。</span></span><br><span class="line"><span class="comment">#2.无论原列表a如何变化，深拷贝d都保持不变。</span></span><br><span class="line"><span class="comment">#3.赋值对象随着原列表一起变化</span></span><br></pre></td></tr></table></figure>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://www.cnblogs.com/huangbiquan/p/7795152.html" target="_blank" rel="noopener">https://www.cnblogs.com/huangbiquan/p/7795152.html</a><br><a href="https://www.cnblogs.com/xueli/p/4952063.html" target="_blank" rel="noopener">https://www.cnblogs.com/xueli/p/4952063.html</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1894,7 +1903,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">125</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1907,7 +1916,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">148</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
