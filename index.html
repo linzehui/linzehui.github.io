@@ -286,6 +286,140 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/04/22/碎片知识/每周碎片知识19/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/22/碎片知识/每周碎片知识19/" itemprop="url">每周碎片知识19</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-22T21:07:14+08:00">
+                2019-04-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-22T21:45:35+08:00">
+                2019-04-22
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>expand&amp;repeat</p>
+<p>expand只能对维数为1的维度进行扩展，且扩展过程中不分配新内存；repeat能对任意维度进行扩展，但需要分配新内存。</p>
+<p>如果满足expand的需要，应尽量使用expand。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/04/21/诗词&句/每周诗词22/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -559,6 +693,226 @@
 <p>几个实验现象：<br>①RNN的提升较少，而Transformer很多，说明RNN比Transformer更鲁棒。RNN比Transformer训练更为稳定。<br>②对于Transformer而言，若同样使用learning rate schedule，仍然有帮助，说明该方法是较为通用的。<br>③不使用lr schedule而只使用本文方法，也能达到不使用本文方法而使用lr schedule的结果，但需要更多的step。</p>
 <h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>为什么该方法能work？<br>符合直觉，模型从简单到难，更好训。同时从机器学习角度，如果完全正常的sample，则容易陷入局部最小或者saddle point，因此需要更长时间或者不好的泛化性能。</p>
 <p>同时论文还提到了，为什么Transformer在增加batch能够有更好的收敛，这是因为一开始训练的noisy gradient太大，若增加batch能够信噪比，而本文方法在某种程度上也解决了该问题。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/04/12/论文/Transformer相关近期盘点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/12/论文/Transformer相关近期盘点/" itemprop="url">Transformer相关近期盘点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-12T09:34:30+08:00">
+                2019-04-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-23T11:43:00+08:00">
+                2019-04-23
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>近年来自然语言处理有相当大的进展，囿于个人浅薄的能力，因此仅谈谈自己较为了解的与Transformer相关一路下来的一些工作。这篇的主要目的是完成邱博给我的任务，也顺便梳理一下思绪。</p>
+<hr>
+<p>自2017年的问世，Transformer就吸引了大批学者的注意，2018年Bert的出现，更是将Transformer推上了NLP舞台的中央。Transformer以其高效率（高并行性）以及极强的模型能力，俨然有替代传统RNN/CNN的态势。因此本次就讨论讨论Transformer及其系列，同时最后加上我个人关于RNN/CNN/Transformer的一点思考。</p>
+<p>要点：</p>
+<ol>
+<li>Transformer及其变体</li>
+<li>Transformer在其他任务</li>
+<li>预训练模型</li>
+<li>Transformer/CNN/RNN对比及思考</li>
+</ol>
+<h2 id="Transformer及其变体"><a href="#Transformer及其变体" class="headerlink" title="Transformer及其变体"></a>Transformer及其变体</h2><h3 id="Transformer简单回顾"><a href="#Transformer简单回顾" class="headerlink" title="Transformer简单回顾"></a>Transformer简单回顾</h3><p>Transformer[1]采用完全的attention机制用以序列建模，序列中的每个节点都能够直接与其他节点交互，而这是通过attention机制来实现的。</p>
+<h4 id="Transformer模型架构"><a href="#Transformer模型架构" class="headerlink" title="Transformer模型架构"></a>Transformer模型架构</h4><p>Transformer架构：<br><img src="/images/15550349717464.jpg" width="50%" height="50%"></p>
+<p>由于Transformer最早由于翻译模型中，因此架构是由一个encoder和一个decoder组成，而encoder和decoder都是由多个基本的block堆叠而成。一个block由两部分组成，也即multi-head attention层和Position-wise Feed-Forward Networks层。</p>
+<h5 id="Multi-head-attention"><a href="#Multi-head-attention" class="headerlink" title="Multi-head attention"></a>Multi-head attention</h5><p>对于序列中一个特定节点$x_i$，$x_i$作为query，其他节点（包括自己）作为key和value，通过向量点积计算出attention分数，进行归一化后（softmax）将value加权平均获得该节点$x_i$新的表示。<br>同时，对于每个节点，为了增强表示能力，可以将其映射到多个不同隐空间中，分别完成上述基本操作。</p>
+<p>如下图所示：<br><img src="/images/15550350386364.jpg" width="70%" height="50%"></p>
+<p>左图为基本操作也即scale-dot product，右图为多个scale-dot product在不同隐空间同时进行，并且将多个head的结果拼接起来作为最终结果。</p>
+<h5 id="Position-wise-Feed-Forward-Networks"><a href="#Position-wise-Feed-Forward-Networks" class="headerlink" title="Position-wise Feed-Forward Networks"></a>Position-wise Feed-Forward Networks</h5><p>为了增强模型表示能力，在Multi-head attention之后，每个节点都过两层MLP以获得新的向量表示。<br>也即:</p>
+<script type="math/tex; mode=display">\mathrm{FFN}(x)=\max \left(0, x W_{1}+b_{1}\right) W_{2}+b_{2}</script><p>相比传统的RNN/CNN而言，其最大的优势是全局的感受野（Global Receptive Field）以及高度并行性（parallelization）。</p>
+<h3 id="变体"><a href="#变体" class="headerlink" title="变体"></a>变体</h3><h4 id="Universal-Transformers"><a href="#Universal-Transformers" class="headerlink" title="Universal Transformers"></a>Universal Transformers</h4><p>提出一种新型通用的Transformer，在Transformer的基础上引入RNN的归纳偏置(inductive bias)，也即迭代学习(learning iterative)的特征。Universal Transformer[2]的主要特点有：</p>
+<ol>
+<li>在Transformer中每层的权重是独立的，而在Universal Transformer中，每层的权重是共享的，也即multi-head Attention与Feed-Forward在每层的权重是一致的。</li>
+<li>在Transformer中引入自适应计算时间(Adaptive Computation Time, ACT[3])，也即对于不同的词允许迭代不同次数。这是基于有些词相比其他词词意更丰富，更难被模型学会，因此需要更多的迭代次数。与固定层数的Transformer相比有更好的通用性。</li>
+</ol>
+<p>因此其总体结构为：<br><img src="/images/15556585300051.jpg" width="70%" height="50%"></p>
+<p>在这里有两个细节：</p>
+<ol>
+<li>加了Timestep embedding去指示当前迭代的次数</li>
+<li>将Feedforward Function用更为通用的Transition Function，可以是普通的全连接，也可以是参数更少的Depth-wise Convolution。</li>
+</ol>
+<h4 id="Star-Transformer"><a href="#Star-Transformer" class="headerlink" title="Star Transformer"></a>Star Transformer</h4><p>Star Transformer[20]是一种轻量级的Transformer，通过将全连接的结构替换为星型拓扑结构，显著减小Transformer的复杂度，从$O(n^2)$减为$O(n)$。</p>
+<p><img src="/images/15556834830687.jpg" width="50%" height="50%"></p>
+<p>其主要思想是’Gather-Distribute’，也即每个节点不直接与其他节点交互，而是与全局节点进行交互。<br><img src="/images/15556836008776.jpg" width="50%" height="50%"></p>
+<p>实验表明，Star Transformer不仅在多个数据集表现更优，且速度更快。</p>
+<p><img src="/images/15557700601922.jpg" width="90%" height="50%"></p>
+<p><img src="/images/15557701172639.jpg" width="90%" height="50%"></p>
+<h4 id="其他小改进"><a href="#其他小改进" class="headerlink" title="其他小改进"></a>其他小改进</h4><p>接下来介绍基于Transformer的几个小改进工作。</p>
+<p>在Convolutional Self-Attention Network[5]中，通过在self-attention层引入CNN的归纳偏置，在翻译任务上有一定的提升。具体做法：<br><img src="/images/15556604248879.jpg" width="80%" height="50%"><br>普通self-attention层，每个节点都能够直接与其他节点交互，而在1D-Convolutional的self-attention层中，每个节点只能与以该节点为中心的窗口内的节点交互。而在2D-Convolution中，对head这一维进行扩展，也即对于任意一个节点，不仅能和周围的节点交互，还可以与其他head的节点交互。<br>实验结果：<br><img src="/images/15556607769307.jpg" width="80%" height="50%"></p>
+<p>在Multi-Head Attention with Disagreement Regularization[6]中，显式对multi-head attention添加正则化，使得不同head尽量区分开来，以使得不同head捕获到不同的特征。论文提出了三种不同位置的正则化方法：<br>①对Value：</p>
+<script type="math/tex; mode=display">D_{\text {subpace}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H} \frac{V^{i} \cdot V^{j}}{\left\|V^{i}\right\|\left\|V^{j}\right\|}</script><p>也即对不同head之间的value，计算他们之间的cos值，作为优化目标之一。</p>
+<p>②对Attention权重：</p>
+<script type="math/tex; mode=display">D_{\text {position}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H}\left|A^{i} \odot A^{j}\right|</script><p>也即将每个head所计算得到的attention矩阵，计算他们之间的element-wise乘法，作为优化目标之一。</p>
+<p>③对输出：</p>
+<script type="math/tex; mode=display">D_{\text {output}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H} \frac{O^{i} \cdot O^{j}}{\left\|O^{i}\right\|\left\|O^{j}\right\|}</script><p>也即对每个head的输出通过cos值进行正则化。</p>
+<p>Modeling Localness for Self-Attention Networks[7]则是通过加强对局部信息的关注，在翻译任务上提升表现。其主要的动机是：①在Transformer中每个词都直接与所有词交互，对所有词进行线性加权导致对邻近词的关注不够（因为权重的分散）；②从直接上看，当词$i$与词$j$有对齐关系时，我们希望与词$j$周围的词也对齐，使得模型能够捕获整个语义单元的信息。其具体做法是在softmax函数内增加一个高斯偏置（Gaussian bias）去修正attention权重分布：</p>
+<script type="math/tex; mode=display">\operatorname{ATT}(Q, K)=\operatorname{softmax}(\text {energy}+G)</script><p>$G_{ij}$是衡量词j与词i所预测的中心词之间的联系紧密程度，计算公式为：</p>
+<script type="math/tex; mode=display">G_{i, j}=-\frac{\left(j-P_{i}\right)^{2}}{2 \sigma_{i}^{2}}</script><p>其中$\sigma_{i}=\frac{D_{i}}{2}$，$D_{i}$是窗口大小。而$P_{i}$是通过计算得出的，$P_{i}$与对应的query有关，因此可以通过$p_{i}=U_{p}^{T} \tanh \left(W_{p} Q_{i}\right)$计算得到；而窗口大小$D_{i}$可以有多种选择，①固定窗口大小；②每层特定的大小，也即将该层的key平均起来，通过$z=U_{d}^{T} \tanh \left(W_{d} \overline{\mathbf{K}}\right)$计算；③每个query都有自己的窗口大小：$z_{i}=U_{d}^{T} \tanh \left(W_{p} Q_{i}\right)$。</p>
+<p>Self-attention with relative position representations[8]则是将Transformer中的绝对位置embedding改为相对位置embedding以提升翻译效果。</p>
+<h2 id="Transformer在其他任务"><a href="#Transformer在其他任务" class="headerlink" title="Transformer在其他任务"></a>Transformer在其他任务</h2><h3 id="Transformer-XL"><a href="#Transformer-XL" class="headerlink" title="Transformer XL"></a>Transformer XL</h3><p>本文探索将Transformer用于语言模型(language model)，并在Transformer引入RNN的归纳偏置，也即RNN的历史信息，使得Transformer能够处理长句子。</p>
+<p>由于Transformer的复杂度是$O(n^2)$，虽然在GPU上能够并行操作，但占用显存较大，因此在实现时，通常是将句子切分为一个一个segment，segment之间没有联系：</p>
+<p><img src="/images/15556764280028.jpg" width="30%" height="50%"></p>
+<p>而在测试阶段，则每生成一个词时滑动一个窗口：</p>
+<p><img src="/images/15556765079362.jpg" width="60%" height="50%"></p>
+<p>这样的方法显然效率很低。</p>
+<p>而在Transformer-XL[9]中，每个segment阶段都接受前一个(甚至前L个)的历史信息：<br>因此过程如下：<br><img src="/images/15556768100801.jpg" width="60%" height="50%"></p>
+<p>而在测试阶段，由于有历史信息，则不需要滑动窗口，因此效率更高。</p>
+<p>具体而言：<br>$\begin{aligned} \widetilde{\mathbf{h}}_{\tau+1}^{n-1} &amp;=\left[\mathrm{SG}\left(\mathbf{h}_{\tau}^{n-1}\right) \circ \mathbf{h}_{\tau+1}^{n-1}\right] \\ \mathbf{q}_{\tau+1}^{n}, \mathbf{k}_{\tau+1}^{n}, \mathbf{v}_{\tau+1}^{n} &amp;=\mathbf{h}_{\tau+1}^{n-1} \mathbf{W}_{q}^{\top}, \widetilde{\mathbf{h}}_{\tau+1}^{n-1} \mathbf{W}_{k}^{\top}, \widetilde{\mathbf{h}}_{\tau+1}^{n-1} \mathbf{W}_{v}^{\top} \\ \mathbf{h}_{\tau+1}^{n} &amp;=\text { Transformer-Layer }\left(\mathbf{q}_{\tau+1}^{n}, \mathbf{k}_{\tau+1}^{n}, \mathbf{v}_{\tau+1}^{n}\right) \end{aligned}$<br>SG代表stop gradient，而历史信息与当前阶段的隐状态拼接在一起。</p>
+<p>同时本文另一大两点是引入相对位置的encoding。如果使用绝对位置encoding，那么则会出现下述情况：<br>$\mathbf{h}_{\tau+1}=f\left(\mathbf{h}_{\tau}, \mathbf{E}_{\mathbf{s}_{\tau+1}}+\mathbf{U}_{1 : L}\right) \quad \text { and } \quad \mathbf{h}_{\tau}=f\left(\mathbf{h}_{\tau-1}, \mathbf{E}_{\mathbf{s}_{\tau}}+\mathbf{U}_{1 : L}\right)$<br>也即每个segment都会有相同的位置信息。因此在这里引入$\mathbf{R} \in \mathbb{R}^{L_{\max } \times d}$，第$i$行代表相对距离$i$的encoding。</p>
+<p>具体而言：<br>在标准Transformer中，query $q_i$与key $k_j$所获得的attention分数可以拆解为：<br>$\mathbf{A}_{i, j}^{\mathrm{abs}}=q_{i}^{\top} k_{j}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{E}_{x_{j}}}_{(a)}+\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{U}_{j}}_{(b)}+\underbrace{\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{E}_{x_{j}}}_{(c)}+\underbrace{\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{U}_{j}}_{(d)}$</p>
+<p>对其进行改进，转化为相对位置encoding，有：<br>$\mathbf{A}_{i, j}^{\mathrm{rel}}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, E} \mathbf{E}_{x_{j}}}_{(a)}+\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, E} \mathbf{R}_{i-j}}_{(b)}+\underbrace{u^{\top} \mathbf{W}_{k, R} \mathbf{E}_{x_{j}}}_{(c)}+\underbrace{v^{\top} \mathbf{W}_{k, R} \mathbf{R}_{i-j}}_{(d)}$</p>
+<p>首先是将所有出现绝对位置的地方都改为相对位置，第二是将引入一个可学习的$u \in \mathbb{R}^{d}$和$v \in \mathbb{R}^{d}$去替代$\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top}$和$\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top}$。第三，是将同样的$\mathbf{W}_{k}$细化成两个不同的$\mathbf{W}_{k, E}$与$\mathbf{W}_{k, R}$。</p>
+<p>Transformer-XL在不同数据集上有相当好的效果：<br><img src="/images/15556790567795.jpg" width="80%" height="50%"></p>
+<p><img src="/images/15556790839030.jpg" width="80%" height="50%"></p>
+<h3 id="Character-Level-Language-Modeling-with-Deeper-Self-Attention"><a href="#Character-Level-Language-Modeling-with-Deeper-Self-Attention" class="headerlink" title="Character-Level Language Modeling with Deeper Self-Attention"></a>Character-Level Language Modeling with Deeper Self-Attention</h3><p>同样是在语言模型上使用Transformer，但是character级别的语言模型。其主要思路是添加多个loss来提升其表现以及加快拟合速度。</p>
+<p>对于传统的RNN character-level语言模型，一般做法是“truncated backpropagation through time” (TBTT)：也即每个batch预测最后一个字符，然后将该batch的隐状态传入下一个batch。</p>
+<p>而在Transformer中也可以采用该方法。但在该基础上，引入三种loss。<br>①Multiple Positions<br>在一个batch内，每个时间步t都预测下一个字符，而不是像传统方法，只预测batch最后一个字符：</p>
+<p><img src="/images/15556794194598.jpg" width="60%" height="50%"></p>
+<p>②Intermediate Layer Losses<br>不仅仅最后一层要进行预测，中间层也需要预测。</p>
+<p><img src="/images/15556795039170.jpg" width="60%" height="50%"><br>越底层的loss所分配的权重越小。</p>
+<p>③Multiple Targets<br>每个位置不仅仅要预测下一个字符，还需要预测后几个的字符：</p>
+<p><img src="/images/15556796677182.jpg" width="60%" height="50%"></p>
+<p>实验表明，使用多个loss能够加速拟合，且能够获得更好的结果。</p>
+<h2 id="预训练模型"><a href="#预训练模型" class="headerlink" title="预训练模型"></a>预训练模型</h2><p>自ELMo开始，预训练模型就开始受到广泛的关注，而Bert随后的问世则更是将预训练模型推上了新的阶段。因此在这里简要介绍预训练模型的历史。</p>
+<h3 id="Non-Transformer-based"><a href="#Non-Transformer-based" class="headerlink" title="Non-Transformer-based"></a>Non-Transformer-based</h3><h4 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h4><p>词向量是最早的预训练模型，Bengio, et al.[10] 最早提出神经网络语言模型，词向量作为训练语言模型的副产品，可以用于下游任务。而随后则出现了word2vec[11],GloVe[12]，是目前最为广泛使用的词向量。</p>
+<h4 id="CoVe-ELMo"><a href="#CoVe-ELMo" class="headerlink" title="CoVe/ELMo"></a>CoVe/ELMo</h4><p>word2vec与GloVe作为静态词向量，一大问题就是难以解决多义词，而多义词的表示可以通过上下文来推测。CoVe[13]将词向量从静态扩展为动态。通过上下文来获得特定词的动态表示，具体是通过翻译模型来达到该目的的。<br>而ELMo[14]继承了动态词向量的思想，不过是通过双向语言模型来达到这一目的的。通过双向LSTM的语言模型，将前向与后向隐状态拼接起来作为该词的表示。<br>仅仅是将传统静态词向量替换成ELMo，就能有很大的提升。自此开始，预训练模型开始受到广泛的关注。</p>
+<h4 id="ULMFit"><a href="#ULMFit" class="headerlink" title="ULMFit"></a>ULMFit</h4><p>在上述预训练模型中，研究者的思路主要集中在预训练词向量用于下游任务。ULMFit[16]则尝试直接对分类模型进行预训练，接着再通过微调(fine-tuning)以提高分类的效果。</p>
+<p><img src="/images/15556816887199.jpg" width="80%" height="50%"></p>
+<p>ULMFit的成功说明直接对模型进行预训练而不是只预训练词向量用于下游任务是可行的。</p>
+<h3 id="Transformer-based"><a href="#Transformer-based" class="headerlink" title="Transformer-based"></a>Transformer-based</h3><p>GPT[15]尝试通过探索构建一种通用模型并在其上训练语言模型，可以在多种任务上有更好的表现。其主要亮点在于①构建一种通用模型，能够处理不同任务，第二使用Transformer而不是LSTM作为其基本模型。<br>其基本模型：</p>
+<p><img src="/images/15556818289287.jpg" width="85%" height="50%"></p>
+<p>具体而言，主要是无监督的语言模型预训练加上有监督的微调。</p>
+<p>而Bert[17]在GPT的基础上，引入masked语言模型，通过随机mask掉部分词，强迫模型通过上下文去预测mask掉的词，加强了模型的能力。</p>
+<p><img src="/images/15556821324062.jpg" width="85%" height="50%"></p>
+<p>同时引入有监督学习，也即预测下一句（Next Sentence Prediction），随机在句对中取两个句子，使得有50%可能句子对有上下文关系，50%句对没有关系，使模型去预测句对之间的关系。具体而言则是通过在句子开头加[CLS]符号，在最高层将该符号的表示通过全连接层。</p>
+<p>Bert在11项数据集上刷新最高记录。</p>
+<p>在此之后，MT-DNN[19]、GPT2.0[18]相继问世，通过添加更多的任务或者更多的数据使得模型表现更好。相信在接下来一段时间内，相关主题的论文也会有很多。</p>
+<h2 id="Transformer-CNN-RNN对比及思考"><a href="#Transformer-CNN-RNN对比及思考" class="headerlink" title="Transformer/CNN/RNN对比及思考"></a>Transformer/CNN/RNN对比及思考</h2><p>上述的介绍，大概对Transformer一支有一个简单的梳理。Transformer作为与RNN/CNN并立的模型，确实值得重视。</p>
+<p>为什么Transformer这么好，是否能够替代RNN/CNN？这也是值得所有人思考的。</p>
+<p>正如前面介绍的那样，Transformer的一大优势是全局感受野，也即RNN/CNN每次只能‘看’到部分上下文，而Transformer则没有这个限制，每个节点都能够直接与其他节点进行交互。也可以这么说，RNN/CNN具有更强的先验(prior)。<br>但这种优势有时也会成为劣势：实践证明，Transformer在小数据集上的效果是不如RNN/CNN的。或许可以这么理解这种现象：Transformer由于不引入强的先验，因此需要大量的数据去从头学习数据所存在的某种pattern（如局部性），而引入强的先验的RNN/CNN则对小数据集更加友好一些。但当有大量训练数据时（如翻译、语言模型），Transformer则会有更高的上限，Bert/GPT也印证了这点。而这种Transformer的劣势或许也是上述几个工作（如universal transformer）的其中一个出发点，也即在Transformer内引入RNN/CNN的归纳偏置，加强对Transformer的先验知识的约束。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Vaswani, Ashish, et al. “Attention is all you need.” Advances in neural information processing systems. 2017.<br>[2]Dehghani, Mostafa, et al. “Universal transformers.” arXiv preprint arXiv:1807.03819 (2018).<br>[3]Graves, Alex. “Adaptive computation time for recurrent neural networks.” arXiv preprint arXiv:1603.08983 (2016).<br>[4]Ahmed, Karim, Nitish Shirish Keskar, and Richard Socher. “Weighted transformer network for machine translation.” arXiv preprint arXiv:1711.02132 (2017).<br>[5]Yang, Baosong, et al. “Convolutional Self-Attention Networks.” arXiv preprint arXiv:1904.03107 (2019).<br>[6]Li, Jian, et al. “Multi-head attention with disagreement regularization.” arXiv preprint arXiv:1810.10183 (2018).<br>[7]Yang, Baosong, et al. “Modeling localness for self-attention networks.” arXiv preprint arXiv:1810.10182 (2018).<br>[8]Shaw, Peter, Jakob Uszkoreit, and Ashish Vaswani. “Self-attention with relative position representations.” arXiv preprint arXiv:1803.02155 (2018).<br>[9]Dai, Zihang, et al. “Transformer-xl: Attentive language models beyond a fixed-length context.” arXiv preprint arXiv:1901.02860 (2019).<br>[10]Bengio, Yoshua, et al. “A neural probabilistic language model.” Journal of machine learning research 3.Feb (2003): 1137-1155.<br>[11]Mikolov, Tomas, et al. “Efficient estimation of word representations in vector space.” arXiv preprint arXiv:1301.3781 (2013).<br>[12]Pennington, Jeffrey, Richard Socher, and Christopher Manning. “Glove: Global vectors for word representation.” Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP). 2014.<br>[13]McCann, Bryan, et al. “Learned in translation: Contextualized word vectors.” Advances in Neural Information Processing Systems. 2017.<br>[14]Peters, Matthew E., et al. “Deep contextualized word representations.” arXiv preprint arXiv:1802.05365 (2018).<br>[15]Radford, Alec, et al. “Improving language understanding by generative pre-training.” URL <a href="https://s3-us-west-2" target="_blank" rel="noopener">https://s3-us-west-2</a>. amazonaws. com/openai-assets/research-covers/languageunsupervised/language understanding paper. pdf (2018).<br>[16]Universal Language Model Fine-tuning for Text Classification<br>[17]Devlin, Jacob, et al. “Bert: Pre-training of deep bidirectional transformers for language understanding.” arXiv preprint arXiv:1810.04805 (2018).<br>[18]Radford, Alec, et al. “Language models are unsupervised multitask learners.” OpenAI Blog 1 (2019): 8.<br>[19]Multi-Task Deep Neural Networks for Natural Language Understanding<br>[20]Guo, Qipeng, et al. “Star-Transformer.” arXiv preprint arXiv:1902.09113 (2019).</p>
 
           
         
@@ -1522,297 +1876,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/03/17/诗词&句/每周诗词19/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/17/诗词&句/每周诗词19/" itemprop="url">每周诗词19</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-17T09:26:14+08:00">
-                2019-03-17
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-17T22:32:17+08:00">
-                2019-03-17
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣送灵澈上人"><a href="#1️⃣送灵澈上人" class="headerlink" title="1️⃣送灵澈上人"></a>1️⃣送灵澈上人</h3><p>[唐] 刘长卿<br>苍苍竹林寺，杳杳钟声晚。<br>荷笠带斜阳，青山独归远。</p>
-<p>荷（hè）笠：背着斗笠。</p>
-<p><a href="http://lib.xcz.im/work/57b90887128fe10054c9c750" target="_blank" rel="noopener">http://lib.xcz.im/work/57b90887128fe10054c9c750</a></p>
-<hr>
-<h3 id="2️⃣苏幕遮-·-怀旧"><a href="#2️⃣苏幕遮-·-怀旧" class="headerlink" title="2️⃣苏幕遮 · 怀旧"></a>2️⃣苏幕遮 · 怀旧</h3><p>[宋] 范仲淹<br>碧云天，黄叶地，秋色连波，波上寒烟翠。山映斜阳天接水，芳草无情，更在斜阳外。<br>黯乡魂，追旅思。夜夜除非，好梦留人睡。明月楼高休独倚，酒入愁肠，化作相思泪。</p>
-<p><a href="http://lib.xcz.im/work/57b8ee4a128fe10054c91757" target="_blank" rel="noopener">http://lib.xcz.im/work/57b8ee4a128fe10054c91757</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/03/10/论文/每周论文12/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/10/论文/每周论文12/" itemprop="url">每周论文12</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-10T10:52:30+08:00">
-                2019-03-10
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T21:44:42+08:00">
-                2019-03-12
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1️⃣-PAY-LESS-ATTENTION-WITH-LIGHTWEIGHT-AND-DYNAMIC-CONVOLUTIONS"><a href="#1️⃣-PAY-LESS-ATTENTION-WITH-LIGHTWEIGHT-AND-DYNAMIC-CONVOLUTIONS" class="headerlink" title="1️⃣[PAY LESS ATTENTION WITH LIGHTWEIGHT AND DYNAMIC CONVOLUTIONS]"></a>1️⃣[PAY LESS ATTENTION WITH LIGHTWEIGHT AND DYNAMIC CONVOLUTIONS]</h2><p>Facebook研究人员提出的两种基于卷积的方法尝试替代self-attention在transformer中的作用，拥有更少的参数以及更快的速度，并且能够达到很好的效果。</p>
-<p><img src="/images/15521843619624.jpg" width="80%" height="80%"></p>
-<h3 id="Lightweight-convolution"><a href="#Lightweight-convolution" class="headerlink" title="Lightweight convolution"></a>Lightweight convolution</h3><p>背景：depthwise convolution<br>每个channel独立进行卷积，注意到放到NLP任务上channel是指embedding的每一维。</p>
-<script type="math/tex; mode=display">O_{i, c}=\text{DepthwiseConv}\left(X, W_{c, :}, i, c\right)=\sum_{j=1}^{k} W_{c, j} \cdot X_{\left(i+j-\left\lceil\frac{k+1}{2}\right]\right), c}</script><p>因此Lightweight convolution的计算方法为：</p>
-<script type="math/tex; mode=display">\operatorname{LightConv}\left(X, W_{\left\lceil\frac{c H}{d}\right\rceil,:}, i, c\right)=\text { DepthwiseConv}\left(X, \text{softmax}(W_{\left\lceil\frac{c H}{d}\right\rceil,:}), i, c\right)</script><p>每一层都有固定的window size，这和self-attention不同，self-attention是所有的context都进行交互。</p>
-<ul>
-<li>Weight sharing 注意到这里讲每d/H个channel的参数进行绑定，进一步减少参数。</li>
-<li>Softmax-normalization 对channel一维进行softmax，相当于归一化每个词的每一维的的重要性（比self-attention更精细）。实验证明，如果没有softmax没办法收敛。</li>
-</ul>
-<p>因此总体的架构为：<br>input—&gt;linear —&gt; GLU(gated linear unit) —&gt; lightconv/dynamicConv —&gt; linear</p>
-<h3 id="Dynamic-convolution"><a href="#Dynamic-convolution" class="headerlink" title="Dynamic convolution"></a>Dynamic convolution</h3><p>与lightweight convolution相似，但加了一个动态的kernel size。</p>
-<script type="math/tex; mode=display">\text { DynamicConv}( X , i , c ) = \operatorname{LightConv}\left(X, f\left(X_{i}\right)_{h,:}, i, c\right)</script><p>这里的kernel size简单使用线性映射：$f : \mathbb { R } ^ { d } \rightarrow \mathbb { R } ^ { H \times k }$<br>如：$f\left(X_{i}\right)=\sum_{c=1}^{d} W_{h, j, c}^{Q} X_{i, c}$</p>
-<hr>
-<h2 id="2️⃣-Joint-Embedding-of-Words-and-Labels-for-Text-Classiﬁcation"><a href="#2️⃣-Joint-Embedding-of-Words-and-Labels-for-Text-Classiﬁcation" class="headerlink" title="2️⃣[Joint Embedding of Words and Labels for Text Classiﬁcation]"></a>2️⃣[Joint Embedding of Words and Labels for Text Classiﬁcation]</h2><p>提出一种机制将label作为embedding与词一同训练，同时引入label和word的attention机制，在分类上获得效果。</p>
-<p><img src="/images/15521854844061.jpg" width="40%" height="50%"></p>
-<p>上图中，C是label embedding，维度为$P\times K$ ; V是句子所有词的embedding矩阵，维度为$P\times L$。<br>$\mathbf{G}$的计算公式为：</p>
-<script type="math/tex; mode=display">\mathbf{G}=\left(\mathbf{C}^{\top} \mathbf{V}\right) \oslash \hat{\mathbf{G}}</script><p>$\oslash$表示element-wise相除。$\hat{\mathbf{G}}$表示l2 norm，也即：</p>
-<script type="math/tex; mode=display">\hat{g}_{k l}=\left\|\boldsymbol{c}_{k}\right\|\left\|\boldsymbol{v}_{l}\right\|</script><p>因此公式的本质即在计算label与每个词的cos距离。</p>
-<p>在获得了$\mathbf{G}$后，为了获得更高的的表示，如phrase，将一个一个block取出，并过线性层：</p>
-<script type="math/tex; mode=display">\boldsymbol{u}_{l}=\operatorname{ReLU}\left(\mathbf{G}_{l-r : l+r} \mathbf{W}_{1}+\boldsymbol{b}_{1}\right)</script><p>接着对每个$\boldsymbol{u}_{l}$取最大值：</p>
-<script type="math/tex; mode=display">m_{l}=\textbf{max-pooling}\left(\boldsymbol{u}_{l}\right)</script><p>此时的$\mathbf{m}$是一个长度为L的向量。最终对m做softmax获得一个分数的分布：</p>
-<script type="math/tex; mode=display">\boldsymbol{\beta}=\operatorname{SoftMax}(\boldsymbol{m})</script><p>将该分数和每个词做加权求和，获得最终的向量表示：</p>
-<script type="math/tex; mode=display">\boldsymbol{z}=\sum_{l} \beta_{l} \boldsymbol{v}_{l}</script><p>思考：将label与embedding放在一起训练这个思路不错。但整合的方式是否过于简单粗暴了<br>？特别是phrase的提取和随后的max-pooling的可解释性并不强的样子。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1867,7 +1930,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">130</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

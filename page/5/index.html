@@ -286,6 +286,292 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/11/11/碎片知识/每周碎片知识11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/11/碎片知识/每周碎片知识11/" itemprop="url">每周碎片知识11</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-11T10:56:14+08:00">
+                2018-11-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-01T15:35:06+08:00">
+                2018-12-01
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣-Optimizer"><a href="#1️⃣-Optimizer" class="headerlink" title="1️⃣[Optimizer]"></a>1️⃣[Optimizer]</h3><p><a href="https://zhuanlan.zhihu.com/p/32262540" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/32262540</a><br><a href="https://zhuanlan.zhihu.com/p/32338983" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/32338983</a></p>
+<p>Adam等自适应学习率算法对于稀疏数据具有优势，且收敛速度很快；但精调参数的SGD（+Momentum）往往能够取得更好的最终结果。</p>
+<p>建议：<br>前期用Adam，享受Adam快速收敛的优势；后期切换到SGD，慢慢寻找最优解。<br>什么时候从Adam切换到SGD？当SGD的相应学习率的移动平均值基本不变的时候。</p>
+<hr>
+<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>LongTensor除以浮点数，会对除数进行取整，再做除法。<br><img src="/images/2018-11-11-15419055399325.jpg" width="30%" height="50%"></p>
+<hr>
+<h3 id="3️⃣-Pytorch"><a href="#3️⃣-Pytorch" class="headerlink" title="3️⃣[Pytorch]"></a>3️⃣[Pytorch]</h3><p>使用Pytorch的DataParallel</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">device = torch.device(<span class="string">'cuda:'</span> + str(</span><br><span class="line">    config.CUDA_VISIBLE_DEVICES[<span class="number">0</span>]) <span class="keyword">if</span> config.use_cuda <span class="keyword">else</span> <span class="string">'cpu'</span>)   <span class="comment"># 指定第一个设备</span></span><br><span class="line"></span><br><span class="line">model = ClassifyModel(</span><br><span class="line">    vocab_size=len(vocab), max_seq_len=config.max_sent_len,</span><br><span class="line">    embed_dim=config.embed_dim, n_layers=config.n_layers,</span><br><span class="line">    n_head=config.n_head, d_k=config.d_k,</span><br><span class="line">    d_v=config.d_v,</span><br><span class="line">    d_model=config.d_model, d_inner=config.d_inner_hid,</span><br><span class="line">    n_label=config.n_label,</span><br><span class="line">    dropout=config.dropout</span><br><span class="line">).to(device)</span><br><span class="line"></span><br><span class="line">model = DataParallel(model, device_ids=config.CUDA_VISIBLE_DEVICES)  <span class="comment"># 显式定义device_ids</span></span><br></pre></td></tr></table></figure>
+<p>注意到：device_ids的起始编号要与之前定义的device中的“cuda:0”相一致，不然会报错。</p>
+<p>如果不显式在代码中的DataParallel指定设备，那么需要在命令行内指定。如果是在命令行里面运行的，且device不是从0开始，应当显式设置GPU_id，否则会出错‘AssertionError: Invalid device id’，正确的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=4,5  python -u classify_main.py --gpu_id 0,1</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/11/11/碎片知识/关于sparse gradient/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/11/碎片知识/关于sparse gradient/" itemprop="url">关于sparse gradient</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-11T10:35:24+08:00">
+                2018-11-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T23:09:12+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前几天在看AllenAI在EMNLP的ppt时，有一页写道：<br><img src="/images/2018-11-11-15419037448379.jpg" width="70%" height="50%"></p>
+<p>为什么会出现这种情况？</p>
+<p>Embedding是一个很大的矩阵，每一次其实都只有一个小部分进行了更新，对于一些词来说，出现的频率不高，或者说，其实大部分的词在一个loop/epoch中，被更新的次数是较少的。但是，注意到一般的optimizer算法，是以matrix为单位进行更新的，也就是每一次都是$W^{t+1}=W^{t}-\eta \frac{\partial L}{\partial{W}}$</p>
+<p>而Adam算法：<br><img src="/images/2018-11-11-15419038346958.jpg" width="70%" height="50%"></p>
+<p>动量占了主导。但这样，每次batch更新，那些没被更新的词（也即gradient=0）的动量仍然会被衰减，所以这样当到这个词更新的时候，他的动量已经被衰减完了，所以更新的gradient就很小。</p>
+<p>解决方案：</p>
+<p>①在PyTorch中，Embedding的API：<br><code>torch.nn.Embedding(num_embeddings, embedding_dim, padding_idx=None, max_norm=None, norm_type=2, scale_grad_by_freq=False, sparse=False, _weight=None)</code></p>
+<p>其中sparse (bool, optional) – if True, gradient w.r.t. weight matrix will be a sparse tensor.</p>
+<p>将sparse设为True即可。</p>
+<p>②针对sparse矩阵，使用不同的optimizer，如torch.optim.SparseAdam：</p>
+<blockquote>
+<p>Implements lazy version of Adam algorithm suitable for sparse tensors.<br>In this variant, only moments that show up in the gradient get updated, and only those portions of the gradient get applied to the parameters.</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/11/10/论文/每周论文5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1487,272 +1773,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/21/诗词&句/每周诗词12/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/21/诗词&句/每周诗词12/" itemprop="url">每周诗词12</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T10:36:14+08:00">
-                2018-10-21
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-21T14:53:18+08:00">
-                2018-10-21
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣望海潮"><a href="#1️⃣望海潮" class="headerlink" title="1️⃣望海潮"></a>1️⃣望海潮</h3><p>[宋] 柳永<br>东南形胜，三吴都会，钱塘自古繁华。烟柳画桥，风帘翠幕，参差十万人家。云树绕堤沙，怒涛卷霜雪，天堑无涯。市列珠玑，户盈罗绮，竞豪奢。<br>重湖叠巘清嘉，有三秋桂子，十里荷花。羌管弄晴，菱歌泛夜，嬉嬉钓叟莲娃。千骑拥高牙，乘醉听箫鼓，吟赏烟霞。异日图将好景，归去凤池夸。</p>
-<p>叠巘（yǎn）：层层叠叠的山峦。</p>
-<p><a href="http://m.xichuangzhu.com/work/57b318228ac247005f2223db" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b318228ac247005f2223db</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/21/代码相关/代码记录8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/21/代码相关/代码记录8/" itemprop="url">代码片段记录8</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T10:33:30+08:00">
-                2018-10-21
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-21T10:34:37+08:00">
-                2018-10-21
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-batchify"><a href="#1️⃣-batchify" class="headerlink" title="1️⃣[batchify]"></a>1️⃣[batchify]</h3><p>快速将数据分成batch。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">batchify</span><span class="params">(data, bsz)</span>:</span></span><br><span class="line">    <span class="comment"># Work out how cleanly we can divide the dataset into bsz parts.</span></span><br><span class="line">    nbatch = data.size(<span class="number">0</span>) // bsz</span><br><span class="line">    <span class="comment"># Trim off any extra elements that wouldn't cleanly fit (remainders).</span></span><br><span class="line">    data = data.narrow(<span class="number">0</span>, <span class="number">0</span>, nbatch * bsz)</span><br><span class="line">    <span class="comment"># Evenly divide the data across the bsz batches.</span></span><br><span class="line">    data = data.view(bsz, <span class="number">-1</span>).t().contiguous()</span><br><span class="line">    <span class="keyword">return</span> data.to(device)</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1807,7 +1827,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">130</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

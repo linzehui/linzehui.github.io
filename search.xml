@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[每周碎片知识19]]></title>
+    <url>%2F2019%2F04%2F22%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8619%2F</url>
+    <content type="text"><![CDATA[1️⃣[Pytorch]expand&amp;repeat expand只能对维数为1的维度进行扩展，且扩展过程中不分配新内存；repeat能对任意维度进行扩展，但需要分配新内存。 如果满足expand的需要，应尽量使用expand。]]></content>
+      <tags>
+        <tag>碎片知识</tag>
+        <tag>Pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[每周诗词22]]></title>
     <url>%2F2019%2F04%2F21%2F%E8%AF%97%E8%AF%8D%26%E5%8F%A5%2F%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D22%2F</url>
     <content type="text"><![CDATA[1️⃣九日齐安登高[唐] 杜牧江涵秋影雁初飞，与客携壶上翠微。尘世难逢开口笑，菊花须插满头归。但将酩酊酬佳节，不用登临恨落晖。古往今来只如此，牛山何必独沾衣？ http://lib.xcz.im/work/57ba4972efa631005a799815]]></content>
@@ -19,6 +28,14 @@
         <tag>NMT</tag>
         <tag>intrinsic dimension</tag>
         <tag>attention mechanism</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Transformer相关近期盘点]]></title>
+    <url>%2F2019%2F04%2F12%2F%E8%AE%BA%E6%96%87%2FTransformer%E7%9B%B8%E5%85%B3%E8%BF%91%E6%9C%9F%E7%9B%98%E7%82%B9%2F</url>
+    <content type="text"><![CDATA[近年来自然语言处理有相当大的进展，囿于个人浅薄的能力，因此仅谈谈自己较为了解的与Transformer相关一路下来的一些工作。这篇的主要目的是完成邱博给我的任务，也顺便梳理一下思绪。 自2017年的问世，Transformer就吸引了大批学者的注意，2018年Bert的出现，更是将Transformer推上了NLP舞台的中央。Transformer以其高效率（高并行性）以及极强的模型能力，俨然有替代传统RNN/CNN的态势。因此本次就讨论讨论Transformer及其系列，同时最后加上我个人关于RNN/CNN/Transformer的一点思考。 要点： Transformer及其变体 Transformer在其他任务 预训练模型 Transformer/CNN/RNN对比及思考 Transformer及其变体Transformer简单回顾Transformer[1]采用完全的attention机制用以序列建模，序列中的每个节点都能够直接与其他节点交互，而这是通过attention机制来实现的。 Transformer模型架构Transformer架构： 由于Transformer最早由于翻译模型中，因此架构是由一个encoder和一个decoder组成，而encoder和decoder都是由多个基本的block堆叠而成。一个block由两部分组成，也即multi-head attention层和Position-wise Feed-Forward Networks层。 Multi-head attention对于序列中一个特定节点$x_i$，$x_i$作为query，其他节点（包括自己）作为key和value，通过向量点积计算出attention分数，进行归一化后（softmax）将value加权平均获得该节点$x_i$新的表示。同时，对于每个节点，为了增强表示能力，可以将其映射到多个不同隐空间中，分别完成上述基本操作。 如下图所示： 左图为基本操作也即scale-dot product，右图为多个scale-dot product在不同隐空间同时进行，并且将多个head的结果拼接起来作为最终结果。 Position-wise Feed-Forward Networks为了增强模型表示能力，在Multi-head attention之后，每个节点都过两层MLP以获得新的向量表示。也即: \mathrm{FFN}(x)=\max \left(0, x W_{1}+b_{1}\right) W_{2}+b_{2}相比传统的RNN/CNN而言，其最大的优势是全局的感受野（Global Receptive Field）以及高度并行性（parallelization）。 变体Universal Transformers提出一种新型通用的Transformer，在Transformer的基础上引入RNN的归纳偏置(inductive bias)，也即迭代学习(learning iterative)的特征。Universal Transformer[2]的主要特点有： 在Transformer中每层的权重是独立的，而在Universal Transformer中，每层的权重是共享的，也即multi-head Attention与Feed-Forward在每层的权重是一致的。 在Transformer中引入自适应计算时间(Adaptive Computation Time, ACT[3])，也即对于不同的词允许迭代不同次数。这是基于有些词相比其他词词意更丰富，更难被模型学会，因此需要更多的迭代次数。与固定层数的Transformer相比有更好的通用性。 因此其总体结构为： 在这里有两个细节： 加了Timestep embedding去指示当前迭代的次数 将Feedforward Function用更为通用的Transition Function，可以是普通的全连接，也可以是参数更少的Depth-wise Convolution。 Star TransformerStar Transformer[20]是一种轻量级的Transformer，通过将全连接的结构替换为星型拓扑结构，显著减小Transformer的复杂度，从$O(n^2)$减为$O(n)$。 其主要思想是’Gather-Distribute’，也即每个节点不直接与其他节点交互，而是与全局节点进行交互。 实验表明，Star Transformer不仅在多个数据集表现更优，且速度更快。 其他小改进接下来介绍基于Transformer的几个小改进工作。 在Convolutional Self-Attention Network[5]中，通过在self-attention层引入CNN的归纳偏置，在翻译任务上有一定的提升。具体做法：普通self-attention层，每个节点都能够直接与其他节点交互，而在1D-Convolutional的self-attention层中，每个节点只能与以该节点为中心的窗口内的节点交互。而在2D-Convolution中，对head这一维进行扩展，也即对于任意一个节点，不仅能和周围的节点交互，还可以与其他head的节点交互。实验结果： 在Multi-Head Attention with Disagreement Regularization[6]中，显式对multi-head attention添加正则化，使得不同head尽量区分开来，以使得不同head捕获到不同的特征。论文提出了三种不同位置的正则化方法：①对Value： D_{\text {subpace}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H} \frac{V^{i} \cdot V^{j}}{\left\|V^{i}\right\|\left\|V^{j}\right\|}也即对不同head之间的value，计算他们之间的cos值，作为优化目标之一。 ②对Attention权重： D_{\text {position}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H}\left|A^{i} \odot A^{j}\right|也即将每个head所计算得到的attention矩阵，计算他们之间的element-wise乘法，作为优化目标之一。 ③对输出： D_{\text {output}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H} \frac{O^{i} \cdot O^{j}}{\left\|O^{i}\right\|\left\|O^{j}\right\|}也即对每个head的输出通过cos值进行正则化。 Modeling Localness for Self-Attention Networks[7]则是通过加强对局部信息的关注，在翻译任务上提升表现。其主要的动机是：①在Transformer中每个词都直接与所有词交互，对所有词进行线性加权导致对邻近词的关注不够（因为权重的分散）；②从直接上看，当词$i$与词$j$有对齐关系时，我们希望与词$j$周围的词也对齐，使得模型能够捕获整个语义单元的信息。其具体做法是在softmax函数内增加一个高斯偏置（Gaussian bias）去修正attention权重分布： \operatorname{ATT}(Q, K)=\operatorname{softmax}(\text {energy}+G)$G_{ij}$是衡量词j与词i所预测的中心词之间的联系紧密程度，计算公式为： G_{i, j}=-\frac{\left(j-P_{i}\right)^{2}}{2 \sigma_{i}^{2}}其中$\sigma_{i}=\frac{D_{i}}{2}$，$D_{i}$是窗口大小。而$P_{i}$是通过计算得出的，$P_{i}$与对应的query有关，因此可以通过$p_{i}=U_{p}^{T} \tanh \left(W_{p} Q_{i}\right)$计算得到；而窗口大小$D_{i}$可以有多种选择，①固定窗口大小；②每层特定的大小，也即将该层的key平均起来，通过$z=U_{d}^{T} \tanh \left(W_{d} \overline{\mathbf{K}}\right)$计算；③每个query都有自己的窗口大小：$z_{i}=U_{d}^{T} \tanh \left(W_{p} Q_{i}\right)$。 Self-attention with relative position representations[8]则是将Transformer中的绝对位置embedding改为相对位置embedding以提升翻译效果。 Transformer在其他任务Transformer XL本文探索将Transformer用于语言模型(language model)，并在Transformer引入RNN的归纳偏置，也即RNN的历史信息，使得Transformer能够处理长句子。 由于Transformer的复杂度是$O(n^2)$，虽然在GPU上能够并行操作，但占用显存较大，因此在实现时，通常是将句子切分为一个一个segment，segment之间没有联系： 而在测试阶段，则每生成一个词时滑动一个窗口： 这样的方法显然效率很低。 而在Transformer-XL[9]中，每个segment阶段都接受前一个(甚至前L个)的历史信息：因此过程如下： 而在测试阶段，由于有历史信息，则不需要滑动窗口，因此效率更高。 具体而言：$\begin{aligned} \widetilde{\mathbf{h}}_{\tau+1}^{n-1} &amp;=\left[\mathrm{SG}\left(\mathbf{h}_{\tau}^{n-1}\right) \circ \mathbf{h}_{\tau+1}^{n-1}\right] \\ \mathbf{q}_{\tau+1}^{n}, \mathbf{k}_{\tau+1}^{n}, \mathbf{v}_{\tau+1}^{n} &amp;=\mathbf{h}_{\tau+1}^{n-1} \mathbf{W}_{q}^{\top}, \widetilde{\mathbf{h}}_{\tau+1}^{n-1} \mathbf{W}_{k}^{\top}, \widetilde{\mathbf{h}}_{\tau+1}^{n-1} \mathbf{W}_{v}^{\top} \\ \mathbf{h}_{\tau+1}^{n} &amp;=\text { Transformer-Layer }\left(\mathbf{q}_{\tau+1}^{n}, \mathbf{k}_{\tau+1}^{n}, \mathbf{v}_{\tau+1}^{n}\right) \end{aligned}$SG代表stop gradient，而历史信息与当前阶段的隐状态拼接在一起。 同时本文另一大两点是引入相对位置的encoding。如果使用绝对位置encoding，那么则会出现下述情况：$\mathbf{h}_{\tau+1}=f\left(\mathbf{h}_{\tau}, \mathbf{E}_{\mathbf{s}_{\tau+1}}+\mathbf{U}_{1 : L}\right) \quad \text { and } \quad \mathbf{h}_{\tau}=f\left(\mathbf{h}_{\tau-1}, \mathbf{E}_{\mathbf{s}_{\tau}}+\mathbf{U}_{1 : L}\right)$也即每个segment都会有相同的位置信息。因此在这里引入$\mathbf{R} \in \mathbb{R}^{L_{\max } \times d}$，第$i$行代表相对距离$i$的encoding。 具体而言：在标准Transformer中，query $q_i$与key $k_j$所获得的attention分数可以拆解为：$\mathbf{A}_{i, j}^{\mathrm{abs}}=q_{i}^{\top} k_{j}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{E}_{x_{j}}}_{(a)}+\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{U}_{j}}_{(b)}+\underbrace{\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{E}_{x_{j}}}_{(c)}+\underbrace{\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{U}_{j}}_{(d)}$ 对其进行改进，转化为相对位置encoding，有：$\mathbf{A}_{i, j}^{\mathrm{rel}}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, E} \mathbf{E}_{x_{j}}}_{(a)}+\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, E} \mathbf{R}_{i-j}}_{(b)}+\underbrace{u^{\top} \mathbf{W}_{k, R} \mathbf{E}_{x_{j}}}_{(c)}+\underbrace{v^{\top} \mathbf{W}_{k, R} \mathbf{R}_{i-j}}_{(d)}$ 首先是将所有出现绝对位置的地方都改为相对位置，第二是将引入一个可学习的$u \in \mathbb{R}^{d}$和$v \in \mathbb{R}^{d}$去替代$\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top}$和$\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top}$。第三，是将同样的$\mathbf{W}_{k}$细化成两个不同的$\mathbf{W}_{k, E}$与$\mathbf{W}_{k, R}$。 Transformer-XL在不同数据集上有相当好的效果： Character-Level Language Modeling with Deeper Self-Attention同样是在语言模型上使用Transformer，但是character级别的语言模型。其主要思路是添加多个loss来提升其表现以及加快拟合速度。 对于传统的RNN character-level语言模型，一般做法是“truncated backpropagation through time” (TBTT)：也即每个batch预测最后一个字符，然后将该batch的隐状态传入下一个batch。 而在Transformer中也可以采用该方法。但在该基础上，引入三种loss。①Multiple Positions在一个batch内，每个时间步t都预测下一个字符，而不是像传统方法，只预测batch最后一个字符： ②Intermediate Layer Losses不仅仅最后一层要进行预测，中间层也需要预测。 越底层的loss所分配的权重越小。 ③Multiple Targets每个位置不仅仅要预测下一个字符，还需要预测后几个的字符： 实验表明，使用多个loss能够加速拟合，且能够获得更好的结果。 预训练模型自ELMo开始，预训练模型就开始受到广泛的关注，而Bert随后的问世则更是将预训练模型推上了新的阶段。因此在这里简要介绍预训练模型的历史。 Non-Transformer-basedWord Embedding词向量是最早的预训练模型，Bengio, et al.[10] 最早提出神经网络语言模型，词向量作为训练语言模型的副产品，可以用于下游任务。而随后则出现了word2vec[11],GloVe[12]，是目前最为广泛使用的词向量。 CoVe/ELMoword2vec与GloVe作为静态词向量，一大问题就是难以解决多义词，而多义词的表示可以通过上下文来推测。CoVe[13]将词向量从静态扩展为动态。通过上下文来获得特定词的动态表示，具体是通过翻译模型来达到该目的的。而ELMo[14]继承了动态词向量的思想，不过是通过双向语言模型来达到这一目的的。通过双向LSTM的语言模型，将前向与后向隐状态拼接起来作为该词的表示。仅仅是将传统静态词向量替换成ELMo，就能有很大的提升。自此开始，预训练模型开始受到广泛的关注。 ULMFit在上述预训练模型中，研究者的思路主要集中在预训练词向量用于下游任务。ULMFit[16]则尝试直接对分类模型进行预训练，接着再通过微调(fine-tuning)以提高分类的效果。 ULMFit的成功说明直接对模型进行预训练而不是只预训练词向量用于下游任务是可行的。 Transformer-basedGPT[15]尝试通过探索构建一种通用模型并在其上训练语言模型，可以在多种任务上有更好的表现。其主要亮点在于①构建一种通用模型，能够处理不同任务，第二使用Transformer而不是LSTM作为其基本模型。其基本模型： 具体而言，主要是无监督的语言模型预训练加上有监督的微调。 而Bert[17]在GPT的基础上，引入masked语言模型，通过随机mask掉部分词，强迫模型通过上下文去预测mask掉的词，加强了模型的能力。 同时引入有监督学习，也即预测下一句（Next Sentence Prediction），随机在句对中取两个句子，使得有50%可能句子对有上下文关系，50%句对没有关系，使模型去预测句对之间的关系。具体而言则是通过在句子开头加[CLS]符号，在最高层将该符号的表示通过全连接层。 Bert在11项数据集上刷新最高记录。 在此之后，MT-DNN[19]、GPT2.0[18]相继问世，通过添加更多的任务或者更多的数据使得模型表现更好。相信在接下来一段时间内，相关主题的论文也会有很多。 Transformer/CNN/RNN对比及思考上述的介绍，大概对Transformer一支有一个简单的梳理。Transformer作为与RNN/CNN并立的模型，确实值得重视。 为什么Transformer这么好，是否能够替代RNN/CNN？这也是值得所有人思考的。 正如前面介绍的那样，Transformer的一大优势是全局感受野，也即RNN/CNN每次只能‘看’到部分上下文，而Transformer则没有这个限制，每个节点都能够直接与其他节点进行交互。也可以这么说，RNN/CNN具有更强的先验(prior)。但这种优势有时也会成为劣势：实践证明，Transformer在小数据集上的效果是不如RNN/CNN的。或许可以这么理解这种现象：Transformer由于不引入强的先验，因此需要大量的数据去从头学习数据所存在的某种pattern（如局部性），而引入强的先验的RNN/CNN则对小数据集更加友好一些。但当有大量训练数据时（如翻译、语言模型），Transformer则会有更高的上限，Bert/GPT也印证了这点。而这种Transformer的劣势或许也是上述几个工作（如universal transformer）的其中一个出发点，也即在Transformer内引入RNN/CNN的归纳偏置，加强对Transformer的先验知识的约束。 参考文献[1] Vaswani, Ashish, et al. “Attention is all you need.” Advances in neural information processing systems. 2017.[2]Dehghani, Mostafa, et al. “Universal transformers.” arXiv preprint arXiv:1807.03819 (2018).[3]Graves, Alex. “Adaptive computation time for recurrent neural networks.” arXiv preprint arXiv:1603.08983 (2016).[4]Ahmed, Karim, Nitish Shirish Keskar, and Richard Socher. “Weighted transformer network for machine translation.” arXiv preprint arXiv:1711.02132 (2017).[5]Yang, Baosong, et al. “Convolutional Self-Attention Networks.” arXiv preprint arXiv:1904.03107 (2019).[6]Li, Jian, et al. “Multi-head attention with disagreement regularization.” arXiv preprint arXiv:1810.10183 (2018).[7]Yang, Baosong, et al. “Modeling localness for self-attention networks.” arXiv preprint arXiv:1810.10182 (2018).[8]Shaw, Peter, Jakob Uszkoreit, and Ashish Vaswani. “Self-attention with relative position representations.” arXiv preprint arXiv:1803.02155 (2018).[9]Dai, Zihang, et al. “Transformer-xl: Attentive language models beyond a fixed-length context.” arXiv preprint arXiv:1901.02860 (2019).[10]Bengio, Yoshua, et al. “A neural probabilistic language model.” Journal of machine learning research 3.Feb (2003): 1137-1155.[11]Mikolov, Tomas, et al. “Efficient estimation of word representations in vector space.” arXiv preprint arXiv:1301.3781 (2013).[12]Pennington, Jeffrey, Richard Socher, and Christopher Manning. “Glove: Global vectors for word representation.” Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP). 2014.[13]McCann, Bryan, et al. “Learned in translation: Contextualized word vectors.” Advances in Neural Information Processing Systems. 2017.[14]Peters, Matthew E., et al. “Deep contextualized word representations.” arXiv preprint arXiv:1802.05365 (2018).[15]Radford, Alec, et al. “Improving language understanding by generative pre-training.” URL https://s3-us-west-2. amazonaws. com/openai-assets/research-covers/languageunsupervised/language understanding paper. pdf (2018).[16]Universal Language Model Fine-tuning for Text Classification[17]Devlin, Jacob, et al. “Bert: Pre-training of deep bidirectional transformers for language understanding.” arXiv preprint arXiv:1810.04805 (2018).[18]Radford, Alec, et al. “Language models are unsupervised multitask learners.” OpenAI Blog 1 (2019): 8.[19]Multi-Task Deep Neural Networks for Natural Language Understanding[20]Guo, Qipeng, et al. “Star-Transformer.” arXiv preprint arXiv:1902.09113 (2019).]]></content>
+      <tags>
+        <tag>Transformer</tag>
       </tags>
   </entry>
   <entry>
@@ -167,8 +184,8 @@
     <content type="text"><![CDATA[前几日因为in-place操作的问题，debug了好几天，最终才发现问题。 12output,_=pad_packed_sequence(output,batch_first=True)output=output.index_copy(0,torch.tensor(sorted_index),output) 因为Pytorch中pack_sequence需要将batch按长度排列，我在过完GRU后需要将其顺序还原，在这边sorted_index即是记录原来index映射。 然而我在写的时候，参考的是官方的example： 123456789&gt;&gt;&gt; x = torch.zeros(5, 3)&gt;&gt;&gt; t = torch.tensor([[1, 2, 3], [4, 5, 6], [7, 8, 9]], dtype=torch.float)&gt;&gt;&gt; index = torch.tensor([0, 4, 2])&gt;&gt;&gt; x.index_copy_(0, index, t)tensor([[ 1., 2., 3.], [ 0., 0., 0.], [ 7., 8., 9.], [ 0., 0., 0.], [ 4., 5., 6.]]) 因此我也不假思索地写：12output,_=pad_packed_sequence(output,batch_first=True)output=output.index_copy_(0,torch.tensor(sorted_index),output) 就因为多了一个_，导致逻辑和我想象中的不一样。 一个简单的例子展示为什么这么是错的： 1234567891011import torchx=torch.Tensor([21,42,45,59])print(x) # tensor([21., 42., 45., 59.])index=torch.tensor([1,2,0,3])x=x.index_copy_(0,index,x)print(x) # tensor([21., 21., 21., 59.]) 由于是in-place操作，第一步，将index=0的数值（也即21）复制到index=1的地方，此时变成[21,21,45,59]；接着将index=1的数值复制到index=2的位置上，注意到之前已经是in-place操作，因此此时取的不是想象中的42，而是已经被替换的21。后面的也是如此。 正确的做法只需要去掉in-place即可。 已经好几次遇到in-place的问题了，在每次做in-place操作时，都要警惕。应尽可能避免in-place操作。实际上Pytorch官方也不建议使用in-place操作。]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>Pytorch</tag>
         <tag>遇到的问题</tag>
+        <tag>Pytorch</tag>
         <tag>index_coopy</tag>
       </tags>
   </entry>
@@ -186,8 +203,8 @@
     <url>%2F2018%2F12%2F29%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8617%2F</url>
     <content type="text"><![CDATA[1️⃣[Pytorch]在有RNN的代码中，如果出现 Cuda Error : RuntimeError: CUDNN_STATUS_EXECUTION_FAILED 那么可能的出错原因是没有将init state放入cuda中。 Reference: https://discuss.pytorch.org/t/cuda-error-runtimeerror-cudnn-status-execution-failed/17625 2️⃣[Pytorch]clone() → TensorReturns a copy of the self tensor. The copy has the same size and data type as self.Unlike copy_(), this function is recorded in the computation graph. Gradients propagating to the cloned tensor will propagate to the original tensor. 如果需要另一个相同的tensor做其他计算，则使用clone()而不是copy_() 123forward_vec=sent_vec# backward_vec=sent_vec wrongbackward_vec=sent_vec.clone() 当然也不能直接赋值，因为赋的只是指针，改变backward_vec也会改变原来的值。 3️⃣[Python]Python中==和is的区别：is表示是否是同一个object；而==表示是否是同一个值。 123456str='GRU'str == 'GRU' # Truestr is 'GRU' # Truestr=str.upper()str == 'GRU' # Falsestr is 'GRU' # True 4️⃣[RNN]在RNN的初始化中，使用正交初始化会比其他方法好一些（待对比实验测验）。Reference: https://smerity.com/articles/2016/orthogonal_init.html 5️⃣[Pytorch]在提供预训练embedding作为初始化时，正确做法： 1234if pretrained_matrix is not None: pretrained_matrix=torch.from_numpy(pretrained_matrix).type(torch.FloatTensor) self.embedding.weight= nn.Parameter(pretrained_matrix, requires_grad=True) 必须要有.type(torch.FloatTensor)，否则会出错：CuDNN error: CUDNN_STATUS_EXECUTION_FAILED 6️⃣[Pytorch]Pytorch中，将初始hidden state作为可学习参数实践：https://discuss.pytorch.org/t/solved-train-initial-hidden-state-of-rnns/2589/9https://discuss.pytorch.org/t/learn-initial-hidden-state-h0-for-rnn/10013/7]]></content>
       <tags>
-        <tag>Python</tag>
         <tag>碎片知识</tag>
+        <tag>Python</tag>
         <tag>Pytorch</tag>
         <tag>RNN</tag>
       </tags>
@@ -227,8 +244,8 @@
     <url>%2F2018%2F12%2F23%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8616%2F</url>
     <content type="text"><![CDATA[1️⃣[Softmax]在使用softmax的时候，要非常注意softmax的行为。应尽量控制softmax前元素的规模，否则容易出现one-hot的情况，导致训练困难。 同时，对全-inf做softmax是未定义的，因此也会出现问题： 2️⃣[slice]在对tensor或array操作时，如果需要取某维的slice： 1234import torcha = torch.rand(2,5)a[:,1:3] # 取第1列到第2列的slicea[:][1:3] # wrong，获得的是第1行到第2行的slice 原因是，a[:][1:3]是先做a[:]操作，获得了全部元素，然后再做[1:3]操作，也即获得第1行到第2行的元素。]]></content>
       <tags>
-        <tag>Python</tag>
         <tag>碎片知识</tag>
+        <tag>Python</tag>
         <tag>Softmax</tag>
       </tags>
   </entry>
@@ -266,10 +283,10 @@
     <url>%2F2018%2F12%2F09%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FPython%E4%B8%AD%E7%9A%84%2B%3D%E6%93%8D%E4%BD%9C%2F</url>
     <content type="text"><![CDATA[前几日在写一段Pytorch代码时，又一次遇到了in-place操作的问题。 1output+=pos # pos是不可更新的tensor，output是可更新的tensor 程序报错：“one of the variables needed for gradient computation has been modified by an inplace operation”。 无意中将代码改成output=output+pos，程序就不会报错了。 在查阅了相关资料后，将我的思考整理下来。 在Python中，i=i+1和i+=1是不同的，如果被操作数没有部署 ’iadd‘方法，则i=i+1和i+=1是等价的，’+=‘并不会产生in-place操作；当被操作数有部署该方法且正确部署，则是会产生in-place操作的。当没有in-place操作时，i=i+1表示对i重分配，也即i指向了另一个空间而不是原来的空间。 所以，这样的例子就能解释清楚了： 12345678910import numpy as npA = np.arange(12).reshape(4,3)for a in A: a = a + 1# A并没有被改变B = np.arange(12).reshape(4,3)for b in B: b += 1# B被改变了 在Pytorch中，也有部署’iadd()‘操作，所以对于output+=pos，output内部的值被改变了，也即在计算图中引入了环，在反向求导时则会出错。 因此，在Pytorch中，应当避免in-place的操作。 Reference:https://stackoverflow.com/questions/41446833/what-is-the-difference-between-i-i-1-and-i-1-in-a-for-loop]]></content>
       <tags>
-        <tag>Python</tag>
         <tag>碎片知识</tag>
-        <tag>Pytorch</tag>
         <tag>遇到的问题</tag>
+        <tag>Python</tag>
+        <tag>Pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -923,10 +940,10 @@
     <url>%2F2018%2F08%2F26%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FDeep%20Learning%20NLP%20best%20practices%E7%AC%94%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[博客地址：http://ruder.io/deep-learning-nlp-best-practices/index.html个人觉得这篇文章写得很好，有许多实践得到的经验，通过这篇可以避免走一些弯路。 PracticesWord Embedding The optimal dimensionality of word embeddings is mostly task-dependent: a smaller dimensionality works better for more syntactic tasks such as named entity recognition or part-of-speech (POS) tagging, while a larger dimensionality is more useful for more semantic tasks such as sentiment analysis. 对于偏向语法的，使用维度低一些的词向量；而对于偏向语义内容的，使用维度大一些的词向量，如情感分析。 LSTM Depth performance improvements of making the model deeper than 2 layers are minimal LSTM深度最好不要超过两层。 Optimization It is often thought that Adam clearly outperforms vanilla stochastic gradient descent (SGD). However, while it converges much faster than SGD, it has been observed that SGD with learning rate annealing slightly outperforms Adam. Recent work furthermore shows that SGD with properly tuned momentum outperforms Adam . Adam可以更早拟合，而SGD效果可能会更好一些。 可以采用优化策略，比如说使用Adam训练直到拟合，然后将学习率减半，并重新导入之前训练好的最好的模型。这样Adam能够忘记之前的信息并重新开始训练。 Denkowski &amp; Neubig (2017) show that Adam with 2 restarts and learning rate annealing is faster and performs better than SGD with annealing Ensembling Combining multiple models into an ensemble by averaging their predictions is a proven strategy to improve model performance. Ensembling很重要的一点是需要保证多样性： Ensembling is an important way to ensure that results are still reliable if the diversity of the evaluated models increases (Denkowski &amp; Neubig, 2017). While ensembling different checkpoints of a model has been shown to be effective (Jean et al., 2015; Sennrich et al., 2016) [51, 52], it comes at the cost of model diversity. Cyclical learning rates can help to mitigate this effect LSTM tricks 在initial state中我们常常使用全0向量，实际上可以将其作为参数学习。 Instead of fixing the initial state, we can learn it like any other parameter, which can improve performance 将input和output embedding的参数共享，如果是做language model或者机器翻译之类的，可以让他们共享。 Gradient Norm Clipping Rather than clipping each gradient independently, clipping the global norm of the gradient yields more significant improvements 这点我没看懂。 Classification practices关于CNN CNN filters:Combining filter sizes near the optimal filter size, e.g. (3,4,5) performs best (Kim, 2014; Kim et al., 2016). The optimal number of feature maps is in the range of 50-600 (Zhang &amp; Wallace, 2015) [59]. Aggregation function:1-max-pooling outperforms average-pooling and k-max pooling (Zhang &amp; Wallace, 2015). 这在我之前的关于CNN文本分类指南中有更详尽的分析。 Conclusion这是一篇干货满满的博客，实际上我还是有许多地方没有读懂，这适合多看几遍，慢慢理解。]]></content>
       <tags>
-        <tag>NLP🤖</tag>
-        <tag>笔记📒</tag>
         <tag>指南</tag>
         <tag>调参</tag>
+        <tag>NLP🤖</tag>
+        <tag>笔记📒</tag>
       </tags>
   </entry>
   <entry>
@@ -962,10 +979,10 @@
     <url>%2F2018%2F08%2F25%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FCNN%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E4%BB%BB%E5%8A%A1%E6%8C%87%E5%8D%97%2F</url>
     <content type="text"><![CDATA[最近因为比赛的缘故对文本分类有一定的了解。其中使用CNN方法做情感分析任务存在着许多优势。虽然模型简单，但如何设置超参有时候对结果有很大的影响。本文记录了关于CNN文本分类的一些学习历程和指南，基本参考了论文。 做法基本上目前较为浅层的CNN文本分类的做法都是如下图： 将词向量堆积成为二维的矩阵，通过CNN的卷积单元对矩阵进行卷积处理，同时使用pooling（通常是1max-pooling）操作，将不等长的卷积结果变为等长，对不同的卷积单元的结果进行拼接后生成单个向量，最后再通过线性层转化成类别概率分布。 另一张图也说明了该流程。 建议与指导超参及其对结果的影响接下来的内容参考了论文A Sensitivity Analysis of (and Practitioners’ Guide to) ConvolutionalNeural Networks for Sentence Classification CNN文本分类的超参： 输入向量 卷积大小 输出通道（feature maps） 激活函数 池化策略 正则化 输入向量的影响实验表明，使用word2vec和GloVe不分伯仲，但将word2vec和GloVe简单拼接在一起并不能带来提升。 unfortunately, simply concatenating these representations does necessarily seem helpful 当句子长度很长（document classification）时，使用one-hot可能会有效果，但在句子长度不是很长时，效果不好。 建议对于新任务，可以word2vec或GloVe或者其他词向量都试一下，如果句子长，可以试着使用one-hot。 卷积大小由于卷积的长度是固定的，也就是词向量的长度，因此只需讨论宽度。实验表明，不同的数据集会有不同的最佳大小，但似乎对于长度越长的句子，最佳大小有越大的趋势。 However, for datasets comprising longer sentences, such as CR (maximum sentence length is 105, whereas it ranges from 36-56 on the other sentiment datasets used here), the optimal region size may be larger. 同时，当增加不同卷积大小作为组合时，如果组合的卷积核大小接近于最佳大小（optimal region size），有助于结果的提升；相反，如果卷积核大小离最佳大小很远时，反而会产生负面影响。 建议首先试着找到最优的卷积核大小，然后在这个基础上添加和该卷积核大小类似的卷积核。 feature maps也就是输出通道（out channel），表明该卷积核大小的卷积核有多少个。 实验表明，最佳的feature maps和数据集相关，但一般不超过600。 it would seem that increasing the number of maps beyond 600 yields at best very marginal returns, and often hurts performance. 建议在600内搜索最优，如果在600的边缘还没有明显的效果下降，那么可以尝试大于600的feature maps。 激活函数实验结果： 结果表明，tanh、ReLU和不使用激活函数效果较好。tanh的优点是以0为中心，ReLU能够加速拟合，至于为什么不使用的效果会好，可能是因为模型较为简单： This indicates that on some datasets, a linear transformation is enough to capture thecorrelation between the word embedding and the output label. 建议使用tanh、ReLU或者干脆不使用。但如果模型更为复杂，有多层的结构，还是需要使用激活函数的。 pooling策略所有的实验都表明了，1-max pooling的效果比其他好，如k-max pooling。在pooling这一步可以直接选择1-max pooling。 This may be because the location of predictive contexts does not matter, and certain n-grams in the sentence can be more predictive on their own than the entire sentence considered jointly. 正则化主要是dropout和l2 norm constraint。dropout就是随机将一些神经元置为0，l2 norm constraint是对参数矩阵W进行整体缩放，使其不超过一定阈值。（与通常的l2 regularization不同，最早可追溯到Hinton的Improving neural networks by preventingco-adaptation of feature detectors） the l2 norm of a weight vector is linearly scaled to a constraint c when it exceeds this threshold, so a smaller c implies stronger regularization 实验表明，dropout起的作用很小，l2 norm没有提升甚至还会导致下降。可能是因为模型参数不多，因此过拟合的可能性较低。 建议设置较小的dropout和较大的l2 norm，当feature maps增大时，可以试着调节较大的dropout以避免过拟合。 建议及结论 刚开始的使用使用word2vec或者GloVe，如果数据量够大，可以尝试one-hot 线性搜索最佳的卷积核大小，如果句子够长，那么可以扩大搜索范围。一旦确定了最佳卷积核大小，尝试在该卷积核大小的附近进行组合，如最佳卷积核宽度是5，那么尝试[3,4,5]或者[2,3,4,5]等 使用较小的dropout和较大的max norm constraint，然后在[100,600]范围内搜索feature maps，如果最佳的feature maps在600附近，可以试着选择比600更大的范围 尝试不同的激活函数，通常tanh和ReLU是较好的，但也可以尝试什么都不加。 使用1-max pooling。 如果模型复杂，比如feature maps很大，那么可以尝试更为严格的正则化，如更大的dropout rate和较小的max norm constraint。 ReferenceConvolutional Neural Networks for Sentence Classification A Sensitivity Analysis of (and Practitioners’ Guide to) ConvolutionalNeural Networks for Sentence Classification]]></content>
       <tags>
-        <tag>指南</tag>
-        <tag>调参</tag>
         <tag>CNN</tag>
         <tag>情感分析</tag>
+        <tag>指南</tag>
+        <tag>调参</tag>
       </tags>
   </entry>
   <entry>
@@ -974,8 +991,8 @@
     <content type="text"><![CDATA[最近在写Hierarchical attention network的时候遇到了如下的bug： one of the variables needed for gradient computation has been modified by an inplace operation 在查阅了文档和请教了其他人之后，最终找到了bug。 1234for i in range(seq_len): h_i = rnn_outputs[i] # batch,hidden*2 a_i = attn_weights[i].unsqueeze_(1) # take in-place opt may cause an error a_i = a_i.expand_as(h_i) # batch,hidden*2 这是我原来的逻辑，我在无意中做了inplace操作，导致了bug的发生。正确的做法应该是这样的： 12345for i in range(seq_len): h_i = rnn_outputs[i] # batch,hidden*2 # a_i = attn_weights[i].unsqueeze_(1) # take in-place opt may cause an error a_i = attn_weights[i].unsqueeze(1) # batch,1 a_i = a_i.expand_as(h_i) # batch,hidden*2 实际上，在实践过程中应当尽量避免inplace操作，在官方文档中也提到了（存疑）这点，虽然提供了inplace操作，但并不推荐使用。 具体的原因是，在Pytorch构建计算图的过程中，会记录每个节点是怎么来的，但inplace会破坏这种关系，使得在回传的时候没法正常求导。 特别地，有两种情况不应该使用inplace操作（摘自知乎）： 对于requires_grad=True的叶子张量(leaf tensor)不能使用inplace operation 对于在求梯度阶段需要用到的张量不能使用inplace operation Reference:https://zhuanlan.zhihu.com/p/38475183]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>Pytorch</tag>
         <tag>遇到的问题</tag>
+        <tag>Pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -1011,9 +1028,9 @@
     <url>%2F2018%2F08%2F19%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FPython%20Tricks%5B%E8%BD%AC%5D%2F</url>
     <content type="text"><![CDATA[原文地址:https://hackernoon.com/python-tricks-101-2836251922e0 我觉得这个介绍Python一些tricks的文章很好，能够更加熟悉Python的一些非常方便的用法。以下是我觉得有用的几个点。 1️⃣Reverse a String/List [::-1]解释：[:]表示取所有的元素，-1表示步进。[1:5:2]表示的就是从元素1到元素5，每2个距离取一个。 2️⃣transpose 2d array zip()相当于压缩，zip(*)相当于解压。 3️⃣Chained function call 非常简洁的写法。 4️⃣Copy List 之前谈过的Python的赋值、浅拷贝、深拷贝。 5️⃣Dictionary get 避免了dict不存在该元素的问题。 6️⃣✨Sort Dictionary by Value 其中第三种返回的是[‘watermelon’, ‘banana’, ‘apple’, ‘orange’]，没有value了。 7️⃣For…else 注意到如果for在中途break了，就不会进入到else了；只有顺利循环完才会进入到else。 1234567891011121314151617&gt;&gt;&gt; a=[1,2,0]&gt;&gt;&gt; for e in a:... if e==0:... break... else:... print('hello')... #什么都没有print&gt;&gt;&gt; for e in a:... print(e)... else:... print('hello')... 120hello 8️⃣Merge dict’s 合并dict的方法。 9️⃣Min and Max index in List]]></content>
       <tags>
+        <tag>碎片知识</tag>
         <tag>Python</tag>
         <tag>Python tricks</tag>
-        <tag>碎片知识</tag>
       </tags>
   </entry>
   <entry>
@@ -1021,8 +1038,8 @@
     <url>%2F2018%2F08%2F19%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%864%2F</url>
     <content type="text"><![CDATA[1️⃣[概率校准(Probability Calibration)]一种对机器学习算法输出结果的校准，通过几个实验可以发现，概率校准能够一定程度提高表现。几个参考资料：直观理解: http://www.bubuko.com/infodetail-2133893.htmlSVC的概率校准在sklearn上的应用: https://blog.csdn.net/ericcchen/article/details/79337716✨完全手册: Calibration of Machine Learning Models 2️⃣[Paper]Hierarchical Attention Networks for Document Classification 亮点在使用层次的RNN结构，以及使用了attention方法。 参考了其他人的代码自己也试着实现了一个，GitHub地址：https://github.com/linzehui/pytorch-hierarchical-attention-network 3️⃣[XGBoost]kaggle神器XGBoost，一篇原理的详细介绍：http://www.cnblogs.com/willnote/p/6801496.html虽然还是有好些地方没搞懂，有必要从头学起。 4️⃣[Python]关于函数列表中单星号(*)和双星号(**)单星号： 代表接收任意多个非关键字参数，将其转换成元组： 1234def one(a,*b): """a是一个普通传入参数，*b是一个非关键字星号参数""" print(b)one(1,2,3,4,5,6) #输出：(2, 3, 4, 5, 6) 对一个普通变量使用单星号，表示对该变量拆分成单个元素 1234def fun(a,b): print(a,b)l=[1,2]fun(*l) #输出 1,2 双星号： 获得字典值 1234def two(a=1,**b): """a是一个普通关键字参数，**b是一个关键字双星号参数""" print(b)two(a=1,b=2,c=3,d=4,e=5,f=6) #输出&#123;'b': 2, 'c': 3, 'e': 5, 'f': 6, 'd': 4&#125; 5️⃣[Pytorch]在Pytorch中，只要一个tensor的requires_grad是true，那么两个tensor的加减乘除后的结果的requires_grad也会是true。]]></content>
       <tags>
-        <tag>Python</tag>
         <tag>碎片知识</tag>
+        <tag>Python</tag>
         <tag>Pytorch</tag>
         <tag>Paper</tag>
         <tag>概率校准</tag>
@@ -1045,8 +1062,8 @@
     <url>%2F2018%2F08%2F18%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FPython%E4%B8%AD%E7%9A%84%E6%8B%B7%E8%B4%9D%2F</url>
     <content type="text"><![CDATA[Python的拷贝和C/C++的差别很大，很经常就容易搞混，因此记录一下。 赋值、拷贝 赋值：实际上就是对象的引用，没有开辟新的内存空间12lst=[1,2,3]l=lst 浅拷贝:创建了新对象，但是内容是对原对象的引用，有三种形式 切片 12l=lst[:]l=[i for i in lst] 工厂 1l=list(lst) copy 12import copyl=copy.copy(lst) 深拷贝:copy中的deepcopy，生成一个全新的对象，与原来的对象无关 12import copyl=copy.deepcopy(lst) 例子12345678910111213141516171819202122232425262728293031### 引用https://www.cnblogs.com/huangbiquan/p/7795152.html 的例子###&gt;&gt;&gt; import copy&gt;&gt;&gt; a = [1,2,3,4,['a','b']] #定义一个列表a&gt;&gt;&gt; b = a #赋值&gt;&gt;&gt; c = copy.copy(a) #浅拷贝&gt;&gt;&gt; d = copy.deepcopy(a) #深拷贝&gt;&gt;&gt; a.append(5)&gt;&gt;&gt; print(a)[1, 2, 3, 4, ['a', 'b'], 5] #a添加一个元素5&gt;&gt;&gt; print(b) [1, 2, 3, 4, ['a', 'b'], 5] #b跟着添加一个元素5 &gt;&gt;&gt; print(c)[1, 2, 3, 4, ['a', 'b']] #c保持不变&gt;&gt;&gt; print(d)[1, 2, 3, 4, ['a', 'b']] #d保持不变&gt;&gt;&gt; a[4].append('c') &gt;&gt;&gt; print(a)[1, 2, 3, 4, ['a', 'b', 'c'], 5] #a中的list(即a[4])添加一个元素c&gt;&gt;&gt; print(b)[1, 2, 3, 4, ['a', 'b', 'c'], 5] #b跟着添加一个元素c&gt;&gt;&gt; print(c)[1, 2, 3, 4, ['a', 'b', 'c']] #c跟着添加一个元素c&gt;&gt;&gt; print(d)[1, 2, 3, 4, ['a', 'b']] #d保持不变#说明如下：#1.外层添加元素时， 浅拷贝c不会随原列表a变化而变化；内层list添加元素时，浅拷贝c才会变化。#2.无论原列表a如何变化，深拷贝d都保持不变。#3.赋值对象随着原列表一起变化 Referencehttps://www.cnblogs.com/huangbiquan/p/7795152.htmlhttps://www.cnblogs.com/xueli/p/4952063.html]]></content>
       <tags>
-        <tag>Python</tag>
         <tag>碎片知识</tag>
+        <tag>Python</tag>
         <tag>拷贝</tag>
       </tags>
   </entry>
@@ -1074,8 +1091,8 @@
     <url>%2F2018%2F08%2F12%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%863%2F</url>
     <content type="text"><![CDATA[1️⃣[Python]在服务器上跑代码时，如 python project/folder1/a.py，如果a.py引用了一个自定义的模块但又不在folder1内，此时interpreter就会报错，提示找不到该模块。这是因为解释器默认只会在同一个folder下查找。解决方案是在运行前显式添加查找范围。如：1export PYTHONPATH=/home/zhlin/bilm-tf:$PYTHONPATH 那么python解释器就会到该目录下去找。 2️⃣[度量标准] 准确率(accuracy): $ACC=\frac{TP+TN}{TP+TN+FP+FN}$ 衡量的是分类器预测准确的比例 召回率(recall): $Recall=\frac{TP}{TP+FN}$ 正例中被分对的比例，衡量了分类器对正例的识别能力。 精确率(Precision): $P=\frac{TP}{TP+FP}$度量了被分为正例的示例中实际为正例的比例。 F-Measure: $F=\frac{(\alpha^2 +1)P*R}{\alpha^2 (P+R)}$ 其中P是Precision,R是Recall。综合考量了两种度量。 当$\alpha=1$时，称为F1值 $F1=\frac{2PR}{P+R}$ 3️⃣[调参技巧]在google发布的一份关于text-classification的guide中，提到了几个调参的trick。 在feature selection步骤中，卡方检验chi2和方差分析的F值 f_classif的表现相当，在大约选择20k的feature时，准确率达到顶峰，当feature越多，效果并没有提升甚至会下降。 在文本分类中，似乎使用normalization并没有多少用处，建议跳过。 Normalization converts all feature/sample values to small and similar values. This simplifies gradient descent convergence in learning algorithms. From what we have seen, normalization during data preprocessing does not seem to add much value in text classification problems; we recommend skipping this step. 实际上我也测试过，发现确实normalization对于准确率的提高没什么帮助，甚至还有一点下降。]]></content>
       <tags>
-        <tag>Python</tag>
         <tag>碎片知识</tag>
+        <tag>Python</tag>
         <tag>度量标准</tag>
         <tag>调参技巧</tag>
       </tags>
@@ -1094,8 +1111,8 @@
     <url>%2F2018%2F08%2F10%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2FVim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%2F</url>
     <content type="text"><![CDATA[在服务器经常要用到Vim，因此记录常用的快捷键并熟悉之。 退出:q 退出:wq 写入并退出:q! 退出并忽略所有更改:e! 放弃修改并打开原来的文件 插入i 在当前位置前插入a 在当前位置后插入 撤销:u 撤销:U 撤销整行操作Ctrl+r 重做 删除:md 删除第m行nd 删除当前行开始的n行(一共n+1行)dd 删除当前行D 删除当前字符至行尾:m,nd 删除从m到n行的内容，如: :100,10000d:m,$d 删除m行及以后所有的行:10d 移动:n 跳转到行号 如， :100gg 跳到行首G(shift+g)移动到文件尾 搜索/text 搜索text，n搜索下一个，N搜索上一个?text 反向查找:set ignorecase 忽略大小写查找:set noignorecase 不忽略大小写查找*或# 对光标处的单词搜索 复制粘贴v 从当前位置开始，光标经过的地方被选中，再按一下v结束 环境设置:set nu 显示行号:set nonu 隐藏行号:set hlsearch 设置搜索结果高亮 Referencehttps://www.cnblogs.com/wangrx/p/5907013.htmlhttps://www.cnblogs.com/yangjig/p/6014198.html]]></content>
       <tags>
-        <tag>杂七杂八</tag>
         <tag>技巧</tag>
+        <tag>杂七杂八</tag>
         <tag>快捷键</tag>
         <tag>Vim</tag>
       </tags>
@@ -1105,9 +1122,9 @@
     <url>%2F2018%2F08%2F10%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2FPycharm%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7%2F</url>
     <content type="text"><![CDATA[记录Pycharm的一些技巧，让Pycharm更顺手 快捷键0️⃣Double Shift 万能搜索可以搜索文件名、类名、方法名、目录名（在关键字前面加/ ），并不能用来搜索任意关键字 1️⃣ Command+F 在页面搜索 2️⃣ Ctrl+Shift+F Find in Path 在路径下搜索 3️⃣✨Command+E 快速查找文件显示最近打开的文件 4️⃣ Shift+Enter 任意位置换行无论光标在何处都可以直接另起一行 5️⃣ Option+Enter 自动导入模块；万能提示键自动导入如何设置见小技巧#0️⃣ 6️⃣ Ctrl+F10 运行我已经添加了Ctrl+R作为另一对运行快捷键 7️⃣ Command+Shift+ +/- 展开/收缩代码 8️⃣ Option+F 在Dash中搜索 9️⃣ Ctrl+J 不跳转查看代码 小技巧0️⃣ Pycharm自动导入模块https://blog.csdn.net/lantian_123/article/details/78094148 1️⃣ ✨远程部署工程 强烈推荐两步走：配置服务器映射+配置服务器解释器 2️⃣跳转后如何回退开启toolbar即可https://segmentfault.com/a/1190000010205945 Referencehttps://foofish.net/pycharm-tips.htmlhttps://blog.csdn.net/lantian_123/article/details/78094148https://segmentfault.com/a/1190000010205945]]></content>
       <tags>
-        <tag>杂七杂八</tag>
         <tag>技巧</tag>
         <tag>Pycharm</tag>
+        <tag>杂七杂八</tag>
         <tag>快捷键</tag>
       </tags>
   </entry>
@@ -1132,9 +1149,9 @@
     <url>%2F2018%2F08%2F05%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FPython%E6%83%AF%E4%BE%8B%2F</url>
     <content type="text"><![CDATA[fork from https://github.com/jackfrued/Python-100-Days/blob/master/Python惯例.md Python惯例“惯例”这个词指的是“习惯的做法，常规的办法，一贯的做法”，与这个词对应的英文单词叫“idiom”。由于Python跟其他很多编程语言在语法和使用上还是有比较显著的差别，因此作为一个Python开发者如果不能掌握这些惯例，就无法写出“Pythonic”的代码。下面我们总结了一些在Python开发中的惯用的代码。 让代码既可以被导入又可以被执行。 1if __name__ == '__main__': 用下面的方式判断逻辑“真”或“假”。 12if x:if not x: 好的代码： 12345name = 'jackfrued'fruits = ['apple', 'orange', 'grape']owners = &#123;'1001': '骆昊', '1002': '王大锤'&#125;if name and fruits and owners: print('I love fruits!') 不好的代码： 12345name = 'jackfrued'fruits = ['apple', 'orange', 'grape']owners = &#123;'1001': '骆昊', '1002': '王大锤'&#125;if name != '' and len(fruits) &gt; 0 and owners != &#123;&#125;: print('I love fruits!') 善于使用in运算符。 12if x in items: # 包含for x in items: # 迭代 好的代码： 123name = 'Hao LUO'if 'L' in name: print('The name has an L in it.') 不好的代码： 123name = 'Hao LUO'if name.find('L') != -1: print('This name has an L in it!') 不使用临时变量交换两个值。 1a, b = b, a 用序列构建字符串。 好的代码： 123chars = ['j', 'a', 'c', 'k', 'f', 'r', 'u', 'e', 'd']name = ''.join(chars)print(name) # jackfrued 不好的代码： 12345chars = ['j', 'a', 'c', 'k', 'f', 'r', 'u', 'e', 'd']name = ''for char in chars: name += charprint(name) # jackfrued EAFP优于LBYL。 EAFP - Easier to Ask Forgiveness than Permission. LBYL - Look Before You Leap. 好的代码： 123456d = &#123;'x': '5'&#125;try: value = int(d['x']) print(value)except (KeyError, TypeError, ValueError): value = None 不好的代码： 1234567d = &#123;'x': '5'&#125;if 'x' in d and isinstance(d['x'], str) \ and d['x'].isdigit(): value = int(d['x']) print(value)else: value = None 使用enumerate进行迭代。 好的代码： 123fruits = ['orange', 'grape', 'pitaya', 'blueberry']for index, fruit in enumerate(fruits): print(index, ':', fruit) 不好的代码： 12345fruits = ['orange', 'grape', 'pitaya', 'blueberry']index = 0for fruit in fruits: print(index, ':', fruit) index += 1 用生成式生成列表。 好的代码： 123data = [7, 20, 3, 15, 11]result = [num * 3 for num in data if num &gt; 10]print(result) # [60, 45, 33] 不好的代码： 123456data = [7, 20, 3, 15, 11]result = []for i in data: if i &gt; 10: result.append(i * 3)print(result) # [60, 45, 33] 用zip组合键和值来创建字典。 好的代码： 1234keys = ['1001', '1002', '1003']values = ['骆昊', '王大锤', '白元芳']d = dict(zip(keys, values))print(d) 不好的代码： 123456keys = ['1001', '1002', '1003']values = ['骆昊', '王大锤', '白元芳']d = &#123;&#125;for i, key in enumerate(keys): d[key] = values[i]print(d) 说明：这篇文章的内容来自于网络，有兴趣的读者可以阅读原文。 注：许多原则我认为非常有意义，能够摆脱C/C++的风格，真正写出Pythonic的代码。让我有很大感触的是1、3、8，能够写出非常简洁优雅的代码。同时6我之前从没注意过，习惯了C/C++风格之后总是会在执行之前考虑所有情况，但确实不够优雅，今后可以尝试EAFP风格（什么是EAFP）。]]></content>
       <tags>
-        <tag>Python</tag>
         <tag>碎片知识</tag>
         <tag>杂七杂八</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -1184,8 +1201,8 @@
     <url>%2F2018%2F08%2F03%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADgrad%E7%9A%84%E7%90%86%E8%A7%A3%2F</url>
     <content type="text"><![CDATA[事情起源于我写了一个CNN用于文本分类，但loss一直没降，因此我尝试print(loss.grad)的grad，发现神奇的是loss grad显示为None，接着尝试print(y_pred.grad)，同样是None，但再print loss和y_pred的requires_grad发现是正常的True。 在查阅了资料，以及问了学长之后发现原来并不是bug，而是因为，Pytorch默认不会保存中间节点(intermediate variable)的grad，此举是为了节省内存。 By default, gradients are only retained for leaf variables. non-leaf variables’ gradients are not retained to be inspected later. This was done by design, to save memory. https://discuss.pytorch.org/t/why-cant-i-see-grad-of-an-intermediate-variable/94 实际上可以通过retain_grad()或者hook来查看中间节点的grad。 我后面尝试print了叶子节点，如 print(CNN_model.fc.weight.grad)，最终获得了正确的grad。 ps：所谓中间节点，是由其他节点计算所得的tensor，而叶子节点则是自己定义出来的。 最后我发现，原来loss一直没降的原因是因为我定义的CNN过于复杂，并且数据集偏小，无法快速收敛导致的。]]></content>
       <tags>
-        <tag>Pytorch</tag>
         <tag>遇到的问题</tag>
+        <tag>Pytorch</tag>
         <tag>grad</tag>
         <tag>bug</tag>
       </tags>
@@ -1195,8 +1212,8 @@
     <url>%2F2018%2F08%2F03%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2FLinux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
     <content type="text"><![CDATA[命令记录自己常用的命令。 1️⃣ls：显式当前目录下的文件和目录 -a 包括隐藏文件 -h 将文件的容量以易读方式列出（配合-s使用） -s 以块数形式显示每个文件分配的尺寸 -l 以较长格式列出信息，可以直接写成 ll 2️⃣cd 到达指定地址 3️⃣kill 杀死程序 -l 信息编号。当l=9时，无条件终止，其他信号可能忽略 killall -u 杀死该用户全部进程 4️⃣ps 报告当前系统的进程状态 -a 所有 -p 指定程序 -u 指定用户 -x 列出该用户的进程的详细信息(我的理解应该是) 如： 5️⃣htop 比top更优，交互更好，同时可以直观看到资源占用情况基本命令与top一致 6️⃣top：动态查看系统运行状态 -u 指定用户名 -p 指定进程 7️⃣nvidia-smi 查看显卡状态watch nvidia-smi 实时查看显卡状态，定时刷新 8️⃣tail 显示指定文件的末尾若干行 -f 显示文件最新追加的内容 -n 显示文件尾部n行内容 -c 显示文件尾部最后c个字符 如： 123tail file 显示最后10行tail -n +20 file 显示从第20行至末尾tail -c 10 file 显示文件file的最后10个字符 ------- 9️⃣echo 用于打印指定的字符串 🔟which 用于查找并显示给定命令的绝对路径，which指令会在环境变量$PATH设置的目录里查找符合条件的文件。使用which命令，可以看到某个系统命令是否存在，以及执行的是哪个位置的命令。如： 1️⃣1️⃣nohup 将程序以忽略挂起信号的方式运行，经常用于在服务器跑代码如：1nohup python xxx.py &gt;output.txt 2&gt;&amp;1 &amp; 即，将输出重定向到output.txt ；最后一个&amp;表示后台挂起 1️⃣2️⃣cp 复制文件 cp [文件] [目标文件夹] -r 递归复制，用于目录的复制 1️⃣3️⃣mv 移动文件、目录或更名 mv [文件/文件夹] [文件夹] -f 强制，当目标文件存在，直接覆盖 -i 会询问 1️⃣4️⃣rm 删除文件或目录 -f 强制删除 -r 递归删除，用于目录删除 1️⃣5️⃣file 用于判断文件的基本数据如： 1️⃣6️⃣tar 对文件打包/压缩 -t 查看打包文件的内容含有哪些文件名 -x 解压缩 -c 新建打包文件 -C 指定压缩/解压目录 -v 解压/压缩过程中将处理的文件名显示出来常用的： 123压缩：tar -jcv -f filename.tar.bz2 要被处理的文件或目录名称查询：tar -jtv -f filename.tar.bz2解压：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录 1️⃣7️⃣wc word count 统计文件内容信息，如行数、字符数 -l 显示文件行数 -c 显示字节数 -m 显示字符数 -w 显示字数 字被定义为由空白、跳格、换行字符分隔的字符串 -L 显示最长行的长度 不加参数，所有的都显示，依次是行数、单词数、字节数、文件名 1️⃣8️⃣df 显示磁盘相关信息 -h 以可读性较高的方式显示信息 1️⃣9️⃣scp 服务器之间的文件复制 如: 1scp -r /test1 zhlin@123.12.1.12:/home/zhlin ✨快捷键Ctrl+a 跳到行首Ctrl+c 退出当前进程Ctrl+e 跳到页尾Ctrl+k 删除当前光标后面的文字Ctrl+l 清屏，等价于clearCtrl+r 搜索之前打过的命令Ctrl+u 删除当前光标前面的文字✨Ctrl+左右键 单词之间跳转 在Mac上可以使用option+左右键Ctrl+y 进行恢复删除Ctrl+z 将当前进程转到后台，使用fg恢复 Referencehttps://blog.csdn.net/leo_618/article/details/53003111 ———-持续更新———-]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Linux</tag>
+        <tag>碎片知识</tag>
         <tag>技巧</tag>
       </tags>
   </entry>
@@ -1205,8 +1222,8 @@
     <url>%2F2018%2F07%2F31%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E4%B8%80%E4%B8%AA%E5%85%B3%E4%BA%8Eyield%E7%9A%84%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%2F</url>
     <content type="text"><![CDATA[今天遇到了一个神奇的”bug”，让我对yield的理解更深一步。 这是一个函数，我本来打算试着print一下line内部的格式和内容。 这是调用的主函数： 结果跑出的结果是： ？？？ 我尝试在函数的开头添加print： 结果仍然没有任何的输出。 我试着在main函数添加print： 结果： 也就是说，根本没有进入到get_dataset_from_txt函数啊。 我以为是pycharm的问题还重启了一遍，然而并没有任何作用。问了其他人，他们也觉得很神奇。最后一个同学看了一下函数，发现了问题所在：yield 我突然想起来，yield返回的是一个generator，只有在对generator进行遍历时，才会开始运行… 于是，我试着这么写，试着对generator遍历： 虽然报错了，但函数终于是进去了… 结论：有yield的函数会返回一个generator，当对其进行遍历时，函数才会开始运行。]]></content>
       <tags>
-        <tag>Python</tag>
         <tag>遇到的问题</tag>
+        <tag>Python</tag>
         <tag>yield</tag>
       </tags>
   </entry>
@@ -1224,8 +1241,8 @@
     <url>%2F2018%2F07%2F29%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%861%2F</url>
     <content type="text"><![CDATA[1️⃣[Python]assert用法： assert expression等价于if not expression: raise AssertionError 2️⃣[Pytorch]Pytorch view：创建一个新的tensor，但他们的data是共享的。 3️⃣[Pytorch]在Pytorch中，embedding的index是不能requires_grad=True的，否则会出错。https://github.com/pytorch/pytorch/issues/7021 之前看过一份代码，设置volatile=false但没有出错，是因为在Pytorch0.4之后volatile已经被弃用了，因此volatile=false不起作用，而默认requires_grad=false 4️⃣[Pytorch]在Pytorch中，nn.Linear(self.hidden_dim,self.vocab_size)的维度是vocab_sizehidden_dim，之前居然没有注意到这个问题。因为nn.Linear的*第一个参数表示输入维度，第二个参数表示输出维度 5️⃣[Pytorch]Pytorch中，使用view一般来说必须要用 .contiguous()。也即： 1batch.view(batch_size, -1).t().contiguous() contiguous()的官方解释：https://discuss.pytorch.org/t/runtimeerror-input-is-not-contiguous/930 It means that your tensor is not a single block of memory, but a block with holes. view can be only used with contiguous tensors, so if you need to use it here, just call .contiguous() before. 也就是说，contiguous会将数据存到一个连续的空间内（block）。 6️⃣[Pytorch]调用Cross_entropy时，Pytorch会帮助你加log和softmax。 7️⃣[Paper]Sliced_RNN 将RNN分块以提高并行性，甚至每层的RNN都可以不一样，达到抽取不同程度的抽象语义信息的目的。实验证明，在不同任务上都有一定的提升，但速度的提升很大。 8️⃣[Tf-idf]计算词语对于句子的重要程度 https://zh.wikipedia.org/wiki/Tf-idf tf是词频，idf是逆向文件频率。也即如果词在该句出现的次数越多，在所有文本的出现次数越少，则词对于句子的重要程度越高。 9️⃣[Numpy]在Numpy中，一个列表虽然是横着表示的，但它是列向量。我之前居然没有注意到这个问题。]]></content>
       <tags>
-        <tag>Python</tag>
         <tag>碎片知识</tag>
+        <tag>Python</tag>
         <tag>Pytorch</tag>
         <tag>Paper</tag>
         <tag>Tf-idf</tag>
@@ -1291,9 +1308,9 @@
     <url>%2F2018%2F07%2F23%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2F%E5%AE%89%E8%A3%85conda%E9%94%99%E8%AF%AF%2F</url>
     <content type="text"><![CDATA[在服务器上安装conda的时候，一开始使用了pip安装pip install conda在安装好conda之后想要使用conda命令，出现： ERROR: The install method you used for conda—probably either pip install conda or easy_install conda—is not compatible with using conda as an application. If your intention is to install conda as a standalone application, currently supported install methods include the Anaconda installer and the miniconda installer. You can download the miniconda installer from https://conda.io/miniconda.html. 然后到官网下载.sh文件并bash安装，仍然没有解决该问题；接着尝试pip uninstall conda，出现 最后在查阅了网上之后，使用 which conda找到conda的地址，并删除rm ××× 最后重新bash安装即可。]]></content>
       <tags>
-        <tag>遇到的问题</tag>
         <tag>杂七杂八</tag>
         <tag>conda</tag>
+        <tag>遇到的问题</tag>
       </tags>
   </entry>
 </search>

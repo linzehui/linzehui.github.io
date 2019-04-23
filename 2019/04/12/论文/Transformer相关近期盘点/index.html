@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Transformer," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="近年来自然语言处理有相当大的进展，囿于个人浅薄的能力，因此仅谈谈自己较为了解的与Transformer相关一路下来的一些工作。这篇的主要目的是完成邱博给我的任务，也顺便梳理一下思绪。  自2017年的问世，Transformer就吸引了大批学者的注意，2018年Bert的出现，更是将Transformer推上了NLP舞台的中央。Transformer以其高效率（高并行性）以及极强的模型能力，俨然有">
+<meta name="keywords" content="Transformer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Transformer相关近期盘点">
+<meta property="og:url" content="http://www.linzehui.me/2019/04/12/论文/Transformer相关近期盘点/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="近年来自然语言处理有相当大的进展，囿于个人浅薄的能力，因此仅谈谈自己较为了解的与Transformer相关一路下来的一些工作。这篇的主要目的是完成邱博给我的任务，也顺便梳理一下思绪。  自2017年的问世，Transformer就吸引了大批学者的注意，2018年Bert的出现，更是将Transformer推上了NLP舞台的中央。Transformer以其高效率（高并行性）以及极强的模型能力，俨然有">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.linzehui.me/images/15550349717464.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15550350386364.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556585300051.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556834830687.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556836008776.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15557700601922.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15557701172639.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556604248879.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556607769307.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556764280028.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556765079362.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556768100801.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556790567795.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556790839030.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556794194598.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556795039170.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556796677182.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556816887199.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556818289287.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15556821324062.jpg">
+<meta property="og:updated_time" content="2019-04-23T03:43:00.963Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Transformer相关近期盘点">
+<meta name="twitter:description" content="近年来自然语言处理有相当大的进展，囿于个人浅薄的能力，因此仅谈谈自己较为了解的与Transformer相关一路下来的一些工作。这篇的主要目的是完成邱博给我的任务，也顺便梳理一下思绪。  自2017年的问世，Transformer就吸引了大批学者的注意，2018年Bert的出现，更是将Transformer推上了NLP舞台的中央。Transformer以其高效率（高并行性）以及极强的模型能力，俨然有">
+<meta name="twitter:image" content="http://www.linzehui.me/images/15550349717464.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2019/04/12/论文/Transformer相关近期盘点/"/>
+
+
+
+
+
+  <title>Transformer相关近期盘点 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/04/12/论文/Transformer相关近期盘点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Transformer相关近期盘点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-12T09:34:30+08:00">
+                2019-04-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-23T11:43:00+08:00">
+                2019-04-23
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>近年来自然语言处理有相当大的进展，囿于个人浅薄的能力，因此仅谈谈自己较为了解的与Transformer相关一路下来的一些工作。这篇的主要目的是完成邱博给我的任务，也顺便梳理一下思绪。</p>
+<hr>
+<p>自2017年的问世，Transformer就吸引了大批学者的注意，2018年Bert的出现，更是将Transformer推上了NLP舞台的中央。Transformer以其高效率（高并行性）以及极强的模型能力，俨然有替代传统RNN/CNN的态势。因此本次就讨论讨论Transformer及其系列，同时最后加上我个人关于RNN/CNN/Transformer的一点思考。</p>
+<p>要点：</p>
+<ol>
+<li>Transformer及其变体</li>
+<li>Transformer在其他任务</li>
+<li>预训练模型</li>
+<li>Transformer/CNN/RNN对比及思考</li>
+</ol>
+<h2 id="Transformer及其变体"><a href="#Transformer及其变体" class="headerlink" title="Transformer及其变体"></a>Transformer及其变体</h2><h3 id="Transformer简单回顾"><a href="#Transformer简单回顾" class="headerlink" title="Transformer简单回顾"></a>Transformer简单回顾</h3><p>Transformer[1]采用完全的attention机制用以序列建模，序列中的每个节点都能够直接与其他节点交互，而这是通过attention机制来实现的。</p>
+<h4 id="Transformer模型架构"><a href="#Transformer模型架构" class="headerlink" title="Transformer模型架构"></a>Transformer模型架构</h4><p>Transformer架构：<br><img src="/images/15550349717464.jpg" width="50%" height="50%"></p>
+<p>由于Transformer最早由于翻译模型中，因此架构是由一个encoder和一个decoder组成，而encoder和decoder都是由多个基本的block堆叠而成。一个block由两部分组成，也即multi-head attention层和Position-wise Feed-Forward Networks层。</p>
+<h5 id="Multi-head-attention"><a href="#Multi-head-attention" class="headerlink" title="Multi-head attention"></a>Multi-head attention</h5><p>对于序列中一个特定节点$x_i$，$x_i$作为query，其他节点（包括自己）作为key和value，通过向量点积计算出attention分数，进行归一化后（softmax）将value加权平均获得该节点$x_i$新的表示。<br>同时，对于每个节点，为了增强表示能力，可以将其映射到多个不同隐空间中，分别完成上述基本操作。</p>
+<p>如下图所示：<br><img src="/images/15550350386364.jpg" width="70%" height="50%"></p>
+<p>左图为基本操作也即scale-dot product，右图为多个scale-dot product在不同隐空间同时进行，并且将多个head的结果拼接起来作为最终结果。</p>
+<h5 id="Position-wise-Feed-Forward-Networks"><a href="#Position-wise-Feed-Forward-Networks" class="headerlink" title="Position-wise Feed-Forward Networks"></a>Position-wise Feed-Forward Networks</h5><p>为了增强模型表示能力，在Multi-head attention之后，每个节点都过两层MLP以获得新的向量表示。<br>也即:</p>
+<script type="math/tex; mode=display">\mathrm{FFN}(x)=\max \left(0, x W_{1}+b_{1}\right) W_{2}+b_{2}</script><p>相比传统的RNN/CNN而言，其最大的优势是全局的感受野（Global Receptive Field）以及高度并行性（parallelization）。</p>
+<h3 id="变体"><a href="#变体" class="headerlink" title="变体"></a>变体</h3><h4 id="Universal-Transformers"><a href="#Universal-Transformers" class="headerlink" title="Universal Transformers"></a>Universal Transformers</h4><p>提出一种新型通用的Transformer，在Transformer的基础上引入RNN的归纳偏置(inductive bias)，也即迭代学习(learning iterative)的特征。Universal Transformer[2]的主要特点有：</p>
+<ol>
+<li>在Transformer中每层的权重是独立的，而在Universal Transformer中，每层的权重是共享的，也即multi-head Attention与Feed-Forward在每层的权重是一致的。</li>
+<li>在Transformer中引入自适应计算时间(Adaptive Computation Time, ACT[3])，也即对于不同的词允许迭代不同次数。这是基于有些词相比其他词词意更丰富，更难被模型学会，因此需要更多的迭代次数。与固定层数的Transformer相比有更好的通用性。</li>
+</ol>
+<p>因此其总体结构为：<br><img src="/images/15556585300051.jpg" width="70%" height="50%"></p>
+<p>在这里有两个细节：</p>
+<ol>
+<li>加了Timestep embedding去指示当前迭代的次数</li>
+<li>将Feedforward Function用更为通用的Transition Function，可以是普通的全连接，也可以是参数更少的Depth-wise Convolution。</li>
+</ol>
+<h4 id="Star-Transformer"><a href="#Star-Transformer" class="headerlink" title="Star Transformer"></a>Star Transformer</h4><p>Star Transformer[20]是一种轻量级的Transformer，通过将全连接的结构替换为星型拓扑结构，显著减小Transformer的复杂度，从$O(n^2)$减为$O(n)$。</p>
+<p><img src="/images/15556834830687.jpg" width="50%" height="50%"></p>
+<p>其主要思想是’Gather-Distribute’，也即每个节点不直接与其他节点交互，而是与全局节点进行交互。<br><img src="/images/15556836008776.jpg" width="50%" height="50%"></p>
+<p>实验表明，Star Transformer不仅在多个数据集表现更优，且速度更快。</p>
+<p><img src="/images/15557700601922.jpg" width="90%" height="50%"></p>
+<p><img src="/images/15557701172639.jpg" width="90%" height="50%"></p>
+<h4 id="其他小改进"><a href="#其他小改进" class="headerlink" title="其他小改进"></a>其他小改进</h4><p>接下来介绍基于Transformer的几个小改进工作。</p>
+<p>在Convolutional Self-Attention Network[5]中，通过在self-attention层引入CNN的归纳偏置，在翻译任务上有一定的提升。具体做法：<br><img src="/images/15556604248879.jpg" width="80%" height="50%"><br>普通self-attention层，每个节点都能够直接与其他节点交互，而在1D-Convolutional的self-attention层中，每个节点只能与以该节点为中心的窗口内的节点交互。而在2D-Convolution中，对head这一维进行扩展，也即对于任意一个节点，不仅能和周围的节点交互，还可以与其他head的节点交互。<br>实验结果：<br><img src="/images/15556607769307.jpg" width="80%" height="50%"></p>
+<p>在Multi-Head Attention with Disagreement Regularization[6]中，显式对multi-head attention添加正则化，使得不同head尽量区分开来，以使得不同head捕获到不同的特征。论文提出了三种不同位置的正则化方法：<br>①对Value：</p>
+<script type="math/tex; mode=display">D_{\text {subpace}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H} \frac{V^{i} \cdot V^{j}}{\left\|V^{i}\right\|\left\|V^{j}\right\|}</script><p>也即对不同head之间的value，计算他们之间的cos值，作为优化目标之一。</p>
+<p>②对Attention权重：</p>
+<script type="math/tex; mode=display">D_{\text {position}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H}\left|A^{i} \odot A^{j}\right|</script><p>也即将每个head所计算得到的attention矩阵，计算他们之间的element-wise乘法，作为优化目标之一。</p>
+<p>③对输出：</p>
+<script type="math/tex; mode=display">D_{\text {output}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H} \frac{O^{i} \cdot O^{j}}{\left\|O^{i}\right\|\left\|O^{j}\right\|}</script><p>也即对每个head的输出通过cos值进行正则化。</p>
+<p>Modeling Localness for Self-Attention Networks[7]则是通过加强对局部信息的关注，在翻译任务上提升表现。其主要的动机是：①在Transformer中每个词都直接与所有词交互，对所有词进行线性加权导致对邻近词的关注不够（因为权重的分散）；②从直接上看，当词$i$与词$j$有对齐关系时，我们希望与词$j$周围的词也对齐，使得模型能够捕获整个语义单元的信息。其具体做法是在softmax函数内增加一个高斯偏置（Gaussian bias）去修正attention权重分布：</p>
+<script type="math/tex; mode=display">\operatorname{ATT}(Q, K)=\operatorname{softmax}(\text {energy}+G)</script><p>$G_{ij}$是衡量词j与词i所预测的中心词之间的联系紧密程度，计算公式为：</p>
+<script type="math/tex; mode=display">G_{i, j}=-\frac{\left(j-P_{i}\right)^{2}}{2 \sigma_{i}^{2}}</script><p>其中$\sigma_{i}=\frac{D_{i}}{2}$，$D_{i}$是窗口大小。而$P_{i}$是通过计算得出的，$P_{i}$与对应的query有关，因此可以通过$p_{i}=U_{p}^{T} \tanh \left(W_{p} Q_{i}\right)$计算得到；而窗口大小$D_{i}$可以有多种选择，①固定窗口大小；②每层特定的大小，也即将该层的key平均起来，通过$z=U_{d}^{T} \tanh \left(W_{d} \overline{\mathbf{K}}\right)$计算；③每个query都有自己的窗口大小：$z_{i}=U_{d}^{T} \tanh \left(W_{p} Q_{i}\right)$。</p>
+<p>Self-attention with relative position representations[8]则是将Transformer中的绝对位置embedding改为相对位置embedding以提升翻译效果。</p>
+<h2 id="Transformer在其他任务"><a href="#Transformer在其他任务" class="headerlink" title="Transformer在其他任务"></a>Transformer在其他任务</h2><h3 id="Transformer-XL"><a href="#Transformer-XL" class="headerlink" title="Transformer XL"></a>Transformer XL</h3><p>本文探索将Transformer用于语言模型(language model)，并在Transformer引入RNN的归纳偏置，也即RNN的历史信息，使得Transformer能够处理长句子。</p>
+<p>由于Transformer的复杂度是$O(n^2)$，虽然在GPU上能够并行操作，但占用显存较大，因此在实现时，通常是将句子切分为一个一个segment，segment之间没有联系：</p>
+<p><img src="/images/15556764280028.jpg" width="30%" height="50%"></p>
+<p>而在测试阶段，则每生成一个词时滑动一个窗口：</p>
+<p><img src="/images/15556765079362.jpg" width="60%" height="50%"></p>
+<p>这样的方法显然效率很低。</p>
+<p>而在Transformer-XL[9]中，每个segment阶段都接受前一个(甚至前L个)的历史信息：<br>因此过程如下：<br><img src="/images/15556768100801.jpg" width="60%" height="50%"></p>
+<p>而在测试阶段，由于有历史信息，则不需要滑动窗口，因此效率更高。</p>
+<p>具体而言：<br>$\begin{aligned} \widetilde{\mathbf{h}}_{\tau+1}^{n-1} &amp;=\left[\mathrm{SG}\left(\mathbf{h}_{\tau}^{n-1}\right) \circ \mathbf{h}_{\tau+1}^{n-1}\right] \\ \mathbf{q}_{\tau+1}^{n}, \mathbf{k}_{\tau+1}^{n}, \mathbf{v}_{\tau+1}^{n} &amp;=\mathbf{h}_{\tau+1}^{n-1} \mathbf{W}_{q}^{\top}, \widetilde{\mathbf{h}}_{\tau+1}^{n-1} \mathbf{W}_{k}^{\top}, \widetilde{\mathbf{h}}_{\tau+1}^{n-1} \mathbf{W}_{v}^{\top} \\ \mathbf{h}_{\tau+1}^{n} &amp;=\text { Transformer-Layer }\left(\mathbf{q}_{\tau+1}^{n}, \mathbf{k}_{\tau+1}^{n}, \mathbf{v}_{\tau+1}^{n}\right) \end{aligned}$<br>SG代表stop gradient，而历史信息与当前阶段的隐状态拼接在一起。</p>
+<p>同时本文另一大两点是引入相对位置的encoding。如果使用绝对位置encoding，那么则会出现下述情况：<br>$\mathbf{h}_{\tau+1}=f\left(\mathbf{h}_{\tau}, \mathbf{E}_{\mathbf{s}_{\tau+1}}+\mathbf{U}_{1 : L}\right) \quad \text { and } \quad \mathbf{h}_{\tau}=f\left(\mathbf{h}_{\tau-1}, \mathbf{E}_{\mathbf{s}_{\tau}}+\mathbf{U}_{1 : L}\right)$<br>也即每个segment都会有相同的位置信息。因此在这里引入$\mathbf{R} \in \mathbb{R}^{L_{\max } \times d}$，第$i$行代表相对距离$i$的encoding。</p>
+<p>具体而言：<br>在标准Transformer中，query $q_i$与key $k_j$所获得的attention分数可以拆解为：<br>$\mathbf{A}_{i, j}^{\mathrm{abs}}=q_{i}^{\top} k_{j}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{E}_{x_{j}}}_{(a)}+\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{U}_{j}}_{(b)}+\underbrace{\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{E}_{x_{j}}}_{(c)}+\underbrace{\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{U}_{j}}_{(d)}$</p>
+<p>对其进行改进，转化为相对位置encoding，有：<br>$\mathbf{A}_{i, j}^{\mathrm{rel}}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, E} \mathbf{E}_{x_{j}}}_{(a)}+\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, E} \mathbf{R}_{i-j}}_{(b)}+\underbrace{u^{\top} \mathbf{W}_{k, R} \mathbf{E}_{x_{j}}}_{(c)}+\underbrace{v^{\top} \mathbf{W}_{k, R} \mathbf{R}_{i-j}}_{(d)}$</p>
+<p>首先是将所有出现绝对位置的地方都改为相对位置，第二是将引入一个可学习的$u \in \mathbb{R}^{d}$和$v \in \mathbb{R}^{d}$去替代$\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top}$和$\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top}$。第三，是将同样的$\mathbf{W}_{k}$细化成两个不同的$\mathbf{W}_{k, E}$与$\mathbf{W}_{k, R}$。</p>
+<p>Transformer-XL在不同数据集上有相当好的效果：<br><img src="/images/15556790567795.jpg" width="80%" height="50%"></p>
+<p><img src="/images/15556790839030.jpg" width="80%" height="50%"></p>
+<h3 id="Character-Level-Language-Modeling-with-Deeper-Self-Attention"><a href="#Character-Level-Language-Modeling-with-Deeper-Self-Attention" class="headerlink" title="Character-Level Language Modeling with Deeper Self-Attention"></a>Character-Level Language Modeling with Deeper Self-Attention</h3><p>同样是在语言模型上使用Transformer，但是character级别的语言模型。其主要思路是添加多个loss来提升其表现以及加快拟合速度。</p>
+<p>对于传统的RNN character-level语言模型，一般做法是“truncated backpropagation through time” (TBTT)：也即每个batch预测最后一个字符，然后将该batch的隐状态传入下一个batch。</p>
+<p>而在Transformer中也可以采用该方法。但在该基础上，引入三种loss。<br>①Multiple Positions<br>在一个batch内，每个时间步t都预测下一个字符，而不是像传统方法，只预测batch最后一个字符：</p>
+<p><img src="/images/15556794194598.jpg" width="60%" height="50%"></p>
+<p>②Intermediate Layer Losses<br>不仅仅最后一层要进行预测，中间层也需要预测。</p>
+<p><img src="/images/15556795039170.jpg" width="60%" height="50%"><br>越底层的loss所分配的权重越小。</p>
+<p>③Multiple Targets<br>每个位置不仅仅要预测下一个字符，还需要预测后几个的字符：</p>
+<p><img src="/images/15556796677182.jpg" width="60%" height="50%"></p>
+<p>实验表明，使用多个loss能够加速拟合，且能够获得更好的结果。</p>
+<h2 id="预训练模型"><a href="#预训练模型" class="headerlink" title="预训练模型"></a>预训练模型</h2><p>自ELMo开始，预训练模型就开始受到广泛的关注，而Bert随后的问世则更是将预训练模型推上了新的阶段。因此在这里简要介绍预训练模型的历史。</p>
+<h3 id="Non-Transformer-based"><a href="#Non-Transformer-based" class="headerlink" title="Non-Transformer-based"></a>Non-Transformer-based</h3><h4 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h4><p>词向量是最早的预训练模型，Bengio, et al.[10] 最早提出神经网络语言模型，词向量作为训练语言模型的副产品，可以用于下游任务。而随后则出现了word2vec[11],GloVe[12]，是目前最为广泛使用的词向量。</p>
+<h4 id="CoVe-ELMo"><a href="#CoVe-ELMo" class="headerlink" title="CoVe/ELMo"></a>CoVe/ELMo</h4><p>word2vec与GloVe作为静态词向量，一大问题就是难以解决多义词，而多义词的表示可以通过上下文来推测。CoVe[13]将词向量从静态扩展为动态。通过上下文来获得特定词的动态表示，具体是通过翻译模型来达到该目的的。<br>而ELMo[14]继承了动态词向量的思想，不过是通过双向语言模型来达到这一目的的。通过双向LSTM的语言模型，将前向与后向隐状态拼接起来作为该词的表示。<br>仅仅是将传统静态词向量替换成ELMo，就能有很大的提升。自此开始，预训练模型开始受到广泛的关注。</p>
+<h4 id="ULMFit"><a href="#ULMFit" class="headerlink" title="ULMFit"></a>ULMFit</h4><p>在上述预训练模型中，研究者的思路主要集中在预训练词向量用于下游任务。ULMFit[16]则尝试直接对分类模型进行预训练，接着再通过微调(fine-tuning)以提高分类的效果。</p>
+<p><img src="/images/15556816887199.jpg" width="80%" height="50%"></p>
+<p>ULMFit的成功说明直接对模型进行预训练而不是只预训练词向量用于下游任务是可行的。</p>
+<h3 id="Transformer-based"><a href="#Transformer-based" class="headerlink" title="Transformer-based"></a>Transformer-based</h3><p>GPT[15]尝试通过探索构建一种通用模型并在其上训练语言模型，可以在多种任务上有更好的表现。其主要亮点在于①构建一种通用模型，能够处理不同任务，第二使用Transformer而不是LSTM作为其基本模型。<br>其基本模型：</p>
+<p><img src="/images/15556818289287.jpg" width="85%" height="50%"></p>
+<p>具体而言，主要是无监督的语言模型预训练加上有监督的微调。</p>
+<p>而Bert[17]在GPT的基础上，引入masked语言模型，通过随机mask掉部分词，强迫模型通过上下文去预测mask掉的词，加强了模型的能力。</p>
+<p><img src="/images/15556821324062.jpg" width="85%" height="50%"></p>
+<p>同时引入有监督学习，也即预测下一句（Next Sentence Prediction），随机在句对中取两个句子，使得有50%可能句子对有上下文关系，50%句对没有关系，使模型去预测句对之间的关系。具体而言则是通过在句子开头加[CLS]符号，在最高层将该符号的表示通过全连接层。</p>
+<p>Bert在11项数据集上刷新最高记录。</p>
+<p>在此之后，MT-DNN[19]、GPT2.0[18]相继问世，通过添加更多的任务或者更多的数据使得模型表现更好。相信在接下来一段时间内，相关主题的论文也会有很多。</p>
+<h2 id="Transformer-CNN-RNN对比及思考"><a href="#Transformer-CNN-RNN对比及思考" class="headerlink" title="Transformer/CNN/RNN对比及思考"></a>Transformer/CNN/RNN对比及思考</h2><p>上述的介绍，大概对Transformer一支有一个简单的梳理。Transformer作为与RNN/CNN并立的模型，确实值得重视。</p>
+<p>为什么Transformer这么好，是否能够替代RNN/CNN？这也是值得所有人思考的。</p>
+<p>正如前面介绍的那样，Transformer的一大优势是全局感受野，也即RNN/CNN每次只能‘看’到部分上下文，而Transformer则没有这个限制，每个节点都能够直接与其他节点进行交互。也可以这么说，RNN/CNN具有更强的先验(prior)。<br>但这种优势有时也会成为劣势：实践证明，Transformer在小数据集上的效果是不如RNN/CNN的。或许可以这么理解这种现象：Transformer由于不引入强的先验，因此需要大量的数据去从头学习数据所存在的某种pattern（如局部性），而引入强的先验的RNN/CNN则对小数据集更加友好一些。但当有大量训练数据时（如翻译、语言模型），Transformer则会有更高的上限，Bert/GPT也印证了这点。而这种Transformer的劣势或许也是上述几个工作（如universal transformer）的其中一个出发点，也即在Transformer内引入RNN/CNN的归纳偏置，加强对Transformer的先验知识的约束。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Vaswani, Ashish, et al. “Attention is all you need.” Advances in neural information processing systems. 2017.<br>[2]Dehghani, Mostafa, et al. “Universal transformers.” arXiv preprint arXiv:1807.03819 (2018).<br>[3]Graves, Alex. “Adaptive computation time for recurrent neural networks.” arXiv preprint arXiv:1603.08983 (2016).<br>[4]Ahmed, Karim, Nitish Shirish Keskar, and Richard Socher. “Weighted transformer network for machine translation.” arXiv preprint arXiv:1711.02132 (2017).<br>[5]Yang, Baosong, et al. “Convolutional Self-Attention Networks.” arXiv preprint arXiv:1904.03107 (2019).<br>[6]Li, Jian, et al. “Multi-head attention with disagreement regularization.” arXiv preprint arXiv:1810.10183 (2018).<br>[7]Yang, Baosong, et al. “Modeling localness for self-attention networks.” arXiv preprint arXiv:1810.10182 (2018).<br>[8]Shaw, Peter, Jakob Uszkoreit, and Ashish Vaswani. “Self-attention with relative position representations.” arXiv preprint arXiv:1803.02155 (2018).<br>[9]Dai, Zihang, et al. “Transformer-xl: Attentive language models beyond a fixed-length context.” arXiv preprint arXiv:1901.02860 (2019).<br>[10]Bengio, Yoshua, et al. “A neural probabilistic language model.” Journal of machine learning research 3.Feb (2003): 1137-1155.<br>[11]Mikolov, Tomas, et al. “Efficient estimation of word representations in vector space.” arXiv preprint arXiv:1301.3781 (2013).<br>[12]Pennington, Jeffrey, Richard Socher, and Christopher Manning. “Glove: Global vectors for word representation.” Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP). 2014.<br>[13]McCann, Bryan, et al. “Learned in translation: Contextualized word vectors.” Advances in Neural Information Processing Systems. 2017.<br>[14]Peters, Matthew E., et al. “Deep contextualized word representations.” arXiv preprint arXiv:1802.05365 (2018).<br>[15]Radford, Alec, et al. “Improving language understanding by generative pre-training.” URL <a href="https://s3-us-west-2" target="_blank" rel="noopener">https://s3-us-west-2</a>. amazonaws. com/openai-assets/research-covers/languageunsupervised/language understanding paper. pdf (2018).<br>[16]Universal Language Model Fine-tuning for Text Classification<br>[17]Devlin, Jacob, et al. “Bert: Pre-training of deep bidirectional transformers for language understanding.” arXiv preprint arXiv:1810.04805 (2018).<br>[18]Radford, Alec, et al. “Language models are unsupervised multitask learners.” OpenAI Blog 1 (2019): 8.<br>[19]Multi-Task Deep Neural Networks for Natural Language Understanding<br>[20]Guo, Qipeng, et al. “Star-Transformer.” arXiv preprint arXiv:1902.09113 (2019).</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Transformer/" rel="tag"> <i class="fa fa-tag"></i> Transformer</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/11/诗词&句/人类永恒的愚蠢/" rel="next" title="无题">
+                <i class="fa fa-chevron-left"></i> 无题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/21/论文/每周论文16/" rel="prev" title="每周论文16">
+                每周论文16 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA0OC8xNjU3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg"
+                alt="林泽辉" />
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">130</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transformer及其变体"><span class="nav-number">1.</span> <span class="nav-text">Transformer及其变体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Transformer简单回顾"><span class="nav-number">1.1.</span> <span class="nav-text">Transformer简单回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Transformer模型架构"><span class="nav-number">1.1.1.</span> <span class="nav-text">Transformer模型架构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Multi-head-attention"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">Multi-head attention</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Position-wise-Feed-Forward-Networks"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">Position-wise Feed-Forward Networks</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变体"><span class="nav-number">1.2.</span> <span class="nav-text">变体</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Universal-Transformers"><span class="nav-number">1.2.1.</span> <span class="nav-text">Universal Transformers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Star-Transformer"><span class="nav-number">1.2.2.</span> <span class="nav-text">Star Transformer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他小改进"><span class="nav-number">1.2.3.</span> <span class="nav-text">其他小改进</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transformer在其他任务"><span class="nav-number">2.</span> <span class="nav-text">Transformer在其他任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Transformer-XL"><span class="nav-number">2.1.</span> <span class="nav-text">Transformer XL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Character-Level-Language-Modeling-with-Deeper-Self-Attention"><span class="nav-number">2.2.</span> <span class="nav-text">Character-Level Language Modeling with Deeper Self-Attention</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预训练模型"><span class="nav-number">3.</span> <span class="nav-text">预训练模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-Transformer-based"><span class="nav-number">3.1.</span> <span class="nav-text">Non-Transformer-based</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Word-Embedding"><span class="nav-number">3.1.1.</span> <span class="nav-text">Word Embedding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CoVe-ELMo"><span class="nav-number">3.1.2.</span> <span class="nav-text">CoVe/ELMo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ULMFit"><span class="nav-number">3.1.3.</span> <span class="nav-text">ULMFit</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transformer-based"><span class="nav-number">3.2.</span> <span class="nav-text">Transformer-based</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transformer-CNN-RNN对比及思考"><span class="nav-number">4.</span> <span class="nav-text">Transformer/CNN/RNN对比及思考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
