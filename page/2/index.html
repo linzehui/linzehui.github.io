@@ -286,6 +286,839 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/04/12/论文/Transformer相关近期盘点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/12/论文/Transformer相关近期盘点/" itemprop="url">Transformer相关近期盘点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-12T09:34:30+08:00">
+                2019-04-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-23T11:43:00+08:00">
+                2019-04-23
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>近年来自然语言处理有相当大的进展，囿于个人浅薄的能力，因此仅谈谈自己较为了解的与Transformer相关一路下来的一些工作。这篇的主要目的是完成邱博给我的任务，也顺便梳理一下思绪。</p>
+<hr>
+<p>自2017年的问世，Transformer就吸引了大批学者的注意，2018年Bert的出现，更是将Transformer推上了NLP舞台的中央。Transformer以其高效率（高并行性）以及极强的模型能力，俨然有替代传统RNN/CNN的态势。因此本次就讨论讨论Transformer及其系列，同时最后加上我个人关于RNN/CNN/Transformer的一点思考。</p>
+<p>要点：</p>
+<ol>
+<li>Transformer及其变体</li>
+<li>Transformer在其他任务</li>
+<li>预训练模型</li>
+<li>Transformer/CNN/RNN对比及思考</li>
+</ol>
+<h2 id="Transformer及其变体"><a href="#Transformer及其变体" class="headerlink" title="Transformer及其变体"></a>Transformer及其变体</h2><h3 id="Transformer简单回顾"><a href="#Transformer简单回顾" class="headerlink" title="Transformer简单回顾"></a>Transformer简单回顾</h3><p>Transformer[1]采用完全的attention机制用以序列建模，序列中的每个节点都能够直接与其他节点交互，而这是通过attention机制来实现的。</p>
+<h4 id="Transformer模型架构"><a href="#Transformer模型架构" class="headerlink" title="Transformer模型架构"></a>Transformer模型架构</h4><p>Transformer架构：<br><img src="/images/15550349717464.jpg" width="50%" height="50%"></p>
+<p>由于Transformer最早由于翻译模型中，因此架构是由一个encoder和一个decoder组成，而encoder和decoder都是由多个基本的block堆叠而成。一个block由两部分组成，也即multi-head attention层和Position-wise Feed-Forward Networks层。</p>
+<h5 id="Multi-head-attention"><a href="#Multi-head-attention" class="headerlink" title="Multi-head attention"></a>Multi-head attention</h5><p>对于序列中一个特定节点$x_i$，$x_i$作为query，其他节点（包括自己）作为key和value，通过向量点积计算出attention分数，进行归一化后（softmax）将value加权平均获得该节点$x_i$新的表示。<br>同时，对于每个节点，为了增强表示能力，可以将其映射到多个不同隐空间中，分别完成上述基本操作。</p>
+<p>如下图所示：<br><img src="/images/15550350386364.jpg" width="70%" height="50%"></p>
+<p>左图为基本操作也即scale-dot product，右图为多个scale-dot product在不同隐空间同时进行，并且将多个head的结果拼接起来作为最终结果。</p>
+<h5 id="Position-wise-Feed-Forward-Networks"><a href="#Position-wise-Feed-Forward-Networks" class="headerlink" title="Position-wise Feed-Forward Networks"></a>Position-wise Feed-Forward Networks</h5><p>为了增强模型表示能力，在Multi-head attention之后，每个节点都过两层MLP以获得新的向量表示。<br>也即:</p>
+<script type="math/tex; mode=display">\mathrm{FFN}(x)=\max \left(0, x W_{1}+b_{1}\right) W_{2}+b_{2}</script><p>相比传统的RNN/CNN而言，其最大的优势是全局的感受野（Global Receptive Field）以及高度并行性（parallelization）。</p>
+<h3 id="变体"><a href="#变体" class="headerlink" title="变体"></a>变体</h3><h4 id="Universal-Transformers"><a href="#Universal-Transformers" class="headerlink" title="Universal Transformers"></a>Universal Transformers</h4><p>提出一种新型通用的Transformer，在Transformer的基础上引入RNN的归纳偏置(inductive bias)，也即迭代学习(learning iterative)的特征。Universal Transformer[2]的主要特点有：</p>
+<ol>
+<li>在Transformer中每层的权重是独立的，而在Universal Transformer中，每层的权重是共享的，也即multi-head Attention与Feed-Forward在每层的权重是一致的。</li>
+<li>在Transformer中引入自适应计算时间(Adaptive Computation Time, ACT[3])，也即对于不同的词允许迭代不同次数。这是基于有些词相比其他词词意更丰富，更难被模型学会，因此需要更多的迭代次数。与固定层数的Transformer相比有更好的通用性。</li>
+</ol>
+<p>因此其总体结构为：<br><img src="/images/15556585300051.jpg" width="70%" height="50%"></p>
+<p>在这里有两个细节：</p>
+<ol>
+<li>加了Timestep embedding去指示当前迭代的次数</li>
+<li>将Feedforward Function用更为通用的Transition Function，可以是普通的全连接，也可以是参数更少的Depth-wise Convolution。</li>
+</ol>
+<h4 id="Star-Transformer"><a href="#Star-Transformer" class="headerlink" title="Star Transformer"></a>Star Transformer</h4><p>Star Transformer[20]是一种轻量级的Transformer，通过将全连接的结构替换为星型拓扑结构，显著减小Transformer的复杂度，从$O(n^2)$减为$O(n)$。</p>
+<p><img src="/images/15556834830687.jpg" width="50%" height="50%"></p>
+<p>其主要思想是’Gather-Distribute’，也即每个节点不直接与其他节点交互，而是与全局节点进行交互。<br><img src="/images/15556836008776.jpg" width="50%" height="50%"></p>
+<p>实验表明，Star Transformer不仅在多个数据集表现更优，且速度更快。</p>
+<p><img src="/images/15557700601922.jpg" width="90%" height="50%"></p>
+<p><img src="/images/15557701172639.jpg" width="90%" height="50%"></p>
+<h4 id="其他小改进"><a href="#其他小改进" class="headerlink" title="其他小改进"></a>其他小改进</h4><p>接下来介绍基于Transformer的几个小改进工作。</p>
+<p>在Convolutional Self-Attention Network[5]中，通过在self-attention层引入CNN的归纳偏置，在翻译任务上有一定的提升。具体做法：<br><img src="/images/15556604248879.jpg" width="80%" height="50%"><br>普通self-attention层，每个节点都能够直接与其他节点交互，而在1D-Convolutional的self-attention层中，每个节点只能与以该节点为中心的窗口内的节点交互。而在2D-Convolution中，对head这一维进行扩展，也即对于任意一个节点，不仅能和周围的节点交互，还可以与其他head的节点交互。<br>实验结果：<br><img src="/images/15556607769307.jpg" width="80%" height="50%"></p>
+<p>在Multi-Head Attention with Disagreement Regularization[6]中，显式对multi-head attention添加正则化，使得不同head尽量区分开来，以使得不同head捕获到不同的特征。论文提出了三种不同位置的正则化方法：<br>①对Value：</p>
+<script type="math/tex; mode=display">D_{\text {subpace}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H} \frac{V^{i} \cdot V^{j}}{\left\|V^{i}\right\|\left\|V^{j}\right\|}</script><p>也即对不同head之间的value，计算他们之间的cos值，作为优化目标之一。</p>
+<p>②对Attention权重：</p>
+<script type="math/tex; mode=display">D_{\text {position}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H}\left|A^{i} \odot A^{j}\right|</script><p>也即将每个head所计算得到的attention矩阵，计算他们之间的element-wise乘法，作为优化目标之一。</p>
+<p>③对输出：</p>
+<script type="math/tex; mode=display">D_{\text {output}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H} \frac{O^{i} \cdot O^{j}}{\left\|O^{i}\right\|\left\|O^{j}\right\|}</script><p>也即对每个head的输出通过cos值进行正则化。</p>
+<p>Modeling Localness for Self-Attention Networks[7]则是通过加强对局部信息的关注，在翻译任务上提升表现。其主要的动机是：①在Transformer中每个词都直接与所有词交互，对所有词进行线性加权导致对邻近词的关注不够（因为权重的分散）；②从直接上看，当词$i$与词$j$有对齐关系时，我们希望与词$j$周围的词也对齐，使得模型能够捕获整个语义单元的信息。其具体做法是在softmax函数内增加一个高斯偏置（Gaussian bias）去修正attention权重分布：</p>
+<script type="math/tex; mode=display">\operatorname{ATT}(Q, K)=\operatorname{softmax}(\text {energy}+G)</script><p>$G_{ij}$是衡量词j与词i所预测的中心词之间的联系紧密程度，计算公式为：</p>
+<script type="math/tex; mode=display">G_{i, j}=-\frac{\left(j-P_{i}\right)^{2}}{2 \sigma_{i}^{2}}</script><p>其中$\sigma_{i}=\frac{D_{i}}{2}$，$D_{i}$是窗口大小。而$P_{i}$是通过计算得出的，$P_{i}$与对应的query有关，因此可以通过$p_{i}=U_{p}^{T} \tanh \left(W_{p} Q_{i}\right)$计算得到；而窗口大小$D_{i}$可以有多种选择，①固定窗口大小；②每层特定的大小，也即将该层的key平均起来，通过$z=U_{d}^{T} \tanh \left(W_{d} \overline{\mathbf{K}}\right)$计算；③每个query都有自己的窗口大小：$z_{i}=U_{d}^{T} \tanh \left(W_{p} Q_{i}\right)$。</p>
+<p>Self-attention with relative position representations[8]则是将Transformer中的绝对位置embedding改为相对位置embedding以提升翻译效果。</p>
+<h2 id="Transformer在其他任务"><a href="#Transformer在其他任务" class="headerlink" title="Transformer在其他任务"></a>Transformer在其他任务</h2><h3 id="Transformer-XL"><a href="#Transformer-XL" class="headerlink" title="Transformer XL"></a>Transformer XL</h3><p>本文探索将Transformer用于语言模型(language model)，并在Transformer引入RNN的归纳偏置，也即RNN的历史信息，使得Transformer能够处理长句子。</p>
+<p>由于Transformer的复杂度是$O(n^2)$，虽然在GPU上能够并行操作，但占用显存较大，因此在实现时，通常是将句子切分为一个一个segment，segment之间没有联系：</p>
+<p><img src="/images/15556764280028.jpg" width="30%" height="50%"></p>
+<p>而在测试阶段，则每生成一个词时滑动一个窗口：</p>
+<p><img src="/images/15556765079362.jpg" width="60%" height="50%"></p>
+<p>这样的方法显然效率很低。</p>
+<p>而在Transformer-XL[9]中，每个segment阶段都接受前一个(甚至前L个)的历史信息：<br>因此过程如下：<br><img src="/images/15556768100801.jpg" width="60%" height="50%"></p>
+<p>而在测试阶段，由于有历史信息，则不需要滑动窗口，因此效率更高。</p>
+<p>具体而言：<br>$\begin{aligned} \widetilde{\mathbf{h}}_{\tau+1}^{n-1} &amp;=\left[\mathrm{SG}\left(\mathbf{h}_{\tau}^{n-1}\right) \circ \mathbf{h}_{\tau+1}^{n-1}\right] \\ \mathbf{q}_{\tau+1}^{n}, \mathbf{k}_{\tau+1}^{n}, \mathbf{v}_{\tau+1}^{n} &amp;=\mathbf{h}_{\tau+1}^{n-1} \mathbf{W}_{q}^{\top}, \widetilde{\mathbf{h}}_{\tau+1}^{n-1} \mathbf{W}_{k}^{\top}, \widetilde{\mathbf{h}}_{\tau+1}^{n-1} \mathbf{W}_{v}^{\top} \\ \mathbf{h}_{\tau+1}^{n} &amp;=\text { Transformer-Layer }\left(\mathbf{q}_{\tau+1}^{n}, \mathbf{k}_{\tau+1}^{n}, \mathbf{v}_{\tau+1}^{n}\right) \end{aligned}$<br>SG代表stop gradient，而历史信息与当前阶段的隐状态拼接在一起。</p>
+<p>同时本文另一大两点是引入相对位置的encoding。如果使用绝对位置encoding，那么则会出现下述情况：<br>$\mathbf{h}_{\tau+1}=f\left(\mathbf{h}_{\tau}, \mathbf{E}_{\mathbf{s}_{\tau+1}}+\mathbf{U}_{1 : L}\right) \quad \text { and } \quad \mathbf{h}_{\tau}=f\left(\mathbf{h}_{\tau-1}, \mathbf{E}_{\mathbf{s}_{\tau}}+\mathbf{U}_{1 : L}\right)$<br>也即每个segment都会有相同的位置信息。因此在这里引入$\mathbf{R} \in \mathbb{R}^{L_{\max } \times d}$，第$i$行代表相对距离$i$的encoding。</p>
+<p>具体而言：<br>在标准Transformer中，query $q_i$与key $k_j$所获得的attention分数可以拆解为：<br>$\mathbf{A}_{i, j}^{\mathrm{abs}}=q_{i}^{\top} k_{j}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{E}_{x_{j}}}_{(a)}+\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{U}_{j}}_{(b)}+\underbrace{\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{E}_{x_{j}}}_{(c)}+\underbrace{\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{U}_{j}}_{(d)}$</p>
+<p>对其进行改进，转化为相对位置encoding，有：<br>$\mathbf{A}_{i, j}^{\mathrm{rel}}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, E} \mathbf{E}_{x_{j}}}_{(a)}+\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, E} \mathbf{R}_{i-j}}_{(b)}+\underbrace{u^{\top} \mathbf{W}_{k, R} \mathbf{E}_{x_{j}}}_{(c)}+\underbrace{v^{\top} \mathbf{W}_{k, R} \mathbf{R}_{i-j}}_{(d)}$</p>
+<p>首先是将所有出现绝对位置的地方都改为相对位置，第二是将引入一个可学习的$u \in \mathbb{R}^{d}$和$v \in \mathbb{R}^{d}$去替代$\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top}$和$\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top}$。第三，是将同样的$\mathbf{W}_{k}$细化成两个不同的$\mathbf{W}_{k, E}$与$\mathbf{W}_{k, R}$。</p>
+<p>Transformer-XL在不同数据集上有相当好的效果：<br><img src="/images/15556790567795.jpg" width="80%" height="50%"></p>
+<p><img src="/images/15556790839030.jpg" width="80%" height="50%"></p>
+<h3 id="Character-Level-Language-Modeling-with-Deeper-Self-Attention"><a href="#Character-Level-Language-Modeling-with-Deeper-Self-Attention" class="headerlink" title="Character-Level Language Modeling with Deeper Self-Attention"></a>Character-Level Language Modeling with Deeper Self-Attention</h3><p>同样是在语言模型上使用Transformer，但是character级别的语言模型。其主要思路是添加多个loss来提升其表现以及加快拟合速度。</p>
+<p>对于传统的RNN character-level语言模型，一般做法是“truncated backpropagation through time” (TBTT)：也即每个batch预测最后一个字符，然后将该batch的隐状态传入下一个batch。</p>
+<p>而在Transformer中也可以采用该方法。但在该基础上，引入三种loss。<br>①Multiple Positions<br>在一个batch内，每个时间步t都预测下一个字符，而不是像传统方法，只预测batch最后一个字符：</p>
+<p><img src="/images/15556794194598.jpg" width="60%" height="50%"></p>
+<p>②Intermediate Layer Losses<br>不仅仅最后一层要进行预测，中间层也需要预测。</p>
+<p><img src="/images/15556795039170.jpg" width="60%" height="50%"><br>越底层的loss所分配的权重越小。</p>
+<p>③Multiple Targets<br>每个位置不仅仅要预测下一个字符，还需要预测后几个的字符：</p>
+<p><img src="/images/15556796677182.jpg" width="60%" height="50%"></p>
+<p>实验表明，使用多个loss能够加速拟合，且能够获得更好的结果。</p>
+<h2 id="预训练模型"><a href="#预训练模型" class="headerlink" title="预训练模型"></a>预训练模型</h2><p>自ELMo开始，预训练模型就开始受到广泛的关注，而Bert随后的问世则更是将预训练模型推上了新的阶段。因此在这里简要介绍预训练模型的历史。</p>
+<h3 id="Non-Transformer-based"><a href="#Non-Transformer-based" class="headerlink" title="Non-Transformer-based"></a>Non-Transformer-based</h3><h4 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h4><p>词向量是最早的预训练模型，Bengio, et al.[10] 最早提出神经网络语言模型，词向量作为训练语言模型的副产品，可以用于下游任务。而随后则出现了word2vec[11],GloVe[12]，是目前最为广泛使用的词向量。</p>
+<h4 id="CoVe-ELMo"><a href="#CoVe-ELMo" class="headerlink" title="CoVe/ELMo"></a>CoVe/ELMo</h4><p>word2vec与GloVe作为静态词向量，一大问题就是难以解决多义词，而多义词的表示可以通过上下文来推测。CoVe[13]将词向量从静态扩展为动态。通过上下文来获得特定词的动态表示，具体是通过翻译模型来达到该目的的。<br>而ELMo[14]继承了动态词向量的思想，不过是通过双向语言模型来达到这一目的的。通过双向LSTM的语言模型，将前向与后向隐状态拼接起来作为该词的表示。<br>仅仅是将传统静态词向量替换成ELMo，就能有很大的提升。自此开始，预训练模型开始受到广泛的关注。</p>
+<h4 id="ULMFit"><a href="#ULMFit" class="headerlink" title="ULMFit"></a>ULMFit</h4><p>在上述预训练模型中，研究者的思路主要集中在预训练词向量用于下游任务。ULMFit[16]则尝试直接对分类模型进行预训练，接着再通过微调(fine-tuning)以提高分类的效果。</p>
+<p><img src="/images/15556816887199.jpg" width="80%" height="50%"></p>
+<p>ULMFit的成功说明直接对模型进行预训练而不是只预训练词向量用于下游任务是可行的。</p>
+<h3 id="Transformer-based"><a href="#Transformer-based" class="headerlink" title="Transformer-based"></a>Transformer-based</h3><p>GPT[15]尝试通过探索构建一种通用模型并在其上训练语言模型，可以在多种任务上有更好的表现。其主要亮点在于①构建一种通用模型，能够处理不同任务，第二使用Transformer而不是LSTM作为其基本模型。<br>其基本模型：</p>
+<p><img src="/images/15556818289287.jpg" width="85%" height="50%"></p>
+<p>具体而言，主要是无监督的语言模型预训练加上有监督的微调。</p>
+<p>而Bert[17]在GPT的基础上，引入masked语言模型，通过随机mask掉部分词，强迫模型通过上下文去预测mask掉的词，加强了模型的能力。</p>
+<p><img src="/images/15556821324062.jpg" width="85%" height="50%"></p>
+<p>同时引入有监督学习，也即预测下一句（Next Sentence Prediction），随机在句对中取两个句子，使得有50%可能句子对有上下文关系，50%句对没有关系，使模型去预测句对之间的关系。具体而言则是通过在句子开头加[CLS]符号，在最高层将该符号的表示通过全连接层。</p>
+<p>Bert在11项数据集上刷新最高记录。</p>
+<p>在此之后，MT-DNN[19]、GPT2.0[18]相继问世，通过添加更多的任务或者更多的数据使得模型表现更好。相信在接下来一段时间内，相关主题的论文也会有很多。</p>
+<h2 id="Transformer-CNN-RNN对比及思考"><a href="#Transformer-CNN-RNN对比及思考" class="headerlink" title="Transformer/CNN/RNN对比及思考"></a>Transformer/CNN/RNN对比及思考</h2><p>上述的介绍，大概对Transformer一支有一个简单的梳理。Transformer作为与RNN/CNN并立的模型，确实值得重视。</p>
+<p>为什么Transformer这么好，是否能够替代RNN/CNN？这也是值得所有人思考的。</p>
+<p>正如前面介绍的那样，Transformer的一大优势是全局感受野，也即RNN/CNN每次只能‘看’到部分上下文，而Transformer则没有这个限制，每个节点都能够直接与其他节点进行交互。也可以这么说，RNN/CNN具有更强的先验(prior)。<br>但这种优势有时也会成为劣势：实践证明，Transformer在小数据集上的效果是不如RNN/CNN的。或许可以这么理解这种现象：Transformer由于不引入强的先验，因此需要大量的数据去从头学习数据所存在的某种pattern（如局部性），而引入强的先验的RNN/CNN则对小数据集更加友好一些。但当有大量训练数据时（如翻译、语言模型），Transformer则会有更高的上限，Bert/GPT也印证了这点。而这种Transformer的劣势或许也是上述几个工作（如universal transformer）的其中一个出发点，也即在Transformer内引入RNN/CNN的归纳偏置，加强对Transformer的先验知识的约束。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Vaswani, Ashish, et al. “Attention is all you need.” Advances in neural information processing systems. 2017.<br>[2]Dehghani, Mostafa, et al. “Universal transformers.” arXiv preprint arXiv:1807.03819 (2018).<br>[3]Graves, Alex. “Adaptive computation time for recurrent neural networks.” arXiv preprint arXiv:1603.08983 (2016).<br>[4]Ahmed, Karim, Nitish Shirish Keskar, and Richard Socher. “Weighted transformer network for machine translation.” arXiv preprint arXiv:1711.02132 (2017).<br>[5]Yang, Baosong, et al. “Convolutional Self-Attention Networks.” arXiv preprint arXiv:1904.03107 (2019).<br>[6]Li, Jian, et al. “Multi-head attention with disagreement regularization.” arXiv preprint arXiv:1810.10183 (2018).<br>[7]Yang, Baosong, et al. “Modeling localness for self-attention networks.” arXiv preprint arXiv:1810.10182 (2018).<br>[8]Shaw, Peter, Jakob Uszkoreit, and Ashish Vaswani. “Self-attention with relative position representations.” arXiv preprint arXiv:1803.02155 (2018).<br>[9]Dai, Zihang, et al. “Transformer-xl: Attentive language models beyond a fixed-length context.” arXiv preprint arXiv:1901.02860 (2019).<br>[10]Bengio, Yoshua, et al. “A neural probabilistic language model.” Journal of machine learning research 3.Feb (2003): 1137-1155.<br>[11]Mikolov, Tomas, et al. “Efficient estimation of word representations in vector space.” arXiv preprint arXiv:1301.3781 (2013).<br>[12]Pennington, Jeffrey, Richard Socher, and Christopher Manning. “Glove: Global vectors for word representation.” Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP). 2014.<br>[13]McCann, Bryan, et al. “Learned in translation: Contextualized word vectors.” Advances in Neural Information Processing Systems. 2017.<br>[14]Peters, Matthew E., et al. “Deep contextualized word representations.” arXiv preprint arXiv:1802.05365 (2018).<br>[15]Radford, Alec, et al. “Improving language understanding by generative pre-training.” URL <a href="https://s3-us-west-2" target="_blank" rel="noopener">https://s3-us-west-2</a>. amazonaws. com/openai-assets/research-covers/languageunsupervised/language understanding paper. pdf (2018).<br>[16]Universal Language Model Fine-tuning for Text Classification<br>[17]Devlin, Jacob, et al. “Bert: Pre-training of deep bidirectional transformers for language understanding.” arXiv preprint arXiv:1810.04805 (2018).<br>[18]Radford, Alec, et al. “Language models are unsupervised multitask learners.” OpenAI Blog 1 (2019): 8.<br>[19]Multi-Task Deep Neural Networks for Natural Language Understanding<br>[20]Guo, Qipeng, et al. “Star-Transformer.” arXiv preprint arXiv:1902.09113 (2019).</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/04/11/诗词&句/人类永恒的愚蠢/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/11/诗词&句/人类永恒的愚蠢/" itemprop="url">无题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-11T23:02:15+08:00">
+                2019-04-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-11T23:03:03+08:00">
+                2019-04-11
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>人类永恒的愚蠢，是把莫名其妙的担忧，等同于智力超群。  ——美国加尔布雷斯</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/03/31/论文/每周论文15/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/31/论文/每周论文15/" itemprop="url">每周论文15</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T22:04:30+08:00">
+                2019-03-31
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-01T11:21:55+08:00">
+                2019-04-01
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本周论文:</p>
+<ol>
+<li>Selective Kernel Networks</li>
+<li>Attentional pooling for action recognition</li>
+</ol>
+<h2 id="1️⃣-Selective-Kernel-Networks"><a href="#1️⃣-Selective-Kernel-Networks" class="headerlink" title="1️⃣[Selective Kernel Networks]"></a>1️⃣[Selective Kernel Networks]</h2><p>通过对不同kernel size的feature map之间进行信息筛选获得更为鲁棒的表示，能够对不同的感受野进行整合，实现动态调整感受野。其思路还挺有意思的。</p>
+<p>Introduction将该模型与视觉神经的理论结合在一起，也即，对于人类而言，在看不同尺寸不同远近的物体时，视觉皮层神经元<strong>感受野大小</strong>是会根据刺激来进行调节的，但一般而言在CNN中卷积核的大小是固定的。该模型正是从这一现象中获得灵感。</p>
+<p>整个模型一共分为三个步骤：split，fuse，select</p>
+<p>split生成多个不同kernel size的feature map，也即对应不同的感受野大小；fuse将不同feature map结合起来，获得一个全局的综合的向量表示；select根据不同的weight选择不同感受野的feature map。</p>
+<p><img src="/images/15540416698404.jpg" width="80%" height="50%"></p>
+<p>以上图为例。</p>
+<h3 id="SK-Net"><a href="#SK-Net" class="headerlink" title="SK-Net"></a>SK-Net</h3><h4 id="第一步split"><a href="#第一步split" class="headerlink" title="第一步split"></a>第一步split</h4><p>给定输入$\mathbf{X} \in \mathbb{R}^{H^{\prime} \times W^{\prime} \times C^{\prime}}$，通过不同的kernel size的CNN的卷积获得不同的feature map，上图是$3\times 3$与$5\times 5$的卷积核。卷积可以是传统的convolution卷积，也可以是空洞卷积（dilated convolution），或者深度卷积（depthwise convolution）。则有：<br>$\widetilde{\mathcal{F}} : \mathbf{X} \rightarrow \widetilde{\mathbf{U}} \in \mathbb{R}^{H \times W \times C}$ 与 $\widehat{\mathcal{F}} : \mathbf{X} \rightarrow \widehat{\mathbf{U}} \in \mathbb{R}^{H \times W \times C}$，其中$\widetilde{\mathcal{F}},\widehat{\mathcal{F}}$是卷积变换。</p>
+<h4 id="第二步fuse"><a href="#第二步fuse" class="headerlink" title="第二步fuse"></a>第二步fuse</h4><p>直接将不同的feature map结合起来以获得全局信息，用以之后的动态调整。这里采用简单的求和以及global average pooling以获得channel-wise的信息$\mathbf{s} \in \mathbb{R}^{C}$：</p>
+<script type="math/tex; mode=display">\mathbf{U}=\widetilde{\mathbf{U}}+\widehat{\mathbf{U}} \\ s_{c}=\mathcal{F}_{g p}\left(\mathbf{U}_{c}\right)=\frac{1}{H \times W} \sum_{i=1}^{H} \sum_{j=1}^{W} \mathbf{U}_{c}(i, j)</script><p>在获得$\mathbf{s}$后再通过MLP获得$\mathbf{z}$：</p>
+<script type="math/tex; mode=display">\mathbf{z}=\mathcal{F}_{f c}(\mathbf{s})=\delta(\mathcal{B}(\mathbf{W} \mathbf{s}))</script><p>其中$\mathcal{B}$是batch normalization；$\delta$是Relu。</p>
+<h4 id="第三步select"><a href="#第三步select" class="headerlink" title="第三步select"></a>第三步select</h4><p>使用soft attention去选择不同kernel size的feature map并结合在一起。也即：</p>
+<script type="math/tex; mode=display">a_{c}=\frac{e^{\mathbf{A}_{c} \mathbf{z}}}{e^{\mathbf{A}_{c} \mathbf{z}}+e^{\mathbf{B}_{c} \mathbf{z}}}, b_{c}=\frac{e^{\mathbf{B}_{c} \mathbf{z}}}{e^{\mathbf{A}_{c} \mathbf{z}}+e^{\mathbf{B}_{c} \mathbf{z}}}</script><p>其中$\mathbf{A}_{c}$是对应$\widetilde{\mathbf{U}}$第$c$个channel的参数，$\mathbf{B}_{c}$是对应$\widehat{\mathbf{U}}$第$c$个channel的参数。$\mathbf{A}, \mathbf{B} \in \mathbb{R}^{C \times d}$，那么$a_{c},b_{c}$就对应不同feature map的weight。</p>
+<p>因此，最终的feature map $\mathbf{V}$：</p>
+<script type="math/tex; mode=display">\mathbf{V}_{c}=a_{c} \cdot \tilde{\mathbf{U}}_{c}+b_{c} \cdot \widehat{\mathbf{U}}_{c}, \quad a_{c}+b_{c}=1 \\ \mathbf{V}=\left[\mathbf{V}_{1}, \mathbf{V}_{2}, \dots, \mathbf{V}_{C}\right], \mathbf{V}_{c} \in \mathbb{R}^{H \times W}</script><h3 id="对比-amp-思考"><a href="#对比-amp-思考" class="headerlink" title="对比&amp;思考"></a>对比&amp;思考</h3><h4 id="与SE-Net"><a href="#与SE-Net" class="headerlink" title="与SE-Net"></a>与SE-Net</h4><p>SE-Net是通过不同channel之间的交互，使得channel获得全局的感受野，使用的是对channel的放缩（详见上一篇论文笔记）；而SK-Net是不同的感受野之间的同一channel在通过全局信息的指导下以soft-attention的形式加权平均，这就和论文中提到的人类视觉对不同物体进行动态调整感受野的思路一致。</p>
+<h4 id="与dynamic-convolution"><a href="#与dynamic-convolution" class="headerlink" title="与dynamic convolution"></a>与dynamic convolution</h4><p>在论文[PAY LESS ATTENTION WITH LIGHTWEIGHT AND DYNAMIC CONVOLUTIONS]中，研究人员提出动态感受野的convolution，通过利用当前词预测一个卷积窗口，增加了模型的灵活性，并在机器翻译上取得了很好的结果。</p>
+<p>虽然目的与本篇论文一致，但思路是完全不同的。一个是通过预测；另一个是在全局信息的指导下进行加权。在我的理解看来，或许本篇论文的思路更加合理一些，第一，在有了全局信息的指导下能够更好的进行加权，而通过预测，似乎有些盲目，可能需要更多的数据才能学得更好；第二，dynamic convolution论文中也提到了，如果不使用如深度可分离卷积等轻量级卷积方法，dynamic convolution不大现实（A dynamic version of standard convolutions would be impractical for current GPUs due to their large memory requirements），而SK-Net则不会有这个问题。</p>
+<h4 id="其他思考"><a href="#其他思考" class="headerlink" title="其他思考"></a>其他思考</h4><p>从另一个角度去思考，SK-Net通过人工定义好的几种不同大小的卷积，相当于在模型中引入更强的先验（inductive bias），也即假设了数据不会超过这几种大小的卷积的处理范围，这或许比不引入先验，完全靠数据去学某种特定pattern的dynamic convolution对小数据集更友好，因此可以不需要更多的数据来使得模型表现良好。类似的理解可以在CNN/RNN与Transformer的对比中看见，因为CNN/RNN引入了较强的local bias，因此对于小数据集更友好，但同时其上限或许不如Transformer高；而Transformer一开始就是全局感受野，使得需要更多数据来帮助模型学到某种特定pattern（如某种local bias），但当数据充足时，Transformer的上限更高，近期非常火的pretrained model GPT/GPT-2.0/Bert似乎也印证了这点。</p>
+<hr>
+<h2 id="2️⃣-Attentional-pooling-for-action-recognition"><a href="#2️⃣-Attentional-pooling-for-action-recognition" class="headerlink" title="2️⃣[Attentional pooling for action recognition]"></a>2️⃣[Attentional pooling for action recognition]</h2><p>提出一种基于attention的pooling策略，采用低秩近似的方法，使得模型能够在计算量不增加很多的情况下达到更好的效果。可以将该方法理解成对二阶pooling的低秩近似。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h4 id="一阶pooling"><a href="#一阶pooling" class="headerlink" title="一阶pooling"></a>一阶pooling</h4><p>记$X \in R^{n \times f}$为被pooling的层，其中n为空间位置的个数，如$16\times 16$，$f$为channel个数。标准的sum/max pooling将该矩阵缩减为$R^{f \times 1}$，然后使用全连接的权重$\mathbf{w} \in R^{f \times 1}$获得一个分类的分数。这里假设的是二分类，但可以很容易推广为多分类。</p>
+<p>上述操作形式化可以写成：</p>
+<script type="math/tex; mode=display">\operatorname{score}_{p o o l}(X)=\mathbf{1}^{T} X \mathbf{w}, \quad \text { where } \quad X \in R^{n \times f}, \mathbf{1} \in R^{n \times 1}, \mathbf{w} \in R^{f \times 1}</script><p>其中$\mathbf{1}$为全1向量，$\mathbf{x}=\mathbf{1}^{T} X \in R^{1 \times f}$就是通过sum pooling后的feature。</p>
+<h4 id="二阶pooling"><a href="#二阶pooling" class="headerlink" title="二阶pooling"></a>二阶pooling</h4><p>构建二阶feature $X^{T} X \in R^{f \times f}$，在获得二阶feature后，通常或向量化该矩阵，再送入全连接以做分类。也即我们会学习一个$f\times f$的全连接权重向量。若保持二阶feature与对应的全连接权重向量的形式为矩阵，矩阵相乘，其中的迹实际上就是这两个向量化后的矩阵所做内积获得的分数。形式化可以写成：</p>
+<script type="math/tex; mode=display">\text {score}_{order2}(X)=\operatorname{Tr}\left(X^{T} X W^{T}\right), \quad \text { where } \quad X \in R^{n \times f}, W \in R^{f \times f}</script><p>这可以用迹的定义去证明：示意图<br><img src="/images/15540862875594.jpg" width="100%" height="50%"></p>
+<h4 id="低秩二阶pooling"><a href="#低秩二阶pooling" class="headerlink" title="低秩二阶pooling"></a>低秩二阶pooling</h4><p>现尝试使用低秩去近似该二阶pooling，也即对$W$近似，将$W$写成两个向量的乘积，也即：</p>
+<script type="math/tex; mode=display">W=\mathbf{a b}^{T} \text { where } \mathbf{a}, \mathbf{b} \in R^{f \times 1}</script><p>将上式代入二阶pooling，可获得：</p>
+<script type="math/tex; mode=display">\begin{aligned} \text {score}_{\text {attention}}(X) &=\operatorname{Tr}\left(X^{T} X \mathbf{b a}^{T}\right), \quad \text { where } \quad X \in R^{n \times f}, \mathbf{a}, \mathbf{b} \in R^{f \times 1} \\ &=\operatorname{Tr}\left(\mathbf{a}^{T} X^{T} X \mathbf{b}\right) \\ &=\mathbf{a}^{T} X^{T} X \mathbf{b} \\ &=\mathbf{a}^{T}\left(X^{T}(X \mathbf{b})\right) \end{aligned}</script><p>第二行使用的是迹的定理：$\operatorname{Tr}(A B C)=\operatorname{Tr}(C A B)$<br>第三行使用的是标量的迹等于标量本身。<br>最后一行表明整个流程：给定一个feature map $X$，首先计算一个对所有空间位置的attentional map：$\mathbf{h}= {X \mathbf{b} \in R^{n \times 1}}$；然后根据该attentional map计算加权平均的feature：$\mathbf{x}=X^{T} \mathbf{h} \in R^{f \times 1}$。该feature再通过线性层获得最终的分数。</p>
+<p>实际上上式还有其他理解的角度：</p>
+<script type="math/tex; mode=display">\begin{aligned} \text {score}_{\text {attention}}(X) &=\left((X \mathbf{a})^{T} X\right) \mathbf{b} \\ &=(X \mathbf{a})^{T}(X \mathbf{b}) \end{aligned}</script><p>第一行表明attentional map也可以通过$X \mathbf{a} \in R^{n \times 1}$来计算，$\mathbf{b}$来做classifier。<br>第二行表明，该式子本质上是对称的，可以看成<strong>两个attentional heapmap的内积</strong>。</p>
+<p>下图是整个流程：<br><img src="/images/15540869385196.jpg" width="80%" height="50%"></p>
+<h4 id="Top-down-attention"><a href="#Top-down-attention" class="headerlink" title="Top-down attention"></a>Top-down attention</h4><p>现将二分类推广为多分类：</p>
+<script type="math/tex; mode=display">\text {score}_{order2}(X, k)=\operatorname{Tr}\left(X^{T} X W_{k}^{T}\right), \quad \text { where } \quad X \in R^{n \times f}, W_{k} \in R^{f \times f}</script><p>也即将$W$替换成类相关的参数，仿照上面的推导，可以推出每个类都有特定的$\boldsymbol{a}_{k}$与$\boldsymbol{b}_{k}$。</p>
+<p>但在这里通过固定其中一个参数为与类无关的参数，也即$\boldsymbol{b}_{k}=\boldsymbol{b}$。实际上就等价于一个是类相关的top-down attention；另一个是类无关的bottom-up attention。一个获得类特定的特征；另一个获得全局通用的特征。</p>
+<p>因此最终低秩attention model为：</p>
+<script type="math/tex; mode=display">\text {score}_{attention}(X, k)=\mathbf{t}_{k}^{T} \mathbf{h}, \quad \text { where } \quad \mathbf{t}_{k}=X \mathbf{a}_{k}, \mathbf{h}=X \mathbf{b}</script><h4 id="Average-pooling-Revisited"><a href="#Average-pooling-Revisited" class="headerlink" title="Average-pooling Revisited"></a>Average-pooling Revisited</h4><p>当然在给定了上述一系列的推导，我们对average-pooling重新进行形式化：</p>
+<script type="math/tex; mode=display">\text {score}_{top-down}(X, k)=\mathbf{1}^{T} X \mathbf{w}_{k}=\mathbf{1}^{T} \mathbf{t}_{k} \quad \text { where } \quad \mathbf{t}_{k}=X \mathbf{w}_{k}</script><p>将$\mathbf{w}$替换成类相关的$\mathbf{w}_{k}$，实际上就是将二分类推广为多分类。但该形式赋予了average-pooling新的理解。</p>
+<p>当然，我们还可以将rank-1推广为rank-k，实验证明对于大数据集使用大的秩会更好。</p>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><h4 id="与Self-attentive的联系"><a href="#与Self-attentive的联系" class="headerlink" title="与Self-attentive的联系"></a>与Self-attentive的联系</h4><p>论文[A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING]就提出了利用可学习的head对feature进行attention加权平均的方法，并且将一个head推广到多个head。<br>实际上在$\mathbf{h}= {X \mathbf{b} \in R^{n \times 1}}$我们就可以看出，$\mathbf{b}$在这里扮演的角色就是self-attentive的head的角色。对于秩为1的近似，就是head为1的情况，若将秩为1推广为秩为k，也即等价于在Self-attentive中多个head的情况。</p>
+<p>本文巧妙的地方在于head有两个作用，一种是top-down的head，获得的是类相关的feature；另一个是bottom-up的feature，获得的是通用的feature。并且本文通过巧妙的数学推导来获得新的解释，本来仅仅是二阶feature过一个全连接，但通过公式推导赋予了attention的解释，这点让人眼前一亮。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/03/31/诗词&句/每周诗词21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/31/诗词&句/每周诗词21/" itemprop="url">每周诗词21</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T11:00:14+08:00">
+                2019-03-31
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-31T11:02:39+08:00">
+                2019-03-31
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣醉落魄-·-席上呈元素"><a href="#1️⃣醉落魄-·-席上呈元素" class="headerlink" title="1️⃣醉落魄 · 席上呈元素"></a>1️⃣醉落魄 · 席上呈元素</h3><p>[宋] 苏轼<br>分携如昨，人生到处萍飘泊。偶然相聚还离索。多病多愁，须信从来错。<br><strong>尊前一笑休辞却，天涯同是伤沦落</strong>。故山犹负平生约。西望峨嵋，长羡归飞鹤。</p>
+<p><a href="http://lib.xcz.im/work/57c467a86be3ff0058452840" target="_blank" rel="noopener">http://lib.xcz.im/work/57c467a86be3ff0058452840</a></p>
+<hr>
+<h3 id="2️⃣戏为六绝句"><a href="#2️⃣戏为六绝句" class="headerlink" title="2️⃣戏为六绝句"></a>2️⃣戏为六绝句</h3><p>[唐] 杜甫<br>【其一】<br>庾信文章老更成，凌云健笔意纵横。<br>今人嗤点流传赋，不觉前贤畏后生。</p>
+<p>【其三】<br>纵使卢王操翰墨，劣于汉魏近风骚。<br>龙文虎脊皆君驭，历块过都见尔曹。</p>
+<p>过都历块 (guò dōu lì kuài)<br>解释：越过都市，经过山阜。意指纵横驰骋，施展才能。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/03/24/论文/每周论文14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/24/论文/每周论文14/" itemprop="url">每周论文14</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-24T09:57:30+08:00">
+                2019-03-24
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-24T10:54:54+08:00">
+                2019-03-24
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本周论文:</p>
+<ol>
+<li>Is Second-order Information Helpful for Large-scale Visual Recognition?</li>
+<li>The Treasure beneath Convolutional Layers: Cross-convolutional-layer Pooling for Image Classification</li>
+</ol>
+<h2 id="1️⃣-Is-Second-order-Information-Helpful-for-Large-scale-Visual-Recognition"><a href="#1️⃣-Is-Second-order-Information-Helpful-for-Large-scale-Visual-Recognition" class="headerlink" title="1️⃣[Is Second-order Information Helpful for Large-scale Visual Recognition?]"></a>1️⃣[Is Second-order Information Helpful for Large-scale Visual Recognition?]</h2><p>通过协方差的方法获得图像的二阶信息。<br>参考了<a href="https://zhuanlan.zhihu.com/p/46864160" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/46864160</a></p>
+<p>深度分类网络主要分为两个部分：特征提取和分类器。无论是VGG还是GoogleNet，后来的Resnet、Densenet，在连接分类器之前，一般都连接了一个Pooling层。<br>但pooling只获得了feature的一阶信息，对于细分类问题中类间差异不显著，一阶信息可能有一些不适用，因此我们可以通过一阶信息获得二阶信息，从而获取更有价值的信息。</p>
+<p>本文通过获取<strong>特征协方差</strong>的方法，以达到该目的。</p>
+<p>输入:$\mathbf{X} \in \mathbb{R}^{d \times N}$</p>
+<p>则协方差矩阵为$\mathbf{X} \mapsto \mathbf{P}, \quad \mathbf{P}=\mathbf{X} \overline{\mathbf{I}} \mathbf{X}^{T}$，其中$\overline{\mathbf{I}}=\frac{1}{N}\left(\mathbf{I}-\frac{1}{N} \mathbf{1} \mathbf{1}^{T}\right)$, $\mathbf{I}$是单位阵，$\mathbf{1}$是全1的向量。</p>
+<p>协方差矩阵是半正定矩阵，因此可写成$\mathbf{P} \mapsto(\mathbf{U}, \mathbf{\Lambda}), \quad \mathbf{P}=\mathbf{U} \mathbf{\Lambda} \mathbf{U}^{T}$，其中$\boldsymbol{\Lambda}=\operatorname{diag}\left(\lambda_{1}, \ldots, \lambda_{d}\right)$，$\mathbf{U}=\left[\mathbf{u}_{1}, \dots, \mathbf{u}_{d}\right]$，$\mathbf{U}$是对应的特征向量。</p>
+<p>最终可获得$\mathbf{Q}$矩阵：$(\mathbf{U}, \boldsymbol{\Lambda}) \mapsto \mathbf{Q}, \mathbf{Q} \triangleq \mathbf{P}^{\alpha}=\mathbf{U F}(\mathbf{\Lambda}) \mathbf{U}^{T}$，其中$\alpha$是一个正实数，$\mathbf{F}(\boldsymbol{\Lambda})=\operatorname{diag}\left(f\left(\lambda_{1}\right), \ldots, f\left(\lambda_{d}\right)\right)$，其中$f\left(\lambda_{i}\right)=\lambda_{i}^{\alpha}$，是特征值的幂，如果要做归一化，那么可以有：</p>
+<script type="math/tex; mode=display">f\left(\lambda_{i}\right)=\left\{\begin{array}{cc}{\lambda_{i}^{\alpha} / \lambda_{1}^{\alpha}} & {\text { for MPN+M }-\ell_{2}} \\ {\lambda_{i}^{\alpha} /\left(\sum_{k} \lambda_{k}^{2 \alpha}\right)^{\frac{1}{2}}} & {\text { for MPN+M-Fro }}\end{array}\right.</script><p>之所以取幂，是为了解决在协方差估计中小样本高维度的问题，以resnet为例，最后得到的feature为7X7X512，也就是49个512维的feature，这样估计出来的协方差矩阵是不靠谱的，而通过幂这个操作，可以解决这一问题。通过实验可以发现，当幂次为0.5也就是平方根操作时，效果最优。（似乎类似的有word2vec的平滑）</p>
+<p>（虽然这篇有些看不大懂，但一个启发就是，可以通过协方差的方式进行特征之间的交互）</p>
+<hr>
+<h2 id="2️⃣-The-Treasure-beneath-Convolutional-Layers-Cross-convolutional-layer-Pooling-for-Image-Classification"><a href="#2️⃣-The-Treasure-beneath-Convolutional-Layers-Cross-convolutional-layer-Pooling-for-Image-Classification" class="headerlink" title="2️⃣[The Treasure beneath Convolutional Layers: Cross-convolutional-layer Pooling for Image Classification]"></a>2️⃣[The Treasure beneath Convolutional Layers: Cross-convolutional-layer Pooling for Image Classification]</h2><p>提出使用卷积出来后的feature经过pooling作为最后的图像特征表示而不是全连接后的特征表示。</p>
+<p>Motivation：只使用最后一层fc的特征有一个缺点，就是丢失位置信息，而convolution layer包含了丰富的空间信息。在pooling完后每个local区域都能获得一个特征，并拼接起来作为最后的表示。</p>
+<p><img src="/images/15533936911589.jpg" width="60%" height="50%"></p>
+<p>prerequisite:<br>①首先有一个预训练好的模型<br>②有两层一样$H\times W$的convolution。论文以AlexNet作为例子</p>
+<p>假设卷积后的feature map是$H × W × D$，那么可以理解成，我们将图片分为$H × W$的区域，每个区域的特征用$D$维表示。我们称每个$D$维特征一个spatial unit。当使用全连接时，这部分的空间信息就丢失了，并且无法还原。</p>
+<p>本文提出，将每个区域提取出一个特征，然后拼起来组成一整张图的特征，如下图，每个长条（也即$1\times 1\times channel$）作为一个特征：</p>
+<p><img src="/images/15533939765641.jpg" width="50%" height="50%"></p>
+<p>如何判断区域？一种方法是首先检测出多个区域，每个区域对应一种object part，然后对于落入该区域的特征进行pooling，给定D种human-specified object parts，那么可以获得D个feature且拼在一起。</p>
+<script type="math/tex; mode=display">\mathbf{P}_{k}^{t}=\sum_{i=1} \mathbf{x}_{i} I_{i, k}</script><p>具体而言，$\mathbf{x}_{i}$是特征，$I_{i, k}$是二元的indicator，表明$\mathbf{x}_{i}$是否落入该区域，每个$I$实际上定义了一个池化通道。当然，这里可以进一步将indicator从二元扩展为权重。</p>
+<p>但在实现的过程中，并没有human-specified的区域。这里我们就借助下一层的卷积作为indicator。</p>
+<blockquote>
+<p>By doing so, D t+1 pooling channels are created for the local features extracted from the tth convolutional layer</p>
+</blockquote>
+<p>这也就被称为cross-convolutional-layer pooling。</p>
+<p>如何做？</p>
+<blockquote>
+<p>the filter of a convolutional layer works as a part detector and its feature map serves a similar role as the part region indicator map.</p>
+</blockquote>
+<p>具体而言，有：</p>
+<script type="math/tex; mode=display">\begin{array}{l}{\mathbf{P}^{t}=\left[\mathbf{P}_{1}^{t}, \mathbf{P}_{2}^{t}, \cdots, \mathbf{P}_{k}^{t}, \cdots, \mathbf{P}_{D_{t+1}}^{t}\right]} \\ {\text { where, } \mathbf{P}_{k}^{t}=\sum_{i=1}^{N_{t}} \mathbf{x}_{i}^{t} a_{i, k}^{t+1}}\end{array}</script><p>$\mathbf{P}^{t}$表示第t层convolution在卷积过后做cross-pooling后的特征集合，也即我们要获得的表示，该表示通过$D_{t+1}$次pooling后的结果拼接而成。$D_{t+1}$具体来说，就是第t+1层的卷积的channel维数。假设$\mathbf{a}_{i}^{t+1} \in \mathbb{R}^{D_{t+1}}$是第t+1层convolution的第i个空间单位（spatial unit）的feature vector，其中$a_{i, k}^{t+1}$是该向量的一个值，该值就作为pooling的权重。</p>
+<p>上述有些绕口且难懂，直接看例子：<br><img src="/images/15533957004853.jpg" width="80%" height="50%"><br><img src="/images/15533957336100.jpg" width="80%" height="50%"></p>
+<p>即，第t+1层convolution的channel维度为多少，则pooling后的特征个数即为多少。因为第t层与第t+1层的$H\times W$是一致的，那么可以用t+1层的每个slice去对第t层的convolution进行加权。</p>
+<p>为什么这样是合理的？<br>因为第t+1层的convolution提取了$D_{t+1}$个特征，使用的是$m\times n$的kernel size，如果$x$是被$m\times n$的某个kernel提取了，那么很自然的，$x$就是对应该kernel提取出来的feature的一个spatial unit。说白了就是第t层与第t+1层的空间对应。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/03/23/诗词&句/每周诗词20/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -785,8 +1618,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T21:44:42+08:00">
-                2019-03-12
+              <time title="更新于" itemprop="dateModified" datetime="2019-05-03T18:40:45+08:00">
+                2019-05-03
               </time>
             
           </span>
@@ -1018,753 +1851,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/03/09/诗词&句/每周诗词18/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/09/诗词&句/每周诗词18/" itemprop="url">每周诗词18</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-09T21:04:14+08:00">
-                2019-03-09
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-17T09:29:39+08:00">
-                2019-03-17
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣西江月-·-遣兴"><a href="#1️⃣西江月-·-遣兴" class="headerlink" title="1️⃣西江月 · 遣兴"></a>1️⃣西江月 · 遣兴</h3><p>[宋] 辛弃疾<br>醉里且贪欢笑，要愁那得工夫。近来始觉古人书，信著全无是处。<br>昨夜松边醉倒，问松「我醉何如」。只疑松动要来扶，以手推松曰「去」！</p>
-<p><a href="http://lib.xcz.im/work/57b935bcd342d3005ac8e63f" target="_blank" rel="noopener">http://lib.xcz.im/work/57b935bcd342d3005ac8e63f</a></p>
-<hr>
-<h3 id="2️⃣蝶恋花"><a href="#2️⃣蝶恋花" class="headerlink" title="2️⃣蝶恋花"></a>2️⃣蝶恋花</h3><p>[宋] 晏殊<br>槛菊愁烟兰泣露，罗幕轻寒，燕子双飞去。明月不谙离恨苦，斜光到晓穿朱户。<br>昨夜西风凋碧树，独上高楼，望尽天涯路。欲寄彩笺兼尺素，山长水阔知何处？</p>
-<p><a href="http://lib.xcz.im/work/57b318dd1532bc00618ffaff" target="_blank" rel="noopener">http://lib.xcz.im/work/57b318dd1532bc00618ffaff</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/01/28/碎片知识/如何使用fairseq复现Transformer NMT/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/28/碎片知识/如何使用fairseq复现Transformer NMT/" itemprop="url">如何使用fairseq复现Transformer NMT</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-28T22:05:05+08:00">
-                2019-01-28
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-17T17:54:32+08:00">
-                2019-04-17
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>基于Transformer的NMT虽然结果好，但超参非常难调，只要有一两个参数和论文不一样，就有可能得到和论文相去甚远的结果。fairseq是现有比较完善的seq2seq库，由于是大公司出品，因此也写得较为完善，不论是代码还是文档。</p>
-<p>本文讨论如何使用fairseq复现基于Transformer的翻译任务，也即复现Vaswani, et al. 的论文结果。本文尽量不讨论实现细节，只讨论如何复现出结果。</p>
-<p>fairseq项目地址：<a href="https://github.com/pytorch/fairseq" target="_blank" rel="noopener">https://github.com/pytorch/fairseq</a></p>
-<h2 id="使用教程"><a href="#使用教程" class="headerlink" title="使用教程"></a>使用教程</h2><p>在这里我们参考的是18年的文章<a href="https://arxiv.org/abs/1806.00187" target="_blank" rel="noopener">Scaling Neural Machine Translation</a>，同样是基于Transformer的NMT。同时，我们使用WMT16 EN-DE而不是Vaswani, et al.论文中的WMT14 EN-DE。二者只在一个文件（commoncrawl）上有区别，其他是一样的，由于WMT16 EN-DE有预处理好的数据，为了方便起见，我们就使用该份数据（下文也有预处理WMT14数据的方法）</p>
-<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
-<li>安装fairseq，在Readme内有</li>
-<li>阅读Readme（optional）</li>
-<li>阅读doc（optional）</li>
-</ol>
-<h3 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h3><h4 id="Step1"><a href="#Step1" class="headerlink" title="Step1"></a>Step1</h4><p>数据预处理主要是下载多个文件并合并—&gt;清理/tokenize数据—&gt;将数据分为train、valid—&gt;bpe(bype pair encoding)。fairseq提供了一整套处理流程的脚本，在examples/translation/prepare-wmt14en2de.sh</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># Adapted from https://github.com/facebookresearch/MIXER/blob/master/prepareData.sh</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'Cloning Moses github repository (for tokenization scripts)...'</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/moses-smt/mosesdecoder.git</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'Cloning Subword NMT repository (for BPE pre-processing)...'</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/rsennrich/subword-nmt.git</span><br><span class="line"></span><br><span class="line">SCRIPTS=mosesdecoder/scripts</span><br><span class="line">TOKENIZER=<span class="variable">$SCRIPTS</span>/tokenizer/tokenizer.perl</span><br><span class="line">CLEAN=<span class="variable">$SCRIPTS</span>/training/clean-corpus-n.perl</span><br><span class="line">NORM_PUNC=<span class="variable">$SCRIPTS</span>/tokenizer/normalize-punctuation.perl</span><br><span class="line">REM_NON_PRINT_CHAR=<span class="variable">$SCRIPTS</span>/tokenizer/remove-non-printing-char.perl</span><br><span class="line">BPEROOT=subword-nmt</span><br><span class="line">BPE_TOKENS=40000</span><br><span class="line"></span><br><span class="line">URLS=(</span><br><span class="line">    <span class="string">"http://statmt.org/wmt13/training-parallel-europarl-v7.tgz"</span></span><br><span class="line">    <span class="string">"http://statmt.org/wmt13/training-parallel-commoncrawl.tgz"</span></span><br><span class="line">    <span class="string">"http://data.statmt.org/wmt17/translation-task/training-parallel-nc-v12.tgz"</span></span><br><span class="line">    <span class="string">"http://data.statmt.org/wmt17/translation-task/dev.tgz"</span></span><br><span class="line">    <span class="string">"http://statmt.org/wmt14/test-full.tgz"</span></span><br><span class="line">)</span><br><span class="line">FILES=(</span><br><span class="line">    <span class="string">"training-parallel-europarl-v7.tgz"</span></span><br><span class="line">    <span class="string">"training-parallel-commoncrawl.tgz"</span></span><br><span class="line">    <span class="string">"training-parallel-nc-v12.tgz"</span></span><br><span class="line">    <span class="string">"dev.tgz"</span></span><br><span class="line">    <span class="string">"test-full.tgz"</span></span><br><span class="line">)</span><br><span class="line">CORPORA=(</span><br><span class="line">    <span class="string">"training/europarl-v7.de-en"</span></span><br><span class="line">    <span class="string">"commoncrawl.de-en"</span></span><br><span class="line">    <span class="string">"training/news-commentary-v12.de-en"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># This will make the dataset compatible to the one used in "Convolutional Sequence to Sequence Learning"</span></span><br><span class="line"><span class="comment"># https://arxiv.org/abs/1705.03122</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$1</span>"</span> == <span class="string">"--icml17"</span> ]; <span class="keyword">then</span></span><br><span class="line">    URLS[2]=<span class="string">"http://statmt.org/wmt14/training-parallel-nc-v9.tgz"</span></span><br><span class="line">    FILES[2]=<span class="string">"training-parallel-nc-v9.tgz"</span></span><br><span class="line">    CORPORA[2]=<span class="string">"training/news-commentary-v9.de-en"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="string">"<span class="variable">$SCRIPTS</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Please set SCRIPTS variable correctly to point to Moses scripts."</span></span><br><span class="line">    <span class="built_in">exit</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">src=en</span><br><span class="line">tgt=de</span><br><span class="line">lang=en-de</span><br><span class="line">prep=wmt14_en_de</span><br><span class="line">tmp=<span class="variable">$prep</span>/tmp</span><br><span class="line">orig=orig</span><br><span class="line">dev=dev/newstest2013</span><br><span class="line"></span><br><span class="line">mkdir -p <span class="variable">$orig</span> <span class="variable">$tmp</span> <span class="variable">$prep</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$orig</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ((i=0;i&lt;<span class="variable">$&#123;#URLS[@]&#125;</span>;++i)); <span class="keyword">do</span></span><br><span class="line">    file=<span class="variable">$&#123;FILES[i]&#125;</span></span><br><span class="line">    <span class="keyword">if</span> [ -f <span class="variable">$file</span> ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$file</span> already exists, skipping download"</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        url=<span class="variable">$&#123;URLS[i]&#125;</span></span><br><span class="line">        wget <span class="string">"<span class="variable">$url</span>"</span></span><br><span class="line">        <span class="keyword">if</span> [ -f <span class="variable">$file</span> ]; <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"<span class="variable">$url</span> successfully downloaded."</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"<span class="variable">$url</span> not successfully downloaded."</span></span><br><span class="line">            <span class="built_in">exit</span> -1</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="variable">$&#123;file: -4&#125;</span> == <span class="string">".tgz"</span> ]; <span class="keyword">then</span></span><br><span class="line">            tar zxvf <span class="variable">$file</span></span><br><span class="line">        <span class="keyword">elif</span> [ <span class="variable">$&#123;file: -4&#125;</span> == <span class="string">".tar"</span> ]; <span class="keyword">then</span></span><br><span class="line">            tar xvf <span class="variable">$file</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"pre-processing train data..."</span></span><br><span class="line"><span class="keyword">for</span> l <span class="keyword">in</span> <span class="variable">$src</span> <span class="variable">$tgt</span>; <span class="keyword">do</span></span><br><span class="line">    rm <span class="variable">$tmp</span>/train.tags.<span class="variable">$lang</span>.tok.<span class="variable">$l</span></span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;CORPORA[@]&#125;</span>"</span>; <span class="keyword">do</span></span><br><span class="line">        cat <span class="variable">$orig</span>/<span class="variable">$f</span>.<span class="variable">$l</span> | \</span><br><span class="line">            perl <span class="variable">$NORM_PUNC</span> <span class="variable">$l</span> | \</span><br><span class="line">            perl <span class="variable">$REM_NON_PRINT_CHAR</span> | \</span><br><span class="line">            perl <span class="variable">$TOKENIZER</span> -threads 8 -a -l <span class="variable">$l</span> &gt;&gt; <span class="variable">$tmp</span>/train.tags.<span class="variable">$lang</span>.tok.<span class="variable">$l</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"pre-processing test data..."</span></span><br><span class="line"><span class="keyword">for</span> l <span class="keyword">in</span> <span class="variable">$src</span> <span class="variable">$tgt</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">"<span class="variable">$l</span>"</span> == <span class="string">"<span class="variable">$src</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">        t=<span class="string">"src"</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        t=<span class="string">"ref"</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    grep <span class="string">'&lt;seg id'</span> <span class="variable">$orig</span>/<span class="built_in">test</span>-full/newstest2014-deen-<span class="variable">$t</span>.<span class="variable">$l</span>.sgm | \</span><br><span class="line">        sed -e <span class="string">'s/&lt;seg id="[0-9]*"&gt;\s*//g'</span> | \</span><br><span class="line">        sed -e <span class="string">'s/\s*&lt;\/seg&gt;\s*//g'</span> | \</span><br><span class="line">        sed -e <span class="string">"s/\’/\'/g"</span> | \</span><br><span class="line">    perl <span class="variable">$TOKENIZER</span> -threads 8 -a -l <span class="variable">$l</span> &gt; <span class="variable">$tmp</span>/<span class="built_in">test</span>.<span class="variable">$l</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">""</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"splitting train and valid..."</span></span><br><span class="line"><span class="keyword">for</span> l <span class="keyword">in</span> <span class="variable">$src</span> <span class="variable">$tgt</span>; <span class="keyword">do</span></span><br><span class="line">    awk <span class="string">'&#123;if (NR%100 == 0)  print $0; &#125;'</span> <span class="variable">$tmp</span>/train.tags.<span class="variable">$lang</span>.tok.<span class="variable">$l</span> &gt; <span class="variable">$tmp</span>/valid.<span class="variable">$l</span></span><br><span class="line">    awk <span class="string">'&#123;if (NR%100 != 0)  print $0; &#125;'</span> <span class="variable">$tmp</span>/train.tags.<span class="variable">$lang</span>.tok.<span class="variable">$l</span> &gt; <span class="variable">$tmp</span>/train.<span class="variable">$l</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">TRAIN=<span class="variable">$tmp</span>/train.de-en</span><br><span class="line">BPE_CODE=<span class="variable">$prep</span>/code</span><br><span class="line">rm -f <span class="variable">$TRAIN</span></span><br><span class="line"><span class="keyword">for</span> l <span class="keyword">in</span> <span class="variable">$src</span> <span class="variable">$tgt</span>; <span class="keyword">do</span></span><br><span class="line">    cat <span class="variable">$tmp</span>/train.<span class="variable">$l</span> &gt;&gt; <span class="variable">$TRAIN</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"learn_bpe.py on <span class="variable">$&#123;TRAIN&#125;</span>..."</span></span><br><span class="line">python <span class="variable">$BPEROOT</span>/learn_bpe.py -s <span class="variable">$BPE_TOKENS</span> &lt; <span class="variable">$TRAIN</span> &gt; <span class="variable">$BPE_CODE</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> L <span class="keyword">in</span> <span class="variable">$src</span> <span class="variable">$tgt</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> train.<span class="variable">$L</span> valid.<span class="variable">$L</span> <span class="built_in">test</span>.<span class="variable">$L</span>; <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"apply_bpe.py to <span class="variable">$&#123;f&#125;</span>..."</span></span><br><span class="line">        python <span class="variable">$BPEROOT</span>/apply_bpe.py -c <span class="variable">$BPE_CODE</span> &lt; <span class="variable">$tmp</span>/<span class="variable">$f</span> &gt; <span class="variable">$tmp</span>/bpe.<span class="variable">$f</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">perl <span class="variable">$CLEAN</span> -ratio 1.5 <span class="variable">$tmp</span>/bpe.train <span class="variable">$src</span> <span class="variable">$tgt</span> <span class="variable">$prep</span>/train 1 250</span><br><span class="line">perl <span class="variable">$CLEAN</span> -ratio 1.5 <span class="variable">$tmp</span>/bpe.valid <span class="variable">$src</span> <span class="variable">$tgt</span> <span class="variable">$prep</span>/valid 1 250</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> L <span class="keyword">in</span> <span class="variable">$src</span> <span class="variable">$tgt</span>; <span class="keyword">do</span></span><br><span class="line">    cp <span class="variable">$tmp</span>/bpe.test.<span class="variable">$L</span> <span class="variable">$prep</span>/<span class="built_in">test</span>.<span class="variable">$L</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-<p>如果希望使用预处理好的数据，则可以使用WMT16 EN-DE，地址为：<a href="https://drive.google.com/uc?export=download&amp;id=0B_bZck-ksdkpM25jRUN2X2UxMm8" target="_blank" rel="noopener">https://drive.google.com/uc?export=download&amp;id=0B_bZck-ksdkpM25jRUN2X2UxMm8</a><br>并解压。</p>
-<h4 id="Step2"><a href="#Step2" class="headerlink" title="Step2"></a>Step2</h4><p>接下来对数据进行二值化(binarize):</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">TEXT=wmt16_en_de_bpe32k</span><br><span class="line">mkdir <span class="variable">$TEXT</span></span><br><span class="line">tar -xzvf wmt16_en_de.tar.gz -C <span class="variable">$TEXT</span>  <span class="comment"># 解压文件</span></span><br><span class="line">python preprocess.py --<span class="built_in">source</span>-lang en --target-lang de \</span><br><span class="line">  --trainpref <span class="variable">$TEXT</span>/train.tok.clean.bpe.32000 \</span><br><span class="line">  --validpref <span class="variable">$TEXT</span>/newstest2013.tok.bpe.32000 \</span><br><span class="line">  --testpref <span class="variable">$TEXT</span>/newstest2014.tok.bpe.32000 \</span><br><span class="line">  --destdir data-bin/wmt16_en_de_bpe32k \</span><br><span class="line">  --nwordssrc 32768 --nwordstgt 32768 \</span><br><span class="line">  --joined-dictionary</span><br></pre></td></tr></table></figure>
-<p>到这里，麻烦的预处理就结束了。</p>
-<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><p>cd到fairseq目录下，执行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7  python -m torch.distributed.launch --nproc_per_node 8 train.py data-bin/wmt16_en_de_bpe32k \        --arch transformer_wmt_en_de --share-all-embeddings \          --optimizer adam --adam-betas <span class="string">'(0.9, 0.98)'</span> --clip-norm 0.0 \            --lr-scheduler inverse_sqrt --warmup-init-lr 1e-07 --warmup-updates 4000 \              --lr 0.0007 --min-lr 1e-09 \             --criterion label_smoothed_cross_entropy --label-smoothing 0.1 --weight-decay 0.0\              --max-tokens  4096   --save-dir checkpoints/en-de-base\               --no-progress-bar --<span class="built_in">log</span>-format json --<span class="built_in">log</span>-interval 50\             --save-interval-updates  1000 --keep-interval-updates 20</span><br></pre></td></tr></table></figure>
-<p>注意到该设置与原论文不大一致。但已证实该设置可以复现论文结果。</p>
-<p>如果没有这么多卡，那么可以设置<code>update freq</code>以模拟8卡行为。如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CUDA_VISIBLE_DEVICES=0,1,2,3  python -m torch.distributed.launch --nproc_per_node 4 \</span><br><span class="line">train.py data-bin/wmt16_en_de_bpe32k    \</span><br><span class="line"> --arch transformer_wmt_en_de --share-all-embeddings \</span><br><span class="line">--optimizer adam --adam-betas <span class="string">'(0.9, 0.98)'</span> \</span><br><span class="line">--clip-norm 0.0   --lr-scheduler inverse_sqrt --warmup-init-lr 1e-07 --warmup-updates 4000  \</span><br><span class="line">--lr 0.0007 --min-lr 1e-09 --criterion label_smoothed_cross_entropy \</span><br><span class="line">--label-smoothing 0.1 --weight-decay 0.0 --max-tokens  4096   \</span><br><span class="line">--save-dir checkpoints/en-de-16-base   \ </span><br><span class="line">--no-progress-bar --<span class="built_in">log</span>-format json --<span class="built_in">log</span>-interval 50 --save-interval-updates  1000 \</span><br><span class="line">--keep-interval-updates 20  --update-freq 2 |tee exp2.log</span><br></pre></td></tr></table></figure>
-<p>4张卡则设<code>update freq=2</code>，2张卡则设<code>update freq=4</code>，以此类推。</p>
-<p>大概在100个epoch内能够收敛(实际上应该在150-200个epoch收敛，100epoch的BLEU是27.3，150-200epoch的结果是27.67)，也即在475000个step。8张1080Ti在大概两天能够训练完成，4张1080Ti大概4天训练完成。</p>
-<p>开始训练…<br><img src="/images/15491934129135.jpg" width="80%" height="50%"></p>
-<p>最后则会获得checkpoint：<br><img src="/images/15491934935157.jpg" width="80%" height="50%"></p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>测试分为几个阶段：首先将几个checkpoint进行平均，实验表明，进行平均能够有一定的提升；其次，使用平均后的模型对test集的句子进行翻译；最终将生成的句子和正确的句子计算bleu值。</p>
-<h4 id="average-checkpoint"><a href="#average-checkpoint" class="headerlink" title="average checkpoint"></a>average checkpoint</h4><p>在测试阶段，论文在Transformer-base中对最后五个checkpoint进行平均，也即对权值进行平均：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python scripts/average_checkpoints.py \</span><br><span class="line">--inputs checkpoints/en-de-base/ \</span><br><span class="line">--num-epoch-checkpoints  5 --output averaged_model.pt</span><br></pre></td></tr></table></figure>
-<p>最终获得averaged_model.pt，我们将用该文件进行测试。</p>
-<h4 id="generate"><a href="#generate" class="headerlink" title="generate"></a>generate</h4><p>我们采用和论文一致的超参：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=0 python generate.py \</span><br><span class="line">data-bin/wmt16_en_de_bpe32k/ --path /some_checkpoint \</span><br><span class="line">--remove-bpe --beam 4 --batch-size 64 --lenpen 0.6 \</span><br><span class="line">--max-len<span class="_">-a</span> 1 --max-len-b 50|tee generate.out</span><br></pre></td></tr></table></figure>
-<p>其中lenpen是生成句子的长度惩罚系数；<code>max-len-a</code>和<code>max-len-b</code>指的是每个句子的最长长度限制，也即：假设源句子长度为x，则目标句子的长度应小于ax+b 。</p>
-<p>最终我们翻译好的句子以及相对应的详细信息都在generate.out里面。我们需要提取源语言句子和目标语言句子，以方便后面的计算。因此：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grep ^T generate.out | cut -f2- | perl -ple <span class="string">'s&#123;(\S)-(\S)&#125;&#123;$1 ##AT##-##AT## $2&#125;g'</span> &gt; generate.ref</span><br><span class="line"></span><br><span class="line">grep ^H generate.out |cut -f3- | perl -ple <span class="string">'s&#123;(\S)-(\S)&#125;&#123;$1 ##AT##-##AT## $2&#125;g'</span> &gt; generate.sys</span><br></pre></td></tr></table></figure>
-<p>分别运行这两个bash命令，我们则获得了generate.ref和generate.sys，分别是目标和源语言的句子。</p>
-<p>注意到这里有一个非常重要的小trick，也即<strong>split compound</strong>。因为一些历史原因（我也不知道为啥，tensor2tensor里面的脚本有提到），该trick已经在上面的脚本命令体现出来了。实践证明，使用该trick能够提高bleu值 0.5个点以上。</p>
-<h4 id="score"><a href="#score" class="headerlink" title="score"></a>score</h4><p>我们此时就可以计算bleu值了，fairseq提供了该脚本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python score.py --sys generate.sys --ref generate.ref</span><br></pre></td></tr></table></figure>
-<p>大功告成！我们终于复现出结果了。<br>作为参考：根据我的实验，只使用checkpoint中最好的一个checkpoint，在经过了上述的流程后，可以得到27.30的结果。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>根据我的需求，我还需要详细记录中间结果，并打印在tensorboard上方便可视化，如：<br><img src="/images/15491946401169.jpg" width="90%" height="50%"></p>
-<p>fairseq并没有提供这种功能，因此需要自己修改部分源代码。<br>只需要修改train.py源文件即可。</p>
-<p>①在开头加summary writer<br><img src="/images/15492019614168.jpg" width="70%" height="50%"></p>
-<p>注意到每次实验都需要修改实验的名字。</p>
-<p>②修改train函数<br>在训练过程中，添加记录的代码：<br><img src="/images/15492020396304.jpg" width="70%" height="50%"></p>
-<p>在epoch结束，添加记录的代码：<br><img src="/images/15492021296611.jpg" width="70%" height="50%"></p>
-<p>对validate的使用进行修改（添加了is_epoch）：<br><img src="/images/15492022604000.jpg" width="70%" height="50%"></p>
-<p>train函数全部代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(args, trainer, task, epoch_itr)</span>:</span></span><br><span class="line">    <span class="string">"""Train the model for one epoch."""</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Update parameters every N batches</span></span><br><span class="line">    <span class="keyword">if</span> epoch_itr.epoch &lt;= len(args.update_freq):</span><br><span class="line">        update_freq = args.update_freq[epoch_itr.epoch - <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        update_freq = args.update_freq[<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Initialize data iterator</span></span><br><span class="line">    itr = epoch_itr.next_epoch_itr(fix_batches_to_gpus=args.fix_batches_to_gpus)</span><br><span class="line">    itr = iterators.GroupedIterator(itr, update_freq)</span><br><span class="line">    progress = progress_bar.build_progress_bar(</span><br><span class="line">        args, itr, epoch_itr.epoch, no_progress_bar=<span class="string">'simple'</span>,</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    extra_meters = collections.defaultdict(<span class="keyword">lambda</span>: AverageMeter())</span><br><span class="line">    first_valid = args.valid_subset.split(<span class="string">','</span>)[<span class="number">0</span>]</span><br><span class="line">    max_update = args.max_update <span class="keyword">or</span> math.inf</span><br><span class="line">    <span class="keyword">for</span> i, samples <span class="keyword">in</span> enumerate(progress, start=epoch_itr.iterations_in_epoch):</span><br><span class="line">        log_output = trainer.train_step(samples)</span><br><span class="line">        <span class="keyword">if</span> log_output <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># log mid-epoch stats</span></span><br><span class="line">        stats = get_training_stats(trainer)</span><br><span class="line">        num_updates = stats[<span class="string">'num_updates'</span>]</span><br><span class="line">        <span class="comment"># print(type(num_updates))</span></span><br><span class="line">        <span class="comment"># print(type(stats['loss']))</span></span><br><span class="line">        summary_writer.add_scalar(<span class="string">'Training/training_loss_update'</span>, float(stats[<span class="string">'loss'</span>]), num_updates)</span><br><span class="line">        summary_writer.add_scalar(<span class="string">'Training/training_nll_loss_update'</span>, float(stats[<span class="string">'nll_loss'</span>]), num_updates)</span><br><span class="line">        summary_writer.add_scalar(<span class="string">'Training/training_ppl_update'</span>, float(stats[<span class="string">'ppl'</span>]), num_updates)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># ------record training metrics --- #</span></span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> log_output.items():</span><br><span class="line">            <span class="keyword">if</span> k <span class="keyword">in</span> [<span class="string">'loss'</span>, <span class="string">'nll_loss'</span>, <span class="string">'ntokens'</span>, <span class="string">'nsentences'</span>, <span class="string">'sample_size'</span>]:</span><br><span class="line">                <span class="keyword">continue</span>  <span class="comment"># these are already logged above</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">'loss'</span> <span class="keyword">in</span> k:</span><br><span class="line">                extra_meters[k].update(v, log_output[<span class="string">'sample_size'</span>])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                extra_meters[k].update(v)</span><br><span class="line">            stats[k] = extra_meters[k].avg</span><br><span class="line">        progress.log(stats)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># ignore the first mini-batch in words-per-second calculation</span></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            trainer.get_meter(<span class="string">'wps'</span>).reset()</span><br><span class="line"></span><br><span class="line">        num_updates = trainer.get_num_updates()</span><br><span class="line">        <span class="keyword">if</span> args.save_interval_updates &gt; <span class="number">0</span> <span class="keyword">and</span> num_updates % args.save_interval_updates == <span class="number">0</span> <span class="keyword">and</span> num_updates &gt; <span class="number">0</span>:</span><br><span class="line">            valid_losses = validate(args, trainer, task, epoch_itr, [first_valid], is_epoch=<span class="keyword">False</span>)</span><br><span class="line">            save_checkpoint(args, trainer, epoch_itr, valid_losses[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> num_updates &gt;= max_update:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># log end-of-epoch stats</span></span><br><span class="line">    stats = get_training_stats(trainer)</span><br><span class="line">    <span class="comment"># ------record training metrics --- #</span></span><br><span class="line">    summary_writer.add_scalar(<span class="string">'Training/training_loss_epoch'</span>, float(stats[<span class="string">'loss'</span>]), epoch_itr.epoch)</span><br><span class="line">    summary_writer.add_scalar(<span class="string">'Training/training_nll_loss_epoch'</span>, float(stats[<span class="string">'nll_loss'</span>]), epoch_itr.epoch)</span><br><span class="line">    summary_writer.add_scalar(<span class="string">'Training/training_ppl_epoch'</span>, float(stats[<span class="string">'ppl'</span>]), epoch_itr.epoch)</span><br><span class="line">    <span class="keyword">for</span> k, meter <span class="keyword">in</span> extra_meters.items():</span><br><span class="line">        stats[k] = meter.avg</span><br><span class="line">    progress.print(stats)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># reset training meters</span></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> [</span><br><span class="line">        <span class="string">'train_loss'</span>, <span class="string">'train_nll_loss'</span>, <span class="string">'wps'</span>, <span class="string">'ups'</span>, <span class="string">'wpb'</span>, <span class="string">'bsz'</span>, <span class="string">'gnorm'</span>, <span class="string">'clip'</span>,</span><br><span class="line">    ]:</span><br><span class="line">        meter = trainer.get_meter(k)</span><br><span class="line">        <span class="keyword">if</span> meter <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            meter.reset()</span><br></pre></td></tr></table></figure>
-<p>③修改validate函数<br>添加了一个参数<code>is_epoch</code>：<br><img src="/images/15492023879130.jpg" width="50%" height="50%"></p>
-<p>添加记录的代码：<br><img src="/images/15492024686078.jpg" width="90%" height="50%"></p>
-<p>validate全部代码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">def validate(args, trainer, task, epoch_itr, subsets, is_epoch=True):</span><br><span class="line">    <span class="string">""</span><span class="string">"Evaluate the model on the validation set(s) and return the losses."</span><span class="string">""</span></span><br><span class="line">    valid_losses = []</span><br><span class="line">    <span class="keyword">for</span> subset <span class="keyword">in</span> subsets:</span><br><span class="line">        <span class="comment"># Initialize data iterator</span></span><br><span class="line">        itr = task.get_batch_iterator(</span><br><span class="line">            dataset=task.dataset(subset),</span><br><span class="line">            max_tokens=args.max_tokens,</span><br><span class="line">            max_sentences=args.max_sentences_valid,</span><br><span class="line">            max_positions=utils.resolve_max_positions(</span><br><span class="line">                task.max_positions(),</span><br><span class="line">                trainer.get_model().max_positions(),</span><br><span class="line">            ),</span><br><span class="line">            ignore_invalid_inputs=args.skip_invalid_size_inputs_valid_test,</span><br><span class="line">            required_batch_size_multiple=8,</span><br><span class="line">            seed=args.seed,</span><br><span class="line">            num_shards=args.distributed_world_size,</span><br><span class="line">            shard_id=args.distributed_rank,</span><br><span class="line">            num_workers=args.num_workers,</span><br><span class="line">        ).next_epoch_itr(shuffle=False)</span><br><span class="line">        progress = progress_bar.build_progress_bar(</span><br><span class="line">            args, itr, epoch_itr.epoch,</span><br><span class="line">            prefix=<span class="string">'valid on \'</span>&#123;&#125;\<span class="string">' subset'</span>.format(subset),</span><br><span class="line">            no_progress_bar=<span class="string">'simple'</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># reset validation loss meters</span></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> [<span class="string">'valid_loss'</span>, <span class="string">'valid_nll_loss'</span>]:</span><br><span class="line">            meter = trainer.get_meter(k)</span><br><span class="line">            <span class="keyword">if</span> meter is not None:</span><br><span class="line">                meter.reset()</span><br><span class="line">        extra_meters = collections.defaultdict(lambda: AverageMeter())</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> sample <span class="keyword">in</span> progress:</span><br><span class="line">            log_output = trainer.valid_step(sample)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> k, v <span class="keyword">in</span> log_output.items():</span><br><span class="line">                <span class="keyword">if</span> k <span class="keyword">in</span> [<span class="string">'loss'</span>, <span class="string">'nll_loss'</span>, <span class="string">'ntokens'</span>, <span class="string">'nsentences'</span>, <span class="string">'sample_size'</span>]:</span><br><span class="line">                    <span class="built_in">continue</span></span><br><span class="line">                extra_meters[k].update(v)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># log validation stats</span></span><br><span class="line">        stats = get_valid_stats(trainer)</span><br><span class="line">        <span class="comment"># ------record validate metrics --- #</span></span><br><span class="line">        <span class="keyword">if</span> is_epoch:  <span class="comment"># every epoch</span></span><br><span class="line">            summary_writer.add_scalar(<span class="string">'Validation/valid_loss_epoch'</span>, <span class="built_in">float</span>(stats[<span class="string">'valid_loss'</span>]), epoch_itr.epoch)</span><br><span class="line">            summary_writer.add_scalar(<span class="string">'Validation/valid_nll_loss_epoch'</span>, <span class="built_in">float</span>(stats[<span class="string">'valid_nll_loss'</span>]), epoch_itr.epoch)</span><br><span class="line">            summary_writer.add_scalar(<span class="string">'Validation/valid_ppl_epoch'</span>, <span class="built_in">float</span>(stats[<span class="string">'valid_ppl'</span>]), epoch_itr.epoch)</span><br><span class="line">        <span class="keyword">else</span>:  <span class="comment"># every n update</span></span><br><span class="line">            num_updates = stats[<span class="string">'num_updates'</span>]</span><br><span class="line">            summary_writer.add_scalar(<span class="string">'Validation/valid_loss_update'</span>, <span class="built_in">float</span>(stats[<span class="string">'valid_loss'</span>]),</span><br><span class="line">                                      num_updates / args.save_interval_updates)</span><br><span class="line">            summary_writer.add_scalar(<span class="string">'Validation/valid_nll_loss_update'</span>, <span class="built_in">float</span>(stats[<span class="string">'valid_nll_loss'</span>]),</span><br><span class="line">                                      num_updates / args.save_interval_updates)</span><br><span class="line">            summary_writer.add_scalar(<span class="string">'Validation/valid_ppl_update'</span>, <span class="built_in">float</span>(stats[<span class="string">'valid_ppl'</span>]),</span><br><span class="line">                                      num_updates / args.save_interval_updates)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> k, meter <span class="keyword">in</span> extra_meters.items():</span><br><span class="line">            stats[k] = meter.avg</span><br><span class="line">        progress.print(stats)</span><br><span class="line"></span><br><span class="line">        valid_losses.append(stats[<span class="string">'valid_loss'</span>])</span><br><span class="line">    <span class="built_in">return</span> valid_losses</span><br></pre></td></tr></table></figure>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://github.com/pytorch/fairseq/tree/master/examples/translation#replicating-results-from-scaling-neural-machine-translation" target="_blank" rel="noopener">Replicating results from “Scaling Neural Machine Translation”
-</a></p>
-<p><a href="https://github.com/pytorch/fairseq/issues/346" target="_blank" rel="noopener">How to reproduce the result of WMT14 en-de on transformer BASE model?</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/01/06/代码相关/代码记录15/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/06/代码相关/代码记录15/" itemprop="url">代码片段记录15</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T10:18:30+08:00">
-                2019-01-06
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-06T10:24:16+08:00">
-                2019-01-06
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-flatten-multi-dimentional-list"><a href="#1️⃣-flatten-multi-dimentional-list" class="headerlink" title="1️⃣[flatten multi-dimentional list]"></a>1️⃣[flatten multi-dimentional list]</h3><p>对多层嵌套的list进行展平。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flatten</span><span class="params">(nestedList)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">aux</span><span class="params">(listOrItem)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(listOrItem, list):</span><br><span class="line">            <span class="keyword">for</span> elem <span class="keyword">in</span> listOrItem:</span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> aux(elem):</span><br><span class="line">                    <span class="keyword">yield</span> item</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">yield</span> listOrItem</span><br><span class="line">    <span class="keyword">return</span> list(aux(nestedList))</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="2️⃣-sorted-index"><a href="#2️⃣-sorted-index" class="headerlink" title="2️⃣[sorted index]"></a>2️⃣[sorted index]</h3><p>使用内置方法获得排好序的index</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sorted_index=[i[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> sorted(enumerate(sent_length),</span><br><span class="line">                                    key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>],</span><br><span class="line">                                    reverse=self.reverse)]</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/01/06/论文/每周论文11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/06/论文/每周论文11/" itemprop="url">每周论文11</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T09:58:30+08:00">
-                2019-01-06
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-07T10:11:24+08:00">
-                2019-01-07
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1️⃣-Multi-Head-Attention-with-Disagreement-Regularization"><a href="#1️⃣-Multi-Head-Attention-with-Disagreement-Regularization" class="headerlink" title="1️⃣[Multi-Head Attention with Disagreement Regularization]"></a>1️⃣[Multi-Head Attention with Disagreement Regularization]</h2><p>EMNLP的短文。</p>
-<p>鼓励transformer中head与head之间的差异。</p>
-<p>加了三种正则化方法：<br>①on subspace<br><img src="/images/15467399912055.jpg" width="40%" height="50%"></p>
-<p>②on attention position<br><img src="/images/15467400218650.jpg" width="40%" height="50%"></p>
-<p>③on output<br><img src="/images/15467400417247.jpg" width="40%" height="50%"></p>
-<p>没什么亮点。</p>
-<hr>
-<h2 id="2️⃣-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overﬁtting"><a href="#2️⃣-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overﬁtting" class="headerlink" title="2️⃣[Dropout: A Simple Way to Prevent Neural Networks from Overﬁtting]"></a>2️⃣[Dropout: A Simple Way to Prevent Neural Networks from Overﬁtting]</h2><p>经典论文。<br>dropout方法很简单，但如何想到，其背后的intuition，以及一些现象很有启发意义。<br>仅罗列一些intuition/motivation以及现象：</p>
-<ol>
-<li>网络复杂关系学到很多噪声，导致overfitting</li>
-<li>最好的regularization方法是对所有的parameter setting的结果进行average。这就是贝叶斯方法， dropout是对该方法进行近似，论文也提到了model combination</li>
-<li>dropout能够减少unit之间复杂的co-adaptation，能够更鲁棒，也就是说，不需要依赖其他unit去纠正自己的错误。each hidden unit in a neural network trained with dropout must learn to work with a randomly chosen sample of other units. This should make each hidden unit more robust and drive it towards creating useful features on its own without relying on other hidden units to correct its mistakes</li>
-<li>dropout的特性：sparsity。标准的网络在训练过程中会固化其他unit的错误，导致复杂的co-adaptation，但这种复杂的adaptation会导致泛化性的降低，因为对于未见到的数据这种复杂的adaptation是没用的。因此dropout的网络中每个unit都要学会自己纠正自己的错误，因此每个unit能够独立学到数据的一部分特性。dropout会导致稀疏化，每次都只会有一小部分的activation高。使用dropout配合高的学习率比较好，因为dropout可能会导致gradient之间互相cancel，同时也可以使用高的momentum。</li>
-</ol>
-<p><img src="/images/15467404963033.jpg" width="80%" height="50%"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/12/31/碎片知识/关于Pytorch中index_copy_及其思考/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/31/碎片知识/关于Pytorch中index_copy_及其思考/" itemprop="url">关于Pytorch中index_copy_及其思考</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T17:39:14+08:00">
-                2018-12-31
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-31T17:53:21+08:00">
-                2018-12-31
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前几日因为in-place操作的问题，debug了好几天，最终才发现问题。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">output,_=pad_packed_sequence(output,batch_first=<span class="keyword">True</span>)</span><br><span class="line">output=output.index_copy(<span class="number">0</span>,torch.tensor(sorted_index),output)</span><br></pre></td></tr></table></figure>
-<p>因为Pytorch中pack_sequence需要将batch按长度排列，我在过完GRU后需要将其顺序还原，在这边sorted_index即是记录原来index映射。</p>
-<p>然而我在写的时候，参考的是官方的example：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.zeros(<span class="number">5</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t = torch.tensor([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]], dtype=torch.float)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>index = torch.tensor([<span class="number">0</span>, <span class="number">4</span>, <span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.index_copy_(<span class="number">0</span>, index, t)</span><br><span class="line">tensor([[ <span class="number">1.</span>,  <span class="number">2.</span>,  <span class="number">3.</span>],</span><br><span class="line">        [ <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>],</span><br><span class="line">        [ <span class="number">7.</span>,  <span class="number">8.</span>,  <span class="number">9.</span>],</span><br><span class="line">        [ <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>],</span><br><span class="line">        [ <span class="number">4.</span>,  <span class="number">5.</span>,  <span class="number">6.</span>]])</span><br></pre></td></tr></table></figure>
-<p>因此我也不假思索地写：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">output,_=pad_packed_sequence(output,batch_first=<span class="keyword">True</span>)</span><br><span class="line">output=output.index_copy_(<span class="number">0</span>,torch.tensor(sorted_index),output)</span><br></pre></td></tr></table></figure></p>
-<p>就因为多了一个_，导致逻辑和我想象中的不一样。</p>
-<p>一个简单的例子展示为什么这么是错的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x=torch.Tensor([<span class="number">21</span>,<span class="number">42</span>,<span class="number">45</span>,<span class="number">59</span>])</span><br><span class="line"></span><br><span class="line">print(x)  <span class="comment"># tensor([21., 42., 45., 59.])</span></span><br><span class="line"></span><br><span class="line">index=torch.tensor([<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">x=x.index_copy_(<span class="number">0</span>,index,x)</span><br><span class="line"></span><br><span class="line">print(x)  <span class="comment"># tensor([21., 21., 21., 59.])</span></span><br></pre></td></tr></table></figure>
-<p>由于是in-place操作，第一步，将index=0的数值（也即21）复制到index=1的地方，此时变成[21,21,45,59]；接着将index=1的数值复制到index=2的位置上，注意到之前已经是in-place操作，因此此时取的不是想象中的42，而是已经被替换的21。后面的也是如此。</p>
-<p>正确的做法只需要去掉in-place即可。</p>
-<hr>
-<p>已经好几次遇到in-place的问题了，在每次做in-place操作时，都要警惕。应尽可能避免in-place操作。实际上Pytorch官方也不建议使用in-place操作。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1819,7 +1905,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">132</span>
+                  <span class="site-state-item-count">137</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1832,7 +1918,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">155</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

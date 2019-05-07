@@ -286,6 +286,748 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 14: Unsupervised Learning: Generation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 14: Unsupervised Learning: Generation/" itemprop="url">Lecture 14:Unsupervised Learning:Generation</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T11:40:24+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:30+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Component-by-component"><a href="#Component-by-component" class="headerlink" title="Component-by-component"></a>Component-by-component</h3><p>对于图像来说，每次生成一个pixel：PixelRNN</p>
+<h3 id="VAE"><a href="#VAE" class="headerlink" title="VAE"></a>VAE</h3><p>架构：<br><img src="/images/2018-10-07-15388837191574.jpg" width="50%" height="50%"></p>
+<p>其中e是噪声，σ是方差，目标是最小化reconstruction error，以及一个限制。该限制的目的即防止σ=0，m是正则化项。</p>
+<p><del>中间的推导以及为什么是这样的架构我还不是很懂，之后再更新。</del><br>实际上可以这么理解，有几个要点：</p>
+<ul>
+<li>首先我们是基于这么一个假设：中间的code应当是服从正态分布的，而encoder的作用即在于拟合该正态分布的均值与方差的对数（因为方差应当恒为正，但神经网络的输出可能有正有负）</li>
+<li>如果生成出来的code不符合正态分布，会有一个惩罚项，也就是上图的constraint（可以通过KL散度推导获得）</li>
+<li>按理说，应当是在生成了均值和方差后，定义好该正态分布，然后再从中采样，但是这样没办法回传更新梯度，因此这里使用重参数技巧(Reparameterization Trick)，也即从$N(\mu,\sigma^2)$中采样$Z$，相当于从$N(0,I)$中采样$\varepsilon$，然后让$Z=\mu + \varepsilon \times \mu$</li>
+</ul>
+<p><img src="/images/2018-10-08-15389638077301.jpg" width="70%" height="50%"></p>
+<p><strong>Reference</strong>:<br><a href="https://www.sohu.com/a/226209674_500659" target="_blank" rel="noopener">https://www.sohu.com/a/226209674_500659</a></p>
+<p>VAE的主要问题在于，网络只试图去记住见过的图像，但没法真正去生成没见过的图像。</p>
+<h3 id="Generative-Adversarial-Network-GAN"><a href="#Generative-Adversarial-Network-GAN" class="headerlink" title="Generative Adversarial Network (GAN)"></a>Generative Adversarial Network (GAN)</h3><p>GAN包含一个discriminator和一个generator，generator试图生成能够骗过discriminator的样本，而generator试图能够将generator生成的样本和真实的样本区分。</p>
+<p>之后会有详细的介绍。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 13: Unsupervised Learning: Auto-encoder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 13: Unsupervised Learning: Auto-encoder/" itemprop="url">Lecture 13:Unsupervised Learning:Auto-encoder</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T11:33:24+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:31+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Auto-encoder"><a href="#Auto-encoder" class="headerlink" title="Auto-encoder"></a>Auto-encoder</h3><p>由一个encoder和一个decoder组成，encoder负责将输入转成一个向量表示（维度通常小于输入），decoder负责将这段向量表示恢复成原来的输入。那么中间的code就可以作为输入的一个低维表示：<br><img src="/images/2018-10-07-15388832782913.jpg" width="50%" height="50%"></p>
+<h3 id="Auto-encoder-for-CNN"><a href="#Auto-encoder-for-CNN" class="headerlink" title="Auto-encoder for CNN"></a>Auto-encoder for CNN</h3><p><img src="/images/2018-10-07-15388833149617.jpg" width="50%" height="50%"></p>
+<h4 id="Unpooling"><a href="#Unpooling" class="headerlink" title="Unpooling"></a>Unpooling</h4><p>有两种方法，一种在pooling的时候记录最大值的位置，在unpooling时在相对位置填充最大值，其他位置填充0；另一种不记录最大值位置，直接在pooling区域全部填充最大值。<br><img src="/images/2018-10-07-15388833530548.jpg" width="50%" height="50%"></p>
+<h4 id="Deconvolution"><a href="#Deconvolution" class="headerlink" title="Deconvolution"></a>Deconvolution</h4><p>其实本质就是convolution。</p>
+<p>这是convolution:</p>
+<p><img src="/images/2018-10-07-15388834044149.jpg" width="10%" height="50%"></p>
+<p>我们期待的convolution：<br><img src="/images/2018-10-07-15388834434741.jpg" width="15%" height="50%"></p>
+<p>实际上就等价在两边做padding，然后直接convolution：<br><img src="/images/2018-10-07-15388834751493.jpg" width="15%" height="50%"></p>
+<h3 id="Auto-encoder的用处"><a href="#Auto-encoder的用处" class="headerlink" title="Auto-encoder的用处"></a>Auto-encoder的用处</h3><p>可以预训练每一层的DNN：<br><img src="/images/2018-10-07-15388835335550.jpg" width="50%" height="50%"></p>
+<p>同理其它层也是一样，每次fix住其他层然后做Auto-encoder。那么在bp的时候只需要fine-tune就行。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 12: Unsupervised Learning: Neighbor Embedding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 12: Unsupervised Learning: Neighbor Embedding/" itemprop="url">Lecture 12:Unsupervised Learning:Neighbor Embedding</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T11:17:24+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:34+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Locally-Linear-Embedding-LLE"><a href="#Locally-Linear-Embedding-LLE" class="headerlink" title="Locally Linear Embedding (LLE)"></a>Locally Linear Embedding (LLE)</h3><p>一种降维方法<br>思想：假设每个点可以由其周围的点来表示<br><img src="/images/2018-10-07-15388822769215.jpg" width="25%" height="50%"></p>
+<p>我们需要找到这样的$w_{ij}$，使得：</p>
+<script type="math/tex; mode=display">∑_i‖x^i−∑_j w_{ij} x^j ‖_2</script><p>这样在降维的时候，我们仍然保持x之间的这样的关系:<br><img src="/images/2018-10-07-15388823792351.jpg" width="50%" height="50%"></p>
+<h3 id="Laplacian-Eigenmaps"><a href="#Laplacian-Eigenmaps" class="headerlink" title="Laplacian Eigenmaps"></a>Laplacian Eigenmaps</h3><p>一种降维方法<br>基本思想：如果$x^1$与$x^2$在高维空间中相近，则降维后也应该接近：</p>
+<script type="math/tex; mode=display">S=1/2 ∑_{i,j} w_{i,j} (z^i−z^j )^2</script><p>其中：<br><img src="/images/2018-10-07-15388824984809.jpg" width="30%" height="50%"></p>
+<p>如果将z全设为0，显然S最小，因此我们需要给z一个限制：z应当充满空间，也即假如z是M维，那么$\{z^1,z^2…,z^N\}$的秩应该等于M</p>
+<h3 id="T-distributed-Stochastic-Neighbor-Embedding-t-SNE"><a href="#T-distributed-Stochastic-Neighbor-Embedding-t-SNE" class="headerlink" title="T-distributed Stochastic Neighbor Embedding (t-SNE)"></a>T-distributed Stochastic Neighbor Embedding (t-SNE)</h3><p>也是一种降维方法<br>前面提到的方法有一个问题：同一类的点确实聚在一起，但不同类的点并没有尽量分开<br><img src="/images/2018-10-07-15388826477983.jpg" width="50%" height="50%"></p>
+<p>t-SNE的主要思想：将数据点映射到概率分布，我们希望降维前和降维后，数据分布的概率应当尽可能一致。<br>t-SNE构建一个高维对象之间的概率分布，使得相似的对象有更高的概率被选择，而不相似的对象有较低的概率被选择。t-SNE在低维空间里在构建这些点的概率分布，使得这两个概率分布之间尽可能的相似。</p>
+<p>如何做？<br>在高维空间中，我们定义：</p>
+<script type="math/tex; mode=display">P(x^j |x^i )=\frac{S(x^i,x^j )}{∑_{k≠i}S(x^i,x^k )}</script><p>其中S表示i与j之间的相似度。</p>
+<p>在低维空间中，同样有：</p>
+<script type="math/tex; mode=display">Q(z^j |z^i )=\frac{S′(z^i,z^j )}{∑_{k≠i}S′(z^i,z^k )}</script><p>使用KL散度去计算两个分布之间的差异：</p>
+<script type="math/tex; mode=display">L=∑_i KL(P(∗|x^i )||Q(∗|z^i )) =∑_i∑_j P(x^j |x^i )\frac{log P(x^j |x^i )}{Q(z^j |z^i )}</script><p>t-SNE中，高维空间和低维空间计算相似度的公式不大一样：</p>
+<script type="math/tex; mode=display">S(x^i,x^j )=exp(−‖x^i−x^j ‖_2 )</script><script type="math/tex; mode=display">S′(z^i,z^j )=\frac{1}{(1+‖z^i−z^j ‖_2)}</script><p>两个公式的图示：<br><img src="/images/2018-10-07-15388830652023.jpg" width="70%" height="50%"></p>
+<p>也即<strong>低维空间会拉长距离，使得距离远的点尽可能被拉开</strong>。</p>
+<p>t-SNE的问题在于：t-SNE无法对新的数据点进行降维。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 11: Unsupervised Learning: Linear Dimension Reduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 11: Unsupervised Learning: Linear Dimension Reduction/" itemprop="url">Lecture 11:Unsupervised Learning:Linear Dimension Reduction</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T10:38:24+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:34+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Clustering"><a href="#Clustering" class="headerlink" title="Clustering"></a>Clustering</h2><h3 id="K-means"><a href="#K-means" class="headerlink" title="K-means"></a>K-means</h3><p>算法步骤：<br><img src="/images/2018-10-07-15388800377875.jpg" width="70%" height="50%"></p>
+<p>迭代更新使得最后聚类中心收敛。但事先需要定好有多少类。</p>
+<h3 id="Hierarchical-Agglomerative-Clustering-HAC"><a href="#Hierarchical-Agglomerative-Clustering-HAC" class="headerlink" title="Hierarchical Agglomerative Clustering (HAC)"></a>Hierarchical Agglomerative Clustering (HAC)</h3><p>自下而上，每次选两个最近的聚为一类，直到所有的都分成一类<br>最后选择一个阈值划分，如蓝色绿色和红色的线<br><img src="/images/2018-10-07-15388801021791.jpg" width="50%" height="50%"></p>
+<h2 id="Dimension-Reduction"><a href="#Dimension-Reduction" class="headerlink" title="Dimension Reduction"></a>Dimension Reduction</h2><p>找到一个映射，使得x能够映射到低维z</p>
+<h3 id="Principle-Component-Analysis-PCA"><a href="#Principle-Component-Analysis-PCA" class="headerlink" title="Principle Component Analysis (PCA)"></a>Principle Component Analysis (PCA)</h3><p>目的是找到一个维度，使得投影得到的variance最大，也即最大程度保留数据的差异性。<br><img src="/images/2018-10-07-15388801830659.jpg" width="50%" height="50%"></p>
+<p>形式化可以写成（一维情形）：</p>
+<script type="math/tex; mode=display">Var(z_1 )=\frac{1}{N} ∑_{z_1}(z_1−\overline{z_1} )^2</script><p>其中：</p>
+<script type="math/tex; mode=display">‖w^1 ‖_2=1</script><script type="math/tex; mode=display">z_1=w^1 \cdot x</script><p>$\overline{z_1}$表示z的均值</p>
+<p>假如我们要投影到多维，其他维度也有同样的目标。其中每个维度之间都应该是相互正交的。<br><img src="/images/2018-10-07-15388804752506.jpg" width="20%" height="50%"></p>
+<h4 id="如何做？"><a href="#如何做？" class="headerlink" title="如何做？"></a>如何做？</h4><p>找到$ \frac{1}{N}∑(x−\overline{x} ) (x−\overline{x})^T$的前k个最大的特征值对应的特征向量，组合起来即是我们要找的$W$</p>
+<h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><p>—-Warning of Math—-<br>目的：$Var(z_1 )=\frac{1}{N} ∑_{z_1}(z_1−\overline{z_1} )^2 $<br>其中 $\overline{z_1} =\frac{1}{N} ∑{z_1} = \frac{1}{N} ∑ w^1 \cdot x=w^1\cdot \overline{x}$</p>
+<p>推导：<br><img src="/images/2018-10-07-15388811276042.jpg" width="35%" height="50%"><br>改变符号 $S=Cov(x)$</p>
+<p>利用拉格朗日乘数法，有：<br>$Sw^1=αw^1$<br>等式两边各左乘$(w^1)^T$，有：<br>$(w^1 )^T Sw^1=α(w^1 )^T w^1=α$</p>
+<p>也即，$α$是$S$的特征值，选择最大的特征值，就能够最大化我们的目标。</p>
+<p>同理，我们要找$w^2$，最大化$(w^2 )^T Sw^2$，其中有：<br>$(w^2 )^T w^2=1$<br>$(w^2 )^T w^1=0$ （与第一维正交）</p>
+<p>因此利用拉格朗日乘数法：</p>
+<script type="math/tex; mode=display">g(w^2 )= (w^2 )^T Sw^2−α((w^2 )^T w^2−1)−β((w^2 )^T w^1−0)</script><p>最终得到，w2对应第二大的特征值的特征向量。</p>
+<p>以此类推，其他维也同理。<br>—-End of Math—-</p>
+<h4 id="PCA的其他"><a href="#PCA的其他" class="headerlink" title="PCA的其他"></a>PCA的其他</h4><p>实际上最终得到的z，每一维之间的协方差都为0<br><img src="/images/2018-10-07-15388815546680.jpg" width="50%" height="50%"></p>
+<p>证明如下：<br><img src="/images/2018-10-07-15388815837458.jpg" width="50%" height="50%"></p>
+<p>PCA也可以用SVD来做：<br><img src="/images/2018-10-07-15388816250075.jpg" width="60%" height="50%"></p>
+<p>U中保存了K个特征向量。</p>
+<p>从另一种角度理解PCA，也可以认为PCA是一种autoencoder：<br><img src="/images/2018-10-07-15388816896369.jpg" width="50%" height="50%"></p>
+<h4 id="PCA的问题"><a href="#PCA的问题" class="headerlink" title="PCA的问题"></a>PCA的问题</h4><p>PCA是无监督学习，如果有标签，则无法按照类别来进行正确降维，如：<br><img src="/images/2018-10-07-15388817393283.jpg" width="30%" height="50%"></p>
+<p>第二就是PCA是线性变换，对于一些需要非线性变换的无能为力<br><img src="/images/2018-10-07-15388817566149.jpg" width="28%" height="50%"></p>
+<h3 id="Matrix-Factorization"><a href="#Matrix-Factorization" class="headerlink" title="Matrix Factorization"></a>Matrix Factorization</h3><p>定义：矩阵分解，就是将一个矩阵D分解为U和V的乘积，即对于一个特定的规模为m*n的矩阵D，估计出规模分别为m*k和n*k的矩阵U和V，使得$UV^T$的值尽可能逼近矩阵D。常用于推荐系统。</p>
+<p>思想：<br>假如有一个矩阵：<br><img src="/images/2018-10-07-15388819053983.jpg" width="60%" height="50%"></p>
+<p>假设横轴和纵轴每一维都有一个向量代表该维，矩阵的每个元素就是横轴和纵轴对应维的点积。我们的目的是尽可能减小：</p>
+<script type="math/tex; mode=display">L=\sum_{(i,j)} (r^i \cdot r^j -n_{ij})^2</script><p>其中$r_i$ $r_j$就是向量表示，$n_{ij}$就是矩阵的内容。</p>
+<p>可以使用SVD求解上式：<br><img src="/images/2018-10-07-15388820642382.jpg" width="50%" height="50%"></p>
+<p>实际上，考虑每一行或列本身的特性，我们对Loss进行扩展：</p>
+<script type="math/tex; mode=display">Minimizing \ \ L=\sum_{(i,j)} (r^i \cdot r^j +b_i+b_j-n_{ij})^2</script><p>使用SGD可以求解。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/碎片知识/梯度消失与梯度爆炸的推导/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/07/碎片知识/梯度消失与梯度爆炸的推导/" itemprop="url">梯度消失与梯度爆炸的推导</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T09:53:24+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-08T12:21:18+08:00">
+                2018-10-08
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> 记RNN中每一步的损失为$E_t$，则损失对$h_{t-1}$的权重$W$的导数有：</p>
+<script type="math/tex; mode=display">\frac{\partial{E_t}}{\partial{W}}=\sum_{k=1}^{t}
+    \frac{\partial{E_t}}{\partial{y_t}} \frac{\partial{y_t}}{\partial{h_t}} \frac{\partial{h_t}}{\partial{h_k}} \frac{\partial{h_k}}{\partial{W}}</script><p>其中$\frac{\partial{h_t}}{\partial{h_k}}$使用链式法则有：</p>
+<script type="math/tex; mode=display">\frac{\partial{h_t}}{\partial{h_k}} = 
+    \prod_{j=k+1}^{t} \frac{\partial{h_j}}{\partial{h_{j-1}}} =
+    \prod_{j=k+1}^{t} W^T \times diag[f^{\prime}(h_{j-1})]</script><p>其中$\frac{\partial{h_j}}{\partial{h_{j-1}}}$ 是雅克比矩阵。对其取模(norm)，有：</p>
+<script type="math/tex; mode=display">\rVert \frac{\partial{h_j}}{\partial{h_{j-1}}}\rVert ≤ 
+\rVert W^T \rVert \rVert diag[f^{\prime}(h_{j-1})] \rVert 
+≤ \beta_W \beta_h</script><p>当$f$为sigmoid时，$f^{\prime}(h_{j-1})$最大值为1。</p>
+<p>最终我们有：</p>
+<script type="math/tex; mode=display">\rVert \frac{\partial{h_t}}{\partial{h_{k}}}\rVert ≤ 
+\rVert \prod_{j=k+1}^{t} \frac{\partial{h_j}}{\partial{h_{j-1}}} \rVert 
+≤ (\beta_W \beta_h)^{t-k}</script><p>从上式可以看出，当t-k足够大时，如果$(\beta_W \beta_h)$小于1则$(\beta_W \beta_h)^{t-k}$则会变得非常小，相反，若$(\beta_W \beta_h)$大于1则$(\beta_W \beta_h)^{t-k}$则会变得非常大。</p>
+<p>在计算机中，当梯度值很大时，会造成上溢(NaN)，也即梯度爆炸问题，当梯度值很小时，会变成0，也即梯度消失。注意到，t-k的损失实际上评估的是一个较远的词对当前t的贡献，梯度消失也即意味着对当前的贡献消失。</p>
+<p>Reference:<br>CS224d: Deep Learning for NLP Lecture4</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/碎片知识/每周碎片知识10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1043,685 +1785,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/30/碎片知识/每周碎片知识9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/30/碎片知识/每周碎片知识9/" itemprop="url">每周碎片知识9</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T09:03:14+08:00">
-                2018-09-30
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-30T15:22:22+08:00">
-                2018-09-30
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>Pytorch中保存checkpoint是一个dict形式，可以保存任意多个模型到一个checkpoint中。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="comment">#save</span></span><br><span class="line">torch.save(&#123;            <span class="string">'epoch'</span>: epoch,            <span class="string">'model_state_dict'</span>: model.state_dict(),            <span class="string">'optimizer_state_dict'</span>: optimizer.state_dict(),            <span class="string">'loss'</span>: loss,            ...            &#125;, PATH)</span><br><span class="line"><span class="comment">#load</span></span><br><span class="line">model = TheModelClass(*args, **kwargs)optimizer = TheOptimizerClass(*args, **kwargs)</span><br><span class="line">checkpoint = torch.load(PATH)model.load_state_dict(checkpoint[<span class="string">'model_state_dict'</span>])optimizer.load_state_dict(checkpoint[<span class="string">'optimizer_state_dict'</span>])epoch = checkpoint[<span class="string">'epoch'</span>]loss = checkpoint[<span class="string">'loss'</span>]</span><br><span class="line">model.eval()<span class="comment"># - or -</span>model.train()</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>Pytorch可以load部分模型，也就是只load进来部分我们需要的层，这在transfer learning中用到。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">torch.save(modelA.state_dict(), PATH)</span><br><span class="line">modelB = TheModelBClass(*args, **kwargs)modelB.load_state_dict(torch.load(PATH), strict=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/30/诗词&句/有力量的文字/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/30/诗词&句/有力量的文字/" itemprop="url">no title</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T08:54:15+08:00">
-                2018-09-30
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-30T08:54:15+08:00">
-                2018-09-30
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>每当我遇到自己不敢直视的困难时，我就会闭上双眼，想象自己是一个80岁的老人，为人生中曾放弃和逃避过的无数困难而懊悔不已，我会对自己说，能再年轻一次该有多好，然后我睁开眼睛：砰！我又年轻一次了！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/30/诗词&句/每周诗词10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/30/诗词&句/每周诗词10/" itemprop="url">每周诗词10</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T08:54:14+08:00">
-                2018-09-30
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T16:40:11+08:00">
-                2018-10-07
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣次北固山下"><a href="#1️⃣次北固山下" class="headerlink" title="1️⃣次北固山下"></a>1️⃣次北固山下</h3><p>[唐] 王湾<br>客路青山外，行舟绿水前。<br>潮平两岸阔，风正一帆悬。<br><strong>海日生残夜，江春入旧年。</strong><br>乡书何处达，归雁洛阳边。</p>
-<p>次：旅途中暂时停宿，这里是停泊的意思。</p>
-<p><a href="http://m.xichuangzhu.com/work/57b95de92e958a005fa8919e" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b95de92e958a005fa8919e</a></p>
-<hr>
-<h3 id="2️⃣将赴吴兴登乐游原"><a href="#2️⃣将赴吴兴登乐游原" class="headerlink" title="2️⃣将赴吴兴登乐游原"></a>2️⃣将赴吴兴登乐游原</h3><p>[唐] 杜牧<br>清时有味是无能，闲爱孤云静爱僧。<br><strong>欲把一麾江海去，乐游原上望昭陵。</strong></p>
-<p>无能：无所作为。</p>
-<p><a href="http://m.xichuangzhu.com/work/57b99db9165abd005a6da742" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b99db9165abd005a6da742</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/23/机器学习与深度学习算法知识/PRML第一章 绪论/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/23/机器学习与深度学习算法知识/PRML第一章 绪论/" itemprop="url">PRML第一章 绪论</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-23T10:30:24+08:00">
-                2018-09-23
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:26+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>记录PRML学习过程。<br>笔记共享链接：<a href="https://1drv.ms/u/s!Apsp2510NHF6rIRjMclFB16v7B0FWg" target="_blank" rel="noopener">https://1drv.ms/u/s!Apsp2510NHF6rIRjMclFB16v7B0FWg</a></p>
-<hr>
-<h1 id="概率论"><a href="#概率论" class="headerlink" title="概率论"></a>概率论</h1><p><img src="/images/2018-09-23-Xnip2018-09-23_10-27-21.jpg" alt="概率论"></p>
-<h1 id="决策论"><a href="#决策论" class="headerlink" title="决策论"></a>决策论</h1><p><img src="/images/2018-09-23-Xnip2018-09-23_10-36-52.jpg" alt="决策论"></p>
-<h1 id="信息论"><a href="#信息论" class="headerlink" title="信息论"></a>信息论</h1><p><img src="/images/2018-09-23-Xnip2018-09-23_10-38-46.jpg" alt="信息论"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/23/机器学习与深度学习算法知识/Lecture 6: Backpropagation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/23/机器学习与深度学习算法知识/Lecture 6: Backpropagation/" itemprop="url">Lecture 6:Backpropagation</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-23T10:03:24+08:00">
-                2018-09-23
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:27+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Chain-Rule"><a href="#Chain-Rule" class="headerlink" title="Chain Rule"></a>Chain Rule</h3><p>基本公式<br><img src="/images/2018-09-23-15376684598125.jpg" width="50%" height="50%"><br><img src="/images/2018-09-23-15376684674095.jpg" width="50%" height="50%"></p>
-<h3 id="forward-pass和backward-pass"><a href="#forward-pass和backward-pass" class="headerlink" title="forward pass和backward pass"></a>forward pass和backward pass</h3><p>可以将backpropagation分为两步</p>
-<h4 id="forward-pass"><a href="#forward-pass" class="headerlink" title="forward pass"></a>forward pass</h4><p>在前向传播的时候提前计算/保存好，因为该梯度很简单<br><img src="/images/2018-09-23-15376686358832.jpg" width="50%" height="50%"></p>
-<p>比如z对w1的梯度就是x1，就是和w1相连的项<br><img src="/images/2018-09-23-15376687025289.jpg" width="20%" height="50%"></p>
-<h4 id="backward-pass"><a href="#backward-pass" class="headerlink" title="backward pass"></a>backward pass</h4><p>回传的时候逐层相乘下去，类似动态规划，获得了后一层的梯度才能求出前一层的梯度。<br><img src="/images/2018-09-23-15376687488493.jpg" width="50%" height="50%"></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="/images/2018-09-23-15376687824826.jpg" width="50%" height="50%"></p>
-<p>先前向，提前算出最邻近的梯度，直到output layer，计算完该梯度，再不断回传逐层相乘获得output对各层的梯度。</p>
-<h3 id="代码实现例子"><a href="#代码实现例子" class="headerlink" title="代码实现例子"></a>代码实现例子</h3><p>relu实现forward pass和backward pass<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyReLU</span><span class="params">(torch.autograd.Function)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    We can implement our own custom autograd Functions by subclassing</span></span><br><span class="line"><span class="string">    torch.autograd.Function and implementing the forward and backward passes</span></span><br><span class="line"><span class="string">    which operate on Tensors.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(ctx, input)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        In the forward pass we receive a Tensor containing the input and return</span></span><br><span class="line"><span class="string">        a Tensor containing the output. ctx is a context object that can be used</span></span><br><span class="line"><span class="string">        to stash information for backward computation. You can cache arbitrary</span></span><br><span class="line"><span class="string">        objects for use in the backward pass using the ctx.save_for_backward method.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        ctx.save_for_backward(input)  <span class="comment">#为了之后的backward计算</span></span><br><span class="line">        <span class="keyword">return</span> input.clamp(min=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(ctx, grad_output)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        In the backward pass we receive a Tensor containing the gradient of the loss</span></span><br><span class="line"><span class="string">        with respect to the output, and we need to compute the gradient of the loss</span></span><br><span class="line"><span class="string">        with respect to the input.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        input, = ctx.saved_tensors</span><br><span class="line">        grad_input = grad_output.clone()</span><br><span class="line">        grad_input[input &lt; <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> grad_input</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1776,7 +1839,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">132</span>
+                  <span class="site-state-item-count">137</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1789,7 +1852,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">155</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -286,6 +286,768 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/26/碎片知识/每周碎片知识5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/26/碎片知识/每周碎片知识5/" itemprop="url">每周碎片知识5</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T11:20:14+08:00">
+                2018-08-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:16+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1️⃣[Paper]<br>Joint Embeddings of Chinese Words, Characters, and Fine-grained Subcharacter Components</p>
+<p>基本框架和CBOW一致，主要贡献在于针对中文词向量添加了偏旁、字的组件作为训练信息。</p>
+<p><img src="/images/2018-08-26-15352530482345.jpg" width="50%" height="50%"></p>
+<hr>
+<p>2️⃣[Paper]<br>Highway Networks</p>
+<p>为了解决神经网络深度过深时导致的反向传播困难的问题。<br>前向传播的公式：</p>
+<script type="math/tex; mode=display">y=H(x,W_H)</script><p>而论文所做的改进：</p>
+<script type="math/tex; mode=display">y=H(x,W_H) \cdot T(x,W_T)+ x \cdot C(x,W_C)</script><p>其中$T$是transform gate，$C$是carry gate。方便起见，可以将 $C=1-T$，最终有：</p>
+<script type="math/tex; mode=display">y=H(x,W_H) \cdot T(x,W_T)+ x \cdot (1-T(x,W_T))</script><p>可以看出思想和LSTM很类似，都是gate的思想。</p>
+<hr>
+<p>3️⃣[调参方法]<br>博客：<a href="https://blog.goodaudience.com/how-to-make-your-model-happy-again-part-1-40d94a9ffb41" target="_blank" rel="noopener">https://blog.goodaudience.com/how-to-make-your-model-happy-again-part-1-40d94a9ffb41</a></p>
+<ul>
+<li><strong>学习率</strong>：</li>
+</ul>
+<p>一条原则：当validation loss开始上升时，减少学习率。</p>
+<p>如何减少？</p>
+<p><img src="/images/2018-08-26-15352871548330.jpg" width="50%" height="50%"></p>
+<p>或者：</p>
+<p><img src="/images/2018-08-26-15352873283890.jpg" width="50%" height="50%"><br>设定一定的epoch作为一个stepsize，在训练过程中线性增加学习率，然后在到达最大值后再线性减小。<br>实验表明，使用该方法可以在一半的epoch内达到相同的效果。</p>
+<ul>
+<li><strong>batch size</strong>：</li>
+</ul>
+<p><img src="/images/2018-08-26-15352891425729.jpg" width="50%" height="50%"></p>
+<p>由于batch size和学习率的强相关性，<a href="https://arxiv.org/pdf/1711.00489.pdf" target="_blank" rel="noopener">相关论文</a>提出提高batch size而不是降低学习率的方法来提升模型表现。</p>
+<blockquote>
+<p>increasing the batch size during training, instead of decaying learning rate. — L. Smith<br><a href="https://arxiv.org/pdf/1711.00489.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1711.00489.pdf</a></p>
+</blockquote>
+<p>一个trick：保持学习率不变，提高batch size，直到batch size~训练集/10，接下来再采用学习率下降的策略。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/26/代码相关/代码分享6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/26/代码相关/代码分享6/" itemprop="url">代码片段记录6</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T11:07:30+08:00">
+                2018-08-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-23T09:30:20+08:00">
+                2018-09-23
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1️⃣将数据整理成batch"><a href="#1️⃣将数据整理成batch" class="headerlink" title="1️⃣将数据整理成batch"></a>1️⃣将数据整理成batch</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_iter_batch</span><span class="params">(paras,labels,batch_size,shuffle=True)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :param paras:</span></span><br><span class="line"><span class="string">    :param labels:</span></span><br><span class="line"><span class="string">    :param batch_size:</span></span><br><span class="line"><span class="string">    :param shuffle:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">assert</span> len(paras)==len(labels)</span><br><span class="line">    paras_size=len(paras)</span><br><span class="line">    <span class="keyword">if</span> shuffle:</span><br><span class="line">        indices=np.arange(paras_size)</span><br><span class="line">        np.random.shuffle(indices)</span><br><span class="line">    <span class="keyword">for</span> start_idx <span class="keyword">in</span> range(<span class="number">0</span>,paras_size-batch_size+<span class="number">1</span>,batch_size):</span><br><span class="line">        <span class="keyword">if</span> shuffle:</span><br><span class="line">            excerpt=indices[start_idx:start_idx+batch_size]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            excerpt=slice(start_idx,start_idx+batch_size)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">yield</span> paras[excerpt],labels[excerpt]</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/26/诗词&句/每周诗词6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/26/诗词&句/每周诗词6/" itemprop="url">每周诗词6</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T10:58:00+08:00">
+                2018-08-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-26T11:00:15+08:00">
+                2018-08-26
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1️⃣</p>
+<h3 id="戏为六绝句"><a href="#戏为六绝句" class="headerlink" title="戏为六绝句"></a>戏为六绝句</h3><p>[唐] 杜甫<br>【其二】<br>王杨卢骆当时体，轻薄为文哂未休。<br><strong>尔曹身与名俱灭，不废江河万古流</strong>。</p>
+<p>哂（shěn）：讥笑。</p>
+<p><a href="http://m.xichuangzhu.com/work/57b9658c0a2b58005c95d2a7" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b9658c0a2b58005c95d2a7</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/25/碎片知识/CNN文本分类任务指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/25/碎片知识/CNN文本分类任务指南/" itemprop="url">CNN文本分类任务指南</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-25T16:25:11+08:00">
+                2018-08-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:21+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近因为比赛的缘故对文本分类有一定的了解。其中使用CNN方法做情感分析任务存在着许多优势。虽然模型简单，但如何设置超参有时候对结果有很大的影响。本文记录了关于CNN文本分类的一些学习历程和指南，基本参考了论文。</p>
+<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>基本上目前较为浅层的CNN文本分类的做法都是如下图：<br><img src="/images/2018-08-25-15351860103617.jpg" alt=""></p>
+<p>将词向量堆积成为二维的矩阵，通过CNN的卷积单元对矩阵进行卷积处理，同时使用pooling（通常是1max-pooling）操作，将不等长的卷积结果变为等长，对不同的卷积单元的结果进行拼接后生成单个向量，最后再通过线性层转化成类别概率分布。</p>
+<p>另一张图也说明了该流程。</p>
+<p><img src="/images/2018-08-25-15351863867337.jpg" alt=""></p>
+<h2 id="建议与指导"><a href="#建议与指导" class="headerlink" title="建议与指导"></a>建议与指导</h2><h3 id="超参及其对结果的影响"><a href="#超参及其对结果的影响" class="headerlink" title="超参及其对结果的影响"></a>超参及其对结果的影响</h3><p>接下来的内容参考了论文<a href="https://arxiv.org/pdf/1510.03820.pdf" target="_blank" rel="noopener">A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional<br>Neural Networks for Sentence Classification</a></p>
+<p>CNN文本分类的超参：</p>
+<ul>
+<li>输入向量</li>
+<li>卷积大小</li>
+<li>输出通道（feature maps）</li>
+<li>激活函数</li>
+<li>池化策略</li>
+<li>正则化</li>
+</ul>
+<h4 id="输入向量的影响"><a href="#输入向量的影响" class="headerlink" title="输入向量的影响"></a>输入向量的影响</h4><p>实验表明，使用word2vec和GloVe不分伯仲，但将word2vec和GloVe简单拼接在一起并不能带来提升。</p>
+<blockquote>
+<p>unfortunately, simply concatenating these representations does necessarily seem helpful</p>
+</blockquote>
+<p>当句子长度很长（document classification）时，使用one-hot可能会有效果，但在句子长度不是很长时，效果不好。</p>
+<h5 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h5><p>对于新任务，可以word2vec或GloVe或者其他词向量都试一下，如果句子长，可以试着使用one-hot。</p>
+<h4 id="卷积大小"><a href="#卷积大小" class="headerlink" title="卷积大小"></a>卷积大小</h4><p>由于卷积的长度是固定的，也就是词向量的长度，因此只需讨论宽度。<br>实验表明，不同的数据集会有不同的最佳大小，但似乎对于长度越长的句子，最佳大小有越大的趋势。</p>
+<blockquote>
+<p>However, for datasets comprising longer sentences, such as CR (maximum sentence length is 105, whereas it ranges from 36-56 on the other sentiment datasets used here), the optimal region size may be larger.</p>
+</blockquote>
+<p>同时，当增加不同卷积大小作为组合时，如果组合的卷积核大小接近于最佳大小（optimal region size），有助于结果的提升；相反，如果卷积核大小离最佳大小很远时，反而会产生负面影响。</p>
+<h5 id="建议-1"><a href="#建议-1" class="headerlink" title="建议"></a>建议</h5><p>首先试着找到最优的卷积核大小，然后在这个基础上添加和该卷积核大小类似的卷积核。</p>
+<h4 id="feature-maps"><a href="#feature-maps" class="headerlink" title="feature maps"></a>feature maps</h4><p>也就是输出通道（out channel），表明该卷积核大小的卷积核有多少个。</p>
+<p>实验表明，最佳的feature maps和数据集相关，但一般不超过600。</p>
+<blockquote>
+<p>it would seem that increasing the number of maps beyond 600 yields at best very marginal returns, and often hurts performance.</p>
+</blockquote>
+<h5 id="建议-2"><a href="#建议-2" class="headerlink" title="建议"></a>建议</h5><p>在600内搜索最优，如果在600的边缘还没有明显的效果下降，那么可以尝试大于600的feature maps。</p>
+<h4 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h4><p>实验结果：<br><img src="/images/2018-08-25-15351889835594.jpg" alt=""></p>
+<p>结果表明，tanh、ReLU和不使用激活函数效果较好。tanh的优点是以0为中心，ReLU能够加速拟合，至于为什么不使用的效果会好，可能是因为模型较为简单：</p>
+<blockquote>
+<p>This indicates that on some datasets, a linear transformation is enough to capture the<br>correlation between the word embedding and the output label.</p>
+</blockquote>
+<h5 id="建议-3"><a href="#建议-3" class="headerlink" title="建议"></a>建议</h5><p>使用tanh、ReLU或者干脆不使用。但如果模型更为复杂，有多层的结构，还是需要使用激活函数的。</p>
+<h4 id="pooling策略"><a href="#pooling策略" class="headerlink" title="pooling策略"></a>pooling策略</h4><p>所有的实验都表明了，1-max pooling的效果比其他好，如k-max pooling。在pooling这一步可以直接选择1-max pooling。</p>
+<blockquote>
+<p>This may be because the location of predictive contexts does not matter, and certain n-grams in the sentence can be more predictive on their own than the entire sentence considered jointly.</p>
+</blockquote>
+<h4 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h4><p>主要是dropout和l2 norm constraint。<br>dropout就是随机将一些神经元置为0，l2 norm constraint是对参数矩阵W进行整体缩放，使其不超过一定阈值。（与通常的l2 regularization不同，最早可追溯到Hinton的<a href="https://arxiv.org/pdf/1207.0580.pdf" target="_blank" rel="noopener">Improving neural networks by preventing<br>co-adaptation of feature detectors</a>）</p>
+<blockquote>
+<p>the l2 norm of a weight vector is linearly scaled to a constraint c when it exceeds this threshold, so a smaller c implies stronger regularization</p>
+</blockquote>
+<p>实验表明，dropout起的作用很小，l2 norm没有提升甚至还会导致下降。可能是因为模型参数不多，因此过拟合的可能性较低。</p>
+<h5 id="建议-4"><a href="#建议-4" class="headerlink" title="建议"></a>建议</h5><p>设置较小的dropout和较大的l2 norm，当feature maps增大时，可以试着调节较大的dropout以避免过拟合。</p>
+<h3 id="建议及结论"><a href="#建议及结论" class="headerlink" title="建议及结论"></a>建议及结论</h3><ul>
+<li>刚开始的使用使用word2vec或者GloVe，如果数据量够大，可以尝试one-hot</li>
+<li>线性搜索最佳的卷积核大小，如果句子够长，那么可以扩大搜索范围。一旦确定了最佳卷积核大小，尝试在该卷积核大小的附近进行组合，如最佳卷积核宽度是5，那么尝试[3,4,5]或者[2,3,4,5]等</li>
+<li>使用较小的dropout和较大的max norm constraint，然后在[100,600]范围内搜索feature maps，如果最佳的feature maps在600附近，可以试着选择比600更大的范围</li>
+<li>尝试不同的激活函数，通常tanh和ReLU是较好的，但也可以尝试什么都不加。</li>
+<li>使用1-max pooling。</li>
+<li>如果模型复杂，比如feature maps很大，那么可以尝试更为严格的正则化，如更大的dropout rate和较小的max norm constraint。</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="http://www.aclweb.org/anthology/D14-1181" target="_blank" rel="noopener">Convolutional Neural Networks for Sentence Classification</a></p>
+<p><a href="https://arxiv.org/pdf/1510.03820.pdf" target="_blank" rel="noopener">A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional<br>Neural Networks for Sentence Classification</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/20/碎片知识/关于Pytorch中in-place的操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/20/碎片知识/关于Pytorch中in-place的操作/" itemprop="url">关于Pytorch中的inplace的操作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-20T09:53:11+08:00">
+                2018-08-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-20T10:09:46+08:00">
+                2018-08-20
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近在写Hierarchical attention network的时候遇到了如下的bug：</p>
+<blockquote>
+<p>one of the variables needed for gradient computation has been modified by an inplace operation</p>
+</blockquote>
+<p>在查阅了文档和请教了其他人之后，最终找到了bug。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(seq_len):</span><br><span class="line">    h_i = rnn_outputs[i]  <span class="comment"># batch,hidden*2</span></span><br><span class="line">    a_i = attn_weights[i].unsqueeze_(<span class="number">1</span>)  <span class="comment"># take in-place opt may cause an error</span></span><br><span class="line">    a_i = a_i.expand_as(h_i)  <span class="comment"># batch,hidden*2</span></span><br></pre></td></tr></table></figure>
+<p>这是我原来的逻辑，我在无意中做了inplace操作，导致了bug的发生。正确的做法应该是这样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(seq_len):</span><br><span class="line">    h_i = rnn_outputs[i]  <span class="comment"># batch,hidden*2</span></span><br><span class="line">    <span class="comment"># a_i = attn_weights[i].unsqueeze_(1)  # take in-place opt may cause an error</span></span><br><span class="line">    a_i = attn_weights[i].unsqueeze(<span class="number">1</span>)  <span class="comment"># batch,1</span></span><br><span class="line">    a_i = a_i.expand_as(h_i)  <span class="comment"># batch,hidden*2</span></span><br></pre></td></tr></table></figure>
+<p>实际上，在实践过程中应当尽量避免inplace操作，在官方文档中也提到了（存疑）这点，虽然提供了inplace操作，但并不推荐使用。</p>
+<p>具体的原因是，在Pytorch构建计算图的过程中，会记录每个节点是怎么来的，但inplace会破坏这种关系，使得在回传的时候没法正常求导。</p>
+<p>特别地，有两种情况不应该使用inplace操作（摘自知乎）：</p>
+<ol>
+<li>对于requires_grad=True的叶子张量(leaf tensor)不能使用inplace operation</li>
+<li>对于在求梯度阶段需要用到的张量不能使用inplace operation</li>
+</ol>
+<p>Reference:<br><a href="https://zhuanlan.zhihu.com/p/38475183" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/38475183</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/19/诗词&句/愿中国青年都摆脱冷气/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1065,797 +1827,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/19/诗词&句/每周诗词5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/19/诗词&句/每周诗词5/" itemprop="url">每周诗词5</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T09:09:00+08:00">
-                2018-08-19
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-19T09:40:58+08:00">
-                2018-08-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本周太忙了，没背什么诗词，只背（复习）了部分的《滕王阁序》。</p>
-<p>1️⃣</p>
-<h3 id="滕王阁序"><a href="#滕王阁序" class="headerlink" title="滕王阁序"></a>滕王阁序</h3><p>嗟乎！时运不齐，命途多舛。冯唐易老，李广难封。屈贾谊于长沙，非无圣主；窜梁鸿于海曲，岂乏明时？所赖<strong>君子见机，达人知命</strong>。老当益壮，宁移白首之心？<strong>穷且益坚，不坠青云之志</strong>。酌贪泉而觉爽，处涸辙以犹欢。<strong>北海虽赊，扶摇可接；东隅已逝，桑榆非晚。</strong>孟尝高洁，空馀报国之情；阮籍猖狂，岂效穷途之哭！</p>
-<p>勃，三尺微命，一介书生。无路请缨，等终军之弱冠；有怀投笔，慕宗慤之长风。舍簪笏于百龄，奉晨昏于万里。非谢家之宝树，接孟氏之芳邻。他日趋庭，叨陪鲤对；今兹捧袂，喜托龙门。杨意不逢，抚凌云而自惜；锺期既遇，奏流水以何惭？</p>
-<hr>
-<p><strong>注释：</strong><br>冯唐：西汉人，有才能却一直不受重用。汉武帝时选求贤良，有人举荐冯唐，可是他已九十多岁，难再做官了。李广：汉武帝时的名将，多年抗击匈奴，军功很大，却终身没有封侯。</p>
-<p>贾谊：汉文帝本想任贾谊为公卿，但因朝中权贵反对，就疏远了贾谊，任他为长沙王太傅。梁鸿：东汉人，因作诗讽刺君王，得罪了汉章帝，被迫逃到齐鲁一带躲避。</p>
-<p>酌（zhuó）贪泉而觉爽：喝下贪泉的水，仍觉得心境清爽。古代传说广州有水名贪泉，人喝了这里的水就会变得贪婪。这句是说有德行的人在污浊的环境中也能保持纯正，不被污染。处涸辙以犹欢：处在奄奄待毙的时候，仍然乐观开朗。处河辙：原指鲋鱼处在干涸的车辙旦。比喻人陷入危急之中。</p>
-<p>孟尝：东汉人，为官清正贤能，但不被重用，后来归田。阮籍：三国魏诗人，他有时独自驾车出行，到无路处便恸哭而返，借此宣泄不满于现实的苦闷心情。</p>
-<p>终军：《汉书·终军传》记载，汉武帝想让南越（今广东、广西一带）王归顺，派终军前往劝说，终军请求给他长缨，必缚住南越王，带回到皇宫门前（意思是一定完成使命）。后来用“请缨”指投军报国。</p>
-<p>宗悫（què）：南朝宋人，少年时很有抱负，说“愿乘长风破万里浪”。</p>
-<p>簪（zān）笏（hù）：这里代指官职。晨昏：晨昏定省，出自 《礼记·曲礼上》，释义为旧时侍奉父母的日常礼节。</p>
-<p>非谢家之宝树，接孟氏之芳邻：自己并不是像谢玄那样出色的人才，却能在今日的宴会上结识各位名士。谢家之宝树：指谢玄。《晋书·谢玄传》记载，晋朝谢安曾问子侄们：为什么人们总希望自己的子弟好？侄子谢玄回答：“譬如芝兰玉树，欲使其生于庭阶耳。”后来就称谢玄为谢家宝树。孟氏之芳邻：这里借孟子的母亲为寻找邻居而三次搬家的故事，来指赴宴的嘉宾。</p>
-<p>他日趋庭，叨陪鲤对：过些时候自己将到父亲那里陪侍和聆听教诲。趋庭：快步走过庭院，这是表示对长辈的恭敬。叨：惭愧地承受，表示自谦。鲤对：孔鲤是孔子的儿子，鲤对指接受父亲教诲。事见《论语·季氏》：（孔子）尝独立，（孔）鲤趋而过庭。（子）曰：“学诗乎？”对曰：“未也。”“不学诗，无以言。”鲤退而学诗。他日，又独立，鲤趋而过庭。（子）曰：“学礼乎？”对曰：‘未也。”“不学礼，无以立。”鲤退而学礼。</p>
-<p>捧袂（mèi）：举起双袖作揖，指谒见阎公。喜托龙门：（受到阎公的接待）十分高兴，好像登上龙门一样。</p>
-<p>杨意：即蜀人杨得意，任掌管天子猎犬的官，西汉辞赋家司马相如是由他推荐给汉武帝的。凌云：这里指司马相如的赋，《史记·司马相如传》说，相如献《大人赋》，“天子大悦，飘飘有凌云之气，似游天地之间”。钟期：即钟子期。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/18/碎片知识/Python中的拷贝/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/18/碎片知识/Python中的拷贝/" itemprop="url">Python中的拷贝</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-18T10:47:05+08:00">
-                2018-08-18
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-19T11:26:51+08:00">
-                2018-08-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Python的拷贝和C/C++的差别很大，很经常就容易搞混，因此记录一下。</p>
-<h3 id="赋值、拷贝"><a href="#赋值、拷贝" class="headerlink" title="赋值、拷贝"></a>赋值、拷贝</h3><ul>
-<li>赋值：实际上就是对象的引用，没有开辟新的内存空间<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lst=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">l=lst</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>浅拷贝:创建了新对象，但是<strong>内容是对原对象的引用</strong>，有三种形式</p>
-<ol>
-<li><p>切片  </p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">l=lst[:]</span><br><span class="line">l=[i <span class="keyword">for</span> i <span class="keyword">in</span> lst]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>工厂</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">l=list(lst)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>copy </p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">l=copy.copy(lst)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>深拷贝:copy中的deepcopy，生成一个全新的对象，与原来的对象无关</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">l=copy.deepcopy(lst)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 引用https://www.cnblogs.com/huangbiquan/p/7795152.html 的例子###</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> copy</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,[<span class="string">'a'</span>,<span class="string">'b'</span>]] <span class="comment">#定义一个列表a</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a <span class="comment">#赋值</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = copy.copy(a) <span class="comment">#浅拷贝</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = copy.deepcopy(a) <span class="comment">#深拷贝</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.append(<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>], <span class="number">5</span>] <span class="comment">#a添加一个元素5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(b) </span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>], <span class="number">5</span>] <span class="comment">#b跟着添加一个元素5 </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(c)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]] <span class="comment">#c保持不变</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(d)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]] <span class="comment">#d保持不变</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">4</span>].append(<span class="string">'c'</span>) </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>], <span class="number">5</span>] <span class="comment">#a中的list(即a[4])添加一个元素c</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(b)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>], <span class="number">5</span>] <span class="comment">#b跟着添加一个元素c</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(c)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]] <span class="comment">#c跟着添加一个元素c</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(d)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]] <span class="comment">#d保持不变</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#说明如下：</span></span><br><span class="line"><span class="comment">#1.外层添加元素时， 浅拷贝c不会随原列表a变化而变化；内层list添加元素时，浅拷贝c才会变化。</span></span><br><span class="line"><span class="comment">#2.无论原列表a如何变化，深拷贝d都保持不变。</span></span><br><span class="line"><span class="comment">#3.赋值对象随着原列表一起变化</span></span><br></pre></td></tr></table></figure>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://www.cnblogs.com/huangbiquan/p/7795152.html" target="_blank" rel="noopener">https://www.cnblogs.com/huangbiquan/p/7795152.html</a><br><a href="https://www.cnblogs.com/xueli/p/4952063.html" target="_blank" rel="noopener">https://www.cnblogs.com/xueli/p/4952063.html</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/12/碎片知识/如何将ELMo词向量用于中文/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/12/碎片知识/如何将ELMo词向量用于中文/" itemprop="url">如何将ELMo词向量用于中文</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-12T16:49:05+08:00">
-                2018-08-12
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-07T10:54:53+08:00">
-                2019-04-07
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>10.10更新：ELMo已经由哈工大组用PyTorch重写了，并且提供了中文的预训练好的language model，可以直接使用。</p>
-<p>2019.4.7更新：年代过于久远，本人于细节方面早已记不大清楚了。遇到bug或问题烦请自行查阅解决，请不必在评论区提问或邮件提问，不会再回复。</p>
-<hr>
-<p>ELMo于今年二月由AllenNLP提出，与word2vec或GloVe不同的是其动态词向量的思想，其本质即通过训练language model，对于一句话进入到language model获得不同的词向量。根据实验可得，使用了Elmo词向量之后，许多NLP任务都有了大幅的提高。</p>
-<p>论文:<a href="https://arxiv.org/pdf/1802.05365.pdf" target="_blank" rel="noopener">Deep contextualized word representations</a></p>
-<p>AllenNLP一共release了两份ELMo的代码，一份是Pytorch版本的，另一份是Tensorflow版本的。Pytorch版本的只开放了使用预训练好的词向量的接口，但没有给出自己训练的接口，因此无法使用到中文语料中。Tensorflow版本有提供训练的代码，因此本文记录如何将ELMo用于中文语料中，但本文只记录使用到的部分，而不会分析全部的代码。</p>
-<p>需求:<br>使用预训练好的词向量作为句子表示直接传入到RNN中(也就是不使用代码中默认的先过CNN)，在训练完后，将模型保存，在需要用的时候load进来，对于一个特定的句子，首先将其转换成预训练的词向量，传入language model之后最终得到ELMo词向量。</p>
-<p>准备工作:</p>
-<ol>
-<li>将中文语料分词</li>
-<li>训练好GloVe词向量或者word2vec</li>
-<li>下载<a href="https://github.com/allenai/bilm-tf" target="_blank" rel="noopener">bilm-tf代码</a></li>
-<li>生成词表 vocab_file （训练的时候要用到）</li>
-<li>optional:阅读Readme</li>
-<li>optional:通读bilm-tf的代码，对代码结构有一定的认识</li>
-</ol>
-<p>思路:</p>
-<ol>
-<li>将预训练的词向量读入</li>
-<li>修改bilm-tf代码<ol>
-<li>option部分</li>
-<li>添加给embedding weight赋初值</li>
-<li>添加保存embedding weight的代码</li>
-</ol>
-</li>
-<li>开始训练，获得checkpoint和option文件</li>
-<li>运行脚本，获得language model的weight文件</li>
-<li>将embedding weight保存为hdf5文件形式</li>
-<li>运行脚本，将语料转化成ELMo embedding。</li>
-</ol>
-<h3 id="训练GloVe或word2vec"><a href="#训练GloVe或word2vec" class="headerlink" title="训练GloVe或word2vec"></a>训练GloVe或word2vec</h3><p>可参见我以前的博客或者网上的教程。<br>注意到，如果要用gensim导入GloVe训好的词向量，需要在开头添加num_word embedding_dim。 如：<br><img src="/images/2018-08-10-15338861462682.jpg" width="70%" height="50%"></p>
-<h3 id="获得vocab词表文件"><a href="#获得vocab词表文件" class="headerlink" title="获得vocab词表文件"></a>获得vocab词表文件</h3><p>注意到，词表文件的开头必须要有<code>&lt;S&gt; &lt;/S&gt; &lt;UNK&gt;</code>，且大小写敏感。并且应当按照单词的词频降序排列。可以通过手动添加这三个特殊符号。<br>如：<br><img src="/images/2018-08-11-15339757184030.jpg" width="10%" height="50%"></p>
-<p>代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">model=gensim.models.KeyedVectors.load_word2vec_format(</span><br><span class="line">    fname=<span class="string">'/home/zhlin/GloVe/vectors.txt'</span>,binary=<span class="keyword">False</span></span><br><span class="line">)</span><br><span class="line">words=model.vocab</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'vocab.txt'</span>,<span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">'&lt;S&gt;'</span>)</span><br><span class="line">    f.write(<span class="string">'\n'</span>）</span><br><span class="line">    f.write(<span class="string">'&lt;/S&gt;'</span>)</span><br><span class="line">    f.write(<span class="string">'\n'</span>)</span><br><span class="line">    f.write(<span class="string">'&lt;UNK&gt;'</span>)</span><br><span class="line">    f.write(<span class="string">'\n'</span>)    <span class="comment"># bilm-tf 要求vocab有这三个符号，并且在最前面</span></span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> words:</span><br><span class="line">        f.write(word)</span><br><span class="line">        f.write(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure></p>
-<h3 id="修改bilm-tf代码"><a href="#修改bilm-tf代码" class="headerlink" title="修改bilm-tf代码"></a>修改bilm-tf代码</h3><p>注意到，在使用该代码之前，需要安装好相应的环境。</p>
-<p><img src="/images/2018-08-10-15338879402377.jpg" width="50%" height="50%"></p>
-<p>如果使用的是conda作为默认的Python解释器，强烈建议使用conda安装，否则可能会出现一些莫名的错误。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda install tensorflow-gpu=1.4</span><br><span class="line">conda install h5py</span><br><span class="line">python setup.py install <span class="comment">#应在bilm-tf的文件夹下执行该指令</span></span><br></pre></td></tr></table></figure></p>
-<p>然后再运行测试代码，通过说明安装成功。</p>
-<h4 id="修改train-elmo-py"><a href="#修改train-elmo-py" class="headerlink" title="修改train_elmo.py"></a>修改train_elmo.py</h4><p>bin文件夹下的train_elmo.py是程序的入口。<br>主要修改的地方：</p>
-<ol>
-<li>load_vocab的第二个参数应该改为None</li>
-<li>n_gpus CUDA_VISIBLE_DEVICES 根据自己需求改</li>
-<li>n_train_tokens 可改可不改，影响的是输出信息。要查看自己语料的行数，可以通过<code>wc -l corpus.txt</code> 查看。</li>
-<li><strong>option的修改</strong>，将char_cnn部分都注释掉，其他根据自己需求修改</li>
-</ol>
-<p>如：<br><img src="/images/2018-08-10-15338888745894.jpg" width="70%" height="50%"></p>
-<h4 id="修改LanguageModel类"><a href="#修改LanguageModel类" class="headerlink" title="修改LanguageModel类"></a>修改LanguageModel类</h4><p>由于我需要传入预训练好的GloVe embedding，那么还需要修改embedding部分，这部分在bilm文件夹下的training.py，进入到LanguageModel类中_build_word_embeddings函数中。注意到，由于前三个是<code>&lt;S&gt; &lt;/S&gt; &lt;UNK&gt;</code>，而这三个字符在GloVe里面是没有的，因此这三个字符的embedding应当在训练的时候逐渐学习到，而正因此 <code>embedding_weights</code>的<code>trainable</code>应当设为<code>True</code></p>
-<p>如:</p>
-<p><img src="/images/2018-08-12-15340585073779.jpg" alt=""></p>
-<h4 id="修改train函数"><a href="#修改train函数" class="headerlink" title="修改train函数"></a>修改train函数</h4><p>添加代码，使得在train函数的最后保存embedding文件。<br><img src="/images/2018-08-12-15340607132103.jpg" alt=""></p>
-<h3 id="训练并获得weights文件"><a href="#训练并获得weights文件" class="headerlink" title="训练并获得weights文件"></a>训练并获得weights文件</h3><p>训练需要语料文件corpus.txt，词表文件vocab.txt。</p>
-<h4 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h4><p>cd到bilm-tf文件夹下，运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> CUDA_VISIBLE_DEVICES=4</span><br><span class="line">nohup python -u bin/train_elmo.py \</span><br><span class="line">--train_prefix=<span class="string">'/home/zhlin/bilm-tf/corpus.txt'</span> \</span><br><span class="line">--vocab_file /home/zhlin/bilm-tf/glove_embedding_vocab8.10/vocab.txt \</span><br><span class="line">--save_dir /home/zhlin/bilm-tf/try &gt;bilm_out.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure></p>
-<p>根据实际情况设定不同的值和路径。</p>
-<p>运行情况：<br><img src="/images/2018-08-10-15339015862848.jpg" width="50%" height="50%"></p>
-<p>PS:运行过程中可能会有warning:</p>
-<blockquote>
-<p>‘list’ object has no attribute ‘name’<br>WARNING:tensorflow:Error encountered when serializing lstm_output_embeddings.<br>Type is unsupported, or the types of the items don’t match field type in CollectionDef.</p>
-</blockquote>
-<p>应该不用担心，还是能够继续运行的，后面也不受影响。</p>
-<p>在等待了相当长的时间后，在save_dir文件夹内生成了几个文件，其中checkpoint和options是关键，checkpoint能够进一步生成language model的weights文件，而options记录language model的参数。</p>
-<p><img src="/images/2018-08-11-15339734319058.jpg" alt=""></p>
-<h4 id="获得language-model的weights"><a href="#获得language-model的weights" class="headerlink" title="获得language model的weights"></a>获得language model的weights</h4><p>接下来运行bin/dump_weights.py将checkpoint转换成hdf5文件。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nohup python -u  /home/zhlin/bilm-tf/bin/dump_weights.py  \</span><br><span class="line">--save_dir /home/zhlin/bilm-tf/try  \</span><br><span class="line">--outfile /home/zhlin/bilm-tf/try/weights.hdf5 &gt;outfile.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>其中save_dir是checkpoint和option文件保存的地址。</p>
-<p>接下来等待程序运行：</p>
-<p><img src="/images/2018-08-11-15339740970081.jpg" width="70%" height="50%"></p>
-<p><img src="/images/2018-08-11-15339745511775.jpg" width="70%" height="50%"></p>
-<p>最终获得了想要的weights和option：<br><img src="/images/2018-08-11-15339978499136.jpg" alt=""></p>
-<h3 id="将语料转化成ELMo-embedding"><a href="#将语料转化成ELMo-embedding" class="headerlink" title="将语料转化成ELMo embedding"></a>将语料转化成ELMo embedding</h3><p>由于我们有了vocab_file、与vocab_file一一对应的embedding h5py文件、以及language model的weights.hdf5和options.json。<br>接下来参考usage_token.py将一句话转化成ELMo embedding。</p>
-<p>参考代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> bilm <span class="keyword">import</span> TokenBatcher, BidirectionalLanguageModel, weight_layers, \</span><br><span class="line">    dump_token_embeddings</span><br><span class="line"></span><br><span class="line"><span class="comment"># Our small dataset.</span></span><br><span class="line">raw_context = [</span><br><span class="line">    <span class="string">'这 是 测试 .'</span>,</span><br><span class="line">    <span class="string">'好的 .'</span></span><br><span class="line">]</span><br><span class="line">tokenized_context = [sentence.split() <span class="keyword">for</span> sentence <span class="keyword">in</span> raw_context]</span><br><span class="line">tokenized_question = [</span><br><span class="line">    [<span class="string">'这'</span>, <span class="string">'是'</span>, <span class="string">'什么'</span>],</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">vocab_file=<span class="string">'/home/zhlin/bilm-tf/glove_embedding_vocab8.10/vocab.txt'</span></span><br><span class="line">options_file=<span class="string">'/home/zhlin/bilm-tf/try/options.json'</span></span><br><span class="line">weight_file=<span class="string">'/home/zhlin/bilm-tf/try/weights.hdf5'</span></span><br><span class="line">token_embedding_file=<span class="string">'/home/zhlin/bilm-tf/glove_embedding_vocab8.10/vocab_embedding.hdf5'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Now we can do inference.</span></span><br><span class="line"><span class="comment"># Create a TokenBatcher to map text to token ids.</span></span><br><span class="line">batcher = TokenBatcher(vocab_file)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Input placeholders to the biLM.</span></span><br><span class="line">context_token_ids = tf.placeholder(<span class="string">'int32'</span>, shape=(<span class="keyword">None</span>, <span class="keyword">None</span>))</span><br><span class="line">question_token_ids = tf.placeholder(<span class="string">'int32'</span>, shape=(<span class="keyword">None</span>, <span class="keyword">None</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Build the biLM graph.</span></span><br><span class="line">bilm = BidirectionalLanguageModel(</span><br><span class="line">    options_file,</span><br><span class="line">    weight_file,</span><br><span class="line">    use_character_inputs=<span class="keyword">False</span>,</span><br><span class="line">    embedding_weight_file=token_embedding_file</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get ops to compute the LM embeddings.</span></span><br><span class="line">context_embeddings_op = bilm(context_token_ids)</span><br><span class="line">question_embeddings_op = bilm(question_token_ids)</span><br><span class="line"></span><br><span class="line">elmo_context_input = weight_layers(<span class="string">'input'</span>, context_embeddings_op, l2_coef=<span class="number">0.0</span>)</span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">''</span>, reuse=<span class="keyword">True</span>):</span><br><span class="line">    <span class="comment"># the reuse=True scope reuses weights from the context for the question</span></span><br><span class="line">    elmo_question_input = weight_layers(</span><br><span class="line">        <span class="string">'input'</span>, question_embeddings_op, l2_coef=<span class="number">0.0</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">elmo_context_output = weight_layers(</span><br><span class="line">    <span class="string">'output'</span>, context_embeddings_op, l2_coef=<span class="number">0.0</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">''</span>, reuse=<span class="keyword">True</span>):</span><br><span class="line">    <span class="comment"># the reuse=True scope reuses weights from the context for the question</span></span><br><span class="line">    elmo_question_output = weight_layers(</span><br><span class="line">        <span class="string">'output'</span>, question_embeddings_op, l2_coef=<span class="number">0.0</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="comment"># It is necessary to initialize variables once before running inference.</span></span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Create batches of data.</span></span><br><span class="line">    context_ids = batcher.batch_sentences(tokenized_context)</span><br><span class="line">    question_ids = batcher.batch_sentences(tokenized_question)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute ELMo representations (here for the input only, for simplicity).</span></span><br><span class="line">    elmo_context_input_, elmo_question_input_ = sess.run(</span><br><span class="line">        [elmo_context_input[<span class="string">'weighted_op'</span>], elmo_question_input[<span class="string">'weighted_op'</span>]],</span><br><span class="line">        feed_dict=&#123;context_token_ids: context_ids,</span><br><span class="line">                   question_token_ids: question_ids&#125;</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">print(elmo_context_input_,elmo_context_input_)</span><br></pre></td></tr></table></figure></p>
-<p>可以修改代码以适应自己的需求。</p>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://github.com/allenai/bilm-tf" target="_blank" rel="noopener">https://github.com/allenai/bilm-tf</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/12/代码相关/代码分享4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/12/代码相关/代码分享4/" itemprop="url">代码片段记录4</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-12T11:20:30+08:00">
-                2018-08-12
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-23T09:30:20+08:00">
-                2018-09-23
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本周没有什么代码要记录的。</p>
-<h3 id="1️⃣sklearn之Pipeline例子"><a href="#1️⃣sklearn之Pipeline例子" class="headerlink" title="1️⃣sklearn之Pipeline例子"></a>1️⃣sklearn之Pipeline例子</h3><p>用机器学习解决问题的流程：<br>(去掉部分数据）—&gt; 获取feature（Tf-idf等） —&gt; （feature selection，chi2、互信息等） —&gt; （缩放/正则化） —&gt; 分类器 —&gt; GridSearch/RandomizedSearch调参</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pipe=Pipeline([     <span class="comment">#建立pipeline</span></span><br><span class="line">    (<span class="string">'vect'</span>,TfidfVectorizer()),</span><br><span class="line">    (<span class="string">'select'</span>,SelectKBest(chi2),</span><br><span class="line">    (<span class="string">'norm'</span>,MaxAbsScaler()),   </span><br><span class="line">    (<span class="string">'svm'</span>,svm.LinearSVC())</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">parameters=&#123;</span><br><span class="line">    <span class="string">'vect__ngram_range'</span>:[(<span class="number">1</span>,<span class="number">1</span>),(<span class="number">1</span>,<span class="number">2</span>),(<span class="number">1</span>,<span class="number">3</span>),(<span class="number">2</span>,<span class="number">3</span>)],</span><br><span class="line">    <span class="string">'vect__max_df'</span>:[<span class="number">0.6</span>,<span class="number">0.7</span>,<span class="number">0.8</span>,<span class="number">0.9</span>],</span><br><span class="line">    <span class="string">'vect__min_df'</span>:[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>],</span><br><span class="line">    <span class="string">'vect__norm'</span>:[<span class="string">'l1'</span>,<span class="string">'l2'</span>],</span><br><span class="line">    <span class="string">'svm__penalty'</span>:[<span class="string">'l1'</span>,<span class="string">'l2'</span>],</span><br><span class="line">    <span class="string">'svm__loss'</span>:[<span class="string">'squared_hinge'</span>],  </span><br><span class="line">    <span class="string">'svm__dual'</span>:[<span class="keyword">False</span>,<span class="keyword">True</span>],</span><br><span class="line">    <span class="string">'svm__tol'</span>:[<span class="number">1e-5</span>,<span class="number">1e-4</span>],</span><br><span class="line">    <span class="string">'svm__C'</span>:[<span class="number">0.1</span>,<span class="number">0.2</span>,<span class="number">0.3</span>,<span class="number">0.4</span>,<span class="number">0.5</span>,<span class="number">0.6</span>,<span class="number">0.7</span>,<span class="number">0.8</span>,<span class="number">0.9</span>,<span class="number">1.0</span>,<span class="number">1.1</span>],</span><br><span class="line">    <span class="string">'svm__class_weight'</span>:[<span class="keyword">None</span>,<span class="string">'balanced'</span>],</span><br><span class="line">    <span class="string">'svm__max_iter'</span>:[<span class="number">1000</span>,<span class="number">5000</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">grid_search_model=GridSearchCV(pipe,parameters,error_score=<span class="number">0</span>,n_jobs=<span class="number">5</span>)</span><br><span class="line">grid_search_model.fit(train[column],train[<span class="string">'class'</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> para_name <span class="keyword">in</span> sorted(parameters.keys()):</span><br><span class="line">    print(para_name,grid_search_model.best_params_[para_name])</span><br><span class="line"></span><br><span class="line">print(<span class="string">"cv_result:"</span>)</span><br><span class="line">print(grid_search_model.cv_results_)</span><br></pre></td></tr></table></figure>
-<hr>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/12/碎片知识/每周碎片知识3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/12/碎片知识/每周碎片知识3/" itemprop="url">每周碎片知识3</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-12T10:13:37+08:00">
-                2018-08-12
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:16+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1️⃣[Python]<br>在服务器上跑代码时，如 <code>python project/folder1/a.py</code>，如果a.py引用了一个自定义的模块但又不在folder1内，此时interpreter就会报错，提示找不到该模块。这是因为解释器默认只会在同一个folder下查找。解决方案是在运行前显式添加查找范围。如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PYTHONPATH=/home/zhlin/bilm-tf:<span class="variable">$PYTHONPATH</span></span><br></pre></td></tr></table></figure></p>
-<p>那么python解释器就会到该目录下去找。</p>
-<hr>
-<p>2️⃣[度量标准]<br><img src="/images/2018-08-12-15340420442670.jpg" alt=""></p>
-<ul>
-<li>准确率(accuracy):  $ACC=\frac{TP+TN}{TP+TN+FP+FN}$<br> 衡量的是分类器预测准确的比例</li>
-<li>召回率(recall): $Recall=\frac{TP}{TP+FN}$<br>  正例中被分对的比例，衡量了分类器对正例的识别能力。</li>
-<li>精确率(Precision): $P=\frac{TP}{TP+FP}$<br>度量了被分为正例的示例中实际为正例的比例。</li>
-<li>F-Measure: $F=\frac{(\alpha^2 +1)P*R}{\alpha^2 (P+R)}$<br>  其中P是Precision,R是Recall。综合考量了两种度量。<br>  当$\alpha=1$时，称为F1值 $F1=\frac{2PR}{P+R}$</li>
-</ul>
-<hr>
-<p>3️⃣[调参技巧]<br>在google发布的一份关于text-classification的<a href="https://developers.google.com/machine-learning/guides/text-classification/" target="_blank" rel="noopener">guide</a>中，提到了几个调参的trick。</p>
-<ol>
-<li>在feature selection步骤中，卡方检验chi2和方差分析的F值 f_classif的表现相当，在大约选择20k的feature时，准确率达到顶峰，当feature越多，效果并没有提升甚至会下降。<br><img src="/images/2018-08-12-15340434326365.jpg" width="90%" height="50%"></li>
-<li>在文本分类中，似乎使用normalization并没有多少用处，建议跳过。<blockquote>
-<p>Normalization converts all feature/sample values to small and similar values. This simplifies gradient descent convergence in learning algorithms. From what we have seen, normalization during data preprocessing does not seem to add much value in text classification problems; we recommend skipping this step.</p>
-</blockquote>
-</li>
-</ol>
-<p>实际上我也测试过，发现确实normalization对于准确率的提高没什么帮助，甚至还有一点下降。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1910,7 +1881,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">132</span>
+                  <span class="site-state-item-count">137</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1923,7 +1894,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">155</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
