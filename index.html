@@ -286,6 +286,150 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/05/07/杂七杂八/Mac上很好用的软件推荐/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/07/杂七杂八/Mac上很好用的软件推荐/" itemprop="url">Mac上很好用的软件推荐</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-07T17:12:13+08:00">
+                2019-05-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-05-08T09:45:38+08:00">
+                2019-05-08
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          记录个人觉得很好用的Mac软件，让Mac作为（程序员👨‍💻‍/科研人员👨‍🔬）生产力工具更顺手，提升生产效率。
+[Alfred3]网上有太多推荐Alfred的了，我主要是用Alfred做一些常规操作，如打开/搜索文件，文本扩展等，以及一些workflow，如有道翻译。
+
+[SwitchResX]用于显示器的调整，对于我而言主要用于外接屏幕开启HiDPI。非常好用！
+
+如何开启HiDPI：https://www.zhihu.com/question/35300978/answer/126332986
+[gfxCardStatus]用于切换外接显卡和独立显卡。能够在menu bar上调整，
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/07/杂七杂八/Mac上很好用的软件推荐/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/05/07/代码相关/关于transformer-xl中rel-shift实现的解读/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -369,30 +513,16 @@
       
         
           
-            <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>transformer-xl中有一步使用相对位置计算attention weight：</p>
-<p>$\mathbf{A}_{i, j}^{\mathrm{rel}}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, E} \mathbf{E}_{x_{j}}}_{(a)}+\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{i-j}}_{(b)}+\underbrace{u^{\top} \mathbf{W}_{k, E} \mathbf{E}_{x_{j}}}_{(c)}+\underbrace{v^{\top} \mathbf{W}_{k, R} \mathbf{R}_{i-j}}_{(d)}$</p>
-<p>由于相对位置要计算所有的query与key对，因此是平方的复杂度。而在论文的附录中提到可以通过简单的推导将复杂度降为线性。<br>简单地说，我们希望获得：<br>$\mathbf{B} = \left[ \begin{array}{cccccc}{q_{0}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{M}} &amp; {\cdots} &amp; {q_{0}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{0}} &amp; {0} &amp; {\cdots} &amp; {0} \\ {q_{1}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{M+1}} &amp; {\cdots} &amp; {q_{1}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{1}} &amp; {q_{1}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{0}} &amp; {\cdots} &amp; {0} \\ {\vdots} &amp; {\vdots} &amp; {\vdots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots} \\ {q_{L-1}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{M+L-1}} &amp; {\cdots} &amp; {q_{L-1}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{M+L-1}} &amp; {q_{L-1}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{L-1}} &amp; {\cdots} &amp; {q_{L-1}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{0}}\end{array}\right] \\  = \left[ \begin{array}{cccccc}{q_{0}^{\top} \mathbf{Q}_{L-1}} &amp; {\cdots} &amp; {q_{0}^{\top} \mathbf{Q}_{M+L-1}} &amp; {0} &amp; {\cdots} &amp; {0} \\ {q_{1}^{\top} \mathbf{Q}_{L-2}} &amp; {\cdots} &amp; {q_{1}^{\top} \mathbf{Q}_{M+L-2}} &amp; {q_{1}^{\top} \mathbf{Q}_{M+L-1}} &amp; {\cdots} &amp; {0} \\ {\vdots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots} \\ {q_{L-1}^{\top} \mathbf{Q}_{0}} &amp; {\cdots} &amp; {q_{L-1}^{\top} \mathbf{Q}_{M}} &amp; {q_{L-1}^{\top} \mathbf{Q}_{M+1}} &amp; {\cdots} &amp; {q_{L-1}^{\top} \mathbf{Q}_{M+L-1}}\end{array}\right]$</p>
-<p>其中：<br>$\mathbf{Q} :=\left[ \begin{array}{c}{\mathbf{R}_{M+L-1}^{\top}} \\ {\mathbf{R}_{M+L-2}^{\top}} \\ {\vdots} \\ {\mathbf{R}_{1}^{\top}} \\ {\mathbf{R}_{0}^{\top}}\end{array}\right] \mathbf{W}_{k, R}^{\top}=\left[ \begin{array}{c}{\left[\mathbf{W}_{k, R} \mathbf{R}_{M+L-1}\right]^{\top}} \\ {\vdots} \\ {\vdots} \\ {\left[\mathbf{W}_{k, R} \mathbf{R}_{1}\right]^{\top}} \\ {\left[\mathbf{W}_{k, R} \mathbf{R}_{0}\right]^{\top}}\end{array}\right] \in \mathbb{R}^{(M+L) \times d}$</p>
-<p>而我们可以直接获得的是：<br>$\tilde{\mathbf{B}}=\mathbf{q} \mathbf{Q}^{\top}=\left[ \begin{array}{cccccc}{q_{0}^{\top} \mathbf{Q}_{0}} &amp; {\cdots} &amp; {q_{0}^{\top} \mathbf{Q}_{M}} &amp; {q_{0}^{\top} \mathbf{Q}_{M+1}} &amp; {\cdots} &amp; {q_{0}^{\top} \mathbf{Q}_{M+L-1}} \\ {q_{1}^{\top} \mathbf{Q}_{0}} &amp; {\cdots} &amp; {q_{1}^{\top} \mathbf{Q}_{M}} &amp; {q_{1}^{\top} \mathbf{Q}_{M+1}} &amp; {\cdots} &amp; {q_{1}^{\top} \mathbf{Q}_{M+L-1}} \\ {\vdots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots} \\ {q_{L-1}^{\top} \mathbf{Q}_{0}} &amp; {\cdots} &amp; {q_{L-1}^{\top} \mathbf{Q}_{M}} &amp; {q_{L-1}^{\top} \mathbf{Q}_{M+1}} &amp; {\cdots} &amp; {q_{L-1}^{\top} \mathbf{Q}_{M+L-1}}\end{array}\right]<br>$</p>
-<p>$\tilde{\mathbf{B}}$与$\mathbf{B}$的区别在于$\tilde{\mathbf{B}}$是$\mathbf{B}$的left-shifted版本，其中第一行左移了L-1，后面每行依次递减左移个数，最后一行则不左移。</p>
-<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>抽象地看，我们要做的事情就是，给定一个矩阵，每行都进行左移，而移动的个数随行数递增而递减。</p>
-<p>我目前想到的一种方法是使用gather，将想要的index提前定好，然后使用Pytorch的gather就能够实现。</p>
-<p>而transformer-xl实现了另一种更好的方法：<code>_rel_shift</code>。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_rel_shift</span><span class="params">(self, x, zero_triu=False)</span>:</span></span><br><span class="line">    <span class="comment"># x: q,k,bs,n_head</span></span><br><span class="line">    zero_pad = torch.zeros((x.size(<span class="number">0</span>), <span class="number">1</span>, *x.size()[<span class="number">2</span>:]),</span><br><span class="line">                           device=x.device, dtype=x.dtype)</span><br><span class="line">    x_padded = torch.cat([zero_pad, x], dim=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    x_padded = x_padded.view(x.size(<span class="number">1</span>) + <span class="number">1</span>, x.size(<span class="number">0</span>), *x.size()[<span class="number">2</span>:])</span><br><span class="line"></span><br><span class="line">    x = x_padded[<span class="number">1</span>:].view_as(x)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
-<p>第一步是，将x的第一列填上padding，此时<code>x.size()=q,k+1,bs,n_head</code>，接下来将其重新reshape，则变成了<code>x.size()=k+1,q,bs,n_head</code>，最后将第一行去掉，变成<code>x.size()=k,q,bs,n_head</code>，再将其reshape回x原来的样子。</p>
-<p>为什么这么做实现了我们想要的左移的功能？我们应该从一维的角度去理解。因为实际上在内存中所有元素都是按照一维去排列的。</p>
-<p>原来的矩阵：<br><img src="/images/15572009149790.jpg" width="60%" height="50%"></p>
-<p>实际上就是有q个key按照一行去排列。</p>
-<p>在做完padding之后，则：<br><img src="/images/15572009689231.jpg" width="60%" height="50%"></p>
-<p>实际上就是在每个key前面插入了0。</p>
-<p>接下来view，实际上数据的先后顺序还是没有变（因为不是transpose）：<br><img src="/images/15572010355613.jpg" width="60%" height="50%"></p>
-<p>实际上只是强行将该行切成一个一个q而已。</p>
-<p>那么最后一个操作，将第一行丢掉，实际上就是要把原来的x的第一行强行左移q-1个（因为有padding）。那么为什么后面的行能够左移的个数依次减少？别忘了padding，第一行左移了q-1个，但第二个key前面也有一个padding，所以相当于将其向右推了一格；第三个又有一个padding，就在原来的基础上又推了一格，也即推了两格。因此最后达到了我们想要的目的。</p>
-<p>实际上要理解该方法，需要牢牢把握数据存储的本质是一整行。</p>
-<p>该方法没有数据的拷贝，全部都是view操作，因此更高效。</p>
-<p>不得不佩服想到该方法的人的工程能力，同时也感谢戴宁带我理解该方法的本质，一开始我是死活不理解的。以后或许可以将该思想灵活应用到其他方面。</p>
-
-          
+          背景transformer-xl中有一步使用相对位置计算attention weight：
+$\mathbf{A}_{i, j}^{\mathrm{rel}}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, E} \mathbf{E}_{x_{j}}}_{(a)}+\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{i-j}}_{(b)}+\underbrace{u^
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/07/代码相关/关于transformer-xl中rel-shift实现的解读/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -522,15 +652,17 @@
       
         
           
-            <p>前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。<br>如：<br><img src="/images/15571956719188.jpg" width="80%" height="50%"></p>
-<p><del>找了一圈网上没有找到其原因，已经在论坛提问了。</del><br>我的解决方案是显式对其进行初始化：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> args.init == <span class="string">'uniform'</span>:</span><br><span class="line">    nn.init.uniform_(self.u, -args.init_range, args.init_range)</span><br><span class="line">    nn.init.uniform_(self.v, -args.init_range, args.init_range)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> args.init == <span class="string">'normal'</span>:</span><br><span class="line">    nn.init.normal_(self.u, <span class="number">0.0</span>, args.init_std)</span><br><span class="line">    nn.init.normal_(self.v, <span class="number">0.0</span>, args.init_std)</span><br></pre></td></tr></table></figure>
-<hr>
-<p>原来是torch.Tensor的锅，torch.Tensor会分配内存空间，但不会清空该空间的值，因此里面可能会有奇怪的值。正确的做法应该是：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">torch.nn.Parameter(torch.rand(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">torch.nn.Parameter(torch.zeros(<span class="number">10</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-<p>参考资料：<br><a href="https://discuss.pytorch.org/t/nan-in-torch-tensor/8987" target="_blank" rel="noopener">https://discuss.pytorch.org/t/nan-in-torch-tensor/8987</a></p>
-
-          
+          前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。如：
+找了一圈网上没有找到其原因，已经在论坛提问了。我的解决方案是显式对其进行初始化：
+1234567if args.init == 'uniform':    nn.init.uniform_(self.u, -args.init_range, args.init_range)    nn.init.uniform_(self.v, -args.init_range, args.init_range)elif args.init == 'normal':    nn.init.norm
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -660,9 +792,16 @@
       
         
           
-            <h3 id="1️⃣-Pytorch检查tensor-nan"><a href="#1️⃣-Pytorch检查tensor-nan" class="headerlink" title="1️⃣[Pytorch检查tensor nan]"></a>1️⃣[Pytorch检查tensor nan]</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 法一，基于nan!=nan </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.tensor([<span class="number">1</span>, <span class="number">2</span>, np.nan])</span><br><span class="line">tensor([  <span class="number">1.</span>,   <span class="number">2.</span>, nan.])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x != x</span><br><span class="line">tensor([ <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">1</span>], dtype=torch.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 法二，torch.isnan(x)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.isnan(x)</span><br><span class="line">tensor([ <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">1</span>], dtype=torch.uint8)</span><br></pre></td></tr></table></figure>
+          1️⃣[Pytorch检查tensor nan]12345678910# 法一，基于nan!=nan &gt;&gt;&gt; x = torch.tensor([1, 2, np.nan])tensor([  1.,   2., nan.])&gt;&gt;&gt; x != xtensor([ 0,  0,  1], dtype=torch.uint8)# 法二，torch.isnan(x)&gt;&gt;&gt; torch.isnan(x)tensor([ 0,  0,  1], dtype=torch.uint8)
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/06/代码相关/代码记录16/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -792,36 +931,20 @@
       
         
           
-            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>①<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.gather(input, dim, index, out=<span class="keyword">None</span>) → Tensor</span><br></pre></td></tr></table></figure></p>
-<p>能够根据index的值在指定维度收集数值。可以用于切slice。</p>
-<p>②<br>expand和repeat不同，不会分配新的内存。如果一个tensor使用expand再cat到其他tensor上，这个expand还会省内存吗？<br>不会。<br>在cat的时候会重新分配整个tensor的内存，并且将元素一个一个copy过去。</p>
-<p><a href="https://discuss.pytorch.org/t/efficiency-of-torch-cat/8830" target="_blank" rel="noopener">https://discuss.pytorch.org/t/efficiency-of-torch-cat/8830</a></p>
-<blockquote>
-<p>it pre-allocates the full tensor and then copy into it each element</p>
-</blockquote>
-<p>③</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.einsum(equation, *operands) → Tensor</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>This function provides a way of computing multilinear expressions (i.e. sums of products) using the Einstein summation convention.</p>
-</blockquote>
-<p>发现一个神奇的api，Pytorch支持爱因斯坦求和约定(Einstein summation convention)。也即在给定两个tensor时，可以指定维度进行求和，相当灵活，可以理解成bmm或者mm的扩展版，这样在做一些tensor之间的操作就不需要view/permute调整成bmm支持的格式了。</p>
-<p>官方例子：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.randn(<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y = torch.randn(<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.einsum(<span class="string">'i,j-&gt;ij'</span>, x, y)  <span class="comment"># outer product</span></span><br><span class="line">tensor([[<span class="number">-0.0570</span>, <span class="number">-0.0286</span>, <span class="number">-0.0231</span>,  <span class="number">0.0197</span>],</span><br><span class="line">        [ <span class="number">1.2616</span>,  <span class="number">0.6335</span>,  <span class="number">0.5113</span>, <span class="number">-0.4351</span>],</span><br><span class="line">        [ <span class="number">1.4452</span>,  <span class="number">0.7257</span>,  <span class="number">0.5857</span>, <span class="number">-0.4984</span>],</span><br><span class="line">        [<span class="number">-0.4647</span>, <span class="number">-0.2333</span>, <span class="number">-0.1883</span>,  <span class="number">0.1603</span>],</span><br><span class="line">        [<span class="number">-1.1130</span>, <span class="number">-0.5588</span>, <span class="number">-0.4510</span>,  <span class="number">0.3838</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>A = torch.randn(<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l = torch.randn(<span class="number">2</span>,<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = torch.randn(<span class="number">2</span>,<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.einsum(<span class="string">'bn,anm,bm-&gt;ba'</span>, l, A, r) <span class="comment"># compare torch.nn.functional.bilinear</span></span><br><span class="line">tensor([[<span class="number">-0.3430</span>, <span class="number">-5.2405</span>,  <span class="number">0.4494</span>],</span><br><span class="line">        [ <span class="number">0.3311</span>,  <span class="number">5.5201</span>, <span class="number">-3.0356</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>As = torch.randn(<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Bs = torch.randn(<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.einsum(<span class="string">'bij,bjk-&gt;bik'</span>, As, Bs) <span class="comment"># batch matrix multiplication</span></span><br><span class="line">tensor([[[<span class="number">-1.0564</span>, <span class="number">-1.5904</span>,  <span class="number">3.2023</span>,  <span class="number">3.1271</span>],</span><br><span class="line">         [<span class="number">-1.6706</span>, <span class="number">-0.8097</span>, <span class="number">-0.8025</span>, <span class="number">-2.1183</span>]],</span><br><span class="line"></span><br><span class="line">        [[ <span class="number">4.2239</span>,  <span class="number">0.3107</span>, <span class="number">-0.5756</span>, <span class="number">-0.2354</span>],</span><br><span class="line">         [<span class="number">-1.4558</span>, <span class="number">-0.3460</span>,  <span class="number">1.5087</span>, <span class="number">-0.8530</span>]],</span><br><span class="line"></span><br><span class="line">        [[ <span class="number">2.8153</span>,  <span class="number">1.8787</span>, <span class="number">-4.3839</span>, <span class="number">-1.2112</span>],</span><br><span class="line">         [ <span class="number">0.3728</span>, <span class="number">-2.1131</span>,  <span class="number">0.0921</span>,  <span class="number">0.8305</span>]]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>A = torch.randn(<span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.einsum(<span class="string">'ii-&gt;i'</span>, A) <span class="comment"># diagonal</span></span><br><span class="line">tensor([<span class="number">-0.7825</span>,  <span class="number">0.8291</span>, <span class="number">-0.1936</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>A = torch.randn(<span class="number">4</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.einsum(<span class="string">'...ii-&gt;...i'</span>, A) <span class="comment"># batch diagonal</span></span><br><span class="line">tensor([[<span class="number">-1.0864</span>,  <span class="number">0.7292</span>,  <span class="number">0.0569</span>],</span><br><span class="line">        [<span class="number">-0.9725</span>, <span class="number">-1.0270</span>,  <span class="number">0.6493</span>],</span><br><span class="line">        [ <span class="number">0.5832</span>, <span class="number">-1.1716</span>, <span class="number">-1.5084</span>],</span><br><span class="line">        [ <span class="number">0.4041</span>, <span class="number">-1.1690</span>,  <span class="number">0.8570</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>A = torch.randn(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.einsum(<span class="string">'...ij-&gt;...ji'</span>, A).shape <span class="comment"># batch permute</span></span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">4</span>])</span><br></pre></td></tr></table></figure>
-<p>我对这个api一般的用法就是，将两个tensor的每一维用不同的记号标号，然后想一下我想要的tensor的格式，按照记号写下就可以直接得到了。</p>
-<p>④<br>squeeze在使用的时候尽量指定维度，否则可能会出现在训练最后一个batch时，batch_size正好是1，就把batch_size给squeeze掉了。（已经两次遇到这样的bug了）</p>
-<p>⑤</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apply(fn)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Applies fn recursively to every submodule (as returned by .children()) as well as self. Typical use includes initializing the parameters of a model (see also torch-nn-init).</p>
-</blockquote>
-<p>可以用于所有的子模块的初始化，好像很方便的样子。但我突然想到这种方法可能会不小心把embedding初始化给覆盖了，如果embedding有用pretrain初始化的话。</p>
-<p>官方例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">init_weights</span><span class="params">(m)</span>:</span></span><br><span class="line">        print(m)</span><br><span class="line">        <span class="keyword">if</span> type(m) == nn.Linear:</span><br><span class="line">            m.weight.data.fill_(<span class="number">1.0</span>)</span><br><span class="line">            print(m.weight)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>net = nn.Sequential(nn.Linear(<span class="number">2</span>, <span class="number">2</span>), nn.Linear(<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>net.apply(init_weights)</span><br><span class="line">Linear(in_features=<span class="number">2</span>, out_features=<span class="number">2</span>, bias=<span class="keyword">True</span>)</span><br><span class="line">Parameter containing:</span><br><span class="line">tensor([[ <span class="number">1.</span>,  <span class="number">1.</span>],</span><br><span class="line">        [ <span class="number">1.</span>,  <span class="number">1.</span>]])</span><br><span class="line">Linear(in_features=<span class="number">2</span>, out_features=<span class="number">2</span>, bias=<span class="keyword">True</span>)</span><br><span class="line">Parameter containing:</span><br><span class="line">tensor([[ <span class="number">1.</span>,  <span class="number">1.</span>],</span><br><span class="line">        [ <span class="number">1.</span>,  <span class="number">1.</span>]])</span><br><span class="line">Sequential(</span><br><span class="line">  (<span class="number">0</span>): Linear(in_features=<span class="number">2</span>, out_features=<span class="number">2</span>, bias=<span class="keyword">True</span>)</span><br><span class="line">  (<span class="number">1</span>): Linear(in_features=<span class="number">2</span>, out_features=<span class="number">2</span>, bias=<span class="keyword">True</span>)</span><br><span class="line">)</span><br><span class="line">Sequential(</span><br><span class="line">  (<span class="number">0</span>): Linear(in_features=<span class="number">2</span>, out_features=<span class="number">2</span>, bias=<span class="keyword">True</span>)</span><br><span class="line">  (<span class="number">1</span>): Linear(in_features=<span class="number">2</span>, out_features=<span class="number">2</span>, bias=<span class="keyword">True</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
-<h3 id="2️⃣-bpc"><a href="#2️⃣-bpc" class="headerlink" title="2️⃣[bpc]"></a>2️⃣[bpc]</h3><p>bits per character(bpc)是language model一个评价指标，另一个常用指标是ppl（困惑度）。实际上bpc和ppl都是和交叉熵挂钩的，其计算公式为：</p>
-<script type="math/tex; mode=display">\begin{aligned} b p c(s t r i n g)=\frac{1}{T} \sum_{t=1}^{T} H\left(P_{t}, \hat{P}_{t}\right) &=-\frac{1}{T} \sum_{t=1}^{T} \sum_{c=1}^{n} P_{t}(c) \log _{2} \hat{P}_{t}(c) \\ &=-\frac{1}{T} \sum_{t=1}^{T} \log _{2} \hat{P}_{t}\left(x_{t}\right) \end{aligned}</script><p>在代码中计算交叉熵的loss是以e为底的，因此需要将loss除以$\log _{e}2$即可（log的换底公式）。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cur_loss / math.log(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<p><a href="https://stats.stackexchange.com/questions/211858/how-to-compute-bits-per-character-bpc" target="_blank" rel="noopener">https://stats.stackexchange.com/questions/211858/how-to-compute-bits-per-character-bpc</a><br><a href="https://arxiv.org/pdf/1308.0850.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1308.0850.pdf</a></p>
+          1️⃣[Pytorch]①1torch.gather(input, dim, index, out=None) → Tensor
+能够根据index的值在指定维度收集数值。可以用于切slice。
+②expand和repeat不同，不会分配新的内存。如果一个tensor使用expand再cat到其他tensor上，这个expand还会省内存吗？不会。在cat的时候会重新分配整个tensor的内存，并且将元素一个一个copy过去。
+https://discuss.pytorch.org/t/efficiency-of-torch-cat/8830
 
-          
+it pre-allocates the ful
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/06/碎片知识/每周碎片知识20/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -951,11 +1074,18 @@
       
         
           
-            <h3 id="1️⃣-观书"><a href="#1️⃣-观书" class="headerlink" title="1️⃣ 观书"></a>1️⃣ 观书</h3><p>[明] 于谦<br>书卷多情似故人，晨昏忧乐每相亲。<br>眼前直下三千字，胸次全无一点尘。<br>活水源流随处满，东风花柳逐时新。<br><strong>金鞍玉勒寻芳客，未信吾庐别有春。</strong></p>
-<p><a href="http://lib.xcz.im/work/582ee1a2da2f600063ec45ea" target="_blank" rel="noopener">http://lib.xcz.im/work/582ee1a2da2f600063ec45ea</a></p>
-<hr>
+          1️⃣ 观书[明] 于谦书卷多情似故人，晨昏忧乐每相亲。眼前直下三千字，胸次全无一点尘。活水源流随处满，东风花柳逐时新。金鞍玉勒寻芳客，未信吾庐别有春。
+http://lib.xcz.im/work/582ee1a2da2f600063ec45ea
+
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/05/诗词&句/每周诗词24/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1085,50 +1215,21 @@
       
         
           
-            <p>本周论文：</p>
-<ol>
-<li>PHRASE-BASED ATTENTIONS</li>
-<li>Regularizing and Optimizing LSTM Language Models</li>
-</ol>
-<h2 id="1️⃣-PHRASE-BASED-ATTENTIONS"><a href="#1️⃣-PHRASE-BASED-ATTENTIONS" class="headerlink" title="1️⃣[PHRASE-BASED ATTENTIONS]"></a>1️⃣[PHRASE-BASED ATTENTIONS]</h2><p>这篇投了ICLR但没中。<br>提出对Transformer的attention机制进行改进，以词组为单位进行attention，引入词组的对齐来提升翻译表现。提出的想法也是比较简单直观的。</p>
-<p>回顾：<br>transformer的做法：<br>$\begin{aligned} \text { Attention }\left(\boldsymbol{Q}, \boldsymbol{K}, \boldsymbol{V}, \boldsymbol{W}_{q}, \boldsymbol{W}_{k}, \boldsymbol{W}_{v}\right) &amp;=\mathcal{S}\left(\frac{\left(\boldsymbol{Q} \boldsymbol{W}_{q}\right)\left(\boldsymbol{K} \boldsymbol{W}_{k}\right)^{T}}{\sqrt{d_{k}}}\right)\left(\boldsymbol{V} \boldsymbol{W}_{v}\right) \\ \text { Head }^{i} &amp;=\text { Attention }\left(\boldsymbol{Q}, \boldsymbol{K}, \boldsymbol{V}, \boldsymbol{W}_{q}^{i}, \boldsymbol{W}_{k}^{i}, \boldsymbol{W}_{v}^{i}\right) \text { for } i=1 \ldots h \\ \text { AttentionOutput }(\boldsymbol{Q}, \boldsymbol{K}, \boldsymbol{V}, \boldsymbol{W}) &amp;=\text { concat (Head}^{1}, \text { Head}^{2}, \ldots, \text { Head}^{h} ) \boldsymbol{W} \end{aligned}<br>$</p>
-<h3 id="模型介绍"><a href="#模型介绍" class="headerlink" title="模型介绍"></a>模型介绍</h3><h4 id="PHRASE-BASED-ATTENTION-METHODS"><a href="#PHRASE-BASED-ATTENTION-METHODS" class="headerlink" title="PHRASE-BASED ATTENTION METHODS"></a>PHRASE-BASED ATTENTION METHODS</h4><p>其本质是使用CNN操作使得词有phrase的信息。也即：</p>
-<script type="math/tex; mode=display">O_{t}=\mathbf{w} \oplus_{k=0}^{n} \mathbf{x}_{t \pm k}</script><p>下面使用$\operatorname{Conv}_{n}(\boldsymbol{X}, \boldsymbol{W})$代表$\boldsymbol{W}$对$\boldsymbol{X}$进行卷积操作。其中$\boldsymbol{W} \in \mathbb{R}^{n \times d_{1} \times d_{2}}$</p>
-<p>接下来提出两种方法。</p>
-<h5 id="KEY-VALUE-CONVOLUTION"><a href="#KEY-VALUE-CONVOLUTION" class="headerlink" title="KEY-VALUE CONVOLUTION"></a>KEY-VALUE CONVOLUTION</h5><script type="math/tex; mode=display">\operatorname{Conv} \mathrm{KV}(\boldsymbol{Q}, \boldsymbol{K}, \boldsymbol{V})=\mathcal{S}\left(\frac{\left(\boldsymbol{Q} \boldsymbol{W}_{q}\right) \operatorname{Conv}_{n}\left(\boldsymbol{K}, \boldsymbol{W}_{k}\right)^{T}}{\sqrt{d_{k}}}\right) \operatorname{Conv}_{n}\left(\boldsymbol{V}, \boldsymbol{W}_{v}\right)</script><p>Q不变，只对K和V进行卷积。</p>
-<h5 id="QUERY-AS-KERNEL-CONVOLUTION"><a href="#QUERY-AS-KERNEL-CONVOLUTION" class="headerlink" title="QUERY AS-KERNEL CONVOLUTION"></a>QUERY AS-KERNEL CONVOLUTION</h5><script type="math/tex; mode=display">\operatorname{QUERYK}(\boldsymbol{Q}, \boldsymbol{K}, \boldsymbol{V})=\mathcal{S}\left(\frac{\operatorname{Conv}_{n}\left(\boldsymbol{K} \boldsymbol{W}_{k}, \boldsymbol{Q} \boldsymbol{W}_{q}\right)}{\sqrt{d_{k} * n}}\right) \operatorname{Conv}_{n}\left(\boldsymbol{V}, \boldsymbol{W}_{v}\right)</script><p>将Q作为convolution的kernel参数进行卷积。$\boldsymbol{W}_{q} \in \mathbb{R}^{n \times d_{q} \times d_{k}}, \boldsymbol{W}_{k} \in \mathbb{R}^{d_{k} \times d_{k}}, \boldsymbol{W}_{v} \in \mathbb{R}^{n \times d_{v} \times d_{v}}$</p>
-<p>以上是基本形式，扩展到多个head可以有多种方法。</p>
-<h4 id="MULTI-HEADED-PHRASAL-ATTENTION"><a href="#MULTI-HEADED-PHRASAL-ATTENTION" class="headerlink" title="MULTI-HEADED PHRASAL ATTENTION"></a>MULTI-HEADED PHRASAL ATTENTION</h4><h5 id="HOMOGENEOUS-N-GRAM-ATTENTION"><a href="#HOMOGENEOUS-N-GRAM-ATTENTION" class="headerlink" title="HOMOGENEOUS N-GRAM ATTENTION"></a>HOMOGENEOUS N-GRAM ATTENTION</h5><p><img src="/images/15564587340044.jpg" width="90%" height="50%"></p>
-<p>每个head专注某种gram。但这样似乎不是很好，因为强行对某些head引入这种特性，有时候词与词之间没有这种关系，这样会带来噪声。</p>
-<h5 id="HETEROGENEOUS-N-GRAM-ATTENTION"><a href="#HETEROGENEOUS-N-GRAM-ATTENTION" class="headerlink" title="HETEROGENEOUS N-GRAM ATTENTION"></a>HETEROGENEOUS N-GRAM ATTENTION</h5><p><img src="/images/15564587795887.jpg" width="90%" height="50%"></p>
-<p>将所有的gram都同时attend。</p>
-<p>也即：</p>
-<script type="math/tex; mode=display">\mathcal{S}\left(\frac{\left(\boldsymbol{Q} \boldsymbol{W}_{q}\right)\left[\left(\boldsymbol{K} \boldsymbol{W}_{k, 1}\right)^{T} ; \operatorname{Conv}_{2}\left(\boldsymbol{K}, \boldsymbol{W}_{k, 2}\right)^{T} ; \ldots\right]}{\sqrt{d_{k}}}\right)\left[\left(\boldsymbol{V} \boldsymbol{W}_{v, 1}\right) ; \operatorname{Conv}_{2}\left(\boldsymbol{V}, \boldsymbol{W}_{v, 2}\right) ; \ldots\right]</script><p>或：</p>
-<script type="math/tex; mode=display">\mathcal{S}\left(\left[\frac{\left(\boldsymbol{Q} \boldsymbol{W}_{q, 1}\right)\left(\boldsymbol{K} \boldsymbol{W}_{k, 1}\right)^{T}}{\sqrt{d}} ; \frac{\operatorname{Conv}_{2}\left(\boldsymbol{K} \boldsymbol{W}_{k, 2}, \boldsymbol{Q} \boldsymbol{W}_{q, 2}\right)}{\sqrt{d * n_{2}}} ; \ldots\right]\right)\left[\left(\boldsymbol{V} \boldsymbol{W}_{v, 1}\right) ; \operatorname{Conv}_{2}\left(\boldsymbol{V}, \boldsymbol{W}_{v, 2}\right) ; \ldots\right]</script><h4 id="INTERLEAVED-PHRASES-TO-PHRASE-HETEROGENEOUS-ATTENTION"><a href="#INTERLEAVED-PHRASES-TO-PHRASE-HETEROGENEOUS-ATTENTION" class="headerlink" title="INTERLEAVED PHRASES TO PHRASE HETEROGENEOUS ATTENTION"></a>INTERLEAVED PHRASES TO PHRASE HETEROGENEOUS ATTENTION</h4><p>上面介绍的都是source端的phrase到target的token，有时候需要反过来，因此可以交叉地交互。<br><img src="/images/15564588967513.jpg" width="90%" height="50%"></p>
-<p>我们先对Q进行两种卷积，获得unigram和bigram。然后与KV的unigram与比bigram进行交叉。<br>$\boldsymbol{A}_{1, \mathrm{ConvKV}}=\mathcal{S}\left(\frac{\left(\boldsymbol{Q} \boldsymbol{W}_{q_{1}}\right)\left[\left(\boldsymbol{K} \boldsymbol{W}_{\boldsymbol{k}, 1}\right)^{T} ; \operatorname{Conv}_{2}\left(\boldsymbol{K}, \boldsymbol{W}_{k, 2}\right)^{T}\right]}{\sqrt{d_{k}}}\right)\left[\left(\boldsymbol{V} \boldsymbol{W}_{v, 1}\right) ; \operatorname{Conv}_{2}\left(\boldsymbol{V}, \boldsymbol{W}_{v, 2}\right)\right]$</p>
-<p>$\boldsymbol{A}_{2, \text {ConvKV }}=\mathcal{S}\left(\frac{\operatorname{Conv}_{2}\left(\boldsymbol{Q}, \boldsymbol{W}_{q_{2}}\right)\left[\left(\boldsymbol{K} \boldsymbol{W}_{\boldsymbol{k}, 1}\right)^{T} ; \operatorname{Conv}_{2}\left(\boldsymbol{K}, \boldsymbol{W}_{\boldsymbol{k}, 2}\right)^{T}\right]}{\sqrt{d_{k}}}\right)\left[\left(\boldsymbol{V} \boldsymbol{W}_{v, 1}\right) ; \operatorname{Conv}_{2}\left(\boldsymbol{V}, \boldsymbol{W}_{v, 2}\right)\right]$</p>
-<p>$\boldsymbol{A}_{1, \text {QueryK }}=\mathcal{S}\left(\left[\frac{\left(\boldsymbol{Q} \boldsymbol{W}_{q_{1}, 1}\right)\left(\boldsymbol{K} \boldsymbol{W}_{\boldsymbol{k}, 1}\right)^{T}}{\sqrt{d}} ; \frac{\operatorname{Conv}_{2}\left(\boldsymbol{K} \boldsymbol{W}_{\boldsymbol{k}, 2}, \boldsymbol{Q} \boldsymbol{W}_{q_{1}, 2}\right)}{\sqrt{d * n_{2}}}\right]\right)\left[\left(\boldsymbol{V} \boldsymbol{W}_{v, 1}\right) ; \operatorname{Conv}_{2}\left(\boldsymbol{V}, \boldsymbol{W}_{v, 2}\right)\right]$</p>
-<p>$\boldsymbol{A}_{2, \text { QueryK }}=\mathcal{S}\left(\left[\frac{\operatorname{Conv}_{2}\left(\boldsymbol{Q}, \boldsymbol{W}_{q_{2}, 1}\right)\left(\boldsymbol{K} \boldsymbol{W}_{\boldsymbol{k}, 1}\right)^{T}}{\sqrt{d}} ; \frac{\operatorname{Conv}_{2}\left(\boldsymbol{K} \boldsymbol{W}_{\boldsymbol{k}, 2}, \operatorname{Conv}_{2}\left(\boldsymbol{Q}, \boldsymbol{W}_{q_{2}, 2}\right)\right)}{\sqrt{d * n_{2}}}\right]\right)\left[\left(\boldsymbol{V} \boldsymbol{W}_{v, 1}\right) ; \operatorname{Conv}_{2}\left(\boldsymbol{V}, \boldsymbol{W}_{v, 2}\right)\right]$</p>
-<p>思考：<br>这样似乎参数量会暴增，其实应该对比的就不是transformer base了，应该是参数量大致相等的transformer，这也在review里面提到过。同时我觉得这个方法是否有些太复杂，不够简单明了。以及结果似乎不大令人信服，因为他的baseline没有复现出transformer base的结果（due to the limited GPU)。</p>
-<h2 id="2️⃣-Regularizing-and-Optimizing-LSTM-Language-Models"><a href="#2️⃣-Regularizing-and-Optimizing-LSTM-Language-Models" class="headerlink" title="2️⃣[Regularizing and Optimizing LSTM Language Models]"></a>2️⃣[Regularizing and Optimizing LSTM Language Models]</h2><p>提出一些优化提升LSTM-based语言模型的方法。此即大名鼎鼎的AWD-LSTM。</p>
-<h3 id="Weight-dropped-LSTM"><a href="#Weight-dropped-LSTM" class="headerlink" title="Weight-dropped LSTM"></a>Weight-dropped LSTM</h3><p>LSTM公式回顾：</p>
-<script type="math/tex; mode=display">\begin{aligned} i_{t} &=\sigma\left(W^{i} x_{t}+U^{i} h_{t-1}\right) \\ f_{t} &=\sigma\left(W^{f} x_{t}+U^{f} h_{t-1}\right) \\ o_{t} &=\sigma\left(W^{o} x_{t}+U^{o} h_{t-1}\right) \\ \tilde{c}_{t} &=\tanh \left(W^{c} x_{t}+U^{c} h_{t-1}\right) \\ c_{t} &=i_{t} \odot \tilde{c}_{t}+f_{t} \odot+\tilde{c}_{t-1} \\ h_{t} &=o_{t} \odot \tanh \left(c_{t}\right) \end{aligned}</script><p>对hidden-to-hidden的weight应用DropConnect。也即对其中的$\left[U^{i}, U^{f}, U^{o}, U^{c}\right]$进行dropconnect。注意到mask矩阵在同一个batch的每个时间步t都是一样的。</p>
-<h3 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h3><p>之前的工作表明，在语言模型中，使用普通的SGD，不带momentum，能超过其他的优化方法。普通SGD：<br>$w_{k+1}=w_{k}-\gamma_{k} \hat{\nabla} f\left(w_{k}\right)$</p>
-<p>本文提出在averaged SGD(ASGD）的基础上进行改进。</p>
-<p>ASGD和上式一致，只不过最后更新完是将最后几次更新的weight做了平均并返回。也即：</p>
-<script type="math/tex; mode=display">\frac{1}{(K-T+1)} \sum_{i=T}^{K} w_{i}</script><p>其中K是total的循环次数；T是人工定义的阈值。但T的阈值需要人工调，因此该方法不是很好。最理想的就是在SGD拟合到一个稳定状态时再平均。</p>
-<p>因此提出一种新的方法以解决上述问题，通过validation loss触发机制。</p>
-<p><img src="/images/15564599688438.jpg" width="50%" height="50%"></p>
-<h3 id="Extended-regularization-techniques"><a href="#Extended-regularization-techniques" class="headerlink" title="Extended regularization techniques"></a>Extended regularization techniques</h3><h4 id="Variable-length-backpropagation-sequences"><a href="#Variable-length-backpropagation-sequences" class="headerlink" title="Variable length backpropagation sequences"></a>Variable length backpropagation sequences</h4><p>若每次都固定窗口切分句子，则总会有一些词没法更新自己，如最后一个词，同时除了第一个词，其他的词都只能接收到部分bp。这实际上是一种data inefficient。</p>
-<p>可以从切分句子的方法上进行改进。使用随机采样句子长度的方式去缓解这一问题。以较高的p选择seq长度，1-p选择seq/2。接着以此为高斯均值，以正态分布$\mathcal{N}(\operatorname{seq}, s)$采样句子长度。</p>
-<h4 id="Variational-dropout"><a href="#Variational-dropout" class="headerlink" title="Variational dropout"></a>Variational dropout</h4><p>在LSTM中，除了hidden-to-hidden的，其他地方都采用variational dropout。</p>
-<h4 id="Embedding-dropout"><a href="#Embedding-dropout" class="headerlink" title="Embedding dropout"></a>Embedding dropout</h4><p>字级别，也即将整个字的embedding去掉。同时由于是在embedding matrix上做的，在一个完整的forward pass与backward pass都用了，因此就相当于使用variational dropout用在one-hot embedding与embedding lookup之间。</p>
-<h4 id="Weight-tying"><a href="#Weight-tying" class="headerlink" title="Weight tying"></a>Weight tying</h4><p> embedding与softmax的权重绑定。</p>
-<h4 id="Independent-embedding-size-and-hidden-size"><a href="#Independent-embedding-size-and-hidden-size" class="headerlink" title="Independent embedding size and hidden size"></a>Independent embedding size and hidden size</h4><p>LSTM的第一层与最后一层与embedding size一致，其它层的就有自己的hidden size。</p>
-<h4 id="Activation-Regularization-AR-and-Temporal-Activation-Regularization-TAR"><a href="#Activation-Regularization-AR-and-Temporal-Activation-Regularization-TAR" class="headerlink" title="Activation Regularization (AR) and Temporal Activation Regularization (TAR)"></a>Activation Regularization (AR) and Temporal Activation Regularization (TAR)</h4><p>AR：<br>L2正则化：$\alpha L_{2}\left(m \odot h_{t}\right)$<br>其中m是mask，h是hidden state</p>
-<p>TAR：<br>$\beta L_{2}\left(h_{t}-h_{t+1}\right)$<br>减少两个h之间的差距。</p>
+          本周论文：
 
-          
+PHRASE-BASED ATTENTIONS
+Regularizing and Optimizing LSTM Language Models
+
+1️⃣[PHRASE-BASED ATTENTIONS]这篇投了ICLR但没中。提出对Transformer的attention机制进行改进，以词组为单位进行attention，引入词组的对齐来提升翻译表现。提出的想法也是比较简单直观的。
+回顾：transformer的做法：$\begin{aligned} \text { Attention }\left(\boldsymbol{Q}, \boldsymbol{K}, \boldsy
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/28/论文/每周论文17/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1258,14 +1359,19 @@
       
         
           
-            <h3 id="1️⃣行香子-·-述怀"><a href="#1️⃣行香子-·-述怀" class="headerlink" title="1️⃣行香子 · 述怀"></a>1️⃣行香子 · 述怀</h3><p>[宋] 苏轼<br><strong>清夜无尘，月色如银</strong>。酒斟时、须满十分。浮名浮利，虚苦劳神。<strong>叹隙中驹，石中火，梦中身</strong>。<br>虽抱文章，开口谁亲。且陶陶、乐尽天真。几时归去，作个闲人。对一张琴，一壶酒，一溪云。</p>
-<p>隙中驹：语出《庄子·知北游》：“人生天地之间，若白驹之过隙，忽然而已。“<br>石中火，梦中身：比喻生命短促，像击石迸出一闪即灭的火花，像在梦境中短暂的经历。石中火，语出北齐刘昼《新论·惜时》：“人之短生，犹如石火，炯然而过。”梦中身，语出《关尹子·四符》：“知此身如梦中身。”</p>
-<p><a href="http://lib.xcz.im/work/57b2c8fa7db2a20054377ecd" target="_blank" rel="noopener">http://lib.xcz.im/work/57b2c8fa7db2a20054377ecd</a></p>
-<hr>
-<h3 id="2️⃣旷怡亭口占"><a href="#2️⃣旷怡亭口占" class="headerlink" title="2️⃣旷怡亭口占"></a>2️⃣旷怡亭口占</h3><p>[现代] 马一浮<br>流转知何世，江山尚此亭。<br>登临皆旷士，丧乱有遗经。<br><strong>已识乾坤大，犹怜草木青</strong>。<br>长空送鸟印，留幻与人灵。</p>
-<p><a href="http://lib.xcz.im/work/5992e274570c35006b8394b3" target="_blank" rel="noopener">http://lib.xcz.im/work/5992e274570c35006b8394b3</a></p>
+          1️⃣行香子 · 述怀[宋] 苏轼清夜无尘，月色如银。酒斟时、须满十分。浮名浮利，虚苦劳神。叹隙中驹，石中火，梦中身。虽抱文章，开口谁亲。且陶陶、乐尽天真。几时归去，作个闲人。对一张琴，一壶酒，一溪云。
+隙中驹：语出《庄子·知北游》：“人生天地之间，若白驹之过隙，忽然而已。“石中火，梦中身：比喻生命短促，像击石迸出一闪即灭的火花，像在梦境中短暂的经历。石中火，语出北齐刘昼《新论·惜时》：“人之短生，犹如石火，炯然而过。”梦中身，语出《关尹子·四符》：“知此身如梦中身。”
+http://lib.xcz.im/work/57b2c8fa7db2a20054377ecd
 
-          
+2️⃣旷怡亭口占[现代] 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/28/诗词&句/每周诗词23/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1395,11 +1501,18 @@
       
         
           
-            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>expand&amp;repeat</p>
-<p>expand只能对维数为1的维度进行扩展，且扩展过程中不分配新内存；repeat能对任意维度进行扩展，但需要分配新内存。</p>
-<p>如果满足expand的需要，应尽量使用expand。</p>
+          1️⃣[Pytorch]expand&amp;repeat
+expand只能对维数为1的维度进行扩展，且扩展过程中不分配新内存；repeat能对任意维度进行扩展，但需要分配新内存。
+如果满足expand的需要，应尽量使用expand。
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/22/碎片知识/每周碎片知识19/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1529,198 +1642,18 @@
       
         
           
-            <h3 id="1️⃣九日齐安登高"><a href="#1️⃣九日齐安登高" class="headerlink" title="1️⃣九日齐安登高"></a>1️⃣九日齐安登高</h3><p>[唐] 杜牧<br>江涵秋影雁初飞，与客携壶上翠微。<br>尘世难逢开口笑，菊花须插满头归。<br>但将酩酊酬佳节，不用登临恨落晖。<br><strong>古往今来只如此，牛山何必独沾衣？</strong></p>
-<p><a href="http://lib.xcz.im/work/57ba4972efa631005a799815" target="_blank" rel="noopener">http://lib.xcz.im/work/57ba4972efa631005a799815</a></p>
-<hr>
+          1️⃣九日齐安登高[唐] 杜牧江涵秋影雁初飞，与客携壶上翠微。尘世难逢开口笑，菊花须插满头归。但将酩酊酬佳节，不用登临恨落晖。古往今来只如此，牛山何必独沾衣？
+http://lib.xcz.im/work/57ba4972efa631005a799815
+
 
           
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/04/21/论文/每周论文16/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/21/论文/每周论文16/" itemprop="url">每周论文16</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T22:04:30+08:00">
-                2019-04-21
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-22T16:52:53+08:00">
-                2019-04-22
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本周论文：</p>
-<ol>
-<li>MEASURING THE INTRINSIC DIMENSION OF OBJECTIVE LANDSCAPES</li>
-<li>Fine-Grained Attention Mechanism for Neural Machine Translation</li>
-<li>Competence-based Curriculum Learning for Neural Machine Translation</li>
-</ol>
-<h2 id="1️⃣-MEASURING-THE-INTRINSIC-DIMENSION-OF-OBJECTIVE-LANDSCAPES"><a href="#1️⃣-MEASURING-THE-INTRINSIC-DIMENSION-OF-OBJECTIVE-LANDSCAPES" class="headerlink" title="1️⃣[MEASURING THE INTRINSIC DIMENSION OF OBJECTIVE LANDSCAPES]"></a>1️⃣[MEASURING THE INTRINSIC DIMENSION OF OBJECTIVE LANDSCAPES]</h2><p>本文探究深度学习中的过量参数问题，通过定义intrinsic dimension，去衡量特定模型在特定数据集上所需维度。</p>
-<p>在给定模型结构和loss function时，整个优化空间也随之确定，训练过程类似于在一个空间内移动使得loss尽量小。</p>
-<p>给定一个有D个参数的模型，通过限制训练随机slice的参数，也即选取一个随机有d个参数的子空间训练，不断增加d，使得预定义的solution第一次出现，则称d为intrinsic dimension，可以理解为该d是解决某特定问题所需的参数量。</p>
-<p>如何做？<br>$\theta^{(D)}=\theta_{0}^{(D)}+P \theta^{(d)}$<br>其中P是随机生成的$D\times d$的投影矩阵，而$\theta (d)$ 是子空间的参数；$P$是固定的而不是可训练的，且$P$可以是归一化为单位长度且正交的。</p>
-<p><img src="/images/15559193313833.jpg" width="40%" height="50%"></p>
-<p>（这里的投影现在还是不能理解？等之后看这方面的论文再说吧）</p>
-<p>因为一些随机性以及实际效果问题，比如正则化效果在子空间无法达到在全空间的效果，因此在这里定义$d_{\mathrm{int} 90}$，也即达到baseline的90%所需要的参数量。</p>
-<p>一些结果：<br><img src="/images/15559195161338.jpg" width="70%" height="50%"></p>
-<p>MNIST的模型可以看到所需参数非常少；横向对比，CNN会比全连接所需的少多了，这也符合我们的直觉，也即CNN比全连接更高效。</p>
-<p><img src="/images/15559195378407.jpg" width="70%" height="50%"></p>
-<p>在全连接中，对于模型不同的宽度以及layer数，发现他们的dint90相差不大，说明对于特定任务，同一个模型家族所需要的参数量是类似的。</p>
-<hr>
-<h2 id="2️⃣-Fine-Grained-Attention-Mechanism-for-Neural-Machine-Translation"><a href="#2️⃣-Fine-Grained-Attention-Mechanism-for-Neural-Machine-Translation" class="headerlink" title="2️⃣[Fine-Grained Attention Mechanism for Neural Machine Translation]"></a>2️⃣[Fine-Grained Attention Mechanism for Neural Machine Translation]</h2><p>本文提出对attention进行细化，将原来的每个词分配一个score扩展为每个词分配d维个score，并在机器翻译上有一定提升。</p>
-<p><img src="/images/15559197269175.jpg" width="80%" height="50%"></p>
-<p>简单地说，原来的attention机制是：<br>$e_{t^{\prime}, t}=f_{\mathrm{Att}}\left(\boldsymbol{z}_{t^{\prime}-1}, \boldsymbol{h}_{t}\right)$</p>
-<p>其中$t^{\prime}$是decoder端的时间步，$t$则是encoder端的第$t$个词。</p>
-<p>而本文的细粒度attention机制：<br>$e_{t^{\prime}, t}^{d}=f_{\mathrm{Att} \mathrm{Y} 2 \mathrm{D}}^{d}\left(\boldsymbol{z}_{t^{\prime}-1}, \boldsymbol{h}_{t}, \boldsymbol{y}_{t^{\prime}-1}\right)$</p>
-<p>也即在原来的基础上做了d次操作，也即实际上在获得每一维的分数时，是能看到其他维的信息的。（如果是我自己做，我可能会将他们隔绝开来。）</p>
-<p>思考：<br>将RNN作为baseline，为什么不使用transformer？当时transformer已经出了，可能是transformer上没效果？因为transformer自带多head，可能表示能力就已经足够了。</p>
-<hr>
-<h2 id="3️⃣-Competence-based-Curriculum-Learning-for-Neural-Machine-Translation"><a href="#3️⃣-Competence-based-Curriculum-Learning-for-Neural-Machine-Translation" class="headerlink" title="3️⃣[Competence-based Curriculum Learning for Neural Machine Translation]"></a>3️⃣[Competence-based Curriculum Learning for Neural Machine Translation]</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>提出一种新的<strong>训练</strong>翻译模型的算法，基本思想是让模型从简单的样例开始学起，随着训练过程的进行逐渐增加难度较大的样例，该方法能够增强模型训练的稳定性，且在效果上也有提升，同时还能减少收敛所需的训练时间。</p>
-<p><img src="/images/15559206435828.jpg" width="50%" height="50%"></p>
-<p>论文的Motivation：如果训练数据以特定的顺序输入，也即从简单的数据开始学，等到模型有一定的能力后再去学难的数据，这样也更符合人类的直觉；同时，从机器学习的角度去看，这种方法可以避免过早陷入不好的局部最优解。</p>
-<p>论文还提到了对于翻译而言，模型很难训练，需要复杂的调参，费时费力。特别是对于Transformer而言，需要精细的learning rate schedule。</p>
-<p>本文提出的方法，只有一个参数，因此不需要精细的调参，同时因为只改变输入的pipeline，因此很方便地使用到已有的模型。</p>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>引入两个概念：<br><strong>Difficulty</strong>：代表一个训练样例的难度，可能和模型当前的状态相关。比如句子长度就是衡量样例难度的一个指标。</p>
-<p><strong>Competence</strong>：范围0-1的数值，代表模型训练的进度，定义为模型状态的一个函数。更进一步，定义$c(t)$为模型在时间步t所允许使用的训练样例的比例。也即训练样例根据difficulty排列，在时间步$t$只允许top $c(t)$的数据使用。</p>
-<p>根据上述两个定义，引入算法：<br><img src="/images/15559212081520.jpg" width="50%" height="50%"></p>
-<p><img src="/images/15559212315953.jpg" width="100%" height="50%"></p>
-<p><img src="/images/15559212598339.jpg" width="50%" height="50%"></p>
-<p>那么有两个问题，如何衡量difficulty以及competence？</p>
-<h4 id="Difficulty-Metrics"><a href="#Difficulty-Metrics" class="headerlink" title="Difficulty Metrics"></a>Difficulty Metrics</h4><p>①句子长度<br>长句子更难翻译，因为长句子往往包含了短句子，同时在生成目标语言时，容易出现错误传播。</p>
-<script type="math/tex; mode=display">d_{\text { length }}\left(s_{i}\right) \triangleq N_{i}</script><p>②Word Rarity<br>若一个句子存在罕见词，更难翻译该句子，因为模型需要多次看见该词才能学到鲁棒的表示；同时罕见词的梯度容易有较大的方差。</p>
-<p>因此我们定义相对词频：</p>
-<script type="math/tex; mode=display">\hat{p}\left(w_{j}\right) \triangleq \frac{1}{N_{\text {total }}} \sum_{i=1}^{M} \sum_{k=1}^{N_{i}} \mathbb{1}_{w_{k}^{i}=w_{j}}</script><p>其中，$j=1, \ldots, \{\text {unique words in corpus}\}$，$\mathbb{1}$ 为指示函数。</p>
-<p>因此最终度量方法为：<br>$d_{\text {rarity}}\left(s_{i}\right) \triangleq-\sum_{k=1}^{N_{i}} \log \hat{p}\left(w_{k}^{i}\right)$</p>
-<p>这样即考虑到了长度也考虑到了词频，同时该方法有点类似language model，可以理解为language model的近似。</p>
-<h4 id="Competence-Functions"><a href="#Competence-Functions" class="headerlink" title="Competence Functions"></a>Competence Functions</h4><p>我们定义competence function只与时间步$t$有关，因此只需要考虑具体的形式。<br>①linear：</p>
-<script type="math/tex; mode=display">c(t) \triangleq \min \left(1, t r+c_{0}\right)</script><p>$c_{0}$是初始值。我们也可以定义T为时间步阈值，当超过该阈值，我们认为模型已经完全有能力了，则上式还可以写成：</p>
-<script type="math/tex; mode=display">c_{\text { linear }}(t) \triangleq \min \left(1, t \frac{1-c_{0}}{T}+c_{0}\right)</script><p>②Root：<br>线性的一个不好的地方，当样例增加时，每个样例被sample的几率减小，因此新加进去的样例被sample到的几率也减小，因此应每次减少新加入的样例，使得模型有足够的时间去学习知识。<br>也即：</p>
-<script type="math/tex; mode=display">\frac{d c(t)}{d t}=\frac{P}{c(t)}</script><p>积分后可得：</p>
-<script type="math/tex; mode=display">c_{\mathrm{sqrt}}(t) \triangleq \min \left(1, \sqrt{t \frac{1-c_{0}^{2}}{T}+c_{0}^{2}}\right)</script><p>当然还可以将开n次方根</p>
-<script type="math/tex; mode=display">c_{\mathrm{root}-p}(t) \triangleq \min \left(1, \sqrt[p]{t \frac{1-c_{0}^{p}}{T}+c_{0}^{p}}\right)</script><p>使得曲线更为陡峭，也即给每个样例的时间更多。</p>
-<p>曲线对比：<br><img src="/images/15559218944874.jpg" width="50%" height="50%"></p>
-<p>实验证明是p=2时最好。</p>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/images/15559219317633.jpg" width="70%" height="50%"></p>
-<p>实验有相当不错的结果，在RNN以及在Transformer上都有提升，并且是在不用learning rate schedule的情况下，并且时间更短。</p>
-<p>几个实验现象：<br>①RNN的提升较少，而Transformer很多，说明RNN比Transformer更鲁棒。RNN比Transformer训练更为稳定。<br>②对于Transformer而言，若同样使用learning rate schedule，仍然有帮助，说明该方法是较为通用的。<br>③不使用lr schedule而只使用本文方法，也能达到不使用本文方法而使用lr schedule的结果，但需要更多的step。</p>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>为什么该方法能work？<br>符合直觉，模型从简单到难，更好训。同时从机器学习角度，如果完全正常的sample，则容易陷入局部最小或者saddle point，因此需要更长时间或者不好的泛化性能。</p>
-<p>同时论文还提到了，为什么Transformer在增加batch能够有更好的收敛，这是因为一开始训练的noisy gradient太大，若增加batch能够信噪比，而本文方法在某种程度上也解决了该问题。</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/21/诗词&句/每周诗词22/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1808,7 +1741,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">138</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1821,7 +1754,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">157</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

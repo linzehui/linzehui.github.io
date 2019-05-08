@@ -286,6 +286,149 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/30/机器学习与深度学习算法知识/采样浅析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/30/机器学习与深度学习算法知识/采样浅析/" itemprop="url">采样浅析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T09:24:24+08:00">
+                2018-09-30
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:23+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          总结在NLP中的采样方法（持续更新）。
+采样方法1️⃣逆变换采样(Inverse Sampling)目的：已知任意概率分布的累积分布函数时，用于从该分布中生成随机样本。
+—-什么是累积分布函数(CDF)—-是概率密度函数(PDF)的积分，定义：
+F_X(x)=P(X≤x)=\int_{-∞}^{x}f_X(t)dt—-END—-
+想象我们知道高斯分布的概率密度函数，我们应该如何采样？本质上我们只能对均匀分布进行直接采样（高斯分布有算法可以生成采样，但无法一般化）。对于这种连续的随机变量，我们只能通过间接的方法进行采样。
+逆变换采样即是通过累积分布函数的反函数来采样。因为累积分布函数的值域为$[
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/30/机器学习与深度学习算法知识/采样浅析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/30/碎片知识/每周碎片知识9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -369,11 +512,15 @@
       
         
           
-            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>Pytorch中保存checkpoint是一个dict形式，可以保存任意多个模型到一个checkpoint中。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="comment">#save</span></span><br><span class="line">torch.save(&#123;            <span class="string">'epoch'</span>: epoch,            <span class="string">'model_state_dict'</span>: model.state_dict(),            <span class="string">'optimizer_state_dict'</span>: optimizer.state_dict(),            <span class="string">'loss'</span>: loss,            ...            &#125;, PATH)</span><br><span class="line"><span class="comment">#load</span></span><br><span class="line">model = TheModelClass(*args, **kwargs)optimizer = TheOptimizerClass(*args, **kwargs)</span><br><span class="line">checkpoint = torch.load(PATH)model.load_state_dict(checkpoint[<span class="string">'model_state_dict'</span>])optimizer.load_state_dict(checkpoint[<span class="string">'optimizer_state_dict'</span>])epoch = checkpoint[<span class="string">'epoch'</span>]loss = checkpoint[<span class="string">'loss'</span>]</span><br><span class="line">model.eval()<span class="comment"># - or -</span>model.train()</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>Pytorch可以load部分模型，也就是只load进来部分我们需要的层，这在transfer learning中用到。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">torch.save(modelA.state_dict(), PATH)</span><br><span class="line">modelB = TheModelBClass(*args, **kwargs)modelB.load_state_dict(torch.load(PATH), strict=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure></p>
-
-          
+          1️⃣[Pytorch]Pytorch中保存checkpoint是一个dict形式，可以保存任意多个模型到一个checkpoint中。1234567import torch#savetorch.save(&#123;            'epoch': epoch,            'model_state_dict': model.state_dict(),            'optimizer_state_dict': optimizer.state_dict(),            'loss': loss,            ...         
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/30/碎片知识/每周碎片知识9/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -503,9 +650,16 @@
       
         
           
-            <p>每当我遇到自己不敢直视的困难时，我就会闭上双眼，想象自己是一个80岁的老人，为人生中曾放弃和逃避过的无数困难而懊悔不已，我会对自己说，能再年轻一次该有多好，然后我睁开眼睛：砰！我又年轻一次了！</p>
+          每当我遇到自己不敢直视的困难时，我就会闭上双眼，想象自己是一个80岁的老人，为人生中曾放弃和逃避过的无数困难而懊悔不已，我会对自己说，能再年轻一次该有多好，然后我睁开眼睛：砰！我又年轻一次了！
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/30/诗词&句/有力量的文字/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -635,15 +789,22 @@
       
         
           
-            <h3 id="1️⃣次北固山下"><a href="#1️⃣次北固山下" class="headerlink" title="1️⃣次北固山下"></a>1️⃣次北固山下</h3><p>[唐] 王湾<br>客路青山外，行舟绿水前。<br>潮平两岸阔，风正一帆悬。<br><strong>海日生残夜，江春入旧年。</strong><br>乡书何处达，归雁洛阳边。</p>
-<p>次：旅途中暂时停宿，这里是停泊的意思。</p>
-<p><a href="http://m.xichuangzhu.com/work/57b95de92e958a005fa8919e" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b95de92e958a005fa8919e</a></p>
-<hr>
-<h3 id="2️⃣将赴吴兴登乐游原"><a href="#2️⃣将赴吴兴登乐游原" class="headerlink" title="2️⃣将赴吴兴登乐游原"></a>2️⃣将赴吴兴登乐游原</h3><p>[唐] 杜牧<br>清时有味是无能，闲爱孤云静爱僧。<br><strong>欲把一麾江海去，乐游原上望昭陵。</strong></p>
-<p>无能：无所作为。</p>
-<p><a href="http://m.xichuangzhu.com/work/57b99db9165abd005a6da742" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b99db9165abd005a6da742</a></p>
+          1️⃣次北固山下[唐] 王湾客路青山外，行舟绿水前。潮平两岸阔，风正一帆悬。海日生残夜，江春入旧年。乡书何处达，归雁洛阳边。
+次：旅途中暂时停宿，这里是停泊的意思。
+http://m.xichuangzhu.com/work/57b95de92e958a005fa8919e
+
+2️⃣将赴吴兴登乐游原[唐] 杜牧清时有味是无能，闲爱孤云静爱僧。欲把一麾江海去，乐游原上望昭陵。
+无能：无所作为。
+http://m.xichuangzhu.com/work/57b99db9165abd005a6da742
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/30/诗词&句/每周诗词10/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -773,13 +934,20 @@
       
         
           
-            <p>记录PRML学习过程。<br>笔记共享链接：<a href="https://1drv.ms/u/s!Apsp2510NHF6rIRjMclFB16v7B0FWg" target="_blank" rel="noopener">https://1drv.ms/u/s!Apsp2510NHF6rIRjMclFB16v7B0FWg</a></p>
-<hr>
-<h1 id="概率论"><a href="#概率论" class="headerlink" title="概率论"></a>概率论</h1><p><img src="/images/2018-09-23-Xnip2018-09-23_10-27-21.jpg" alt="概率论"></p>
-<h1 id="决策论"><a href="#决策论" class="headerlink" title="决策论"></a>决策论</h1><p><img src="/images/2018-09-23-Xnip2018-09-23_10-36-52.jpg" alt="决策论"></p>
-<h1 id="信息论"><a href="#信息论" class="headerlink" title="信息论"></a>信息论</h1><p><img src="/images/2018-09-23-Xnip2018-09-23_10-38-46.jpg" alt="信息论"></p>
+          记录PRML学习过程。笔记共享链接：https://1drv.ms/u/s!Apsp2510NHF6rIRjMclFB16v7B0FWg
+
+概率论
+决策论
+信息论
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/23/机器学习与深度学习算法知识/PRML第一章 绪论/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -909,16 +1077,22 @@
       
         
           
-            <h3 id="Chain-Rule"><a href="#Chain-Rule" class="headerlink" title="Chain Rule"></a>Chain Rule</h3><p>基本公式<br><img src="/images/2018-09-23-15376684598125.jpg" width="50%" height="50%"><br><img src="/images/2018-09-23-15376684674095.jpg" width="50%" height="50%"></p>
-<h3 id="forward-pass和backward-pass"><a href="#forward-pass和backward-pass" class="headerlink" title="forward pass和backward pass"></a>forward pass和backward pass</h3><p>可以将backpropagation分为两步</p>
-<h4 id="forward-pass"><a href="#forward-pass" class="headerlink" title="forward pass"></a>forward pass</h4><p>在前向传播的时候提前计算/保存好，因为该梯度很简单<br><img src="/images/2018-09-23-15376686358832.jpg" width="50%" height="50%"></p>
-<p>比如z对w1的梯度就是x1，就是和w1相连的项<br><img src="/images/2018-09-23-15376687025289.jpg" width="20%" height="50%"></p>
-<h4 id="backward-pass"><a href="#backward-pass" class="headerlink" title="backward pass"></a>backward pass</h4><p>回传的时候逐层相乘下去，类似动态规划，获得了后一层的梯度才能求出前一层的梯度。<br><img src="/images/2018-09-23-15376687488493.jpg" width="50%" height="50%"></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="/images/2018-09-23-15376687824826.jpg" width="50%" height="50%"></p>
-<p>先前向，提前算出最邻近的梯度，直到output layer，计算完该梯度，再不断回传逐层相乘获得output对各层的梯度。</p>
-<h3 id="代码实现例子"><a href="#代码实现例子" class="headerlink" title="代码实现例子"></a>代码实现例子</h3><p>relu实现forward pass和backward pass<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyReLU</span><span class="params">(torch.autograd.Function)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    We can implement our own custom autograd Functions by subclassing</span></span><br><span class="line"><span class="string">    torch.autograd.Function and implementing the forward and backward passes</span></span><br><span class="line"><span class="string">    which operate on Tensors.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(ctx, input)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        In the forward pass we receive a Tensor containing the input and return</span></span><br><span class="line"><span class="string">        a Tensor containing the output. ctx is a context object that can be used</span></span><br><span class="line"><span class="string">        to stash information for backward computation. You can cache arbitrary</span></span><br><span class="line"><span class="string">        objects for use in the backward pass using the ctx.save_for_backward method.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        ctx.save_for_backward(input)  <span class="comment">#为了之后的backward计算</span></span><br><span class="line">        <span class="keyword">return</span> input.clamp(min=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(ctx, grad_output)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        In the backward pass we receive a Tensor containing the gradient of the loss</span></span><br><span class="line"><span class="string">        with respect to the output, and we need to compute the gradient of the loss</span></span><br><span class="line"><span class="string">        with respect to the input.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        input, = ctx.saved_tensors</span><br><span class="line">        grad_input = grad_output.clone()</span><br><span class="line">        grad_input[input &lt; <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> grad_input</span><br></pre></td></tr></table></figure></p>
-
-          
+          Chain Rule基本公式
+forward pass和backward pass可以将backpropagation分为两步
+forward pass在前向传播的时候提前计算/保存好，因为该梯度很简单
+比如z对w1的梯度就是x1，就是和w1相连的项
+backward pass回传的时候逐层相乘下去，类似动态规划，获得了后一层的梯度才能求出前一层的梯度。
+总结
+先前向，提前算出最邻近的梯度，直到output layer，计算完该梯度，再不断回传逐层相乘获得output对各层的梯度。
+代码实现例子relu实现forward pass和backward pass123456789101112131
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/23/机器学习与深度学习算法知识/Lecture 6: Backpropagation/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1048,29 +1222,23 @@
       
         
           
-            <h3 id="logistic-regression如何做？"><a href="#logistic-regression如何做？" class="headerlink" title="logistic regression如何做？"></a>logistic regression如何做？</h3><p>step1: 定义function set<br><img src="/images/2018-09-23-15376666391912.jpg" width="30%" height="50%"></p>
-<p>step2: 更新<br>使用最大似然更新</p>
-<script type="math/tex; mode=display">L(w,b)=f_{w,b}(x^1 )f_{w,b}(x^2 )(1−f_{w,b} (x^3 ))⋯f_{w,b} (x^N )</script><p>找到w，b使得L最大</p>
-<p>对似然函数取负对数，则有：<br><img src="/images/2018-09-23-15376667791380.jpg" width="60%" height="50%"></p>
-<p>将式子的每个元素写成伯努利分布形式：<br><img src="/images/2018-09-23-15376669013511.jpg" width="60%" height="50%"></p>
-<p>上式就是cross-entropy损失函数。</p>
-<p>求导该式子可得：<br><img src="/images/2018-09-23-15376669743224.jpg" width="30%" height="50%"><br>更新公式：<br><img src="/images/2018-09-23-15376669980138.jpg" width="40%" height="50%"><br>可以看出上式很直观：和答案差距越大，更新步伐越大。</p>
-<p>同时发现上式和linear regression的更新公式是一致的。</p>
-<h3 id="为什么不像linear-regression那样设loss为square？"><a href="#为什么不像linear-regression那样设loss为square？" class="headerlink" title="为什么不像linear regression那样设loss为square？"></a>为什么不像linear regression那样设loss为square？</h3><p>假设我们使用square loss，则求导得到的梯度：<br><img src="/images/2018-09-23-15376671202521.jpg" width="50%" height="50%"><br>上式可以看出，当接近target时，梯度小；远离target时，梯度也小。难以达到全局最小<br><img src="/images/2018-09-23-15376672527230.jpg" width="60%" height="50%"></p>
-<p>下图是cross entropy和square error的图像示意：<br><img src="/images/2018-09-23-15376672892502.jpg" width="60%" height="50%"></p>
-<p>如图，square loss难以到达全局最小。</p>
-<h3 id="生成式模型与判别式模型的区别"><a href="#生成式模型与判别式模型的区别" class="headerlink" title="生成式模型与判别式模型的区别"></a>生成式模型与判别式模型的区别</h3><p>生成式对联合概率分布进行建模，再通过贝叶斯定理获得后验概率；而判别式模型直接对后验概率建模。<br><img src="/images/2018-09-23-15376674213503.jpg" width="60%" height="50%"><br>二者所定义的function set是一致的，但同一组数据可能会得到不同的w和b。</p>
-<p>二者优劣对比：</p>
-<ul>
-<li>数据量多时，一般来说判别式模型会更好。因为判别式模型没有先验假设，完全依赖于数据。但如果数据有噪声，容易受影响。</li>
-<li>生成式模型是有一定的假设的，当假设错误，会影响分类效果。</li>
-<li>正因为有一定的先验假设，当数据量很少时，可能效果会不错；对于噪声更具有鲁棒性。</li>
-<li>先验可以从其他数据源获得来帮助特定任务，如语音识别问题。</li>
-</ul>
-<h3 id="logistic的局限"><a href="#logistic的局限" class="headerlink" title="logistic的局限"></a>logistic的局限</h3><p>本质仍是一个线性分类器，没办法分类非线性的数据。<br>如何解决该问题?<br><strong>将logistic regression model拼接起来</strong>，前面的model对数据进行feature transformation，然后再对新的feature进行分类。<br><img src="/images/2018-09-23-15376677559470.jpg" width="70%" height="50%"></p>
-<p>logistic与deep learning的联系：<br>如果将logistic regression的一个单元称为neuron，拼起来就是neural network了！！！</p>
-
-          
+          logistic regression如何做？step1: 定义function set
+step2: 更新使用最大似然更新
+L(w,b)=f_{w,b}(x^1 )f_{w,b}(x^2 )(1−f_{w,b} (x^3 ))⋯f_{w,b} (x^N )找到w，b使得L最大
+对似然函数取负对数，则有：
+将式子的每个元素写成伯努利分布形式：
+上式就是cross-entropy损失函数。
+求导该式子可得：更新公式：可以看出上式很直观：和答案差距越大，更新步伐越大。
+同时发现上式和linear regression的更新公式是一致的。
+为什么不像linear regression那样设loss为
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/23/机器学习与深度学习算法知识/Lecture 5 Classification: Logistic Regression/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1200,16 +1368,18 @@
       
         
           
-            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>torch.max()有两种不同写法。<br>torch.max(input) → Tensor 返回其中最大的元素<br>torch.max(input, dim, keepdim=False, out=None) → (Tensor, LongTensor) 返回该维度上最大值，以及对应的index</p>
-<hr>
-<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>将模型同时部署到多张卡上训练，本质就是将一个batch的数据split，送到各个model，然后合并结果。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model = nn.DataParallel(model)</span><br><span class="line">device = torch.device(<span class="string">"cuda:0"</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">"cpu"</span>)</span><br><span class="line">model.to(device)</span><br><span class="line"><span class="keyword">for</span> data <span class="keyword">in</span> rand_loader:</span><br><span class="line">    input = data.to(device)</span><br><span class="line">    output = model(input)</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="3️⃣-求导"><a href="#3️⃣-求导" class="headerlink" title="3️⃣[求导]"></a>3️⃣[求导]</h3><p>标量、向量、矩阵之间的求导有两种布局，即分子布局和分母布局。分子布局和分母布局只差一个转置。<br>我的记法：在求导过程中，假设分母为m*n，分子为 k*n，则导数矩阵应该为 k*m 。一些特殊的如标量对矩阵求导等除外。<br>具体直接查表：<a href="https://en.m.wikipedia.org/wiki/Matrix_calculus" target="_blank" rel="noopener">https://en.m.wikipedia.org/wiki/Matrix_calculus</a></p>
-<p>按位计算求导：<br>假设一个函数$f(x)$的输入是标量$x$。对于一组K个标量$x_1,··· ,x_K$，我们<br>可以通过$f(x)$得到另外一组K个标量$z_1,··· ,z_K$，<br>$z_k = f(x_k),∀k = 1,··· ,K$<br>其中，$f(x)$是按位运算的，即$[f(x)]_i = f(x_i)$<br>其导数是一个对角矩阵：<br><img src="/images/2018-09-23-15376727095200.jpg" width="50%" height="50%"></p>
-<p><strong>Reference</strong>：<br><a href="https://en.m.wikipedia.org/wiki/Matrix_calculus" target="_blank" rel="noopener">https://en.m.wikipedia.org/wiki/Matrix_calculus</a><br><a href="https://blog.csdn.net/uncle_gy/article/details/78879131" target="_blank" rel="noopener">https://blog.csdn.net/uncle_gy/article/details/78879131</a><br><a href="https://nndl.github.io/chap-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80.pdf" target="_blank" rel="noopener">https://nndl.github.io/chap-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80.pdf</a></p>
+          1️⃣[Pytorch]torch.max()有两种不同写法。torch.max(input) → Tensor 返回其中最大的元素torch.max(input, dim, keepdim=False, out=None) → (Tensor, LongTensor) 返回该维度上最大值，以及对应的index
 
-          
+2️⃣[Pytorch]将模型同时部署到多张卡上训练，本质就是将一个batch的数据split，送到各个model，然后合并结果。
+123456model = nn.DataParallel(model)device = torch.device("cuda:0" if torch.
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/23/碎片知识/每周碎片知识8/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1339,14 +1509,17 @@
       
         
           
-            <h3 id="1️⃣softmax的numpy实现"><a href="#1️⃣softmax的numpy实现" class="headerlink" title="1️⃣softmax的numpy实现"></a>1️⃣softmax的numpy实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax</span><span class="params">(x,axis=<span class="number">0</span>)</span>:</span></span><br><span class="line">    <span class="string">"""Compute softmax values for each sets of scores in x."""</span></span><br><span class="line">    <span class="keyword">return</span> np.exp(x) / np.sum(np.exp(x), axis=axis)</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="2️⃣numpy-手动求导relu"><a href="#2️⃣numpy-手动求导relu" class="headerlink" title="2️⃣numpy 手动求导relu"></a>2️⃣numpy 手动求导relu</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># N is batch size; D_in is input dimension;</span></span><br><span class="line"><span class="comment"># H is hidden dimension; D_out is output dimension.</span></span><br><span class="line">N, D_in, H, D_out = <span class="number">64</span>, <span class="number">1000</span>, <span class="number">100</span>, <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create random input and output data</span></span><br><span class="line">x = np.random.randn(N, D_in)</span><br><span class="line">y = np.random.randn(N, D_out)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Randomly initialize weights</span></span><br><span class="line">w1 = np.random.randn(D_in, H)</span><br><span class="line">w2 = np.random.randn(H, D_out)</span><br><span class="line"></span><br><span class="line">learning_rate = <span class="number">1e-6</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">500</span>):</span><br><span class="line">    <span class="comment"># Forward pass: compute predicted y</span></span><br><span class="line">    h = x.dot(w1)</span><br><span class="line">    h_relu = np.maximum(h, <span class="number">0</span>)</span><br><span class="line">    y_pred = h_relu.dot(w2)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute and print loss</span></span><br><span class="line">    loss = np.square(y_pred - y).sum()</span><br><span class="line">    print(t, loss)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Backprop to compute gradients of w1 and w2 with respect to loss</span></span><br><span class="line">    grad_y_pred = <span class="number">2.0</span> * (y_pred - y)</span><br><span class="line">    grad_w2 = h_relu.T.dot(grad_y_pred)</span><br><span class="line">    grad_h_relu = grad_y_pred.dot(w2.T)</span><br><span class="line">    grad_h = grad_h_relu.copy()</span><br><span class="line">    grad_h[h &lt; <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">    grad_w1 = x.T.dot(grad_h)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Update weights</span></span><br><span class="line">    w1 -= learning_rate * grad_w1</span><br><span class="line">    w2 -= learning_rate * grad_w2</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="3️⃣Pytorch实现relu"><a href="#3️⃣Pytorch实现relu" class="headerlink" title="3️⃣Pytorch实现relu"></a>3️⃣Pytorch实现relu</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyReLU</span><span class="params">(torch.autograd.Function)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    We can implement our own custom autograd Functions by subclassing</span></span><br><span class="line"><span class="string">    torch.autograd.Function and implementing the forward and backward passes</span></span><br><span class="line"><span class="string">    which operate on Tensors.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(ctx, input)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        In the forward pass we receive a Tensor containing the input and return</span></span><br><span class="line"><span class="string">        a Tensor containing the output. ctx is a context object that can be used</span></span><br><span class="line"><span class="string">        to stash information for backward computation. You can cache arbitrary</span></span><br><span class="line"><span class="string">        objects for use in the backward pass using the ctx.save_for_backward method.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        ctx.save_for_backward(input)  <span class="comment">#为了之后的backward计算</span></span><br><span class="line">        <span class="keyword">return</span> input.clamp(min=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(ctx, grad_output)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        In the backward pass we receive a Tensor containing the gradient of the loss</span></span><br><span class="line"><span class="string">        with respect to the output, and we need to compute the gradient of the loss</span></span><br><span class="line"><span class="string">        with respect to the input.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        input, = ctx.saved_tensors</span><br><span class="line">        grad_input = grad_output.clone()</span><br><span class="line">        grad_input[input &lt; <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> grad_input</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="4️⃣Pytorch在多张卡上部署"><a href="#4️⃣Pytorch在多张卡上部署" class="headerlink" title="4️⃣Pytorch在多张卡上部署"></a>4️⃣Pytorch在多张卡上部署</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model = nn.DataParallel(model)</span><br><span class="line">device = torch.device(<span class="string">"cuda:0"</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">"cpu"</span>)</span><br><span class="line">model.to(device)</span><br><span class="line"><span class="keyword">for</span> data <span class="keyword">in</span> rand_loader:</span><br><span class="line">    input = data.to(device)</span><br><span class="line">    output = model(input)</span><br></pre></td></tr></table></figure>
-          
+          1️⃣softmax的numpy实现123def softmax(x,axis=0):    """Compute softmax values for each sets of scores in x."""    return np.exp(x) / np.sum(np.exp(x), axis=axis)
+
+2️⃣numpy 手动求导relu123456789101112131415161718192021222324252627282930313233343536import numpy as np# N is batch size; D_in is input dimension;#
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/23/代码相关/代码记录7/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1476,181 +1649,27 @@
       
         
           
-            <p>前几日（周日）去了达观杯答辩现场听了前10名做了报告，有了一些感想，但一直没有抽出时间写一下自己的感想（懒）。</p>
-<p>自己大概花了十来天做了一下比赛，实际上也就是一个文本分类的<a href="http://www.dcjingsai.com/common/cmpt/%E2%80%9C%E8%BE%BE%E8%A7%82%E6%9D%AF%E2%80%9D%E6%96%87%E6%9C%AC%E6%99%BA%E8%83%BD%E5%A4%84%E7%90%86%E6%8C%91%E6%88%98%E8%B5%9B_%E8%B5%9B%E4%BD%93%E4%B8%8E%E6%95%B0%E6%8D%AE.html" target="_blank" rel="noopener">比赛</a>，因为没有比赛经验的缘故，走了很多弯路。不过也学到了一些东西。</p>
-<p>现记录前十名的一些idea/trick：</p>
-<ul>
-<li>数据增强<ul>
-<li>因为给的句子长度很长，因此在做截断的时候后面的就没法训练到了，可以将文本倒序作为新的数据训练模型。可以充分利用到数据</li>
-<li>将数据打乱、随机删除，实际上就是对一个句子的词进行sample再组合</li>
-<li>打乱词序以增加数据量</li>
-<li>使用pseudo labeling，但有的队伍使用这个做出效果了，但有的没有</li>
-</ul>
-</li>
-<li>特征工程<ul>
-<li>假设开头中间结尾的信息对分类有帮助，因此截取该部分信息做训练</li>
-<li>改进baseline的tfidf的特征工程方法，使用基于熵的词权重计算</li>
-<li>降维，留下最重要的特征。先用卡方分布降到20万，再用SVD降到8000</li>
-<li>将word2vec和GloVe拼接起来作为deep learning模型的输入</li>
-<li>将文章分段，每段取前20后20拼起来</li>
-</ul>
-</li>
-<li>模型融合<br>  所有队伍都无一例外使用了模型融合，stacking或者简单的投票<ul>
-<li>DL+ML —&gt; lgbm model —&gt; voting</li>
-<li>深度模型+传统模型，在深度模型最后一层加入传统模型的信息/feature</li>
-<li>后向选择剔除冗余模型</li>
-</ul>
-</li>
-<li>DL&amp;其他<ul>
-<li>HAN，选择10个attention vector</li>
-<li>对易错类增加权重，通过改变损失函数来增加权重</li>
-<li>CNN, [1,2,3,4,5,6]*600</li>
-<li>提出新的模型（第一名）</li>
-</ul>
-</li>
-</ul>
-<p>其实除了一些trick，我还是有些失望的，因为都是用模型融合堆出来的，这也让我对比赛失去了一些兴趣。虽然能理解现在的比赛都是这样的，但感觉实在太暴力了。<br>当然，其中还是有一些亮点的，有一支队伍立意很高，从理解业务的角度出发而不是堆模型，也取得了很好的效果；还有一个使用了最新论文中的特征工程改进方法，令我耳目一新；以及第一名在比赛过程中提出来三个新的模型。</p>
-<p>Anyway，我目前还是太菜了，还是安心搞科研吧。_(:з」∠)</p>
+          前几日（周日）去了达观杯答辩现场听了前10名做了报告，有了一些感想，但一直没有抽出时间写一下自己的感想（懒）。
+自己大概花了十来天做了一下比赛，实际上也就是一个文本分类的比赛，因为没有比赛经验的缘故，走了很多弯路。不过也学到了一些东西。
+现记录前十名的一些idea/trick：
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
+数据增强
+因为给的句子长度很长，因此在做截断的时候后面的就没法训练到了，可以将文本倒序作为新的数据训练模型。可以充分利用到数据
+将数据打乱、随机删除，实际上就是对一个句子的词进行sample再组合
+打乱词序以增加数据量
+使用pseudo labeling，但有的队伍使用这个做出效果了，但有的没有
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/碎片知识/每周碎片知识7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/16/碎片知识/每周碎片知识7/" itemprop="url">每周碎片知识7</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T11:04:14+08:00">
-                2018-09-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:15+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-Pytorch"><a href="#1️⃣-Pytorch" class="headerlink" title="1️⃣[Pytorch]"></a>1️⃣[Pytorch]</h3><p>只有一个元素的tensor，可用.item()来获取元素</p>
-<p>tensor &lt;—&gt; numpy 相互转化会共享内部数据，因此改变其中一个会改变另一个</p>
-<p>可用使用 .to 来移动到设备<br><img src="/images/2018-09-16-15370671350548.jpg" alt=""></p>
-<p>.detech()  detach it from the computation history, and to prevent future computation from being tracked. 将其从计算图中分离，变为叶子节点，并且requires_grad=False</p>
-<p>Function 记录了这个tensor是怎么来的，所有的tensor都有，除非是用户自定义的：<br><img src="/images/2018-09-16-15370672806253.jpg" width="65%" height="50%"></p>
-<hr>
-<h3 id="2️⃣-协方差"><a href="#2️⃣-协方差" class="headerlink" title="2️⃣[协方差]"></a>2️⃣[协方差]</h3><p>关于协方差的理解，x与y关于某个自变量的变化程度，即度量了x与y之间的联系。<br><a href="https://www.zhihu.com/question/20852004" target="_blank" rel="noopener">https://www.zhihu.com/question/20852004</a></p>
-
-          
+特征工程
+假设开
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/19/见闻&想法/听达观杯现场答辩有感/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1738,7 +1757,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">138</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1751,7 +1770,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">157</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

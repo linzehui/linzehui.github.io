@@ -286,6 +286,149 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/碎片知识/每周碎片知识7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/16/碎片知识/每周碎片知识7/" itemprop="url">每周碎片知识7</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T11:04:14+08:00">
+                2018-09-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:15+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1️⃣[Pytorch]只有一个元素的tensor，可用.item()来获取元素
+tensor &lt;—&gt; numpy 相互转化会共享内部数据，因此改变其中一个会改变另一个
+可用使用 .to 来移动到设备
+.detech()  detach it from the computation history, and to prevent future computation from being tracked. 将其从计算图中分离，变为叶子节点，并且requires_grad=False
+Function 记录了这个tensor是怎么来的，所有的tensor都有，除非是用户自定义的：
+
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/16/碎片知识/每周碎片知识7/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/16/机器学习与深度学习算法知识/Lecture 4 Classification  Probabilistic Generative Model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -369,37 +512,21 @@
       
         
           
-            <h3 id="为什么不使用regression来分类？"><a href="#为什么不使用regression来分类？" class="headerlink" title="为什么不使用regression来分类？"></a>为什么不使用regression来分类？</h3><p>1️⃣如果使用regression的思想来分类，会对离边界较远的点进行惩罚：<br><img src="/images/2018-09-16-15370662150910.jpg" width="70%" height="50%"></p>
-<p>2️⃣如果多分类使用regression，如class 1, class 2, class 3；则隐式地假设了class 1 和 class 2较为接近，如果没有这种接近关系，则分类会不正确。</p>
-<h3 id="问题描述与定义"><a href="#问题描述与定义" class="headerlink" title="问题描述与定义"></a>问题描述与定义</h3><p><img src="/images/2018-09-16-15370662762802.jpg" width="70%" height="50%"></p>
-<p>当P大于0.5则是C1类，反之是C2类<br>先验P(C1)和P(C2)都好计算，计算C1占总的比例即可<br>因此，我们需要计算的就是p(x|C)</p>
-<p>这一想法，本质是得到了生成式模型：<br><img src="/images/2018-09-16-15370663099515.jpg" width="70%" height="50%"></p>
-<h3 id="原理概述"><a href="#原理概述" class="headerlink" title="原理概述"></a>原理概述</h3><p>现<strong>假设训练数据点的分布服从高斯分布</strong>：（显然可以自己设任何分布）<br>即数据从高斯分布采样得到：<br><img src="/images/2018-09-16-15370663870205.jpg" width="55%" height="50%"></p>
-<p>根据最大似然估计，可以获得每个类别的μ和Σ：<br><img src="/images/2018-09-16-15370664041246.jpg" width="70%" height="50%"></p>
-<p>得到了参数后，即可代入得到P(C|x) ：<br><img src="/images/2018-09-16-15370664355955.jpg" width="80%" height="50%"></p>
-<p>刚刚假设$Σ$对于不同类别不同，现我们<strong>令不同类别共享相同$Σ$</strong>：<br>（因为协方差代表的是不同feature之间的联系，可以认为是和类别无关的）</p>
-<p>$Σ$的计算公式是加权求和：<br><img src="/images/2018-09-16-15370665362081.jpg" width="24%" height="50%"></p>
-<p>在使用了相同的协方差矩阵后，边界就是线性的（后面会提到为什么是这样）：<br><img src="/images/2018-09-16-15370665553962.jpg" alt=""></p>
-<p> 总结：<br> 三步走，定义function set，计算μ和协方差矩阵，得到best function：<br><img src="/images/2018-09-16-15370665888683.jpg" width="60%" height="50%"></p>
-<p>注意到，如果我们认为，不同feature之间没有关系，每个feature符合特定的高斯分布，则该分类器则是朴素贝叶斯分类器：<br><img src="/images/2018-09-16-15370666092459.jpg" width="60%" height="50%"></p>
-<h3 id="分类与logistics-regression"><a href="#分类与logistics-regression" class="headerlink" title="分类与logistics regression"></a>分类与logistics regression</h3><p>现推导，该分类问题与logistics regression之间的联系：<br>即：<br><img src="/images/2018-09-16-15370666567324.jpg" width="60%" height="50%"></p>
-<h4 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h4><p>数据服从高斯分布，共享$Σ$</p>
-<h4 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h4><p>①总框架：<br><img src="/images/2018-09-16-15370667000974.jpg" width="50%" height="50%"></p>
-<p>令<br><img src="/images/2018-09-16-15370667135868.jpg" width="24%" height="50%"></p>
-<p>则有：<br><img src="/images/2018-09-16-15370667376312.jpg" width="50%" height="50%"></p>
-<p>②z的进一步推导与简化：<br><img src="/images/2018-09-16-15370667582564.jpg" width="30%" height="50%"></p>
-<p>将z展开：<br><img src="/images/2018-09-16-15370667763267.jpg" width="50%" height="50%"></p>
-<p>而第一部分有：<br><img src="/images/2018-09-16-15370667880942.jpg" width="50%" height="50%"></p>
-<p>第一部分相除，有：<br><img src="/images/2018-09-16-15370668274551.jpg" width="50%" height="50%"></p>
-<p>再进行展开，有：<br><img src="/images/2018-09-16-15370668394919.jpg" width="50%" height="50%"></p>
-<p>最终z的公式为：<br><img src="/images/2018-09-16-15370668522531.jpg" width="50%" height="50%"></p>
-<p>由于共享协方差矩阵，则可以消去部分，得到：<br><img src="/images/2018-09-16-15370668957564.jpg" width="50%" height="50%"></p>
-<p>替换成w和b：<br><img src="/images/2018-09-16-15370669103562.jpg" width="50%" height="50%"></p>
-<p>③最终，将z带回到原式：<br><img src="/images/2018-09-16-15370669221472.jpg" width="25%" height="50%"></p>
-<p>所以我们不需要再估计N1,N2,μ和Σ，直接计算w和b即可。也因此，分界线是线性的。</p>
-<p>全过程：<br><img src="/images/2018-09-16-15370669594744.jpg" alt=""></p>
-
-          
+          为什么不使用regression来分类？1️⃣如果使用regression的思想来分类，会对离边界较远的点进行惩罚：
+2️⃣如果多分类使用regression，如class 1, class 2, class 3；则隐式地假设了class 1 和 class 2较为接近，如果没有这种接近关系，则分类会不正确。
+问题描述与定义
+当P大于0.5则是C1类，反之是C2类先验P(C1)和P(C2)都好计算，计算C1占总的比例即可因此，我们需要计算的就是p(x|C)
+这一想法，本质是得到了生成式模型：
+原理概述现假设训练数据点的分布服从高斯分布：（显然可以自己设任何分布）即数据从高斯分布采样得到：
+根据
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/16/机器学习与深度学习算法知识/Lecture 4 Classification  Probabilistic Generative Model/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -529,36 +656,23 @@
       
         
           
-            <h2 id="Gradient-Descent-tips"><a href="#Gradient-Descent-tips" class="headerlink" title="Gradient Descent tips"></a>Gradient Descent tips</h2><h3 id="tip-1：Adaptive-Learning-Rates"><a href="#tip-1：Adaptive-Learning-Rates" class="headerlink" title="tip 1：Adaptive Learning Rates"></a>tip 1：Adaptive Learning Rates</h3><h4 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h4><h5 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h5><p><img src="/images/2018-09-16-15370654467771.jpg" width="30%" height="50%"></p>
-<p><img src="/images/2018-09-16-15370654502774.jpg" width="20%" height="50%"></p>
-<p>其中σ是之前所有的梯度的平方根<br><img src="/images/2018-09-16-15370654728457.jpg" width="30%" height="50%"></p>
-<p>化简形式：<br><img src="/images/2018-09-16-15370654853172.jpg" width="50%" height="50%"></p>
-<h5 id="为什么要怎么做？"><a href="#为什么要怎么做？" class="headerlink" title="为什么要怎么做？"></a>为什么要怎么做？</h5><p>考虑一个开口向上的二次函数<br><img src="/images/2018-09-16-15370655091732.jpg" width="50%" height="50%"></p>
-<p>也即，最好的步长是一次导除以二次导，但二次导计算量大，因此使用近似的方式：<br><strong>对一次导作多次的sample</strong>。<br>下图显示，如果二次导小，那么多次sample获得的一次导也小，反之则大，也就是说，一次导在某种程度上可以反映二次导的大小，所以直接用一次导近似，可以减少计算量。</p>
-<p><img src="/images/2018-09-16-15370655850876.jpg" width="50%" height="50%"></p>
-<h3 id="tip-2：feature-scaling"><a href="#tip-2：feature-scaling" class="headerlink" title="tip 2：feature scaling"></a>tip 2：feature scaling</h3><p><img src="/images/2018-09-16-15370656836724.jpg" width="50%" height="50%"></p>
-<p>能够改变loss的分布，上图1中w2对loss的影响较大，则较陡峭，参数更新就较困难，需要adaptive learning rate；如果进行feature scaling，能够更好达到local optimal</p>
-<h2 id="Gradient-Descent-Theory"><a href="#Gradient-Descent-Theory" class="headerlink" title="Gradient Descent Theory"></a>Gradient Descent Theory</h2><p>另一种角度看gradient descent：</p>
-<p>基本思想：<br>我们希望每一次都在当前点附近找到一个最小的点，即在一个范围内：<br><img src="/images/2018-09-16-15370657785697.jpg" width="40%" height="50%"></p>
-<p>应该如何找到该最小点？</p>
-<p>我们知道，泰勒级数的形式：<br><img src="/images/2018-09-16-15370658066669.jpg" width="50%" height="50%"></p>
-<p>当x接近x0时，会有如下近似：<br><img src="/images/2018-09-16-15370658167935.jpg" width="30%" height="50%"></p>
-<p>推广到多元泰勒级数则有：<br><img src="/images/2018-09-16-15370658315314.jpg" width="60%" height="50%"></p>
-<p>那么，如前所述，x接近x0，对于图中，即圆圈足够小时：<br><img src="/images/2018-09-16-15370658494091.jpg" width="50%" height="50%"></p>
-<p>简化符号：<br><img src="/images/2018-09-16-15370658736683.jpg" width="12%" height="50%"></p>
-<p><img src="/images/2018-09-16-15370658623258.jpg" width="30%" height="50%"></p>
-<p>所以可以简写成：<br><img src="/images/2018-09-16-15370658855882.jpg" width="30%" height="50%"></p>
-<p>由于s,u,v都是常数，在圆圈范围内寻找最小值对应的参数可以简化成：<br><img src="/images/2018-09-16-15370658981519.jpg" width="40%" height="50%"></p>
-<p><img src="/images/2018-09-16-15370659061025.jpg" width="30%" height="50%"></p>
-<p>再度简化，可以表达成：<br><img src="/images/2018-09-16-15370659680601.jpg" width="40%" height="50%"></p>
-<p><img src="/images/2018-09-16-15370659747339.jpg" width="30%" height="50%"></p>
-<p>在图中可以画为两个向量的点积<br><img src="/images/2018-09-16-15370660126195.jpg" width="40%" height="50%"></p>
-<p>显然，当反方向时，最小：<br><img src="/images/2018-09-16-15370660243469.jpg" width="40%" height="50%"></p>
-<p>也即：<br><img src="/images/2018-09-16-15370660628961.jpg" width="50%" height="50%"></p>
-<p>最终完整的式子：<br><img src="/images/2018-09-16-15370660794436.jpg" width="55%" height="50%"></p>
-<p>因此，当learning rate不够小时，是不满足泰勒级数近似的。</p>
+          Gradient Descent tipstip 1：Adaptive Learning RatesAdagrad基本思想
 
-          
+其中σ是之前所有的梯度的平方根
+化简形式：
+为什么要怎么做？考虑一个开口向上的二次函数
+也即，最好的步长是一次导除以二次导，但二次导计算量大，因此使用近似的方式：对一次导作多次的sample。下图显示，如果二次导小，那么多次sample获得的一次导也小，反之则大，也就是说，一次导在某种程度上可以反映二次导的大小，所以直接用一次导近似，可以减少计算量。
+
+tip 2：feature scaling
+能够改变loss的分布，上图1中w2对loss的影响较大，则较陡峭，参数更
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/16/机器学习与深度学习算法知识/Lecture 3 Gradient Descent/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -688,12 +802,19 @@
       
         
           
-            <h3 id="如何理解bias-amp-variance"><a href="#如何理解bias-amp-variance" class="headerlink" title="如何理解bias&amp;variance"></a>如何理解bias&amp;variance</h3><p><img src="/images/2018-09-16-15370650140053.jpg" width="40%" height="50%"><br>bias是function space中心离optimal model的差距，variance是某次实验所得模型离function space中心的距离。</p>
-<p>比如说，简单地模型的function space小，随机性小，因此variance小，但也因为function space小，表示能力有限，因此bias大。</p>
-<p>如图：<br><img src="/images/2018-09-16-15370651353167.jpg" width="70%" height="50%"><br>该图中蓝色圈代表模型所能表达的范围。</p>
-<h3 id="如何解决variance大的问题"><a href="#如何解决variance大的问题" class="headerlink" title="如何解决variance大的问题"></a>如何解决variance大的问题</h3><p>①更多的data<br>②regularization：强迫function更平滑，因此减小variance，但因为调整了function space，可能会增加bias。</p>
+          如何理解bias&amp;variancebias是function space中心离optimal model的差距，variance是某次实验所得模型离function space中心的距离。
+比如说，简单地模型的function space小，随机性小，因此variance小，但也因为function space小，表示能力有限，因此bias大。
+如图：该图中蓝色圈代表模型所能表达的范围。
+如何解决variance大的问题①更多的data②regularization：强迫function更平滑，因此减小variance，但因为调整了function space，可能会增加bias。
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/16/机器学习与深度学习算法知识/Lecture 2 Bias and Variance/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -823,12 +944,19 @@
       
         
           
-            <h3 id="白雪歌送武判官归京"><a href="#白雪歌送武判官归京" class="headerlink" title="白雪歌送武判官归京"></a>白雪歌送武判官归京</h3><p>[唐] 岑参<br>北风卷地白草折，胡天八月即飞雪。<br><strong>忽如一夜春风来，千树万树梨花开</strong>。<br>散入珠帘湿罗幕，狐裘不暖锦衾薄。<br>将军角弓不得控，都护铁衣冷难着。<br>瀚海阑干百丈冰，愁云惨淡万里凝。<br>中军置酒饮归客，胡琴琵琶与羌笛。<br>纷纷暮雪下辕门，风掣红旗冻不翻。<br><strong>轮台东门送君去，去时雪满天山路。<br>山回路转不见君，雪上空留马行处。</strong></p>
-<p><a href="http://m.xichuangzhu.com/work/57b903e3d342d3005ac74290" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b903e3d342d3005ac74290</a></p>
-<hr>
-<h3 id="绝命诗"><a href="#绝命诗" class="headerlink" title="绝命诗"></a>绝命诗</h3><p>谭嗣同<br>望门投止思张俭，<br>忍死须臾待杜根。<br><strong>我自横刀向天笑，<br>去留肝胆两昆仑！</strong></p>
+          白雪歌送武判官归京[唐] 岑参北风卷地白草折，胡天八月即飞雪。忽如一夜春风来，千树万树梨花开。散入珠帘湿罗幕，狐裘不暖锦衾薄。将军角弓不得控，都护铁衣冷难着。瀚海阑干百丈冰，愁云惨淡万里凝。中军置酒饮归客，胡琴琵琶与羌笛。纷纷暮雪下辕门，风掣红旗冻不翻。轮台东门送君去，去时雪满天山路。山回路转不见君，雪上空留马行处。
+http://m.xichuangzhu.com/work/57b903e3d342d3005ac74290
+
+绝命诗谭嗣同望门投止思张俭，忍死须臾待杜根。我自横刀向天笑，去留肝胆两昆仑！
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/16/诗词&句/每周诗词9/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -958,19 +1086,17 @@
       
         
           
-            <p>最近在看pytorch文档的时候，看到backward内有一个参数gradient，在经过查阅了相关资料和进行了实验后，对backward有了更深的认识。</p>
-<h2 id="backward"><a href="#backward" class="headerlink" title="backward"></a>backward</h2><p>1️⃣如果调用backward的是一个标量，如：<code>loss.backward()</code><br>则gradient不需要手动传入，会自动求导。<br>例子:<br>$a=[x_1,x_2],b=\frac{x_1+x_2}{2}$<br>则b对a求导，有：<br>$\dfrac {\partial b}{\partial x_{1}}=\frac{1}{2}，\dfrac {\partial b}{\partial x_{2}}=\frac{1}{2}$</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">a=torch.Tensor([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">a.requires_grad=<span class="keyword">True</span></span><br><span class="line">b=torch.mean(a)  <span class="comment">#tensor(2.5000, grad_fn=&lt;MeanBackward1&gt;)</span></span><br><span class="line">b.backward()</span><br><span class="line">a.grad   <span class="comment">#tensor([0.5000, 0.5000])</span></span><br></pre></td></tr></table></figure>
-<p>gradient此时只是在缩放原grad的大小，也即不指定gradient和gradient=1是等价的</p>
-<p>当然，也可以指定gradient，其中指定gradient的shape必须和b的维度相同<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gradient=torch.tensor(<span class="number">10.0</span>)</span><br><span class="line">b.backward(gradient)</span><br><span class="line">a.grad   <span class="comment">#tensor([5., 5.])</span></span><br></pre></td></tr></table></figure></p>
-<p>2️⃣如果调用backward的是一个向量<br>例子：<br>$a=[x_1,x_2],b=[b_1,b_2]$, 其中 $b_1=x_1+x_2,b_2=x_1*x_2$<br>b对a求导，有：<br>$\dfrac {\partial b_1}{\partial x_{1}}=1,\dfrac {\partial b_1}{\partial x_{2}}=1$</p>
-<p>$\dfrac {\partial b_2}{\partial x_{1}}=x_2,\dfrac {\partial b_2}{\partial x_{2}}=x_1$</p>
-<p>在backward的时候则必须指定gradient。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">a=torch.FloatTensor([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">a.requires_grad=<span class="keyword">True</span></span><br><span class="line">b=torch.zeros(<span class="number">2</span>)</span><br><span class="line">b[<span class="number">0</span>]=a[<span class="number">0</span>]+a[<span class="number">1</span>]</span><br><span class="line">b[<span class="number">1</span>]=a[<span class="number">0</span>]*a[<span class="number">1</span>]    <span class="comment"># b=tensor([5., 6.], grad_fn=&lt;CopySlices&gt;)</span></span><br><span class="line">gradient=torch.tensor([<span class="number">1.0</span>,<span class="number">0.0</span>])</span><br><span class="line">b.backward(gradient,retain_graph=<span class="keyword">True</span>)</span><br><span class="line">a.grad   <span class="comment">#tensor([1., 1.])，说明是对b_1进行求导</span></span><br><span class="line">a.grad.zero_()  <span class="comment">#将梯度清空，否则会叠加</span></span><br><span class="line"><span class="comment">#-------------- #</span></span><br><span class="line">gradient=torch.tensor([<span class="number">0.0</span>,<span class="number">1.0</span>])</span><br><span class="line">b.backward(gradient,retain_graph=<span class="keyword">True</span>)</span><br><span class="line">a.grad  <span class="comment"># tensor([3., 2.])，说明对b_2进行求导</span></span><br><span class="line">a.grad.zero_()</span><br><span class="line"><span class="comment"># ------------- #</span></span><br><span class="line">gradient=torch.tensor([<span class="number">1.0</span>,<span class="number">1.0</span>])</span><br><span class="line">b.backward(gradient,retain_graph=<span class="keyword">True</span>)</span><br><span class="line">a.grad   <span class="comment"># tensor([4., 3.])，即b_1,b_2的导数的叠加</span></span><br><span class="line">a.grad.zero_()</span><br></pre></td></tr></table></figure>
-<p>注意到b.backward()时需要retain_graph设为True，否则在计算完后会自动释放计算图的内存，这样就没法进行二次反向传播了。</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.pytorchtutorial.com/pytorch-backward/" target="_blank" rel="noopener">https://www.pytorchtutorial.com/pytorch-backward/</a></p>
-
-          
+          最近在看pytorch文档的时候，看到backward内有一个参数gradient，在经过查阅了相关资料和进行了实验后，对backward有了更深的认识。
+backward1️⃣如果调用backward的是一个标量，如：loss.backward()则gradient不需要手动传入，会自动求导。例子:$a=[x_1,x_2],b=\frac{x_1+x_2}{2}$则b对a求导，有：$\dfrac {\partial b}{\partial x_{1}}=\frac{1}{2}，\dfrac {\partial b}{\partial x_{2}}=\frac{1}{2}$
+123456imp
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/16/碎片知识/Pytorch backward()浅析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1100,17 +1226,22 @@
       
         
           
-            <h3 id="望月怀远"><a href="#望月怀远" class="headerlink" title="望月怀远"></a>望月怀远</h3><p>[唐] 张九龄<br><strong>海上生明月，天涯共此时。</strong><br>情人怨遥夜，竟夕起相思。<br>灭烛怜光满，披衣觉露滋。<br>不堪盈手赠，还寝梦佳期。</p>
-<p>遥夜，长夜。</p>
-<p><a href="http://m.xichuangzhu.com/work/57aca120a341310060e2a09f" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57aca120a341310060e2a09f</a></p>
-<hr>
-<h3 id="无题"><a href="#无题" class="headerlink" title="无题"></a>无题</h3><p>萨镇冰<br>五十七载犹如梦，举国沦亡缘汉城。<br><strong>龙游浅水勿自弃，终有扬眉吐气天。</strong></p>
-<p>1951年，中国人民志愿军在抗美援朝战争第三次战役后打进了汉城，萨镇冰得知此事，回想起57年前的甲午悲歌，当即作诗一首。</p>
-<hr>
-<h3 id="白雪歌送武判官归京"><a href="#白雪歌送武判官归京" class="headerlink" title="白雪歌送武判官归京"></a>白雪歌送武判官归京</h3><p>[唐] 岑参<br>北风卷地白草折，胡天八月即飞雪。<br><strong>忽如一夜春风来，千树万树梨花开。</strong><br>散入珠帘湿罗幕，狐裘不暖锦衾薄。<br>将军角弓不得控，都护铁衣冷难着。<br>瀚海阑干百丈冰，愁云惨淡万里凝。<br>中军置酒饮归客，胡琴琵琶与羌笛。<br>纷纷暮雪下辕门，风掣红旗冻不翻。<br><strong>轮台东门送君去，去时雪满天山路。<br>山回路转不见君，雪上空留马行处</strong>。</p>
-<p><a href="http://m.xichuangzhu.com/work/57b903e3d342d3005ac74290" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b903e3d342d3005ac74290</a></p>
+          望月怀远[唐] 张九龄海上生明月，天涯共此时。情人怨遥夜，竟夕起相思。灭烛怜光满，披衣觉露滋。不堪盈手赠，还寝梦佳期。
+遥夜，长夜。
+http://m.xichuangzhu.com/work/57aca120a341310060e2a09f
 
-          
+无题萨镇冰五十七载犹如梦，举国沦亡缘汉城。龙游浅水勿自弃，终有扬眉吐气天。
+1951年，中国人民志愿军在抗美援朝战争第三次战役后打进了汉城，萨镇冰得知此事，回想起57年前的甲午悲歌，当即作诗一首。
+
+白雪歌送武判官归京[唐] 岑参北风卷地白草折，胡天八月即飞雪。忽如一夜春风来，千树万树梨花开。散入珠帘湿罗幕，狐裘不暖锦衾薄。将军角弓不得控，都护铁衣冷难
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/09/诗词&句/每周诗词8/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1240,19 +1371,18 @@
       
         
           
-            <h3 id="滕王阁序"><a href="#滕王阁序" class="headerlink" title="滕王阁序"></a>滕王阁序</h3><p>遥襟甫畅，逸兴遄飞。爽籁发而清风生，纤歌凝而白云遏。睢园绿竹，气凌彭泽之樽；邺水朱华，光照临川之笔。四美具，二难并。穷睇眄于中天，极娱游于暇日。天高地迥，觉宇宙之无穷；兴尽悲来，识盈虚之有数。望长安于日下，目吴会于云间。地势极而南溟深，天柱高而北辰远。关山难越，谁悲失路之人；萍水相逢，尽是他乡之客。怀帝阍而不见，奉宣室以何年？</p>
-<hr>
-<p><strong>注释：</strong><br>遥襟甫畅，逸兴遄（chuán）飞：登高望远的胸怀顿时舒畅，飘欲脱俗的兴致油然而生。</p>
-<p>爽籁（lài）发而清风生，纤歌凝而白云遏：宴会上，排箫响起，好像清风拂来；柔美的歌声缭绕不散，遏止了白云飞动。爽：形容籁的发音清脆。籁：排箫，一种由多根竹管编排而成的管乐器。</p>
-<p>睢（suī）园绿竹，气凌彭泽之樽：今日的宴会，好比当年睢园竹林的聚会，在座的文人雅士，豪爽善饮的气概超过了陶渊明。睢园：西汉梁孝王在睢水旁修建的竹园，他常和一些文人在此饮酒赋诗。</p>
-<p>邺（yè）水朱华，光照临川之笔：这是借诗人曹植、谢灵运来比拟参加宴会的文人。邺：今河北临漳，是曹魏兴起的地方。曹植曾在这里作过《公宴诗》，诗中有“朱华冒绿池”的句子。临川之笔：指谢灵运，他曾任临川（今属江西）内史。</p>
-<p>四美：指良辰、美景、赏心、乐事。</p>
-<p>二难：贤主、嘉宾。</p>
-<p>地势极而南溟深，天柱高而北辰远：地势偏远，南海深邃；天柱高耸，北极星远悬。</p>
-<p>帝阍（hūn）：原指天帝的守门者。这里指皇帝的宫门。</p>
-<p>奉宣室以何年：什么时候才能像贾谊那样去侍奉君王呢</p>
+          滕王阁序遥襟甫畅，逸兴遄飞。爽籁发而清风生，纤歌凝而白云遏。睢园绿竹，气凌彭泽之樽；邺水朱华，光照临川之笔。四美具，二难并。穷睇眄于中天，极娱游于暇日。天高地迥，觉宇宙之无穷；兴尽悲来，识盈虚之有数。望长安于日下，目吴会于云间。地势极而南溟深，天柱高而北辰远。关山难越，谁悲失路之人；萍水相逢，尽是他乡之客。怀帝阍而不见，奉宣室以何年？
 
-          
+注释：遥襟甫畅，逸兴遄（chuán）飞：登高望远的胸怀顿时舒畅，飘欲脱俗的兴致油然而生。
+爽籁（lài）发而清风生，纤歌凝而白云遏：宴会上，排箫响起，好像清风拂来；柔美的歌声缭绕不散，遏止了白云飞动。爽：形容籁的发音清脆。籁：排箫，一种由多根竹管编排而成的管乐
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/02/诗词&句/每周诗词7/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1382,19 +1512,22 @@
       
         
           
-            <h3 id="1️⃣-dropout"><a href="#1️⃣-dropout" class="headerlink" title="1️⃣[dropout]"></a>1️⃣[dropout]</h3><p>dropout形式:<br><img src="/images/2018-09-02-15358857481798.jpg" width="70%" height="50%"><br>RNN的形式有多种：</p>
-<ul>
-<li><p>recurrent dropout<br>RNN: $h_t=f(W_h ⊙ [x_t,h_{t-1}]+b_h)$<br>加上dropout的RNN：$h_t=f(W_h ⊙ [x_t,d(h_{t-1})]+b_h)$，其中$d(\cdot)$为dropout函数<br>同理：<br>LSTM:$c_t=f_t ⊙c_{t-1} + i_t ⊙ d(g_t)$<br>GRU:$h_t=(1-z_t)⊙c_{t-1}+z_t⊙d(g_t)$</p>
-</li>
-<li><p>垂直连接的dropout<br>dropout的作用即是否允许L层某个LSTM单元的隐状态信息流入L+1层对应单元。<br><img src="/images/2018-09-02-15358866404870.jpg" width="50%" height="50%"></p>
-</li>
-</ul>
-<p>Reference:<br><a href="https://blog.csdn.net/falianghuang/article/details/72910161" target="_blank" rel="noopener">https://blog.csdn.net/falianghuang/article/details/72910161</a></p>
-<hr>
-<h3 id="2️⃣-Pytorch"><a href="#2️⃣-Pytorch" class="headerlink" title="2️⃣[Pytorch]"></a>2️⃣[Pytorch]</h3><p>pack_padded_sequence用于RNN中，将padding矩阵压缩:<br><img src="/images/2018-09-02-15358868858836.jpg" width="60%" height="50%"><br>这样就可以实现在RNN传输过程中短句提前结束。</p>
-<p>pad_packed_sequence是pack_padded_sequence的逆运算。</p>
+          1️⃣[dropout]dropout形式:RNN的形式有多种：
 
-          
+recurrent dropoutRNN: $h_t=f(W_h ⊙ [x_t,h_{t-1}]+b_h)$加上dropout的RNN：$h_t=f(W_h ⊙ [x_t,d(h_{t-1})]+b_h)$，其中$d(\cdot)$为dropout函数同理：LSTM:$c_t=f_t ⊙c_{t-1} + i_t ⊙ d(g_t)$GRU:$h_t=(1-z_t)⊙c_{t-1}+z_t⊙d(g_t)$
+
+垂直连接的dropoutdropout的作用即是否允许L层某个LSTM单元的隐状态信息流入L+1层对应单元。
+
+
+Refe
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/02/碎片知识/每周碎片知识6/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1524,187 +1657,17 @@
       
         
           
-            <p>《我没有说话》</p>
-<p>纳粹杀共产党时，<br>我没有出声<br>——因为我不是共产党员；<br>接着他们迫害犹太人，<br>我没有出声<br>——因为我不是犹太人；<br>然后他们杀工会成员，<br>我没有出声<br>——因为我不是工会成员；<br>后来他们迫害天主教徒，<br>我没有出声<br>——因为我是新教徒；<br>最后当他们开始对付我的时候，<br>已经没有人能站出来为我发声了</p>
+          《我没有说话》
+纳粹杀共产党时，我没有出声——因为我不是共产党员；接着他们迫害犹太人，我没有出声——因为我不是犹太人；然后他们杀工会成员，我没有出声——因为我不是工会成员；后来他们迫害天主教徒，我没有出声——因为我是新教徒；最后当他们开始对付我的时候，已经没有人能站出来为我发声了
 
           
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/08/26/碎片知识/Deep Learning NLP best practices笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/26/碎片知识/Deep Learning NLP best practices笔记/" itemprop="url">Deep Learning NLP best practices笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T11:35:24+08:00">
-                2018-08-26
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-01T21:22:51+08:00">
-                2018-09-01
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>博客地址：<a href="http://ruder.io/deep-learning-nlp-best-practices/index.html" target="_blank" rel="noopener">http://ruder.io/deep-learning-nlp-best-practices/index.html</a><br>个人觉得这篇文章写得很好，有许多实践得到的经验，通过这篇可以避免走一些弯路。</p>
-<h2 id="Practices"><a href="#Practices" class="headerlink" title="Practices"></a>Practices</h2><h3 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h3><blockquote>
-<p>The optimal dimensionality of word embeddings is mostly task-dependent: a smaller dimensionality works better for more syntactic tasks such as named entity recognition or part-of-speech (POS) tagging, while a larger dimensionality is more useful for more semantic tasks such as sentiment analysis.</p>
-</blockquote>
-<p>对于偏向语法的，使用维度低一些的词向量；而对于偏向语义内容的，使用维度大一些的词向量，如情感分析。</p>
-<h3 id="LSTM-Depth"><a href="#LSTM-Depth" class="headerlink" title="LSTM Depth"></a>LSTM Depth</h3><blockquote>
-<p>performance improvements of making the model deeper than 2 layers are minimal </p>
-</blockquote>
-<p>LSTM深度最好不要超过两层。</p>
-<h3 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h3><blockquote>
-<p>It is often thought that Adam clearly outperforms vanilla stochastic gradient descent (SGD). However, while it converges much faster than SGD, it has been observed that SGD with learning rate annealing slightly outperforms Adam. Recent work furthermore shows that SGD with properly tuned momentum outperforms Adam .</p>
-</blockquote>
-<p>Adam可以更早拟合，而SGD效果可能会更好一些。</p>
-<p>可以采用优化策略，比如说使用Adam训练直到拟合，然后将学习率减半，并重新导入之前训练好的最好的模型。这样Adam能够忘记之前的信息并重新开始训练。</p>
-<blockquote>
-<p>Denkowski &amp; Neubig (2017) show that Adam with 2 restarts and learning rate annealing is faster and performs better than SGD with annealing</p>
-</blockquote>
-<h3 id="Ensembling"><a href="#Ensembling" class="headerlink" title="Ensembling"></a>Ensembling</h3><blockquote>
-<p>Combining multiple models into an ensemble by averaging their predictions is a proven strategy to improve model performance.</p>
-</blockquote>
-<p>Ensembling很重要的一点是需要保证多样性：</p>
-<blockquote>
-<p>Ensembling is an important way to ensure that results are still reliable if the diversity of the evaluated models increases (Denkowski &amp; Neubig, 2017). While ensembling different checkpoints of a model has been shown to be effective (Jean et al., 2015; Sennrich et al., 2016) [51, 52], it comes at the cost of model diversity. Cyclical learning rates can help to mitigate this effect</p>
-</blockquote>
-<h3 id="LSTM-tricks"><a href="#LSTM-tricks" class="headerlink" title="LSTM tricks"></a>LSTM tricks</h3><ul>
-<li><p>在initial state中我们常常使用全0向量，实际上可以将其作为参数学习。</p>
-<blockquote>
-<p>Instead of fixing the initial state, we can learn it like any other parameter, which can improve performance</p>
-</blockquote>
-</li>
-<li><p>将input和output embedding的参数共享，如果是做language model或者机器翻译之类的，可以让他们共享。</p>
-</li>
-<li><p>Gradient Norm Clipping</p>
-<blockquote>
-<p>Rather than clipping each gradient independently, clipping the global norm of the gradient yields more significant improvements</p>
-</blockquote>
-</li>
-</ul>
-<p>这点我没看懂。</p>
-<h3 id="Classification-practices"><a href="#Classification-practices" class="headerlink" title="Classification practices"></a>Classification practices</h3><p>关于CNN</p>
-<blockquote>
-<p>CNN filters:Combining filter sizes near the optimal filter size, e.g. (3,4,5) performs best (Kim, 2014; Kim et al., 2016). The optimal number of feature maps is in the range of 50-600 (Zhang &amp; Wallace, 2015) [59].</p>
-<p>Aggregation function:1-max-pooling outperforms average-pooling and k-max pooling (Zhang &amp; Wallace, 2015).</p>
-</blockquote>
-<p>这在我之前的关于CNN文本分类指南中有更详尽的分析。</p>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这是一篇干货满满的博客，实际上我还是有许多地方没有读懂，这适合多看几遍，慢慢理解。</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/29/诗词&句/我没有说话/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1792,7 +1755,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">138</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1805,7 +1768,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">157</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -286,6 +286,150 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/04/21/论文/每周论文16/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/21/论文/每周论文16/" itemprop="url">每周论文16</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T22:04:30+08:00">
+                2019-04-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-22T16:52:53+08:00">
+                2019-04-22
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          本周论文：
+
+MEASURING THE INTRINSIC DIMENSION OF OBJECTIVE LANDSCAPES
+Fine-Grained Attention Mechanism for Neural Machine Translation
+Competence-based Curriculum Learning for Neural Machine Translation
+
+1️⃣[MEASURING THE INTRINSIC DIMENSION OF OBJECTIVE LANDSCAPES]本文探究深度学习中的过量参数问题，通过定义intrinsic dimension
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/21/论文/每周论文16/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/04/12/论文/Transformer相关近期盘点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -369,97 +513,21 @@
       
         
           
-            <p>近年来自然语言处理有相当大的进展，囿于个人浅薄的能力，因此仅谈谈自己较为了解的与Transformer相关一路下来的一些工作。这篇的主要目的是完成邱博给我的任务，也顺便梳理一下思绪。</p>
-<hr>
-<p>自2017年的问世，Transformer就吸引了大批学者的注意，2018年Bert的出现，更是将Transformer推上了NLP舞台的中央。Transformer以其高效率（高并行性）以及极强的模型能力，俨然有替代传统RNN/CNN的态势。因此本次就讨论讨论Transformer及其系列，同时最后加上我个人关于RNN/CNN/Transformer的一点思考。</p>
-<p>要点：</p>
-<ol>
-<li>Transformer及其变体</li>
-<li>Transformer在其他任务</li>
-<li>预训练模型</li>
-<li>Transformer/CNN/RNN对比及思考</li>
-</ol>
-<h2 id="Transformer及其变体"><a href="#Transformer及其变体" class="headerlink" title="Transformer及其变体"></a>Transformer及其变体</h2><h3 id="Transformer简单回顾"><a href="#Transformer简单回顾" class="headerlink" title="Transformer简单回顾"></a>Transformer简单回顾</h3><p>Transformer[1]采用完全的attention机制用以序列建模，序列中的每个节点都能够直接与其他节点交互，而这是通过attention机制来实现的。</p>
-<h4 id="Transformer模型架构"><a href="#Transformer模型架构" class="headerlink" title="Transformer模型架构"></a>Transformer模型架构</h4><p>Transformer架构：<br><img src="/images/15550349717464.jpg" width="50%" height="50%"></p>
-<p>由于Transformer最早由于翻译模型中，因此架构是由一个encoder和一个decoder组成，而encoder和decoder都是由多个基本的block堆叠而成。一个block由两部分组成，也即multi-head attention层和Position-wise Feed-Forward Networks层。</p>
-<h5 id="Multi-head-attention"><a href="#Multi-head-attention" class="headerlink" title="Multi-head attention"></a>Multi-head attention</h5><p>对于序列中一个特定节点$x_i$，$x_i$作为query，其他节点（包括自己）作为key和value，通过向量点积计算出attention分数，进行归一化后（softmax）将value加权平均获得该节点$x_i$新的表示。<br>同时，对于每个节点，为了增强表示能力，可以将其映射到多个不同隐空间中，分别完成上述基本操作。</p>
-<p>如下图所示：<br><img src="/images/15550350386364.jpg" width="70%" height="50%"></p>
-<p>左图为基本操作也即scale-dot product，右图为多个scale-dot product在不同隐空间同时进行，并且将多个head的结果拼接起来作为最终结果。</p>
-<h5 id="Position-wise-Feed-Forward-Networks"><a href="#Position-wise-Feed-Forward-Networks" class="headerlink" title="Position-wise Feed-Forward Networks"></a>Position-wise Feed-Forward Networks</h5><p>为了增强模型表示能力，在Multi-head attention之后，每个节点都过两层MLP以获得新的向量表示。<br>也即:</p>
-<script type="math/tex; mode=display">\mathrm{FFN}(x)=\max \left(0, x W_{1}+b_{1}\right) W_{2}+b_{2}</script><p>相比传统的RNN/CNN而言，其最大的优势是全局的感受野（Global Receptive Field）以及高度并行性（parallelization）。</p>
-<h3 id="变体"><a href="#变体" class="headerlink" title="变体"></a>变体</h3><h4 id="Universal-Transformers"><a href="#Universal-Transformers" class="headerlink" title="Universal Transformers"></a>Universal Transformers</h4><p>提出一种新型通用的Transformer，在Transformer的基础上引入RNN的归纳偏置(inductive bias)，也即迭代学习(learning iterative)的特征。Universal Transformer[2]的主要特点有：</p>
-<ol>
-<li>在Transformer中每层的权重是独立的，而在Universal Transformer中，每层的权重是共享的，也即multi-head Attention与Feed-Forward在每层的权重是一致的。</li>
-<li>在Transformer中引入自适应计算时间(Adaptive Computation Time, ACT[3])，也即对于不同的词允许迭代不同次数。这是基于有些词相比其他词词意更丰富，更难被模型学会，因此需要更多的迭代次数。与固定层数的Transformer相比有更好的通用性。</li>
-</ol>
-<p>因此其总体结构为：<br><img src="/images/15556585300051.jpg" width="70%" height="50%"></p>
-<p>在这里有两个细节：</p>
-<ol>
-<li>加了Timestep embedding去指示当前迭代的次数</li>
-<li>将Feedforward Function用更为通用的Transition Function，可以是普通的全连接，也可以是参数更少的Depth-wise Convolution。</li>
-</ol>
-<h4 id="Star-Transformer"><a href="#Star-Transformer" class="headerlink" title="Star Transformer"></a>Star Transformer</h4><p>Star Transformer[20]是一种轻量级的Transformer，通过将全连接的结构替换为星型拓扑结构，显著减小Transformer的复杂度，从$O(n^2)$减为$O(n)$。</p>
-<p><img src="/images/15556834830687.jpg" width="50%" height="50%"></p>
-<p>其主要思想是’Gather-Distribute’，也即每个节点不直接与其他节点交互，而是与全局节点进行交互。<br><img src="/images/15556836008776.jpg" width="50%" height="50%"></p>
-<p>实验表明，Star Transformer不仅在多个数据集表现更优，且速度更快。</p>
-<p><img src="/images/15557700601922.jpg" width="90%" height="50%"></p>
-<p><img src="/images/15557701172639.jpg" width="90%" height="50%"></p>
-<h4 id="其他小改进"><a href="#其他小改进" class="headerlink" title="其他小改进"></a>其他小改进</h4><p>接下来介绍基于Transformer的几个小改进工作。</p>
-<p>在Convolutional Self-Attention Network[5]中，通过在self-attention层引入CNN的归纳偏置，在翻译任务上有一定的提升。具体做法：<br><img src="/images/15556604248879.jpg" width="80%" height="50%"><br>普通self-attention层，每个节点都能够直接与其他节点交互，而在1D-Convolutional的self-attention层中，每个节点只能与以该节点为中心的窗口内的节点交互。而在2D-Convolution中，对head这一维进行扩展，也即对于任意一个节点，不仅能和周围的节点交互，还可以与其他head的节点交互。<br>实验结果：<br><img src="/images/15556607769307.jpg" width="80%" height="50%"></p>
-<p>在Multi-Head Attention with Disagreement Regularization[6]中，显式对multi-head attention添加正则化，使得不同head尽量区分开来，以使得不同head捕获到不同的特征。论文提出了三种不同位置的正则化方法：<br>①对Value：</p>
-<script type="math/tex; mode=display">D_{\text {subpace}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H} \frac{V^{i} \cdot V^{j}}{\left\|V^{i}\right\|\left\|V^{j}\right\|}</script><p>也即对不同head之间的value，计算他们之间的cos值，作为优化目标之一。</p>
-<p>②对Attention权重：</p>
-<script type="math/tex; mode=display">D_{\text {position}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H}\left|A^{i} \odot A^{j}\right|</script><p>也即将每个head所计算得到的attention矩阵，计算他们之间的element-wise乘法，作为优化目标之一。</p>
-<p>③对输出：</p>
-<script type="math/tex; mode=display">D_{\text {output}}=-\frac{1}{H^{2}} \sum_{i=1}^{H} \sum_{j=1}^{H} \frac{O^{i} \cdot O^{j}}{\left\|O^{i}\right\|\left\|O^{j}\right\|}</script><p>也即对每个head的输出通过cos值进行正则化。</p>
-<p>Modeling Localness for Self-Attention Networks[7]则是通过加强对局部信息的关注，在翻译任务上提升表现。其主要的动机是：①在Transformer中每个词都直接与所有词交互，对所有词进行线性加权导致对邻近词的关注不够（因为权重的分散）；②从直接上看，当词$i$与词$j$有对齐关系时，我们希望与词$j$周围的词也对齐，使得模型能够捕获整个语义单元的信息。其具体做法是在softmax函数内增加一个高斯偏置（Gaussian bias）去修正attention权重分布：</p>
-<script type="math/tex; mode=display">\operatorname{ATT}(Q, K)=\operatorname{softmax}(\text {energy}+G)</script><p>$G_{ij}$是衡量词j与词i所预测的中心词之间的联系紧密程度，计算公式为：</p>
-<script type="math/tex; mode=display">G_{i, j}=-\frac{\left(j-P_{i}\right)^{2}}{2 \sigma_{i}^{2}}</script><p>其中$\sigma_{i}=\frac{D_{i}}{2}$，$D_{i}$是窗口大小。而$P_{i}$是通过计算得出的，$P_{i}$与对应的query有关，因此可以通过$p_{i}=U_{p}^{T} \tanh \left(W_{p} Q_{i}\right)$计算得到；而窗口大小$D_{i}$可以有多种选择，①固定窗口大小；②每层特定的大小，也即将该层的key平均起来，通过$z=U_{d}^{T} \tanh \left(W_{d} \overline{\mathbf{K}}\right)$计算；③每个query都有自己的窗口大小：$z_{i}=U_{d}^{T} \tanh \left(W_{p} Q_{i}\right)$。</p>
-<p>Self-attention with relative position representations[8]则是将Transformer中的绝对位置embedding改为相对位置embedding以提升翻译效果。</p>
-<h2 id="Transformer在其他任务"><a href="#Transformer在其他任务" class="headerlink" title="Transformer在其他任务"></a>Transformer在其他任务</h2><h3 id="Transformer-XL"><a href="#Transformer-XL" class="headerlink" title="Transformer XL"></a>Transformer XL</h3><p>本文探索将Transformer用于语言模型(language model)，并在Transformer引入RNN的归纳偏置，也即RNN的历史信息，使得Transformer能够处理长句子。</p>
-<p>由于Transformer的复杂度是$O(n^2)$，虽然在GPU上能够并行操作，但占用显存较大，因此在实现时，通常是将句子切分为一个一个segment，segment之间没有联系：</p>
-<p><img src="/images/15556764280028.jpg" width="30%" height="50%"></p>
-<p>而在测试阶段，则每生成一个词时滑动一个窗口：</p>
-<p><img src="/images/15556765079362.jpg" width="60%" height="50%"></p>
-<p>这样的方法显然效率很低。</p>
-<p>而在Transformer-XL[9]中，每个segment阶段都接受前一个(甚至前L个)的历史信息：<br>因此过程如下：<br><img src="/images/15556768100801.jpg" width="60%" height="50%"></p>
-<p>而在测试阶段，由于有历史信息，则不需要滑动窗口，因此效率更高。</p>
-<p>具体而言：<br>$\begin{aligned} \widetilde{\mathbf{h}}_{\tau+1}^{n-1} &amp;=\left[\mathrm{SG}\left(\mathbf{h}_{\tau}^{n-1}\right) \circ \mathbf{h}_{\tau+1}^{n-1}\right] \\ \mathbf{q}_{\tau+1}^{n}, \mathbf{k}_{\tau+1}^{n}, \mathbf{v}_{\tau+1}^{n} &amp;=\mathbf{h}_{\tau+1}^{n-1} \mathbf{W}_{q}^{\top}, \widetilde{\mathbf{h}}_{\tau+1}^{n-1} \mathbf{W}_{k}^{\top}, \widetilde{\mathbf{h}}_{\tau+1}^{n-1} \mathbf{W}_{v}^{\top} \\ \mathbf{h}_{\tau+1}^{n} &amp;=\text { Transformer-Layer }\left(\mathbf{q}_{\tau+1}^{n}, \mathbf{k}_{\tau+1}^{n}, \mathbf{v}_{\tau+1}^{n}\right) \end{aligned}$<br>SG代表stop gradient，而历史信息与当前阶段的隐状态拼接在一起。</p>
-<p>同时本文另一大两点是引入相对位置的encoding。如果使用绝对位置encoding，那么则会出现下述情况：<br>$\mathbf{h}_{\tau+1}=f\left(\mathbf{h}_{\tau}, \mathbf{E}_{\mathbf{s}_{\tau+1}}+\mathbf{U}_{1 : L}\right) \quad \text { and } \quad \mathbf{h}_{\tau}=f\left(\mathbf{h}_{\tau-1}, \mathbf{E}_{\mathbf{s}_{\tau}}+\mathbf{U}_{1 : L}\right)$<br>也即每个segment都会有相同的位置信息。因此在这里引入$\mathbf{R} \in \mathbb{R}^{L_{\max } \times d}$，第$i$行代表相对距离$i$的encoding。</p>
-<p>具体而言：<br>在标准Transformer中，query $q_i$与key $k_j$所获得的attention分数可以拆解为：<br>$\mathbf{A}_{i, j}^{\mathrm{abs}}=q_{i}^{\top} k_{j}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{E}_{x_{j}}}_{(a)}+\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{U}_{j}}_{(b)}+\underbrace{\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{E}_{x_{j}}}_{(c)}+\underbrace{\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k} \mathbf{U}_{j}}_{(d)}$</p>
-<p>对其进行改进，转化为相对位置encoding，有：<br>$\mathbf{A}_{i, j}^{\mathrm{rel}}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, E} \mathbf{E}_{x_{j}}}_{(a)}+\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, E} \mathbf{R}_{i-j}}_{(b)}+\underbrace{u^{\top} \mathbf{W}_{k, R} \mathbf{E}_{x_{j}}}_{(c)}+\underbrace{v^{\top} \mathbf{W}_{k, R} \mathbf{R}_{i-j}}_{(d)}$</p>
-<p>首先是将所有出现绝对位置的地方都改为相对位置，第二是将引入一个可学习的$u \in \mathbb{R}^{d}$和$v \in \mathbb{R}^{d}$去替代$\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top}$和$\mathbf{U}_{i}^{\top} \mathbf{W}_{q}^{\top}$。第三，是将同样的$\mathbf{W}_{k}$细化成两个不同的$\mathbf{W}_{k, E}$与$\mathbf{W}_{k, R}$。</p>
-<p>Transformer-XL在不同数据集上有相当好的效果：<br><img src="/images/15556790567795.jpg" width="80%" height="50%"></p>
-<p><img src="/images/15556790839030.jpg" width="80%" height="50%"></p>
-<h3 id="Character-Level-Language-Modeling-with-Deeper-Self-Attention"><a href="#Character-Level-Language-Modeling-with-Deeper-Self-Attention" class="headerlink" title="Character-Level Language Modeling with Deeper Self-Attention"></a>Character-Level Language Modeling with Deeper Self-Attention</h3><p>同样是在语言模型上使用Transformer，但是character级别的语言模型。其主要思路是添加多个loss来提升其表现以及加快拟合速度。</p>
-<p>对于传统的RNN character-level语言模型，一般做法是“truncated backpropagation through time” (TBTT)：也即每个batch预测最后一个字符，然后将该batch的隐状态传入下一个batch。</p>
-<p>而在Transformer中也可以采用该方法。但在该基础上，引入三种loss。<br>①Multiple Positions<br>在一个batch内，每个时间步t都预测下一个字符，而不是像传统方法，只预测batch最后一个字符：</p>
-<p><img src="/images/15556794194598.jpg" width="60%" height="50%"></p>
-<p>②Intermediate Layer Losses<br>不仅仅最后一层要进行预测，中间层也需要预测。</p>
-<p><img src="/images/15556795039170.jpg" width="60%" height="50%"><br>越底层的loss所分配的权重越小。</p>
-<p>③Multiple Targets<br>每个位置不仅仅要预测下一个字符，还需要预测后几个的字符：</p>
-<p><img src="/images/15556796677182.jpg" width="60%" height="50%"></p>
-<p>实验表明，使用多个loss能够加速拟合，且能够获得更好的结果。</p>
-<h2 id="预训练模型"><a href="#预训练模型" class="headerlink" title="预训练模型"></a>预训练模型</h2><p>自ELMo开始，预训练模型就开始受到广泛的关注，而Bert随后的问世则更是将预训练模型推上了新的阶段。因此在这里简要介绍预训练模型的历史。</p>
-<h3 id="Non-Transformer-based"><a href="#Non-Transformer-based" class="headerlink" title="Non-Transformer-based"></a>Non-Transformer-based</h3><h4 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h4><p>词向量是最早的预训练模型，Bengio, et al.[10] 最早提出神经网络语言模型，词向量作为训练语言模型的副产品，可以用于下游任务。而随后则出现了word2vec[11],GloVe[12]，是目前最为广泛使用的词向量。</p>
-<h4 id="CoVe-ELMo"><a href="#CoVe-ELMo" class="headerlink" title="CoVe/ELMo"></a>CoVe/ELMo</h4><p>word2vec与GloVe作为静态词向量，一大问题就是难以解决多义词，而多义词的表示可以通过上下文来推测。CoVe[13]将词向量从静态扩展为动态。通过上下文来获得特定词的动态表示，具体是通过翻译模型来达到该目的的。<br>而ELMo[14]继承了动态词向量的思想，不过是通过双向语言模型来达到这一目的的。通过双向LSTM的语言模型，将前向与后向隐状态拼接起来作为该词的表示。<br>仅仅是将传统静态词向量替换成ELMo，就能有很大的提升。自此开始，预训练模型开始受到广泛的关注。</p>
-<h4 id="ULMFit"><a href="#ULMFit" class="headerlink" title="ULMFit"></a>ULMFit</h4><p>在上述预训练模型中，研究者的思路主要集中在预训练词向量用于下游任务。ULMFit[16]则尝试直接对分类模型进行预训练，接着再通过微调(fine-tuning)以提高分类的效果。</p>
-<p><img src="/images/15556816887199.jpg" width="80%" height="50%"></p>
-<p>ULMFit的成功说明直接对模型进行预训练而不是只预训练词向量用于下游任务是可行的。</p>
-<h3 id="Transformer-based"><a href="#Transformer-based" class="headerlink" title="Transformer-based"></a>Transformer-based</h3><p>GPT[15]尝试通过探索构建一种通用模型并在其上训练语言模型，可以在多种任务上有更好的表现。其主要亮点在于①构建一种通用模型，能够处理不同任务，第二使用Transformer而不是LSTM作为其基本模型。<br>其基本模型：</p>
-<p><img src="/images/15556818289287.jpg" width="85%" height="50%"></p>
-<p>具体而言，主要是无监督的语言模型预训练加上有监督的微调。</p>
-<p>而Bert[17]在GPT的基础上，引入masked语言模型，通过随机mask掉部分词，强迫模型通过上下文去预测mask掉的词，加强了模型的能力。</p>
-<p><img src="/images/15556821324062.jpg" width="85%" height="50%"></p>
-<p>同时引入有监督学习，也即预测下一句（Next Sentence Prediction），随机在句对中取两个句子，使得有50%可能句子对有上下文关系，50%句对没有关系，使模型去预测句对之间的关系。具体而言则是通过在句子开头加[CLS]符号，在最高层将该符号的表示通过全连接层。</p>
-<p>Bert在11项数据集上刷新最高记录。</p>
-<p>在此之后，MT-DNN[19]、GPT2.0[18]相继问世，通过添加更多的任务或者更多的数据使得模型表现更好。相信在接下来一段时间内，相关主题的论文也会有很多。</p>
-<h2 id="Transformer-CNN-RNN对比及思考"><a href="#Transformer-CNN-RNN对比及思考" class="headerlink" title="Transformer/CNN/RNN对比及思考"></a>Transformer/CNN/RNN对比及思考</h2><p>上述的介绍，大概对Transformer一支有一个简单的梳理。Transformer作为与RNN/CNN并立的模型，确实值得重视。</p>
-<p>为什么Transformer这么好，是否能够替代RNN/CNN？这也是值得所有人思考的。</p>
-<p>正如前面介绍的那样，Transformer的一大优势是全局感受野，也即RNN/CNN每次只能‘看’到部分上下文，而Transformer则没有这个限制，每个节点都能够直接与其他节点进行交互。也可以这么说，RNN/CNN具有更强的先验(prior)。<br>但这种优势有时也会成为劣势：实践证明，Transformer在小数据集上的效果是不如RNN/CNN的。或许可以这么理解这种现象：Transformer由于不引入强的先验，因此需要大量的数据去从头学习数据所存在的某种pattern（如局部性），而引入强的先验的RNN/CNN则对小数据集更加友好一些。但当有大量训练数据时（如翻译、语言模型），Transformer则会有更高的上限，Bert/GPT也印证了这点。而这种Transformer的劣势或许也是上述几个工作（如universal transformer）的其中一个出发点，也即在Transformer内引入RNN/CNN的归纳偏置，加强对Transformer的先验知识的约束。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Vaswani, Ashish, et al. “Attention is all you need.” Advances in neural information processing systems. 2017.<br>[2]Dehghani, Mostafa, et al. “Universal transformers.” arXiv preprint arXiv:1807.03819 (2018).<br>[3]Graves, Alex. “Adaptive computation time for recurrent neural networks.” arXiv preprint arXiv:1603.08983 (2016).<br>[4]Ahmed, Karim, Nitish Shirish Keskar, and Richard Socher. “Weighted transformer network for machine translation.” arXiv preprint arXiv:1711.02132 (2017).<br>[5]Yang, Baosong, et al. “Convolutional Self-Attention Networks.” arXiv preprint arXiv:1904.03107 (2019).<br>[6]Li, Jian, et al. “Multi-head attention with disagreement regularization.” arXiv preprint arXiv:1810.10183 (2018).<br>[7]Yang, Baosong, et al. “Modeling localness for self-attention networks.” arXiv preprint arXiv:1810.10182 (2018).<br>[8]Shaw, Peter, Jakob Uszkoreit, and Ashish Vaswani. “Self-attention with relative position representations.” arXiv preprint arXiv:1803.02155 (2018).<br>[9]Dai, Zihang, et al. “Transformer-xl: Attentive language models beyond a fixed-length context.” arXiv preprint arXiv:1901.02860 (2019).<br>[10]Bengio, Yoshua, et al. “A neural probabilistic language model.” Journal of machine learning research 3.Feb (2003): 1137-1155.<br>[11]Mikolov, Tomas, et al. “Efficient estimation of word representations in vector space.” arXiv preprint arXiv:1301.3781 (2013).<br>[12]Pennington, Jeffrey, Richard Socher, and Christopher Manning. “Glove: Global vectors for word representation.” Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP). 2014.<br>[13]McCann, Bryan, et al. “Learned in translation: Contextualized word vectors.” Advances in Neural Information Processing Systems. 2017.<br>[14]Peters, Matthew E., et al. “Deep contextualized word representations.” arXiv preprint arXiv:1802.05365 (2018).<br>[15]Radford, Alec, et al. “Improving language understanding by generative pre-training.” URL <a href="https://s3-us-west-2" target="_blank" rel="noopener">https://s3-us-west-2</a>. amazonaws. com/openai-assets/research-covers/languageunsupervised/language understanding paper. pdf (2018).<br>[16]Universal Language Model Fine-tuning for Text Classification<br>[17]Devlin, Jacob, et al. “Bert: Pre-training of deep bidirectional transformers for language understanding.” arXiv preprint arXiv:1810.04805 (2018).<br>[18]Radford, Alec, et al. “Language models are unsupervised multitask learners.” OpenAI Blog 1 (2019): 8.<br>[19]Multi-Task Deep Neural Networks for Natural Language Understanding<br>[20]Guo, Qipeng, et al. “Star-Transformer.” arXiv preprint arXiv:1902.09113 (2019).</p>
+          近年来自然语言处理有相当大的进展，囿于个人浅薄的能力，因此仅谈谈自己较为了解的与Transformer相关一路下来的一些工作。这篇的主要目的是完成邱博给我的任务，也顺便梳理一下思绪。
 
-          
+自2017年的问世，Transformer就吸引了大批学者的注意，2018年Bert的出现，更是将Transformer推上了NLP舞台的中央。Transformer以其高效率（高并行性）以及极强的模型能力，俨然有替代传统RNN/CNN的态势。因此本次就讨论讨论Transformer及其系列，同时最后加上我个人关于RNN/CNN/Transformer的一点思考。
+要点：
+
+Transformer及其变体
+Tr
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/12/论文/Transformer相关近期盘点/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -589,9 +657,16 @@
       
         
           
-            <p>人类永恒的愚蠢，是把莫名其妙的担忧，等同于智力超群。  ——美国加尔布雷斯</p>
+          人类永恒的愚蠢，是把莫名其妙的担忧，等同于智力超群。  ——美国加尔布雷斯
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/11/诗词&句/人类永恒的愚蠢/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -721,52 +796,21 @@
       
         
           
-            <p>本周论文:</p>
-<ol>
-<li>Selective Kernel Networks</li>
-<li>Attentional pooling for action recognition</li>
-</ol>
-<h2 id="1️⃣-Selective-Kernel-Networks"><a href="#1️⃣-Selective-Kernel-Networks" class="headerlink" title="1️⃣[Selective Kernel Networks]"></a>1️⃣[Selective Kernel Networks]</h2><p>通过对不同kernel size的feature map之间进行信息筛选获得更为鲁棒的表示，能够对不同的感受野进行整合，实现动态调整感受野。其思路还挺有意思的。</p>
-<p>Introduction将该模型与视觉神经的理论结合在一起，也即，对于人类而言，在看不同尺寸不同远近的物体时，视觉皮层神经元<strong>感受野大小</strong>是会根据刺激来进行调节的，但一般而言在CNN中卷积核的大小是固定的。该模型正是从这一现象中获得灵感。</p>
-<p>整个模型一共分为三个步骤：split，fuse，select</p>
-<p>split生成多个不同kernel size的feature map，也即对应不同的感受野大小；fuse将不同feature map结合起来，获得一个全局的综合的向量表示；select根据不同的weight选择不同感受野的feature map。</p>
-<p><img src="/images/15540416698404.jpg" width="80%" height="50%"></p>
-<p>以上图为例。</p>
-<h3 id="SK-Net"><a href="#SK-Net" class="headerlink" title="SK-Net"></a>SK-Net</h3><h4 id="第一步split"><a href="#第一步split" class="headerlink" title="第一步split"></a>第一步split</h4><p>给定输入$\mathbf{X} \in \mathbb{R}^{H^{\prime} \times W^{\prime} \times C^{\prime}}$，通过不同的kernel size的CNN的卷积获得不同的feature map，上图是$3\times 3$与$5\times 5$的卷积核。卷积可以是传统的convolution卷积，也可以是空洞卷积（dilated convolution），或者深度卷积（depthwise convolution）。则有：<br>$\widetilde{\mathcal{F}} : \mathbf{X} \rightarrow \widetilde{\mathbf{U}} \in \mathbb{R}^{H \times W \times C}$ 与 $\widehat{\mathcal{F}} : \mathbf{X} \rightarrow \widehat{\mathbf{U}} \in \mathbb{R}^{H \times W \times C}$，其中$\widetilde{\mathcal{F}},\widehat{\mathcal{F}}$是卷积变换。</p>
-<h4 id="第二步fuse"><a href="#第二步fuse" class="headerlink" title="第二步fuse"></a>第二步fuse</h4><p>直接将不同的feature map结合起来以获得全局信息，用以之后的动态调整。这里采用简单的求和以及global average pooling以获得channel-wise的信息$\mathbf{s} \in \mathbb{R}^{C}$：</p>
-<script type="math/tex; mode=display">\mathbf{U}=\widetilde{\mathbf{U}}+\widehat{\mathbf{U}} \\ s_{c}=\mathcal{F}_{g p}\left(\mathbf{U}_{c}\right)=\frac{1}{H \times W} \sum_{i=1}^{H} \sum_{j=1}^{W} \mathbf{U}_{c}(i, j)</script><p>在获得$\mathbf{s}$后再通过MLP获得$\mathbf{z}$：</p>
-<script type="math/tex; mode=display">\mathbf{z}=\mathcal{F}_{f c}(\mathbf{s})=\delta(\mathcal{B}(\mathbf{W} \mathbf{s}))</script><p>其中$\mathcal{B}$是batch normalization；$\delta$是Relu。</p>
-<h4 id="第三步select"><a href="#第三步select" class="headerlink" title="第三步select"></a>第三步select</h4><p>使用soft attention去选择不同kernel size的feature map并结合在一起。也即：</p>
-<script type="math/tex; mode=display">a_{c}=\frac{e^{\mathbf{A}_{c} \mathbf{z}}}{e^{\mathbf{A}_{c} \mathbf{z}}+e^{\mathbf{B}_{c} \mathbf{z}}}, b_{c}=\frac{e^{\mathbf{B}_{c} \mathbf{z}}}{e^{\mathbf{A}_{c} \mathbf{z}}+e^{\mathbf{B}_{c} \mathbf{z}}}</script><p>其中$\mathbf{A}_{c}$是对应$\widetilde{\mathbf{U}}$第$c$个channel的参数，$\mathbf{B}_{c}$是对应$\widehat{\mathbf{U}}$第$c$个channel的参数。$\mathbf{A}, \mathbf{B} \in \mathbb{R}^{C \times d}$，那么$a_{c},b_{c}$就对应不同feature map的weight。</p>
-<p>因此，最终的feature map $\mathbf{V}$：</p>
-<script type="math/tex; mode=display">\mathbf{V}_{c}=a_{c} \cdot \tilde{\mathbf{U}}_{c}+b_{c} \cdot \widehat{\mathbf{U}}_{c}, \quad a_{c}+b_{c}=1 \\ \mathbf{V}=\left[\mathbf{V}_{1}, \mathbf{V}_{2}, \dots, \mathbf{V}_{C}\right], \mathbf{V}_{c} \in \mathbb{R}^{H \times W}</script><h3 id="对比-amp-思考"><a href="#对比-amp-思考" class="headerlink" title="对比&amp;思考"></a>对比&amp;思考</h3><h4 id="与SE-Net"><a href="#与SE-Net" class="headerlink" title="与SE-Net"></a>与SE-Net</h4><p>SE-Net是通过不同channel之间的交互，使得channel获得全局的感受野，使用的是对channel的放缩（详见上一篇论文笔记）；而SK-Net是不同的感受野之间的同一channel在通过全局信息的指导下以soft-attention的形式加权平均，这就和论文中提到的人类视觉对不同物体进行动态调整感受野的思路一致。</p>
-<h4 id="与dynamic-convolution"><a href="#与dynamic-convolution" class="headerlink" title="与dynamic convolution"></a>与dynamic convolution</h4><p>在论文[PAY LESS ATTENTION WITH LIGHTWEIGHT AND DYNAMIC CONVOLUTIONS]中，研究人员提出动态感受野的convolution，通过利用当前词预测一个卷积窗口，增加了模型的灵活性，并在机器翻译上取得了很好的结果。</p>
-<p>虽然目的与本篇论文一致，但思路是完全不同的。一个是通过预测；另一个是在全局信息的指导下进行加权。在我的理解看来，或许本篇论文的思路更加合理一些，第一，在有了全局信息的指导下能够更好的进行加权，而通过预测，似乎有些盲目，可能需要更多的数据才能学得更好；第二，dynamic convolution论文中也提到了，如果不使用如深度可分离卷积等轻量级卷积方法，dynamic convolution不大现实（A dynamic version of standard convolutions would be impractical for current GPUs due to their large memory requirements），而SK-Net则不会有这个问题。</p>
-<h4 id="其他思考"><a href="#其他思考" class="headerlink" title="其他思考"></a>其他思考</h4><p>从另一个角度去思考，SK-Net通过人工定义好的几种不同大小的卷积，相当于在模型中引入更强的先验（inductive bias），也即假设了数据不会超过这几种大小的卷积的处理范围，这或许比不引入先验，完全靠数据去学某种特定pattern的dynamic convolution对小数据集更友好，因此可以不需要更多的数据来使得模型表现良好。类似的理解可以在CNN/RNN与Transformer的对比中看见，因为CNN/RNN引入了较强的local bias，因此对于小数据集更友好，但同时其上限或许不如Transformer高；而Transformer一开始就是全局感受野，使得需要更多数据来帮助模型学到某种特定pattern（如某种local bias），但当数据充足时，Transformer的上限更高，近期非常火的pretrained model GPT/GPT-2.0/Bert似乎也印证了这点。</p>
-<hr>
-<h2 id="2️⃣-Attentional-pooling-for-action-recognition"><a href="#2️⃣-Attentional-pooling-for-action-recognition" class="headerlink" title="2️⃣[Attentional pooling for action recognition]"></a>2️⃣[Attentional pooling for action recognition]</h2><p>提出一种基于attention的pooling策略，采用低秩近似的方法，使得模型能够在计算量不增加很多的情况下达到更好的效果。可以将该方法理解成对二阶pooling的低秩近似。</p>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h4 id="一阶pooling"><a href="#一阶pooling" class="headerlink" title="一阶pooling"></a>一阶pooling</h4><p>记$X \in R^{n \times f}$为被pooling的层，其中n为空间位置的个数，如$16\times 16$，$f$为channel个数。标准的sum/max pooling将该矩阵缩减为$R^{f \times 1}$，然后使用全连接的权重$\mathbf{w} \in R^{f \times 1}$获得一个分类的分数。这里假设的是二分类，但可以很容易推广为多分类。</p>
-<p>上述操作形式化可以写成：</p>
-<script type="math/tex; mode=display">\operatorname{score}_{p o o l}(X)=\mathbf{1}^{T} X \mathbf{w}, \quad \text { where } \quad X \in R^{n \times f}, \mathbf{1} \in R^{n \times 1}, \mathbf{w} \in R^{f \times 1}</script><p>其中$\mathbf{1}$为全1向量，$\mathbf{x}=\mathbf{1}^{T} X \in R^{1 \times f}$就是通过sum pooling后的feature。</p>
-<h4 id="二阶pooling"><a href="#二阶pooling" class="headerlink" title="二阶pooling"></a>二阶pooling</h4><p>构建二阶feature $X^{T} X \in R^{f \times f}$，在获得二阶feature后，通常或向量化该矩阵，再送入全连接以做分类。也即我们会学习一个$f\times f$的全连接权重向量。若保持二阶feature与对应的全连接权重向量的形式为矩阵，矩阵相乘，其中的迹实际上就是这两个向量化后的矩阵所做内积获得的分数。形式化可以写成：</p>
-<script type="math/tex; mode=display">\text {score}_{order2}(X)=\operatorname{Tr}\left(X^{T} X W^{T}\right), \quad \text { where } \quad X \in R^{n \times f}, W \in R^{f \times f}</script><p>这可以用迹的定义去证明：示意图<br><img src="/images/15540862875594.jpg" width="100%" height="50%"></p>
-<h4 id="低秩二阶pooling"><a href="#低秩二阶pooling" class="headerlink" title="低秩二阶pooling"></a>低秩二阶pooling</h4><p>现尝试使用低秩去近似该二阶pooling，也即对$W$近似，将$W$写成两个向量的乘积，也即：</p>
-<script type="math/tex; mode=display">W=\mathbf{a b}^{T} \text { where } \mathbf{a}, \mathbf{b} \in R^{f \times 1}</script><p>将上式代入二阶pooling，可获得：</p>
-<script type="math/tex; mode=display">\begin{aligned} \text {score}_{\text {attention}}(X) &=\operatorname{Tr}\left(X^{T} X \mathbf{b a}^{T}\right), \quad \text { where } \quad X \in R^{n \times f}, \mathbf{a}, \mathbf{b} \in R^{f \times 1} \\ &=\operatorname{Tr}\left(\mathbf{a}^{T} X^{T} X \mathbf{b}\right) \\ &=\mathbf{a}^{T} X^{T} X \mathbf{b} \\ &=\mathbf{a}^{T}\left(X^{T}(X \mathbf{b})\right) \end{aligned}</script><p>第二行使用的是迹的定理：$\operatorname{Tr}(A B C)=\operatorname{Tr}(C A B)$<br>第三行使用的是标量的迹等于标量本身。<br>最后一行表明整个流程：给定一个feature map $X$，首先计算一个对所有空间位置的attentional map：$\mathbf{h}= {X \mathbf{b} \in R^{n \times 1}}$；然后根据该attentional map计算加权平均的feature：$\mathbf{x}=X^{T} \mathbf{h} \in R^{f \times 1}$。该feature再通过线性层获得最终的分数。</p>
-<p>实际上上式还有其他理解的角度：</p>
-<script type="math/tex; mode=display">\begin{aligned} \text {score}_{\text {attention}}(X) &=\left((X \mathbf{a})^{T} X\right) \mathbf{b} \\ &=(X \mathbf{a})^{T}(X \mathbf{b}) \end{aligned}</script><p>第一行表明attentional map也可以通过$X \mathbf{a} \in R^{n \times 1}$来计算，$\mathbf{b}$来做classifier。<br>第二行表明，该式子本质上是对称的，可以看成<strong>两个attentional heapmap的内积</strong>。</p>
-<p>下图是整个流程：<br><img src="/images/15540869385196.jpg" width="80%" height="50%"></p>
-<h4 id="Top-down-attention"><a href="#Top-down-attention" class="headerlink" title="Top-down attention"></a>Top-down attention</h4><p>现将二分类推广为多分类：</p>
-<script type="math/tex; mode=display">\text {score}_{order2}(X, k)=\operatorname{Tr}\left(X^{T} X W_{k}^{T}\right), \quad \text { where } \quad X \in R^{n \times f}, W_{k} \in R^{f \times f}</script><p>也即将$W$替换成类相关的参数，仿照上面的推导，可以推出每个类都有特定的$\boldsymbol{a}_{k}$与$\boldsymbol{b}_{k}$。</p>
-<p>但在这里通过固定其中一个参数为与类无关的参数，也即$\boldsymbol{b}_{k}=\boldsymbol{b}$。实际上就等价于一个是类相关的top-down attention；另一个是类无关的bottom-up attention。一个获得类特定的特征；另一个获得全局通用的特征。</p>
-<p>因此最终低秩attention model为：</p>
-<script type="math/tex; mode=display">\text {score}_{attention}(X, k)=\mathbf{t}_{k}^{T} \mathbf{h}, \quad \text { where } \quad \mathbf{t}_{k}=X \mathbf{a}_{k}, \mathbf{h}=X \mathbf{b}</script><h4 id="Average-pooling-Revisited"><a href="#Average-pooling-Revisited" class="headerlink" title="Average-pooling Revisited"></a>Average-pooling Revisited</h4><p>当然在给定了上述一系列的推导，我们对average-pooling重新进行形式化：</p>
-<script type="math/tex; mode=display">\text {score}_{top-down}(X, k)=\mathbf{1}^{T} X \mathbf{w}_{k}=\mathbf{1}^{T} \mathbf{t}_{k} \quad \text { where } \quad \mathbf{t}_{k}=X \mathbf{w}_{k}</script><p>将$\mathbf{w}$替换成类相关的$\mathbf{w}_{k}$，实际上就是将二分类推广为多分类。但该形式赋予了average-pooling新的理解。</p>
-<p>当然，我们还可以将rank-1推广为rank-k，实验证明对于大数据集使用大的秩会更好。</p>
-<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><h4 id="与Self-attentive的联系"><a href="#与Self-attentive的联系" class="headerlink" title="与Self-attentive的联系"></a>与Self-attentive的联系</h4><p>论文[A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING]就提出了利用可学习的head对feature进行attention加权平均的方法，并且将一个head推广到多个head。<br>实际上在$\mathbf{h}= {X \mathbf{b} \in R^{n \times 1}}$我们就可以看出，$\mathbf{b}$在这里扮演的角色就是self-attentive的head的角色。对于秩为1的近似，就是head为1的情况，若将秩为1推广为秩为k，也即等价于在Self-attentive中多个head的情况。</p>
-<p>本文巧妙的地方在于head有两个作用，一种是top-down的head，获得的是类相关的feature；另一个是bottom-up的feature，获得的是通用的feature。并且本文通过巧妙的数学推导来获得新的解释，本来仅仅是二阶feature过一个全连接，但通过公式推导赋予了attention的解释，这点让人眼前一亮。</p>
+          本周论文:
 
-          
+Selective Kernel Networks
+Attentional pooling for action recognition
+
+1️⃣[Selective Kernel Networks]通过对不同kernel size的feature map之间进行信息筛选获得更为鲁棒的表示，能够对不同的感受野进行整合，实现动态调整感受野。其思路还挺有意思的。
+Introduction将该模型与视觉神经的理论结合在一起，也即，对于人类而言，在看不同尺寸不同远近的物体时，视觉皮层神经元感受野大小是会根据刺激来进行调节的，但一般而言在CNN中卷积核的大小是固定的。该模型正是从这一现象中
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/31/论文/每周论文15/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -896,14 +940,21 @@
       
         
           
-            <h3 id="1️⃣醉落魄-·-席上呈元素"><a href="#1️⃣醉落魄-·-席上呈元素" class="headerlink" title="1️⃣醉落魄 · 席上呈元素"></a>1️⃣醉落魄 · 席上呈元素</h3><p>[宋] 苏轼<br>分携如昨，人生到处萍飘泊。偶然相聚还离索。多病多愁，须信从来错。<br><strong>尊前一笑休辞却，天涯同是伤沦落</strong>。故山犹负平生约。西望峨嵋，长羡归飞鹤。</p>
-<p><a href="http://lib.xcz.im/work/57c467a86be3ff0058452840" target="_blank" rel="noopener">http://lib.xcz.im/work/57c467a86be3ff0058452840</a></p>
-<hr>
-<h3 id="2️⃣戏为六绝句"><a href="#2️⃣戏为六绝句" class="headerlink" title="2️⃣戏为六绝句"></a>2️⃣戏为六绝句</h3><p>[唐] 杜甫<br>【其一】<br>庾信文章老更成，凌云健笔意纵横。<br>今人嗤点流传赋，不觉前贤畏后生。</p>
-<p>【其三】<br>纵使卢王操翰墨，劣于汉魏近风骚。<br>龙文虎脊皆君驭，历块过都见尔曹。</p>
-<p>过都历块 (guò dōu lì kuài)<br>解释：越过都市，经过山阜。意指纵横驰骋，施展才能。</p>
+          1️⃣醉落魄 · 席上呈元素[宋] 苏轼分携如昨，人生到处萍飘泊。偶然相聚还离索。多病多愁，须信从来错。尊前一笑休辞却，天涯同是伤沦落。故山犹负平生约。西望峨嵋，长羡归飞鹤。
+http://lib.xcz.im/work/57c467a86be3ff0058452840
+
+2️⃣戏为六绝句[唐] 杜甫【其一】庾信文章老更成，凌云健笔意纵横。今人嗤点流传赋，不觉前贤畏后生。
+【其三】纵使卢王操翰墨，劣于汉魏近风骚。龙文虎脊皆君驭，历块过都见尔曹。
+过都历块 (guò dōu lì kuài)解释：越过都市，经过山阜。意指纵横驰骋，施展才能。
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/31/诗词&句/每周诗词21/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1033,46 +1084,20 @@
       
         
           
-            <p>本周论文:</p>
-<ol>
-<li>Is Second-order Information Helpful for Large-scale Visual Recognition?</li>
-<li>The Treasure beneath Convolutional Layers: Cross-convolutional-layer Pooling for Image Classification</li>
-</ol>
-<h2 id="1️⃣-Is-Second-order-Information-Helpful-for-Large-scale-Visual-Recognition"><a href="#1️⃣-Is-Second-order-Information-Helpful-for-Large-scale-Visual-Recognition" class="headerlink" title="1️⃣[Is Second-order Information Helpful for Large-scale Visual Recognition?]"></a>1️⃣[Is Second-order Information Helpful for Large-scale Visual Recognition?]</h2><p>通过协方差的方法获得图像的二阶信息。<br>参考了<a href="https://zhuanlan.zhihu.com/p/46864160" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/46864160</a></p>
-<p>深度分类网络主要分为两个部分：特征提取和分类器。无论是VGG还是GoogleNet，后来的Resnet、Densenet，在连接分类器之前，一般都连接了一个Pooling层。<br>但pooling只获得了feature的一阶信息，对于细分类问题中类间差异不显著，一阶信息可能有一些不适用，因此我们可以通过一阶信息获得二阶信息，从而获取更有价值的信息。</p>
-<p>本文通过获取<strong>特征协方差</strong>的方法，以达到该目的。</p>
-<p>输入:$\mathbf{X} \in \mathbb{R}^{d \times N}$</p>
-<p>则协方差矩阵为$\mathbf{X} \mapsto \mathbf{P}, \quad \mathbf{P}=\mathbf{X} \overline{\mathbf{I}} \mathbf{X}^{T}$，其中$\overline{\mathbf{I}}=\frac{1}{N}\left(\mathbf{I}-\frac{1}{N} \mathbf{1} \mathbf{1}^{T}\right)$, $\mathbf{I}$是单位阵，$\mathbf{1}$是全1的向量。</p>
-<p>协方差矩阵是半正定矩阵，因此可写成$\mathbf{P} \mapsto(\mathbf{U}, \mathbf{\Lambda}), \quad \mathbf{P}=\mathbf{U} \mathbf{\Lambda} \mathbf{U}^{T}$，其中$\boldsymbol{\Lambda}=\operatorname{diag}\left(\lambda_{1}, \ldots, \lambda_{d}\right)$，$\mathbf{U}=\left[\mathbf{u}_{1}, \dots, \mathbf{u}_{d}\right]$，$\mathbf{U}$是对应的特征向量。</p>
-<p>最终可获得$\mathbf{Q}$矩阵：$(\mathbf{U}, \boldsymbol{\Lambda}) \mapsto \mathbf{Q}, \mathbf{Q} \triangleq \mathbf{P}^{\alpha}=\mathbf{U F}(\mathbf{\Lambda}) \mathbf{U}^{T}$，其中$\alpha$是一个正实数，$\mathbf{F}(\boldsymbol{\Lambda})=\operatorname{diag}\left(f\left(\lambda_{1}\right), \ldots, f\left(\lambda_{d}\right)\right)$，其中$f\left(\lambda_{i}\right)=\lambda_{i}^{\alpha}$，是特征值的幂，如果要做归一化，那么可以有：</p>
-<script type="math/tex; mode=display">f\left(\lambda_{i}\right)=\left\{\begin{array}{cc}{\lambda_{i}^{\alpha} / \lambda_{1}^{\alpha}} & {\text { for MPN+M }-\ell_{2}} \\ {\lambda_{i}^{\alpha} /\left(\sum_{k} \lambda_{k}^{2 \alpha}\right)^{\frac{1}{2}}} & {\text { for MPN+M-Fro }}\end{array}\right.</script><p>之所以取幂，是为了解决在协方差估计中小样本高维度的问题，以resnet为例，最后得到的feature为7X7X512，也就是49个512维的feature，这样估计出来的协方差矩阵是不靠谱的，而通过幂这个操作，可以解决这一问题。通过实验可以发现，当幂次为0.5也就是平方根操作时，效果最优。（似乎类似的有word2vec的平滑）</p>
-<p>（虽然这篇有些看不大懂，但一个启发就是，可以通过协方差的方式进行特征之间的交互）</p>
-<hr>
-<h2 id="2️⃣-The-Treasure-beneath-Convolutional-Layers-Cross-convolutional-layer-Pooling-for-Image-Classification"><a href="#2️⃣-The-Treasure-beneath-Convolutional-Layers-Cross-convolutional-layer-Pooling-for-Image-Classification" class="headerlink" title="2️⃣[The Treasure beneath Convolutional Layers: Cross-convolutional-layer Pooling for Image Classification]"></a>2️⃣[The Treasure beneath Convolutional Layers: Cross-convolutional-layer Pooling for Image Classification]</h2><p>提出使用卷积出来后的feature经过pooling作为最后的图像特征表示而不是全连接后的特征表示。</p>
-<p>Motivation：只使用最后一层fc的特征有一个缺点，就是丢失位置信息，而convolution layer包含了丰富的空间信息。在pooling完后每个local区域都能获得一个特征，并拼接起来作为最后的表示。</p>
-<p><img src="/images/15533936911589.jpg" width="60%" height="50%"></p>
-<p>prerequisite:<br>①首先有一个预训练好的模型<br>②有两层一样$H\times W$的convolution。论文以AlexNet作为例子</p>
-<p>假设卷积后的feature map是$H × W × D$，那么可以理解成，我们将图片分为$H × W$的区域，每个区域的特征用$D$维表示。我们称每个$D$维特征一个spatial unit。当使用全连接时，这部分的空间信息就丢失了，并且无法还原。</p>
-<p>本文提出，将每个区域提取出一个特征，然后拼起来组成一整张图的特征，如下图，每个长条（也即$1\times 1\times channel$）作为一个特征：</p>
-<p><img src="/images/15533939765641.jpg" width="50%" height="50%"></p>
-<p>如何判断区域？一种方法是首先检测出多个区域，每个区域对应一种object part，然后对于落入该区域的特征进行pooling，给定D种human-specified object parts，那么可以获得D个feature且拼在一起。</p>
-<script type="math/tex; mode=display">\mathbf{P}_{k}^{t}=\sum_{i=1} \mathbf{x}_{i} I_{i, k}</script><p>具体而言，$\mathbf{x}_{i}$是特征，$I_{i, k}$是二元的indicator，表明$\mathbf{x}_{i}$是否落入该区域，每个$I$实际上定义了一个池化通道。当然，这里可以进一步将indicator从二元扩展为权重。</p>
-<p>但在实现的过程中，并没有human-specified的区域。这里我们就借助下一层的卷积作为indicator。</p>
-<blockquote>
-<p>By doing so, D t+1 pooling channels are created for the local features extracted from the tth convolutional layer</p>
-</blockquote>
-<p>这也就被称为cross-convolutional-layer pooling。</p>
-<p>如何做？</p>
-<blockquote>
-<p>the filter of a convolutional layer works as a part detector and its feature map serves a similar role as the part region indicator map.</p>
-</blockquote>
-<p>具体而言，有：</p>
-<script type="math/tex; mode=display">\begin{array}{l}{\mathbf{P}^{t}=\left[\mathbf{P}_{1}^{t}, \mathbf{P}_{2}^{t}, \cdots, \mathbf{P}_{k}^{t}, \cdots, \mathbf{P}_{D_{t+1}}^{t}\right]} \\ {\text { where, } \mathbf{P}_{k}^{t}=\sum_{i=1}^{N_{t}} \mathbf{x}_{i}^{t} a_{i, k}^{t+1}}\end{array}</script><p>$\mathbf{P}^{t}$表示第t层convolution在卷积过后做cross-pooling后的特征集合，也即我们要获得的表示，该表示通过$D_{t+1}$次pooling后的结果拼接而成。$D_{t+1}$具体来说，就是第t+1层的卷积的channel维数。假设$\mathbf{a}_{i}^{t+1} \in \mathbb{R}^{D_{t+1}}$是第t+1层convolution的第i个空间单位（spatial unit）的feature vector，其中$a_{i, k}^{t+1}$是该向量的一个值，该值就作为pooling的权重。</p>
-<p>上述有些绕口且难懂，直接看例子：<br><img src="/images/15533957004853.jpg" width="80%" height="50%"><br><img src="/images/15533957336100.jpg" width="80%" height="50%"></p>
-<p>即，第t+1层convolution的channel维度为多少，则pooling后的特征个数即为多少。因为第t层与第t+1层的$H\times W$是一致的，那么可以用t+1层的每个slice去对第t层的convolution进行加权。</p>
-<p>为什么这样是合理的？<br>因为第t+1层的convolution提取了$D_{t+1}$个特征，使用的是$m\times n$的kernel size，如果$x$是被$m\times n$的某个kernel提取了，那么很自然的，$x$就是对应该kernel提取出来的feature的一个spatial unit。说白了就是第t层与第t+1层的空间对应。</p>
+          本周论文:
 
-          
+Is Second-order Information Helpful for Large-scale Visual Recognition?
+The Treasure beneath Convolutional Layers: Cross-convolutional-layer Pooling for Image Classification
+
+1️⃣[Is Second-order Information Helpful for Large-scale Visual Recognition?]通过协方差的方法获得图像的二阶信息。参考了https://zhuanlan.zhih
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/24/论文/每周论文14/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1202,13 +1227,20 @@
       
         
           
-            <h3 id="1️⃣杂诗七首（其四）"><a href="#1️⃣杂诗七首（其四）" class="headerlink" title="1️⃣杂诗七首（其四）"></a>1️⃣杂诗七首（其四）</h3><p>[三国] 曹植<br>南国有佳人，容华若桃李。<br>朝游江北岸，夕宿潇湘沚。<br>时俗薄朱颜，谁为发皓齿？<br>俯仰岁将暮，荣耀难久恃。</p>
-<p><a href="http://lib.xcz.im/work/58ad4c78ac502e007e9f6f9f" target="_blank" rel="noopener">http://lib.xcz.im/work/58ad4c78ac502e007e9f6f9f</a></p>
-<hr>
-<h3 id="2️⃣梦江南"><a href="#2️⃣梦江南" class="headerlink" title="2️⃣梦江南"></a>2️⃣梦江南</h3><p>[唐] 温庭筠<br>千万恨，恨极在天涯。山月不知心里事，水风空落眼前花，摇曳碧云斜。</p>
-<p><a href="http://lib.xcz.im/work/57b8d0c77db2a2005425c856" target="_blank" rel="noopener">http://lib.xcz.im/work/57b8d0c77db2a2005425c856</a></p>
+          1️⃣杂诗七首（其四）[三国] 曹植南国有佳人，容华若桃李。朝游江北岸，夕宿潇湘沚。时俗薄朱颜，谁为发皓齿？俯仰岁将暮，荣耀难久恃。
+http://lib.xcz.im/work/58ad4c78ac502e007e9f6f9f
+
+2️⃣梦江南[唐] 温庭筠千万恨，恨极在天涯。山月不知心里事，水风空落眼前花，摇曳碧云斜。
+http://lib.xcz.im/work/57b8d0c77db2a2005425c856
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/23/诗词&句/每周诗词20/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1338,56 +1370,18 @@
       
         
           
-            <h2 id="1️⃣-Depthwise-Separable-Convolutions-for-Neural-Machine-Translation"><a href="#1️⃣-Depthwise-Separable-Convolutions-for-Neural-Machine-Translation" class="headerlink" title="1️⃣[Depthwise Separable Convolutions for Neural Machine Translation]"></a>1️⃣[Depthwise Separable Convolutions for Neural Machine Translation]</h2><p>将depthwise separable convolution 深度可分离卷积 用于翻译任务，并在此基础上对depthwise separable进行更进一步的参数量优化，也即super-separable。（其实我觉得并没有啥创新性的感觉）</p>
-<p><img src="/images/15528281403428.jpg" width="90%" height="50%"></p>
-<p>首先介绍什么是depthwise separable convolution，实际上就是一个depthwise+pointwise。</p>
-<script type="math/tex; mode=display">\operatorname{Conv}(W, y)_{(i, j)}=\sum_{k, l, m}^{K, L, M} W_{(k, l, m)} \cdot y_{(i+k, j+l, m)}</script><script type="math/tex; mode=display">\operatorname{PointwiseConv}(W, y)_{(i, j)}=\sum_{m}^{M} W_{m} \cdot y_{(i, j, m)}</script><script type="math/tex; mode=display">\text {DepthwiseConv}(W, y)_{(i, j)}=\sum_{k, l}^{K, L} W_{(k, l)} \odot y_{(i+k, j+l)}</script><script type="math/tex; mode=display">\operatorname{SepConv}\left(W_{p}, W_{d}, y\right)_{(i, j)}=\text {PointwiseConv}_{(i, j)}\left(W_{p}, \text { DepthwiseConv }_{(i, j)}\left(W_{d}, y\right)\right)</script><p>几种convolution的参数量对比：<br><img src="/images/15528283555357.jpg" width="80%" height="50%"><br>其中k是kernel size，c是channel，g是group。</p>
-<p>g-Sub-separable是指将channel分为几个group，每个group进行常规的convolution操作；g-Super-separable，也即本文中提出的convolution，同样是将channel分为几个group，然后对每个group进行depthwise-separable的卷积。</p>
-<hr>
-<h2 id="2️⃣-Squeeze-and-Excitation-Networks"><a href="#2️⃣-Squeeze-and-Excitation-Networks" class="headerlink" title="2️⃣[Squeeze-and-Excitation Networks]"></a>2️⃣[Squeeze-and-Excitation Networks]</h2><p>提出一种新型的网络，能够通过建模channel之间的关系，使得每个channel能够获得全局的信息，进而提高模型的能力。<br><img src="/images/15528285519609.jpg" width="90%" height="50%"></p>
-<p>分为两步：第一步是获得一个全局的表示，第二步是根据全局信息更新每个channel的信息。</p>
-<h3 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h3><p>输入：$ \mathbf{X} \in \mathbb{R}^{H^{\prime} \times W^{\prime} \times C^{\prime}} $<br>经过特征提取后（如Convolution)：$\mathbf{U} \in \mathbb{R}^{H \times W \times C}$，也即：$\mathbf{U}=\mathbf{F}_{t r}(\mathbf{X})$<br>将$\mathbf{U}$写成：$\mathbf{U}=\left[\mathbf{u}_{1}, \mathbf{u}_{2}, \dots, \mathbf{u}_{C}\right]$<br>$\mathbf{V}$ 是可学习的卷积核参数： $\mathbf{V}=\left[\mathbf{v}_{1}, \mathbf{v}_{2}, \ldots, \mathbf{v}_{C}\right]$</p>
-<p>则上述卷积变换可写成：$\mathbf{u}_{c}=\mathbf{v}_{c} \ast \mathbf{X}=\sum_{s=1}^{C^{\prime}} \mathbf{v}_{c}^{s} \ast \mathbf{x}^{s}$</p>
-<h3 id="Squeeze-Global-Information-Embedding"><a href="#Squeeze-Global-Information-Embedding" class="headerlink" title="Squeeze: Global Information Embedding"></a>Squeeze: Global Information Embedding</h3><p>第一步，将所有的特征进行整合得到全局的特征：</p>
-<script type="math/tex; mode=display">z_{c}=\mathbf{F}_{s q}\left(\mathbf{u}_{c}\right)=\frac{1}{H \times W} \sum_{i=1}^{H} \sum_{j=1}^{W} u_{c}(i, j)</script><p>论文提取全局特征的方法直接用简单的global average pooling。那么$\mathbf{z} \in \mathbb{R}^{C}$的每一维就代表每一维的channel。</p>
-<h3 id="Excitation-Adaptive-Recalibration"><a href="#Excitation-Adaptive-Recalibration" class="headerlink" title="Excitation: Adaptive Recalibration"></a>Excitation: Adaptive Recalibration</h3><p>与attention不同的是，论文希望能够同时强调不同多个channel的重要（而不是one-hot的形式），因此使用一个简单的门控制机制，采用sigmoid激活函数：（这里的想法挺有意思，相对attention的softmax似乎确实会更好的样子）</p>
-<script type="math/tex; mode=display">\mathbf{s}=\mathbf{F}_{ex}(\mathbf{z}, \mathbf{W})=\sigma(g(\mathbf{z}, \mathbf{W}))=\sigma\left(\mathbf{W}_{2} \delta\left(\mathbf{W}_{1} \mathbf{z}\right)\right)</script><p>为了减少参数这里的MLP采用了bottleneck的形式。亦即：<br>${\mathbf{W}_{1} \in \mathbb{R}^{\frac{C}{r} \times C}}$ $ {\mathbf{W}_{2} \in \mathbb{R}^{C \times \frac{C}{r}}}$<br>$r$是reduction ratio。</p>
-<p>贴上作者的思路：</p>
-<blockquote>
-<p>To make use of the information aggregated in the squeeze operation, we follow it with a second operation which aims to fully capture channel-wise dependencies. To fulfill this objective, the function must meet two criteria: first, it must be ﬂexible (in particular, it must be capable of learning a nonlinear interaction between channels) and second, it must learn a non-mutually-exclusive relationship since we would like to ensure that multiple channels are allowed to be emphasised (rather than enforcing a one-hot activation). To meet these criteria, we opt to employ a simple gating mechanism with a sigmoid activation.</p>
-</blockquote>
-<p>最后对每个channel进行<strong>放缩</strong>，获得新的表示：</p>
-<script type="math/tex; mode=display">\widetilde{\mathbf{x}}_{c}=\mathbf{F}_{\text {scale}}\left(\mathbf{u}_{c}, s_{c}\right)=s_{c} \cdot \mathbf{u}_{c}</script><hr>
-<h2 id="3️⃣-Non-local-Neural-Networks"><a href="#3️⃣-Non-local-Neural-Networks" class="headerlink" title="3️⃣[Non-local Neural Networks]"></a>3️⃣[Non-local Neural Networks]</h2><p>提出一种新的结构，与上一篇类似，希望模型的每个位置都能感知到其他位置，从而捕获长程依赖，拥有全局信息。</p>
-<p><img src="/images/15528297540165.jpg" width="60%" height="50%"></p>
-<h3 id="Non-local-Network"><a href="#Non-local-Network" class="headerlink" title="Non-local Network"></a>Non-local Network</h3><p>定义non-local网络：</p>
-<script type="math/tex; mode=display">\mathbf{y}_{i}=\frac{1}{\mathcal{C}(\mathbf{x})} \sum_{\forall j} f\left(\mathbf{x}_{i}, \mathbf{x}_{j}\right) g\left(\mathbf{x}_{j}\right)</script><p>其中$\mathcal{C}$是归一化函数；$f$是第$i$个位置与第$j$个位置的交互函数；$g$计算第$j$个位置的表示。</p>
-<h4 id="g-的具体形式"><a href="#g-的具体形式" class="headerlink" title="$g$的具体形式"></a>$g$的具体形式</h4><p>一个线性函数：$g\left(\mathbf{x}_{j}\right)=W_{g} \mathbf{x}_{j}$<br>在实现的时候是一个$1\times1$或 $1\times1\times1$的convolution。</p>
-<h4 id="f-的具体形式"><a href="#f-的具体形式" class="headerlink" title="$f$的具体形式"></a>$f$的具体形式</h4><p>①Gaussian<br>$f\left(\mathbf{x}_{i}, \mathbf{x}_{j}\right)=e^{\mathbf{x}_{i}^{T} \mathbf{x}_{j}}$<br>则归一化定义为$\mathcal{C}(\mathbf{x})=\sum_{\forall j} f\left(\mathbf{x}_{i}, \mathbf{x}_{j}\right)$ 。</p>
-<p>②Embedded Gaussian<br>$f\left(\mathbf{x}_{i}, \mathbf{x}_{j}\right)=e^{\theta\left(\mathbf{x}_{i}\right)^{T} \phi\left(\mathbf{x}_{j}\right)}$<br>其中：$\theta\left(\mathbf{x}_{i}\right)=W_{\theta} \mathbf{x}_{i} $, $ \phi\left(\mathbf{x}_{j}\right)=W_{\phi} \mathbf{x}_{j}$<br>归一化：$\mathcal{C}(\mathbf{x})=\sum_{\forall j} f\left(\mathbf{x}_{i}, \mathbf{x}_{j}\right)$</p>
-<p>可以看到self-attention是Embedded Gaussian的一种形式。虽然有这样的关系，但作者在实验中发现softmax并不是必要的。</p>
-<p>③Dot product<br>$f\left(\mathbf{x}_{i}, \mathbf{x}_{j}\right)=\theta\left(\mathbf{x}_{i}\right)^{T} \phi\left(\mathbf{x}_{j}\right)$<br>归一化：$\mathcal{C}(\mathbf{x})=N$</p>
-<p>④Concatenation<br>$f\left(\mathbf{x}_{i}, \mathbf{x}_{j}\right)=\operatorname{ReLU}\left(\mathbf{w}_{f}^{T}\left[\theta\left(\mathbf{x}_{i}\right), \phi\left(\mathbf{x}_{j}\right)\right]\right)$<br>$\mathcal{C}(\mathbf{x})=N$</p>
-<p>有了上面的non-local的介绍，可以直接将其用于residual network。<br>$\mathbf{z}_{i}=W_{z} \mathbf{y}_{i}+\mathbf{x}_{i}$<br>$y$则是non-local network的输出。</p>
-<h3 id="Non-local-block的策略-tricks"><a href="#Non-local-block的策略-tricks" class="headerlink" title="Non-local block的策略/tricks"></a>Non-local block的策略/tricks</h3><p>①设置$W_g$,$W_θ$,$W_ϕ$的channel的数目为x的channel数目的一半，这样就形成了一个bottleneck，能够减少一半的计算量。Wz再重新放大到x的channel数目，保证输入输出维度一致。</p>
-<p>②在$\frac{1}{\mathcal{C}(\hat{\mathbf{x}})} \sum_{\forall j} f\left(\mathbf{x}_{i}, \hat{\mathbf{x}}_{j}\right) g\left(\hat{\mathbf{x}}_{j}\right)$使用下采样，如max-pooling，减少计算量。</p>
-<hr>
-<h2 id="4️⃣-Bilinear-CNN-Models-for-Fine-grained-Visual-Recognition"><a href="#4️⃣-Bilinear-CNN-Models-for-Fine-grained-Visual-Recognition" class="headerlink" title="4️⃣[Bilinear CNN Models for Fine-grained Visual Recognition]"></a>4️⃣[Bilinear CNN Models for Fine-grained Visual Recognition]</h2><p>提出一种双线性模型，由两个特征提取器组成，他们的输出做<strong>外积</strong>，最终获得图像描述特征。</p>
-<p>Motivation(?不确定是不是这样)：对于细粒度物体的分类，先对局部定位，再提取特征。两个特征提取器一个是提取location，另一个提取特征。</p>
-<p><img src="/images/15528310057673.jpg" width="60%" height="50%"></p>
-<p>为什么用<strong>外积</strong>？</p>
-<blockquote>
-<p>outer product captures pairwise correlations between the feature channels</p>
-</blockquote>
-<p>有意思的是作者将该模型和人脑视觉处理的两个假设联系在一起(stream hypothesis)：<br>here are two main pathways, or “streams”. The ventral stream (or, “what pathway”) is involved with object identiﬁcation and recognition. The dorsal stream (or, “where pathway”) is involved with processing the object’s spatial location relative to the viewer.<br>不过看看就好，并没有什么道理。</p>
-<p>对于一个分类的双线性模型而言，其一般形式是一个四元组：$\mathcal{B}=\left(f_{A}, f_{B}, \mathcal{P}, \mathcal{C}\right)$。其中$f$是特征函数，$\mathcal{P}$是pooling函数，$\mathcal{C}$是分类函数。具体而言，$f$是一个映射，${f : \mathcal{L} \times \mathcal{I} \rightarrow} {R^ {c\times D}} $。也即将一个image和一个location L 映射成feature。（We refer to locations generally which can include position and scale 其实这里不是很懂location的意思）</p>
-<p>将feature a和feature b结合在一起：<br>$\text { bilinear }\left(l, \mathcal{I}, f_{A}, f_{B}\right)=f_{A}(l, \mathcal{I})^{T} f_{B}(l, \mathcal{I})$</p>
-<p>pooling有好几种，可以直接加起来，或者使用max-pooling。这里使用直接加起来的方式，可以理解为，这些特征是无序(orderless)的叠加。</p>
-<p>在获得输出后再做一些操作/trick能够提升表现：<br>$\begin{array}{l}{\mathbf{y} \leftarrow \operatorname{sign}(\mathbf{x}) \sqrt{|\mathbf{x}|}} \\ {\mathbf{z} \leftarrow \mathbf{y} /|\mathbf{y}|_{2}}\end{array}$</p>
-<p>讨论：<br>①But do the networks specialize into roles of localization (“where”) and appearance modeling (“what”) when initialized asymmetrically and ﬁne-tuned?<br>通过可视化发现，并没有明确的功能分开。<br>Both these networks tend to activate strongly on highly speciﬁc semantic parts</p>
-<p>②bilinear的好处还可以扩展成trilinear，添加更多的信息。</p>
+          1️⃣[Depthwise Separable Convolutions for Neural Machine Translation]将depthwise separable convolution 深度可分离卷积 用于翻译任务，并在此基础上对depthwise separable进行更进一步的参数量优化，也即super-separable。（其实我觉得并没有啥创新性的感觉）
 
-          
+首先介绍什么是depthwise separable convolution，实际上就是一个depthwise+pointwise。
+\operatorname{Conv}(W, y)_{(i, j)}=\sum_{
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/17/论文/每周论文13/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1517,14 +1511,21 @@
       
         
           
-            <h3 id="1️⃣送灵澈上人"><a href="#1️⃣送灵澈上人" class="headerlink" title="1️⃣送灵澈上人"></a>1️⃣送灵澈上人</h3><p>[唐] 刘长卿<br>苍苍竹林寺，杳杳钟声晚。<br>荷笠带斜阳，青山独归远。</p>
-<p>荷（hè）笠：背着斗笠。</p>
-<p><a href="http://lib.xcz.im/work/57b90887128fe10054c9c750" target="_blank" rel="noopener">http://lib.xcz.im/work/57b90887128fe10054c9c750</a></p>
-<hr>
-<h3 id="2️⃣苏幕遮-·-怀旧"><a href="#2️⃣苏幕遮-·-怀旧" class="headerlink" title="2️⃣苏幕遮 · 怀旧"></a>2️⃣苏幕遮 · 怀旧</h3><p>[宋] 范仲淹<br>碧云天，黄叶地，秋色连波，波上寒烟翠。山映斜阳天接水，芳草无情，更在斜阳外。<br>黯乡魂，追旅思。夜夜除非，好梦留人睡。明月楼高休独倚，酒入愁肠，化作相思泪。</p>
-<p><a href="http://lib.xcz.im/work/57b8ee4a128fe10054c91757" target="_blank" rel="noopener">http://lib.xcz.im/work/57b8ee4a128fe10054c91757</a></p>
+          1️⃣送灵澈上人[唐] 刘长卿苍苍竹林寺，杳杳钟声晚。荷笠带斜阳，青山独归远。
+荷（hè）笠：背着斗笠。
+http://lib.xcz.im/work/57b90887128fe10054c9c750
+
+2️⃣苏幕遮 · 怀旧[宋] 范仲淹碧云天，黄叶地，秋色连波，波上寒烟翠。山映斜阳天接水，芳草无情，更在斜阳外。黯乡魂，追旅思。夜夜除非，好梦留人睡。明月楼高休独倚，酒入愁肠，化作相思泪。
+http://lib.xcz.im/work/57b8ee4a128fe10054c91757
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/17/诗词&句/每周诗词19/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1654,170 +1655,18 @@
       
         
           
-            <h2 id="1️⃣-PAY-LESS-ATTENTION-WITH-LIGHTWEIGHT-AND-DYNAMIC-CONVOLUTIONS"><a href="#1️⃣-PAY-LESS-ATTENTION-WITH-LIGHTWEIGHT-AND-DYNAMIC-CONVOLUTIONS" class="headerlink" title="1️⃣[PAY LESS ATTENTION WITH LIGHTWEIGHT AND DYNAMIC CONVOLUTIONS]"></a>1️⃣[PAY LESS ATTENTION WITH LIGHTWEIGHT AND DYNAMIC CONVOLUTIONS]</h2><p>Facebook研究人员提出的两种基于卷积的方法尝试替代self-attention在transformer中的作用，拥有更少的参数以及更快的速度，并且能够达到很好的效果。</p>
-<p><img src="/images/15521843619624.jpg" width="80%" height="80%"></p>
-<h3 id="Lightweight-convolution"><a href="#Lightweight-convolution" class="headerlink" title="Lightweight convolution"></a>Lightweight convolution</h3><p>背景：depthwise convolution<br>每个channel独立进行卷积，注意到放到NLP任务上channel是指embedding的每一维。</p>
-<script type="math/tex; mode=display">O_{i, c}=\text{DepthwiseConv}\left(X, W_{c, :}, i, c\right)=\sum_{j=1}^{k} W_{c, j} \cdot X_{\left(i+j-\left\lceil\frac{k+1}{2}\right]\right), c}</script><p>因此Lightweight convolution的计算方法为：</p>
-<script type="math/tex; mode=display">\operatorname{LightConv}\left(X, W_{\left\lceil\frac{c H}{d}\right\rceil,:}, i, c\right)=\text { DepthwiseConv}\left(X, \text{softmax}(W_{\left\lceil\frac{c H}{d}\right\rceil,:}), i, c\right)</script><p>每一层都有固定的window size，这和self-attention不同，self-attention是所有的context都进行交互。</p>
-<ul>
-<li>Weight sharing 注意到这里讲每d/H个channel的参数进行绑定，进一步减少参数。</li>
-<li>Softmax-normalization 对channel一维进行softmax，相当于归一化每个词的每一维的的重要性（比self-attention更精细）。实验证明，如果没有softmax没办法收敛。</li>
-</ul>
-<p>因此总体的架构为：<br>input—&gt;linear —&gt; GLU(gated linear unit) —&gt; lightconv/dynamicConv —&gt; linear</p>
-<h3 id="Dynamic-convolution"><a href="#Dynamic-convolution" class="headerlink" title="Dynamic convolution"></a>Dynamic convolution</h3><p>与lightweight convolution相似，但加了一个动态的kernel size。</p>
-<script type="math/tex; mode=display">\text { DynamicConv}( X , i , c ) = \operatorname{LightConv}\left(X, f\left(X_{i}\right)_{h,:}, i, c\right)</script><p>这里的kernel size简单使用线性映射：$f : \mathbb { R } ^ { d } \rightarrow \mathbb { R } ^ { H \times k }$<br>如：$f\left(X_{i}\right)=\sum_{c=1}^{d} W_{h, j, c}^{Q} X_{i, c}$</p>
-<hr>
-<h2 id="2️⃣-Joint-Embedding-of-Words-and-Labels-for-Text-Classiﬁcation"><a href="#2️⃣-Joint-Embedding-of-Words-and-Labels-for-Text-Classiﬁcation" class="headerlink" title="2️⃣[Joint Embedding of Words and Labels for Text Classiﬁcation]"></a>2️⃣[Joint Embedding of Words and Labels for Text Classiﬁcation]</h2><p>提出一种机制将label作为embedding与词一同训练，同时引入label和word的attention机制，在分类上获得效果。</p>
-<p><img src="/images/15521854844061.jpg" width="40%" height="50%"></p>
-<p>上图中，C是label embedding，维度为$P\times K$ ; V是句子所有词的embedding矩阵，维度为$P\times L$。<br>$\mathbf{G}$的计算公式为：</p>
-<script type="math/tex; mode=display">\mathbf{G}=\left(\mathbf{C}^{\top} \mathbf{V}\right) \oslash \hat{\mathbf{G}}</script><p>$\oslash$表示element-wise相除。$\hat{\mathbf{G}}$表示l2 norm，也即：</p>
-<script type="math/tex; mode=display">\hat{g}_{k l}=\left\|\boldsymbol{c}_{k}\right\|\left\|\boldsymbol{v}_{l}\right\|</script><p>因此公式的本质即在计算label与每个词的cos距离。</p>
-<p>在获得了$\mathbf{G}$后，为了获得更高的的表示，如phrase，将一个一个block取出，并过线性层：</p>
-<script type="math/tex; mode=display">\boldsymbol{u}_{l}=\operatorname{ReLU}\left(\mathbf{G}_{l-r : l+r} \mathbf{W}_{1}+\boldsymbol{b}_{1}\right)</script><p>接着对每个$\boldsymbol{u}_{l}$取最大值：</p>
-<script type="math/tex; mode=display">m_{l}=\textbf{max-pooling}\left(\boldsymbol{u}_{l}\right)</script><p>此时的$\mathbf{m}$是一个长度为L的向量。最终对m做softmax获得一个分数的分布：</p>
-<script type="math/tex; mode=display">\boldsymbol{\beta}=\operatorname{SoftMax}(\boldsymbol{m})</script><p>将该分数和每个词做加权求和，获得最终的向量表示：</p>
-<script type="math/tex; mode=display">\boldsymbol{z}=\sum_{l} \beta_{l} \boldsymbol{v}_{l}</script><p>思考：将label与embedding放在一起训练这个思路不错。但整合的方式是否过于简单粗暴了<br>？特别是phrase的提取和随后的max-pooling的可解释性并不强的样子。</p>
+          1️⃣[PAY LESS ATTENTION WITH LIGHTWEIGHT AND DYNAMIC CONVOLUTIONS]Facebook研究人员提出的两种基于卷积的方法尝试替代self-attention在transformer中的作用，拥有更少的参数以及更快的速度，并且能够达到很好的效果。
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/03/10/碎片知识/每周碎片知识18/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/10/碎片知识/每周碎片知识18/" itemprop="url">每周碎片知识18</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-10T09:46:14+08:00">
-                2019-03-10
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-10T09:59:03+08:00">
-                2019-03-10
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1️⃣-Depthwise-seperable-convolution"><a href="#1️⃣-Depthwise-seperable-convolution" class="headerlink" title="1️⃣[Depthwise seperable convolution]"></a>1️⃣[Depthwise seperable convolution]</h3><p>Depthwise seperable convolution = depthwise + pointwise<br>先每个卷积核独立对一个feature map进行卷积，再通过一个$1\times 1 \times n$的卷积核对feature map进行整合。</p>
-<p><a href="https://blog.csdn.net/tintinetmilou/article/details/81607721" target="_blank" rel="noopener">https://blog.csdn.net/tintinetmilou/article/details/81607721</a></p>
-<hr>
-<h3 id="2️⃣-如何寻找较好的lr"><a href="#2️⃣-如何寻找较好的lr" class="headerlink" title="2️⃣[如何寻找较好的lr]"></a>2️⃣[如何寻找较好的lr]</h3><p>一种启发式的方法：</p>
-<blockquote>
-<p>Over an epoch begin your SGD with a very low learning rate (like 10−8) but change it (by multiplying it by a certain factor for instance) at each mini-batch until it reaches a very high value (like 1 or 10). Record the loss each time at each iteration and once you’re finished, plot those losses against the learning rate.</p>
-</blockquote>
-<p><a href="https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html" target="_blank" rel="noopener">https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html</a></p>
-
-          
+Lightweight convolution背景：depthwise convolution每个channel独立进行卷积，注意到放到NLP任务上channel是指embedding的每一维。
+O_{i, c}=\text{DepthwiseConv}\left(X, W_{c, :}, i
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/10/论文/每周论文12/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1905,7 +1754,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">138</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1918,7 +1767,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">157</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -286,6 +286,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 15: Transfer Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 15: Transfer Learning/" itemprop="url">Lecture 15:Transfer Learning</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T11:45:24+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:30+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Model Fine-tuning假设我们有很多的source data $(x^s,y^s )$，与任务相关的target data $(x^t,y^t )$  很少。我们利用source data训练一个模型，然后用target data来fine tune模型。
+conservative training
+我们可以用source data训练好的模型的weight作为新的模型的weight，然后设定一些限制，比如source data作为输入的output应和target data作为输入的output尽量相似，或者参数尽量相似等。
+layer transfer也就是新模型有几层是直接c
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 15: Transfer Learning/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/07/机器学习与深度学习算法知识/Lecture 14: Unsupervised Learning: Generation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -369,22 +510,21 @@
       
         
           
-            <h3 id="Component-by-component"><a href="#Component-by-component" class="headerlink" title="Component-by-component"></a>Component-by-component</h3><p>对于图像来说，每次生成一个pixel：PixelRNN</p>
-<h3 id="VAE"><a href="#VAE" class="headerlink" title="VAE"></a>VAE</h3><p>架构：<br><img src="/images/2018-10-07-15388837191574.jpg" width="50%" height="50%"></p>
-<p>其中e是噪声，σ是方差，目标是最小化reconstruction error，以及一个限制。该限制的目的即防止σ=0，m是正则化项。</p>
-<p><del>中间的推导以及为什么是这样的架构我还不是很懂，之后再更新。</del><br>实际上可以这么理解，有几个要点：</p>
-<ul>
-<li>首先我们是基于这么一个假设：中间的code应当是服从正态分布的，而encoder的作用即在于拟合该正态分布的均值与方差的对数（因为方差应当恒为正，但神经网络的输出可能有正有负）</li>
-<li>如果生成出来的code不符合正态分布，会有一个惩罚项，也就是上图的constraint（可以通过KL散度推导获得）</li>
-<li>按理说，应当是在生成了均值和方差后，定义好该正态分布，然后再从中采样，但是这样没办法回传更新梯度，因此这里使用重参数技巧(Reparameterization Trick)，也即从$N(\mu,\sigma^2)$中采样$Z$，相当于从$N(0,I)$中采样$\varepsilon$，然后让$Z=\mu + \varepsilon \times \mu$</li>
-</ul>
-<p><img src="/images/2018-10-08-15389638077301.jpg" width="70%" height="50%"></p>
-<p><strong>Reference</strong>:<br><a href="https://www.sohu.com/a/226209674_500659" target="_blank" rel="noopener">https://www.sohu.com/a/226209674_500659</a></p>
-<p>VAE的主要问题在于，网络只试图去记住见过的图像，但没法真正去生成没见过的图像。</p>
-<h3 id="Generative-Adversarial-Network-GAN"><a href="#Generative-Adversarial-Network-GAN" class="headerlink" title="Generative Adversarial Network (GAN)"></a>Generative Adversarial Network (GAN)</h3><p>GAN包含一个discriminator和一个generator，generator试图生成能够骗过discriminator的样本，而generator试图能够将generator生成的样本和真实的样本区分。</p>
-<p>之后会有详细的介绍。</p>
+          Component-by-component对于图像来说，每次生成一个pixel：PixelRNN
+VAE架构：
+其中e是噪声，σ是方差，目标是最小化reconstruction error，以及一个限制。该限制的目的即防止σ=0，m是正则化项。
+中间的推导以及为什么是这样的架构我还不是很懂，之后再更新。实际上可以这么理解，有几个要点：
 
-          
+首先我们是基于这么一个假设：中间的code应当是服从正态分布的，而encoder的作用即在于拟合该正态分布的均值与方差的对数（因为方差应当恒为正，但神经网络的输出可能有正有负）
+如果生成出来的code不符合正态分布，会有一个惩罚项，也就是上图的constra
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 14: Unsupervised Learning: Generation/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -514,18 +654,21 @@
       
         
           
-            <h3 id="Auto-encoder"><a href="#Auto-encoder" class="headerlink" title="Auto-encoder"></a>Auto-encoder</h3><p>由一个encoder和一个decoder组成，encoder负责将输入转成一个向量表示（维度通常小于输入），decoder负责将这段向量表示恢复成原来的输入。那么中间的code就可以作为输入的一个低维表示：<br><img src="/images/2018-10-07-15388832782913.jpg" width="50%" height="50%"></p>
-<h3 id="Auto-encoder-for-CNN"><a href="#Auto-encoder-for-CNN" class="headerlink" title="Auto-encoder for CNN"></a>Auto-encoder for CNN</h3><p><img src="/images/2018-10-07-15388833149617.jpg" width="50%" height="50%"></p>
-<h4 id="Unpooling"><a href="#Unpooling" class="headerlink" title="Unpooling"></a>Unpooling</h4><p>有两种方法，一种在pooling的时候记录最大值的位置，在unpooling时在相对位置填充最大值，其他位置填充0；另一种不记录最大值位置，直接在pooling区域全部填充最大值。<br><img src="/images/2018-10-07-15388833530548.jpg" width="50%" height="50%"></p>
-<h4 id="Deconvolution"><a href="#Deconvolution" class="headerlink" title="Deconvolution"></a>Deconvolution</h4><p>其实本质就是convolution。</p>
-<p>这是convolution:</p>
-<p><img src="/images/2018-10-07-15388834044149.jpg" width="10%" height="50%"></p>
-<p>我们期待的convolution：<br><img src="/images/2018-10-07-15388834434741.jpg" width="15%" height="50%"></p>
-<p>实际上就等价在两边做padding，然后直接convolution：<br><img src="/images/2018-10-07-15388834751493.jpg" width="15%" height="50%"></p>
-<h3 id="Auto-encoder的用处"><a href="#Auto-encoder的用处" class="headerlink" title="Auto-encoder的用处"></a>Auto-encoder的用处</h3><p>可以预训练每一层的DNN：<br><img src="/images/2018-10-07-15388835335550.jpg" width="50%" height="50%"></p>
-<p>同理其它层也是一样，每次fix住其他层然后做Auto-encoder。那么在bp的时候只需要fine-tune就行。</p>
+          Auto-encoder由一个encoder和一个decoder组成，encoder负责将输入转成一个向量表示（维度通常小于输入），decoder负责将这段向量表示恢复成原来的输入。那么中间的code就可以作为输入的一个低维表示：
+Auto-encoder for CNN
+Unpooling有两种方法，一种在pooling的时候记录最大值的位置，在unpooling时在相对位置填充最大值，其他位置填充0；另一种不记录最大值位置，直接在pooling区域全部填充最大值。
+Deconvolution其实本质就是convolution。
+这是convolution:
 
-          
+我们期待的convolutio
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 13: Unsupervised Learning: Auto-encoder/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -655,24 +798,20 @@
       
         
           
-            <h3 id="Locally-Linear-Embedding-LLE"><a href="#Locally-Linear-Embedding-LLE" class="headerlink" title="Locally Linear Embedding (LLE)"></a>Locally Linear Embedding (LLE)</h3><p>一种降维方法<br>思想：假设每个点可以由其周围的点来表示<br><img src="/images/2018-10-07-15388822769215.jpg" width="25%" height="50%"></p>
-<p>我们需要找到这样的$w_{ij}$，使得：</p>
-<script type="math/tex; mode=display">∑_i‖x^i−∑_j w_{ij} x^j ‖_2</script><p>这样在降维的时候，我们仍然保持x之间的这样的关系:<br><img src="/images/2018-10-07-15388823792351.jpg" width="50%" height="50%"></p>
-<h3 id="Laplacian-Eigenmaps"><a href="#Laplacian-Eigenmaps" class="headerlink" title="Laplacian Eigenmaps"></a>Laplacian Eigenmaps</h3><p>一种降维方法<br>基本思想：如果$x^1$与$x^2$在高维空间中相近，则降维后也应该接近：</p>
-<script type="math/tex; mode=display">S=1/2 ∑_{i,j} w_{i,j} (z^i−z^j )^2</script><p>其中：<br><img src="/images/2018-10-07-15388824984809.jpg" width="30%" height="50%"></p>
-<p>如果将z全设为0，显然S最小，因此我们需要给z一个限制：z应当充满空间，也即假如z是M维，那么$\{z^1,z^2…,z^N\}$的秩应该等于M</p>
-<h3 id="T-distributed-Stochastic-Neighbor-Embedding-t-SNE"><a href="#T-distributed-Stochastic-Neighbor-Embedding-t-SNE" class="headerlink" title="T-distributed Stochastic Neighbor Embedding (t-SNE)"></a>T-distributed Stochastic Neighbor Embedding (t-SNE)</h3><p>也是一种降维方法<br>前面提到的方法有一个问题：同一类的点确实聚在一起，但不同类的点并没有尽量分开<br><img src="/images/2018-10-07-15388826477983.jpg" width="50%" height="50%"></p>
-<p>t-SNE的主要思想：将数据点映射到概率分布，我们希望降维前和降维后，数据分布的概率应当尽可能一致。<br>t-SNE构建一个高维对象之间的概率分布，使得相似的对象有更高的概率被选择，而不相似的对象有较低的概率被选择。t-SNE在低维空间里在构建这些点的概率分布，使得这两个概率分布之间尽可能的相似。</p>
-<p>如何做？<br>在高维空间中，我们定义：</p>
-<script type="math/tex; mode=display">P(x^j |x^i )=\frac{S(x^i,x^j )}{∑_{k≠i}S(x^i,x^k )}</script><p>其中S表示i与j之间的相似度。</p>
-<p>在低维空间中，同样有：</p>
-<script type="math/tex; mode=display">Q(z^j |z^i )=\frac{S′(z^i,z^j )}{∑_{k≠i}S′(z^i,z^k )}</script><p>使用KL散度去计算两个分布之间的差异：</p>
-<script type="math/tex; mode=display">L=∑_i KL(P(∗|x^i )||Q(∗|z^i )) =∑_i∑_j P(x^j |x^i )\frac{log P(x^j |x^i )}{Q(z^j |z^i )}</script><p>t-SNE中，高维空间和低维空间计算相似度的公式不大一样：</p>
-<script type="math/tex; mode=display">S(x^i,x^j )=exp(−‖x^i−x^j ‖_2 )</script><script type="math/tex; mode=display">S′(z^i,z^j )=\frac{1}{(1+‖z^i−z^j ‖_2)}</script><p>两个公式的图示：<br><img src="/images/2018-10-07-15388830652023.jpg" width="70%" height="50%"></p>
-<p>也即<strong>低维空间会拉长距离，使得距离远的点尽可能被拉开</strong>。</p>
-<p>t-SNE的问题在于：t-SNE无法对新的数据点进行降维。</p>
-
-          
+          Locally Linear Embedding (LLE)一种降维方法思想：假设每个点可以由其周围的点来表示
+我们需要找到这样的$w_{ij}$，使得：
+∑_i‖x^i−∑_j w_{ij} x^j ‖_2这样在降维的时候，我们仍然保持x之间的这样的关系:
+Laplacian Eigenmaps一种降维方法基本思想：如果$x^1$与$x^2$在高维空间中相近，则降维后也应该接近：
+S=1/2 ∑_{i,j} w_{i,j} (z^i−z^j )^2其中：
+如果将z全设为0，显然S最小，因此我们需要给z一个限制：z应当充满空间，也即假如z是M维，那么$\{z^1,z^2…,z^N\}$的秩应该
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 12: Unsupervised Learning: Neighbor Embedding/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -802,40 +941,21 @@
       
         
           
-            <h2 id="Clustering"><a href="#Clustering" class="headerlink" title="Clustering"></a>Clustering</h2><h3 id="K-means"><a href="#K-means" class="headerlink" title="K-means"></a>K-means</h3><p>算法步骤：<br><img src="/images/2018-10-07-15388800377875.jpg" width="70%" height="50%"></p>
-<p>迭代更新使得最后聚类中心收敛。但事先需要定好有多少类。</p>
-<h3 id="Hierarchical-Agglomerative-Clustering-HAC"><a href="#Hierarchical-Agglomerative-Clustering-HAC" class="headerlink" title="Hierarchical Agglomerative Clustering (HAC)"></a>Hierarchical Agglomerative Clustering (HAC)</h3><p>自下而上，每次选两个最近的聚为一类，直到所有的都分成一类<br>最后选择一个阈值划分，如蓝色绿色和红色的线<br><img src="/images/2018-10-07-15388801021791.jpg" width="50%" height="50%"></p>
-<h2 id="Dimension-Reduction"><a href="#Dimension-Reduction" class="headerlink" title="Dimension Reduction"></a>Dimension Reduction</h2><p>找到一个映射，使得x能够映射到低维z</p>
-<h3 id="Principle-Component-Analysis-PCA"><a href="#Principle-Component-Analysis-PCA" class="headerlink" title="Principle Component Analysis (PCA)"></a>Principle Component Analysis (PCA)</h3><p>目的是找到一个维度，使得投影得到的variance最大，也即最大程度保留数据的差异性。<br><img src="/images/2018-10-07-15388801830659.jpg" width="50%" height="50%"></p>
-<p>形式化可以写成（一维情形）：</p>
-<script type="math/tex; mode=display">Var(z_1 )=\frac{1}{N} ∑_{z_1}(z_1−\overline{z_1} )^2</script><p>其中：</p>
-<script type="math/tex; mode=display">‖w^1 ‖_2=1</script><script type="math/tex; mode=display">z_1=w^1 \cdot x</script><p>$\overline{z_1}$表示z的均值</p>
-<p>假如我们要投影到多维，其他维度也有同样的目标。其中每个维度之间都应该是相互正交的。<br><img src="/images/2018-10-07-15388804752506.jpg" width="20%" height="50%"></p>
-<h4 id="如何做？"><a href="#如何做？" class="headerlink" title="如何做？"></a>如何做？</h4><p>找到$ \frac{1}{N}∑(x−\overline{x} ) (x−\overline{x})^T$的前k个最大的特征值对应的特征向量，组合起来即是我们要找的$W$</p>
-<h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><p>—-Warning of Math—-<br>目的：$Var(z_1 )=\frac{1}{N} ∑_{z_1}(z_1−\overline{z_1} )^2 $<br>其中 $\overline{z_1} =\frac{1}{N} ∑{z_1} = \frac{1}{N} ∑ w^1 \cdot x=w^1\cdot \overline{x}$</p>
-<p>推导：<br><img src="/images/2018-10-07-15388811276042.jpg" width="35%" height="50%"><br>改变符号 $S=Cov(x)$</p>
-<p>利用拉格朗日乘数法，有：<br>$Sw^1=αw^1$<br>等式两边各左乘$(w^1)^T$，有：<br>$(w^1 )^T Sw^1=α(w^1 )^T w^1=α$</p>
-<p>也即，$α$是$S$的特征值，选择最大的特征值，就能够最大化我们的目标。</p>
-<p>同理，我们要找$w^2$，最大化$(w^2 )^T Sw^2$，其中有：<br>$(w^2 )^T w^2=1$<br>$(w^2 )^T w^1=0$ （与第一维正交）</p>
-<p>因此利用拉格朗日乘数法：</p>
-<script type="math/tex; mode=display">g(w^2 )= (w^2 )^T Sw^2−α((w^2 )^T w^2−1)−β((w^2 )^T w^1−0)</script><p>最终得到，w2对应第二大的特征值的特征向量。</p>
-<p>以此类推，其他维也同理。<br>—-End of Math—-</p>
-<h4 id="PCA的其他"><a href="#PCA的其他" class="headerlink" title="PCA的其他"></a>PCA的其他</h4><p>实际上最终得到的z，每一维之间的协方差都为0<br><img src="/images/2018-10-07-15388815546680.jpg" width="50%" height="50%"></p>
-<p>证明如下：<br><img src="/images/2018-10-07-15388815837458.jpg" width="50%" height="50%"></p>
-<p>PCA也可以用SVD来做：<br><img src="/images/2018-10-07-15388816250075.jpg" width="60%" height="50%"></p>
-<p>U中保存了K个特征向量。</p>
-<p>从另一种角度理解PCA，也可以认为PCA是一种autoencoder：<br><img src="/images/2018-10-07-15388816896369.jpg" width="50%" height="50%"></p>
-<h4 id="PCA的问题"><a href="#PCA的问题" class="headerlink" title="PCA的问题"></a>PCA的问题</h4><p>PCA是无监督学习，如果有标签，则无法按照类别来进行正确降维，如：<br><img src="/images/2018-10-07-15388817393283.jpg" width="30%" height="50%"></p>
-<p>第二就是PCA是线性变换，对于一些需要非线性变换的无能为力<br><img src="/images/2018-10-07-15388817566149.jpg" width="28%" height="50%"></p>
-<h3 id="Matrix-Factorization"><a href="#Matrix-Factorization" class="headerlink" title="Matrix Factorization"></a>Matrix Factorization</h3><p>定义：矩阵分解，就是将一个矩阵D分解为U和V的乘积，即对于一个特定的规模为m*n的矩阵D，估计出规模分别为m*k和n*k的矩阵U和V，使得$UV^T$的值尽可能逼近矩阵D。常用于推荐系统。</p>
-<p>思想：<br>假如有一个矩阵：<br><img src="/images/2018-10-07-15388819053983.jpg" width="60%" height="50%"></p>
-<p>假设横轴和纵轴每一维都有一个向量代表该维，矩阵的每个元素就是横轴和纵轴对应维的点积。我们的目的是尽可能减小：</p>
-<script type="math/tex; mode=display">L=\sum_{(i,j)} (r^i \cdot r^j -n_{ij})^2</script><p>其中$r_i$ $r_j$就是向量表示，$n_{ij}$就是矩阵的内容。</p>
-<p>可以使用SVD求解上式：<br><img src="/images/2018-10-07-15388820642382.jpg" width="50%" height="50%"></p>
-<p>实际上，考虑每一行或列本身的特性，我们对Loss进行扩展：</p>
-<script type="math/tex; mode=display">Minimizing \ \ L=\sum_{(i,j)} (r^i \cdot r^j +b_i+b_j-n_{ij})^2</script><p>使用SGD可以求解。</p>
-
-          
+          ClusteringK-means算法步骤：
+迭代更新使得最后聚类中心收敛。但事先需要定好有多少类。
+Hierarchical Agglomerative Clustering (HAC)自下而上，每次选两个最近的聚为一类，直到所有的都分成一类最后选择一个阈值划分，如蓝色绿色和红色的线
+Dimension Reduction找到一个映射，使得x能够映射到低维z
+Principle Component Analysis (PCA)目的是找到一个维度，使得投影得到的variance最大，也即最大程度保留数据的差异性。
+形式化可以写成（一维情形）：
+Var(z_1 )=\frac{1}{N} ∑_{
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/07/机器学习与深度学习算法知识/Lecture 11: Unsupervised Learning: Linear Dimension Reduction/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -965,23 +1085,18 @@
       
         
           
-            <p> 记RNN中每一步的损失为$E_t$，则损失对$h_{t-1}$的权重$W$的导数有：</p>
-<script type="math/tex; mode=display">\frac{\partial{E_t}}{\partial{W}}=\sum_{k=1}^{t}
-    \frac{\partial{E_t}}{\partial{y_t}} \frac{\partial{y_t}}{\partial{h_t}} \frac{\partial{h_t}}{\partial{h_k}} \frac{\partial{h_k}}{\partial{W}}</script><p>其中$\frac{\partial{h_t}}{\partial{h_k}}$使用链式法则有：</p>
-<script type="math/tex; mode=display">\frac{\partial{h_t}}{\partial{h_k}} = 
-    \prod_{j=k+1}^{t} \frac{\partial{h_j}}{\partial{h_{j-1}}} =
-    \prod_{j=k+1}^{t} W^T \times diag[f^{\prime}(h_{j-1})]</script><p>其中$\frac{\partial{h_j}}{\partial{h_{j-1}}}$ 是雅克比矩阵。对其取模(norm)，有：</p>
-<script type="math/tex; mode=display">\rVert \frac{\partial{h_j}}{\partial{h_{j-1}}}\rVert ≤ 
-\rVert W^T \rVert \rVert diag[f^{\prime}(h_{j-1})] \rVert 
-≤ \beta_W \beta_h</script><p>当$f$为sigmoid时，$f^{\prime}(h_{j-1})$最大值为1。</p>
-<p>最终我们有：</p>
-<script type="math/tex; mode=display">\rVert \frac{\partial{h_t}}{\partial{h_{k}}}\rVert ≤ 
-\rVert \prod_{j=k+1}^{t} \frac{\partial{h_j}}{\partial{h_{j-1}}} \rVert 
-≤ (\beta_W \beta_h)^{t-k}</script><p>从上式可以看出，当t-k足够大时，如果$(\beta_W \beta_h)$小于1则$(\beta_W \beta_h)^{t-k}$则会变得非常小，相反，若$(\beta_W \beta_h)$大于1则$(\beta_W \beta_h)^{t-k}$则会变得非常大。</p>
-<p>在计算机中，当梯度值很大时，会造成上溢(NaN)，也即梯度爆炸问题，当梯度值很小时，会变成0，也即梯度消失。注意到，t-k的损失实际上评估的是一个较远的词对当前t的贡献，梯度消失也即意味着对当前的贡献消失。</p>
-<p>Reference:<br>CS224d: Deep Learning for NLP Lecture4</p>
-
-          
+           记RNN中每一步的损失为$E_t$，则损失对$h_{t-1}$的权重$W$的导数有：
+\frac{\partial{E_t}}{\partial{W}}=\sum_{k=1}^{t}
+    \frac{\partial{E_t}}{\partial{y_t}} \frac{\partial{y_t}}{\partial{h_t}} \frac{\partial{h_t}}{\partial{h_k}} \frac{\partial{h_k}}{\partial{W}}其中$\frac{\partial{h_t}}{\partial{h_k}}$使用链式法则有：
+\frac{\partial
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/07/碎片知识/梯度消失与梯度爆炸的推导/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1111,14 +1226,21 @@
       
         
           
-            <h3 id="1️⃣-正态分布"><a href="#1️⃣-正态分布" class="headerlink" title="1️⃣[正态分布]"></a>1️⃣[正态分布]</h3><p>高维正态分布是从一维发展而来的：<br><img src="/images/2018-10-07-15388761009977.jpg" width="70%" height="50%"></p>
-<p><a href="https://www.zhihu.com/question/36339816" target="_blank" rel="noopener">https://www.zhihu.com/question/36339816</a></p>
-<hr>
-<h3 id="2️⃣-RNN"><a href="#2️⃣-RNN" class="headerlink" title="2️⃣[RNN]"></a>2️⃣[RNN]</h3><p>from <a href="https://www.cs.toronto.edu/~hinton/csc2535/notes/lec10new.pdf" target="_blank" rel="noopener">https://www.cs.toronto.edu/~hinton/csc2535/notes/lec10new.pdf</a></p>
-<p>通常而言，我们都会将RNN的initial state设为全0，但在Hinton的slide中提到，我们可以将初始状态作为可学习的变量，和我们在学习权重矩阵一样。</p>
-<p><img src="/images/2018-10-07-15388770544817.jpg" width="80%" height="50%"></p>
+          1️⃣[正态分布]高维正态分布是从一维发展而来的：
+https://www.zhihu.com/question/36339816
+
+2️⃣[RNN]from https://www.cs.toronto.edu/~hinton/csc2535/notes/lec10new.pdf
+通常而言，我们都会将RNN的initial state设为全0，但在Hinton的slide中提到，我们可以将初始状态作为可学习的变量，和我们在学习权重矩阵一样。
+
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/07/碎片知识/每周碎片知识10/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1248,19 +1370,26 @@
       
         
           
-            <h1 id="二元变量"><a href="#二元变量" class="headerlink" title="二元变量"></a>二元变量</h1><p><img src="/images/2018-09-30-Xnip2018-09-30_14-25-21.jpg" alt="二元变量1"></p>
-<p><img src="/images/2018-09-30-Xnip2018-09-30_14-26-46.jpg" alt="贝塔分布"></p>
-<h1 id="多项式分布"><a href="#多项式分布" class="headerlink" title="多项式分布"></a>多项式分布</h1><p><img src="/images/2018-09-30-Xnip2018-09-30_14-31-55.jpg" alt="多项式分布"></p>
-<h1 id="高斯分布"><a href="#高斯分布" class="headerlink" title="高斯分布"></a>高斯分布</h1><p><img src="/images/2018-09-30-Xnip2018-09-30_14-40-32.jpg" alt="高斯分布"></p>
-<p><img src="/images/2018-09-30-Xnip2018-09-30_14-43-09.jpg" alt="2"></p>
-<p><img src="/images/2018-09-30-Xnip2018-09-30_14-45-15.jpg" alt="3"></p>
-<p><img src="/images/2018-09-30-Xnip2018-09-30_14-48-58.jpg" alt="4"></p>
-<h1 id="指数族分布"><a href="#指数族分布" class="headerlink" title="指数族分布"></a>指数族分布</h1><p><img src="/images/2018-09-30-Xnip2018-09-30_14-51-25.jpg" alt="1"></p>
-<p><img src="/images/2018-10-03-Xnip2018-10-03_10-03-54.jpg" alt="2"></p>
-<h1 id="非参数优化"><a href="#非参数优化" class="headerlink" title="非参数优化"></a>非参数优化</h1><p><img src="/images/2018-10-03-Xnip2018-10-03_10-05-24.jpg" alt="1"></p>
-<p><img src="/images/2018-10-03-Xnip2018-10-03_10-06-55.jpg" alt="2"></p>
+          二元变量
+
+多项式分布
+高斯分布
+
+
+
+指数族分布
+
+非参数优化
+
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/30/机器学习与深度学习算法知识/PRML第二章 概率分布/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1390,53 +1519,19 @@
       
         
           
-            <p>什么是semi-supervised learning</p>
-<p>给定数据${(x^r,\hat{y}^r)}_{r=1}^{R},{(x_u)}_{u=R}^{R+U}$，其中未标记数据远远多于标记数据 $U&gt;&gt;R$</p>
-<p>为什么半监督学习有用？<br>因为未标记数据的分布可能能够给我们一些信息。</p>
-<h3 id="生成模型的半监督学习"><a href="#生成模型的半监督学习" class="headerlink" title="生成模型的半监督学习"></a>生成模型的半监督学习</h3><p>给定两类$C_1$、$C_2$，要求得到后验概率分布</p>
-<script type="math/tex; mode=display">P(C_1 |x)=\frac{P(x|C_1 )P(C_1 )}{(P(x|C_1 )P(C_1 )+P(x|C_2 )P(C_2 ) )}</script><p>其中联合概率分布服从高斯分布。未标记数据此时的作用即帮我们重新估计$P(C_1),P(C_2),\mu,\Sigma$</p>
-<p><img src="/images/2018-09-30-15382829251218.jpg" width="50%" height="50%"></p>
-<p>如何做?<br>先初始化$P(C_1),P(C_2),\mu,\Sigma$，通常可以先用有标记数据进行估计</p>
-<ol>
-<li>计算每个未标记数据的后验概率分布</li>
-<li>以该概率分布更新模型<br>不断重复直至拟合</li>
-</ol>
-<p><img src="/images/2018-09-30-15382829987091.jpg" width="70%" height="50%"></p>
-<p>原因：<br>当我们在做监督学习时，使用最大似然求解：</p>
-<script type="math/tex; mode=display">logL(θ)=∑_{x^r,\hat{y}^r} logP_θ (x^r |\hat{y}^r )</script><p>加上了未标记数据后，同样也要做最大似然：</p>
-<script type="math/tex; mode=display">logL(θ)=∑_{(x^r,\hat{y}^r)} logP_θ (x^r |\hat{y}^r )+∑_{x^u} logP_θ (x^u)</script><h3 id="Low-density-Separation"><a href="#Low-density-Separation" class="headerlink" title="Low-density Separation"></a>Low-density Separation</h3><p>假设不同类别之间有一条明显的分界线，也即存在一个区域，其密度比其他区域小</p>
-<h4 id="Self-training"><a href="#Self-training" class="headerlink" title="Self-training"></a>Self-training</h4><p>如何做?</p>
-<ol>
-<li>先用有标签数据训练一个模型$f$；</li>
-<li>利用模型对未标记数据进行标记，这些标签称为伪标签（pseudo-label）</li>
-<li>将部分有伪标签的数据放入有标签数据中，重新训练<br>重复直到拟合</li>
-</ol>
-<p>这种方式和生成模型的区别：该方法使用的是hard label而生成模型使用的是soft label</p>
-<h4 id="Entropy-based-Regularization"><a href="#Entropy-based-Regularization" class="headerlink" title="Entropy-based Regularization"></a>Entropy-based Regularization</h4><p>将未标记数据充当正则化的效果，我们希望模型预测标签的概率较为集中，也即熵应该尽可能小。也就是说，未标记数据使得分类边界尽可能划在低密度区域。<br><img src="/images/2018-09-30-15382837957204.jpg" width="30%" height="50%"></p>
-<h3 id="Smoothness-Assumption"><a href="#Smoothness-Assumption" class="headerlink" title="Smoothness Assumption"></a>Smoothness Assumption</h3><p>假设：位于稠密数据区域的两个距离很近的样例的类标签相似，通过high density path连接。</p>
-<p><img src="/images/2018-09-30-15382840889274.jpg" width="40%" height="50%"><br>x1与x2之间较为稠密，因此x2与x1比x2与x3更为接近。</p>
-<p><strong>如何知道x1与x2通过high density path连接？</strong><br><img src="/images/2018-09-30-15382841851160.jpg" width="50%" height="50%"></p>
-<p>基于图的方法：</p>
-<ol>
-<li>定义xi与xj之间的相似度$s(x^i,x^j)$</li>
-<li>添加边，有两种选择<ol>
-<li>k nearest neighbor</li>
-<li>e-neighborhood<br><img src="/images/2018-09-30-15382842669412.jpg" width="50%" height="50%"></li>
-</ol>
-</li>
-<li>边之间的权重通过相似度来衡量。如： $s(x^i,x^j )=exp(−γ‖x^i−x^j‖^2)$</li>
-</ol>
-<p>该方法本质即利用有标签数据去影响未标记数据，通过图的传播。但一个问题是如果数据不够多，就可能没办法传播。如：<br><img src="/images/2018-09-30-15382844101208.jpg" width="30%" height="50%"></p>
-<p>在建立好图后，如何使用?</p>
-<ul>
-<li>定义图的平滑程度，$y$表示标签。$S$越小表示越平滑。<script type="math/tex; mode=display">S=1/2∑_{i,j} w_{i,j} (y^i−y^j )^2=y^T Ly</script><script type="math/tex; mode=display">y=[⋯y^i⋯y^j⋯]^T</script><script type="math/tex; mode=display">L=D−W</script></li>
-</ul>
-<p>D是邻接矩阵，第ij个元素即xi与xj之间的weight，W是对角矩阵，ii个元素是D的第i行的加和；L称为Graph Laplacian<br><img src="/images/2018-09-30-15382847006975.jpg" width="50%" height="50%"></p>
-<ul>
-<li>我们最终在计算Loss的时候要加上这项正则项<script type="math/tex; mode=display">L=∑_{x^r}C(y^r,\hat{y}^r ) +λS</script></li>
-</ul>
-
-          
+          什么是semi-supervised learning
+给定数据${(x^r,\hat{y}^r)}_{r=1}^{R},{(x_u)}_{u=R}^{R+U}$，其中未标记数据远远多于标记数据 $U&gt;&gt;R$
+为什么半监督学习有用？因为未标记数据的分布可能能够给我们一些信息。
+生成模型的半监督学习给定两类$C_1$、$C_2$，要求得到后验概率分布
+P(C_1 |x)=\frac{P(x|C_1 )P(C_1 )}{(P(x|C_1 )P(C_1 )+P(x|C_2 )P(C_2 ) )}其中联合概率分布服从高斯分布。未标记数据此时的作用即帮我们重新估计$P(C_1),P(C_2)
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/30/机器学习与深度学习算法知识/Lecture 10: Semi-supervised/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1566,192 +1661,24 @@
       
         
           
-            <p>大纲<br><img src="/images/2018-09-30-15382757690955.jpg" width="50%" height="50%"></p>
-<h2 id="new-activation-function"><a href="#new-activation-function" class="headerlink" title="new activation function"></a>new activation function</h2><p>梯度消失问题：由于sigmoid会将值压缩，所以在反向传播时，越到后面值越小。</p>
-<p><img src="/images/2018-09-30-15382758841507.jpg" width="30%" height="50%"><br>所以后层的更新会比前层的更新更快，导致前层还没converge，后层就根据前层的数据（random）达到converge了</p>
-<h3 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h3><p><img src="/images/2018-09-30-15382759503401.jpg" width="30%" height="50%"><br>能够快速计算，且能够解决梯度消失问题。</p>
-<p>因为会有部分neuron的值是0，所以相当于每次训练一个瘦长的神经网络。<br><img src="/images/2018-09-30-15382760030965.jpg" width="50%" height="50%"></p>
-<h4 id="ReLU的变体"><a href="#ReLU的变体" class="headerlink" title="ReLU的变体"></a>ReLU的变体</h4><p><img src="/images/2018-09-30-15382928024258.jpg" width="50%" height="50%"></p>
-<h3 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h3><p>首先将几个neuron归为一组，然后每次前向传播时取最大的作为输出。<br><img src="/images/2018-09-30-15382761367509.jpg" width="50%" height="50%"></p>
-<p>实际上ReLU是maxout的一种特殊形式：<br><img src="/images/2018-09-30-15382761741870.jpg" width="40%" height="50%"></p>
-<p>更一般的，有：<br><img src="/images/2018-09-30-15382762237369.jpg" width="40%" height="50%"></p>
-<p>因为w和b的变化，所以该activation function实际上就是一个learnable activation function</p>
-<p>这样一个learnable activation function有这样的特点：</p>
-<blockquote>
-<p>Activation function in maxout network can be any piecewise linear convex function<br>How many pieces depending on how many elements in a group</p>
-</blockquote>
-<p>如：<br><img src="/images/2018-09-30-15382763537888.jpg" width="60%" height="50%"></p>
-<p>maxout应如何训练？</p>
-<p><img src="/images/2018-09-30-15382764343880.jpg" width="50%" height="50%"></p>
-<p>实际上就是一个普通的瘦长network，常规训练即可。<br><img src="/images/2018-09-30-15382764564859.jpg" width="50%" height="50%"></p>
-<h2 id="Adaptive-learning-rate"><a href="#Adaptive-learning-rate" class="headerlink" title="Adaptive learning rate"></a>Adaptive learning rate</h2><p>在adagrad中:<br><img src="/images/2018-09-30-15382765516383.jpg" width="30%" height="50%"></p>
-<p>越到后面learning rate越来越小，但实际上在dl里面，error surface是非常复杂的，越来越小的learning rate可能不适用于dl。如：<br><img src="/images/2018-09-30-15382765821828.jpg" width="50%" height="50%"></p>
-<h3 id="RMSprop"><a href="#RMSprop" class="headerlink" title="RMSprop"></a>RMSprop</h3><p><img src="/images/2018-09-30-15382766372355.jpg" width="60%" height="50%"><br>$σ^t$是历史信息，也就是说$σ^t$参考了过去的梯度和当前的梯度获得一个新的放缩大小</p>
-<h3 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h3><p>引入惯性作为参考，也即参考了上一次梯度的方向。引入惯性后，可能有机会越过local minimum。<br>普通的gradient descent:<br><img src="/images/2018-09-30-15382769712428.jpg" width="40%" height="50%"><br>每次朝着梯度的反方向走。</p>
-<p>Momentum:<br><img src="/images/2018-09-30-15382770120104.jpg" width="40%" height="50%"></p>
-<p>考虑了上一步走的方向。</p>
-<p>具体算法：<br><img src="/images/2018-09-30-15382771516587.jpg" width="30%" height="50%"></p>
-<h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><p>结合了RMSprop和Momentum，也即综合考虑了历史信息决定当前步长；考虑了上一步的方向决定当前走的方向。<br>具体算法：<br><img src="/images/2018-09-30-15382772986250.jpg" width="60%" height="50%"></p>
-<h2 id="Early-Stopping"><a href="#Early-Stopping" class="headerlink" title="Early Stopping"></a>Early Stopping</h2><p>就是在validation set的loss不再减小时停止<br><img src="/images/2018-09-30-15382814784406.jpg" width="50%" height="50%"></p>
-<h2 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h2><h3 id="L2正则化"><a href="#L2正则化" class="headerlink" title="L2正则化"></a>L2正则化</h3><p><img src="/images/2018-09-30-15382815175056.jpg" width="50%" height="50%"><br>其中<br><img src="/images/2018-09-30-15382815336088.jpg" width="30%" height="50%"><br>因此更新公式为：<br>    <img src="/images/2018-09-30-15382815641437.jpg" width="50%" height="50%"></p>
-<p>也即每次以$1-\eta \lambda$对w进行放缩，使w更接近0<br>正则化在DL中也称为weight decay</p>
-<h3 id="L1正则化"><a href="#L1正则化" class="headerlink" title="L1正则化"></a>L1正则化</h3><p><img src="/images/2018-09-30-15382816962676.jpg" width="25%" height="50%"></p>
-<p><img src="/images/2018-09-30-15382817122102.jpg" width="25%" height="50%"><br><img src="/images/2018-09-30-15382817409633.jpg" width="25%" height="50%"></p>
-<p>则更新公式为：<br><img src="/images/2018-09-30-15382817897319.jpg" width="50%" height="50%"></p>
-<p>也即每次以$ηλsgn(w)$ 使w往0靠（sgn表示符号函数）</p>
-<p>可以看出，L1每次都加减相同的值，而L2按比例进行缩放。因此L1更为稀疏(sparse)。</p>
-<h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h2><p>训练的时候每一层采样p%的神经元设为0，让其不工作<br><img src="/images/2018-09-30-15382819376579.jpg" width="50%" height="50%"></p>
-<p>实际上就是每个batch改变了网络结构，使得网络更细长<br><img src="/images/2018-09-30-15382819772611.jpg" width="50%" height="50%"></p>
-<p>测试的时候所有的weight都乘以1-p%</p>
-<p>从ensemble的角度看待dropout：<br>在训练的时候训练一堆不同结构的network，最多有$2^N$种组合，N为neuron个数，可以称为终极的ensemble方法了。而在测试的时候对这些不同的网络进行平均。</p>
-<p><img src="/images/2018-09-30-15382821089494.jpg" width="50%" height="50%"></p>
-<p><img src="/images/2018-09-30-15382821379688.jpg" width="50%" height="50%"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/09/30/机器学习与深度学习算法知识/采样浅析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/30/机器学习与深度学习算法知识/采样浅析/" itemprop="url">采样浅析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T09:24:24+08:00">
-                2018-09-30
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:23+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>总结在NLP中的采样方法（持续更新）。</p>
-<h2 id="采样方法"><a href="#采样方法" class="headerlink" title="采样方法"></a>采样方法</h2><h3 id="1️⃣逆变换采样-Inverse-Sampling"><a href="#1️⃣逆变换采样-Inverse-Sampling" class="headerlink" title="1️⃣逆变换采样(Inverse Sampling)"></a>1️⃣逆变换采样(Inverse Sampling)</h3><p>目的：已知任意概率分布的<strong>累积分布函数</strong>时，用于从该分布中生成随机样本。</p>
-<p>—-什么是累积分布函数(CDF)—-<br>是概率密度函数(PDF)的积分，定义：</p>
-<script type="math/tex; mode=display">F_X(x)=P(X≤x)=\int_{-∞}^{x}f_X(t)dt</script><p>—-END—-</p>
-<p>想象我们知道高斯分布的概率密度函数，我们应该如何采样？本质上我们只能对均匀分布进行直接采样（高斯分布有<a href="https://www.zhihu.com/question/29971598" target="_blank" rel="noopener">算法</a>可以生成采样，但无法一般化）。对于这种连续的随机变量，我们只能通过间接的方法进行采样。</p>
-<p>逆变换采样即是通过累积分布函数的反函数来采样。因为累积分布函数的值域为$[0,1]$，因此我们通过在$[0,1]$上进行采样，再映射到原分布。<br>例子:<br><img src="/images/2018-09-30-15382714567064.jpg" width="80%" height="50%"><br>映射关系如图：<br><img src="/images/2018-09-30-15382715821631.jpg" width="50%" height="50%"></p>
-<h3 id="2️⃣重要性采样-Importance-Sampling"><a href="#2️⃣重要性采样-Importance-Sampling" class="headerlink" title="2️⃣重要性采样(Importance Sampling)"></a>2️⃣重要性采样(Importance Sampling)</h3><p>目的：已知某个分布$P$，希望能估计$f(x)$的期望。亦即：</p>
-<script type="math/tex; mode=display">E[f(x)]=\int_{x}f(x)p(x)dx≈\frac{1}{n}\sum_{i=1}^{n}f(x_i)</script><p>其中$x\sim p$。<br>假设$p(x)$的分布复杂或样本不好生成，另一分布$q(x)$方便生成样本。因此我们引入$q(x)$对原先分布进行估计。</p>
-<script type="math/tex; mode=display">E[f(x)]=\int_{x}f(x)p(x)dx=\int_{x}f(x)\frac{p(x)}{q(x)}q(x)dx≈\frac{1}{n}\sum_{i=1}^{n}f(x_i)\frac{p(x_i)}{q(x_i)}</script><p>其中，$x \sim q$。$w(x)=\frac{p(x)}{q(x)}$称为Importance Weight</p>
-<p>根据上式，实际上就是每次采样的加权求和。</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>逆变换采样<br><a href="https://zh.wikipedia.org/wiki/%E9%80%86%E5%8F%98%E6%8D%A2%E9%87%87%E6%A0%B7" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/%E9%80%86%E5%8F%98%E6%8D%A2%E9%87%87%E6%A0%B7</a></p>
-<p>重要性采样<br><a href="https://www.youtube.com/watch?v=S3LAOZxGcnk" target="_blank" rel="noopener">https://www.youtube.com/watch?v=S3LAOZxGcnk</a></p>
-<p>——持续更新——</p>
-
-          
+          大纲
+new activation function梯度消失问题：由于sigmoid会将值压缩，所以在反向传播时，越到后面值越小。
+所以后层的更新会比前层的更新更快，导致前层还没converge，后层就根据前层的数据（random）达到converge了
+ReLU能够快速计算，且能够解决梯度消失问题。
+因为会有部分neuron的值是0，所以相当于每次训练一个瘦长的神经网络。
+ReLU的变体
+Maxout首先将几个neuron归为一组，然后每次前向传播时取最大的作为输出。
+实际上ReLU是maxout的一种特殊形式：
+更一般的，有：
+因为w和b的变化，所以该activation function
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/30/机器学习与深度学习算法知识/Lecture 7: Tips for DL/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1839,7 +1766,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">138</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1852,7 +1779,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">157</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

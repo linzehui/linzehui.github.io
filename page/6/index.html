@@ -286,6 +286,150 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/11/10/论文/每周论文5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/10/论文/每周论文5/" itemprop="url">每周论文5</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-10T23:10:30+08:00">
+                2018-11-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:11+08:00">
+                2018-11-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1️⃣[Neural Turing Machine]通过模仿冯诺依曼机，引入外部内存(externel memory)。
+和普通神经网络一样，与外界交互，获得一个输入，产生一个输出。但不同的是，内部还有一个memory进行读写。假设memory是一个N × M的矩阵，N是内存的位置数量。
+读写memory①读其中读的时候对各内存位置线性加权。w是归一化权重。
+②写$e_t$是擦除向量（erase vector）
+$a_t$是加和向量(add vector)
+具体如何获得权重就不说了。
+Controller network中间的controller network可以是一个普通的feed for
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/10/论文/每周论文5/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/11/10/诗词&句/每周诗词15/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -369,10 +513,17 @@
       
         
           
-            <h3 id="1️⃣蜀相"><a href="#1️⃣蜀相" class="headerlink" title="1️⃣蜀相"></a>1️⃣蜀相</h3><p>[唐] 杜甫<br>丞相祠堂何处寻，锦官城外柏森森。<br>映阶碧草自春色，隔叶黄鹂空好音。<br>三顾频烦天下计，两朝开济老臣心。<br><strong>出师未捷身先死，长使英雄泪满襟</strong>。</p>
-<p><a href="http://m.xichuangzhu.com/work/57b93410a633bd00665efd4a" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b93410a633bd00665efd4a</a></p>
+          1️⃣蜀相[唐] 杜甫丞相祠堂何处寻，锦官城外柏森森。映阶碧草自春色，隔叶黄鹂空好音。三顾频烦天下计，两朝开济老臣心。出师未捷身先死，长使英雄泪满襟。
+http://m.xichuangzhu.com/work/57b93410a633bd00665efd4a
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/10/诗词&句/每周诗词15/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -502,53 +653,16 @@
       
         
           
-            <h2 id="1️⃣-Character-Level-Language-Modeling-with-Deeper-Self-Attention"><a href="#1️⃣-Character-Level-Language-Modeling-with-Deeper-Self-Attention" class="headerlink" title="1️⃣[Character-Level Language Modeling with Deeper Self-Attention]"></a>1️⃣[Character-Level Language Modeling with Deeper Self-Attention]</h2><p>将transformer用于character-level的语言模型中，通过添加多个loss来提高其表现以及加快拟合速度，同时加深transformer的层数，极大提升表现，12层的transformer layer能达到SOTA，而64层则有更多的提升。</p>
-<p>普通RNN用于character-level language model：<br>将句子按character为单位组成多个batch，每个batch预测最后一个词，然后将该batch的隐状态传入下一个batch。也即“truncated backpropagation through time” (TBTT)。</p>
-<p>如果用在Transformer，如下图，我们只预测$t_4$。<br><img src="/images/2018-11-04-15412915431327.jpg" width="90%" height="50%"></p>
-<p>本文的一大贡献是多加了三种loss，并且有些loss的权值会随着训练的过程而逐渐减小，每个loss都会自己的schedule。这些loss加快了拟合速度，同时也提升了表现。</p>
-<h3 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h3><h4 id="Multiple-Positions"><a href="#Multiple-Positions" class="headerlink" title="Multiple Positions"></a>Multiple Positions</h4><p>对于batch内而言，每个时间步t都要预测下一个词。<br><img src="/images/2018-11-04-15412916429104.jpg" width="90%" height="50%"></p>
-<h4 id="Intermediate-Layer-Losses"><a href="#Intermediate-Layer-Losses" class="headerlink" title="Intermediate Layer Losses"></a>Intermediate Layer Losses</h4><p>要求中间层也做出预测：<br><img src="/images/2018-11-04-15412916704097.jpg" width="95%" height="50%"></p>
-<p>在这里，越底层的layer其loss权值越低。</p>
-<h4 id="Multiple-Targets"><a href="#Multiple-Targets" class="headerlink" title="Multiple Targets"></a>Multiple Targets</h4><p>每一个position，不仅仅要预测下一个词，还要预测下几个词，预测下一个词和预测下几个词的分类器是独立的。</p>
-<p><img src="/images/2018-11-04-15412917374689.jpg" width="70%" height="50%"></p>
-<h3 id="Positional-embedding"><a href="#Positional-embedding" class="headerlink" title="Positional embedding"></a>Positional embedding</h3><p>每一层的都添加一个不共享的可学习的positional embedding。</p>
-<hr>
-<h2 id="2️⃣-Self-Attention-with-Relative-Position-Representations"><a href="#2️⃣-Self-Attention-with-Relative-Position-Representations" class="headerlink" title="2️⃣[Self-Attention with Relative Position Representations]"></a>2️⃣[Self-Attention with Relative Position Representations]</h2><p>提出使用相对位置替代Transformer的绝对位置信息，并在NMT上有一定的提升。</p>
-<p>分解：<br>在原先的self-attention中，输出为：<br><img src="/images/2018-11-04-15412923510664.jpg" width="25%" height="50%"></p>
-<p>其中：<br><img src="/images/2018-11-04-15412923744647.jpg" width="25%" height="50%"><br><img src="/images/2018-11-04-15412923773686.jpg" width="25%" height="50%"></p>
-<p>现在我们考虑添加相对位置，其中相对位置信息在各层都是共享的：<br><img src="/images/2018-11-04-15412924279426.jpg" width="30%" height="50%"><br><img src="/images/2018-11-04-15412924396468.jpg" width="30%" height="50%"></p>
-<p>$a_{ij}^K$的具体形式：<br><img src="/images/2018-11-04-15412925792994.jpg" width="40%" height="50%"><br><img src="/images/2018-11-04-15412925910424.jpg" width="55%" height="50%"><br>上式为了降低复杂度，不考虑长于k的相对位置信息。</p>
-<p>考虑到transformer的并行性，为了并行性，我们考虑如下式子：<br><img src="/images/2018-11-04-15412926687951.jpg" width="50%" height="50%"><br>其中，第一项和原来的Transformer一致；第二项，通过reshape可以达到并行的效果，然后两项直接加起来。</p>
-<p>实验证明，使用相对位置效果是有一定的提升的，而同时使用绝对位置和相对位置并没有提升。<br><img src="/images/2018-11-04-15412930642978.jpg" width="90%" height="50%"></p>
-<hr>
-<h2 id="3️⃣-WEIGHTED-TRANSFORMER-NETWORK-FOR-MACHINE-TRANSLATION"><a href="#3️⃣-WEIGHTED-TRANSFORMER-NETWORK-FOR-MACHINE-TRANSLATION" class="headerlink" title="3️⃣[WEIGHTED TRANSFORMER NETWORK FOR MACHINE TRANSLATION]"></a>3️⃣[WEIGHTED TRANSFORMER NETWORK FOR MACHINE TRANSLATION]</h2><p>这篇被ICLR拒了，但有审稿人打了9分的高分。</p>
-<p>对Transformer进行改进，拥有更好的效果和更小的计算代价。</p>
-<p>传统的Transformer：</p>
-<script type="math/tex; mode=display">Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V</script><script type="math/tex; mode=display">head_i=Attention(QW_i^Q,KW_i^K,VW_i^V)</script><script type="math/tex; mode=display">MultiHead(Q,K,V)=Concat_i (head_i)W^O</script><script type="math/tex; mode=display">FFN(x)=max(0,xW_1+b_1)W_2 + b_2</script><p>在本文中，先对head进行升维并乘以权重，过了FNN后，再乘以另一个权重。其中权重$\alpha$ $ \kappa$为可学习参数：</p>
-<script type="math/tex; mode=display">head_i=Attention(QW_i^Q,KW_i^K,VW_i^V)</script><script type="math/tex; mode=display">\overline{head_i}=head_i W^{O_i} \times \kappa_i</script><script type="math/tex; mode=display">BranchedAttention(Q,K,V)=\sum_{i=1}^{M} \alpha_i FFN(\overline{head}_i)</script><p>其中要求权重之和为1。即$\sum_{i=1}^{M}\alpha_i=1$,$\sum_{i=1}^{M}\kappa_i=1$。</p>
-<p><img src="/images/2018-11-04-15412939412047.jpg" width="90%" height="50%"></p>
-<p>文中对$\kappa$和$\alpha$作了解释。</p>
-<blockquote>
-<p>κ can be interpreted as a learned concatenation weight and α as the learned addition weight</p>
-</blockquote>
-<p>通过实验，发现该模型会有更好的正则化特性。同时效果也有一定提升，收敛速度更快：<br><img src="/images/2018-11-04-15412940966579.jpg" width="80%" height="50%"></p>
-<hr>
-<h2 id="4️⃣-You-May-Not-Need-Attention"><a href="#4️⃣-You-May-Not-Need-Attention" class="headerlink" title="4️⃣[You May Not Need Attention]"></a>4️⃣[You May Not Need Attention]</h2><p>粗略地过了一遍，一些细节没有弄明白。</p>
-<p>提出一种将encoder-decoder融合起来的模型，也即eager translation model，不需要attention，能够实现即时的翻译，也即读入一个词就能翻译一个词，同时不需要记录encoder的所有输出，因此需要很少的内存。</p>
-<p><img src="/images/2018-11-04-15412942175720.jpg" width="50%" height="50%"></p>
-<p>分为三步：<br>①pre-processing<br>进行预处理，使得源句子和目标句子满足<strong>eager feasible</strong> for every aligned pair of words $(s_i , t_j ), i ≤ j$。</p>
-<p>首先通过现成的工具进行对齐操作(alignment)，然后对于那些不符合eager feasible的有具体算法（没认真看）进行补padding。如图<br><img src="/images/2018-11-04-15412945231042.jpg" width="60%" height="50%"></p>
-<p>我们还可以在target sentence的开头添加b个padding，使得模型能够在开始预测之前获取更多的source sentence的词。</p>
-<p>②模型<br>两层的LSTM，输入是上一次的y和当前的x拼接起来直接传进去。</p>
-<p>③post processing<br>在最终结果之前，将padding去掉。</p>
-<p>在inference（也即beam search）时，还有几个操作/trick：</p>
-<ul>
-<li>Padding limit</li>
-<li>Source padding injection SPI</li>
-</ul>
-<p>实验表明，eager model在长的句子表现超过传统带attention的NMT，而长句子的建模正是attention-based 的模型的一大挑战；而在短句子上就不如attention-based的NMT。<br><img src="/images/2018-11-04-15412946442983.jpg" width="50%" height="50%"></p>
-
-          
+          1️⃣[Character-Level Language Modeling with Deeper Self-Attention]将transformer用于character-level的语言模型中，通过添加多个loss来提高其表现以及加快拟合速度，同时加深transformer的层数，极大提升表现，12层的transformer layer能达到SOTA，而64层则有更多的提升。
+普通RNN用于character-level language model：将句子按character为单位组成多个batch，每个batch预测最后一个词，然后将该batch的隐状态传入下一个batch。也即“
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/04/论文/每周论文4/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -678,11 +792,18 @@
       
         
           
-            <h3 id="1️⃣鹤冲天"><a href="#1️⃣鹤冲天" class="headerlink" title="1️⃣鹤冲天"></a>1️⃣鹤冲天</h3><p>[宋] 柳永<br>黄金榜上，偶失龙头望。明代暂遗贤，如何向？未遂风云便，争不恣游狂荡。何须论得丧？才子词人，自是白衣卿相。<br>烟花巷陌，依约丹靑屛障。幸有意中人，堪寻访。且恁偎红倚翠，风流事，平生畅。靑春都一饷。<strong>忍把浮名，换了浅斟低唱</strong>！</p>
-<p>恣（zì）：放纵，随心所欲。<br>恁（nèn）：如此。</p>
-<p><a href="http://m.xichuangzhu.com/work/57aeff68a633bd0057f7d406" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57aeff68a633bd0057f7d406</a></p>
+          1️⃣鹤冲天[宋] 柳永黄金榜上，偶失龙头望。明代暂遗贤，如何向？未遂风云便，争不恣游狂荡。何须论得丧？才子词人，自是白衣卿相。烟花巷陌，依约丹靑屛障。幸有意中人，堪寻访。且恁偎红倚翠，风流事，平生畅。靑春都一饷。忍把浮名，换了浅斟低唱！
+恣（zì）：放纵，随心所欲。恁（nèn）：如此。
+http://m.xichuangzhu.com/work/57aeff68a633bd0057f7d406
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/04/诗词&句/每周诗词14/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -812,10 +933,16 @@
       
         
           
-            <h3 id="1️⃣-collate-fn"><a href="#1️⃣-collate-fn" class="headerlink" title="1️⃣[collate_fn]"></a>1️⃣[collate_fn]</h3><p>将不等长句子组合成batch。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">collate_fn</span><span class="params">(insts)</span>:</span></span><br><span class="line">    <span class="string">''' Pad the instance to the max seq length in batch '''</span></span><br><span class="line"></span><br><span class="line">    max_len = max(len(inst) <span class="keyword">for</span> inst <span class="keyword">in</span> insts)</span><br><span class="line"></span><br><span class="line">    batch_seq = np.array([</span><br><span class="line">        inst + [Constants.PAD] * (max_len - len(inst))</span><br><span class="line">        <span class="keyword">for</span> inst <span class="keyword">in</span> insts])</span><br><span class="line"></span><br><span class="line">    batch_pos = np.array([</span><br><span class="line">        [pos_i + <span class="number">1</span> <span class="keyword">if</span> w_i != Constants.PAD <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">         <span class="keyword">for</span> pos_i, w_i <span class="keyword">in</span> enumerate(inst)] <span class="keyword">for</span> inst <span class="keyword">in</span> batch_seq]) <span class="comment"># 位置信息</span></span><br><span class="line"></span><br><span class="line">    batch_seq = torch.LongTensor(batch_seq)</span><br><span class="line">    batch_pos = torch.LongTensor(batch_pos)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> batch_seq, batch_pos</span><br></pre></td></tr></table></figure>
-
-          
+          1️⃣[collate_fn]将不等长句子组合成batch。
+1234567891011121314151617def collate_fn(insts):    ''' Pad the instance to the max seq length in batch '''    max_len = max(len(inst) for inst in insts)    batch_seq = np.array([        inst + [Constants.PAD] * (max_len - len(inst))        for inst in insts])    batch_
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/04/代码相关/代码记录9/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -945,18 +1072,20 @@
       
         
           
-            <p>历时三个月的“莱斯杯”全国第一届“军事智能·机器阅读”挑战赛终于落下帷幕，前几日（10.26-10.28）有幸在南京青旅宾馆参与决赛，体验多多，收获满满，心中亦有一些感想。</p>
-<p>一个是南京总带给我一种回家的感觉，对南京的事物总有亲切感。第一次来南京是一年半前，也是来参加比赛。周五晚上的夜游秦淮，让我感受到许久未曾感受到的烟火气息。</p>
-<p><img src="/images/2018-10-30-511540860855_.pic_hd.jpg" width="90%" height="50%"></p>
-<p>第二个是此次主办方提供的食宿令人惊喜。一开始听到青旅宾馆，我已经做好了艰苦奋战的准备了，然而酒店是星级酒店的，吃方面直接到楼下的自助。可以看出主办方此次确实用心在举办这次比赛。</p>
-<p><img src="/images/2018-10-30-15408644190676.jpg" width="100%" height="50%"></p>
-<p>第三点是关于比赛的，关于比赛的整个历程我还是颇有感触。<br>我们是以第9名的成绩挺进决赛，其实在后期比赛中，我们都有所懈怠了，几乎没有花时间在这上面，10月初发布决赛的数据集，而我们在10月20日才得知这一事情，此时离决赛只剩一周时间。因此我们确实准备不足。当然我们也没有预料到我们的决赛成绩会这么靠前，否则我们肯定会更加充分去准备。这确实是我们的失误。</p>
-<p>我们在比赛过程中，一直尝试在使用ELMo，这正是我负责的部分。一开始使用官方TensorFlow的代码，费了九牛二虎之力我才跑通代码，但因为队长使用的是pytorch，而二者在cuda版本上不兼容，因此在初赛我们没有使用ELMo。而在最后几天，我尝试使用哈工大的pytorch训练代码，但因为inference速度实在太慢，我们最终还是弃用了这个方案。而在决赛现场，我们发现也确实是因为速度和资源的原因，大家都没有使用ELMo，除了一组。该组正是凭借了ELMo弯道超车从第7升到了第一，拿走了20万大奖。这也是我们非常遗憾的一个地方，我们在遇到困难时没有尝试解决，而是直接弃用，最终没有取得更好的成绩。</p>
-<p>此次我们的成绩排名第4(三等奖)，是有一定的进步的，但有一点遗憾的是，我们仅差0.18百分点，就能超过第三名拿到5万的奖金了。后面我们分析了一下，还是因为我们对比赛懈怠的态度，其他组都对数据进行了分析并有针对性的改进，而我们并没有做这一步。</p>
-<p>Anyway，第一次组队参加比赛就有收获，增长了见识，从交流中也获得了许多。这个比赛之后，就得好好看paper了。 __(:з」∠)_</p>
-<p><img src="/images/2018-10-30-521540861008_.pic_hd.jpg" width="80%" height="50%"></p>
+          历时三个月的“莱斯杯”全国第一届“军事智能·机器阅读”挑战赛终于落下帷幕，前几日（10.26-10.28）有幸在南京青旅宾馆参与决赛，体验多多，收获满满，心中亦有一些感想。
+一个是南京总带给我一种回家的感觉，对南京的事物总有亲切感。第一次来南京是一年半前，也是来参加比赛。周五晚上的夜游秦淮，让我感受到许久未曾感受到的烟火气息。
 
-          
+第二个是此次主办方提供的食宿令人惊喜。一开始听到青旅宾馆，我已经做好了艰苦奋战的准备了，然而酒店是星级酒店的，吃方面直接到楼下的自助。可以看出主办方此次确实用心在举办这次比赛。
+
+第三点是关于比赛的，关于比赛的整个历程我还是颇有感触。我们是以第9名的成绩挺进决赛，其实
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/30/见闻&想法/“莱斯杯”挑战赛有感/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1086,14 +1215,19 @@
       
         
           
-            <h3 id="1️⃣行路难三首"><a href="#1️⃣行路难三首" class="headerlink" title="1️⃣行路难三首"></a>1️⃣行路难三首</h3><p>[唐] 李白<br>【其一】<br>金樽清酒斗十千，玉盘珍羞直万钱。<br><strong>停杯投箸不能食，拔剑四顾心茫然</strong>。<br>欲渡黄河冰塞川，将登太行雪满山。<br>闲来垂钓碧溪上，忽复乘舟梦日边。<br>行路难，行路难，多歧路，今安在？<br><strong>长风破浪会有时，直挂云帆济沧海</strong>！</p>
-<p><strong>注释</strong>：<br>「闲来垂钓碧溪上，忽复乘舟梦日边。」句：暗用典故：姜太公吕尚曾在渭水的磻溪上钓鱼，得遇周文王，助周灭商；伊尹曾梦见自己乘船从日月旁边经过，后被商汤聘请，助商灭夏。这两句表示诗人自己对从政仍有所期待。碧，一作「坐」。</p>
-<hr>
-<h3 id="2️⃣登科后"><a href="#2️⃣登科后" class="headerlink" title="2️⃣登科后"></a>2️⃣登科后</h3><p>[唐] 孟郊<br>昔日龌龊不足夸，今朝放荡思无涯。<br><strong>春风得意马蹄疾，一日看尽长安花</strong>。</p>
-<p><strong>注释</strong>：<br>龌龊（wò chuò）：原意是肮脏，这里指不如意的处境。不足夸：不值得提起。<br>放荡（dàng）：自由自在，不受约束。<br>思无涯：兴致高涨。</p>
-<p><a href="http://m.xichuangzhu.com/work/57add198a633bd0057eefa8a" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57add198a633bd0057eefa8a</a></p>
+          1️⃣行路难三首[唐] 李白【其一】金樽清酒斗十千，玉盘珍羞直万钱。停杯投箸不能食，拔剑四顾心茫然。欲渡黄河冰塞川，将登太行雪满山。闲来垂钓碧溪上，忽复乘舟梦日边。行路难，行路难，多歧路，今安在？长风破浪会有时，直挂云帆济沧海！
+注释：「闲来垂钓碧溪上，忽复乘舟梦日边。」句：暗用典故：姜太公吕尚曾在渭水的磻溪上钓鱼，得遇周文王，助周灭商；伊尹曾梦见自己乘船从日月旁边经过，后被商汤聘请，助商灭夏。这两句表示诗人自己对从政仍有所期待。碧，一作「坐」。
 
-          
+2️⃣登科后[唐] 孟郊昔日龌龊不足夸，今朝放荡思无涯。春风得意马蹄疾，一日看尽长安花。
+注释：龌龊（wò chuò）：原意是肮脏，这里指不如意的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/29/诗词&句/每周诗词13/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1223,56 +1357,20 @@
       
         
           
-            <h2 id="1️⃣-A-Neural-Probabilistic-Language-Model"><a href="#1️⃣-A-Neural-Probabilistic-Language-Model" class="headerlink" title="1️⃣[A Neural Probabilistic Language Model]"></a>1️⃣[A Neural Probabilistic Language Model]</h2><p>第一篇使用神经网络获得词向量的paper。</p>
-<p>通过对language model建模，将词映射到低维表示，在训练过程中同时训练语言模型以及每个词的词向量。</p>
-<p><img src="/images/2018-10-29-15407808716787.jpg" width="50%" height="50%"></p>
-<p>将中心词的前n个拼接起来 $x=(C(w_{t-1},C(w_{t-2}),…,C(w_{t-n+1}))$<br>将$x$送入神经网络中获得$y=b+Wx+Utanh(d+Hx)$，最后做一个softmax即可。</p>
-<hr>
-<h2 id="2️⃣-Adaptive-Computation-Time-for-Recurrent-Neural-Networks"><a href="#2️⃣-Adaptive-Computation-Time-for-Recurrent-Neural-Networks" class="headerlink" title="2️⃣[Adaptive Computation Time for Recurrent Neural Networks]"></a>2️⃣[Adaptive Computation Time for Recurrent Neural Networks]</h2><p>一种允许RNN动态堆叠层数的算法。</p>
-<h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>证据证明，RNN的堆叠层数多，效果会有提升。但是，对于不同的任务，要求不同的计算复杂度。我们需要先验来决定特定任务的计算复杂度。当然我们可以粗暴地直接堆叠深层的网络。ACT(Adaptive Computation Time)能够动态决定每个输入t所需的计算次数。</p>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>将RNN每一步的输出过一个网络+sigmoid层，获得一个概率分布，也即什么时候应当停止不再继续往上堆叠，直到概率加和为1。同时为了尽可能抑制层数的无限增长，在loss添加一项惩罚。</p>
-<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><p>对于普通的RNN：<br><img src="/images/2018-10-29-15408103221289.jpg" width="30%" height="50%"></p>
-<p>s是隐藏层；y是输出。</p>
-<p>对于ACT的RNN，有：<br><img src="/images/2018-10-29-15408103823681.jpg" width="40%" height="50%"></p>
-<p>上标n是指的t时刻的层数；其中：<br><img src="/images/2018-10-29-15408104201718.jpg" width="20%" height="50%"></p>
-<p>$δ$是flat，指示x是第几次输入。</p>
-<p>引入新的网络，输入时隐状态，输出是一个概率分布：<br><img src="/images/2018-10-29-15408105451770.jpg" width="30%" height="50%"></p>
-<p>那么每一层的概率是：<br><img src="/images/2018-10-29-15408105687677.jpg" width="35%" height="50%"></p>
-<p>其中$R(t)$是在每一层概率求和超过1时的剩余概率（为了保证概率和为1，可以试着举一个例子来证明）<br><img src="/images/2018-10-29-15408106099743.jpg" width="45%" height="50%"></p>
-<p><img src="/images/2018-10-29-15408106125837.jpg" width="25%" height="50%"></p>
-<p>ε是为了解决第一次输出时就超过1-ε的情况，ε一般取很小。</p>
-<p>最终，加权求和，作为最终的结果，传入下一个时间步：<br><img src="/images/2018-10-29-15408106649319.jpg" width="45%" height="50%"></p>
-<p>普通RNN与ACT的RNN对比：<br><img src="/images/2018-10-29-15408106950342.jpg" width="90%" height="50%"></p>
-<h4 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h4><p>为了防止模型层数无限增长，添加一项惩罚项以抑制。</p>
-<p>记每一步的惩罚项为：<br><img src="/images/2018-10-29-15408107184035.jpg" width="23%" height="50%"></p>
-<p>总的惩罚项则为：<br><img src="/images/2018-10-29-15408107351871.jpg" width="19%" height="50%"></p>
-<p>Loss function则为：<br><img src="/images/2018-10-29-15408108024183.jpg" width="35%" height="50%"></p>
-<p>因为N(t)是不可导的，我们在实际过程中只去最小化R(t)  （<del>我觉得不甚合理</del>，一种解读是如果我们不断最小化R(t)直到变成0，那么相当于N(t)少了一层，接着R(t)就会变得很大，然后又继续最小化R(t)…）</p>
-<hr>
-<h2 id="3️⃣-Universal-Transformers"><a href="#3️⃣-Universal-Transformers" class="headerlink" title="3️⃣[Universal Transformers]"></a>3️⃣[Universal Transformers]</h2><p>提出一种新型通用的transformer。</p>
-<h3 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h3><p>Transformer的问题：RNN的归纳偏置(inductive bias)在一些任务上很重要，也即RNN的循环学习的过程；Transformer在一些问题上表现不好，可能是归纳偏置的原因。</p>
-<blockquote>
-<p>Notably, however, the Transformer foregoes the RNN’s inductive bias towards learning iterative or recursive transformations.Our experiments indicate that this inductive bias may be crucial for several algorithmic and language understanding tasks of varying complexity: in contrast to models such as the Neural Turing Machine [13], the Neural GPU [17] or Stack RNNs [16], the Transformer does not generalize well to input lengths not encountered during training.</p>
-</blockquote>
-<p>因此在Transformer内引入归纳偏置</p>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
-<li>每一层的权重是共享的，也即multi-head上的权重以及transition function在每一层是一致的。这一点和RNN、CNN一致。</li>
-<li>动态层数（ACT mechanism ）：对于每个词都会有不同的循环次数；也即有些词需要更多的refine；而有些词不需要。和固定层数的transformer相比，会有更好的通用性。</li>
-</ul>
-<h3 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h3><h4 id="总体架构"><a href="#总体架构" class="headerlink" title="总体架构"></a>总体架构</h4><p><img src="/images/2018-10-29-15408125098915.jpg" width="90%" height="50%"></p>
-<p>过程：<br><img src="/images/2018-10-29-15408125469899.jpg" width="45%" height="50%"></p>
-<p><img src="/images/2018-10-29-15408125685038.jpg" width="70%" height="50%"></p>
-<p><img src="/images/2018-10-29-15408125974795.jpg" width="70%" height="50%"></p>
-<p><img src="/images/2018-10-29-15408126143943.jpg" width="60%" height="50%"></p>
-<p>和普通Transformer不同的地方在于：</p>
-<ul>
-<li>加了一层Transition层，Transition可以是depth-wise separable convolution（<a href="https://www.cnblogs.com/adong7639/p/7918527.html" target="_blank" rel="noopener">是什么？</a>）或者全连接层。</li>
-<li>每层都添加了position embedding；以及timestep embedding，用以指示层数。</li>
-</ul>
-<h4 id="ACT"><a href="#ACT" class="headerlink" title="ACT"></a>ACT</h4><p>由于一个句子中间，有些词比其他词更难学会，需要更多计算量，但堆叠太多层会大大增加计算量，为了节省计算量，我们可以引入ACT来动态分配计算量。</p>
-<p>ACT原来用于RNN，在Transformer中，当halting unit指示词t应当停止时，直接讲该词的状态复制到下一个time step，直到所有的词都停止。</p>
+          1️⃣[A Neural Probabilistic Language Model]第一篇使用神经网络获得词向量的paper。
+通过对language model建模，将词映射到低维表示，在训练过程中同时训练语言模型以及每个词的词向量。
 
-          
+将中心词的前n个拼接起来 $x=(C(w_{t-1},C(w_{t-2}),…,C(w_{t-n+1}))$将$x$送入神经网络中获得$y=b+Wx+Utanh(d+Hx)$，最后做一个softmax即可。
+
+2️⃣[Adaptive Computation Time for Recurrent Neural Networks]一种允许RNN动态堆叠层数的算
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/29/论文/每周论文3/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1402,11 +1500,18 @@
       
         
           
-            <h3 id="1️⃣望海潮"><a href="#1️⃣望海潮" class="headerlink" title="1️⃣望海潮"></a>1️⃣望海潮</h3><p>[宋] 柳永<br>东南形胜，三吴都会，钱塘自古繁华。烟柳画桥，风帘翠幕，参差十万人家。云树绕堤沙，怒涛卷霜雪，天堑无涯。市列珠玑，户盈罗绮，竞豪奢。<br>重湖叠巘清嘉，有三秋桂子，十里荷花。羌管弄晴，菱歌泛夜，嬉嬉钓叟莲娃。千骑拥高牙，乘醉听箫鼓，吟赏烟霞。异日图将好景，归去凤池夸。</p>
-<p>叠巘（yǎn）：层层叠叠的山峦。</p>
-<p><a href="http://m.xichuangzhu.com/work/57b318228ac247005f2223db" target="_blank" rel="noopener">http://m.xichuangzhu.com/work/57b318228ac247005f2223db</a></p>
+          1️⃣望海潮[宋] 柳永东南形胜，三吴都会，钱塘自古繁华。烟柳画桥，风帘翠幕，参差十万人家。云树绕堤沙，怒涛卷霜雪，天堑无涯。市列珠玑，户盈罗绮，竞豪奢。重湖叠巘清嘉，有三秋桂子，十里荷花。羌管弄晴，菱歌泛夜，嬉嬉钓叟莲娃。千骑拥高牙，乘醉听箫鼓，吟赏烟霞。异日图将好景，归去凤池夸。
+叠巘（yǎn）：层层叠叠的山峦。
+http://m.xichuangzhu.com/work/57b318228ac247005f2223db
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/21/诗词&句/每周诗词12/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1536,144 +1641,16 @@
       
         
           
-            <h3 id="1️⃣-batchify"><a href="#1️⃣-batchify" class="headerlink" title="1️⃣[batchify]"></a>1️⃣[batchify]</h3><p>快速将数据分成batch。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">batchify</span><span class="params">(data, bsz)</span>:</span></span><br><span class="line">    <span class="comment"># Work out how cleanly we can divide the dataset into bsz parts.</span></span><br><span class="line">    nbatch = data.size(<span class="number">0</span>) // bsz</span><br><span class="line">    <span class="comment"># Trim off any extra elements that wouldn't cleanly fit (remainders).</span></span><br><span class="line">    data = data.narrow(<span class="number">0</span>, <span class="number">0</span>, nbatch * bsz)</span><br><span class="line">    <span class="comment"># Evenly divide the data across the bsz batches.</span></span><br><span class="line">    data = data.view(bsz, <span class="number">-1</span>).t().contiguous()</span><br><span class="line">    <span class="keyword">return</span> data.to(device)</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2018/10/21/机器学习与深度学习算法知识/PRML第四章 分类的线性模型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="林泽辉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Weekly Review">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/21/机器学习与深度学习算法知识/PRML第四章 分类的线性模型/" itemprop="url">PRML第四章 分类的线性模型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T09:21:24+08:00">
-                2018-10-21
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-19T11:21:24+08:00">
-                2018-11-19
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="判别函数"><a href="#判别函数" class="headerlink" title="判别函数"></a>判别函数</h1><p><img src="/images/2018-10-21-Xnip2018-10-21_09-26-42.jpg" alt="0"></p>
-<hr>
-<p><img src="/images/2018-10-21-Xnip2018-10-21_09-27-57.jpg" alt="1"></p>
-<p>—-未完—-</p>
-
-          
+          1️⃣[batchify]快速将数据分成batch。
+12345678def batchify(data, bsz):    # Work out how cleanly we can divide the dataset into bsz parts.    nbatch = data.size(0) // bsz    # Trim off any extra elements that wouldn't cleanly fit (remainders).    data = data.narrow(0, 0, nbatch * bsz)    # Evenly divide the da
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/21/代码相关/代码记录8/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1761,7 +1738,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">138</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1774,7 +1751,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">157</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
