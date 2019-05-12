@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Classification,Paper,每周论文阅读,Language Modeling,LSTM,long-term dependency,GC-Net,Ordered Neuron,pretrain,GPT,GE-Net,PSANet,CCNet," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本周论文：  GCNet: Non-local Networks Meet Squeeze-Excitation Networks and Beyond Ordered Neurons- Integrating Tree Structures into Recurrent Neural Networks Cached Long Short-Term Memory Neural Networks f">
+<meta name="keywords" content="Classification,Paper,每周论文阅读,Language Modeling,LSTM,long-term dependency,GC-Net,Ordered Neuron,pretrain,GPT,GE-Net,PSANet,CCNet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周论文18">
+<meta property="og:url" content="http://www.linzehui.me/2019/05/12/论文/每周论文18/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="本周论文：  GCNet: Non-local Networks Meet Squeeze-Excitation Networks and Beyond Ordered Neurons- Integrating Tree Structures into Recurrent Neural Networks Cached Long Short-Term Memory Neural Networks f">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.linzehui.me/images/15576253999087.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576254102911.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576254433886.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576257652930.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576268851485.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576279206849.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576282560620.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576285238806.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576285809670.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576285948426.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576287381755.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576291070929.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576291449392.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576291939204.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576292257307.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576301327447.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576302667770.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576304353141.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576307417016.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576307988403.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576308514373.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15576311079687.jpg">
+<meta property="og:updated_time" content="2019-05-12T14:10:43.529Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每周论文18">
+<meta name="twitter:description" content="本周论文：  GCNet: Non-local Networks Meet Squeeze-Excitation Networks and Beyond Ordered Neurons- Integrating Tree Structures into Recurrent Neural Networks Cached Long Short-Term Memory Neural Networks f">
+<meta name="twitter:image" content="http://www.linzehui.me/images/15576253999087.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2019/05/12/论文/每周论文18/"/>
+
+
+
+
+
+  <title>每周论文18 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/05/12/论文/每周论文18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">每周论文18</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-12T09:39:30+08:00">
+                2019-05-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-05-12T22:10:43+08:00">
+                2019-05-12
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本周论文：</p>
+<ol>
+<li>GCNet: Non-local Networks Meet Squeeze-Excitation Networks and Beyond</li>
+<li>Ordered Neurons- Integrating Tree Structures into Recurrent Neural Networks</li>
+<li>Cached Long Short-Term Memory Neural Networks for Document-Level Sentiment Classification</li>
+<li>Unified Language Model Pre-training for Natural Language Understanding and Generation</li>
+<li>Language Models are Unsupervised Multitask Learners</li>
+<li>MASS: Masked Sequence to Sequence Pre-training for Language Generation</li>
+<li>Gather-Excite: Exploiting Feature Context in Convolutional Neural Networks</li>
+<li>PSANet: Point-wise Spatial Attention Network for Scene Parsing</li>
+<li>CCNet: Criss-Cross Attention for Semantic Segmentation</li>
+</ol>
+<h2 id="GCNet-Non-local-Networks-Meet-Squeeze-Excitation-Networks-and-Beyond"><a href="#GCNet-Non-local-Networks-Meet-Squeeze-Excitation-Networks-and-Beyond" class="headerlink" title="[GCNet: Non-local Networks Meet Squeeze-Excitation Networks and Beyond]"></a>[GCNet: Non-local Networks Meet Squeeze-Excitation Networks and Beyond]</h2><p>提出一种新的对长距离依赖建模的方法，并结合了之前其他研究者的工作，抽象得到全局上下文建模（global context modeling）的框架。</p>
+<p>目前长距离依赖建模有两种：一种是引入self-attention机制，获得query-dependent的全局上下文，如NL-Net；另一种则是query-independent的全局上下文，如SE-Net。</p>
+<h3 id="Simplified-NL-Net"><a href="#Simplified-NL-Net" class="headerlink" title="Simplified NL-Net"></a>Simplified NL-Net</h3><p>Motivation：通过对Non-local network的分析，发现网络实际上学到的是query无关的上下文，因此可以直接对NL-Net进行简化。</p>
+<p>首先是对NL-Net的观察，通过可视化，以及统计得到的数据，可以发现，NL-Net对于每个query来说，其学到的全局信息差异很小。</p>
+<p><img src="/images/15576253999087.jpg" width="80%" height="50%"></p>
+<p><img src="/images/15576254102911.jpg" width="60%" height="50%"></p>
+<p>同时，NL-Net由于这种query-dependent的长距离依赖建模，拥有较高的复杂度（平方级别）。因此首先我们可以对NL-Net进行简化。</p>
+<p><img src="/images/15576254433886.jpg" width="60%" height="50%"></p>
+<p>原来的NL-Net是：</p>
+<script type="math/tex; mode=display">\mathbf{z}_{i}=\mathbf{x}_{i}+W_{z} \sum_{j=1}^{N_{p}} \frac{f\left(\mathbf{x}_{i}, \mathbf{x}_{j}\right)}{\mathcal{C}(\mathbf{x})}\left(W_{v} \cdot \mathbf{x}_{j}\right)</script><p>每两个feature之间计算一个attention分数。</p>
+<p>将query-dependent去掉后，则有：</p>
+<script type="math/tex; mode=display">\mathbf{z}_{i}=\mathbf{x}_{i}+\sum_{j=1}^{N_{p}} \frac{\exp \left(W_{k} \mathbf{x}_{j}\right)}{\sum_{m=1}^{N_{p}} \exp \left(W_{k} \mathbf{x}_{m}\right)}\left(W_{v} \cdot \mathbf{x}_{j}\right)</script><p>还可以将$W_{v}$移到外面，更进一步地简化：</p>
+<script type="math/tex; mode=display">\mathbf{z}_{i}=\mathbf{x}_{i}+W_{v} \sum_{j=1}^{N_{p}} \frac{\exp \left(W_{k} \mathbf{x}_{j}\right)}{\sum_{m=1}^{N_{p}} \exp \left(W_{k} \mathbf{x}_{m}\right)} \mathbf{x}_{j}</script><h3 id="Global-Context-Modeling-Framework"><a href="#Global-Context-Modeling-Framework" class="headerlink" title="Global Context Modeling Framework"></a>Global Context Modeling Framework</h3><p>通过对比近期相关的工作，作者将全局上下文建模的方法抽象出来，分为三个步骤：<br>a)global attention pooling 将全局的信息收集起来，伴随着一个全连接和softmax<br>b)feature transform via a 1x1 convolution Wv  将所获得的feature进行线性转换。<br>c)feature aggregation 将global feature与每个position融合。</p>
+<p>形式化则有：</p>
+<script type="math/tex; mode=display">\mathbf{z}_{i}=F\left(\mathbf{x}_{i}, \delta\left(\sum_{j=1}^{N_{p}} \alpha_{j} \mathbf{x}_{j}\right)\right)</script><p>如果从这个角度去理解，那么SE-Net也是属于该框架的一种实例。</p>
+<p><img src="/images/15576257652930.jpg" width="87%" height="50%"></p>
+<p>作者在该框架的基础上提出了新的实例，也即GC-Net，同时有NL-Net的高效建模的优点和SE-Net的计算效率高的优点。</p>
+<script type="math/tex; mode=display">\mathbf{z}_{i}=\mathbf{x}_{i}+W_{v 2} \operatorname{ReLU}\left(\operatorname{LN}\left(W_{v 1} \sum_{j=1}^{N_{p}} \frac{e^{W_{k} \mathbf{x}_{j}}}{\sum_{m=1}^{N_{p}} e^{W_{k} \mathbf{x}_{m}}} \mathbf{x}_{j}\right)\right)</script><p>第一，基本采用NL-Net的形式，简化成query-independent的形式，并且使用的是加的形式而不是SE-Net的rescale的形式，将global feature与每个位置融合。<br>第二，采用SE-Net的bottleneck的形式去减少参数和计算量，并且在此基础上多了一步layer norm使得模型更易训练，实践证明，layer norm能够提升表现。</p>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><p>对比NL-Net：不同之处在于global attention pooling，用的是query-independent<br>对比SE-Net：不同之处在于fusion module（框架的第三步），使用的是addition而不是rescale；以及在bottleneck上做了一点改进，加了layer norm。</p>
+<p>思考：<br>文章有意思的点是立足于实验观察，这点值得学习，从实践中发现问题。同时，应学会用抽象的思想去总结前人的工作（比如NL-Net实际上也是对前面的工作的抽象总结，实际上个人认为并没有什么大的创新），从一个更高的角度去看问题能将问题看得更清晰。</p>
+<p>抽象出框架是有必要的吗？我看在这篇论文里面有些勉强，因为完全可以说inspired by SE-Net for the computation efficiency… 但非要抽象成框架，会不会只是要表现出对模型的理解够深？以及增加点内容？</p>
+<p>以及query-dependent是否真的没必要？似乎在其他论文中的结论反而是相反的。</p>
+<hr>
+<h2 id="Ordered-Neurons-Integrating-Tree-Structures-into-Recurrent-Neural-Networks"><a href="#Ordered-Neurons-Integrating-Tree-Structures-into-Recurrent-Neural-Networks" class="headerlink" title="[Ordered Neurons: Integrating Tree Structures into Recurrent Neural Networks]"></a>[Ordered Neurons: Integrating Tree Structures into Recurrent Neural Networks]</h2><p>ICLR19 best paper。</p>
+<p>在LSTM中引入了新的inductive bias，隐式对句子进行树的建模。</p>
+<p>Motivation：<br>语言都有一定的树的结构而不是序列结构。前人研究表明，在NLP中引入树的结构有助于增强泛化，帮助减少长程依赖问题，能够获得更好的抽象表示。<br>一些方法包括增加监督信号，也即语法树等，但该方法有限制，如标注数据不足，在一些领域语法规则容易被打破（如推特）；同时随着时间的推移，语法也在变化。<br>同时，一些研究也表明，有足够容量的LSTM在能够隐式地对句子进行树的建模。</p>
+<p>因此在本文引入新的inductive bias，<strong>完全数据驱动</strong>（相对于显式构建树），隐式地对句子进行树的建模。这种归纳偏置促进了每个神经元内存储的信息的生命周期的分化。high-ranking的神经元保存长程的信息，在一个较长时间步内保存，而low-ranking则保存短程信息，能够快速被遗忘。引入cumulative softmax，一种新的激活函数来生成master input gate和forget gate 保证当一个神经元被更新/遗忘，其后的神经元都会被更新/遗忘。</p>
+<h3 id="ORDERED-NEURONS"><a href="#ORDERED-NEURONS" class="headerlink" title="ORDERED NEURONS"></a>ORDERED NEURONS</h3><p>给定语言序列$S=\left(x_{1}, \dots, x_{T}\right)$以及对应的constituency tree，我们希望在计算时间步t的时候，隐状态$h_t$能包含该节点到根节点路径上所有节点的信息。直观上，我们希望该路径上的节点都能够被$h_t$的一部分神经元表示。由于$h_t$的维度是固定的，而路径上的节点则是动态的，因此一种最好的情况就是能够动态分配每个节点在hidden state的维度。</p>
+<p>在上述思路的基础上，作者引入了ordered neurons，强制让神经元表示不同时间尺度上的信息。正如前面提到的，high-ranking的神经元保存的时间长，代表的就是接近树根的节点，而low-ranking的神经元保存时间短，代表的就是小的成分（如phrase）。原则是：要更新/遗忘high-ranking的神经元，应该先把low-ranking的神经元先更新/遗忘掉。</p>
+<p>如图：</p>
+<p><img src="/images/15576268851485.jpg" width="80%" height="50%"></p>
+<h3 id="ON-LSTM-“Ordered-Neurons-LSTM”"><a href="#ON-LSTM-“Ordered-Neurons-LSTM”" class="headerlink" title="ON-LSTM (“Ordered Neurons LSTM”)"></a>ON-LSTM (“Ordered Neurons LSTM”)</h3><p>LSTM结构：</p>
+<p>$\begin{array}{ll}{f_{t}=\sigma\left(W_{f} x_{t}+U_{f} h_{t-1}+b_{f}\right)} \\ {i_{t}=\sigma\left(W_{i} x_{t}+U_{i} h_{t-1}+b_{i}\right)} \\ {o_{t}=\sigma\left(W_{o} x_{t}+U_{o} h_{t-1}+b_{o}\right)} \\ {\hat{c}_{t}=\tanh \left(W_{c} x_{t}+U_{c} h_{t-1}+b_{c}\right)} \\ {h_{t}=o_{t} \circ \tanh \left(c_{t}\right)}\end{array}$</p>
+<p>OH-LSTM与LSTM的不同在于修改了cell state的更新方式。</p>
+<p>首先定义新的激活函数：</p>
+<script type="math/tex; mode=display">\hat{g}=\operatorname{cumax}(\ldots)=\operatorname{cumsum}(\operatorname{softmax}(\ldots))</script><p>$\hat{g}$可以看做是二元gate的期望，而g将cell state分成两个segment $g=(0, \dots, 0,1, \dots, 1)$。</p>
+<p>因为离散的方法不好优化，以及太过严格。具体的解释和证明在论文里。</p>
+<p>引入两个新的gate，master forget gate和master input gate。forget gate的值单调递增；而input gate的值单调递减。</p>
+<p>$\begin{aligned} \tilde{f}_{t} &amp;=\operatorname{cumax}\left(W_{\tilde{f}} x_{t}+U_{\tilde{f}} h_{t-1}+b_{\tilde{f}}\right) \\ \tilde{i}_{t} &amp;=1-\operatorname{cumax}\left(W_{\tilde{i}} x_{t}+U_{i} h_{t-1}+b_{\tilde{i}}\right) \end{aligned}$</p>
+<p>新的更新规则：<br>$\begin{aligned} \omega_{t} &amp;=\tilde{f}_{t} \circ \tilde{i}_{t} \\ \hat{f}_{t} &amp;=f_{t} \circ \omega_{t}+\left(\tilde{f}_{t}-\omega_{t}\right)=\tilde{f}_{t} \circ\left(f_{t} \circ \tilde{i}_{t}+1-\tilde{i}_{t}\right) \\ \hat{i}_{t} &amp;=i_{t} \circ \omega_{t}+\left(\tilde{i}_{t}-\omega_{t}\right)=\tilde{i}_{t} \circ\left(i_{t} \circ \tilde{f}_{t}+1-\tilde{f}_{t}\right) \\ c_{t} &amp;=\hat{f}_{t} \circ c_{t-1}+\hat{i}_{t} \circ \hat{c}_{t} \end{aligned}$</p>
+<p>master forget gate 控制的是erasing行为；master input gate则是控制writing行为。具体的例子见论文。$\omega_{t}$则是$\tilde{f}_{t}$与$\tilde{i}_{t}$的重叠部分，表示的是 相应的神经元段编码包含一些先前单词和当前输入单词$x_t$的不完整成分。</p>
+<p>同时，master gates专注一些粗粒度的控制，因此没必要和hidden state一样的维度，分配小一些的维度$D_{m}=\frac{D}{C}$即可。因此每C-sized个chunk有同样的master gates。</p>
+<p>思考：<br>设计很精巧，通过将神经元分化，隐式建模。更新规则部分我其实还没仔细去看，但该思想确实很有意思。</p>
+<hr>
+<h2 id="Cached-Long-Short-Term-Memory-Neural-Networks-for-Document-Level-Sentiment-Classification"><a href="#Cached-Long-Short-Term-Memory-Neural-Networks-for-Document-Level-Sentiment-Classification" class="headerlink" title="[Cached Long Short-Term Memory Neural Networks for Document-Level Sentiment Classification]"></a>[Cached Long Short-Term Memory Neural Networks for Document-Level Sentiment Classification]</h2><p>配合上一篇ON-LSTM看，发现他们之间具有相似之处。</p>
+<p>本文在LSTM上引入cache机制，将memory切分为多个group并赋予不同的forget rate，使模型更好地保留全局的信息，对document级别的情感分类能够有更好的结果。</p>
+<p>LSTM：</p>
+<script type="math/tex; mode=display">\begin{aligned} \mathbf{i}^{(t)} &=\sigma\left(\mathbf{W}_{i} \mathbf{x}^{(t)}+\mathbf{U}_{i} \mathbf{h}^{(t-1)}\right) \\ \mathbf{f}^{(t)} &=\sigma\left(\mathbf{W}_{f} \mathbf{x}^{(t)}+\mathbf{U}_{f} \mathbf{h}^{(t-1)}\right) \\ \mathbf{o}^{(t)} &=\sigma\left(\mathbf{W}_{o} \mathbf{x}^{(t)}+\mathbf{U}_{o} \mathbf{h}^{(t-1)}\right) \\ \tilde{\mathbf{c}}^{(t)} &=\tanh \left(\mathbf{W}_{c} \mathbf{x}^{(t)}+\mathbf{U}_{c} \mathbf{h}^{(t-1)}\right) \\ \mathbf{c}^{(t)} &=\mathbf{f}^{(t)} \odot \mathbf{c}^{(t-1)}+\mathbf{i}^{(t)} \odot \tilde{\mathbf{c}}^{(t)} ) \\ \mathbf{h}^{(t)} &=\mathbf{o}^{(t)} \odot \tanh \left(\mathbf{c}^{(t)}\right) \end{aligned}</script><p>在本文中，实际上是使用了LSTM的变体，将input gate与forget gate合并为一个，也即：</p>
+<script type="math/tex; mode=display">\mathbf{c}^{(t)}=\mathbf{f}^{(t)} \odot \mathbf{c}^{(t-1)}+\left(\mathbf{1}-\mathbf{f}^{(t)}\right) \odot \tilde{\mathbf{c}}^{(t)}</script><h3 id="Cached-LSTM"><a href="#Cached-LSTM" class="headerlink" title="Cached LSTM"></a>Cached LSTM</h3><p>改进LSTM，将memory分为多个group，每个group代表不同的长程依赖，分配不同的forget rate。直观上，高的rate代表了短程依赖，低的rate代表长程依赖。</p>
+<p>将memory cell切成K块$\left\{G_{1}, \cdots, G_{K}\right\}$。因此有如下公式：</p>
+<script type="math/tex; mode=display">\begin{aligned} \mathbf{r}_{k}^{(t)} &=\psi_{k}\left(\sigma\left(\mathbf{W}_{r}^{k} \mathbf{x}^{(t)}+\sum_{j=1}^{K} \mathbf{U}_{f}^{j \rightarrow k} \mathbf{h}_{j}^{(t-1)}\right)\right) \\ \mathbf{o}_{k}^{(t)} &=\sigma\left(\mathbf{W}_{o}^{k} \mathbf{x}^{(t)}+\sum_{j=1}^{K} \mathbf{U}_{o}^{j \rightarrow k} \mathbf{h}_{j}^{(t-1)}\right) \\ \tilde{\mathbf{c}}_{k}^{(t)} &=\tanh \left(\mathbf{W}_{c}^{(t)} \mathbf{x}^{(t-1)}+\left(\mathbf{r}_{k}^{(t)}\right) \odot \tilde{\mathbf{c}}_{k}^{(t)}\right) \\ \mathbf{h}_{k}^{(t)} &=\mathbf{o}_{k}^{(t)} \odot \tanh \left(\mathbf{c}_{k}^{(t)}\right) \end{aligned}</script><p>$\psi_{k}(\mathbf{z})$是压缩函数：</p>
+<script type="math/tex; mode=display">\mathbf{r}_{k}=\psi_{k}(\mathbf{z})=\frac{1}{K} \cdot \mathbf{z}+\frac{k-1}{K}</script><p>将forget rate压缩在一定范围$\left(\frac{k-1}{K}, \frac{k}{K}\right)$。</p>
+<p>类似bi-LSTM，同样CLSTM可以有双向。在做分类时，只将代表长程依赖的那组取出来过softmax。</p>
+<p><img src="/images/15576279206849.jpg" width="55%" height="50%"></p>
+<p>思考：<br>与Ordered Neuron相比，这里显式地将固定维度切分成多个组，相比而言Ordered Neuron更加灵活，但二者还是有相当的相似程度的，虽然任务和motivation不同。</p>
+<hr>
+<h2 id="Unified-Language-Model-Pre-training-for-Natural-Language-Understanding-and-Generation"><a href="#Unified-Language-Model-Pre-training-for-Natural-Language-Understanding-and-Generation" class="headerlink" title="[Unified Language Model Pre-training for Natural Language Understanding and Generation]"></a>[Unified Language Model Pre-training for Natural Language Understanding and Generation]</h2><p>将pretrain扩展到生成领域，使用生成任务来对语言模型进行pretrain。</p>
+<p><img src="/images/15576282560620.jpg" width="80%" height="50%"></p>
+<p>同时使用三种语言模型来进行pretrain。一种是bidirectional的，和bert一样；一种是从左到右/从右到左单向的，和GPT一样；另一种是做生成的，也即encoder端相互都attend到，而decoder端只能看到encoder部分和decoder的左边。</p>
+<p>统一使用[MASK]的方法（bert）同时训练这三种语言模型，这样可以使用同一套训练流程同时训练三种模型。</p>
+<p>本文的主要贡献就是将生成加进来了吧，并且效果还可以。其他并没有很大的创新点。</p>
+<hr>
+<h2 id="Language-Models-are-Unsupervised-Multitask-Learners"><a href="#Language-Models-are-Unsupervised-Multitask-Learners" class="headerlink" title="[Language Models are Unsupervised Multitask Learners]"></a>[Language Models are Unsupervised Multitask Learners]</h2><p>大名鼎鼎的GPT2.0 通过增加更多层，增加更多数据，训练一个更好的语言模型，并且尝试在不fine-tune的情况下完成下游任务，并取得不错的效果。</p>
+<p>全文都在讨论怎么获得数据以及怎么训练。实际上帮助并不大，但个人认为本文最大的贡献就是尝试去做生成，并且在zero-shot的情景下去探索language model的上限。</p>
+<p>其他我没仔细看。</p>
+<hr>
+<h2 id="MASS-Masked-Sequence-to-Sequence-Pre-training-for-Language-Generation"><a href="#MASS-Masked-Sequence-to-Sequence-Pre-training-for-Language-Generation" class="headerlink" title="[MASS: Masked Sequence to Sequence Pre-training for Language Generation]"></a>[MASS: Masked Sequence to Sequence Pre-training for Language Generation]</h2><p>引入encoder-decoder结构来做pretrain，可以同时训练encoder和decoder，可以用于生成任务。 idea还是挺有意思的。</p>
+<p>Motivation:<br>采用encoder-decoder框架能进一步更好地用于生成任务上，而不像bert和GPT那样只有一个encoder或decoder，没法对attention预训练，对生成任务不友好。</p>
+<p>做法：在encoder端mask连续的词，然后使用transformer对其进行encode；然后再decoder端输入同样的句子，但是masked掉的正好和encoder相反，和翻译一样，使用attention机制去训练，但只预测encoder端被mask掉的词。</p>
+<p><img src="/images/15576285238806.jpg" width="80%" height="50%"></p>
+<p>作者认为这样做的好处：<br>对encoder端的mask能够强制让encoder端更好地学习未被mask掉的词的意义，这样才能预测mask掉的词；对decoder端的input进行mask能够强制模型更多依赖于source端，而不是前面的input。</p>
+<p>作者还将MASS与Bert/GPT做了对比，发现Bert/GPT是MASS的一个特例。MASS有一个超参k，控制mask掉的segment长度。当k=1时，则是BERT；当k=m，也即整个句子长度时则是GPT。</p>
+<p><img src="/images/15576285809670.jpg" width="50%" height="50%"></p>
+<p><img src="/images/15576285948426.jpg" width="100%" height="50%"></p>
+<p>当k=1时，我们可以理解为decoder端没有input信息，全部信息来自encoder，和Bert对比一下，虽然在结构上不一样，但做的事情是一样的，此时decoder的角色就是bert里面的分类器。<br>当k=m时，实际上就是将encoder端的所有信息都mask掉了，此时decoder要预测只能靠decoder端的input，这实际上就是一个标准的语言模型。</p>
+<p>在几个生成任务上的结果相当不错，我没仔细看。</p>
+<p>思考：将bert和GPT抽象出来，作为其框架的一种特殊形式，这又和NL-Net有一些相似。</p>
+<hr>
+<h2 id="Gather-Excite-Exploiting-Feature-Context-in-Convolutional-Neural-Networks"><a href="#Gather-Excite-Exploiting-Feature-Context-in-Convolutional-Neural-Networks" class="headerlink" title="[Gather-Excite: Exploiting Feature Context in Convolutional Neural Networks]"></a>[Gather-Excite: Exploiting Feature Context in Convolutional Neural Networks]</h2><p>另一种Gather-Distribute思想的实例。该模型同样是为了捕获长距离上下文，以提升表现。</p>
+<p>分为两步：gather，将较大空间内的信息聚集起来，excite，将信息重新分发给local features。</p>
+<p><img src="/images/15576287381755.jpg" width="80%" height="50%"></p>
+<p>Motivation：CNN的信息流动方式。每次抽取周围的信息聚合在一起，随着层数的增多逐渐抽象，其感受野也逐渐增大。本文提出的模型实际上就是在同一层内让每个点都感受到其周围更大空间的信息。</p>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p>模型定义：<br>输入：$x=\left\{x^{c} : c \in\{1, \ldots, C\}\right\}$<br>C代表C个feature maps，也即channel维。</p>
+<p>定义selection operator：<br>$\iota(u, e)=\left\{e u+\delta : \delta \in[-\lfloor(2 e-1) / 2\rfloor,\lfloor(2 e-1) / 2\rfloor]^{2}\right\}$</p>
+<p>u是输出的元素，e是extent ratio，代表的实际上就是一个窗口大小。</p>
+<p>因此gather operator可以定义为映射函数：<br>$\xi_{G} : \mathbb{R}^{H \times W \times C} \rightarrow \mathbb{R}^{H^{\prime} \times W^{\prime} \times C}\left(H^{\prime}=\left\lceil\frac{H}{e}\right\rceil, W^{\prime}=\left\lceil\frac{W}{e}\right\rceil\right)$<br>$\xi_{G}(x)_{u}^{c}=\xi_{G}\left(x \odot \mathbf{1}_{\iota_{(u, e)}}^{c}\right)$</p>
+<p>其实就是对该窗口内的元素进行了映射（如mean-pooling）。其中$u \in\left\{1, \ldots, H^{\prime}\right\} \times\left\{1, \ldots, W^{\prime}\right\}, c \in\{1, \ldots, C\}$</p>
+<p>从上式可以看出，gather操作实际上就是对于每个输出u，其感受野为单个channel的一个窗口。如果该窗口恰好覆盖了整个空间，则称该gather操作有global extent。</p>
+<p>而excite操作则是利用gather获得的上下文信息，更新每个feature。也即：</p>
+<script type="math/tex; mode=display">\begin{array}{l}{\xi_{E}(x, \hat{x})=x \odot f(\hat{x})} \\ {f : \mathbb{R}^{H^{\prime} \times W^{\prime} \times C} \rightarrow[0,1]^{\overline{H} \times W \times C}}\end{array}</script><p>那么G是如何获得的？可以有两种，一种是无参数，另一种是有参数。</p>
+<h4 id="无参数GE"><a href="#无参数GE" class="headerlink" title="无参数GE"></a>无参数GE</h4><p>实际上就是mean-pooling。<br>则整个GE-Net为：</p>
+<script type="math/tex; mode=display">y^{c}=x \odot \sigma\left(\text {interp}\left(\xi_{G}(x)^{c}\right)\right)</script><p>其中interp(·)代表了最邻近插值。实际上可以理解成，将一个较大窗口的信息都mean-pooling一下，然后该窗口的feature都用mean-pooling的值乘一下（因为最邻近的特点，该窗口的插值都是自身）。</p>
+<p>当设计不同的e时，也即窗口大小，可以看到窗口越大，其表现越好。</p>
+<p><img src="/images/15576291070929.jpg" width="40%" height="50%"></p>
+<h4 id="有参数GE"><a href="#有参数GE" class="headerlink" title="有参数GE"></a>有参数GE</h4><p>采用strided depth-wise convolution。</p>
+<p>同样越大的e越好：</p>
+<p><img src="/images/15576291449392.jpg" width="40%" height="50%"></p>
+<p>并且表现会比无参数的更好。</p>
+<p>实验表明，在整个模型的中间层或者后面层（有更多的channel）加GE会更好。</p>
+<h3 id="与SE-Net的关系"><a href="#与SE-Net的关系" class="headerlink" title="与SE-Net的关系"></a>与SE-Net的关系</h3><p>SE-Net可以看做是特殊的GE-Net。SE-Net的gather操作就是全局的mean-pooling；而在excite时多了一层全连接的网络（？论文说就是一层全连接，但似乎不是这样的）。</p>
+<p><img src="/images/15576291939204.jpg" width="70%" height="50%"></p>
+<p>论文中还将SE-Net和GE-Net结合起来，发现有更大的提升，证明二者不是排斥的。</p>
+<p>应用GE-Net的几个例子：</p>
+<p><img src="/images/15576292257307.jpg" width="80%" height="50%"></p>
+<p>我的思考：<br>与SE-Net的关系密切（实际上就是同一拨人做的）。但这里强调的是channel之间没有联系，仅仅是通过扩大感受野，增强global的信息；而SE-Net则是强调的channel之间的联系，并没有考虑channel内部的关系，相当于GE-Net具有全局感受野。如果GE-Net有全局感受野，那么他比SE-Net就差在channel之间的联系了。</p>
+<hr>
+<h2 id="PSANet-Point-wise-Spatial-Attention-Network-for-Scene-Parsing"><a href="#PSANet-Point-wise-Spatial-Attention-Network-for-Scene-Parsing" class="headerlink" title="[PSANet: Point-wise Spatial Attention Network for Scene Parsing]"></a>[PSANet: Point-wise Spatial Attention Network for Scene Parsing]</h2><p>提出另一种解决local constraint的方案，也即使得feature之间能够建立长距离依赖。feature map上的每个位置通过attention map与其他点进行连接，同时信息流动是双向的，每个点同时进行收集与分发的操作。</p>
+<p>通常而言，信息的aggregation可以形式化成：</p>
+<script type="math/tex; mode=display">\mathbf{z}_{i}=\frac{1}{N} \sum_{\forall j \in \Omega(i)} F\left(\mathbf{x}_{i}, \mathbf{x}_{j}, \Delta_{i j}\right) \mathbf{x}_{j}</script><p>$\mathbf{z}_{i}$是第i个位置的输出；$\mathbf{x}_{j}$是输入的feature map $X$。$\forall j \in \Omega(i)$ 是与i相关的所有位置的feature集合。$ F\left(\mathbf{x}_{i}, \mathbf{x}_{j}, \Delta_{i j}\right)$ 代表的是j到i的信息流动。$\Delta$ 代表的是相对位置信息。</p>
+<p>可以将上述式子简化为：</p>
+<script type="math/tex; mode=display">\mathbf{z}_{i}=\frac{1}{N} \sum_{\forall j \in \Omega(i)} F_{\Delta_{i j}}\left(\mathbf{x}_{i}, \mathbf{x}_{j}\right) \mathbf{x}_{j}</script><p>其中$\left\{F_{\Delta_{i j}}\right\}$是位置相关的函数映射。</p>
+<p>当一个feature map的位置很多时，$x_i$与$x_j$的pair将会很大。</p>
+<p>因此将上式函数映射简化为：</p>
+<script type="math/tex; mode=display">F_{\Delta_{i j}}\left(\mathbf{x}_{i}, \mathbf{x}_{j}\right) \approx F_{\Delta_{i j}}\left(\mathbf{x}_{i}\right)</script><p>也即$j$到$i$的信息流动只与$i$位置的feature以及$i$与$j$之间的相对位置有关。</p>
+<p>同理，还可以将函数映射简化成：</p>
+<script type="math/tex; mode=display">F_{\Delta_{i j}}\left(\mathbf{x}_{i}, \mathbf{x}_{j}\right) \approx F_{\Delta_{i j}}\left(\mathbf{x}_{j}\right)</script><p>也即信息流动只与$i$与$j$的相对位置以及$j$位置上的feature有关。</p>
+<p>将上述两个简化函数结合起来，可以获得双向信息传播路径。也即：</p>
+<script type="math/tex; mode=display">F_{\Delta_{i j}}\left(\mathbf{x}_{i}, \mathbf{x}_{j}\right) \approx F_{\Delta_{i j}}\left(\mathbf{x}_{i}\right)+F_{\Delta_{i j}}\left(\mathbf{x}_{j}\right)</script><p>此时我们可以得到：</p>
+<script type="math/tex; mode=display">\mathbf{z}_{i}=\frac{1}{N} \sum_{\forall j \in \Omega(i)} F_{\Delta_{i j}}\left(\mathbf{x}_{i}\right) \mathbf{x}_{j}+\frac{1}{N} \sum_{\forall j \in \Omega(i)} F_{\Delta_{i j}}\left(\mathbf{x}_{j}\right) \mathbf{x}_{j}</script><p>第一项$F_{\Delta_{i j}}\left(\mathbf{x}_{i}\right)$encode了在其他位置上的信息在多大程度上能够帮助位置i（通过位置i的feature以及相对位置）。</p>
+<p>第二项$F_{\Delta_{i j}}\left(\mathbf{x}_{j}\right)$所做的也即预测其他位置上的feature的重要性（通过相对位置，以及位置j的feature）。</p>
+<p>如下图：</p>
+<p><img src="/images/15576301327447.jpg" width="70%" height="50%"></p>
+<p>上述两个F实际上可以看做是在预测一个attention的值，去做aggregation。也即：</p>
+<script type="math/tex; mode=display">\mathbf{z}_{i}=\frac{1}{N} \sum_{\forall j} \mathbf{a}_{i, j}^{c} \mathbf{x}_{j}+\frac{1}{N} \sum_{\forall j} \mathbf{a}_{i, j}^{d} \mathbf{x}_{j}</script><p>问题在于如何获得a？<br>下图是较为清晰的一个框架图：</p>
+<p><img src="/images/15576302667770.jpg" width="70%" height="50%"></p>
+<p>可以看出是通过多个CNN来获得attention矩阵的。</p>
+<p>上下两条线很类似。第一步是先压缩channel以减少计算量（C2&lt;C1)。第二步扩展channel为$(2H-1)\times(2W-1)$，下面解释为什么。接下来在重新获得$H\times W$的channel维，该channel维的每一维所代表的就是一个feature（共有$H\times W$个feature）的attention值。最后乘起来再concat一下，获得最后的output。</p>
+<p>为什么是$(2H-1)\times(2W-1)$的channel维，因为希望将该feature剪裁一下变成$H\times W$，正好可以表示相对位置。</p>
+<p><img src="/images/15576304353141.jpg" width="80%" height="50%"></p>
+<p>对于一个$(2H-1)\times(2W-1)$的feature可以展开成二维的，其中位置i为中心，仅有$H\times W$个有用。具体而言,在第k行第l列的位置i，则有用的矩阵是从$H-k$行和$W-l$列开始的。这个做法倒挺有意思的。</p>
+<p>与NL-Net的关系：NL-Net没有考虑相对位置信息。</p>
+<p>思考：<br>该方法似乎确实相比NL-Net的计算量小，虽然看起来也很大。NL-Net的计算量是(HW)^2。而这里的数量级是HW。究其原因，是因为attention是预测出来的。</p>
+<p>从获得attention矩阵的方式可以看出，channel与channel之间有交互。</p>
+<p>attention矩阵是预测出来的（$1\times 1$的convolution），而不是一对pair计算出来的。似乎就没那么有道理。</p>
+<p>并且，上下两条支线的操作都是一样的，只是将其解释为双向信息流动；那还可以解释成像Transformer那样，多个head，将同一个表示映射到多个隐空间中增强表示。</p>
+<hr>
+<h2 id="CCNet-Criss-Cross-Attention-for-Semantic-Segmentation"><a href="#CCNet-Criss-Cross-Attention-for-Semantic-Segmentation" class="headerlink" title="[CCNet: Criss-Cross Attention for Semantic Segmentation]"></a>[CCNet: Criss-Cross Attention for Semantic Segmentation]</h2><p>对NL-Net的改进，通过引入十字交叉的attention和recurrent结构，减少了计算量，同时使得模型能够捕获长距离依赖，以及提升了模型表现。</p>
+<p>Motivation:<br>NL-Net会生成一个很大的attention map，其复杂度为${\mathcal{O}}((H \times W)\times(H \times W))$。</p>
+<p>主要做法，将该position-wise的attention分解成两步：第一步是每个点只和其同一行和同一列的进行attention，将attention的操作循环多次，达到每个点间接和其他点都做了attention。其复杂度则为 $\mathcal{O}((H \times W) \times(H+W-1))$</p>
+<p>两种方法的对比：</p>
+<p><img src="/images/15576307417016.jpg" width="50%" height="50%"></p>
+<p>注意到recurrent的结构中参数是共享的。</p>
+<p>具体的框架：</p>
+<p><img src="/images/15576307988403.jpg" width="80%" height="50%"></p>
+<p>先进行降维，做完criss-cross attention后的output与原先的x拼起来，再过CNN等进行融合。</p>
+<h3 id="Criss-Cross-Attention"><a href="#Criss-Cross-Attention" class="headerlink" title="Criss-Cross Attention"></a>Criss-Cross Attention</h3><p><img src="/images/15576308514373.jpg" width="50%" height="50%"></p>
+<p>过三个线性层得到QKV（和transformer类似）；接着Q与K做纵横交叉的attention，获得softmax，接着再和V对应的位置相乘。</p>
+<p>具体而言：<br>输入：$\mathbf{H} \in \mathbb{R}^{C \times W \times H}$<br>过线性层：$\{\mathbf{Q}, \mathbf{K}\} \in \mathbb{R}^{C^{\prime} \times W \times H}$<br>attention分数：$\mathbf{A} \in \mathbb{R}^{(H+W-1) \times W \times H}$<br>与u元素做attention的feature集合，也即同一行或同一列的feature：$\boldsymbol{\Omega}_{\mathbf{u}} \in \mathbb{R}^{(H+W-1) \times C^{\prime}} \cdot \mathbf{\Omega}_{\mathbf{i}, \mathbf{u}} \in \mathbb{R}^{C^{\prime}}$<br>做attention：$d_{i, u}=\mathbf{Q}_{\mathbf{u}} \mathbf{\Omega}_{\mathbf{i}, \mathbf{u}^{\top}}$<br>再做softmax，最终获得output：$\mathbf{H}_{\mathbf{u}}^{\prime}=\sum_{i \in\left|\mathbf{\Phi}_{\mathbf{u}}\right|} \mathbf{A}_{\mathbf{i}, \mathbf{u}} \mathbf{\Phi}_{\mathbf{i}, \mathbf{u}}+\mathbf{H}_{\mathbf{u}}$<br>$\boldsymbol{\Phi}_{\mathbf{i}, \mathbf{u}}$与$\boldsymbol{\Omega}_{\mathbf{u}}$是同一集合。</p>
+<h3 id="Recurrent-Criss-Cross-Attention"><a href="#Recurrent-Criss-Cross-Attention" class="headerlink" title="Recurrent Criss-Cross Attention"></a>Recurrent Criss-Cross Attention</h3><p>多做几次，每次都共享，就是recurrent了。<br>当循环次数是2时，每个点都能够attend到其他任何点了。</p>
+<p><img src="/images/15576311079687.jpg" width="66%" height="50%"></p>
+<p>思考：<br>通过纵横来间接attend到所有点，这个想法还蛮有趣的。并且减少了计算量。就是这种纵横的方法代码要怎么实现？有些好奇。<br>同时本文的图也很漂亮，每个图都恰到好处，可以通过图就大致理解本文在讲什么。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    林泽辉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.linzehui.me/2019/05/12/论文/每周论文18/" title="每周论文18">http://www.linzehui.me/2019/05/12/论文/每周论文18/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://www.linzehui.me" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Classification/" rel="tag"> <i class="fa fa-tag"></i> Classification</a>
+          
+            <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
+          
+            <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
+          
+            <a href="/tags/Language-Modeling/" rel="tag"> <i class="fa fa-tag"></i> Language Modeling</a>
+          
+            <a href="/tags/LSTM/" rel="tag"> <i class="fa fa-tag"></i> LSTM</a>
+          
+            <a href="/tags/long-term-dependency/" rel="tag"> <i class="fa fa-tag"></i> long-term dependency</a>
+          
+            <a href="/tags/GC-Net/" rel="tag"> <i class="fa fa-tag"></i> GC-Net</a>
+          
+            <a href="/tags/Ordered-Neuron/" rel="tag"> <i class="fa fa-tag"></i> Ordered Neuron</a>
+          
+            <a href="/tags/pretrain/" rel="tag"> <i class="fa fa-tag"></i> pretrain</a>
+          
+            <a href="/tags/GPT/" rel="tag"> <i class="fa fa-tag"></i> GPT</a>
+          
+            <a href="/tags/GE-Net/" rel="tag"> <i class="fa fa-tag"></i> GE-Net</a>
+          
+            <a href="/tags/PSANet/" rel="tag"> <i class="fa fa-tag"></i> PSANet</a>
+          
+            <a href="/tags/CCNet/" rel="tag"> <i class="fa fa-tag"></i> CCNet</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/07/杂七杂八/Mac上很好用的软件推荐/" rel="next" title="Mac上很好用的软件推荐">
+                <i class="fa fa-chevron-left"></i> Mac上很好用的软件推荐
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/12/诗词&句/每周诗词25/" rel="prev" title="每周诗词25">
+                每周诗词25 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA0OC8xNjU3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg"
+                alt="林泽辉" />
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">142</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">165</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GCNet-Non-local-Networks-Meet-Squeeze-Excitation-Networks-and-Beyond"><span class="nav-number">1.</span> <span class="nav-text">[GCNet: Non-local Networks Meet Squeeze-Excitation Networks and Beyond]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Simplified-NL-Net"><span class="nav-number">1.1.</span> <span class="nav-text">Simplified NL-Net</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Global-Context-Modeling-Framework"><span class="nav-number">1.2.</span> <span class="nav-text">Global Context Modeling Framework</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对比"><span class="nav-number">1.3.</span> <span class="nav-text">对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ordered-Neurons-Integrating-Tree-Structures-into-Recurrent-Neural-Networks"><span class="nav-number">2.</span> <span class="nav-text">[Ordered Neurons: Integrating Tree Structures into Recurrent Neural Networks]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ORDERED-NEURONS"><span class="nav-number">2.1.</span> <span class="nav-text">ORDERED NEURONS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ON-LSTM-“Ordered-Neurons-LSTM”"><span class="nav-number">2.2.</span> <span class="nav-text">ON-LSTM (“Ordered Neurons LSTM”)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cached-Long-Short-Term-Memory-Neural-Networks-for-Document-Level-Sentiment-Classification"><span class="nav-number">3.</span> <span class="nav-text">[Cached Long Short-Term Memory Neural Networks for Document-Level Sentiment Classification]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cached-LSTM"><span class="nav-number">3.1.</span> <span class="nav-text">Cached LSTM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unified-Language-Model-Pre-training-for-Natural-Language-Understanding-and-Generation"><span class="nav-number">4.</span> <span class="nav-text">[Unified Language Model Pre-training for Natural Language Understanding and Generation]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Language-Models-are-Unsupervised-Multitask-Learners"><span class="nav-number">5.</span> <span class="nav-text">[Language Models are Unsupervised Multitask Learners]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MASS-Masked-Sequence-to-Sequence-Pre-training-for-Language-Generation"><span class="nav-number">6.</span> <span class="nav-text">[MASS: Masked Sequence to Sequence Pre-training for Language Generation]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gather-Excite-Exploiting-Feature-Context-in-Convolutional-Neural-Networks"><span class="nav-number">7.</span> <span class="nav-text">[Gather-Excite: Exploiting Feature Context in Convolutional Neural Networks]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-number">7.1.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#无参数GE"><span class="nav-number">7.1.1.</span> <span class="nav-text">无参数GE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有参数GE"><span class="nav-number">7.1.2.</span> <span class="nav-text">有参数GE</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与SE-Net的关系"><span class="nav-number">7.2.</span> <span class="nav-text">与SE-Net的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PSANet-Point-wise-Spatial-Attention-Network-for-Scene-Parsing"><span class="nav-number">8.</span> <span class="nav-text">[PSANet: Point-wise Spatial Attention Network for Scene Parsing]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CCNet-Criss-Cross-Attention-for-Semantic-Segmentation"><span class="nav-number">9.</span> <span class="nav-text">[CCNet: Criss-Cross Attention for Semantic Segmentation]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Criss-Cross-Attention"><span class="nav-number">9.1.</span> <span class="nav-text">Criss-Cross Attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recurrent-Criss-Cross-Attention"><span class="nav-number">9.2.</span> <span class="nav-text">Recurrent Criss-Cross Attention</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

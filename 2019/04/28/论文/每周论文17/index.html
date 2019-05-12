@@ -82,7 +82,7 @@
 <meta name="description" content="本周论文：  PHRASE-BASED ATTENTIONS Regularizing and Optimizing LSTM Language Models  1️⃣[PHRASE-BASED ATTENTIONS]这篇投了ICLR但没中。提出对Transformer的attention机制进行改进，以词组为单位进行attention，引入词组的对齐来提升翻译表现。提出的想法也是比较简单直观的。">
 <meta name="keywords" content="Paper,attention,每周论文阅读">
 <meta property="og:type" content="article">
-<meta property="og:title" content="每周论文16">
+<meta property="og:title" content="每周论文17">
 <meta property="og:url" content="http://www.linzehui.me/2019/04/28/论文/每周论文17/index.html">
 <meta property="og:site_name" content="Weekly Review">
 <meta property="og:description" content="本周论文：  PHRASE-BASED ATTENTIONS Regularizing and Optimizing LSTM Language Models  1️⃣[PHRASE-BASED ATTENTIONS]这篇投了ICLR但没中。提出对Transformer的attention机制进行改进，以词组为单位进行attention，引入词组的对齐来提升翻译表现。提出的想法也是比较简单直观的。">
@@ -91,9 +91,9 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15564587795887.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15564588967513.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15564599688438.jpg">
-<meta property="og:updated_time" content="2019-04-28T14:08:05.120Z">
+<meta property="og:updated_time" content="2019-05-12T02:01:33.136Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="每周论文16">
+<meta name="twitter:title" content="每周论文17">
 <meta name="twitter:description" content="本周论文：  PHRASE-BASED ATTENTIONS Regularizing and Optimizing LSTM Language Models  1️⃣[PHRASE-BASED ATTENTIONS]这篇投了ICLR但没中。提出对Transformer的attention机制进行改进，以词组为单位进行attention，引入词组的对齐来提升翻译表现。提出的想法也是比较简单直观的。">
 <meta name="twitter:image" content="http://www.linzehui.me/images/15564587340044.jpg">
 
@@ -131,7 +131,7 @@
 
 
 
-  <title>每周论文16 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>每周论文17 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -309,7 +309,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">每周论文16</h1>
+          <h1 class="post-title" itemprop="name headline">每周论文17</h1>
         
 
         <div class="post-meta">
@@ -337,8 +337,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-28T22:08:05+08:00">
-                2019-04-28
+              <time title="更新于" itemprop="dateModified" datetime="2019-05-12T10:01:33+08:00">
+                2019-05-12
               </time>
             
           </span>
@@ -396,6 +396,7 @@
 <p>$\boldsymbol{A}_{1, \text {QueryK }}=\mathcal{S}\left(\left[\frac{\left(\boldsymbol{Q} \boldsymbol{W}_{q_{1}, 1}\right)\left(\boldsymbol{K} \boldsymbol{W}_{\boldsymbol{k}, 1}\right)^{T}}{\sqrt{d}} ; \frac{\operatorname{Conv}_{2}\left(\boldsymbol{K} \boldsymbol{W}_{\boldsymbol{k}, 2}, \boldsymbol{Q} \boldsymbol{W}_{q_{1}, 2}\right)}{\sqrt{d * n_{2}}}\right]\right)\left[\left(\boldsymbol{V} \boldsymbol{W}_{v, 1}\right) ; \operatorname{Conv}_{2}\left(\boldsymbol{V}, \boldsymbol{W}_{v, 2}\right)\right]$</p>
 <p>$\boldsymbol{A}_{2, \text { QueryK }}=\mathcal{S}\left(\left[\frac{\operatorname{Conv}_{2}\left(\boldsymbol{Q}, \boldsymbol{W}_{q_{2}, 1}\right)\left(\boldsymbol{K} \boldsymbol{W}_{\boldsymbol{k}, 1}\right)^{T}}{\sqrt{d}} ; \frac{\operatorname{Conv}_{2}\left(\boldsymbol{K} \boldsymbol{W}_{\boldsymbol{k}, 2}, \operatorname{Conv}_{2}\left(\boldsymbol{Q}, \boldsymbol{W}_{q_{2}, 2}\right)\right)}{\sqrt{d * n_{2}}}\right]\right)\left[\left(\boldsymbol{V} \boldsymbol{W}_{v, 1}\right) ; \operatorname{Conv}_{2}\left(\boldsymbol{V}, \boldsymbol{W}_{v, 2}\right)\right]$</p>
 <p>思考：<br>这样似乎参数量会暴增，其实应该对比的就不是transformer base了，应该是参数量大致相等的transformer，这也在review里面提到过。同时我觉得这个方法是否有些太复杂，不够简单明了。以及结果似乎不大令人信服，因为他的baseline没有复现出transformer base的结果（due to the limited GPU)。</p>
+<hr>
 <h2 id="2️⃣-Regularizing-and-Optimizing-LSTM-Language-Models"><a href="#2️⃣-Regularizing-and-Optimizing-LSTM-Language-Models" class="headerlink" title="2️⃣[Regularizing and Optimizing LSTM Language Models]"></a>2️⃣[Regularizing and Optimizing LSTM Language Models]</h2><p>提出一些优化提升LSTM-based语言模型的方法。此即大名鼎鼎的AWD-LSTM。</p>
 <h3 id="Weight-dropped-LSTM"><a href="#Weight-dropped-LSTM" class="headerlink" title="Weight-dropped LSTM"></a>Weight-dropped LSTM</h3><p>LSTM公式回顾：</p>
 <script type="math/tex; mode=display">\begin{aligned} i_{t} &=\sigma\left(W^{i} x_{t}+U^{i} h_{t-1}\right) \\ f_{t} &=\sigma\left(W^{f} x_{t}+U^{f} h_{t-1}\right) \\ o_{t} &=\sigma\left(W^{o} x_{t}+U^{o} h_{t-1}\right) \\ \tilde{c}_{t} &=\tanh \left(W^{c} x_{t}+U^{c} h_{t-1}\right) \\ c_{t} &=i_{t} \odot \tilde{c}_{t}+f_{t} \odot+\tilde{c}_{t-1} \\ h_{t} &=o_{t} \odot \tanh \left(c_{t}\right) \end{aligned}</script><p>对hidden-to-hidden的weight应用DropConnect。也即对其中的$\left[U^{i}, U^{f}, U^{o}, U^{c}\right]$进行dropconnect。注意到mask矩阵在同一个batch的每个时间步t都是一样的。</p>
@@ -433,7 +434,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.linzehui.me/2019/04/28/论文/每周论文17/" title="每周论文16">http://www.linzehui.me/2019/04/28/论文/每周论文17/</a>
+    <a href="http://www.linzehui.me/2019/04/28/论文/每周论文17/" title="每周论文17">http://www.linzehui.me/2019/04/28/论文/每周论文17/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -563,7 +564,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-count">142</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -576,7 +577,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">157</span>
+                  <span class="site-state-item-count">165</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
