@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15576307988403.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15576308514373.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15576311079687.jpg">
-<meta property="og:updated_time" content="2019-05-12T14:10:43.529Z">
+<meta property="og:updated_time" content="2019-05-28T03:02:38.865Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文18">
 <meta name="twitter:description" content="本周论文：  GCNet: Non-local Networks Meet Squeeze-Excitation Networks and Beyond Ordered Neurons- Integrating Tree Structures into Recurrent Neural Networks Cached Long Short-Term Memory Neural Networks f">
@@ -355,8 +355,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-05-12T22:10:43+08:00">
-                2019-05-12
+              <time title="更新于" itemprop="dateModified" datetime="2019-05-28T11:02:38+08:00">
+                2019-05-28
               </time>
             
           </span>
@@ -535,7 +535,7 @@
 <p>思考：<br>该方法似乎确实相比NL-Net的计算量小，虽然看起来也很大。NL-Net的计算量是(HW)^2。而这里的数量级是HW。究其原因，是因为attention是预测出来的。</p>
 <p>从获得attention矩阵的方式可以看出，channel与channel之间有交互。</p>
 <p>attention矩阵是预测出来的（$1\times 1$的convolution），而不是一对pair计算出来的。似乎就没那么有道理。</p>
-<p>并且，上下两条支线的操作都是一样的，只是将其解释为双向信息流动；那还可以解释成像Transformer那样，多个head，将同一个表示映射到多个隐空间中增强表示。</p>
+<p><del>并且，上下两条支线的操作都是一样的，只是将其解释为双向信息流动；那还可以解释成像Transformer那样，多个head，将同一个表示映射到多个隐空间中增强表示。</del>之前理解错了、</p>
 <hr>
 <h2 id="CCNet-Criss-Cross-Attention-for-Semantic-Segmentation"><a href="#CCNet-Criss-Cross-Attention-for-Semantic-Segmentation" class="headerlink" title="[CCNet: Criss-Cross Attention for Semantic Segmentation]"></a>[CCNet: Criss-Cross Attention for Semantic Segmentation]</h2><p>对NL-Net的改进，通过引入十字交叉的attention和recurrent结构，减少了计算量，同时使得模型能够捕获长距离依赖，以及提升了模型表现。</p>
 <p>Motivation:<br>NL-Net会生成一个很大的attention map，其复杂度为${\mathcal{O}}((H \times W)\times(H \times W))$。</p>
@@ -722,7 +722,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">142</span>
+                  <span class="site-state-item-count">149</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -735,7 +735,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">165</span>
+                  <span class="site-state-item-count">169</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
