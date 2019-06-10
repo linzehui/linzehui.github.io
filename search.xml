@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[每周碎片知识22]]></title>
+    <url>%2F2019%2F06%2F10%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8622%2F</url>
+    <content type="text"><![CDATA[[Sequence Labeling]介绍sequence labeling博客：https://www.cnblogs.com/jiangxinyang/p/9368482.html 关于几个任务的定义： 命名实体识别（Named Entity Recognition, NER)：从文本中识别出命名实体，实体一般包括人名(PER)、地名(LOC)、机构名(ORG)、时间、日期、货币、百分比等。组块分析 (Chunking)：标出句子中的短语块，例如名词短语（NP），动词短语（VP）等词性标注 (Part-of-speech Tagging, POS)：确定文本中每个词的词性。词性包括动词（Verb）、名词（Noun）、代词（pronoun）等。 [Active learning]定义： 样本信息就是说在训练数据集当中每个样本带给模型训练的信息是不同的，即每个样本为模型训练的贡献有大有小，它们之间是有差异的。因此，为了尽可能地减小训练集及标注成本，在机器学习领域中，提出主动学习（active learning）方法，优化分类模型。主动学习(active learning)，指的是这样一种学习方法：有的时候，有类标的数据比较稀少而没有类标的数据是相当丰富的，但是对数据进行人工标注又非常昂贵，这时候，学习算法可以主动地提出一些标注请求，将一些经过筛选的数据提交给专家进行标注。]]></content>
+      <tags>
+        <tag>碎片知识</tag>
+        <tag>Sequence Labeling</tag>
+        <tag>Active learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[每周论文20]]></title>
+    <url>%2F2019%2F06%2F09%2F%E8%AE%BA%E6%96%87%2F%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8720%2F</url>
+    <content type="text"><![CDATA[本周论文： Neural Machine Translation in Linear Time Curriculum Learning Bilingual Word Embeddings for Phrase-Based Machine Translation LEARNING TO EXECUTE Self-Paced Learning for Latent Variable Models [Neural Machine Translation in Linear Time]使用新的结构将翻译控制在线性复杂度。感觉思路还蛮清晰，挺新颖的。 主要有三个点： 第一，结构上采用bytenet，也即采用了空洞卷积的网络，使得计算代价减小。 第二，直接将decoder堆在encoder上，每次decoder只取对应对应位置上的encoder，这和一般的基于encoder-decoder的方法不同。 第三，采用dynamic unfolding以解决encoder与decoder长度不同的问题。人工预先定义好decoder的上界： |\hat{\mathbf{t}}|=a|\mathbf{s}|+b也即encoder将会生成这么多的representation。 而实际上target是可以超出这个上界的，直到生成EOS为止，如果超出上界则在该步不利用encoder的representation，上界只是用以指导encoder应该生成多少representation。 该模型非常轻量级；但我还是没有怎么搞懂encoder如何生成出比source长度还长的信息的。 [Curriculum Learning]课程学习的开山之作。对curriculum learning进行了形式化的总结，并且通过几个实验对curriculum learning的性质进行了探索。该文章属于对其他人有启发的性质。 curriculum learning的思想：在训练过程中，先使用简单的样例进行训练，然后逐渐将难的样例加入到训练样例中。本质就是从易到难的过程，符合人的学习过程，并且能够获得更好的效果。 形式化：感觉不重要，其实就是对data distribution进行了重排。 性质： ①获得更好的结果 ②能够加速拟合，‘Cleaner Examples May Yield Better Generalization Faster ’，因为简单的example能够避免confuse the learner ③curriculum learning展现出regularizer的性质，也即在同样training error的情况下能够获得更低的generalization error。 对于learner来说，在训练的每个阶段都有对他来说太简单和太难的知识，太简单的学不到什么，太难的学不会。因此在每个阶段选择对learner而言interesting的例子，不太难也不太简单的，是最好的。 同时curriculum learning与boosting algorithm不同，因为boosting algorithm 是强调难的example而curriculum learning只是每个阶段按照难度对example赋予不同的权值。 curriculum learning可以看做是transfer learning的一种特殊形式。transfer learning是利用原始任务来引导learner在最终任务获得更好的结果；而curriculum learning就是利用训练上的技巧来引导learner获得更好的最终结果。 其实curriculum learning的难点就在于如何定义easy example，因为不同任务可能有不同的定义。 [Bilingual Word Embeddings for Phrase-Based Machine Translation]讲关于训练双语word embedding的。我只关注curriculum learning部分，但其实讲的不多。 [LEARNING TO EXECUTE]这篇论文是使用LSTM来评估短的计算机程序。我比较关注curriculum learning的部分，其中的一些解释或许能够有一些启发。 本文在使用传统curriculum learning训练的过程中，发现效果并不好，因此转而使用一种混合训练方法。也即部分随机采样，部分采用传统curriculum learning的逐渐提升难度。 为什么传统的不够好？作者的解释是，如果从简单的开始学，LSTM会将所有的memory用以记忆简单的样本，在训练过程中就构建好了这套pattern，而在逐渐增加难度时，要求对memory的pattern重组，而这点不容易做到。而如果采样部分随机样本，则能够同时学习到部分难的example，从而防止overfit到某个简单的pattern上。 [Self-Paced Learning for Latent Variable Models]传统机器学习的优化算法。证明了curriculum learning也能在传统机器学习算法中取得效果。 \left(\mathbf{w}_{t+1}, \mathbf{v}_{t+1}\right)=\underset{\mathbf{w} \in \mathbb{R}^{d}, \mathbf{v} \in\{0,1\}^{n}}{\operatorname{argmin}}\left(r(\mathbf{w})+\sum_{i=1}^{n} v_{i} f\left(\mathbf{x}_{i}, \mathbf{y}_{i} ; \mathbf{w}\right)-\frac{1}{K} \sum_{i=1}^{n} v_{i}\right)只有那些能够很好fit的sample作数，也即使用二元变量v来控制。]]></content>
+      <tags>
+        <tag>Paper</tag>
+        <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
+        <tag>NMT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[每周诗词27]]></title>
+    <url>%2F2019%2F06%2F09%2F%E8%AF%97%E8%AF%8D%26%E5%8F%A5%2F%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D27%2F</url>
+    <content type="text"><![CDATA[夜上受降城闻笛[唐] 李益回乐峰前沙似雪，受降城外月如霜。不知何处吹芦管，一夜征人尽望乡。 http://lib.xcz.im/work/57b91effa633bd00665e4f15 饮中八仙歌[唐] 杜甫…李白斗酒诗百篇，长安市上酒家眠，天子呼来不上船，自称臣是酒中仙。… http://lib.xcz.im/work/57b8e3a7c4c97100558e7dc6 新唐书·李白传》载：李白应诏至长安，唐玄宗在金銮殿召见他，并赐食，亲为调羹，诏为供奉翰林。有一次，玄宗在沉香亭召他写配乐的诗，而他却在长安酒肆喝得大醉。范传正《李白新墓碑》载：玄宗泛舟白莲地，召李白来写文章，而这时李白已在翰林院喝醉了，玄宗就命高力士扶他上船来见。]]></content>
+      <tags>
+        <tag>诗词</tag>
+        <tag>诗词分享</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[每周碎片知识21]]></title>
     <url>%2F2019%2F06%2F02%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8621%2F</url>
     <content type="text"><![CDATA[[Dying Relu]Dying Relu现象指的是，在使用Relu作为激活函数时，因为学习率较大或某些原因，导致某一层的bias学到较大的负值，使得该层在过完Relu激活函数后的输出始终是0。 当进入到这一状态时，基本上没办法再回到正常状态。因为在回传时，值为0导致梯度也为0。 https://datascience.stackexchange.com/questions/5706/what-is-the-dying-relu-problem-in-neural-networks]]></content>
@@ -218,6 +248,7 @@
       <tags>
         <tag>Paper</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
         <tag>intrinsic dimension</tag>
         <tag>attention mechanism</tag>
@@ -397,8 +428,8 @@
     <content type="text"><![CDATA[1️⃣[Pytorch]在有RNN的代码中，如果出现 Cuda Error : RuntimeError: CUDNN_STATUS_EXECUTION_FAILED 那么可能的出错原因是没有将init state放入cuda中。 Reference: https://discuss.pytorch.org/t/cuda-error-runtimeerror-cudnn-status-execution-failed/17625 2️⃣[Pytorch]clone() → TensorReturns a copy of the self tensor. The copy has the same size and data type as self.Unlike copy_(), this function is recorded in the computation graph. Gradients propagating to the cloned tensor will propagate to the original tensor. 如果需要另一个相同的tensor做其他计算，则使用clone()而不是copy_() 123forward_vec=sent_vec# backward_vec=sent_vec wrongbackward_vec=sent_vec.clone() 当然也不能直接赋值，因为赋的只是指针，改变backward_vec也会改变原来的值。 3️⃣[Python]Python中==和is的区别：is表示是否是同一个object；而==表示是否是同一个值。 123456str='GRU'str == 'GRU' # Truestr is 'GRU' # Truestr=str.upper()str == 'GRU' # Falsestr is 'GRU' # True 4️⃣[RNN]在RNN的初始化中，使用正交初始化会比其他方法好一些（待对比实验测验）。Reference: https://smerity.com/articles/2016/orthogonal_init.html 5️⃣[Pytorch]在提供预训练embedding作为初始化时，正确做法： 1234if pretrained_matrix is not None: pretrained_matrix=torch.from_numpy(pretrained_matrix).type(torch.FloatTensor) self.embedding.weight= nn.Parameter(pretrained_matrix, requires_grad=True) 必须要有.type(torch.FloatTensor)，否则会出错：CuDNN error: CUDNN_STATUS_EXECUTION_FAILED 6️⃣[Pytorch]Pytorch中，将初始hidden state作为可学习参数实践：https://discuss.pytorch.org/t/solved-train-initial-hidden-state-of-rnns/2589/9https://discuss.pytorch.org/t/learn-initial-hidden-state-h0-for-rnn/10013/7]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>Pytorch</tag>
         <tag>Python</tag>
+        <tag>Pytorch</tag>
         <tag>RNN</tag>
       </tags>
   </entry>
@@ -478,8 +509,8 @@
       <tags>
         <tag>碎片知识</tag>
         <tag>遇到的问题</tag>
-        <tag>Pytorch</tag>
         <tag>Python</tag>
+        <tag>Pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -542,8 +573,8 @@
         <tag>attention</tag>
         <tag>capsule</tag>
         <tag>每周论文阅读</tag>
-        <tag>self-attention</tag>
         <tag>NMT</tag>
+        <tag>self-attention</tag>
         <tag>locality modeling</tag>
         <tag>dropblock</tag>
         <tag>contextualized embedding</tag>
@@ -659,11 +690,11 @@
         <tag>Paper</tag>
         <tag>Transformer</tag>
         <tag>每周论文阅读</tag>
+        <tag>NMT</tag>
         <tag>Language Modeling</tag>
         <tag>self-attention</tag>
         <tag>relative position</tag>
         <tag>positional encoding</tag>
-        <tag>NMT</tag>
         <tag>eager translation model</tag>
       </tags>
   </entry>
@@ -1232,8 +1263,8 @@
     <content type="text"><![CDATA[1️⃣[概率校准(Probability Calibration)]一种对机器学习算法输出结果的校准，通过几个实验可以发现，概率校准能够一定程度提高表现。几个参考资料：直观理解: http://www.bubuko.com/infodetail-2133893.htmlSVC的概率校准在sklearn上的应用: https://blog.csdn.net/ericcchen/article/details/79337716✨完全手册: Calibration of Machine Learning Models 2️⃣[Paper]Hierarchical Attention Networks for Document Classification 亮点在使用层次的RNN结构，以及使用了attention方法。 参考了其他人的代码自己也试着实现了一个，GitHub地址：https://github.com/linzehui/pytorch-hierarchical-attention-network 3️⃣[XGBoost]kaggle神器XGBoost，一篇原理的详细介绍：http://www.cnblogs.com/willnote/p/6801496.html虽然还是有好些地方没搞懂，有必要从头学起。 4️⃣[Python]关于函数列表中单星号(*)和双星号(**)单星号： 代表接收任意多个非关键字参数，将其转换成元组： 1234def one(a,*b): """a是一个普通传入参数，*b是一个非关键字星号参数""" print(b)one(1,2,3,4,5,6) #输出：(2, 3, 4, 5, 6) 对一个普通变量使用单星号，表示对该变量拆分成单个元素 1234def fun(a,b): print(a,b)l=[1,2]fun(*l) #输出 1,2 双星号： 获得字典值 1234def two(a=1,**b): """a是一个普通关键字参数，**b是一个关键字双星号参数""" print(b)two(a=1,b=2,c=3,d=4,e=5,f=6) #输出&#123;'b': 2, 'c': 3, 'e': 5, 'f': 6, 'd': 4&#125; 5️⃣[Pytorch]在Pytorch中，只要一个tensor的requires_grad是true，那么两个tensor的加减乘除后的结果的requires_grad也会是true。]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>Pytorch</tag>
         <tag>Python</tag>
+        <tag>Pytorch</tag>
         <tag>Paper</tag>
         <tag>概率校准</tag>
         <tag>Probability Calibration</tag>
@@ -1305,9 +1336,9 @@
     <content type="text"><![CDATA[在服务器经常要用到Vim，因此记录常用的快捷键并熟悉之。 退出:q 退出:wq 写入并退出:q! 退出并忽略所有更改:e! 放弃修改并打开原来的文件 插入i 在当前位置前插入a 在当前位置后插入 撤销:u 撤销:U 撤销整行操作Ctrl+r 重做 删除:md 删除第m行nd 删除当前行开始的n行(一共n+1行)dd 删除当前行D 删除当前字符至行尾:m,nd 删除从m到n行的内容，如: :100,10000d:m,$d 删除m行及以后所有的行:10d 移动:n 跳转到行号 如， :100gg 跳到行首G(shift+g)移动到文件尾 搜索/text 搜索text，n搜索下一个，N搜索上一个?text 反向查找:set ignorecase 忽略大小写查找:set noignorecase 不忽略大小写查找*或# 对光标处的单词搜索 复制粘贴v 从当前位置开始，光标经过的地方被选中，再按一下v结束 环境设置:set nu 显示行号:set nonu 隐藏行号:set hlsearch 设置搜索结果高亮 Referencehttps://www.cnblogs.com/wangrx/p/5907013.htmlhttps://www.cnblogs.com/yangjig/p/6014198.html]]></content>
       <tags>
         <tag>技巧</tag>
-        <tag>Vim</tag>
         <tag>杂七杂八</tag>
         <tag>快捷键</tag>
+        <tag>Vim</tag>
       </tags>
   </entry>
   <entry>
@@ -1317,8 +1348,8 @@
       <tags>
         <tag>技巧</tag>
         <tag>杂七杂八</tag>
-        <tag>快捷键</tag>
         <tag>Pycharm</tag>
+        <tag>快捷键</tag>
       </tags>
   </entry>
   <entry>
@@ -1435,8 +1466,8 @@
     <content type="text"><![CDATA[1️⃣[Python]assert用法： assert expression等价于if not expression: raise AssertionError 2️⃣[Pytorch]Pytorch view：创建一个新的tensor，但他们的data是共享的。 3️⃣[Pytorch]在Pytorch中，embedding的index是不能requires_grad=True的，否则会出错。https://github.com/pytorch/pytorch/issues/7021 之前看过一份代码，设置volatile=false但没有出错，是因为在Pytorch0.4之后volatile已经被弃用了，因此volatile=false不起作用，而默认requires_grad=false 4️⃣[Pytorch]在Pytorch中，nn.Linear(self.hidden_dim,self.vocab_size)的维度是vocab_sizehidden_dim，之前居然没有注意到这个问题。因为nn.Linear的*第一个参数表示输入维度，第二个参数表示输出维度 5️⃣[Pytorch]Pytorch中，使用view一般来说必须要用 .contiguous()。也即： 1batch.view(batch_size, -1).t().contiguous() contiguous()的官方解释：https://discuss.pytorch.org/t/runtimeerror-input-is-not-contiguous/930 It means that your tensor is not a single block of memory, but a block with holes. view can be only used with contiguous tensors, so if you need to use it here, just call .contiguous() before. 也就是说，contiguous会将数据存到一个连续的空间内（block）。 6️⃣[Pytorch]调用Cross_entropy时，Pytorch会帮助你加log和softmax。 7️⃣[Paper]Sliced_RNN 将RNN分块以提高并行性，甚至每层的RNN都可以不一样，达到抽取不同程度的抽象语义信息的目的。实验证明，在不同任务上都有一定的提升，但速度的提升很大。 8️⃣[Tf-idf]计算词语对于句子的重要程度 https://zh.wikipedia.org/wiki/Tf-idf tf是词频，idf是逆向文件频率。也即如果词在该句出现的次数越多，在所有文本的出现次数越少，则词对于句子的重要程度越高。 9️⃣[Numpy]在Numpy中，一个列表虽然是横着表示的，但它是列向量。我之前居然没有注意到这个问题。]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>Pytorch</tag>
         <tag>Python</tag>
+        <tag>Pytorch</tag>
         <tag>Paper</tag>
         <tag>Tf-idf</tag>
         <tag>Numpy</tag>
