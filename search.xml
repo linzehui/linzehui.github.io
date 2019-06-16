@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[DRL Lecture 2:Proximal Policy Optimization (PPO)]]></title>
+    <url>%2F2019%2F06%2F16%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%2FDRL%20Lecture%202%3A%20Proximal%20Policy%20Optimization%20(PPO)%2F</url>
+    <content type="text"><![CDATA[Policy Gradient的问题：每次sample的data只能使用一次，较为耗费时间。因此引入off-policy，每次sample的数据可以多次使用。 特点：on-policy中学习的agent与和环境交互的agent是一致的；而off-policy则是有两个agent，其中一个agent负责与环境交互来获得episode，另一个agent则通过这些episode更新参数。 在这里利用importance-sampling来达到这一目的。 importance-sampling给定概率$p$要计算$f(x)$的期望：可以采用sample的方式来达到该目的。也即： E_{x \sim p}[f(x)] \approx \frac{1}{N} \sum_{i=1}^{N} f\left(x^{i}\right)而若$p$分布无法获得，可以利用另一个可获得的分布$q$来近似。也即： E_{x \sim p}[f(x)]=\int f(x) p(x) d x=\int f(x) \frac{p(x)}{q(x)} q(x) d x=E_{x \sim q}[f(x) \frac{p(x)}{q(x)}]然后再由$q$来做sampling。 注意这里$p$与$q$的分布不应该差距太大，否则其variance则会相差很大，造成近似结果差距较大。 off-policy将importance sampling用于off-policy。 原来： \nabla \overline{R}_{\theta}=E_{\tau \sim p_{\theta}(\tau)}\left[R(\tau) \nabla \log p_{\theta}(\tau)\right]变成： \nabla \overline{R}_{\theta}=E_{\tau \sim p_{\theta^{\prime}}(\tau)}\left[\frac{p_{\theta}(\tau)}{p_{\theta^{\prime}}(\tau)} R(\tau) \log p_{\theta}(\tau)\right]其中$p_{\theta^{\prime}}$是另一个agent的分布，也即data是从该agent的分布sample得到的，因此可以使用该data来多次训练θ。 因此梯度公式则为： \begin{array}{l}{=E_{\left(s_{t}, a_{t}\right) \sim \pi_{\theta}}\left[A^{\theta}\left(s_{t}, a_{t}\right) \nabla \log p_{\theta}\left(a_{t}^{n} | s_{t}^{n}\right)\right]} \\ {=E_{\left(s_{t}, a_{t}\right) \sim \pi_{\theta^{\prime}}}\left[\frac{P_{\theta}\left(s_{t}, a_{t}\right)}{P_{\theta^{\prime}}\left(s_{t}, a_{t}\right)} A^{\theta}\left(s_{t}, a_{t}\right) \nabla \log p_{\theta}\left(a_{t}^{n} | s_{t}^{n}\right)\right]} \\ {=E_{\left(s_{t}, a_{t}\right) \sim \pi_{\theta^{\prime}}}\left[\frac{p_{\theta}\left(a_{t} | s_{t}\right)}{p_{\theta^{\prime}}\left(a_{t} | s_{t}\right)} \frac{p_{\theta}\left(s_{t}\right)}{p_{\theta^{\prime}}\left(s_{t}\right)} A^{\theta}\left(s_{t}, a_{t}\right) \nabla \log p_{\theta}\left(a_{t}^{n} | s_{t}^{n}\right)\right]}\end{array}其中，我们将$A^{\theta}\left(s_{t}, a_{t}\right)$改成$A^{\theta^{\prime}}\left(s_{t}, a_{t}\right)$，因为数据是从$\theta^{\prime}$ 来的；同时我们假设$\frac{p_{\theta}\left(s_{t}\right)}{p_{\theta^{\prime}}\left(s_{t}\right)}=1$，一方面是不方便计算，作此假设可以方便计算；另一方面该假设也有一定合理性，因为某个state出现的几率应该和agent的关系较小。 通过梯度公式我们可以还原出原式： J^{\theta^{\prime}}(\theta)=E_{\left(s_{t}, a_{t}\right) \sim \pi_{\theta^{\prime}}}\left[\frac{p_{\theta}\left(a_{t} | s_{t}\right)}{p_{\theta^{\prime}}\left(a_{t} | s_{t}\right)} A^{\theta^{\prime}}\left(s_{t}, a_{t}\right)\right]另一个问题是，在什么时候停止使用同一组data更新参数？也即同一组data能够更新参数几次？ 一个原则是：我们希望两个agent的分布差异小一些，因为分布差异一旦大了，variance则会变大，因此这里添加一个constraint。 J_{P P O}^{\theta^{\prime}}(\theta)=J^{\theta^{\prime}}(\theta)-\beta K L\left(\theta, \theta^{\prime}\right)注意这里的KL散度是对action分布的KL散度而不是参数的。 所以最终的算法为： 其中$\theta_{k}$是上次更新完的agent的参数。也即与环境交互的agent的参数总是上个iteration 另一个agent更新后的参数。 还有几个细节，$\beta$可以是adaptive的；以及PPO2对PPO中constraint的改进，不过都是细枝末节。]]></content>
+      <tags>
+        <tag>机器学习🤖</tag>
+        <tag>强化学习</tag>
+        <tag>RL</tag>
+        <tag>Reinforcement Learning</tag>
+        <tag>Deep Reinforcement Learning</tag>
+        <tag>李宏毅强化学习课程</tag>
+        <tag>PPO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DRL Lecture 1:Policy Gradient (Review)]]></title>
+    <url>%2F2019%2F06%2F16%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%2FDRL%20Lecture%201%3A%20Policy%20Gradient%20(Review)%2F</url>
+    <content type="text"><![CDATA[李宏毅深度强化学习课程笔记。 本lecture主要是复习强化学习的policy gradient。基本的介绍都在之前的强化学习笔记里面。 基本大致框架为： 每次sample几个episode，然后更新模型： 值得提的几个新的点：①我们要对reward加baseline，因为防止reward一直为正，鼓励其他出现几率小但reward高的episode被sample到。因此加一个baseline： \nabla \overline{R}_{\theta} \approx \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_{n}}\left(R\left(\tau^{n}\right) -b \right) \nabla \log p_{\theta}\left(a_{t}^{n} | s_{t}^{n}\right)其中$b$可以设为$b \approx E[R(\tau)]$ ②对每个action应该分配不同的weight，鼓励reward高的action出现：一种方法，是将全局的R换成累积的R： \nabla \overline{R}_{\theta} \approx \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_{n}}\left(\sum_{t^{\prime}=t}^{T_{n}} r_{t^{\prime}}^{n} -b \right) \nabla \log p_{\theta}\left(a_{t}^{n} | s_{t}^{n}\right)也即当前action到episode结束累加的reward。 更进一步，添加衰减因子，其中$\gamma&lt;1$： \nabla \overline{R}_{\theta} \approx \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_{n}}\left(\sum_{t^{\prime}=t}^{T_{n}} \gamma^{t^{\prime}-t} r_{t^{\prime}}^{n} -b \right) \nabla \log p_{\theta}\left(a_{t}^{n} | s_{t}^{n}\right)当然，为了简便，将reward $R(\tau^{n})$ 统一写成 $A^θ (s_t,a_t )$，代表的是在当前state下采用action的reward。]]></content>
+      <tags>
+        <tag>机器学习🤖</tag>
+        <tag>强化学习</tag>
+        <tag>RL</tag>
+        <tag>Reinforcement Learning</tag>
+        <tag>Deep Reinforcement Learning</tag>
+        <tag>李宏毅强化学习课程</tag>
+        <tag>Policy Gradient</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[每周论文21]]></title>
+    <url>%2F2019%2F06%2F16%2F%E8%AE%BA%E6%96%87%2F%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8721%2F</url>
+    <content type="text"><![CDATA[本周论文： Named Entity Recognition with Bidirectional LSTM-CNNs [Named Entity Recognition with Bidirectional LSTM-CNNs]关于NER的经典论文。 总的结构很简单，其实就是利用word embedding + CNN-char features + additional word features作为总的features，过一个双向LSTM获得上下文相关的向量表示，最终获得分类结果。 其中CNN的feature是character级别的： 同时还加了一些人工的feature：比如大写的feature；比如外部词典等。 最终]]></content>
+      <tags>
+        <tag>CNN</tag>
+        <tag>Paper</tag>
+        <tag>每周论文阅读</tag>
+        <tag>NER</tag>
+        <tag>LSTM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[每周诗词28]]></title>
+    <url>%2F2019%2F06%2F16%2F%E8%AF%97%E8%AF%8D%26%E5%8F%A5%2F%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D28%2F</url>
+    <content type="text"><![CDATA[蝶恋花[宋] 欧阳修庭院深深深几许？杨柳堆烟，帘幕无重数。玉勒雕鞍游冶处，楼高不见章台路。雨横风狂三月暮，门掩黄昏，无计留春住。泪眼问花花不语，乱红飞过秋千去。]]></content>
+      <tags>
+        <tag>诗词</tag>
+        <tag>诗词分享</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[每周碎片知识22]]></title>
     <url>%2F2019%2F06%2F10%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8622%2F</url>
     <content type="text"><![CDATA[[Sequence Labeling]介绍sequence labeling博客：https://www.cnblogs.com/jiangxinyang/p/9368482.html 关于几个任务的定义： 命名实体识别（Named Entity Recognition, NER)：从文本中识别出命名实体，实体一般包括人名(PER)、地名(LOC)、机构名(ORG)、时间、日期、货币、百分比等。组块分析 (Chunking)：标出句子中的短语块，例如名词短语（NP），动词短语（VP）等词性标注 (Part-of-speech Tagging, POS)：确定文本中每个词的词性。词性包括动词（Verb）、名词（Noun）、代词（pronoun）等。 [Active learning]定义： 样本信息就是说在训练数据集当中每个样本带给模型训练的信息是不同的，即每个样本为模型训练的贡献有大有小，它们之间是有差异的。因此，为了尽可能地减小训练集及标注成本，在机器学习领域中，提出主动学习（active learning）方法，优化分类模型。主动学习(active learning)，指的是这样一种学习方法：有的时候，有类标的数据比较稀少而没有类标的数据是相当丰富的，但是对数据进行人工标注又非常昂贵，这时候，学习算法可以主动地提出一些标注请求，将一些经过筛选的数据提交给专家进行标注。]]></content>
@@ -120,8 +169,8 @@
         <tag>Classification</tag>
         <tag>Paper</tag>
         <tag>每周论文阅读</tag>
-        <tag>Language Modeling</tag>
         <tag>LSTM</tag>
+        <tag>Language Modeling</tag>
         <tag>long-term dependency</tag>
         <tag>GC-Net</tag>
         <tag>Ordered Neuron</tag>
@@ -428,8 +477,8 @@
     <content type="text"><![CDATA[1️⃣[Pytorch]在有RNN的代码中，如果出现 Cuda Error : RuntimeError: CUDNN_STATUS_EXECUTION_FAILED 那么可能的出错原因是没有将init state放入cuda中。 Reference: https://discuss.pytorch.org/t/cuda-error-runtimeerror-cudnn-status-execution-failed/17625 2️⃣[Pytorch]clone() → TensorReturns a copy of the self tensor. The copy has the same size and data type as self.Unlike copy_(), this function is recorded in the computation graph. Gradients propagating to the cloned tensor will propagate to the original tensor. 如果需要另一个相同的tensor做其他计算，则使用clone()而不是copy_() 123forward_vec=sent_vec# backward_vec=sent_vec wrongbackward_vec=sent_vec.clone() 当然也不能直接赋值，因为赋的只是指针，改变backward_vec也会改变原来的值。 3️⃣[Python]Python中==和is的区别：is表示是否是同一个object；而==表示是否是同一个值。 123456str='GRU'str == 'GRU' # Truestr is 'GRU' # Truestr=str.upper()str == 'GRU' # Falsestr is 'GRU' # True 4️⃣[RNN]在RNN的初始化中，使用正交初始化会比其他方法好一些（待对比实验测验）。Reference: https://smerity.com/articles/2016/orthogonal_init.html 5️⃣[Pytorch]在提供预训练embedding作为初始化时，正确做法： 1234if pretrained_matrix is not None: pretrained_matrix=torch.from_numpy(pretrained_matrix).type(torch.FloatTensor) self.embedding.weight= nn.Parameter(pretrained_matrix, requires_grad=True) 必须要有.type(torch.FloatTensor)，否则会出错：CuDNN error: CUDNN_STATUS_EXECUTION_FAILED 6️⃣[Pytorch]Pytorch中，将初始hidden state作为可学习参数实践：https://discuss.pytorch.org/t/solved-train-initial-hidden-state-of-rnns/2589/9https://discuss.pytorch.org/t/learn-initial-hidden-state-h0-for-rnn/10013/7]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>Python</tag>
         <tag>Pytorch</tag>
+        <tag>Python</tag>
         <tag>RNN</tag>
       </tags>
   </entry>
@@ -498,8 +547,8 @@
       <tags>
         <tag>Paper</tag>
         <tag>每周论文阅读</tag>
-        <tag>Encode</tag>
         <tag>LSTM</tag>
+        <tag>Encode</tag>
       </tags>
   </entry>
   <entry>
@@ -509,8 +558,8 @@
       <tags>
         <tag>碎片知识</tag>
         <tag>遇到的问题</tag>
-        <tag>Python</tag>
         <tag>Pytorch</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -603,8 +652,8 @@
     <content type="text"><![CDATA[1️⃣[Transformer]对Transformer新理解： 可以将Transformer理解成一张全连接图，其中每个节点与其他节点的关系通过attention权重表现。图关系是序列关系或者树关系的一般化。 为什么要有multi-head？不仅仅是论文的解释，或许还可以理解成，对一个向量的不同部分（如第1维到20维，第21维到40维等）施以不同的attention权重，如果不使用multi-head，那么对于一个query，就只会有一个权重，而不同的维度有不同的重要性。 2️⃣[attention&amp;capsule]attention是收信息，query从value按权重获取信息，其中所有value的权重和是1。capsule是发信息，对于$l-1$层的一个capsule来说，在传入到$l$层的k个capsule的信息，其权重和为1。]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>Transformer</tag>
         <tag>attention</tag>
+        <tag>Transformer</tag>
         <tag>capsule</tag>
       </tags>
   </entry>
@@ -722,8 +771,8 @@
     <content type="text"><![CDATA[历时三个月的“莱斯杯”全国第一届“军事智能·机器阅读”挑战赛终于落下帷幕，前几日（10.26-10.28）有幸在南京青旅宾馆参与决赛，体验多多，收获满满，心中亦有一些感想。 一个是南京总带给我一种回家的感觉，对南京的事物总有亲切感。第一次来南京是一年半前，也是来参加比赛。周五晚上的夜游秦淮，让我感受到许久未曾感受到的烟火气息。 第二个是此次主办方提供的食宿令人惊喜。一开始听到青旅宾馆，我已经做好了艰苦奋战的准备了，然而酒店是星级酒店的，吃方面直接到楼下的自助。可以看出主办方此次确实用心在举办这次比赛。 第三点是关于比赛的，关于比赛的整个历程我还是颇有感触。我们是以第9名的成绩挺进决赛，其实在后期比赛中，我们都有所懈怠了，几乎没有花时间在这上面，10月初发布决赛的数据集，而我们在10月20日才得知这一事情，此时离决赛只剩一周时间。因此我们确实准备不足。当然我们也没有预料到我们的决赛成绩会这么靠前，否则我们肯定会更加充分去准备。这确实是我们的失误。 我们在比赛过程中，一直尝试在使用ELMo，这正是我负责的部分。一开始使用官方TensorFlow的代码，费了九牛二虎之力我才跑通代码，但因为队长使用的是pytorch，而二者在cuda版本上不兼容，因此在初赛我们没有使用ELMo。而在最后几天，我尝试使用哈工大的pytorch训练代码，但因为inference速度实在太慢，我们最终还是弃用了这个方案。而在决赛现场，我们发现也确实是因为速度和资源的原因，大家都没有使用ELMo，除了一组。该组正是凭借了ELMo弯道超车从第7升到了第一，拿走了20万大奖。这也是我们非常遗憾的一个地方，我们在遇到困难时没有尝试解决，而是直接弃用，最终没有取得更好的成绩。 此次我们的成绩排名第4(三等奖)，是有一定的进步的，但有一点遗憾的是，我们仅差0.18百分点，就能超过第三名拿到5万的奖金了。后面我们分析了一下，还是因为我们对比赛懈怠的态度，其他组都对数据进行了分析并有针对性的改进，而我们并没有做这一步。 Anyway，第一次组队参加比赛就有收获，增长了见识，从交流中也获得了许多。这个比赛之后，就得好好看paper了。 __(:з」∠)_]]></content>
       <tags>
         <tag>有感</tag>
-        <tag>莱斯杯</tag>
         <tag>比赛</tag>
+        <tag>莱斯杯</tag>
       </tags>
   </entry>
   <entry>
@@ -744,8 +793,8 @@
         <tag>Paper</tag>
         <tag>Transformer</tag>
         <tag>每周论文阅读</tag>
-        <tag>ACT</tag>
         <tag>Language Modeling</tag>
+        <tag>ACT</tag>
       </tags>
   </entry>
   <entry>
@@ -808,8 +857,8 @@
     <content type="text"><![CDATA[记号： $a$是action，$s$即外部状态state，$\pi_{\theta}(s)$也即从$s$映射到$a$的函数；$r$是reward，每采取一个动作，会有一个reward，则总的reward为 R_\theta = \sum_{t=1}^{T} r_t我们使用神经网络来拟合$\pi$，一个eposide $\tau$是一个流程下来的的所有state、action和reward的集合。 \tau = \{s_1,a_1,r_1,s_2,a_2,r_2,...,s_T,a_T,r_T \}如果我们使用相同的actor运行n次，则每个$\tau$会有一定的概率被采样到，采样概率记为$P(\tau|\theta)$，则我们可以通过采样的方式来对期望reward进行估计： \overline{R}_\theta = \sum_\tau R(\tau) P(\tau|\theta) ≈ \frac{1}{N} \sum_{n=1}^{N} R(\tau^n)那么我们接下来的目标就是最大化期望reward，其中期望reward是： \overline{R}_\theta = \sum_\tau R(\tau) P(\tau|\theta)我们同样使用梯度上升：其中与$θ$相关的是$P$，则可以写成： \nabla \overline{R}_\theta = \sum_\tau R(\tau) \nabla P(\tau|\theta)= \sum_\tau R(\tau) P(\tau|\theta) \frac{\nabla P(\tau|\theta)}{P(\tau|\theta)}由于$\dfrac {d\log \left( f\left( x\right) \right) }{dx}=\dfrac {1}{f\left( x\right) }\dfrac {df(x)}{dx}$，则前式可写成： \nabla \overline{R}_\theta = \sum_\tau R(\tau) P(\tau|\theta) \nabla log P(\tau | \theta) ≈ \frac{1}{N} \sum_{n=1}^{N} R(\tau^n) log P(\tau ^n| \theta)如何求梯度？由于： P(\tau | \theta)=p(s_1)p(a_1|s_1,\theta)p(r_1,s_2|s_1,a_1)p(a_2|s_2,\theta)p(r_2,s_3|s_2,a_2)... \\=p(s_1)\prod_{t=1}^{T}p(a_t|s_t,\theta)p(r_t , s_{t+1}| s_t,a_t)实际上，其中与梯度相关的只有中间项$p(a_t|s_t,\theta)$，该项也即$π$函数，从state到action的映射。取log并求导，有： \nabla log P(\tau | \theta)= \sum_{t=1}^{T} \nabla log p(a_t|s_t,\theta)代回，因此最终$\overline{R}_\theta$的梯度为： \nabla \overline{R}_\theta = \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_n} R(\tau^n) \nabla log p(a_{t}^n | s_t^n,\theta)注意到该式子告诉我们，应考虑整体的reward而不应该只考虑每一步的reward；并且取log的原因可以理解成是对action取归一化，因为： \frac{\nabla p(a_t^n | s_t^n,\theta)}{p(a_t^n | s_t^n,\theta)}也就是说对于那些出现次数较多的action，要衡量他们对reward的真正影响，应当对他们归一化。 为了让那些出现可能性较低的action不会因为没被sample到而在更新后被降低他们的概率，可以添加一个baseline，只有超过$b$的reward才会增加他们出现的概率。 \nabla \overline{R}_\theta = \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_n} (R(\tau^n)-b) \nabla log p(a_{t}^n | s_t^n,\theta)]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>李宏毅机器学习课程</tag>
         <tag>Deep Reinforcement Learning</tag>
+        <tag>李宏毅机器学习课程</tag>
       </tags>
   </entry>
   <entry>
@@ -1060,8 +1109,8 @@
     <content type="text"><![CDATA[前几日（周日）去了达观杯答辩现场听了前10名做了报告，有了一些感想，但一直没有抽出时间写一下自己的感想（懒）。 自己大概花了十来天做了一下比赛，实际上也就是一个文本分类的比赛，因为没有比赛经验的缘故，走了很多弯路。不过也学到了一些东西。 现记录前十名的一些idea/trick： 数据增强 因为给的句子长度很长，因此在做截断的时候后面的就没法训练到了，可以将文本倒序作为新的数据训练模型。可以充分利用到数据 将数据打乱、随机删除，实际上就是对一个句子的词进行sample再组合 打乱词序以增加数据量 使用pseudo labeling，但有的队伍使用这个做出效果了，但有的没有 特征工程 假设开头中间结尾的信息对分类有帮助，因此截取该部分信息做训练 改进baseline的tfidf的特征工程方法，使用基于熵的词权重计算 降维，留下最重要的特征。先用卡方分布降到20万，再用SVD降到8000 将word2vec和GloVe拼接起来作为deep learning模型的输入 将文章分段，每段取前20后20拼起来 模型融合 所有队伍都无一例外使用了模型融合，stacking或者简单的投票 DL+ML —&gt; lgbm model —&gt; voting 深度模型+传统模型，在深度模型最后一层加入传统模型的信息/feature 后向选择剔除冗余模型 DL&amp;其他 HAN，选择10个attention vector 对易错类增加权重，通过改变损失函数来增加权重 CNN, [1,2,3,4,5,6]*600 提出新的模型（第一名） 其实除了一些trick，我还是有些失望的，因为都是用模型融合堆出来的，这也让我对比赛失去了一些兴趣。虽然能理解现在的比赛都是这样的，但感觉实在太暴力了。当然，其中还是有一些亮点的，有一支队伍立意很高，从理解业务的角度出发而不是堆模型，也取得了很好的效果；还有一个使用了最新论文中的特征工程改进方法，令我耳目一新；以及第一名在比赛过程中提出来三个新的模型。 Anyway，我目前还是太菜了，还是安心搞科研吧。_(:з」∠)]]></content>
       <tags>
         <tag>有感</tag>
-        <tag>比赛</tag>
         <tag>达观杯</tag>
+        <tag>比赛</tag>
       </tags>
   </entry>
   <entry>
@@ -1263,8 +1312,8 @@
     <content type="text"><![CDATA[1️⃣[概率校准(Probability Calibration)]一种对机器学习算法输出结果的校准，通过几个实验可以发现，概率校准能够一定程度提高表现。几个参考资料：直观理解: http://www.bubuko.com/infodetail-2133893.htmlSVC的概率校准在sklearn上的应用: https://blog.csdn.net/ericcchen/article/details/79337716✨完全手册: Calibration of Machine Learning Models 2️⃣[Paper]Hierarchical Attention Networks for Document Classification 亮点在使用层次的RNN结构，以及使用了attention方法。 参考了其他人的代码自己也试着实现了一个，GitHub地址：https://github.com/linzehui/pytorch-hierarchical-attention-network 3️⃣[XGBoost]kaggle神器XGBoost，一篇原理的详细介绍：http://www.cnblogs.com/willnote/p/6801496.html虽然还是有好些地方没搞懂，有必要从头学起。 4️⃣[Python]关于函数列表中单星号(*)和双星号(**)单星号： 代表接收任意多个非关键字参数，将其转换成元组： 1234def one(a,*b): """a是一个普通传入参数，*b是一个非关键字星号参数""" print(b)one(1,2,3,4,5,6) #输出：(2, 3, 4, 5, 6) 对一个普通变量使用单星号，表示对该变量拆分成单个元素 1234def fun(a,b): print(a,b)l=[1,2]fun(*l) #输出 1,2 双星号： 获得字典值 1234def two(a=1,**b): """a是一个普通关键字参数，**b是一个关键字双星号参数""" print(b)two(a=1,b=2,c=3,d=4,e=5,f=6) #输出&#123;'b': 2, 'c': 3, 'e': 5, 'f': 6, 'd': 4&#125; 5️⃣[Pytorch]在Pytorch中，只要一个tensor的requires_grad是true，那么两个tensor的加减乘除后的结果的requires_grad也会是true。]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>Python</tag>
         <tag>Pytorch</tag>
+        <tag>Python</tag>
         <tag>Paper</tag>
         <tag>概率校准</tag>
         <tag>Probability Calibration</tag>
@@ -1347,8 +1396,8 @@
     <content type="text"><![CDATA[记录Pycharm的一些技巧，让Pycharm更顺手 快捷键0️⃣Double Shift 万能搜索可以搜索文件名、类名、方法名、目录名（在关键字前面加/ ），并不能用来搜索任意关键字 1️⃣ Command+F 在页面搜索 2️⃣ Ctrl+Shift+F Find in Path 在路径下搜索 3️⃣✨Command+E 快速查找文件显示最近打开的文件 4️⃣ Shift+Enter 任意位置换行无论光标在何处都可以直接另起一行 5️⃣ Option+Enter 自动导入模块；万能提示键自动导入如何设置见小技巧#0️⃣ 6️⃣ Ctrl+F10 运行我已经添加了Ctrl+R作为另一对运行快捷键 7️⃣ Command+Shift+ +/- 展开/收缩代码 8️⃣ Option+F 在Dash中搜索 9️⃣ Ctrl+J 不跳转查看代码 小技巧0️⃣ Pycharm自动导入模块https://blog.csdn.net/lantian_123/article/details/78094148 1️⃣ ✨远程部署工程 强烈推荐两步走：配置服务器映射+配置服务器解释器 2️⃣跳转后如何回退开启toolbar即可https://segmentfault.com/a/1190000010205945 Referencehttps://foofish.net/pycharm-tips.htmlhttps://blog.csdn.net/lantian_123/article/details/78094148https://segmentfault.com/a/1190000010205945]]></content>
       <tags>
         <tag>技巧</tag>
-        <tag>杂七杂八</tag>
         <tag>Pycharm</tag>
+        <tag>杂七杂八</tag>
         <tag>快捷键</tag>
       </tags>
   </entry>
@@ -1466,8 +1515,8 @@
     <content type="text"><![CDATA[1️⃣[Python]assert用法： assert expression等价于if not expression: raise AssertionError 2️⃣[Pytorch]Pytorch view：创建一个新的tensor，但他们的data是共享的。 3️⃣[Pytorch]在Pytorch中，embedding的index是不能requires_grad=True的，否则会出错。https://github.com/pytorch/pytorch/issues/7021 之前看过一份代码，设置volatile=false但没有出错，是因为在Pytorch0.4之后volatile已经被弃用了，因此volatile=false不起作用，而默认requires_grad=false 4️⃣[Pytorch]在Pytorch中，nn.Linear(self.hidden_dim,self.vocab_size)的维度是vocab_sizehidden_dim，之前居然没有注意到这个问题。因为nn.Linear的*第一个参数表示输入维度，第二个参数表示输出维度 5️⃣[Pytorch]Pytorch中，使用view一般来说必须要用 .contiguous()。也即： 1batch.view(batch_size, -1).t().contiguous() contiguous()的官方解释：https://discuss.pytorch.org/t/runtimeerror-input-is-not-contiguous/930 It means that your tensor is not a single block of memory, but a block with holes. view can be only used with contiguous tensors, so if you need to use it here, just call .contiguous() before. 也就是说，contiguous会将数据存到一个连续的空间内（block）。 6️⃣[Pytorch]调用Cross_entropy时，Pytorch会帮助你加log和softmax。 7️⃣[Paper]Sliced_RNN 将RNN分块以提高并行性，甚至每层的RNN都可以不一样，达到抽取不同程度的抽象语义信息的目的。实验证明，在不同任务上都有一定的提升，但速度的提升很大。 8️⃣[Tf-idf]计算词语对于句子的重要程度 https://zh.wikipedia.org/wiki/Tf-idf tf是词频，idf是逆向文件频率。也即如果词在该句出现的次数越多，在所有文本的出现次数越少，则词对于句子的重要程度越高。 9️⃣[Numpy]在Numpy中，一个列表虽然是横着表示的，但它是列向量。我之前居然没有注意到这个问题。]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>Python</tag>
         <tag>Pytorch</tag>
+        <tag>Python</tag>
         <tag>Paper</tag>
         <tag>Tf-idf</tag>
         <tag>Numpy</tag>
