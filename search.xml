@@ -1,6 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[佳句分享1]]></title>
+    <url>%2F2019%2F06%2F23%2F%E8%AF%97%E8%AF%8D%26%E5%8F%A5%2F%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB1%2F</url>
+    <content type="text"><![CDATA[1仓促本身就是最要不得的态度。当你做某件事的时候，一旦想要求快 ，就表示你再也不关心它，而想去做别的事 —《禅与摩托车维修艺术》 2自律使我们与众不同，自律令我们活得更高级。也正是自律，使我们获得更自由的人生。假如我们像动物一样，听从欲望，逃避痛苦，我们并不是真的自由行动。我们只是成了欲望和冲动的奴隶。我们不是在选择，而是在服从。但人之所以为人， 就在于，人不是被欲望主宰，而是自我主宰。 —康德]]></content>
+      <tags>
+        <tag>佳句分享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[每周诗词29]]></title>
+    <url>%2F2019%2F06%2F23%2F%E8%AF%97%E8%AF%8D%26%E5%8F%A5%2F%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D29%2F</url>
+    <content type="text"><![CDATA[永遇乐 · 京口北固亭怀古[宋] 辛弃疾千古江山，英雄无觅，孙仲谋处。舞榭歌台，风流总被，雨打风吹去。斜阳草树，寻常巷陌，人道寄奴曾住。想当年、金戈铁马，气吞万里如虎。元嘉草草，封狼居胥，赢得仓皇北顾。四十三年，望中犹记，烽火扬州路。可堪回首，佛貍祠下，一片神鸦社鼓。凭谁问，廉颇老矣，尚能饭否？]]></content>
+      <tags>
+        <tag>诗词</tag>
+        <tag>诗词分享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[每周碎片知识23]]></title>
+    <url>%2F2019%2F06%2F23%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8623%2F</url>
+    <content type="text"><![CDATA[[Autodiff]Autodiff通过提前构造好backprop的计算图，使得不需要像backprop算法那样保存中间值。 [NAS]关于NAS(Neural Architecture Search)的科普文。https://medium.com/@ashiqbuet14/neural-architecture-search-nas-the-future-of-deep-learning-c99356351136 Search space：就是一个接一个的layer，也可以包括skip connection； 如果希望大的框架定好，只是里面的layer搜索，这称为micro-search。 RL：可以使用强化学习来做NAS，以RNN为基本模型。 其实就是每个输出指示一个layer选项，然后通过RL获得的reward来更新。 Progressive Neural Architecture Search(PNAS)：这就是前面提到的固定整个大的框架（block），然后搜索里面的layer。 可以通过每层选完去掉一些选项来减少排列组合巨大的总数。 Differentiable Architecture Search(DARTS)：将选择layer的discrete的动作变成连续的，使得能够通过求导的方式更新。 其本质就是两个node之间连多个operation，然后训练获得每个operation的比例，只保留最大的。 这个用连续来达到离散的做法还挺有创新的。]]></content>
+      <tags>
+        <tag>碎片知识</tag>
+        <tag>Autodiff</tag>
+        <tag>NAS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DRL Lecture 7:Sparse Reward]]></title>
+    <url>%2F2019%2F06%2F23%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%2FDRL%20Lecture%207%3A%20Sparse%20Reward%2F</url>
+    <content type="text"><![CDATA[讨论了当RL遇到sparse reward时的几个解决方案。 Reward Shapinghand-crafted也即虚构出reward引导agent走向自己期望的结果。 如上图，仔细定义了游戏中每个操作的reward。 Curiosity往agent里添加好奇心。 输入是$a_t$和$s_t$尝试预测出$s_{t+1}$，如果预测的和真实的差距较大时，则该action的reward大，这样能够鼓励agent探索更多的操作。 但有时候难以预测的state并不代表其重要。应当过滤掉这样的state，比如游戏中树叶飘动，但这个state完全不重要。因此对上述模型进行改进： 添加feature extractor，同时添加另一个网络，来通过$s_t$和$s_{t+1}$预测action，这样就能够过滤掉state中没意义的部分。 Curriculum Learning从简单的开始学起，比如玩游戏的例子： 这个需要人工较为精细的调整。 Reverse Curriculum Generation首先给定一个gold state，也即目标，然后寻找与gold state最接近的state获得相应的reward。 然后去掉reward太大或太小的。在留下来的state中再获取与他们接近的state，继续以上流程。]]></content>
+      <tags>
+        <tag>机器学习🤖</tag>
+        <tag>强化学习</tag>
+        <tag>RL</tag>
+        <tag>Reinforcement Learning</tag>
+        <tag>Deep Reinforcement Learning</tag>
+        <tag>李宏毅强化学习课程</tag>
+        <tag>Sparse Reward</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DRL Lecture 6:Actor-Critic]]></title>
+    <url>%2F2019%2F06%2F23%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%2FDRL%20Lecture%206%3A%20Actor-Critic%2F</url>
+    <content type="text"><![CDATA[介绍了actor-critic的算法，结合了policy gradient和Q-learning。 Actor-Critic原先policy gradient的算法是直接学习一个policy： \nabla \overline{R}_{\theta} \approx \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_{n}}\left(\sum_{t^{\prime}=t}^{T_{n}} \gamma^{t^{\prime}-t} r_{t^{\prime}}^{n}-b\right) \nabla \log p_{\theta}\left(a_{t}^{n} | s_{t}^{n}\right)但显然reward是不稳定的，它代表了采取action之后的reward的期望值，当sample次数不够多，其预估的也不准。 因此在这里将Q-learning引入到预估reward中，也即policy gradient和q-learning的结合。 也即我们将reward替换成$E\left[G_{t}^{n}\right]=Q^{\pi_{\theta}}\left(s_{t}^{n}, a_{t}^{n}\right)$。同时根据baseline的定义，我们将其替换成$V^{\pi_{\theta}}\left(s_{t}^{n}\right)$。 所以括号内的$\sum_{t^{\prime}=t}^{T_{n}} \gamma^{t^{\prime}-t} r_{t^{\prime}}^{n}-b$就变成$Q^{\pi \theta}\left(s_{t}^{n}, a_{t}^{n}\right)-V^{\pi_{\theta}}\left(s_{t}^{n}\right)$。 实际上我们不需要分别训练两个网络，直接整合成一个网络即可。也即将$Q^{\pi \theta}\left(s_{t}^{n}, a_{t}^{n}\right)-V^{\pi_{\theta}}\left(s_{t}^{n}\right)$改成$r_{t}^{n}+V^{\pi}\left(s_{t+1}^{n}\right)-V^{\pi}\left(s_{t}^{n}\right)$。 因此整个流程： 形式化也即： \nabla \overline{R}_{\theta} \approx \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_{n}}\left(r_{t}^{n}+V^{\pi}\left(s_{t+1}^{n}\right)-V^{\pi}\left(s_{t}^{n}\right)\right) \nabla \log p_{\theta}\left(a_{t}^{n} | s_{t}^{n}\right)由于$\pi$和$V$的输入都是$s$，在实际操作中可以将这两个网络的前几层参数共享： 同时对$\pi$的输出加以限制，希望有更大的entropy，这样能够探索更多情况。 Pathwise Derivative Policy Gradient接下来介绍了一种新的方法，直接学习一个$\pi$，输入$s￥可以获得能够最大化Q的action。这和GAN的思想很相似。 这样$\pi$天然地能够处理continuous的情况。 所以整个流程： 先交互，学习一个好的$Q$，然后将这个$Q￥作为标准，学习$\pi$使得输出的$Q$最大。和GAN很像。]]></content>
+      <tags>
+        <tag>机器学习🤖</tag>
+        <tag>强化学习</tag>
+        <tag>RL</tag>
+        <tag>Reinforcement Learning</tag>
+        <tag>Deep Reinforcement Learning</tag>
+        <tag>李宏毅强化学习课程</tag>
+        <tag>Actor-Critic</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DRL Lecture 5:Q-learning (Continuous Action)]]></title>
+    <url>%2F2019%2F06%2F23%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%2FDRL%20Lecture%205%3A%20Q-learning%20(Continuous%20Action)%2F</url>
+    <content type="text"><![CDATA[讨论了如何将Q-learning用于连续的action中。 前面提到 Q-learning就是： a=\arg \max _{a} Q(s, a)若a是连续的，几种解决方案： ①sample一堆action$\left\{a_{1}, a_{2}, \cdots, a_{N}\right\}$，然后按照discrete的情况来处理。但精度不高，因为没法sample太多情况。 ②使用gradient ascent来计算处理上式。该方法显然太耗时，因为每个sample都等于要训练一遍模型。 ③设计专门的网络使得该优化可行。首先输入state： 获得一个$\mu$，$\Sigma$和$V$。接着和action交互： Q(s, a)=-(a-\mu(s))^{T} \Sigma(s)(a-\mu(s))+V(s)显然,第一项若$\Sigma$半正定，必定小于等于0，所以当$a=\mu(s)$时$Q$最大。实际上$\Sigma$是通过先获得一个矩阵$A$，然后$A\times A^{T}$保证其正定性。 因此： \mu(s)=\arg \max _{a} Q(s, a)④别用Q-learning处理连续的情况，因为处理还是比较麻烦的。]]></content>
+      <tags>
+        <tag>机器学习🤖</tag>
+        <tag>强化学习</tag>
+        <tag>RL</tag>
+        <tag>Reinforcement Learning</tag>
+        <tag>Deep Reinforcement Learning</tag>
+        <tag>李宏毅强化学习课程</tag>
+        <tag>Q-learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DRL Lecture 4:Q-learning (Advanced Tips)]]></title>
+    <url>%2F2019%2F06%2F23%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%2FDRL%20Lecture%204%3A%20Q-learning%20(Advanced%20Tips)%2F</url>
+    <content type="text"><![CDATA[介绍一些进阶的Q-learning tips，能够帮助Q-learning提升表现。 Double DQN发现Q-value总是容易被高估，原因是算法中有$Q\left(s_{t}, a_{t}\right)=r_{t}+\max _{a} Q\left(s_{t+1}, a\right)$。该公式的max使得$Q$总是选择最大的action，使得$Q$的拟合总是偏大。 那么在这里多加一个$Q^{\prime}$以规避上述情况，也即： Q\left(s_{t}, a_{t}\right)=r_{t}+Q^{\prime}\left(s_{t+1}, \arg \max _{a} Q\left(s_{t+1}, a\right)\right)若$Q$高估了a，$Q^{\prime}$不高估那么$Q^{\prime}$的值也不会那么大则左式的值就不会被高估；若$Q^{\prime}$对某个action高估了，只要$Q$不高估该action，那么也不会选择该action。 Dueling DQN将模型结构做了改变： 也即将$Q$分离开来。一种解释是这样的分离可以使得数据的使用更有效率，使得模型更为灵活。课件上还举了一个例子。 同时还可以对$A$加一些限制，比如向量和为0。 Prioritized Reply对replay buffer进行改进。对TD error较大的优先sample，也即对那些学得不好的example优先学习。 Multi-step将MC和TD综合起来。给定$\left(s_{t}, a_{t}, r_{t}, \cdots, s_{t+N}, a_{t+N}, r_{t+N}, s_{t+N+1}\right)$，有： 也即介于MC的整个episode完成后再计算和TD的每个step都计算一次。 Noisy Netepsilon greedy也可以看做是加噪声，但是是加在action上： a=\left\{\begin{aligned} \arg \max _{a} Q(s, a), & \text {with probability } 1-\varepsilon \\ \text {random}, & \text { otherwise } \end{aligned}\right.这样使得模型的行为不一致，可能不大好。 而Noisy Net是在parameter上加噪声。也即在episode开始之前对$Q$加噪声，变成$\tilde{Q}$： a=\arg \max _{a} \tilde{Q}(s, a)而在episode期间不会改变noise。这样更有系统性的探索可能会更好，因为模型行为一致。 Distributional Q-function基本思想是令$Q$预测每个行为的reward的分布而不仅仅是一个期望值。因为期望值损失了太多信息了，不同的distribution可能有同样大小的期望。 实际上操作也即： Distributional Q-function往往不会高估expectation而是低估。因为在预测distribution时已经限定了最高和最低的范围了，对于那些大于或小于的值都忽略掉。]]></content>
+      <tags>
+        <tag>机器学习🤖</tag>
+        <tag>强化学习</tag>
+        <tag>RL</tag>
+        <tag>Reinforcement Learning</tag>
+        <tag>Deep Reinforcement Learning</tag>
+        <tag>李宏毅强化学习课程</tag>
+        <tag>Q-learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DRL Lecture 3:Q-learning (Basic Idea)]]></title>
+    <url>%2F2019%2F06%2F22%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%2FDRL%20Lecture%203%3A%20Q-learning%20(Basic%20Idea)%2F</url>
+    <content type="text"><![CDATA[简单介绍Q-learning的思想以及相关的训练tips。 是什么与Policy Gradient不同的是，Q-Learning是属于value based，也即学习一个critic去估计特定actor π在某个state s下的累积reward。 注意到Q-learning虽然只学习了critic，但仍然可以用于做决策。 首先是如何预估critic？critic的本质就是函数映射$V^{\pi}(s)$，输入$s$，输出一个scalar作为使用了actor $\pi$的累积reward。有两种方法：Monte-Carlo (MC) based approach和Temporal-difference (TD) approach。 Monte-Carlo (MC) based approachcritic看完整个episode，然后对$s$做出预估： 其实质上就是在做regression。 Temporal-difference (TD) approach由于有些episode非常长，等跑完再预估效率太低，因此直接对每个step进行预估。对于一个time step $\cdots s_{t}, a_{t}, r_{t}, s_{t+1} \cdots$，直接预估： 介绍完$V^{\pi}(s)$，还有一种critic，输入$s$和$a$以获得一个累积reward。这里和$V^{\pi}(s)$不同的是，对于同一个π，能够评估强制采用$a$所获得的reward。 如何使用critic决策在训练完了一个critic，如何用于进行决策？ 其基本思想是：给定$Q$，总能找到一个$\pi^{\prime}$ 比$\pi$好，也即$V^{\pi^{\prime}}(s) \geq V^{\pi}(s)$。形式化： \pi^{\prime}(s)=\arg \max _{a} Q^{\pi}(s, a)也就是说，在学习完一个特定$\pi$对应的$Q$后，只需要遵照每遇到一个state，选择能使$Q$最大化的action，该新的$\pi$就会比原来的$\pi$更优。 为什么一定会更优。提供证明： 每一步选择最优都会比原来好一些。 如何训练Q function我们通过类似TD的方法来训练。给定$\cdots s_{t}, a_{t}, r_{t}, s_{t+1} \cdots$,我们有： \mathrm{Q}^{\pi}\left(s_{t}, a_{t}\right)=r_{t}+\mathrm{Q}^{\pi}\left(s_{t+1}, \pi\left(s_{t+1}\right)\right)其中由于公式有两个Q，若让两个Q同时变，不好做回归。因此我们让右边的Q固定住，训练左边的Q，在更新完几次后，直接将左边的Q覆盖右边。重复多次： 另一个问题是如何收集数据？ 由于action是基于Q函数的，也即每次都采用贪心的策略，会使得在初始情况下固定的action会一直出现，无法探索到其他情况。因此采用两种策略： ①epsilon greedy： a=\left\{\begin{aligned} \arg \max _{a} Q(s, a), & \text { with probability } 1-\varepsilon \\ \text {random}, & \text { otherwise } \end{aligned}\right. 其中$\varepsilon$随着时间而逐渐变小。 ②boltzmann exploration：按概率采样 P(a | s)=\frac{\exp (Q(s, a))}{\sum_{a} \exp (Q(s, a))}还有一个小技巧用于更好利用sample，也即replay buffer：将每次π与环境交互的episode都放在一个buffer里面，可以都用来学习Q函数，即使数据来自不同的policy也没关系。这和off-policy有点像。为什么可以这么用一种解释是这样可以使得数据更diverse，同时减少sample次数加快训练。 因此一个典型的q-learning则是：]]></content>
+      <tags>
+        <tag>机器学习🤖</tag>
+        <tag>强化学习</tag>
+        <tag>RL</tag>
+        <tag>Reinforcement Learning</tag>
+        <tag>Deep Reinforcement Learning</tag>
+        <tag>李宏毅强化学习课程</tag>
+        <tag>Q-learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[每周论文22]]></title>
+    <url>%2F2019%2F06%2F22%2F%E8%AE%BA%E6%96%87%2F%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8722%2F</url>
+    <content type="text"><![CDATA[本周论文： Boosting Neural Machine Translation Curriculum Learning by Transfer Learning: Theory and Experiments with Deep Networks On The Power of Curriculum Learning in Training Deep Networks XLNet: Generalized Autoregressive Pretraining for Language Understanding An Empirical Exploration of Curriculum Learning for Neural Machine Translation [Boosting Neural Machine Translation]通过将机器学习中的boosting引入NMT，对翻译效果有一定提升。同时还提出了另外几种方法，对输入数据pipeline进行了修改，发现都有一定的提升。本文的中心思想就是focus on difficult examples，作者认为更多关注于difficult example，能够对模型有提升的作用。 几种policy original：就是将所有的数据都过一遍boost：将最难的10%重复一遍reduce：将最简单的20%去掉。具体操作是，每个epoch重新衡量一次，每三个epoch作为一个训练，也即三个epoch内部分别使用100% 80% 64%的数据bootstrap：每个epoch都re-sample一遍，也即允许重复以及部分句子消失。 难度是通过perplexity来衡量的，因为每个epoch在训练时就已经计算过perplexity了，因此没有引入额外的计算复杂度。 实验结果论文的实验采用的是双向LSTM作为翻译的模块。 几个实验结论：boosting能够加速拟合，并且结果更好；reduce用更少的数据，达到最好的效果。这点令人印象深刻boostrap，稍微好一些，且训练更稳定。 为什么要focus on difficult example? We emulate a human spending additional energy on learning complex conceptsTo force the system to pay much attention on them can adjust it towards “mastering” more information for these sentences. 几个想法这篇文章是一篇短文，很明显很多实验没做，估计是到deadline了就提交了，比如分析不同比例的结果，以及一些消融实验也没做。 第二，为什么boostrap能够有提升并且有更稳定的训练？这种resample的方式能够带来一定的uncertainty，可能会有一定的帮助，虽然帮助不大，论文里面也仅仅提到了uncertainty，显然应该做进一步的分析。 这篇论文提供的insight我认为还是有一定启发的，首先这并不是curriculum-learning，也即没有从简单到难，而是正常的训练，只不过通过增加更多的difficult example，同时去掉了部分太简单的sample，说明仅仅是修改数据分布而不是修改数据的输入顺序（本质上也是修改数据分布），也能够带来提升效果；第二，通过减少简单数据，是否意味着，每个模型都有一个下限（特别是对于神经网络这种能力很强的模型），低过这个下限的数据对模型的训练是没有帮助的，反而可能会使模型overfit到某个简单的pattern（这和learning to execute的结论似乎有些类似）；同时，增加更多的difficult sample，使得模型的上限被提高了；以及，是否可以将curriculum learning与该思路结合起来，达到更好的结果，一方面由易到难，另一方面修改数据分布，使得模型更多关注难的数据。 [Curriculum Learning by Transfer Learning: Theory and Experiments with Deep Networks]ICML18的文章，极其硬核，根本看不懂理论的部分。 先贴出ICML oral的三张PPT： 从理论上证明了： ①the rate of convergence of an ideal curriculum learning method is monotonically increasing with the difﬁculty of the examples ②convergence is faster when using points which incur higher loss with respect to the current hypothesis.当difficulty score是固定的，对于current hypothesis而言，高的loss能够比低的loss拟合速度更快。该结论非常直观。也就是说，难的example更有益是针对当前而言（current hypothesis）而简单的example更有益是针对final hypothesis而言的。 ③使用pretrain好的模型来作为difficulty的估计，a signiﬁcant boost in convergence speed at the beginning of training ④使用curriculum learning能够显著加速拟合；当任务难度（这和模型本身的容量也有关，模型越弱相对的任务难度也就越大，同时也和regularization相关，越强代表模型的自由度越弱）越大时，使用CL的效果就越明显。 几个结果： 思考：文中的结论还是可以参考参考的，但theoretical的结论毕竟是在凸函数上得到的，似乎说服力不大。文中的思路是从理论上证明凸函数的结论；然后通过实验在非凸函数上从实践证明相似结论。其主要的贡献在于一些CL相关的结论和引入transfer learning作为difficulty score。 [On The Power of Curriculum Learning in Training Deep Networks]ICML19一篇很硬核的文章，说实话里面的证明以及部分实验设计我还是没怎么搞懂。但是一些结论值得注意。这属于有启发的一类论文。 通过transfer-learning和self-taught的方法获得新的curriculum-learning算法，同时通过理论证明获得了一些有启发性的结论。 curriculum learning有两个挑战： 如何定义数据的难度；以及数据喂给模型的速度，太快会让模型更confused，太慢导致学习太慢 本文对这两个挑战都有一定的解决方案：分别定义了scoring function 和 pacing function scoring function有两种：transfer learning和self-tutoring，一个就是pretrained model，另一个是使用训练好的未采用curriculum learning的模型。 pacing function：①Fixed exponential pacing没固定次数的step就提升一下 ②Varied exponential pacing 提升的step可以是变化的 ③Single-step pacing 简化版的① 关于current hypothesis与target hypothesis： 有些方法中（self-paced learning hard example mining 或 active learning）更倾向于hard example。实际上和CL不同，是因为focus on hard example是基于当前模型的状态去定义难度的（current hypothesis），CL则是基于最终的状态（target hypothesis）。实际上这两种并不矛盾，有研究表明模型可以同时受益于这两种。这篇文章也从理论角度去证明了这一结论。 实验关于curriculum by transfer的结论：Curriculum learning is clearly and signiﬁcantly beneﬁcial - learning starts faster, and converges to a better solution.the observed advantage of CL is more signiﬁcant when the task is more difﬁcult（很直观，因为越难的任务越需要CL） 其中anti-curriculum指的是按照难度从高到低排；random则是对难度随机排： 其他结论： 使用不同的transfer function都指向了相似的gradient方向；与使用所有数据相比，transfer function则指向了不同的方向；同时使用所有数据的gradient和使用random scoring function的gradient相似，说明random能够较为合理的去estimate真正的empirical gradient。如图： 理论略过大量公式。直接谈结论： ①通过CL修改后的optimization landscape拥有和原来一样的optimization function；并且修改后的global maximum 比原先的更明显（pronounced） ②如果数据分布p和最优的utility $U_{\tilde{\vartheta}}(X)$ 是正相关的，且比其他的$U_{\vartheta}(X)$更正相关，那么往optimal parameter $\tilde{\vartheta}$ 总体上会更加steeper（陡峭）。 ③the optimization landscape is modiﬁed to amplify the difference between the optimal parameters vector and all other parameter values whose covariance with the optimal solution (the covariance is measured between the induced prior vectors) is small, and speciﬁcally smaller than the variance of the optimum. 结论与思考就我的理解而言，本文的最大贡献就是：统一了原先的从简单到难（curriculum learning或self-paced learning）和focus on difficulty examples（boosting或hard data mining），只要修改后的数据分布与optimal utility是正相关的，那么就可以提升表现，因此两种strategy都是有效的。 It may even be possible to find a curriculum which is directly correlated with the optimal utility, and that outperforms both methods 不过这篇文章有些奇怪，empirical和theoretical的部分完全割裂的感觉。 [XLNet: Generalized Autoregressive Pretraining for Language Understanding]最近比较火的文章，对Bert的全面超越。将bert的双向和context以及language model的long range dependency巧妙结合，获得新的pretrain model。 背景预训练语言模型可以分为两种 autoregressive(AR)语言模型和 autoencoding（AE）。AR就是传统的语言模型，从前到后或从后到前预测，典型的就是GPT；AE则是通过受破坏的数据还原出原始数据，Bert就是其中一员。 但这两种方法各有缺点： bert的AE方法假设了所有被预测的token是独立的（也即mask掉的词相互之间是独立的，也即上一个mask的词并不能对预测下一个mask的词有帮助），但自然语言中这种依赖关系应该是存在的；同时[Mask]在真实数据中并不存在，也即存在input noise，导致pretrain-ﬁnetune discrepancy。 而AR的问题主要在没有充分利用前后的上下文，只使用了部分。 本文通过permutation来达到规避这两个缺点的目的，也即 既利用了前后上下文，又没有input noise，同时还没有independence assumption。 模型定义一个factorization orders（注意是虚拟的顺序，原始顺序还是会保留的），将原始的顺序打乱。使得一个词的预测可以由两侧的词来帮助。 如图，输入的原始顺序还是不变，但通过 mask attention来达到不同的factorization order的目的，在不同order下预测同一个$x_3$，由于factorization order的顺序不同，在3之前的词发挥了作用，而在他之后的词就没有参与预测。 形式化则有： \max _{\theta} \mathbb{E}_{\mathbf{z} \sim \mathcal{Z}_{T}}\left[\sum_{t=1}^{T} \log p_{\theta}\left(x_{z_{t}} | \mathbf{x}_{\mathbf{z}_{]]></content>
+      <tags>
+        <tag>Paper</tag>
+        <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
+        <tag>NMT</tag>
+        <tag>Language Modeling</tag>
+        <tag>boosting</tag>
+        <tag>XLNet</tag>
+        <tag>pretrain</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[DRL Lecture 2:Proximal Policy Optimization (PPO)]]></title>
     <url>%2F2019%2F06%2F16%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86%2FDRL%20Lecture%202%3A%20Proximal%20Policy%20Optimization%20(PPO)%2F</url>
     <content type="text"><![CDATA[Policy Gradient的问题：每次sample的data只能使用一次，较为耗费时间。因此引入off-policy，每次sample的数据可以多次使用。 特点：on-policy中学习的agent与和环境交互的agent是一致的；而off-policy则是有两个agent，其中一个agent负责与环境交互来获得episode，另一个agent则通过这些episode更新参数。 在这里利用importance-sampling来达到这一目的。 importance-sampling给定概率$p$要计算$f(x)$的期望：可以采用sample的方式来达到该目的。也即： E_{x \sim p}[f(x)] \approx \frac{1}{N} \sum_{i=1}^{N} f\left(x^{i}\right)而若$p$分布无法获得，可以利用另一个可获得的分布$q$来近似。也即： E_{x \sim p}[f(x)]=\int f(x) p(x) d x=\int f(x) \frac{p(x)}{q(x)} q(x) d x=E_{x \sim q}[f(x) \frac{p(x)}{q(x)}]然后再由$q$来做sampling。 注意这里$p$与$q$的分布不应该差距太大，否则其variance则会相差很大，造成近似结果差距较大。 off-policy将importance sampling用于off-policy。 原来： \nabla \overline{R}_{\theta}=E_{\tau \sim p_{\theta}(\tau)}\left[R(\tau) \nabla \log p_{\theta}(\tau)\right]变成： \nabla \overline{R}_{\theta}=E_{\tau \sim p_{\theta^{\prime}}(\tau)}\left[\frac{p_{\theta}(\tau)}{p_{\theta^{\prime}}(\tau)} R(\tau) \log p_{\theta}(\tau)\right]其中$p_{\theta^{\prime}}$是另一个agent的分布，也即data是从该agent的分布sample得到的，因此可以使用该data来多次训练θ。 因此梯度公式则为： \begin{array}{l}{=E_{\left(s_{t}, a_{t}\right) \sim \pi_{\theta}}\left[A^{\theta}\left(s_{t}, a_{t}\right) \nabla \log p_{\theta}\left(a_{t}^{n} | s_{t}^{n}\right)\right]} \\ {=E_{\left(s_{t}, a_{t}\right) \sim \pi_{\theta^{\prime}}}\left[\frac{P_{\theta}\left(s_{t}, a_{t}\right)}{P_{\theta^{\prime}}\left(s_{t}, a_{t}\right)} A^{\theta}\left(s_{t}, a_{t}\right) \nabla \log p_{\theta}\left(a_{t}^{n} | s_{t}^{n}\right)\right]} \\ {=E_{\left(s_{t}, a_{t}\right) \sim \pi_{\theta^{\prime}}}\left[\frac{p_{\theta}\left(a_{t} | s_{t}\right)}{p_{\theta^{\prime}}\left(a_{t} | s_{t}\right)} \frac{p_{\theta}\left(s_{t}\right)}{p_{\theta^{\prime}}\left(s_{t}\right)} A^{\theta}\left(s_{t}, a_{t}\right) \nabla \log p_{\theta}\left(a_{t}^{n} | s_{t}^{n}\right)\right]}\end{array}其中，我们将$A^{\theta}\left(s_{t}, a_{t}\right)$改成$A^{\theta^{\prime}}\left(s_{t}, a_{t}\right)$，因为数据是从$\theta^{\prime}$ 来的；同时我们假设$\frac{p_{\theta}\left(s_{t}\right)}{p_{\theta^{\prime}}\left(s_{t}\right)}=1$，一方面是不方便计算，作此假设可以方便计算；另一方面该假设也有一定合理性，因为某个state出现的几率应该和agent的关系较小。 通过梯度公式我们可以还原出原式： J^{\theta^{\prime}}(\theta)=E_{\left(s_{t}, a_{t}\right) \sim \pi_{\theta^{\prime}}}\left[\frac{p_{\theta}\left(a_{t} | s_{t}\right)}{p_{\theta^{\prime}}\left(a_{t} | s_{t}\right)} A^{\theta^{\prime}}\left(s_{t}, a_{t}\right)\right]另一个问题是，在什么时候停止使用同一组data更新参数？也即同一组data能够更新参数几次？ 一个原则是：我们希望两个agent的分布差异小一些，因为分布差异一旦大了，variance则会变大，因此这里添加一个constraint。 J_{P P O}^{\theta^{\prime}}(\theta)=J^{\theta^{\prime}}(\theta)-\beta K L\left(\theta, \theta^{\prime}\right)注意这里的KL散度是对action分布的KL散度而不是参数的。 所以最终的算法为： 其中$\theta_{k}$是上次更新完的agent的参数。也即与环境交互的agent的参数总是上个iteration 另一个agent更新后的参数。 还有几个细节，$\beta$可以是adaptive的；以及PPO2对PPO中constraint的改进，不过都是细枝末节。]]></content>
@@ -169,12 +281,12 @@
         <tag>Classification</tag>
         <tag>Paper</tag>
         <tag>每周论文阅读</tag>
-        <tag>LSTM</tag>
         <tag>Language Modeling</tag>
+        <tag>LSTM</tag>
+        <tag>pretrain</tag>
         <tag>long-term dependency</tag>
         <tag>GC-Net</tag>
         <tag>Ordered Neuron</tag>
-        <tag>pretrain</tag>
         <tag>GPT</tag>
         <tag>GE-Net</tag>
         <tag>PSANet</tag>
@@ -208,8 +320,8 @@
     <content type="text"><![CDATA[前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。如： 找了一圈网上没有找到其原因，已经在论坛提问了。我的解决方案是显式对其进行初始化： 1234567if args.init == 'uniform': nn.init.uniform_(self.u, -args.init_range, args.init_range) nn.init.uniform_(self.v, -args.init_range, args.init_range)elif args.init == 'normal': nn.init.normal_(self.u, 0.0, args.init_std) nn.init.normal_(self.v, 0.0, args.init_std) 原来是torch.Tensor的锅，torch.Tensor会分配内存空间，但不会清空该空间的值，因此里面可能会有奇怪的值。正确的做法应该是： 123torch.nn.Parameter(torch.rand(10,10))# 或者torch.nn.Parameter(torch.zeros(10,10)) 参考资料：https://discuss.pytorch.org/t/nan-in-torch-tensor/8987]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>遇到的问题</tag>
         <tag>Pytorch</tag>
+        <tag>遇到的问题</tag>
         <tag>Parameter</tag>
         <tag>nan</tag>
       </tags>
@@ -220,8 +332,8 @@
     <content type="text"><![CDATA[断断续续记录一下在写代码过程中遇到的问题以及解决方案。 [Parameter nan]http://www.linzehui.me/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/ 问题描述在定义Parameter时遇到其元素存在nan的问题。 原因torch.Tensor(m,n)只分配空间而没有将其中的值更新。 解决方案torch.Tensor(m,n)是不建议使用的初始化方法。改成torch.nn.Parameter(torch.rand(10,10))或torch.nn.Parameter(torch.zeros(10,10))。 [+= inplace operation]http://www.linzehui.me/2018/12/09/碎片知识/Python中的+=操作/ 问题描述1output+=pos # pos是不可更新的tensor，output是可更新的tensor 程序报错：“one of the variables needed for gradient computation has been modified by an inplace operation”。 原因在Python中，i=i+1和i+=1是不同的，如果被操作数没有部署 ’iadd‘方法，则i=i+1和i+=1是等价的，’+=‘并不会产生in-place操作；当被操作数有部署该方法且正确部署，则是会产生in-place操作的。当没有in-place操作时，i=i+1表示对i重分配，也即i指向了另一个空间而不是原来的空间。在Pytorch中，也有部署’iadd()‘操作，所以对于output+=pos，output内部的值被改变了，也即在计算图中引入了环，在反向求导时则会出错。 解决方案尽量不使用inplace操作，即使是官方的API，如unsqueeze_()。已经好几次被inplace操作坑了。 [squeeze dim]问题描述当需要squeeze时，未指定squeeze的维度，导致后面的维数不一致，报错。 原因由于在某些极端情况下，可能会出现batch size为1的情况，当遇到这个情况时，squeeze会将其一并压缩掉，使得后面会出错。 解决方案尽可能显式指定要压缩的维度，除非很明确就要将所有的压缩掉。]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>遇到的问题</tag>
         <tag>Pytorch</tag>
+        <tag>遇到的问题</tag>
       </tags>
   </entry>
   <entry>
@@ -239,8 +351,8 @@
     <content type="text"><![CDATA[1️⃣[Pytorch]①1torch.gather(input, dim, index, out=None) → Tensor 能够根据index的值在指定维度收集数值。可以用于切slice。 ②expand和repeat不同，不会分配新的内存。如果一个tensor使用expand再cat到其他tensor上，这个expand还会省内存吗？不会。在cat的时候会重新分配整个tensor的内存，并且将元素一个一个copy过去。 https://discuss.pytorch.org/t/efficiency-of-torch-cat/8830 it pre-allocates the full tensor and then copy into it each element ③ 1torch.einsum(equation, *operands) → Tensor This function provides a way of computing multilinear expressions (i.e. sums of products) using the Einstein summation convention. 发现一个神奇的api，Pytorch支持爱因斯坦求和约定(Einstein summation convention)。也即在给定两个tensor时，可以指定维度进行求和，相当灵活，可以理解成bmm或者mm的扩展版，这样在做一些tensor之间的操作就不需要view/permute调整成bmm支持的格式了。 官方例子： 123456789101112131415161718192021222324252627282930313233343536373839404142&gt;&gt;&gt; x = torch.randn(5)&gt;&gt;&gt; y = torch.randn(4)&gt;&gt;&gt; torch.einsum('i,j-&gt;ij', x, y) # outer producttensor([[-0.0570, -0.0286, -0.0231, 0.0197], [ 1.2616, 0.6335, 0.5113, -0.4351], [ 1.4452, 0.7257, 0.5857, -0.4984], [-0.4647, -0.2333, -0.1883, 0.1603], [-1.1130, -0.5588, -0.4510, 0.3838]])&gt;&gt;&gt; A = torch.randn(3,5,4)&gt;&gt;&gt; l = torch.randn(2,5)&gt;&gt;&gt; r = torch.randn(2,4)&gt;&gt;&gt; torch.einsum('bn,anm,bm-&gt;ba', l, A, r) # compare torch.nn.functional.bilineartensor([[-0.3430, -5.2405, 0.4494], [ 0.3311, 5.5201, -3.0356]])&gt;&gt;&gt; As = torch.randn(3,2,5)&gt;&gt;&gt; Bs = torch.randn(3,5,4)&gt;&gt;&gt; torch.einsum('bij,bjk-&gt;bik', As, Bs) # batch matrix multiplicationtensor([[[-1.0564, -1.5904, 3.2023, 3.1271], [-1.6706, -0.8097, -0.8025, -2.1183]], [[ 4.2239, 0.3107, -0.5756, -0.2354], [-1.4558, -0.3460, 1.5087, -0.8530]], [[ 2.8153, 1.8787, -4.3839, -1.2112], [ 0.3728, -2.1131, 0.0921, 0.8305]]])&gt;&gt;&gt; A = torch.randn(3, 3)&gt;&gt;&gt; torch.einsum('ii-&gt;i', A) # diagonaltensor([-0.7825, 0.8291, -0.1936])&gt;&gt;&gt; A = torch.randn(4, 3, 3)&gt;&gt;&gt; torch.einsum('...ii-&gt;...i', A) # batch diagonaltensor([[-1.0864, 0.7292, 0.0569], [-0.9725, -1.0270, 0.6493], [ 0.5832, -1.1716, -1.5084], [ 0.4041, -1.1690, 0.8570]])&gt;&gt;&gt; A = torch.randn(2, 3, 4, 5)&gt;&gt;&gt; torch.einsum('...ij-&gt;...ji', A).shape # batch permutetorch.Size([2, 3, 5, 4]) 我对这个api一般的用法就是，将两个tensor的每一维用不同的记号标号，然后想一下我想要的tensor的格式，按照记号写下就可以直接得到了。 ④squeeze在使用的时候尽量指定维度，否则可能会出现在训练最后一个batch时，batch_size正好是1，就把batch_size给squeeze掉了。（已经两次遇到这样的bug了） ⑤ 1apply(fn) Applies fn recursively to every submodule (as returned by .children()) as well as self. Typical use includes initializing the parameters of a model (see also torch-nn-init). 可以用于所有的子模块的初始化，好像很方便的样子。但我突然想到这种方法可能会不小心把embedding初始化给覆盖了，如果embedding有用pretrain初始化的话。 官方例子：123456789101112131415161718192021222324&gt;&gt;&gt; def init_weights(m): print(m) if type(m) == nn.Linear: m.weight.data.fill_(1.0) print(m.weight)&gt;&gt;&gt; net = nn.Sequential(nn.Linear(2, 2), nn.Linear(2, 2))&gt;&gt;&gt; net.apply(init_weights)Linear(in_features=2, out_features=2, bias=True)Parameter containing:tensor([[ 1., 1.], [ 1., 1.]])Linear(in_features=2, out_features=2, bias=True)Parameter containing:tensor([[ 1., 1.], [ 1., 1.]])Sequential( (0): Linear(in_features=2, out_features=2, bias=True) (1): Linear(in_features=2, out_features=2, bias=True))Sequential( (0): Linear(in_features=2, out_features=2, bias=True) (1): Linear(in_features=2, out_features=2, bias=True)) 2️⃣[bpc]bits per character(bpc)是language model一个评价指标，另一个常用指标是ppl（困惑度）。实际上bpc和ppl都是和交叉熵挂钩的，其计算公式为： \begin{aligned} b p c(s t r i n g)=\frac{1}{T} \sum_{t=1}^{T} H\left(P_{t}, \hat{P}_{t}\right) &=-\frac{1}{T} \sum_{t=1}^{T} \sum_{c=1}^{n} P_{t}(c) \log _{2} \hat{P}_{t}(c) \\ &=-\frac{1}{T} \sum_{t=1}^{T} \log _{2} \hat{P}_{t}\left(x_{t}\right) \end{aligned}在代码中计算交叉熵的loss是以e为底的，因此需要将loss除以$\log _{e}2$即可（log的换底公式）。 1cur_loss / math.log(2) https://stats.stackexchange.com/questions/211858/how-to-compute-bits-per-character-bpchttps://arxiv.org/pdf/1308.0850.pdf]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>遇到的问题</tag>
         <tag>Pytorch</tag>
+        <tag>遇到的问题</tag>
         <tag>bpc</tag>
       </tags>
   </entry>
@@ -457,8 +569,8 @@
     <content type="text"><![CDATA[前几日因为in-place操作的问题，debug了好几天，最终才发现问题。 12output,_=pad_packed_sequence(output,batch_first=True)output=output.index_copy(0,torch.tensor(sorted_index),output) 因为Pytorch中pack_sequence需要将batch按长度排列，我在过完GRU后需要将其顺序还原，在这边sorted_index即是记录原来index映射。 然而我在写的时候，参考的是官方的example： 123456789&gt;&gt;&gt; x = torch.zeros(5, 3)&gt;&gt;&gt; t = torch.tensor([[1, 2, 3], [4, 5, 6], [7, 8, 9]], dtype=torch.float)&gt;&gt;&gt; index = torch.tensor([0, 4, 2])&gt;&gt;&gt; x.index_copy_(0, index, t)tensor([[ 1., 2., 3.], [ 0., 0., 0.], [ 7., 8., 9.], [ 0., 0., 0.], [ 4., 5., 6.]]) 因此我也不假思索地写：12output,_=pad_packed_sequence(output,batch_first=True)output=output.index_copy_(0,torch.tensor(sorted_index),output) 就因为多了一个_，导致逻辑和我想象中的不一样。 一个简单的例子展示为什么这么是错的： 1234567891011import torchx=torch.Tensor([21,42,45,59])print(x) # tensor([21., 42., 45., 59.])index=torch.tensor([1,2,0,3])x=x.index_copy_(0,index,x)print(x) # tensor([21., 21., 21., 59.]) 由于是in-place操作，第一步，将index=0的数值（也即21）复制到index=1的地方，此时变成[21,21,45,59]；接着将index=1的数值复制到index=2的位置上，注意到之前已经是in-place操作，因此此时取的不是想象中的42，而是已经被替换的21。后面的也是如此。 正确的做法只需要去掉in-place即可。 已经好几次遇到in-place的问题了，在每次做in-place操作时，都要警惕。应尽可能避免in-place操作。实际上Pytorch官方也不建议使用in-place操作。]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>遇到的问题</tag>
         <tag>Pytorch</tag>
+        <tag>遇到的问题</tag>
         <tag>index_coopy</tag>
       </tags>
   </entry>
@@ -476,9 +588,9 @@
     <url>%2F2018%2F12%2F29%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8617%2F</url>
     <content type="text"><![CDATA[1️⃣[Pytorch]在有RNN的代码中，如果出现 Cuda Error : RuntimeError: CUDNN_STATUS_EXECUTION_FAILED 那么可能的出错原因是没有将init state放入cuda中。 Reference: https://discuss.pytorch.org/t/cuda-error-runtimeerror-cudnn-status-execution-failed/17625 2️⃣[Pytorch]clone() → TensorReturns a copy of the self tensor. The copy has the same size and data type as self.Unlike copy_(), this function is recorded in the computation graph. Gradients propagating to the cloned tensor will propagate to the original tensor. 如果需要另一个相同的tensor做其他计算，则使用clone()而不是copy_() 123forward_vec=sent_vec# backward_vec=sent_vec wrongbackward_vec=sent_vec.clone() 当然也不能直接赋值，因为赋的只是指针，改变backward_vec也会改变原来的值。 3️⃣[Python]Python中==和is的区别：is表示是否是同一个object；而==表示是否是同一个值。 123456str='GRU'str == 'GRU' # Truestr is 'GRU' # Truestr=str.upper()str == 'GRU' # Falsestr is 'GRU' # True 4️⃣[RNN]在RNN的初始化中，使用正交初始化会比其他方法好一些（待对比实验测验）。Reference: https://smerity.com/articles/2016/orthogonal_init.html 5️⃣[Pytorch]在提供预训练embedding作为初始化时，正确做法： 1234if pretrained_matrix is not None: pretrained_matrix=torch.from_numpy(pretrained_matrix).type(torch.FloatTensor) self.embedding.weight= nn.Parameter(pretrained_matrix, requires_grad=True) 必须要有.type(torch.FloatTensor)，否则会出错：CuDNN error: CUDNN_STATUS_EXECUTION_FAILED 6️⃣[Pytorch]Pytorch中，将初始hidden state作为可学习参数实践：https://discuss.pytorch.org/t/solved-train-initial-hidden-state-of-rnns/2589/9https://discuss.pytorch.org/t/learn-initial-hidden-state-h0-for-rnn/10013/7]]></content>
       <tags>
+        <tag>Python</tag>
         <tag>碎片知识</tag>
         <tag>Pytorch</tag>
-        <tag>Python</tag>
         <tag>RNN</tag>
       </tags>
   </entry>
@@ -517,8 +629,8 @@
     <url>%2F2018%2F12%2F23%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8616%2F</url>
     <content type="text"><![CDATA[1️⃣[Softmax]在使用softmax的时候，要非常注意softmax的行为。应尽量控制softmax前元素的规模，否则容易出现one-hot的情况，导致训练困难。 同时，对全-inf做softmax是未定义的，因此也会出现问题： 2️⃣[slice]在对tensor或array操作时，如果需要取某维的slice： 1234import torcha = torch.rand(2,5)a[:,1:3] # 取第1列到第2列的slicea[:][1:3] # wrong，获得的是第1行到第2行的slice 原因是，a[:][1:3]是先做a[:]操作，获得了全部元素，然后再做[1:3]操作，也即获得第1行到第2行的元素。]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Python</tag>
+        <tag>碎片知识</tag>
         <tag>Softmax</tag>
       </tags>
   </entry>
@@ -556,10 +668,10 @@
     <url>%2F2018%2F12%2F09%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FPython%E4%B8%AD%E7%9A%84%2B%3D%E6%93%8D%E4%BD%9C%2F</url>
     <content type="text"><![CDATA[前几日在写一段Pytorch代码时，又一次遇到了in-place操作的问题。 1output+=pos # pos是不可更新的tensor，output是可更新的tensor 程序报错：“one of the variables needed for gradient computation has been modified by an inplace operation”。 无意中将代码改成output=output+pos，程序就不会报错了。 在查阅了相关资料后，将我的思考整理下来。 在Python中，i=i+1和i+=1是不同的，如果被操作数没有部署 ’iadd‘方法，则i=i+1和i+=1是等价的，’+=‘并不会产生in-place操作；当被操作数有部署该方法且正确部署，则是会产生in-place操作的。当没有in-place操作时，i=i+1表示对i重分配，也即i指向了另一个空间而不是原来的空间。 所以，这样的例子就能解释清楚了： 12345678910import numpy as npA = np.arange(12).reshape(4,3)for a in A: a = a + 1# A并没有被改变B = np.arange(12).reshape(4,3)for b in B: b += 1# B被改变了 在Pytorch中，也有部署’iadd()‘操作，所以对于output+=pos，output内部的值被改变了，也即在计算图中引入了环，在反向求导时则会出错。 因此，在Pytorch中，应当避免in-place的操作。 Reference:https://stackoverflow.com/questions/41446833/what-is-the-difference-between-i-i-1-and-i-1-in-a-for-loop]]></content>
       <tags>
-        <tag>碎片知识</tag>
-        <tag>遇到的问题</tag>
-        <tag>Pytorch</tag>
         <tag>Python</tag>
+        <tag>碎片知识</tag>
+        <tag>Pytorch</tag>
+        <tag>遇到的问题</tag>
       </tags>
   </entry>
   <entry>
@@ -652,8 +764,8 @@
     <content type="text"><![CDATA[1️⃣[Transformer]对Transformer新理解： 可以将Transformer理解成一张全连接图，其中每个节点与其他节点的关系通过attention权重表现。图关系是序列关系或者树关系的一般化。 为什么要有multi-head？不仅仅是论文的解释，或许还可以理解成，对一个向量的不同部分（如第1维到20维，第21维到40维等）施以不同的attention权重，如果不使用multi-head，那么对于一个query，就只会有一个权重，而不同的维度有不同的重要性。 2️⃣[attention&amp;capsule]attention是收信息，query从value按权重获取信息，其中所有value的权重和是1。capsule是发信息，对于$l-1$层的一个capsule来说，在传入到$l$层的k个capsule的信息，其权重和为1。]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>attention</tag>
         <tag>Transformer</tag>
+        <tag>attention</tag>
         <tag>capsule</tag>
       </tags>
   </entry>
@@ -771,8 +883,8 @@
     <content type="text"><![CDATA[历时三个月的“莱斯杯”全国第一届“军事智能·机器阅读”挑战赛终于落下帷幕，前几日（10.26-10.28）有幸在南京青旅宾馆参与决赛，体验多多，收获满满，心中亦有一些感想。 一个是南京总带给我一种回家的感觉，对南京的事物总有亲切感。第一次来南京是一年半前，也是来参加比赛。周五晚上的夜游秦淮，让我感受到许久未曾感受到的烟火气息。 第二个是此次主办方提供的食宿令人惊喜。一开始听到青旅宾馆，我已经做好了艰苦奋战的准备了，然而酒店是星级酒店的，吃方面直接到楼下的自助。可以看出主办方此次确实用心在举办这次比赛。 第三点是关于比赛的，关于比赛的整个历程我还是颇有感触。我们是以第9名的成绩挺进决赛，其实在后期比赛中，我们都有所懈怠了，几乎没有花时间在这上面，10月初发布决赛的数据集，而我们在10月20日才得知这一事情，此时离决赛只剩一周时间。因此我们确实准备不足。当然我们也没有预料到我们的决赛成绩会这么靠前，否则我们肯定会更加充分去准备。这确实是我们的失误。 我们在比赛过程中，一直尝试在使用ELMo，这正是我负责的部分。一开始使用官方TensorFlow的代码，费了九牛二虎之力我才跑通代码，但因为队长使用的是pytorch，而二者在cuda版本上不兼容，因此在初赛我们没有使用ELMo。而在最后几天，我尝试使用哈工大的pytorch训练代码，但因为inference速度实在太慢，我们最终还是弃用了这个方案。而在决赛现场，我们发现也确实是因为速度和资源的原因，大家都没有使用ELMo，除了一组。该组正是凭借了ELMo弯道超车从第7升到了第一，拿走了20万大奖。这也是我们非常遗憾的一个地方，我们在遇到困难时没有尝试解决，而是直接弃用，最终没有取得更好的成绩。 此次我们的成绩排名第4(三等奖)，是有一定的进步的，但有一点遗憾的是，我们仅差0.18百分点，就能超过第三名拿到5万的奖金了。后面我们分析了一下，还是因为我们对比赛懈怠的态度，其他组都对数据进行了分析并有针对性的改进，而我们并没有做这一步。 Anyway，第一次组队参加比赛就有收获，增长了见识，从交流中也获得了许多。这个比赛之后，就得好好看paper了。 __(:з」∠)_]]></content>
       <tags>
         <tag>有感</tag>
-        <tag>比赛</tag>
         <tag>莱斯杯</tag>
+        <tag>比赛</tag>
       </tags>
   </entry>
   <entry>
@@ -793,8 +905,8 @@
         <tag>Paper</tag>
         <tag>Transformer</tag>
         <tag>每周论文阅读</tag>
-        <tag>Language Modeling</tag>
         <tag>ACT</tag>
+        <tag>Language Modeling</tag>
       </tags>
   </entry>
   <entry>
@@ -1109,8 +1221,8 @@
     <content type="text"><![CDATA[前几日（周日）去了达观杯答辩现场听了前10名做了报告，有了一些感想，但一直没有抽出时间写一下自己的感想（懒）。 自己大概花了十来天做了一下比赛，实际上也就是一个文本分类的比赛，因为没有比赛经验的缘故，走了很多弯路。不过也学到了一些东西。 现记录前十名的一些idea/trick： 数据增强 因为给的句子长度很长，因此在做截断的时候后面的就没法训练到了，可以将文本倒序作为新的数据训练模型。可以充分利用到数据 将数据打乱、随机删除，实际上就是对一个句子的词进行sample再组合 打乱词序以增加数据量 使用pseudo labeling，但有的队伍使用这个做出效果了，但有的没有 特征工程 假设开头中间结尾的信息对分类有帮助，因此截取该部分信息做训练 改进baseline的tfidf的特征工程方法，使用基于熵的词权重计算 降维，留下最重要的特征。先用卡方分布降到20万，再用SVD降到8000 将word2vec和GloVe拼接起来作为deep learning模型的输入 将文章分段，每段取前20后20拼起来 模型融合 所有队伍都无一例外使用了模型融合，stacking或者简单的投票 DL+ML —&gt; lgbm model —&gt; voting 深度模型+传统模型，在深度模型最后一层加入传统模型的信息/feature 后向选择剔除冗余模型 DL&amp;其他 HAN，选择10个attention vector 对易错类增加权重，通过改变损失函数来增加权重 CNN, [1,2,3,4,5,6]*600 提出新的模型（第一名） 其实除了一些trick，我还是有些失望的，因为都是用模型融合堆出来的，这也让我对比赛失去了一些兴趣。虽然能理解现在的比赛都是这样的，但感觉实在太暴力了。当然，其中还是有一些亮点的，有一支队伍立意很高，从理解业务的角度出发而不是堆模型，也取得了很好的效果；还有一个使用了最新论文中的特征工程改进方法，令我耳目一新；以及第一名在比赛过程中提出来三个新的模型。 Anyway，我目前还是太菜了，还是安心搞科研吧。_(:з」∠)]]></content>
       <tags>
         <tag>有感</tag>
-        <tag>达观杯</tag>
         <tag>比赛</tag>
+        <tag>达观杯</tag>
       </tags>
   </entry>
   <entry>
@@ -1264,8 +1376,8 @@
     <content type="text"><![CDATA[最近在写Hierarchical attention network的时候遇到了如下的bug： one of the variables needed for gradient computation has been modified by an inplace operation 在查阅了文档和请教了其他人之后，最终找到了bug。 1234for i in range(seq_len): h_i = rnn_outputs[i] # batch,hidden*2 a_i = attn_weights[i].unsqueeze_(1) # take in-place opt may cause an error a_i = a_i.expand_as(h_i) # batch,hidden*2 这是我原来的逻辑，我在无意中做了inplace操作，导致了bug的发生。正确的做法应该是这样的： 12345for i in range(seq_len): h_i = rnn_outputs[i] # batch,hidden*2 # a_i = attn_weights[i].unsqueeze_(1) # take in-place opt may cause an error a_i = attn_weights[i].unsqueeze(1) # batch,1 a_i = a_i.expand_as(h_i) # batch,hidden*2 实际上，在实践过程中应当尽量避免inplace操作，在官方文档中也提到了（存疑）这点，虽然提供了inplace操作，但并不推荐使用。 具体的原因是，在Pytorch构建计算图的过程中，会记录每个节点是怎么来的，但inplace会破坏这种关系，使得在回传的时候没法正常求导。 特别地，有两种情况不应该使用inplace操作（摘自知乎）： 对于requires_grad=True的叶子张量(leaf tensor)不能使用inplace operation 对于在求梯度阶段需要用到的张量不能使用inplace operation Reference:https://zhuanlan.zhihu.com/p/38475183]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>遇到的问题</tag>
         <tag>Pytorch</tag>
+        <tag>遇到的问题</tag>
       </tags>
   </entry>
   <entry>
@@ -1301,9 +1413,9 @@
     <url>%2F2018%2F08%2F19%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FPython%20Tricks%5B%E8%BD%AC%5D%2F</url>
     <content type="text"><![CDATA[原文地址:https://hackernoon.com/python-tricks-101-2836251922e0 我觉得这个介绍Python一些tricks的文章很好，能够更加熟悉Python的一些非常方便的用法。以下是我觉得有用的几个点。 1️⃣Reverse a String/List [::-1]解释：[:]表示取所有的元素，-1表示步进。[1:5:2]表示的就是从元素1到元素5，每2个距离取一个。 2️⃣transpose 2d array zip()相当于压缩，zip(*)相当于解压。 3️⃣Chained function call 非常简洁的写法。 4️⃣Copy List 之前谈过的Python的赋值、浅拷贝、深拷贝。 5️⃣Dictionary get 避免了dict不存在该元素的问题。 6️⃣✨Sort Dictionary by Value 其中第三种返回的是[‘watermelon’, ‘banana’, ‘apple’, ‘orange’]，没有value了。 7️⃣For…else 注意到如果for在中途break了，就不会进入到else了；只有顺利循环完才会进入到else。 1234567891011121314151617&gt;&gt;&gt; a=[1,2,0]&gt;&gt;&gt; for e in a:... if e==0:... break... else:... print('hello')... #什么都没有print&gt;&gt;&gt; for e in a:... print(e)... else:... print('hello')... 120hello 8️⃣Merge dict’s 合并dict的方法。 9️⃣Min and Max index in List]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Python</tag>
         <tag>Python tricks</tag>
+        <tag>碎片知识</tag>
       </tags>
   </entry>
   <entry>
@@ -1311,9 +1423,9 @@
     <url>%2F2018%2F08%2F19%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%864%2F</url>
     <content type="text"><![CDATA[1️⃣[概率校准(Probability Calibration)]一种对机器学习算法输出结果的校准，通过几个实验可以发现，概率校准能够一定程度提高表现。几个参考资料：直观理解: http://www.bubuko.com/infodetail-2133893.htmlSVC的概率校准在sklearn上的应用: https://blog.csdn.net/ericcchen/article/details/79337716✨完全手册: Calibration of Machine Learning Models 2️⃣[Paper]Hierarchical Attention Networks for Document Classification 亮点在使用层次的RNN结构，以及使用了attention方法。 参考了其他人的代码自己也试着实现了一个，GitHub地址：https://github.com/linzehui/pytorch-hierarchical-attention-network 3️⃣[XGBoost]kaggle神器XGBoost，一篇原理的详细介绍：http://www.cnblogs.com/willnote/p/6801496.html虽然还是有好些地方没搞懂，有必要从头学起。 4️⃣[Python]关于函数列表中单星号(*)和双星号(**)单星号： 代表接收任意多个非关键字参数，将其转换成元组： 1234def one(a,*b): """a是一个普通传入参数，*b是一个非关键字星号参数""" print(b)one(1,2,3,4,5,6) #输出：(2, 3, 4, 5, 6) 对一个普通变量使用单星号，表示对该变量拆分成单个元素 1234def fun(a,b): print(a,b)l=[1,2]fun(*l) #输出 1,2 双星号： 获得字典值 1234def two(a=1,**b): """a是一个普通关键字参数，**b是一个关键字双星号参数""" print(b)two(a=1,b=2,c=3,d=4,e=5,f=6) #输出&#123;'b': 2, 'c': 3, 'e': 5, 'f': 6, 'd': 4&#125; 5️⃣[Pytorch]在Pytorch中，只要一个tensor的requires_grad是true，那么两个tensor的加减乘除后的结果的requires_grad也会是true。]]></content>
       <tags>
+        <tag>Python</tag>
         <tag>碎片知识</tag>
         <tag>Pytorch</tag>
-        <tag>Python</tag>
         <tag>Paper</tag>
         <tag>概率校准</tag>
         <tag>Probability Calibration</tag>
@@ -1335,8 +1447,8 @@
     <url>%2F2018%2F08%2F18%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FPython%E4%B8%AD%E7%9A%84%E6%8B%B7%E8%B4%9D%2F</url>
     <content type="text"><![CDATA[Python的拷贝和C/C++的差别很大，很经常就容易搞混，因此记录一下。 赋值、拷贝 赋值：实际上就是对象的引用，没有开辟新的内存空间12lst=[1,2,3]l=lst 浅拷贝:创建了新对象，但是内容是对原对象的引用，有三种形式 切片 12l=lst[:]l=[i for i in lst] 工厂 1l=list(lst) copy 12import copyl=copy.copy(lst) 深拷贝:copy中的deepcopy，生成一个全新的对象，与原来的对象无关 12import copyl=copy.deepcopy(lst) 例子12345678910111213141516171819202122232425262728293031### 引用https://www.cnblogs.com/huangbiquan/p/7795152.html 的例子###&gt;&gt;&gt; import copy&gt;&gt;&gt; a = [1,2,3,4,['a','b']] #定义一个列表a&gt;&gt;&gt; b = a #赋值&gt;&gt;&gt; c = copy.copy(a) #浅拷贝&gt;&gt;&gt; d = copy.deepcopy(a) #深拷贝&gt;&gt;&gt; a.append(5)&gt;&gt;&gt; print(a)[1, 2, 3, 4, ['a', 'b'], 5] #a添加一个元素5&gt;&gt;&gt; print(b) [1, 2, 3, 4, ['a', 'b'], 5] #b跟着添加一个元素5 &gt;&gt;&gt; print(c)[1, 2, 3, 4, ['a', 'b']] #c保持不变&gt;&gt;&gt; print(d)[1, 2, 3, 4, ['a', 'b']] #d保持不变&gt;&gt;&gt; a[4].append('c') &gt;&gt;&gt; print(a)[1, 2, 3, 4, ['a', 'b', 'c'], 5] #a中的list(即a[4])添加一个元素c&gt;&gt;&gt; print(b)[1, 2, 3, 4, ['a', 'b', 'c'], 5] #b跟着添加一个元素c&gt;&gt;&gt; print(c)[1, 2, 3, 4, ['a', 'b', 'c']] #c跟着添加一个元素c&gt;&gt;&gt; print(d)[1, 2, 3, 4, ['a', 'b']] #d保持不变#说明如下：#1.外层添加元素时， 浅拷贝c不会随原列表a变化而变化；内层list添加元素时，浅拷贝c才会变化。#2.无论原列表a如何变化，深拷贝d都保持不变。#3.赋值对象随着原列表一起变化 Referencehttps://www.cnblogs.com/huangbiquan/p/7795152.htmlhttps://www.cnblogs.com/xueli/p/4952063.html]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Python</tag>
+        <tag>碎片知识</tag>
         <tag>拷贝</tag>
       </tags>
   </entry>
@@ -1364,8 +1476,8 @@
     <url>%2F2018%2F08%2F12%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%863%2F</url>
     <content type="text"><![CDATA[1️⃣[Python]在服务器上跑代码时，如 python project/folder1/a.py，如果a.py引用了一个自定义的模块但又不在folder1内，此时interpreter就会报错，提示找不到该模块。这是因为解释器默认只会在同一个folder下查找。解决方案是在运行前显式添加查找范围。如：1export PYTHONPATH=/home/zhlin/bilm-tf:$PYTHONPATH 那么python解释器就会到该目录下去找。 2️⃣[度量标准] 准确率(accuracy): $ACC=\frac{TP+TN}{TP+TN+FP+FN}$ 衡量的是分类器预测准确的比例 召回率(recall): $Recall=\frac{TP}{TP+FN}$ 正例中被分对的比例，衡量了分类器对正例的识别能力。 精确率(Precision): $P=\frac{TP}{TP+FP}$度量了被分为正例的示例中实际为正例的比例。 F-Measure: $F=\frac{(\alpha^2 +1)P*R}{\alpha^2 (P+R)}$ 其中P是Precision,R是Recall。综合考量了两种度量。 当$\alpha=1$时，称为F1值 $F1=\frac{2PR}{P+R}$ 3️⃣[调参技巧]在google发布的一份关于text-classification的guide中，提到了几个调参的trick。 在feature selection步骤中，卡方检验chi2和方差分析的F值 f_classif的表现相当，在大约选择20k的feature时，准确率达到顶峰，当feature越多，效果并没有提升甚至会下降。 在文本分类中，似乎使用normalization并没有多少用处，建议跳过。 Normalization converts all feature/sample values to small and similar values. This simplifies gradient descent convergence in learning algorithms. From what we have seen, normalization during data preprocessing does not seem to add much value in text classification problems; we recommend skipping this step. 实际上我也测试过，发现确实normalization对于准确率的提高没什么帮助，甚至还有一点下降。]]></content>
       <tags>
-        <tag>碎片知识</tag>
         <tag>Python</tag>
+        <tag>碎片知识</tag>
         <tag>度量标准</tag>
         <tag>调参技巧</tag>
       </tags>
@@ -1384,8 +1496,8 @@
     <url>%2F2018%2F08%2F10%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2FVim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%2F</url>
     <content type="text"><![CDATA[在服务器经常要用到Vim，因此记录常用的快捷键并熟悉之。 退出:q 退出:wq 写入并退出:q! 退出并忽略所有更改:e! 放弃修改并打开原来的文件 插入i 在当前位置前插入a 在当前位置后插入 撤销:u 撤销:U 撤销整行操作Ctrl+r 重做 删除:md 删除第m行nd 删除当前行开始的n行(一共n+1行)dd 删除当前行D 删除当前字符至行尾:m,nd 删除从m到n行的内容，如: :100,10000d:m,$d 删除m行及以后所有的行:10d 移动:n 跳转到行号 如， :100gg 跳到行首G(shift+g)移动到文件尾 搜索/text 搜索text，n搜索下一个，N搜索上一个?text 反向查找:set ignorecase 忽略大小写查找:set noignorecase 不忽略大小写查找*或# 对光标处的单词搜索 复制粘贴v 从当前位置开始，光标经过的地方被选中，再按一下v结束 环境设置:set nu 显示行号:set nonu 隐藏行号:set hlsearch 设置搜索结果高亮 Referencehttps://www.cnblogs.com/wangrx/p/5907013.htmlhttps://www.cnblogs.com/yangjig/p/6014198.html]]></content>
       <tags>
-        <tag>技巧</tag>
         <tag>杂七杂八</tag>
+        <tag>技巧</tag>
         <tag>快捷键</tag>
         <tag>Vim</tag>
       </tags>
@@ -1395,9 +1507,9 @@
     <url>%2F2018%2F08%2F10%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2FPycharm%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7%2F</url>
     <content type="text"><![CDATA[记录Pycharm的一些技巧，让Pycharm更顺手 快捷键0️⃣Double Shift 万能搜索可以搜索文件名、类名、方法名、目录名（在关键字前面加/ ），并不能用来搜索任意关键字 1️⃣ Command+F 在页面搜索 2️⃣ Ctrl+Shift+F Find in Path 在路径下搜索 3️⃣✨Command+E 快速查找文件显示最近打开的文件 4️⃣ Shift+Enter 任意位置换行无论光标在何处都可以直接另起一行 5️⃣ Option+Enter 自动导入模块；万能提示键自动导入如何设置见小技巧#0️⃣ 6️⃣ Ctrl+F10 运行我已经添加了Ctrl+R作为另一对运行快捷键 7️⃣ Command+Shift+ +/- 展开/收缩代码 8️⃣ Option+F 在Dash中搜索 9️⃣ Ctrl+J 不跳转查看代码 小技巧0️⃣ Pycharm自动导入模块https://blog.csdn.net/lantian_123/article/details/78094148 1️⃣ ✨远程部署工程 强烈推荐两步走：配置服务器映射+配置服务器解释器 2️⃣跳转后如何回退开启toolbar即可https://segmentfault.com/a/1190000010205945 Referencehttps://foofish.net/pycharm-tips.htmlhttps://blog.csdn.net/lantian_123/article/details/78094148https://segmentfault.com/a/1190000010205945]]></content>
       <tags>
+        <tag>杂七杂八</tag>
         <tag>技巧</tag>
         <tag>Pycharm</tag>
-        <tag>杂七杂八</tag>
         <tag>快捷键</tag>
       </tags>
   </entry>
@@ -1422,9 +1534,9 @@
     <url>%2F2018%2F08%2F05%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2FPython%E6%83%AF%E4%BE%8B%2F</url>
     <content type="text"><![CDATA[fork from https://github.com/jackfrued/Python-100-Days/blob/master/Python惯例.md Python惯例“惯例”这个词指的是“习惯的做法，常规的办法，一贯的做法”，与这个词对应的英文单词叫“idiom”。由于Python跟其他很多编程语言在语法和使用上还是有比较显著的差别，因此作为一个Python开发者如果不能掌握这些惯例，就无法写出“Pythonic”的代码。下面我们总结了一些在Python开发中的惯用的代码。 让代码既可以被导入又可以被执行。 1if __name__ == '__main__': 用下面的方式判断逻辑“真”或“假”。 12if x:if not x: 好的代码： 12345name = 'jackfrued'fruits = ['apple', 'orange', 'grape']owners = &#123;'1001': '骆昊', '1002': '王大锤'&#125;if name and fruits and owners: print('I love fruits!') 不好的代码： 12345name = 'jackfrued'fruits = ['apple', 'orange', 'grape']owners = &#123;'1001': '骆昊', '1002': '王大锤'&#125;if name != '' and len(fruits) &gt; 0 and owners != &#123;&#125;: print('I love fruits!') 善于使用in运算符。 12if x in items: # 包含for x in items: # 迭代 好的代码： 123name = 'Hao LUO'if 'L' in name: print('The name has an L in it.') 不好的代码： 123name = 'Hao LUO'if name.find('L') != -1: print('This name has an L in it!') 不使用临时变量交换两个值。 1a, b = b, a 用序列构建字符串。 好的代码： 123chars = ['j', 'a', 'c', 'k', 'f', 'r', 'u', 'e', 'd']name = ''.join(chars)print(name) # jackfrued 不好的代码： 12345chars = ['j', 'a', 'c', 'k', 'f', 'r', 'u', 'e', 'd']name = ''for char in chars: name += charprint(name) # jackfrued EAFP优于LBYL。 EAFP - Easier to Ask Forgiveness than Permission. LBYL - Look Before You Leap. 好的代码： 123456d = &#123;'x': '5'&#125;try: value = int(d['x']) print(value)except (KeyError, TypeError, ValueError): value = None 不好的代码： 1234567d = &#123;'x': '5'&#125;if 'x' in d and isinstance(d['x'], str) \ and d['x'].isdigit(): value = int(d['x']) print(value)else: value = None 使用enumerate进行迭代。 好的代码： 123fruits = ['orange', 'grape', 'pitaya', 'blueberry']for index, fruit in enumerate(fruits): print(index, ':', fruit) 不好的代码： 12345fruits = ['orange', 'grape', 'pitaya', 'blueberry']index = 0for fruit in fruits: print(index, ':', fruit) index += 1 用生成式生成列表。 好的代码： 123data = [7, 20, 3, 15, 11]result = [num * 3 for num in data if num &gt; 10]print(result) # [60, 45, 33] 不好的代码： 123456data = [7, 20, 3, 15, 11]result = []for i in data: if i &gt; 10: result.append(i * 3)print(result) # [60, 45, 33] 用zip组合键和值来创建字典。 好的代码： 1234keys = ['1001', '1002', '1003']values = ['骆昊', '王大锤', '白元芳']d = dict(zip(keys, values))print(d) 不好的代码： 123456keys = ['1001', '1002', '1003']values = ['骆昊', '王大锤', '白元芳']d = &#123;&#125;for i, key in enumerate(keys): d[key] = values[i]print(d) 说明：这篇文章的内容来自于网络，有兴趣的读者可以阅读原文。 注：许多原则我认为非常有意义，能够摆脱C/C++的风格，真正写出Pythonic的代码。让我有很大感触的是1、3、8，能够写出非常简洁优雅的代码。同时6我之前从没注意过，习惯了C/C++风格之后总是会在执行之前考虑所有情况，但确实不够优雅，今后可以尝试EAFP风格（什么是EAFP）。]]></content>
       <tags>
+        <tag>Python</tag>
         <tag>碎片知识</tag>
         <tag>杂七杂八</tag>
-        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -1474,8 +1586,8 @@
     <url>%2F2018%2F08%2F03%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADgrad%E7%9A%84%E7%90%86%E8%A7%A3%2F</url>
     <content type="text"><![CDATA[事情起源于我写了一个CNN用于文本分类，但loss一直没降，因此我尝试print(loss.grad)的grad，发现神奇的是loss grad显示为None，接着尝试print(y_pred.grad)，同样是None，但再print loss和y_pred的requires_grad发现是正常的True。 在查阅了资料，以及问了学长之后发现原来并不是bug，而是因为，Pytorch默认不会保存中间节点(intermediate variable)的grad，此举是为了节省内存。 By default, gradients are only retained for leaf variables. non-leaf variables’ gradients are not retained to be inspected later. This was done by design, to save memory. https://discuss.pytorch.org/t/why-cant-i-see-grad-of-an-intermediate-variable/94 实际上可以通过retain_grad()或者hook来查看中间节点的grad。 我后面尝试print了叶子节点，如 print(CNN_model.fc.weight.grad)，最终获得了正确的grad。 ps：所谓中间节点，是由其他节点计算所得的tensor，而叶子节点则是自己定义出来的。 最后我发现，原来loss一直没降的原因是因为我定义的CNN过于复杂，并且数据集偏小，无法快速收敛导致的。]]></content>
       <tags>
-        <tag>遇到的问题</tag>
         <tag>Pytorch</tag>
+        <tag>遇到的问题</tag>
         <tag>grad</tag>
         <tag>bug</tag>
       </tags>
@@ -1485,8 +1597,8 @@
     <url>%2F2018%2F08%2F03%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2FLinux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
     <content type="text"><![CDATA[命令记录自己常用的命令。 1️⃣ls：显式当前目录下的文件和目录 -a 包括隐藏文件 -h 将文件的容量以易读方式列出（配合-s使用） -s 以块数形式显示每个文件分配的尺寸 -l 以较长格式列出信息，可以直接写成 ll 2️⃣cd 到达指定地址 3️⃣kill 杀死程序 -l 信息编号。当l=9时，无条件终止，其他信号可能忽略 killall -u 杀死该用户全部进程 4️⃣ps 报告当前系统的进程状态 -a 所有 -p 指定程序 -u 指定用户 -x 列出该用户的进程的详细信息(我的理解应该是) 如： 5️⃣htop 比top更优，交互更好，同时可以直观看到资源占用情况基本命令与top一致 6️⃣top：动态查看系统运行状态 -u 指定用户名 -p 指定进程 7️⃣nvidia-smi 查看显卡状态watch nvidia-smi 实时查看显卡状态，定时刷新 8️⃣tail 显示指定文件的末尾若干行 -f 显示文件最新追加的内容 -n 显示文件尾部n行内容 -c 显示文件尾部最后c个字符 如： 123tail file 显示最后10行tail -n +20 file 显示从第20行至末尾tail -c 10 file 显示文件file的最后10个字符 ------- 9️⃣echo 用于打印指定的字符串 🔟which 用于查找并显示给定命令的绝对路径，which指令会在环境变量$PATH设置的目录里查找符合条件的文件。使用which命令，可以看到某个系统命令是否存在，以及执行的是哪个位置的命令。如： 1️⃣1️⃣nohup 将程序以忽略挂起信号的方式运行，经常用于在服务器跑代码如：1nohup python xxx.py &gt;output.txt 2&gt;&amp;1 &amp; 即，将输出重定向到output.txt ；最后一个&amp;表示后台挂起 1️⃣2️⃣cp 复制文件 cp [文件] [目标文件夹] -r 递归复制，用于目录的复制 1️⃣3️⃣mv 移动文件、目录或更名 mv [文件/文件夹] [文件夹] -f 强制，当目标文件存在，直接覆盖 -i 会询问 1️⃣4️⃣rm 删除文件或目录 -f 强制删除 -r 递归删除，用于目录删除 1️⃣5️⃣file 用于判断文件的基本数据如： 1️⃣6️⃣tar 对文件打包/压缩 -t 查看打包文件的内容含有哪些文件名 -x 解压缩 -c 新建打包文件 -C 指定压缩/解压目录 -v 解压/压缩过程中将处理的文件名显示出来常用的： 123压缩：tar -jcv -f filename.tar.bz2 要被处理的文件或目录名称查询：tar -jtv -f filename.tar.bz2解压：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录 1️⃣7️⃣wc word count 统计文件内容信息，如行数、字符数 -l 显示文件行数 -c 显示字节数 -m 显示字符数 -w 显示字数 字被定义为由空白、跳格、换行字符分隔的字符串 -L 显示最长行的长度 不加参数，所有的都显示，依次是行数、单词数、字节数、文件名 1️⃣8️⃣df 显示磁盘相关信息 -h 以可读性较高的方式显示信息 1️⃣9️⃣scp 服务器之间的文件复制 如: 1scp -r /test1 zhlin@123.12.1.12:/home/zhlin ✨快捷键Ctrl+a 跳到行首Ctrl+c 退出当前进程Ctrl+e 跳到页尾Ctrl+k 删除当前光标后面的文字Ctrl+l 清屏，等价于clearCtrl+r 搜索之前打过的命令Ctrl+u 删除当前光标前面的文字✨Ctrl+左右键 单词之间跳转 在Mac上可以使用option+左右键Ctrl+y 进行恢复删除Ctrl+z 将当前进程转到后台，使用fg恢复 Referencehttps://blog.csdn.net/leo_618/article/details/53003111 ———-持续更新———-]]></content>
       <tags>
-        <tag>Linux</tag>
         <tag>碎片知识</tag>
+        <tag>Linux</tag>
         <tag>技巧</tag>
       </tags>
   </entry>
@@ -1495,8 +1607,8 @@
     <url>%2F2018%2F07%2F31%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E4%B8%80%E4%B8%AA%E5%85%B3%E4%BA%8Eyield%E7%9A%84%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%2F</url>
     <content type="text"><![CDATA[今天遇到了一个神奇的”bug”，让我对yield的理解更深一步。 这是一个函数，我本来打算试着print一下line内部的格式和内容。 这是调用的主函数： 结果跑出的结果是： ？？？ 我尝试在函数的开头添加print： 结果仍然没有任何的输出。 我试着在main函数添加print： 结果： 也就是说，根本没有进入到get_dataset_from_txt函数啊。 我以为是pycharm的问题还重启了一遍，然而并没有任何作用。问了其他人，他们也觉得很神奇。最后一个同学看了一下函数，发现了问题所在：yield 我突然想起来，yield返回的是一个generator，只有在对generator进行遍历时，才会开始运行… 于是，我试着这么写，试着对generator遍历： 虽然报错了，但函数终于是进去了… 结论：有yield的函数会返回一个generator，当对其进行遍历时，函数才会开始运行。]]></content>
       <tags>
-        <tag>遇到的问题</tag>
         <tag>Python</tag>
+        <tag>遇到的问题</tag>
         <tag>yield</tag>
       </tags>
   </entry>
@@ -1514,9 +1626,9 @@
     <url>%2F2018%2F07%2F29%2F%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86%2F%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%861%2F</url>
     <content type="text"><![CDATA[1️⃣[Python]assert用法： assert expression等价于if not expression: raise AssertionError 2️⃣[Pytorch]Pytorch view：创建一个新的tensor，但他们的data是共享的。 3️⃣[Pytorch]在Pytorch中，embedding的index是不能requires_grad=True的，否则会出错。https://github.com/pytorch/pytorch/issues/7021 之前看过一份代码，设置volatile=false但没有出错，是因为在Pytorch0.4之后volatile已经被弃用了，因此volatile=false不起作用，而默认requires_grad=false 4️⃣[Pytorch]在Pytorch中，nn.Linear(self.hidden_dim,self.vocab_size)的维度是vocab_sizehidden_dim，之前居然没有注意到这个问题。因为nn.Linear的*第一个参数表示输入维度，第二个参数表示输出维度 5️⃣[Pytorch]Pytorch中，使用view一般来说必须要用 .contiguous()。也即： 1batch.view(batch_size, -1).t().contiguous() contiguous()的官方解释：https://discuss.pytorch.org/t/runtimeerror-input-is-not-contiguous/930 It means that your tensor is not a single block of memory, but a block with holes. view can be only used with contiguous tensors, so if you need to use it here, just call .contiguous() before. 也就是说，contiguous会将数据存到一个连续的空间内（block）。 6️⃣[Pytorch]调用Cross_entropy时，Pytorch会帮助你加log和softmax。 7️⃣[Paper]Sliced_RNN 将RNN分块以提高并行性，甚至每层的RNN都可以不一样，达到抽取不同程度的抽象语义信息的目的。实验证明，在不同任务上都有一定的提升，但速度的提升很大。 8️⃣[Tf-idf]计算词语对于句子的重要程度 https://zh.wikipedia.org/wiki/Tf-idf tf是词频，idf是逆向文件频率。也即如果词在该句出现的次数越多，在所有文本的出现次数越少，则词对于句子的重要程度越高。 9️⃣[Numpy]在Numpy中，一个列表虽然是横着表示的，但它是列向量。我之前居然没有注意到这个问题。]]></content>
       <tags>
+        <tag>Python</tag>
         <tag>碎片知识</tag>
         <tag>Pytorch</tag>
-        <tag>Python</tag>
         <tag>Paper</tag>
         <tag>Tf-idf</tag>
         <tag>Numpy</tag>
@@ -1581,9 +1693,9 @@
     <url>%2F2018%2F07%2F23%2F%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%2F%E5%AE%89%E8%A3%85conda%E9%94%99%E8%AF%AF%2F</url>
     <content type="text"><![CDATA[在服务器上安装conda的时候，一开始使用了pip安装pip install conda在安装好conda之后想要使用conda命令，出现： ERROR: The install method you used for conda—probably either pip install conda or easy_install conda—is not compatible with using conda as an application. If your intention is to install conda as a standalone application, currently supported install methods include the Anaconda installer and the miniconda installer. You can download the miniconda installer from https://conda.io/miniconda.html. 然后到官网下载.sh文件并bash安装，仍然没有解决该问题；接着尝试pip uninstall conda，出现 最后在查阅了网上之后，使用 which conda找到conda的地址，并删除rm ××× 最后重新bash安装即可。]]></content>
       <tags>
+        <tag>遇到的问题</tag>
         <tag>杂七杂八</tag>
         <tag>conda</tag>
-        <tag>遇到的问题</tag>
       </tags>
   </entry>
 </search>
