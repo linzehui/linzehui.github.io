@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="RL,Reinforcement Learning,Paper,每周论文阅读,Curriculum Learning,NMT,LSTM,Dropout,meta-learning,multi-task," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本周论文：  Reinforcement Learning based Curriculum Optimization for Neural Machine Translation Curriculum Dropout Self-Paced Curriculum Learning Learning the Easy Things First: Self-Paced Visual Category">
+<meta name="keywords" content="RL,Reinforcement Learning,Paper,每周论文阅读,Curriculum Learning,NMT,LSTM,Dropout,meta-learning,multi-task">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周论文23">
+<meta property="og:url" content="http://www.linzehui.me/2019/06/29/论文/每周论文23/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="本周论文：  Reinforcement Learning based Curriculum Optimization for Neural Machine Translation Curriculum Dropout Self-Paced Curriculum Learning Learning the Easy Things First: Self-Paced Visual Category">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.linzehui.me/images/15618207015732.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618211418694.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618570682762.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618570907601.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618573588977.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618574547524.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618574884386.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618575566938.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618576497211.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618578493722.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618578792843.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618579415036.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618579749575.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618584599852.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618585223767.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618586132751.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618586384812.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618587842064.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618590469237.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618590754597.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618591345801.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618591847957.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618592716048.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618593002197.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15618593717627.jpg">
+<meta property="og:updated_time" content="2019-07-01T11:24:59.512Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每周论文23">
+<meta name="twitter:description" content="本周论文：  Reinforcement Learning based Curriculum Optimization for Neural Machine Translation Curriculum Dropout Self-Paced Curriculum Learning Learning the Easy Things First: Self-Paced Visual Category">
+<meta name="twitter:image" content="http://www.linzehui.me/images/15618207015732.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2019/06/29/论文/每周论文23/"/>
+
+
+
+
+
+  <title>每周论文23 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/06/29/论文/每周论文23/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">每周论文23</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-29T23:01:30+08:00">
+                2019-06-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-01T19:24:59+08:00">
+                2019-07-01
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本周论文：</p>
+<ol>
+<li>Reinforcement Learning based Curriculum Optimization for Neural Machine Translation</li>
+<li>Curriculum Dropout</li>
+<li>Self-Paced Curriculum Learning</li>
+<li>Learning the Easy Things First: Self-Paced Visual Category Discovery</li>
+<li>Curriculum Learning and Minibatch Bucketing in Neural Machine Translation</li>
+<li>Visualizing and Understanding Curriculum Learning for Long Short-Term Memory Networks</li>
+<li>LEARNING TO TEACH</li>
+<li>Learning to learn by gradient descent by gradient descent</li>
+<li>Curriculum Learning of Multiple Tasks</li>
+</ol>
+<h2 id="Reinforcement-Learning-based-Curriculum-Optimization-for-Neural-Machine-Translation"><a href="#Reinforcement-Learning-based-Curriculum-Optimization-for-Neural-Machine-Translation" class="headerlink" title="[Reinforcement Learning based Curriculum Optimization for Neural Machine Translation]"></a>[Reinforcement Learning based Curriculum Optimization for Neural Machine Translation]</h2><p>使用RL来进行学习curriculum learning，使得模型能够在各式各样的数据集上表现良好（也即高效利用noise很大的数据集，如Paracrawl)。</p>
+<p><img src="/images/15618207015732.jpg" width="60%" height="50%"></p>
+<p>使用一个指标CDS来将数据切分：</p>
+<script type="math/tex; mode=display">s(e, f)=\log p_{\theta_{c}}(f | e)-\log p_{\theta_{n}}(f | e)</script><p>$e$和$f$是翻译对。其中$\theta_c$是在可信任的数据集上训练的模型；$\theta_n$在noisy corpus上训练的（比如Paracrawl)。</p>
+<p>RL的几个基本因素：</p>
+<p>Observation Engineering：the observation is the vector containing sentence-level log-likelihoods produced by the NMT system for this prototype batch  参考（Reinforced co-training.）</p>
+<p>Reward Engineering：The reward is a function of the log-likelihood of the development set of interest.</p>
+<p>Action：将数据集分为多个bin，action就是选择在哪个bin里面选择数据集。</p>
+<hr>
+<h2 id="Curriculum-Dropout"><a href="#Curriculum-Dropout" class="headerlink" title="[Curriculum Dropout]"></a>[Curriculum Dropout]</h2><p>顾名思义，就是逐渐增加dropout rate。</p>
+<p><img src="/images/15618211418694.jpg" width="40%" height="50%"></p>
+<hr>
+<h2 id="Self-Paced-Curriculum-Learning"><a href="#Self-Paced-Curriculum-Learning" class="headerlink" title="[Self-Paced Curriculum Learning]"></a>[Self-Paced Curriculum Learning]</h2><p>将self-paced learning与curriculum learning结合。</p>
+<h3 id="Curriculum-Learning"><a href="#Curriculum-Learning" class="headerlink" title="Curriculum Learning"></a>Curriculum Learning</h3><p>通过先验知识对example的难度进行预定义，然后按照先后顺序训练模型；</p>
+<p>这是一种Instructor-driven的训练方法；并不考虑learner的feedback</p>
+<h3 id="Self-paced-Learning"><a href="#Self-paced-Learning" class="headerlink" title="Self-paced Learning"></a>Self-paced Learning</h3><p>是直接将目标函数和curriculum一起结合起来，也即在训练的过程中根据模型的学习情况（loss）调整curriculum。灵活，但不考虑先验知识。</p>
+<script type="math/tex; mode=display">\min _{\mathbf{w}, \mathbf{v} \in[0,1]^{n}} \mathbb{E}(\mathbf{w}, \mathbf{v} ; \lambda)=\sum_{i=1}^{n} v_{i} L\left(y_{i}, f\left(\mathbf{x}_{i}, \mathbf{w}\right)\right)-\lambda \sum_{i=1}^{n} v_{i}</script><p>当loss小于$\lambda$时，就被认为是easy sample，$v=1$；若大于$\lambda$则$v=0$。</p>
+<p>λ controls the pace at which the model learns new samples, and physically λ corresponds to the “age” of the model</p>
+<p>由于学习过程完全被loss主导，因此可能会overfitting。</p>
+<h3 id="Self-paced-Curriculum-Learning"><a href="#Self-paced-Curriculum-Learning" class="headerlink" title="Self-paced Curriculum Learning"></a>Self-paced Curriculum Learning</h3><p>在二者基础上结合，在SPL的框架下引入CL的先验知识。也即既考虑了先验知识，又考虑了模型学习的反馈（loss）。</p>
+<script type="math/tex; mode=display">\min _{\mathbf{w}, \mathbf{v} \in[0,1]^{n}} \mathbb{E}(\mathbf{w}, \mathbf{v} ; \lambda, \Psi)=\sum_{i=1}^{n} v_{i} L\left(y_{i}, g\left(\mathbf{x}_{i}, \mathbf{w}\right)\right)+f(\mathbf{v} ; \lambda),\text { s.t. } \mathbf{v} \in \Psi</script><p>其中$\Psi$代表了预定义的curriculum的集合。</p>
+<p>相当于CL提供了一个弱sample的顺序，建议模型要先学哪些，但他有自由去调整学习目标。<br>我的理解是，$\Psi$是可以动态增大的。但是模型是否要将集合里的example用于训练还是要看上述的目标函数的，loss小的时候代表的easy example，会用于学习。</p>
+<p><img src="/images/15618570682762.jpg" width="60%" height="50%"></p>
+<p>这是CL/SPL/SPCL的区别：</p>
+<p><img src="/images/15618570907601.jpg" width="100%" height="50%"></p>
+<p>思考：</p>
+<p>$\lambda$代表了模型的成熟度，控制的是模型自身的competence；而$\Psi$集合大小代表了instructor认为模型的成熟度。这二者的结合能够让模型更灵活。但是competence还是需要一个手动的schedule。</p>
+<hr>
+<h2 id="Learning-the-Easy-Things-First-Self-Paced-Visual-Category-Discovery"><a href="#Learning-the-Easy-Things-First-Self-Paced-Visual-Category-Discovery" class="headerlink" title="[Learning the Easy Things First: Self-Paced Visual Category Discovery]"></a>[Learning the Easy Things First: Self-Paced Visual Category Discovery]</h2><p>将self-paced的思路应用于visual category discovery。与传统self-paced learning不同的是，并没有将self-paced绑定在loss function上。</p>
+<p>每一次计算两个指标 objectness和context-awareness。将最简单的选出来训练，然后再计算指标，再选出简单的训练。不断循环。</p>
+<p>self-paced与curriculum learning不同，没有一个固定的teacher来判断难易程度，根据每次自己学习的进程来判断难度。本文相较传统self-paced不同，因为将loss和对难易程度的判断两个步骤分离开来。</p>
+<hr>
+<h2 id="Curriculum-Learning-and-Minibatch-Bucketing-in-Neural-Machine-Translation"><a href="#Curriculum-Learning-and-Minibatch-Bucketing-in-Neural-Machine-Translation" class="headerlink" title="[Curriculum Learning and Minibatch Bucketing in Neural Machine Translation]"></a>[Curriculum Learning and Minibatch Bucketing in Neural Machine Translation]</h2><p>在翻译任务上做了一些训练方法上的组合尝试，给出了一些结论。</p>
+<h3 id="Minibatch-Bucketing"><a href="#Minibatch-Bucketing" class="headerlink" title="Minibatch Bucketing"></a>Minibatch Bucketing</h3><p>首先是尝试了在同一个batch里不仅句子长度相同（加速训练），还希望同一个batch内部有某种linguistic的信息(sentence length, number of coordinating conjunctions, number of nouns, number of proper nouns and the number of verbs in the training data pairs)。可能由于他选的这些linguistic并不好，最终并没有发现结果的提升。</p>
+<p><img src="/images/15618573588977.jpg" width="55%" height="50%"></p>
+<h3 id="Curriculum-Learning-1"><a href="#Curriculum-Learning-1" class="headerlink" title="Curriculum Learning"></a>Curriculum Learning</h3><p>对curriculum learning进行了改进，实际上普通的CL间接地强调了easier example，因为他们被sample了多次，所以这里采用了一种新的方法能够让每个example在一个epoch都只被sample一次。</p>
+<p>按照难度将样例分为几个bin，首先从最简单的bin开始取样例，直到该bin的剩余样例个数和第二个bin的样例一样，然后从这两个bin剩下的样例中取样例，直到剩下和第三个bin样例个数一样。这样能保证在一个epoch内每个example的概率是一致的。</p>
+<p>如何判断难易程度？长度，词的频率等</p>
+<h4 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h4><p>①<br>首先，在训练完一个epoch后，使用CL相比没使用CL有提升：</p>
+<p><img src="/images/15618574547524.jpg" width="55%" height="50%"></p>
+<p>②<br>在一个epoch内的训练曲线：</p>
+<p><img src="/images/15618574884386.jpg" width="70%" height="50%"></p>
+<p>可以看到用CL的在每次新加example后都会有一个陡峭的跳跃。特别要注意按照source长度和按照target长度的CL有很大的不同，可能是按照target的CL给了训练进程一个较大的penalization。</p>
+<p>③<br>模型很容易过拟合recent example，因此如果只提供难一点的example，那么在easy的example就容易下降。所以需要mixing strategy。</p>
+<p><img src="/images/15618575566938.jpg" width="70%" height="50%"></p>
+<p>从CL by target length可以看出，陡峭的跳跃说明模型在新加入数据之前很快地adapt在短的句子，而长句一进来又很快adapt到长句。这种快速转换似乎说明了模型的快速适应性。<br>如果不回顾简单的句子，见sorted by length的曲线，可以看到performance很差。<br>同时如果reverse CL，也即一开始evenly cover所有句子，然后只使用短的句子，那么可以看到一开始效果不错，到后面就降低了，这是因为模型快速适应了生成短的句子，就没法生成test集的正常长度的句子。</p>
+<p>④<br>注意到以上都是在一个epoch内（也即过完了一遍训练数据）的结论。在这个epoch后继续几种训练方式（基于‘CL by target length’）。</p>
+<p><img src="/images/15618576497211.jpg" width="70%" height="50%"></p>
+<p>重新从最简单的开始（second epoch of CL by target length)，会伤害performance，但到后面还是有提升的。如果在第二个epoch用shuffle的数据训练，那么可以看到是几乎没有提升的，可能是因为模型已经陷入了当前的optimum了。</p>
+<h3 id="思考与结论"><a href="#思考与结论" class="headerlink" title="思考与结论"></a>思考与结论</h3><p>这里的回顾式的CL，无法减少训练时间，因为要到最后才能获得超越baseline的performance。<br>同时实验证明了，模型的快速适应性，很容易overfitting到最近的训练样例上，因此要设计mixing strategy。</p>
+<hr>
+<h2 id="Visualizing-and-Understanding-Curriculum-Learning-for-Long-Short-Term-Memory-Networks"><a href="#Visualizing-and-Understanding-Curriculum-Learning-for-Long-Short-Term-Memory-Networks" class="headerlink" title="[Visualizing and Understanding Curriculum Learning for Long Short-Term Memory Networks]"></a>[Visualizing and Understanding Curriculum Learning for Long Short-Term Memory Networks]</h2><p>对CL在LSTM的训练的影响进行分析。得到一些结论。</p>
+<p>快速回顾了两种CL：One-Pass Curriculum和Baby Steps Curriculum。</p>
+<p>One-Pass Curriculum：将训练数据分为几个bucket，然后从简单的bucket开始，训练完简单的bucket之后跳到难的bucket。</p>
+<p><img src="/images/15618578493722.jpg" width="60%" height="50%"></p>
+<p>Baby Steps Curriculum：从简单的开始，但在增加难的数据后，不会discard简单的数据。</p>
+<p><img src="/images/15618578792843.jpg" width="60%" height="50%"></p>
+<h3 id="实验-amp-结论"><a href="#实验-amp-结论" class="headerlink" title="实验&amp;结论"></a>实验&amp;结论</h3><p>①<br>Baby Step在多个任务上都明显更好，如，digit sum</p>
+<p><img src="/images/15618579415036.jpg" width="90%" height="50%"></p>
+<p>不仅仅是结果好，同时其variance也更小：</p>
+<p><img src="/images/15618579749575.jpg" width="70%" height="50%"></p>
+<p>②<br>在不同复杂度的模型上，CL效果都好，当模型越大，效果的差距会越小。注意到，CL在参数数量更少的情况下效果更好。</p>
+<p><img src="/images/15618584599852.jpg" width="60%" height="50%"></p>
+<p>③<br>在情感分析任务上的结果</p>
+<p><img src="/images/15618585223767.jpg" width="60%" height="50%"></p>
+<p>首先是使用CL效果好，其次是使用conjunction（是指连接两个情感极性相反句子的词（but等）（conjunctions where a span of text contradicts or supports overall sentiment polarity））效果差距更大。说明使用CL使得模型的鲁棒性更强。</p>
+<p>同时CL在使用不同词来预测，其表现较为一致：</p>
+<p><img src="/images/15618586132751.jpg" width="70%" height="50%"></p>
+<p>同时，在数据量更少的情况下，CL的效果越明显：</p>
+<p><img src="/images/15618586384812.jpg" width="60%" height="50%"></p>
+<p>结论：<br>CL在数据少，模型小的情况下很重要。</p>
+<hr>
+<h2 id="LEARNING-TO-TEACH"><a href="#LEARNING-TO-TEACH" class="headerlink" title="[LEARNING TO TEACH]"></a>[LEARNING TO TEACH]</h2><p>采用RL的方法来进行schedule learning。 主要结构是，一个teacher决定给学生的数据，一个学生通过给定的数据训练，并获得reward和state作为feedback返回给teacher。 </p>
+<p>teacher的目标是提供数据，loss function和hypothesis space。实际上论文只讨论了数据的提供。目标：</p>
+<script type="math/tex; mode=display">\min _{D, L, \Omega} \mathcal{M}\left(\mu(D, L, \Omega), D_{t e s t}\right)</script><p><img src="/images/15618587842064.jpg" width="55%" height="50%"></p>
+<p>RL的几个要素：</p>
+<p>action：随机sample数据，然后从这些sample的数据里再筛选出数据。也即对所有sample的数据打标签，1代表给学生model训练，0则被抛弃掉。</p>
+<p>state：实际上就是一些人工定好的feature。数据的feature，比如label category，句子长度，linguistic feature等；student model的feature，也即代表了当前NN被训练得多好的feature，历史training loss和历史的validation accuracy等；还有就是二者的结合，比如predicted probability ；data的loss等</p>
+<p>reward：和student model收敛速度相关，也即记录第一个在测试集上准确率超过某个阈值的mini-batch的索引，然后计算：</p>
+<script type="math/tex; mode=display">r_{T}=-\log \left(i_{\tau} / T^{\prime}\right)</script><p>这是为了鼓励早点收敛。</p>
+<p>本篇文章框架设定得很好，但并没有讨论另外两个。</p>
+<hr>
+<h2 id="Learning-to-learn-by-gradient-descent-by-gradient-descent"><a href="#Learning-to-learn-by-gradient-descent-by-gradient-descent" class="headerlink" title="[Learning to learn by gradient descent by gradient descent]"></a>[Learning to learn by gradient descent by gradient descent]</h2><p>meta-learning的一种方法。被题目吸引，大概看了看。</p>
+<p>利用LSTM来学习optimizer的梯度，以帮助模型更好的训练。</p>
+<p><img src="/images/15618590469237.jpg" width="50%" height="50%"></p>
+<p><img src="/images/15618590754597.jpg" width="60%" height="50%"></p>
+<p>其中虚线不回传，实线回传。</p>
+<p>同时，注意到为了让参数的顺序对输出没有影响，因为假设每个参数坐标都是独立的，因此使用separate hidden state，但LSTM的参数是共享的，也即每个输入梯度都单独处理。</p>
+<p><img src="/images/15618591345801.jpg" width="45%" height="50%"></p>
+<hr>
+<h2 id="Teacher-Student-Curriculum-Learning"><a href="#Teacher-Student-Curriculum-Learning" class="headerlink" title="[Teacher-Student Curriculum Learning]"></a>[Teacher-Student Curriculum Learning]</h2><p>没仔细看，大概思想是，一个teacher帮忙选择sub-task让student学。</p>
+<p><img src="/images/15618591847957.jpg" width="50%" height="50%"></p>
+<p>state代表的是student的整个状态，neural network parameters and optimizer state) and is not observable to the Teacher.</p>
+<p>action是teacher所采取的动作，也即选择某个task；</p>
+<p>observation 是在选择了task后所获得的score；</p>
+<p>reward也即在该timestep的score的改变 $r_{t}=x_{t}^{(i)}-x_{t_{i}^{\prime}}^{(i)}$</p>
+<p>CL的地方在于从简单的学起（也即带来的改变最大的task），然后当其提升的速率降低了，则降低其sample的概率。</p>
+<p>总结起来，CL的几个原则：</p>
+<p><img src="/images/15618592716048.jpg" width="80%" height="50%"></p>
+<p>理想化的CL：</p>
+<p><img src="/images/15618593002197.jpg" width="76%" height="50%"></p>
+<p>当某个task的score下降了，说明他忘了这部分的知识，又要提升该sample的概率。</p>
+<hr>
+<h2 id="Curriculum-Learning-of-Multiple-Tasks"><a href="#Curriculum-Learning-of-Multiple-Tasks" class="headerlink" title="[Curriculum Learning of Multiple Tasks]"></a>[Curriculum Learning of Multiple Tasks]</h2><p>学习多个task，按照先后顺序来，而不是联合训练。上一个task学到的weight用于下一个task的初始化。</p>
+<p><img src="/images/15618593717627.jpg" width="55%" height="50%"></p>
+<p>自动选择task顺序。我的理解是，每当训练完一个subtask，测试所有其他subtask，选择表现最好的那个（某个指标，平均期望误差），然后选择该subtask继续训练。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    林泽辉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.linzehui.me/2019/06/29/论文/每周论文23/" title="每周论文23">http://www.linzehui.me/2019/06/29/论文/每周论文23/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://www.linzehui.me" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RL/" rel="tag"> <i class="fa fa-tag"></i> RL</a>
+          
+            <a href="/tags/Reinforcement-Learning/" rel="tag"> <i class="fa fa-tag"></i> Reinforcement Learning</a>
+          
+            <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
+          
+            <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
+          
+            <a href="/tags/Curriculum-Learning/" rel="tag"> <i class="fa fa-tag"></i> Curriculum Learning</a>
+          
+            <a href="/tags/NMT/" rel="tag"> <i class="fa fa-tag"></i> NMT</a>
+          
+            <a href="/tags/LSTM/" rel="tag"> <i class="fa fa-tag"></i> LSTM</a>
+          
+            <a href="/tags/Dropout/" rel="tag"> <i class="fa fa-tag"></i> Dropout</a>
+          
+            <a href="/tags/meta-learning/" rel="tag"> <i class="fa fa-tag"></i> meta-learning</a>
+          
+            <a href="/tags/multi-task/" rel="tag"> <i class="fa fa-tag"></i> multi-task</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/23/诗词&句/佳句分享1/" rel="next" title="佳句分享1">
+                <i class="fa fa-chevron-left"></i> 佳句分享1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/30/诗词&句/每周诗词30/" rel="prev" title="每周诗词30">
+                每周诗词30 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA0OC8xNjU3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg"
+                alt="林泽辉" />
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">169</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">190</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reinforcement-Learning-based-Curriculum-Optimization-for-Neural-Machine-Translation"><span class="nav-number">1.</span> <span class="nav-text">[Reinforcement Learning based Curriculum Optimization for Neural Machine Translation]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Curriculum-Dropout"><span class="nav-number">2.</span> <span class="nav-text">[Curriculum Dropout]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Self-Paced-Curriculum-Learning"><span class="nav-number">3.</span> <span class="nav-text">[Self-Paced Curriculum Learning]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Curriculum-Learning"><span class="nav-number">3.1.</span> <span class="nav-text">Curriculum Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Self-paced-Learning"><span class="nav-number">3.2.</span> <span class="nav-text">Self-paced Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Self-paced-Curriculum-Learning"><span class="nav-number">3.3.</span> <span class="nav-text">Self-paced Curriculum Learning</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Learning-the-Easy-Things-First-Self-Paced-Visual-Category-Discovery"><span class="nav-number">4.</span> <span class="nav-text">[Learning the Easy Things First: Self-Paced Visual Category Discovery]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Curriculum-Learning-and-Minibatch-Bucketing-in-Neural-Machine-Translation"><span class="nav-number">5.</span> <span class="nav-text">[Curriculum Learning and Minibatch Bucketing in Neural Machine Translation]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Minibatch-Bucketing"><span class="nav-number">5.1.</span> <span class="nav-text">Minibatch Bucketing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Curriculum-Learning-1"><span class="nav-number">5.2.</span> <span class="nav-text">Curriculum Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实验结果"><span class="nav-number">5.2.1.</span> <span class="nav-text">实验结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考与结论"><span class="nav-number">5.3.</span> <span class="nav-text">思考与结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Visualizing-and-Understanding-Curriculum-Learning-for-Long-Short-Term-Memory-Networks"><span class="nav-number">6.</span> <span class="nav-text">[Visualizing and Understanding Curriculum Learning for Long Short-Term Memory Networks]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实验-amp-结论"><span class="nav-number">6.1.</span> <span class="nav-text">实验&amp;结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LEARNING-TO-TEACH"><span class="nav-number">7.</span> <span class="nav-text">[LEARNING TO TEACH]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Learning-to-learn-by-gradient-descent-by-gradient-descent"><span class="nav-number">8.</span> <span class="nav-text">[Learning to learn by gradient descent by gradient descent]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Teacher-Student-Curriculum-Learning"><span class="nav-number">9.</span> <span class="nav-text">[Teacher-Student Curriculum Learning]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Curriculum-Learning-of-Multiple-Tasks"><span class="nav-number">10.</span> <span class="nav-text">[Curriculum Learning of Multiple Tasks]</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
