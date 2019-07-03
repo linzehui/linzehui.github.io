@@ -3,6 +3,31 @@
   
     
     <entry>
+      <title>关于Pytorch中inf导数的nan问题</title>
+      <link href="/2019/07/03/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPyTorch%E4%B8%ADinf%E5%AF%BC%E6%95%B0%E7%9A%84nan%E9%97%AE%E9%A2%98/"/>
+      <url>/2019/07/03/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPyTorch%E4%B8%ADinf%E5%AF%BC%E6%95%B0%E7%9A%84nan%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p>想要实现一个功能。将Transformer中多层的attention矩阵加权平均。也即：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pre_attn shape: batch_size*n_head,6,target_len,source_len</span></span><br><span class="line">self.attn_alpha = Parameter(torch.zeros(<span class="number">1</span>, <span class="number">6</span>))</span><br><span class="line">normalized_alpha = F.softmax(self.attn_alpha, dim=<span class="number">-1</span>)  <span class="comment"># 1,6</span></span><br><span class="line">normalized_alpha = normalized_alpha.reshape(<span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">1</span>)  <span class="comment"># 1,6,1,1</span></span><br><span class="line"></span><br><span class="line">weighted_attn = prev_attn * normalized_alpha</span><br><span class="line">weighted_attn = weighted_attn.sum(dim=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure><p>获得的<code>weighted_attn</code>就是所有层的attention矩阵的加权平均。再将<code>weighted_attn</code>用于后面的计算。其中<code>attn_alpha</code>是可学习的参数。</p><p>功能很简单，但在backward完后，<code>attn_alpha</code>就会一下子跳到nan。按理说，虽然attn矩阵里面存在-inf，但只要是同一个batch，inf存在的索引位置应该都是一样的，即使加权求和也不会导致某一行全为-inf，使得在softmax后存在nan的情况。</p><p>在航总排查了一晚上后，也尝试了各种假设，最终发现，是因为梯度回传时的问题。也即当<code>weighted_attn = prev_attn * normalized_alpha</code>这句代码梯度回传的时候，由于存在’-inf’的值，alpha的梯度就会有nan（因为上句代码中alpha的导数是<code>prev_attn</code>，当<code>prev_attn</code>存在inf时，则grad则为nan。</p><p>解决方案是，首先获得attention矩阵的mask，接着使用masked_fill将inf的部分置为0，再和alpha相乘，此时就不会有nan的情况出现了。也即：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pre_attn shape: batch_size*n_head,6,target_len,source_len</span></span><br><span class="line">self.attn_alpha = Parameter(torch.zeros(<span class="number">1</span>, <span class="number">6</span>))</span><br><span class="line">normalized_alpha = F.softmax(self.attn_alpha, dim=<span class="number">-1</span>)  <span class="comment"># 1,6</span></span><br><span class="line">normalized_alpha = normalized_alpha.reshape(<span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">1</span>)  <span class="comment"># 1,6,1,1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ----多加这几行 --- #</span></span><br><span class="line">_attn_mask = prev_attn == float(<span class="string">'-inf'</span>)  <span class="comment"># -inf的位置为1</span></span><br><span class="line">new_pre_attn = pre_attn.data.masked_fill(_attn_mask,<span class="number">0</span>) <span class="comment"># 将-inf填充为0</span></span><br><span class="line"><span class="comment"># --------------- # </span></span><br><span class="line"></span><br><span class="line">weighted_attn = new_pre_attn * normalized_alpha</span><br><span class="line">weighted_attn = weighted_attn.sum(dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure><p>总结起来，则是，当tensor存在inf时，与它相乘的tensor如果是可更新的，则该tensor的grad为nan。所以在处理有inf的tensor要特别注意，可能出现相乘后梯度回传grad为nan的情况，还有一种情况则是若某一行全为inf，过softmax后则也会出现nan。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 碎片知识 </tag>
+            
+            <tag> 遇到的问题 </tag>
+            
+            <tag> Pytorch </tag>
+            
+            <tag> nan </tag>
+            
+            <tag> inf </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>每周碎片知识24</title>
       <link href="/2019/06/30/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8624/"/>
       <url>/2019/06/30/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8624/</url>
@@ -761,31 +786,6 @@
     </entry>
     
     <entry>
-      <title>关于Pytorch中inf导数的nan问题</title>
-      <link href="/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPyTorch%E4%B8%ADinf%E5%AF%BC%E6%95%B0%E7%9A%84nan%E9%97%AE%E9%A2%98/"/>
-      <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPyTorch%E4%B8%ADinf%E5%AF%BC%E6%95%B0%E7%9A%84nan%E9%97%AE%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[<p>想要实现一个功能。将Transformer中多层的attention矩阵加权平均。也即：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pre_attn shape: batch_size*n_head,6,target_len,source_len</span></span><br><span class="line">self.attn_alpha = Parameter(torch.zeros(<span class="number">1</span>, <span class="number">6</span>))</span><br><span class="line">normalized_alpha = F.softmax(self.attn_alpha, dim=<span class="number">-1</span>)  <span class="comment"># 1,6</span></span><br><span class="line">normalized_alpha = normalized_alpha.reshape(<span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">1</span>)  <span class="comment"># 1,6,1,1</span></span><br><span class="line"></span><br><span class="line">weighted_attn = prev_attn * normalized_alpha</span><br><span class="line">weighted_attn = weighted_attn.sum(dim=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure><p>获得的<code>weighted_attn</code>就是所有层的attention矩阵的加权平均。再将<code>weighted_attn</code>用于后面的计算。其中<code>attn_alpha</code>是可学习的参数。</p><p>功能很简单，但在backward完后，<code>attn_alpha</code>就会一下子跳到nan。按理说，虽然attn矩阵里面存在-inf，但只要是同一个batch，inf存在的索引位置应该都是一样的，即使加权求和也不会导致某一行全为-inf，使得在softmax后存在nan的情况。</p><p>在航总排查了一晚上后，也尝试了各种假设，最终发现，是因为梯度回传时的问题。也即当<code>weighted_attn = prev_attn * normalized_alpha</code>这句代码梯度回传的时候，由于存在’-inf’的值，alpha的梯度就会有nan（因为上句代码中alpha的导数是<code>prev_attn</code>，当<code>prev_attn</code>存在inf时，则grad则为nan。</p><p>解决方案是，首先获得attention矩阵的mask，接着使用masked_fill将inf的部分置为0，再和alpha相乘，此时就不会有nan的情况出现了。也即：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pre_attn shape: batch_size*n_head,6,target_len,source_len</span></span><br><span class="line">self.attn_alpha = Parameter(torch.zeros(<span class="number">1</span>, <span class="number">6</span>))</span><br><span class="line">normalized_alpha = F.softmax(self.attn_alpha, dim=<span class="number">-1</span>)  <span class="comment"># 1,6</span></span><br><span class="line">normalized_alpha = normalized_alpha.reshape(<span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">1</span>)  <span class="comment"># 1,6,1,1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ----多加这几行 --- #</span></span><br><span class="line">_attn_mask = prev_attn == float(<span class="string">'-inf'</span>)  <span class="comment"># -inf的位置为1</span></span><br><span class="line">new_pre_attn = pre_attn.data.masked_fill(_attn_mask,<span class="number">0</span>) <span class="comment"># 将-inf填充为0</span></span><br><span class="line"><span class="comment"># --------------- # </span></span><br><span class="line"></span><br><span class="line">weighted_attn = new_pre_attn * normalized_alpha</span><br><span class="line">weighted_attn = weighted_attn.sum(dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure><p>总结起来，则是，当tensor存在inf时，与它相乘的tensor如果是可更新的，则该tensor的grad为nan。所以在处理有inf的tensor要特别注意，可能出现相乘后梯度回传grad为nan的情况，还有一种情况则是若某一行全为inf，过softmax后则也会出现nan。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 碎片知识 </tag>
-            
-            <tag> 遇到的问题 </tag>
-            
-            <tag> Pytorch </tag>
-            
-            <tag> inf </tag>
-            
-            <tag> nan </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
       <title>关于Pytorch中Parameter的nan</title>
       <link href="/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADParameter%E7%9A%84nan/"/>
       <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADParameter%E7%9A%84nan/</url>
@@ -827,9 +827,9 @@
             
             <tag> Pytorch </tag>
             
-            <tag> inf </tag>
-            
             <tag> nan </tag>
+            
+            <tag> inf </tag>
             
             <tag> Parameter </tag>
             
@@ -1368,9 +1368,9 @@
             
             <tag> 碎片知识 </tag>
             
-            <tag> Python </tag>
-            
             <tag> Pytorch </tag>
+            
+            <tag> Python </tag>
             
             <tag> RNN </tag>
             
@@ -1538,9 +1538,9 @@
             
             <tag> 遇到的问题 </tag>
             
-            <tag> Python </tag>
-            
             <tag> Pytorch </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -1563,9 +1563,9 @@
             
             <tag> 每周论文阅读 </tag>
             
-            <tag> Dropout </tag>
-            
             <tag> DiSAN </tag>
+            
+            <tag> Dropout </tag>
             
             <tag> Targeted Dropout </tag>
             
@@ -3121,9 +3121,9 @@
             
             <tag> 碎片知识 </tag>
             
-            <tag> Python </tag>
-            
             <tag> Pytorch </tag>
+            
+            <tag> Python </tag>
             
             <tag> Paper </tag>
             
@@ -3272,11 +3272,11 @@
       
         <tags>
             
+            <tag> 技巧 </tag>
+            
             <tag> 杂七杂八 </tag>
             
             <tag> 快捷键 </tag>
-            
-            <tag> 技巧 </tag>
             
             <tag> Vim </tag>
             
@@ -3295,13 +3295,13 @@
       
         <tags>
             
+            <tag> 技巧 </tag>
+            
             <tag> Pycharm </tag>
             
             <tag> 杂七杂八 </tag>
             
             <tag> 快捷键 </tag>
-            
-            <tag> 技巧 </tag>
             
         </tags>
       
@@ -3352,9 +3352,9 @@
       
         <tags>
             
-            <tag> 杂七杂八 </tag>
-            
             <tag> 碎片知识 </tag>
+            
+            <tag> 杂七杂八 </tag>
             
             <tag> Python </tag>
             
@@ -3484,11 +3484,11 @@
       
         <tags>
             
-            <tag> 技巧 </tag>
-            
             <tag> Linux </tag>
             
             <tag> 碎片知识 </tag>
+            
+            <tag> 技巧 </tag>
             
         </tags>
       
@@ -3547,9 +3547,9 @@
             
             <tag> 碎片知识 </tag>
             
-            <tag> Python </tag>
-            
             <tag> Pytorch </tag>
+            
+            <tag> Python </tag>
             
             <tag> Paper </tag>
             
