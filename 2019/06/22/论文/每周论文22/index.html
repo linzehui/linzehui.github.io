@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15611949233220.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15612123996612.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15612125916364.jpg">
-<meta property="og:updated_time" content="2019-06-23T09:00:47.643Z">
+<meta property="og:updated_time" content="2019-07-02T01:03:49.690Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文22">
 <meta name="twitter:description" content="本周论文：  Boosting Neural Machine Translation Curriculum Learning by Transfer Learning: Theory and Experiments with Deep Networks On The Power of Curriculum Learning in Training Deep Networks XLNet: Gene">
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-06-23T17:00:47+08:00">
-                2019-06-23
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-02T09:03:49+08:00">
+                2019-07-02
               </time>
             
           </span>
@@ -403,7 +403,7 @@
 <p>We emulate a human spending additional energy on learning complex concepts<br>To force the system to pay much attention on them can adjust it towards “mastering” more information for these sentences.</p>
 </blockquote>
 <h3 id="几个想法"><a href="#几个想法" class="headerlink" title="几个想法"></a>几个想法</h3><p>这篇文章是一篇短文，很明显很多实验没做，估计是到deadline了就提交了，比如分析不同比例的结果，以及一些消融实验也没做。</p>
-<p>第二，为什么boostrap能够有提升并且有更稳定的训练？这种resample的方式能够带来一定的uncertainty，可能会有一定的帮助，虽然帮助不大，论文里面也仅仅提到了uncertainty，显然应该做进一步的分析。</p>
+<p>为什么boostrap能够有提升并且有更稳定的训练？这种resample的方式能够带来一定的uncertainty，可能会有一定的帮助，虽然帮助不大，论文里面也仅仅提到了uncertainty，显然应该做进一步的分析。</p>
 <p>这篇论文提供的insight我认为还是有一定启发的，首先这并不是curriculum-learning，也即没有从简单到难，而是正常的训练，只不过通过增加更多的difficult example，同时去掉了部分太简单的sample，说明仅仅是修改数据分布而不是修改数据的输入顺序（本质上也是修改数据分布），也能够带来提升效果；第二，通过减少简单数据，是否意味着，每个模型都有一个下限（特别是对于神经网络这种能力很强的模型），低过这个下限的数据对模型的训练是没有帮助的，反而可能会使模型overfit到某个简单的pattern（这和learning to execute的结论似乎有些类似）；同时，增加更多的difficult sample，使得模型的上限被提高了；以及，是否可以将curriculum learning与该思路结合起来，达到更好的结果，一方面由易到难，另一方面修改数据分布，使得模型更多关注难的数据。</p>
 <hr>
 <h2 id="Curriculum-Learning-by-Transfer-Learning-Theory-and-Experiments-with-Deep-Networks"><a href="#Curriculum-Learning-by-Transfer-Learning-Theory-and-Experiments-with-Deep-Networks" class="headerlink" title="[Curriculum Learning by Transfer Learning: Theory and Experiments with Deep Networks]"></a>[Curriculum Learning by Transfer Learning: Theory and Experiments with Deep Networks]</h2><p>ICML18的文章，极其硬核，根本看不懂理论的部分。</p>
@@ -638,7 +638,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">169</span>
+                  <span class="site-state-item-count">170</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -651,7 +651,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">190</span>
+                  <span class="site-state-item-count">191</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

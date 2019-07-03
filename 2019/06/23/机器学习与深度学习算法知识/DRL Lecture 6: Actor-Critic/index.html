@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15612576221669.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15612577121214.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15612577508356.jpg">
-<meta property="og:updated_time" content="2019-06-23T09:03:05.214Z">
+<meta property="og:updated_time" content="2019-07-02T06:21:34.529Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DRL Lecture 6:Actor-Critic">
 <meta name="twitter:description" content="介绍了actor-critic的算法，结合了policy gradient和Q-learning。 Actor-Critic原先policy gradient的算法是直接学习一个policy： \nabla \overline{R}_{\theta} \approx \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_{n}}\left(\sum_{t^{\prime">
@@ -337,8 +337,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-06-23T17:03:05+08:00">
-                2019-06-23
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-02T14:21:34+08:00">
+                2019-07-02
               </time>
             
           </span>
@@ -384,12 +384,12 @@
 <script type="math/tex; mode=display">\nabla \overline{R}_{\theta} \approx \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_{n}}\left(r_{t}^{n}+V^{\pi}\left(s_{t+1}^{n}\right)-V^{\pi}\left(s_{t}^{n}\right)\right) \nabla \log p_{\theta}\left(a_{t}^{n} | s_{t}^{n}\right)</script><p>由于$\pi$和$V$的输入都是$s$，在实际操作中可以将这两个网络的前几层参数共享：</p>
 <p><img src="/images/15612576221669.jpg" width="50%" height="50%"></p>
 <p>同时对$\pi$的输出加以限制，希望有更大的entropy，这样能够探索更多情况。</p>
-<h2 id="Pathwise-Derivative-Policy-Gradient"><a href="#Pathwise-Derivative-Policy-Gradient" class="headerlink" title="Pathwise Derivative Policy Gradient"></a>Pathwise Derivative Policy Gradient</h2><p>接下来介绍了一种新的方法，直接学习一个$\pi$，输入$s￥可以获得能够最大化Q的action。这和GAN的思想很相似。</p>
+<h2 id="Pathwise-Derivative-Policy-Gradient"><a href="#Pathwise-Derivative-Policy-Gradient" class="headerlink" title="Pathwise Derivative Policy Gradient"></a>Pathwise Derivative Policy Gradient</h2><p>接下来介绍了一种新的方法，直接学习一个$\pi$，输入$s$可以获得能够最大化Q的action。这和GAN的思想很相似。</p>
 <p><img src="/images/15612577121214.jpg" width="60%" height="50%"></p>
 <p>这样$\pi$天然地能够处理continuous的情况。</p>
 <p>所以整个流程：</p>
 <p><img src="/images/15612577508356.jpg" width="55%" height="50%"></p>
-<p>先交互，学习一个好的$Q$，然后将这个$Q￥作为标准，学习$\pi$使得输出的$Q$最大。和GAN很像。</p>
+<p>先交互，学习一个好的$Q$，然后将这个$Q$作为标准，学习$\pi$使得输出的$Q$最大。和GAN很像。</p>
 
       
     </div>
@@ -548,7 +548,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">169</span>
+                  <span class="site-state-item-count">170</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -561,7 +561,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">190</span>
+                  <span class="site-state-item-count">191</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

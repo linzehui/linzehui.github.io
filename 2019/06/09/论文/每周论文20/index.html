@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.linzehui.me/images/15600510169611.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15600511595880.jpg">
-<meta property="og:updated_time" content="2019-06-10T03:00:48.266Z">
+<meta property="og:updated_time" content="2019-07-02T00:57:06.620Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文20">
 <meta name="twitter:description" content="本周论文：  Neural Machine Translation in Linear Time Curriculum Learning Bilingual Word Embeddings for Phrase-Based Machine Translation LEARNING TO EXECUTE Self-Paced Learning for Latent Variable Models">
@@ -335,8 +335,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-06-10T11:00:48+08:00">
-                2019-06-10
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-02T08:57:06+08:00">
+                2019-07-02
               </time>
             
           </span>
@@ -406,7 +406,7 @@
 <p>本文在使用传统curriculum learning训练的过程中，发现效果并不好，因此转而使用一种混合训练方法。也即部分随机采样，部分采用传统curriculum learning的逐渐提升难度。</p>
 <p>为什么传统的不够好？<br>作者的解释是，如果从简单的开始学，LSTM会将所有的memory用以记忆简单的样本，在训练过程中就构建好了这套pattern，而在逐渐增加难度时，要求对memory的pattern重组，而这点不容易做到。而如果采样部分随机样本，则能够同时学习到部分难的example，从而<strong>防止overfit到某个简单的pattern上</strong>。</p>
 <hr>
-<h2 id="Self-Paced-Learning-for-Latent-Variable-Models"><a href="#Self-Paced-Learning-for-Latent-Variable-Models" class="headerlink" title="[Self-Paced Learning for Latent Variable Models]"></a>[Self-Paced Learning for Latent Variable Models]</h2><p>传统机器学习的优化算法。证明了curriculum learning也能在传统机器学习算法中取得效果。</p>
+<h2 id="Self-Paced-Learning-for-Latent-Variable-Models"><a href="#Self-Paced-Learning-for-Latent-Variable-Models" class="headerlink" title="[Self-Paced Learning for Latent Variable Models]"></a>[Self-Paced Learning for Latent Variable Models]</h2><p>传统机器学习的优化算法。<del>证明了curriculum learning也能在传统机器学习算法中取得效果。</del> 7.2更新：之前理解错了，self-paced learning与Curriculum Learning虽有共通之处但并不是一个东西。CL的difficulty score是在训练前固定的，而SPL是在训练过程中根据example的loss来动态决定的。</p>
 <script type="math/tex; mode=display">\left(\mathbf{w}_{t+1}, \mathbf{v}_{t+1}\right)=\underset{\mathbf{w} \in \mathbb{R}^{d}, \mathbf{v} \in\{0,1\}^{n}}{\operatorname{argmin}}\left(r(\mathbf{w})+\sum_{i=1}^{n} v_{i} f\left(\mathbf{x}_{i}, \mathbf{y}_{i} ; \mathbf{w}\right)-\frac{1}{K} \sum_{i=1}^{n} v_{i}\right)</script><p>只有那些能够很好fit的sample作数，也即使用二元变量v来控制。</p>
 
       
@@ -560,7 +560,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">169</span>
+                  <span class="site-state-item-count">170</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -573,7 +573,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">190</span>
+                  <span class="site-state-item-count">191</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
