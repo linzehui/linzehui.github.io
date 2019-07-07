@@ -3,6 +3,42 @@
   
     
     <entry>
+      <title>佳句分享2</title>
+      <link href="/2019/07/07/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB2/"/>
+      <url>/2019/07/07/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB2/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>Learn to be ordinary before you wish to be extraordinary.</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 佳句分享 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>每周论文24</title>
+      <link href="/2019/07/07/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8724/"/>
+      <url>/2019/07/07/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8724/</url>
+      
+        <content type="html"><![CDATA[<p>本周论文：</p><ol><li>Curriculum Learning for Multi-Task Classiﬁcation of Visual Attributes</li><li>Highway Networks</li><li>Deep Residual Learning for Image Recognition</li><li>Gated Feedback Recurrent Neural Networks</li><li>Densely Connected Convolutional Networks</li></ol><h2 id="Curriculum-Learning-for-Multi-Task-Classiﬁcation-of-Visual-Attributes"><a href="#Curriculum-Learning-for-Multi-Task-Classiﬁcation-of-Visual-Attributes" class="headerlink" title="[Curriculum Learning for Multi-Task Classiﬁcation of Visual Attributes]"></a>[Curriculum Learning for Multi-Task Classiﬁcation of Visual Attributes]</h2><p>大致思路是：将数据分为两个task，先训练强相关的task，然后再训练弱相关的task。具体来说，对于visual attribute，先训练强相关label，然后再训练弱相关的label。<br><img src="/images/15624682482609.jpg" width="60%" height="50%"></p><p>具体形式：</p><p><img src="/images/15624684432867.jpg" width="80%" height="50%"></p><p>如何计算相关性：</p><script type="math/tex; mode=display">p_{i}=\sum_{j=1, j \neq i}^{T} \frac{\operatorname{cov}\left(y_{t_{i}}, y_{t_{j}}\right)}{\sigma\left(y_{t_{i}}\right) \sigma\left(y_{t_{j}}\right)}, i=1, \ldots, T</script><p>top 50%是强相关的，剩下都是弱相关的。</p><p>我的理解是，似乎是将label给切分了：</p><p><img src="/images/15624684979775.jpg" width="60%" height="50%"></p><hr><h2 id="Highway-Networks"><a href="#Highway-Networks" class="headerlink" title="[Highway Networks]"></a>[Highway Networks]</h2><p>原先的普通layer：</p><script type="math/tex; mode=display">\mathbf{y}=H\left(\mathbf{x}, \mathbf{W}_{\mathbf{H}}\right)</script><p>为了能够训练很深的网络，改成：</p><script type="math/tex; mode=display">\mathbf{y}=H\left(\mathbf{x}, \mathbf{W}_{\mathbf{H}}\right) \cdot T\left(\mathbf{x}, \mathbf{W}_{\mathbf{T}}\right)+\mathbf{x} \cdot C\left(\mathbf{x}, \mathbf{W}_{\mathbf{C}}\right)</script><p>也即增加两个仿射变换。其中T是transformer gate，而C是carry gate。这样能够有助于模型的优化。</p><p>简单起见：</p><script type="math/tex; mode=display">\mathbf{y}=H\left(\mathbf{x}, \mathbf{W}_{\mathbf{H}}\right) \cdot T\left(\mathbf{x}, \mathbf{W}_{\mathbf{T}}\right)+\mathbf{x} \cdot\left(1-T\left(\mathbf{x}, \mathbf{W}_{\mathbf{T}}\right)\right)</script><p>在T中，可以设bias为负，也即一开始偏向carry的行为。</p><hr><h2 id="Deep-Residual-Learning-for-Image-Recognition"><a href="#Deep-Residual-Learning-for-Image-Recognition" class="headerlink" title="[Deep Residual Learning for Image Recognition]"></a>[Deep Residual Learning for Image Recognition]</h2><p><img src="/images/15624688998473.jpg" width="50%" height="50%"></p><p>本质是残差比直接学习x的变换更容易。对模型的优化更容易。</p><blockquote><p>if an identity mapping were optimal, it would be easier to push the residual to zero than to ﬁt an identity mapping by a stack of nonlinear layers</p></blockquote><p>可否理解highway network是ResNet的进阶版？</p><hr><h2 id="Gated-Feedback-Recurrent-Neural-Networks"><a href="#Gated-Feedback-Recurrent-Neural-Networks" class="headerlink" title="[Gated Feedback Recurrent Neural Networks]"></a>[Gated Feedback Recurrent Neural Networks]</h2><p><img src="/images/15624692408778.jpg" width="80%" height="50%"></p><p>对于多层的RNN，第l层的time step为t的h，可以接收上一个time step的大于l层的也接收小于l层的hidden state。</p><hr><h2 id="Densely-Connected-Convolutional-Networks"><a href="#Densely-Connected-Convolutional-Networks" class="headerlink" title="[Densely Connected Convolutional Networks]"></a>[Densely Connected Convolutional Networks]</h2><p>在一个block内，每层都连接到后面的层。</p><p><img src="/images/15624693085589.jpg" width="70%" height="50%"></p><p>注意到，在连接形式上，resnet是相加：</p><script type="math/tex; mode=display">\mathbf{x}_{\ell}=H_{\ell}\left(\mathbf{x}_{\ell-1}\right)+\mathbf{x}_{\ell-1}</script><p>而DenseNet则是concat：</p><script type="math/tex; mode=display">\mathbf{x}_{\ell}=H_{\ell}\left(\left[\mathbf{x}_{0}, \mathbf{x}_{1}, \dots, \mathbf{x}_{\ell-1}\right]\right)</script><p>这里的H是Bn-Relu-Conv。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Paper </tag>
+            
+            <tag> 每周论文阅读 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>关于Pytorch中inf导数的nan问题</title>
       <link href="/2019/07/03/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPyTorch%E4%B8%ADinf%E5%AF%BC%E6%95%B0%E7%9A%84nan%E9%97%AE%E9%A2%98/"/>
       <url>/2019/07/03/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPyTorch%E4%B8%ADinf%E5%AF%BC%E6%95%B0%E7%9A%84nan%E9%97%AE%E9%A2%98/</url>
@@ -117,32 +153,15 @@
             
             <tag> LSTM </tag>
             
-            <tag> Curriculum Learning </tag>
-            
             <tag> NMT </tag>
+            
+            <tag> Curriculum Learning </tag>
             
             <tag> Dropout </tag>
             
             <tag> meta-learning </tag>
             
             <tag> multi-task </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>佳句分享1</title>
-      <link href="/2019/06/23/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB1/"/>
-      <url>/2019/06/23/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB1/</url>
-      
-        <content type="html"><![CDATA[<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>仓促本身就是最要不得的态度。当你做某件事的时候，一旦想要求快 ，就表示你再也不关心它，而想去做别的事   —《禅与摩托车维修艺术》</p><h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><p>自律使我们与众不同，自律令我们活得更高级。<br>也正是自律，使我们获得更自由的人生。<br>假如我们像动物一样，听从欲望，逃避痛苦，我们并不是真的自由行动。我们只是成了欲望和冲动的奴隶。我们不是在选择，而是在服从。但人之所以为人， 就在于，人不是被欲望主宰，而是自我主宰。       —康德</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 佳句分享 </tag>
             
         </tags>
       
@@ -162,6 +181,23 @@
             <tag> 诗词 </tag>
             
             <tag> 诗词分享 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>佳句分享1</title>
+      <link href="/2019/06/23/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB1/"/>
+      <url>/2019/06/23/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB1/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>仓促本身就是最要不得的态度。当你做某件事的时候，一旦想要求快 ，就表示你再也不关心它，而想去做别的事 —《禅与摩托车维修艺术》</p><h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><p>自律使我们与众不同，自律令我们活得更高级。<br>也正是自律，使我们获得更自由的人生。<br>假如我们像动物一样，听从欲望，逃避痛苦，我们并不是真的自由行动。我们只是成了欲望和冲动的奴隶。我们不是在选择，而是在服从。但人之所以为人， 就在于，人不是被欲望主宰，而是自我主宰。 —康德</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 佳句分享 </tag>
             
         </tags>
       
@@ -346,11 +382,11 @@
             
             <tag> 每周论文阅读 </tag>
             
-            <tag> Curriculum Learning </tag>
+            <tag> Language Modeling </tag>
             
             <tag> NMT </tag>
             
-            <tag> Language Modeling </tag>
+            <tag> Curriculum Learning </tag>
             
             <tag> boosting </tag>
             
@@ -500,9 +536,9 @@
             
             <tag> 每周论文阅读 </tag>
             
-            <tag> Curriculum Learning </tag>
-            
             <tag> NMT </tag>
+            
+            <tag> Curriculum Learning </tag>
             
         </tags>
       
@@ -802,9 +838,9 @@
             
             <tag> Pytorch </tag>
             
-            <tag> nan </tag>
-            
             <tag> Parameter </tag>
+            
+            <tag> nan </tag>
             
         </tags>
       
@@ -815,7 +851,7 @@
       <link href="/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/PyTorch%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E5%90%88%E9%9B%86%EF%BC%89/"/>
       <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/PyTorch%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E5%90%88%E9%9B%86%EF%BC%89/</url>
       
-        <content type="html"><![CDATA[<p>断断续续记录一下在写代码过程中遇到的问题以及解决方案。</p><h3 id="Parameter-nan"><a href="#Parameter-nan" class="headerlink" title="[Parameter nan]"></a>[Parameter nan]</h3><p><a href="http://www.linzehui.me/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/">http://www.linzehui.me/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/</a></p><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>在定义Parameter时遇到其元素存在nan的问题。</p><p><img src="/images/15571956719188.jpg" width="80%" height="50%"></p><h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p><code>torch.Tensor(m,n)</code>只分配空间而没有将其中的值更新。</p><h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p><code>torch.Tensor(m,n)</code>是不建议使用的初始化方法。改成<code>torch.nn.Parameter(torch.rand(10,10))</code>或<code>torch.nn.Parameter(torch.zeros(10,10))</code>。</p><hr><h3 id="inplace-operation"><a href="#inplace-operation" class="headerlink" title="[+= inplace operation]"></a>[+= inplace operation]</h3><p><a href="http://www.linzehui.me/2018/12/09/碎片知识/Python中的+=操作/">http://www.linzehui.me/2018/12/09/碎片知识/Python中的+=操作/</a></p><h4 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">output+=pos  <span class="comment"># pos是不可更新的tensor，output是可更新的tensor</span></span><br></pre></td></tr></table></figure><p>程序报错：“one of the variables needed for gradient computation has been modified by an inplace operation”。</p><h4 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h4><p>在Python中，<code>i=i+1</code>和<code>i+=1</code>是不同的，如果被操作数没有部署 ’<strong>iadd</strong>‘方法，则<code>i=i+1</code>和<code>i+=1</code>是等价的，’+=‘并不会产生in-place操作；当被操作数有部署该方法且正确部署，则是会产生in-place操作的。当没有in-place操作时，<code>i=i+1</code>表示对i重分配，也即i指向了另一个空间而不是原来的空间。<br>在Pytorch中，也有部署’<strong>iadd</strong>()‘操作，所以对于<code>output+=pos</code>，output内部的值被改变了，也即在计算图中引入了环，在反向求导时则会出错。</p><h4 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h4><p>尽量不使用inplace操作，即使是官方的API，如<code>unsqueeze_()</code>。已经好几次被inplace操作坑了。</p><hr><h3 id="squeeze-dim"><a href="#squeeze-dim" class="headerlink" title="[squeeze dim]"></a>[squeeze dim]</h3><p><a href="http://www.linzehui.me/2019/05/06/碎片知识/每周碎片知识20/">http://www.linzehui.me/2019/05/06/碎片知识/每周碎片知识20/</a></p><h4 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h4><p>当需要squeeze时，未指定squeeze的维度，导致后面的维数不一致，报错。</p><h4 id="原因-2"><a href="#原因-2" class="headerlink" title="原因"></a>原因</h4><p>由于在某些极端情况下，可能会出现batch size为1的情况，当遇到这个情况时，squeeze会将其一并压缩掉，使得后面会出错。</p><h4 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h4><p>尽可能显式指定要压缩的维度，除非很明确就要将所有的压缩掉。</p><hr><h3 id="inf—-gt-nan"><a href="#inf—-gt-nan" class="headerlink" title="[inf—&gt;nan]"></a>[inf—&gt;nan]</h3><h4 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h4><p>两个tensor相乘，若其中一个tensor带有inf，则另一个tensor（该tensor可更新）的grad则为nan。</p><h4 id="原因-3"><a href="#原因-3" class="headerlink" title="原因"></a>原因</h4><p>乘法的导数的定义。两个tensor相乘，导数为对方。在PyTorch中，inf的grad则为nan。</p><h4 id="解决方案-3"><a href="#解决方案-3" class="headerlink" title="解决方案"></a>解决方案</h4><p>在相乘前，将带有inf的tensor做masked_fill，inf被置为0后再相乘。</p>]]></content>
+        <content type="html"><![CDATA[<p>断断续续记录一下在写代码过程中遇到的问题以及解决方案。</p><h3 id="Parameter-nan"><a href="#Parameter-nan" class="headerlink" title="[Parameter nan]"></a>[Parameter nan]</h3><p><a href="http://www.linzehui.me/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/">http://www.linzehui.me/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/</a></p><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>在定义Parameter时遇到其元素存在nan的问题。</p><p><img src="/images/15571956719188.jpg" width="80%" height="50%"></p><h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p><code>torch.Tensor(m,n)</code>只分配空间而没有将其中的值更新。</p><h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p><code>torch.Tensor(m,n)</code>是不建议使用的初始化方法。改成<code>torch.nn.Parameter(torch.rand(10,10))</code>或<code>torch.nn.Parameter(torch.zeros(10,10))</code>。</p><hr><h3 id="inplace-operation"><a href="#inplace-operation" class="headerlink" title="[+= inplace operation]"></a>[+= inplace operation]</h3><p><a href="http://www.linzehui.me/2018/12/09/碎片知识/Python中的+=操作/">http://www.linzehui.me/2018/12/09/碎片知识/Python中的+=操作/</a></p><h4 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">output+=pos  <span class="comment"># pos是不可更新的tensor，output是可更新的tensor</span></span><br></pre></td></tr></table></figure><p>程序报错：“one of the variables needed for gradient computation has been modified by an inplace operation”。</p><h4 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h4><p>在Python中，<code>i=i+1</code>和<code>i+=1</code>是不同的，如果被操作数没有部署 ’<strong>iadd</strong>‘方法，则<code>i=i+1</code>和<code>i+=1</code>是等价的，’+=‘并不会产生in-place操作；当被操作数有部署该方法且正确部署，则是会产生in-place操作的。当没有in-place操作时，<code>i=i+1</code>表示对i重分配，也即i指向了另一个空间而不是原来的空间。<br>在Pytorch中，也有部署’<strong>iadd</strong>()‘操作，所以对于<code>output+=pos</code>，output内部的值被改变了，也即在计算图中引入了环，在反向求导时则会出错。</p><h4 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h4><p>尽量不使用inplace操作，即使是官方的API，如<code>unsqueeze_()</code>。已经好几次被inplace操作坑了。</p><hr><h3 id="squeeze-dim"><a href="#squeeze-dim" class="headerlink" title="[squeeze dim]"></a>[squeeze dim]</h3><p><a href="http://www.linzehui.me/2019/05/06/碎片知识/每周碎片知识20/">http://www.linzehui.me/2019/05/06/碎片知识/每周碎片知识20/</a></p><h4 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h4><p>当需要squeeze时，未指定squeeze的维度，导致后面的维数不一致，报错。</p><h4 id="原因-2"><a href="#原因-2" class="headerlink" title="原因"></a>原因</h4><p>由于在某些极端情况下，可能会出现batch size为1的情况，当遇到这个情况时，squeeze会将其一并压缩掉，使得后面会出错。</p><h4 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h4><p>尽可能显式指定要压缩的维度，除非很明确就要将所有的压缩掉。</p><hr><h3 id="inf—-gt-nan"><a href="#inf—-gt-nan" class="headerlink" title="[inf—&gt;nan]"></a>[inf—&gt;nan]</h3><p><a href="http://www.linzehui.me/2019/07/03/碎片知识/关于PyTorch中inf导数的nan问题/">http://www.linzehui.me/2019/07/03/碎片知识/关于PyTorch中inf导数的nan问题/</a></p><h4 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h4><p>两个tensor相乘，若其中一个tensor带有inf，则另一个tensor（该tensor可更新）的grad则为nan。</p><h4 id="原因-3"><a href="#原因-3" class="headerlink" title="原因"></a>原因</h4><p>乘法的导数的定义。两个tensor相乘，导数为对方。在PyTorch中，inf的grad则为nan。</p><h4 id="解决方案-3"><a href="#解决方案-3" class="headerlink" title="解决方案"></a>解决方案</h4><p>在相乘前，将带有inf的tensor做masked_fill，inf被置为0后再相乘。</p>]]></content>
       
       
       
@@ -827,11 +863,11 @@
             
             <tag> Pytorch </tag>
             
+            <tag> Parameter </tag>
+            
             <tag> nan </tag>
             
             <tag> inf </tag>
-            
-            <tag> Parameter </tag>
             
         </tags>
       
@@ -991,9 +1027,9 @@
             
             <tag> 每周论文阅读 </tag>
             
-            <tag> Curriculum Learning </tag>
-            
             <tag> NMT </tag>
+            
+            <tag> Curriculum Learning </tag>
             
             <tag> intrinsic dimension </tag>
             
@@ -1368,9 +1404,9 @@
             
             <tag> 碎片知识 </tag>
             
-            <tag> Pytorch </tag>
-            
             <tag> Python </tag>
+            
+            <tag> Pytorch </tag>
             
             <tag> RNN </tag>
             
@@ -1538,9 +1574,9 @@
             
             <tag> 遇到的问题 </tag>
             
-            <tag> Pytorch </tag>
-            
             <tag> Python </tag>
+            
+            <tag> Pytorch </tag>
             
         </tags>
       
@@ -1563,9 +1599,9 @@
             
             <tag> 每周论文阅读 </tag>
             
-            <tag> DiSAN </tag>
-            
             <tag> Dropout </tag>
+            
+            <tag> DiSAN </tag>
             
             <tag> Targeted Dropout </tag>
             
@@ -1672,9 +1708,9 @@
             
             <tag> 每周论文阅读 </tag>
             
-            <tag> NMT </tag>
-            
             <tag> self-attention </tag>
+            
+            <tag> NMT </tag>
             
             <tag> locality modeling </tag>
             
@@ -1917,8 +1953,6 @@
             
             <tag> 每周论文阅读 </tag>
             
-            <tag> NMT </tag>
-            
             <tag> Language Modeling </tag>
             
             <tag> self-attention </tag>
@@ -1926,6 +1960,8 @@
             <tag> relative position </tag>
             
             <tag> positional encoding </tag>
+            
+            <tag> NMT </tag>
             
             <tag> eager translation model </tag>
             
@@ -3121,9 +3157,9 @@
             
             <tag> 碎片知识 </tag>
             
-            <tag> Pytorch </tag>
-            
             <tag> Python </tag>
+            
+            <tag> Pytorch </tag>
             
             <tag> Paper </tag>
             
@@ -3547,9 +3583,9 @@
             
             <tag> 碎片知识 </tag>
             
-            <tag> Pytorch </tag>
-            
             <tag> Python </tag>
+            
+            <tag> Pytorch </tag>
             
             <tag> Paper </tag>
             
