@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Paper,每周论文阅读," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本周论文：  Easy Samples First: Self-paced Reranking for Zero-Example Multimedia Search Self-Paced Learning with Diversity Self-paced dictionary learning for image classification Self-Paced Learning for Ma">
+<meta name="keywords" content="Paper,每周论文阅读">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周论文25">
+<meta property="og:url" content="http://www.linzehui.me/2019/07/26/论文/每周论文25/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="本周论文：  Easy Samples First: Self-paced Reranking for Zero-Example Multimedia Search Self-Paced Learning with Diversity Self-paced dictionary learning for image classification Self-Paced Learning for Ma">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.linzehui.me/images/15642823398246.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15642828676000.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15642831390970.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15642831523214.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15642834501198.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15642835464066.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15642836554962.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15642848899908.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15642849290180.jpg">
+<meta property="og:updated_time" content="2019-07-30T15:05:12.672Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每周论文25">
+<meta name="twitter:description" content="本周论文：  Easy Samples First: Self-paced Reranking for Zero-Example Multimedia Search Self-Paced Learning with Diversity Self-paced dictionary learning for image classification Self-Paced Learning for Ma">
+<meta name="twitter:image" content="http://www.linzehui.me/images/15642823398246.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2019/07/26/论文/每周论文25/"/>
+
+
+
+
+
+  <title>每周论文25 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/07/26/论文/每周论文25/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">每周论文25</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-26T22:12:30+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-30T23:05:12+08:00">
+                2019-07-30
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本周论文：</p>
+<ol>
+<li>Easy Samples First: Self-paced Reranking for Zero-Example Multimedia Search</li>
+<li>Self-Paced Learning with Diversity</li>
+<li>Self-paced dictionary learning for image classification</li>
+<li>Self-Paced Learning for Matrix Factorization</li>
+<li>Self-Paced Boost Learning for Classification</li>
+</ol>
+<h2 id="Easy-Samples-First-Self-paced-Reranking-for-Zero-Example-Multimedia-Search"><a href="#Easy-Samples-First-Self-paced-Reranking-for-Zero-Example-Multimedia-Search" class="headerlink" title="[Easy Samples First: Self-paced Reranking for Zero-Example Multimedia Search]"></a>[Easy Samples First: Self-paced Reranking for Zero-Example Multimedia Search]</h2><p>将self-paced learning用于reranking任务中。并且将self-paced learning更一般化，也即将原先的{0,1} weight扩展到实数域。</p>
+<p>具体而言，原先的self-paced learning：</p>
+<script type="math/tex; mode=display">\left(\mathbf{w}_{t+1}, \mathbf{v}_{t+1}\right)=\underset{\mathbf{w} \in \mathbb{R}^{d}, \mathbf{v} \in\{0,1\}^{n}}{\operatorname{argmin}}\left(r(\mathbf{w})+\sum_{i=1}^{n} v_{i} f\left(\mathbf{x}_{i}, \mathbf{y}_{i} ; \mathbf{w}\right)-\frac{1}{K} \sum_{i=1}^{n} v_{i}\right)</script><p>其中 $v\in\{0,1 \}$。后项的正则项为 $f(\mathbf{v} ; k)=-\frac{1}{k}|\mathbf{v}|_{1}=-\frac{1}{k} \sum_{i=1}^{n} v_{i}$</p>
+<p>得出的解为：</p>
+<script type="math/tex; mode=display">v_{i}^{*}=\left\{\begin{array}{ll}{1} & {\frac{1}{m} \sum_{j=1}^{m} C \ell_{i j}<\frac{1}{k}} \\ {0} & {\frac{1}{m} \sum_{j=1}^{m} C \ell_{i j} \geq \frac{1}{k}}\end{array}\right.</script><p>而现在：<br>①线性，也即与loss是线性相关的：</p>
+<script type="math/tex; mode=display">f(\mathbf{v} ; k)=\frac{1}{k}\left(\frac{1}{2}\|\mathbf{v}\|_{2}^{2}-\sum_{i=1}^{n} v_{i}\right)</script><p>得出的解为：</p>
+<script type="math/tex; mode=display">v_{i}^{*}=\left\{\begin{array}{ll}{-k\left(\frac{1}{m} \sum_{j=1}^{m} C \ell_{i j}\right)+1} & {\frac{1}{m} \sum_{i=1}^{m} C \ell_{i j}<\frac{1}{k}} \\ {0} & {\frac{1}{m} \sum_{i=1}^{m} C \ell_{i j} \geq \frac{1}{k}}\end{array}\right.</script><p>②log关系</p>
+<script type="math/tex; mode=display">f(\mathbf{v} ; k)=\sum_{i=1}^{n}\left(\zeta v_{i}-\frac{\zeta^{v_{i}}}{\log \zeta}\right)</script><p>解为：</p>
+<script type="math/tex; mode=display">v_{i}^{*}=\left\{\begin{array}{ll}{\frac{1}{\log \zeta} \log \left(\frac{1}{m} \sum_{j=1}^{m} C \ell_{i j}+\zeta\right)} & {\frac{1}{m} \sum_{i=1}^{m} C \ell_{i j}<\frac{1}{k}} \\ {0} & {\frac{1}{m} \sum_{i=1}^{m} C \ell_{i j} \geq \frac{1}{k}}\end{array}\right.</script><p>③soft与hard的混合</p>
+<script type="math/tex; mode=display">f\left(\mathbf{v} ; k, k^{\prime}\right)=-\zeta \sum_{i=1}^{n} \log \left(v_{i}+\zeta k\right)</script><p>解为：</p>
+<script type="math/tex; mode=display">v_{i}^{*}=\left\{\begin{array}{ll}{1} & {\frac{1}{m} \sum_{i=1}^{m} C \ell_{i j} \leq \frac{1}{k^{\prime}}} \\ {0} & {\frac{1}{m} \sum_{i=1}^{m} C \ell_{i j} \geq \frac{1}{k}} \\ {\frac{m \zeta}{\sum_{i=1}^{m} C \ell_{i j}}-k \zeta} & {\text { otherwise }}\end{array}\right.</script><p>也即，loss太小置为1，太大置为0.中间则是实数域。</p>
+<p><img src="/images/15642823398246.jpg" width="60%" height="50%"></p>
+<hr>
+<h2 id="Self-Paced-Learning-with-Diversity"><a href="#Self-Paced-Learning-with-Diversity" class="headerlink" title="[Self-Paced Learning with Diversity]"></a>[Self-Paced Learning with Diversity]</h2><p>提出在self-paced learning中，不仅仅要选择简单的，还要增加diversity这一指标，使得模型不会overfitting到某个pattern上，同时diverse sample能够帮助模型学到更为comprehensive的知识。</p>
+<p><img src="/images/15642828676000.jpg" width="80%" height="50%"></p>
+<p>由于self-paced learning没有先验知识，一开始接收到的某领域的sample，之后会倾向于一直选择该领域的sample，因为之前获取到该领域的sample，使得该领域的sample的loss相较其他领域的loss更低。这样就容易overfit到某个特定的pattern。为了解决这一问题，需要显式将diversity作为objective。</p>
+<p>基于这一思想，有：<br>假设训练数据$\mathbf{X}=\left(\mathbf{x}_{1}, \cdots, \mathbf{x}_{n}\right) \in \mathbb{R}^{m \times n}$，分成b个group $\mathbf{X}^{(1)}, \cdots, \mathbf{X}^{(b)}$。weight vector为$\mathbf{v}=\left[\mathbf{v}^{(1)}, \cdots, \mathbf{v}^{(b)}\right]$，其中$\mathbf{v}^{(j)}=\left(v_{1}^{(j)}, \cdots, v_{n_{j}}^{(j)}\right)^{T} \in[0,1]^{n_{j}}$</p>
+<p>因此objective function为：</p>
+<script type="math/tex; mode=display">\min _{\mathbf{w}, \mathbf{v}} \mathbb{E}(\mathbf{w}, \mathbf{v} ; \lambda, \gamma)=\sum_{i=1}^{n} v_{i} L\left(y_{i}, f\left(\mathbf{x}_{i}, \mathbf{w}\right)\right)-\lambda \sum_{i=1}^{n} v_{i}-\gamma\|\mathbf{v}\|_{2,1}, \text { s.t. } \mathbf{v} \in[0,1]^{n}</script><p>其中新的regularization为$-|\mathbf{v}|_{2,1}=-\sum_{j=1}^{b}\left|\mathbf{v}^{(j)}\right|_{2}$，该regularization能够使模型尽量去选择不同group的sample。</p>
+<p>当每个group只有一个sample时，公式退化为：</p>
+<script type="math/tex; mode=display">\min _{\mathbf{w}, \mathbf{v}} \mathbb{E}(\mathbf{w}, \mathbf{v} ; \lambda)=\sum_{i=1}^{n} v_{i} L\left(y_{i}, f\left(\mathbf{x}_{i}, \mathbf{w}\right)\right)-\lambda \sum_{i=1}^{n} v_{i}, \text { s.t. } \mathbf{v} \in[0,1]^{n}</script><p>因此最终的算法：</p>
+<p><img src="/images/15642831390970.jpg" width="90%" height="50%"></p>
+<p><img src="/images/15642831523214.jpg" width="90%" height="50%"></p>
+<p>思考：从diversity的角度确实很有道理，如果不是这篇文章我想不到diversity。作者对问题的认识很到位。</p>
+<hr>
+<h2 id="Self-paced-dictionary-learning-for-image-classification"><a href="#Self-paced-dictionary-learning-for-image-classification" class="headerlink" title="[Self-paced dictionary learning for image classification]"></a>[Self-paced dictionary learning for image classification]</h2><p>将self-paced learning用于dictionary learning（对该领域不了解）。</p>
+<p><img src="/images/15642834501198.jpg" width="60%" height="50%"></p>
+<p>另一贡献是提出新的阈值更新公式：</p>
+<script type="math/tex; mode=display">\sigma=f(\pi, t)=\pi+\log \left(\pi^{2}+c\right) t \quad(c \geq 1)</script><p>保证第一轮有超过一半的example认定为easy。</p>
+<hr>
+<h2 id="Self-Paced-Learning-for-Matrix-Factorization"><a href="#Self-Paced-Learning-for-Matrix-Factorization" class="headerlink" title="[Self-Paced Learning for Matrix Factorization]"></a>[Self-Paced Learning for Matrix Factorization]</h2><p>将self-paced learning用于矩阵分解，同时将hard weight改成soft weight。</p>
+<p><img src="/images/15642835464066.jpg" width="60%" height="50%"></p>
+<p><img src="/images/15642836554962.jpg" width="65%" height="50%"></p>
+<hr>
+<h2 id="Self-Paced-Boost-Learning-for-Classification"><a href="#Self-Paced-Boost-Learning-for-Classification" class="headerlink" title="[Self-Paced Boost Learning for Classification]"></a>[Self-Paced Boost Learning for Classification]</h2><p>提出将boost和self-paced的思想结合在一起的算法。</p>
+<h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>在监督学习中，有两个重要的原则：effectiveness和robustness。effectiveness专注于让模型分对，提高accuracy；而robustness则是减少noise或者confusing example的影响。<br>boosting算法则专注于effectiveness，因为渐进地专注于分错的example。但这样就容易使得模型缺少鲁棒性/泛化性。<br>self-paced learning则是从简单到难，这样可以通过稳步提高模型能力之后减少confusing/noise example对模型的影响，也即一开始就能够学习简单的pattern，而不会受到confusing/noise example所有的复杂pattern的影响。</p>
+<p>boosting与self-paced有共通之处以及互补之处：<br>二者都是一个渐进的过程，从weak state到strong state。<br>boosting更考虑effectiveness，而SPL则更考虑robustness；boosting对不充分学习的样本施加负面抑制（不大懂意思，应该是说算法强调不充分学习的样本），而SPL正面鼓励简单易学的样本。boosting更专注于class之间的margin，尝试去拟合each sample，通过动态选择具有不同模式的简单样本；SPL更关注类内变化。<br>因此，boosting倾向于反映local的pattern，更加对noise敏感，而SPL则更加平滑，具有更强的鲁棒性。</p>
+<p>将二者结合起来：positive encouragement (on reliable samples) and negative suppression (on misclassified samples)</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>问题定义：训练数据$\left\{\left(x_{i}, y_{i}\right)\right\}_{i=1}^{n}$，其中$x_{i} \in \mathbb{R}^{d}$，$y_{i} \in\{1,2, \ldots, C\}$。</p>
+<p>要学习一个映射$\tilde{y}(x)=\underset{r \in\{1, \ldots, C\}}{\operatorname{argmax}} F_{r}(x ; \Theta)$。而多分类的目标/loss function为：</p>
+<script type="math/tex; mode=display">\begin{array}{c}{\min _{\Theta} \sum_{i=1}^{n} \sum_{r=1}^{C} L\left(\rho_{i r}\right)+\nu R(\Theta)} \\ {\text {s.t.} \forall i, r, \rho_{i r}=F_{y_{i}}(x ; \Theta)-F_{r}(x ; \Theta)}\end{array}</script><p><strong>$F$决定effectiveness；而$L$决定robustness</strong>。</p>
+<p>在boosting中：</p>
+<script type="math/tex; mode=display">F_{r}(x ; W)=\sum_{j=1}^{k} w_{r j} h_{j}(x), r=1, \ldots, C</script><p>其中$\left\{h_{j}(\cdot) \in \mathcal{H}\right\}_{j=1}^{k}$，$h_{j}(\cdot) : \mathbb{R}^{d} \rightarrow\{0,1\}$是weak classifier。$W$是分配给每个classifier的权重。</p>
+<p>在boosting中加入SPL的思想，也即引导模型先学简单的再学难的：</p>
+<script type="math/tex; mode=display">\begin{array}{c}{\min _{W, v} \sum_{i=1}^{n} v_{i} \sum_{r=1}^{C} L\left(\rho_{i r}\right)+\sum_{i=1}^{n} g\left(v_{i} ; \lambda\right)+\nu R(W)} \\ {\text {s.t.} \forall i, r, \rho_{i r}=H_{i :} w_{y_{i}}-H_{i :} w_{r} ; W \geqslant 0 ; v \in[0,1]^{n}}\end{array}</script><p>其中$\left[H_{i j}\right]=\left[h_{j}\left(x_{i}\right)\right]$，$W=\left[w_{1}, \cdots, w_{C}\right] \in \mathbb{R}^{k \times C}$</p>
+<p>将$L$具体化为logistics函数，$R(W)$是$l_{2,1} \text{-norm}$。则：</p>
+<script type="math/tex; mode=display">\begin{array}{l}{\min _{W, v} \sum_{i, r} v_{i} \ln \left(1+e^{-\rho_{i r}}\right)+\sum_{i} g\left(v_{i} ; \lambda\right)+\nu\|W\|_{2,1}} \\ {\text {s.t.} \forall i, r, \rho_{i r}=H_{i :} w_{y_{i}}-H_{i :} w_{r} ; W \geqslant 0 ; v \in[0,1]^{n}}\end{array}</script><p>采用column generation method来解决上述公式（这段看不懂咋算出来的）：</p>
+<p><img src="/images/15642848899908.jpg" width="60%" height="50%"></p>
+<p><img src="/images/15642849290180.jpg" width="57%" height="50%"></p>
+<blockquote>
+<p>the future weak learners will put emphasis on samples that are both insufﬁciently learned currently and easily learned previously</p>
+</blockquote>
+<p>也即是boosting与SPL的结合。</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>boosting由于只能通过分对分错来给权重而不是根据loss，是粗粒度的，强调要解决难的；而SPL则是强调先学简单的，再解决难的不迟。二者巧妙互补。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    林泽辉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.linzehui.me/2019/07/26/论文/每周论文25/" title="每周论文25">http://www.linzehui.me/2019/07/26/论文/每周论文25/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://www.linzehui.me" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
+          
+            <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/26/诗词&句/每周诗词31/" rel="next" title="每周诗词31">
+                <i class="fa fa-chevron-left"></i> 每周诗词31
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/28/碎片知识/每周碎片知识25/" rel="prev" title="每周碎片知识25">
+                每周碎片知识25 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA0OC8xNjU3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws4.sinaimg.cn/large/006tNc79gy1fthknxagbjj3069069jr8.jpg"
+                alt="林泽辉" />
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">176</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">193</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Easy-Samples-First-Self-paced-Reranking-for-Zero-Example-Multimedia-Search"><span class="nav-number">1.</span> <span class="nav-text">[Easy Samples First: Self-paced Reranking for Zero-Example Multimedia Search]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Self-Paced-Learning-with-Diversity"><span class="nav-number">2.</span> <span class="nav-text">[Self-Paced Learning with Diversity]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Self-paced-dictionary-learning-for-image-classification"><span class="nav-number">3.</span> <span class="nav-text">[Self-paced dictionary learning for image classification]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Self-Paced-Learning-for-Matrix-Factorization"><span class="nav-number">4.</span> <span class="nav-text">[Self-Paced Learning for Matrix Factorization]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Self-Paced-Boost-Learning-for-Classification"><span class="nav-number">5.</span> <span class="nav-text">[Self-Paced Boost Learning for Classification]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation"><span class="nav-number">5.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">5.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考"><span class="nav-number">5.3.</span> <span class="nav-text">思考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
