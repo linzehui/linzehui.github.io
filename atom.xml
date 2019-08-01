@@ -328,11 +328,11 @@
     
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
-      <category term="LSTM" scheme="http://www.linzehui.me/tags/LSTM/"/>
-    
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
+    
+      <category term="LSTM" scheme="http://www.linzehui.me/tags/LSTM/"/>
     
       <category term="Dropout" scheme="http://www.linzehui.me/tags/Dropout/"/>
     
