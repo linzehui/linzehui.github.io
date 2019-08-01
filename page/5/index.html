@@ -288,12 +288,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/05/07/碎片知识/PyTorch中遇到的问题（合集）/">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.png">
+      <meta itemprop="image" content="/images/touxiang.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -307,7 +307,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/07/碎片知识/PyTorch中遇到的问题（合集）/" itemprop="url">Pytorch中遇到的问题（合集）</a></h1>
+                <a class="post-title-link" href="/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/" itemprop="url">关于Pytorch中Parameter的nan</a></h1>
         
 
         <div class="post-meta">
@@ -335,8 +335,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-03T10:22:23+08:00">
-                2019-07-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-05-08T15:29:02+08:00">
+                2019-05-08
               </time>
             
           </span>
@@ -371,18 +371,13 @@
       
         
           
-          断断续续记录一下在写代码过程中遇到的问题以及解决方案。
-[Parameter nan]http://www.linzehui.me/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/
-问题描述在定义Parameter时遇到其元素存在nan的问题。
-
-原因torch.Tensor(m,n)只分配空间而没有将其中的值更新。
-解决方案torch.Tensor(m,n)是不建议使用的初始化方法。改成torch.nn.Parameter(torch.rand(10,10))或torch.nn.Parameter(torch.zeros(10,10))。
-
-[+= inpla
+          前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。如：
+找了一圈网上没有找到其原因，已经在论坛提问了。我的解决方案是显式对其进行初始化：
+1234567if args.init == 'uniform':    nn.init.uniform_(self.u, -args.init_range, args.init_range)    nn.init.uniform_(self.v, -args.init_range, args.init_range)elif args.init == 'normal':    nn.init.norm
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/05/07/碎片知识/PyTorch中遇到的问题（合集）/#more" rel="contents">
+            <a class="btn" href="/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -438,7 +433,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.png">
+      <meta itemprop="image" content="/images/touxiang.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -577,7 +572,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.png">
+      <meta itemprop="image" content="/images/touxiang.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -720,7 +715,7 @@ it pre-allocates the ful
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.png">
+      <meta itemprop="image" content="/images/touxiang.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -861,7 +856,7 @@ http://lib.xcz.im/work/582ee1a2da2f600063ec45ea
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.png">
+      <meta itemprop="image" content="/images/touxiang.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1005,7 +1000,7 @@ Regularizing and Optimizing LSTM Language Models
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.png">
+      <meta itemprop="image" content="/images/touxiang.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1147,7 +1142,7 @@ http://lib.xcz.im/work/57b2c8fa7db2a20054377ecd
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.png">
+      <meta itemprop="image" content="/images/touxiang.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1288,7 +1283,7 @@ expand只能对维数为1的维度进行扩展，且扩展过程中不分配新�
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.png">
+      <meta itemprop="image" content="/images/touxiang.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1429,7 +1424,7 @@ http://lib.xcz.im/work/57ba4972efa631005a799815
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.png">
+      <meta itemprop="image" content="/images/touxiang.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1573,7 +1568,7 @@ Competence-based Curriculum Learning for Neural Machine Translation
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林泽辉">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.png">
+      <meta itemprop="image" content="/images/touxiang.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1739,7 +1734,7 @@ Tr
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/images/touxiang.png"
+                src="/images/touxiang.jpeg"
                 alt="林泽辉" />
             
               <p class="site-author-name" itemprop="name">林泽辉</p>

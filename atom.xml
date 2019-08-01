@@ -229,11 +229,11 @@
     
       <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
     
-      <category term="Mac" scheme="http://www.linzehui.me/tags/Mac/"/>
-    
       <category term="Homebrew" scheme="http://www.linzehui.me/tags/Homebrew/"/>
     
       <category term="Alfred" scheme="http://www.linzehui.me/tags/Alfred/"/>
+    
+      <category term="Mac" scheme="http://www.linzehui.me/tags/Mac/"/>
     
   </entry>
   
@@ -336,9 +336,9 @@
     
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
-      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
-    
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
       <category term="LSTM" scheme="http://www.linzehui.me/tags/LSTM/"/>
     
@@ -640,9 +640,9 @@
     
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
-      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
-    
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
       <category term="Language Modeling" scheme="http://www.linzehui.me/tags/Language-Modeling/"/>
     
