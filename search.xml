@@ -108,9 +108,9 @@
         <tag>Reinforcement Learning</tag>
         <tag>Paper</tag>
         <tag>每周论文阅读</tag>
-        <tag>LSTM</tag>
         <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
+        <tag>LSTM</tag>
         <tag>Dropout</tag>
         <tag>meta-learning</tag>
         <tag>multi-task</tag>
@@ -1615,9 +1615,9 @@
     <content type="text"><![CDATA[在服务器经常要用到Vim，因此记录常用的快捷键并熟悉之。 退出:q 退出:wq 写入并退出:q! 退出并忽略所有更改:e! 放弃修改并打开原来的文件 插入i 在当前位置前插入a 在当前位置后插入 撤销:u 撤销:U 撤销整行操作Ctrl+r 重做 删除:md 删除第m行nd 删除当前行开始的n行(一共n+1行)dd 删除当前行D 删除当前字符至行尾:m,nd 删除从m到n行的内容，如: :100,10000d:m,$d 删除m行及以后所有的行:10d 移动:n 跳转到行号 如， :100gg 跳到行首G(shift+g)移动到文件尾 搜索/text 搜索text，n搜索下一个，N搜索上一个?text 反向查找:set ignorecase 忽略大小写查找:set noignorecase 不忽略大小写查找*或# 对光标处的单词搜索 复制粘贴v 从当前位置开始，光标经过的地方被选中，再按一下v结束 环境设置:set nu 显示行号:set nonu 隐藏行号:set hlsearch 设置搜索结果高亮 Referencehttps://www.cnblogs.com/wangrx/p/5907013.htmlhttps://www.cnblogs.com/yangjig/p/6014198.html]]></content>
       <tags>
         <tag>技巧</tag>
+        <tag>Vim</tag>
         <tag>杂七杂八</tag>
         <tag>快捷键</tag>
-        <tag>Vim</tag>
       </tags>
   </entry>
   <entry>
@@ -1626,9 +1626,9 @@
     <content type="text"><![CDATA[记录Pycharm的一些技巧，让Pycharm更顺手 快捷键0️⃣Double Shift 万能搜索可以搜索文件名、类名、方法名、目录名（在关键字前面加/ ），并不能用来搜索任意关键字 1️⃣ Command+F 在页面搜索 2️⃣ Ctrl+Shift+F Find in Path 在路径下搜索 3️⃣✨Command+E 快速查找文件显示最近打开的文件 4️⃣ Shift+Enter 任意位置换行无论光标在何处都可以直接另起一行 5️⃣ Option+Enter 自动导入模块；万能提示键自动导入如何设置见小技巧#0️⃣ 6️⃣ Ctrl+F10 运行我已经添加了Ctrl+R作为另一对运行快捷键 7️⃣ Command+Shift+ +/- 展开/收缩代码 8️⃣ Option+F 在Dash中搜索 9️⃣ Ctrl+J 不跳转查看代码 小技巧0️⃣ Pycharm自动导入模块https://blog.csdn.net/lantian_123/article/details/78094148 1️⃣ ✨远程部署工程 强烈推荐两步走：配置服务器映射+配置服务器解释器 2️⃣跳转后如何回退开启toolbar即可https://segmentfault.com/a/1190000010205945 Referencehttps://foofish.net/pycharm-tips.htmlhttps://blog.csdn.net/lantian_123/article/details/78094148https://segmentfault.com/a/1190000010205945]]></content>
       <tags>
         <tag>技巧</tag>
-        <tag>Pycharm</tag>
         <tag>杂七杂八</tag>
         <tag>快捷键</tag>
+        <tag>Pycharm</tag>
       </tags>
   </entry>
   <entry>
