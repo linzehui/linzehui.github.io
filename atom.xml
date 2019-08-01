@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Weekly Review</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://www.linzehui.me/"/>
+  <updated>2019-07-28T11:30:20.936Z</updated>
+  <id>http://www.linzehui.me/</id>
+  
+  <author>
+    <name>林泽辉</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>每周碎片知识25</title>
+    <link href="http://www.linzehui.me/2019/07/28/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8625/"/>
+    <id>http://www.linzehui.me/2019/07/28/碎片知识/每周碎片知识25/</id>
+    <published>2019-07-28T11:18:14.000Z</published>
+    <updated>2019-07-28T11:30:20.936Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="fairseq-CUDA"><a href="#fairseq-CUDA" class="headerlink" title="[fairseq CUDA]"></a>[fairseq CUDA]</h3><p>常常遇到fairseq跑翻译，跑着跑着就print很多tensor，显示CUDA问题。</p><p>尝试添加<code>--ddp-backend=no_c10d</code>之后，似乎就不会出现该问题了。也即：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python -m torch.distributed.launch --nproc_per_node <span class="number">4</span> \</span><br><span class="line">train.py --ddp-backend=no_c10d ...</span><br></pre></td></tr></table></figure><hr><h3 id="Overleaf"><a href="#Overleaf" class="headerlink" title="[Overleaf]"></a>[Overleaf]</h3><p>一般overleaf并不会产生中间文件，假如确实需要bbl而不是bib文件（比如提交到arxiv时就需要bbl），可以点击compile旁边的log and other files，翻到最下面就可以选择下载bbl。</p><p><a href="https://tex.stackexchange.com/questions/462314/overleaf-v2-how-to-get-bbl-file" target="_blank" rel="noopener">https://tex.stackexchange.com/questions/462314/overleaf-v2-how-to-get-bbl-file</a></p><hr><h3 id="Arxiv"><a href="#Arxiv" class="headerlink" title="[Arxiv]"></a>[Arxiv]</h3><p>arxiv上传时出现warning的问题：‘This version (v8.31) of natbib is stricter in its formatting requirements for bibitem entries than the previous version used at arXiv (v7.1)’。</p><p>检查一下，可能是bbl与主文件的名字不同，改成相同的可能就可以了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;fairseq-CUDA&quot;&gt;&lt;a href=&quot;#fairseq-CUDA&quot; class=&quot;headerlink&quot; title=&quot;[fairseq CUDA]&quot;&gt;&lt;/a&gt;[fairseq CUDA]&lt;/h3&gt;&lt;p&gt;常常遇到fairseq跑翻译，跑着跑着就print很
+      
+    
+    </summary>
+    
+    
+      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周论文25</title>
+    <link href="http://www.linzehui.me/2019/07/26/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8725/"/>
+    <id>http://www.linzehui.me/2019/07/26/论文/每周论文25/</id>
+    <published>2019-07-26T14:12:30.000Z</published>
+    <updated>2019-07-30T15:05:12.672Z</updated>
+    
+    <content type="html"><![CDATA[<p>本周论文：</p><ol><li>Easy Samples First: Self-paced Reranking for Zero-Example Multimedia Search</li><li>Self-Paced Learning with Diversity</li><li>Self-paced dictionary learning for image classification</li><li>Self-Paced Learning for Matrix Factorization</li><li>Self-Paced Boost Learning for Classification</li></ol><h2 id="Easy-Samples-First-Self-paced-Reranking-for-Zero-Example-Multimedia-Search"><a href="#Easy-Samples-First-Self-paced-Reranking-for-Zero-Example-Multimedia-Search" class="headerlink" title="[Easy Samples First: Self-paced Reranking for Zero-Example Multimedia Search]"></a>[Easy Samples First: Self-paced Reranking for Zero-Example Multimedia Search]</h2><p>将self-paced learning用于reranking任务中。并且将self-paced learning更一般化，也即将原先的{0,1} weight扩展到实数域。</p><p>具体而言，原先的self-paced learning：</p><script type="math/tex; mode=display">\left(\mathbf{w}_{t+1}, \mathbf{v}_{t+1}\right)=\underset{\mathbf{w} \in \mathbb{R}^{d}, \mathbf{v} \in\{0,1\}^{n}}{\operatorname{argmin}}\left(r(\mathbf{w})+\sum_{i=1}^{n} v_{i} f\left(\mathbf{x}_{i}, \mathbf{y}_{i} ; \mathbf{w}\right)-\frac{1}{K} \sum_{i=1}^{n} v_{i}\right)</script><p>其中 $v\in\{0,1 \}$。后项的正则项为 $f(\mathbf{v} ; k)=-\frac{1}{k}|\mathbf{v}|_{1}=-\frac{1}{k} \sum_{i=1}^{n} v_{i}$</p><p>得出的解为：</p><script type="math/tex; mode=display">v_{i}^{*}=\left\{\begin{array}{ll}{1} & {\frac{1}{m} \sum_{j=1}^{m} C \ell_{i j}<\frac{1}{k}} \\ {0} & {\frac{1}{m} \sum_{j=1}^{m} C \ell_{i j} \geq \frac{1}{k}}\end{array}\right.</script><p>而现在：<br>①线性，也即与loss是线性相关的：</p><script type="math/tex; mode=display">f(\mathbf{v} ; k)=\frac{1}{k}\left(\frac{1}{2}\|\mathbf{v}\|_{2}^{2}-\sum_{i=1}^{n} v_{i}\right)</script><p>得出的解为：</p><script type="math/tex; mode=display">v_{i}^{*}=\left\{\begin{array}{ll}{-k\left(\frac{1}{m} \sum_{j=1}^{m} C \ell_{i j}\right)+1} & {\frac{1}{m} \sum_{i=1}^{m} C \ell_{i j}<\frac{1}{k}} \\ {0} & {\frac{1}{m} \sum_{i=1}^{m} C \ell_{i j} \geq \frac{1}{k}}\end{array}\right.</script><p>②log关系</p><script type="math/tex; mode=display">f(\mathbf{v} ; k)=\sum_{i=1}^{n}\left(\zeta v_{i}-\frac{\zeta^{v_{i}}}{\log \zeta}\right)</script><p>解为：</p><script type="math/tex; mode=display">v_{i}^{*}=\left\{\begin{array}{ll}{\frac{1}{\log \zeta} \log \left(\frac{1}{m} \sum_{j=1}^{m} C \ell_{i j}+\zeta\right)} & {\frac{1}{m} \sum_{i=1}^{m} C \ell_{i j}<\frac{1}{k}} \\ {0} & {\frac{1}{m} \sum_{i=1}^{m} C \ell_{i j} \geq \frac{1}{k}}\end{array}\right.</script><p>③soft与hard的混合</p><script type="math/tex; mode=display">f\left(\mathbf{v} ; k, k^{\prime}\right)=-\zeta \sum_{i=1}^{n} \log \left(v_{i}+\zeta k\right)</script><p>解为：</p><script type="math/tex; mode=display">v_{i}^{*}=\left\{\begin{array}{ll}{1} & {\frac{1}{m} \sum_{i=1}^{m} C \ell_{i j} \leq \frac{1}{k^{\prime}}} \\ {0} & {\frac{1}{m} \sum_{i=1}^{m} C \ell_{i j} \geq \frac{1}{k}} \\ {\frac{m \zeta}{\sum_{i=1}^{m} C \ell_{i j}}-k \zeta} & {\text { otherwise }}\end{array}\right.</script><p>也即，loss太小置为1，太大置为0.中间则是实数域。</p><p><img src="/images/15642823398246.jpg" width="60%" height="50%"></p><hr><h2 id="Self-Paced-Learning-with-Diversity"><a href="#Self-Paced-Learning-with-Diversity" class="headerlink" title="[Self-Paced Learning with Diversity]"></a>[Self-Paced Learning with Diversity]</h2><p>提出在self-paced learning中，不仅仅要选择简单的，还要增加diversity这一指标，使得模型不会overfitting到某个pattern上，同时diverse sample能够帮助模型学到更为comprehensive的知识。</p><p><img src="/images/15642828676000.jpg" width="80%" height="50%"></p><p>由于self-paced learning没有先验知识，一开始接收到的某领域的sample，之后会倾向于一直选择该领域的sample，因为之前获取到该领域的sample，使得该领域的sample的loss相较其他领域的loss更低。这样就容易overfit到某个特定的pattern。为了解决这一问题，需要显式将diversity作为objective。</p><p>基于这一思想，有：<br>假设训练数据$\mathbf{X}=\left(\mathbf{x}_{1}, \cdots, \mathbf{x}_{n}\right) \in \mathbb{R}^{m \times n}$，分成b个group $\mathbf{X}^{(1)}, \cdots, \mathbf{X}^{(b)}$。weight vector为$\mathbf{v}=\left[\mathbf{v}^{(1)}, \cdots, \mathbf{v}^{(b)}\right]$，其中$\mathbf{v}^{(j)}=\left(v_{1}^{(j)}, \cdots, v_{n_{j}}^{(j)}\right)^{T} \in[0,1]^{n_{j}}$</p><p>因此objective function为：</p><script type="math/tex; mode=display">\min _{\mathbf{w}, \mathbf{v}} \mathbb{E}(\mathbf{w}, \mathbf{v} ; \lambda, \gamma)=\sum_{i=1}^{n} v_{i} L\left(y_{i}, f\left(\mathbf{x}_{i}, \mathbf{w}\right)\right)-\lambda \sum_{i=1}^{n} v_{i}-\gamma\|\mathbf{v}\|_{2,1}, \text { s.t. } \mathbf{v} \in[0,1]^{n}</script><p>其中新的regularization为$-|\mathbf{v}|_{2,1}=-\sum_{j=1}^{b}\left|\mathbf{v}^{(j)}\right|_{2}$，该regularization能够使模型尽量去选择不同group的sample。</p><p>当每个group只有一个sample时，公式退化为：</p><script type="math/tex; mode=display">\min _{\mathbf{w}, \mathbf{v}} \mathbb{E}(\mathbf{w}, \mathbf{v} ; \lambda)=\sum_{i=1}^{n} v_{i} L\left(y_{i}, f\left(\mathbf{x}_{i}, \mathbf{w}\right)\right)-\lambda \sum_{i=1}^{n} v_{i}, \text { s.t. } \mathbf{v} \in[0,1]^{n}</script><p>因此最终的算法：</p><p><img src="/images/15642831390970.jpg" width="90%" height="50%"></p><p><img src="/images/15642831523214.jpg" width="90%" height="50%"></p><p>思考：从diversity的角度确实很有道理，如果不是这篇文章我想不到diversity。作者对问题的认识很到位。</p><hr><h2 id="Self-paced-dictionary-learning-for-image-classification"><a href="#Self-paced-dictionary-learning-for-image-classification" class="headerlink" title="[Self-paced dictionary learning for image classification]"></a>[Self-paced dictionary learning for image classification]</h2><p>将self-paced learning用于dictionary learning（对该领域不了解）。</p><p><img src="/images/15642834501198.jpg" width="60%" height="50%"></p><p>另一贡献是提出新的阈值更新公式：</p><script type="math/tex; mode=display">\sigma=f(\pi, t)=\pi+\log \left(\pi^{2}+c\right) t \quad(c \geq 1)</script><p>保证第一轮有超过一半的example认定为easy。</p><hr><h2 id="Self-Paced-Learning-for-Matrix-Factorization"><a href="#Self-Paced-Learning-for-Matrix-Factorization" class="headerlink" title="[Self-Paced Learning for Matrix Factorization]"></a>[Self-Paced Learning for Matrix Factorization]</h2><p>将self-paced learning用于矩阵分解，同时将hard weight改成soft weight。</p><p><img src="/images/15642835464066.jpg" width="60%" height="50%"></p><p><img src="/images/15642836554962.jpg" width="65%" height="50%"></p><hr><h2 id="Self-Paced-Boost-Learning-for-Classification"><a href="#Self-Paced-Boost-Learning-for-Classification" class="headerlink" title="[Self-Paced Boost Learning for Classification]"></a>[Self-Paced Boost Learning for Classification]</h2><p>提出将boost和self-paced的思想结合在一起的算法。</p><h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>在监督学习中，有两个重要的原则：effectiveness和robustness。effectiveness专注于让模型分对，提高accuracy；而robustness则是减少noise或者confusing example的影响。<br>boosting算法则专注于effectiveness，因为渐进地专注于分错的example。但这样就容易使得模型缺少鲁棒性/泛化性。<br>self-paced learning则是从简单到难，这样可以通过稳步提高模型能力之后减少confusing/noise example对模型的影响，也即一开始就能够学习简单的pattern，而不会受到confusing/noise example所有的复杂pattern的影响。</p><p>boosting与self-paced有共通之处以及互补之处：<br>二者都是一个渐进的过程，从weak state到strong state。<br>boosting更考虑effectiveness，而SPL则更考虑robustness；boosting对不充分学习的样本施加负面抑制（不大懂意思，应该是说算法强调不充分学习的样本），而SPL正面鼓励简单易学的样本。boosting更专注于class之间的margin，尝试去拟合each sample，通过动态选择具有不同模式的简单样本；SPL更关注类内变化。<br>因此，boosting倾向于反映local的pattern，更加对noise敏感，而SPL则更加平滑，具有更强的鲁棒性。</p><p>将二者结合起来：positive encouragement (on reliable samples) and negative suppression (on misclassified samples)</p><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>问题定义：训练数据$\left\{\left(x_{i}, y_{i}\right)\right\}_{i=1}^{n}$，其中$x_{i} \in \mathbb{R}^{d}$，$y_{i} \in\{1,2, \ldots, C\}$。</p><p>要学习一个映射$\tilde{y}(x)=\underset{r \in\{1, \ldots, C\}}{\operatorname{argmax}} F_{r}(x ; \Theta)$。而多分类的目标/loss function为：</p><script type="math/tex; mode=display">\begin{array}{c}{\min _{\Theta} \sum_{i=1}^{n} \sum_{r=1}^{C} L\left(\rho_{i r}\right)+\nu R(\Theta)} \\ {\text {s.t.} \forall i, r, \rho_{i r}=F_{y_{i}}(x ; \Theta)-F_{r}(x ; \Theta)}\end{array}</script><p><strong>$F$决定effectiveness；而$L$决定robustness</strong>。</p><p>在boosting中：</p><script type="math/tex; mode=display">F_{r}(x ; W)=\sum_{j=1}^{k} w_{r j} h_{j}(x), r=1, \ldots, C</script><p>其中$\left\{h_{j}(\cdot) \in \mathcal{H}\right\}_{j=1}^{k}$，$h_{j}(\cdot) : \mathbb{R}^{d} \rightarrow\{0,1\}$是weak classifier。$W$是分配给每个classifier的权重。</p><p>在boosting中加入SPL的思想，也即引导模型先学简单的再学难的：</p><script type="math/tex; mode=display">\begin{array}{c}{\min _{W, v} \sum_{i=1}^{n} v_{i} \sum_{r=1}^{C} L\left(\rho_{i r}\right)+\sum_{i=1}^{n} g\left(v_{i} ; \lambda\right)+\nu R(W)} \\ {\text {s.t.} \forall i, r, \rho_{i r}=H_{i :} w_{y_{i}}-H_{i :} w_{r} ; W \geqslant 0 ; v \in[0,1]^{n}}\end{array}</script><p>其中$\left[H_{i j}\right]=\left[h_{j}\left(x_{i}\right)\right]$，$W=\left[w_{1}, \cdots, w_{C}\right] \in \mathbb{R}^{k \times C}$</p><p>将$L$具体化为logistics函数，$R(W)$是$l_{2,1} \text{-norm}$。则：</p><script type="math/tex; mode=display">\begin{array}{l}{\min _{W, v} \sum_{i, r} v_{i} \ln \left(1+e^{-\rho_{i r}}\right)+\sum_{i} g\left(v_{i} ; \lambda\right)+\nu\|W\|_{2,1}} \\ {\text {s.t.} \forall i, r, \rho_{i r}=H_{i :} w_{y_{i}}-H_{i :} w_{r} ; W \geqslant 0 ; v \in[0,1]^{n}}\end{array}</script><p>采用column generation method来解决上述公式（这段看不懂咋算出来的）：</p><p><img src="/images/15642848899908.jpg" width="60%" height="50%"></p><p><img src="/images/15642849290180.jpg" width="57%" height="50%"></p><blockquote><p>the future weak learners will put emphasis on samples that are both insufﬁciently learned currently and easily learned previously</p></blockquote><p>也即是boosting与SPL的结合。</p><h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>boosting由于只能通过分对分错来给权重而不是根据loss，是粗粒度的，强调要解决难的；而SPL则是强调先学简单的，再解决难的不迟。二者巧妙互补。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本周论文：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Easy Samples First: Self-paced Reranking for Zero-Example Multimedia Search&lt;/li&gt;
+&lt;li&gt;Self-Paced Learning with Diversit
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周诗词31</title>
+    <link href="http://www.linzehui.me/2019/07/26/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D31/"/>
+    <id>http://www.linzehui.me/2019/07/26/诗词&amp;句/每周诗词31/</id>
+    <published>2019-07-26T14:06:14.000Z</published>
+    <updated>2019-07-26T14:12:19.096Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="滁州西涧"><a href="#滁州西涧" class="headerlink" title="滁州西涧"></a>滁州西涧</h3><p>[唐] 韦应物<br>独怜幽草涧边生，上有黄鹂深树鸣。<br>春潮带雨晚来急，野渡无人舟自横。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;滁州西涧&quot;&gt;&lt;a href=&quot;#滁州西涧&quot; class=&quot;headerlink&quot; title=&quot;滁州西涧&quot;&gt;&lt;/a&gt;滁州西涧&lt;/h3&gt;&lt;p&gt;[唐] 韦应物&lt;br&gt;独怜幽草涧边生，上有黄鹂深树鸣。&lt;br&gt;春潮带雨晚来急，野渡无人舟自横。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>佳句分享3</title>
+    <link href="http://www.linzehui.me/2019/07/26/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB3/"/>
+    <id>http://www.linzehui.me/2019/07/26/诗词&amp;句/佳句分享3/</id>
+    <published>2019-07-26T14:05:15.000Z</published>
+    <updated>2019-07-28T11:32:17.600Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>世界上只有一种真正的英雄主义，就是认清了生活的真相后还依然热爱它。</p><h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><p>宠辱不惊，闲看庭前花开花落；去留无意，漫随天外云卷云舒。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h3&gt;&lt;p&gt;世界上只有一种真正的英雄主义，就是认清了生活的真相后还依然热爱它。&lt;/p&gt;
+&lt;h3 id=&quot;2&quot;&gt;&lt;a href=&quot;#2&quot; class=&quot;heade
+      
+    
+    </summary>
+    
+    
+      <category term="佳句分享" scheme="http://www.linzehui.me/tags/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>佳句分享2</title>
+    <link href="http://www.linzehui.me/2019/07/07/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB2/"/>
+    <id>http://www.linzehui.me/2019/07/07/诗词&amp;句/佳句分享2/</id>
+    <published>2019-07-07T03:41:15.000Z</published>
+    <updated>2019-07-07T03:44:12.686Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>Learn to be ordinary before you wish to be extraordinary.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h3&gt;&lt;p&gt;Learn to be ordinary before you wish to be extraordinary.&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="佳句分享" scheme="http://www.linzehui.me/tags/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周论文24</title>
+    <link href="http://www.linzehui.me/2019/07/07/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8724/"/>
+    <id>http://www.linzehui.me/2019/07/07/论文/每周论文24/</id>
+    <published>2019-07-07T02:55:30.000Z</published>
+    <updated>2019-07-29T01:27:34.096Z</updated>
+    
+    <content type="html"><![CDATA[<p>本周论文：</p><ol><li>Curriculum Learning for Multi-Task Classiﬁcation of Visual Attributes</li><li>Highway Networks</li><li>Deep Residual Learning for Image Recognition</li><li>Gated Feedback Recurrent Neural Networks</li><li>Densely Connected Convolutional Networks</li></ol><h2 id="Curriculum-Learning-for-Multi-Task-Classiﬁcation-of-Visual-Attributes"><a href="#Curriculum-Learning-for-Multi-Task-Classiﬁcation-of-Visual-Attributes" class="headerlink" title="[Curriculum Learning for Multi-Task Classiﬁcation of Visual Attributes]"></a>[Curriculum Learning for Multi-Task Classiﬁcation of Visual Attributes]</h2><p>大致思路是：将数据分为两个task，先训练强相关的task，然后再训练弱相关的task。具体来说，对于visual attribute，先训练强相关label，然后再训练弱相关的label。<br><img src="/images/15624682482609.jpg" width="60%" height="50%"></p><p>具体形式：</p><p><img src="/images/15624684432867.jpg" width="80%" height="50%"></p><p>如何计算相关性：</p><script type="math/tex; mode=display">p_{i}=\sum_{j=1, j \neq i}^{T} \frac{\operatorname{cov}\left(y_{t_{i}}, y_{t_{j}}\right)}{\sigma\left(y_{t_{i}}\right) \sigma\left(y_{t_{j}}\right)}, i=1, \ldots, T</script><p>top 50%是强相关的，剩下都是弱相关的。</p><p>我的理解是，似乎是将label给切分了：</p><p><img src="/images/15624684979775.jpg" width="60%" height="50%"></p><hr><h2 id="Highway-Networks"><a href="#Highway-Networks" class="headerlink" title="[Highway Networks]"></a>[Highway Networks]</h2><p>原先的普通layer：</p><script type="math/tex; mode=display">\mathbf{y}=H\left(\mathbf{x}, \mathbf{W}_{\mathbf{H}}\right)</script><p>为了能够训练很深的网络，改成：</p><script type="math/tex; mode=display">\mathbf{y}=H\left(\mathbf{x}, \mathbf{W}_{\mathbf{H}}\right) \cdot T\left(\mathbf{x}, \mathbf{W}_{\mathbf{T}}\right)+\mathbf{x} \cdot C\left(\mathbf{x}, \mathbf{W}_{\mathbf{C}}\right)</script><p>也即增加两个仿射变换。其中T是transformer gate，而C是carry gate。这样能够有助于模型的优化。</p><p>简单起见：</p><script type="math/tex; mode=display">\mathbf{y}=H\left(\mathbf{x}, \mathbf{W}_{\mathbf{H}}\right) \cdot T\left(\mathbf{x}, \mathbf{W}_{\mathbf{T}}\right)+\mathbf{x} \cdot\left(1-T\left(\mathbf{x}, \mathbf{W}_{\mathbf{T}}\right)\right)</script><p>在T中，可以设bias为负，也即一开始偏向carry的行为。</p><hr><h2 id="Deep-Residual-Learning-for-Image-Recognition"><a href="#Deep-Residual-Learning-for-Image-Recognition" class="headerlink" title="[Deep Residual Learning for Image Recognition]"></a>[Deep Residual Learning for Image Recognition]</h2><p><img src="/images/15624688998473.jpg" width="50%" height="50%"></p><p>本质是残差比直接学习x的变换更容易。对模型的优化更容易。</p><blockquote><p>if an identity mapping were optimal, it would be easier to push the residual to zero than to ﬁt an identity mapping by a stack of nonlinear layers</p></blockquote><p>可否理解highway network是ResNet的进阶版？</p><hr><h2 id="Gated-Feedback-Recurrent-Neural-Networks"><a href="#Gated-Feedback-Recurrent-Neural-Networks" class="headerlink" title="[Gated Feedback Recurrent Neural Networks]"></a>[Gated Feedback Recurrent Neural Networks]</h2><p><img src="/images/15624692408778.jpg" width="80%" height="50%"></p><p>对于多层的RNN，第l层的time step为t的h，可以接收上一个time step的大于l层的也接收小于l层的hidden state。</p><hr><h2 id="Densely-Connected-Convolutional-Networks"><a href="#Densely-Connected-Convolutional-Networks" class="headerlink" title="[Densely Connected Convolutional Networks]"></a>[Densely Connected Convolutional Networks]</h2><p>在一个block内，每层都连接到后面的层。</p><p><img src="/images/15624693085589.jpg" width="70%" height="50%"></p><p>注意到，在连接形式上，resnet是相加：</p><script type="math/tex; mode=display">\mathbf{x}_{\ell}=H_{\ell}\left(\mathbf{x}_{\ell-1}\right)+\mathbf{x}_{\ell-1}</script><p>而DenseNet则是concat：</p><script type="math/tex; mode=display">\mathbf{x}_{\ell}=H_{\ell}\left(\left[\mathbf{x}_{0}, \mathbf{x}_{1}, \dots, \mathbf{x}_{\ell-1}\right]\right)</script><p>这里的H是Bn-Relu-Conv。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本周论文：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Curriculum Learning for Multi-Task Classiﬁcation of Visual Attributes&lt;/li&gt;
+&lt;li&gt;Highway Networks&lt;/li&gt;
+&lt;li&gt;Deep Residual
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于Pytorch中inf导数的nan问题</title>
+    <link href="http://www.linzehui.me/2019/07/03/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPyTorch%E4%B8%ADinf%E5%AF%BC%E6%95%B0%E7%9A%84nan%E9%97%AE%E9%A2%98/"/>
+    <id>http://www.linzehui.me/2019/07/03/碎片知识/关于PyTorch中inf导数的nan问题/</id>
+    <published>2019-07-03T02:20:14.000Z</published>
+    <updated>2019-07-03T02:20:23.405Z</updated>
+    
+    <content type="html"><![CDATA[<p>想要实现一个功能。将Transformer中多层的attention矩阵加权平均。也即：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pre_attn shape: batch_size*n_head,6,target_len,source_len</span></span><br><span class="line">self.attn_alpha = Parameter(torch.zeros(<span class="number">1</span>, <span class="number">6</span>))</span><br><span class="line">normalized_alpha = F.softmax(self.attn_alpha, dim=<span class="number">-1</span>)  <span class="comment"># 1,6</span></span><br><span class="line">normalized_alpha = normalized_alpha.reshape(<span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">1</span>)  <span class="comment"># 1,6,1,1</span></span><br><span class="line"></span><br><span class="line">weighted_attn = prev_attn * normalized_alpha</span><br><span class="line">weighted_attn = weighted_attn.sum(dim=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure><p>获得的<code>weighted_attn</code>就是所有层的attention矩阵的加权平均。再将<code>weighted_attn</code>用于后面的计算。其中<code>attn_alpha</code>是可学习的参数。</p><p>功能很简单，但在backward完后，<code>attn_alpha</code>就会一下子跳到nan。按理说，虽然attn矩阵里面存在-inf，但只要是同一个batch，inf存在的索引位置应该都是一样的，即使加权求和也不会导致某一行全为-inf，使得在softmax后存在nan的情况。</p><p>在航总排查了一晚上后，也尝试了各种假设，最终发现，是因为梯度回传时的问题。也即当<code>weighted_attn = prev_attn * normalized_alpha</code>这句代码梯度回传的时候，由于存在’-inf’的值，alpha的梯度就会有nan（因为上句代码中alpha的导数是<code>prev_attn</code>，当<code>prev_attn</code>存在inf时，则grad则为nan。</p><p>解决方案是，首先获得attention矩阵的mask，接着使用masked_fill将inf的部分置为0，再和alpha相乘，此时就不会有nan的情况出现了。也即：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pre_attn shape: batch_size*n_head,6,target_len,source_len</span></span><br><span class="line">self.attn_alpha = Parameter(torch.zeros(<span class="number">1</span>, <span class="number">6</span>))</span><br><span class="line">normalized_alpha = F.softmax(self.attn_alpha, dim=<span class="number">-1</span>)  <span class="comment"># 1,6</span></span><br><span class="line">normalized_alpha = normalized_alpha.reshape(<span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">1</span>)  <span class="comment"># 1,6,1,1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ----多加这几行 --- #</span></span><br><span class="line">_attn_mask = prev_attn == float(<span class="string">'-inf'</span>)  <span class="comment"># -inf的位置为1</span></span><br><span class="line">new_pre_attn = pre_attn.data.masked_fill(_attn_mask,<span class="number">0</span>) <span class="comment"># 将-inf填充为0</span></span><br><span class="line"><span class="comment"># --------------- # </span></span><br><span class="line"></span><br><span class="line">weighted_attn = new_pre_attn * normalized_alpha</span><br><span class="line">weighted_attn = weighted_attn.sum(dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure><p>总结起来，则是，当tensor存在inf时，与它相乘的tensor如果是可更新的，则该tensor的grad为nan。所以在处理有inf的tensor要特别注意，可能出现相乘后梯度回传grad为nan的情况，还有一种情况则是若某一行全为inf，过softmax后则也会出现nan。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;想要实现一个功能。将Transformer中多层的attention矩阵加权平均。也即：&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1
+      
+    
+    </summary>
+    
+    
+      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="遇到的问题" scheme="http://www.linzehui.me/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    
+      <category term="Pytorch" scheme="http://www.linzehui.me/tags/Pytorch/"/>
+    
+      <category term="nan" scheme="http://www.linzehui.me/tags/nan/"/>
+    
+      <category term="inf" scheme="http://www.linzehui.me/tags/inf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周碎片知识24</title>
+    <link href="http://www.linzehui.me/2019/06/30/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8624/"/>
+    <id>http://www.linzehui.me/2019/06/30/碎片知识/每周碎片知识24/</id>
+    <published>2019-06-30T02:59:14.000Z</published>
+    <updated>2019-07-28T11:18:56.988Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Homebrew"><a href="#Homebrew" class="headerlink" title="[Homebrew]"></a>[Homebrew]</h3><p>Homebrew安装遇到 Permission denied @ dir_s_mkdir</p><p>No need to chown the whole /usr/local if brew only fails to create a single directory.<br>For example, I fixed this error:<br>Permission denied @ dir_s_mkdir - /usr/local/Frameworks<br>With this command:<br>sudo install -d -o $(whoami) -g admin /usr/local/Frameworks</p><p><a href="https://gist.github.com/irazasyed/7732946" target="_blank" rel="noopener">https://gist.github.com/irazasyed/7732946</a></p><hr><h3 id="Alfred"><a href="#Alfred" class="headerlink" title="[Alfred]"></a>[Alfred]</h3><p>mac 上 QQ 会阻止 Alfred 锁屏功能，这是因为快捷键冲突，取消查看联系人的快捷键即可。</p><p><img src="/images/15618638268867.jpg" width="60%" height="50%"></p><p><a href="https://www.v2ex.com/t/477934" target="_blank" rel="noopener">https://www.v2ex.com/t/477934</a></p><hr><h3 id="Autodiff"><a href="#Autodiff" class="headerlink" title="[Autodiff]"></a>[Autodiff]</h3><p>Autodiff有两种模式，forward和reverse。当前的深度学习框架都用的reverse。</p><p><a href="https://blog.csdn.net/aws3217150/article/details/70214422" target="_blank" rel="noopener">https://blog.csdn.net/aws3217150/article/details/70214422</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Homebrew&quot;&gt;&lt;a href=&quot;#Homebrew&quot; class=&quot;headerlink&quot; title=&quot;[Homebrew]&quot;&gt;&lt;/a&gt;[Homebrew]&lt;/h3&gt;&lt;p&gt;Homebrew安装遇到 Permission denied @ dir_s_mkd
+      
+    
+    </summary>
+    
+    
+      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="Homebrew" scheme="http://www.linzehui.me/tags/Homebrew/"/>
+    
+      <category term="Alfred" scheme="http://www.linzehui.me/tags/Alfred/"/>
+    
+      <category term="Mac" scheme="http://www.linzehui.me/tags/Mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DRL Lecture 8:Imitation Learning</title>
+    <link href="http://www.linzehui.me/2019/06/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/DRL%20Lecture%208:%20Imitation%20Learning/"/>
+    <id>http://www.linzehui.me/2019/06/30/机器学习与深度学习算法知识/DRL Lecture 8: Imitation Learning/</id>
+    <published>2019-06-30T02:42:24.000Z</published>
+    <updated>2019-06-30T02:58:16.429Z</updated>
+    
+    <content type="html"><![CDATA[<p>讨论了在没有reward的情况下，如何利用expert来进行RL。</p><p>问题定义：在一些问题上是没有reward的，给定一些expert的demonstration example，如何利用这些example使得机器能够学习？</p><h3 id="Behavior-Cloning"><a href="#Behavior-Cloning" class="headerlink" title="Behavior Cloning"></a>Behavior Cloning</h3><p>本质就是监督学习，给定训练数据，要模型输入s能够获得尽量和expert相似的action。</p><p><img src="/images/15618627790626.jpg" width="60%" height="50%"></p><p>由于expert example是较少的，机器可能遇到没遇到的情况。<br>同时由于机器的capacity是有限的，可能选择无关的行为去学习。<br>还有可能带来由于训练数据和测试数据的分布不同导致的问题。因为RL有序列性，如果使用Behavior Cloning，在某个state下采用了不同的action，则之后的state都会完全不同（失之毫厘谬以千里）</p><h3 id="Inverse-Reinforcement-Learning-IRL"><a href="#Inverse-Reinforcement-Learning-IRL" class="headerlink" title="Inverse Reinforcement Learning (IRL)"></a>Inverse Reinforcement Learning (IRL)</h3><p>通过expert example来学习reward function，在学习完reward function后让agent与环境交互获得agent example。接着调整reward function使得expert example一定大于agent的example。不断循环。这和GAN的思想有点像：</p><p><img src="/images/15618628831028.jpg" width="60%" height="50%"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;讨论了在没有reward的情况下，如何利用expert来进行RL。&lt;/p&gt;
+&lt;p&gt;问题定义：在一些问题上是没有reward的，给定一些expert的demonstration example，如何利用这些example使得机器能够学习？&lt;/p&gt;
+&lt;h3 id=&quot;Behavi
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习🤖" scheme="http://www.linzehui.me/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%F0%9F%A4%96/"/>
+    
+      <category term="强化学习" scheme="http://www.linzehui.me/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="RL" scheme="http://www.linzehui.me/tags/RL/"/>
+    
+      <category term="Reinforcement Learning" scheme="http://www.linzehui.me/tags/Reinforcement-Learning/"/>
+    
+      <category term="Deep Reinforcement Learning" scheme="http://www.linzehui.me/tags/Deep-Reinforcement-Learning/"/>
+    
+      <category term="李宏毅强化学习课程" scheme="http://www.linzehui.me/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/"/>
+    
+      <category term="Imitation Learning" scheme="http://www.linzehui.me/tags/Imitation-Learning/"/>
+    
+      <category term="IRL" scheme="http://www.linzehui.me/tags/IRL/"/>
+    
+      <category term="Inverse Reinforcement Learning" scheme="http://www.linzehui.me/tags/Inverse-Reinforcement-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周诗词30</title>
+    <link href="http://www.linzehui.me/2019/06/30/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D30/"/>
+    <id>http://www.linzehui.me/2019/06/30/诗词&amp;句/每周诗词30/</id>
+    <published>2019-06-30T01:55:14.000Z</published>
+    <updated>2019-06-30T02:00:00.798Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="水龙吟-·-登建康赏心亭"><a href="#水龙吟-·-登建康赏心亭" class="headerlink" title="水龙吟 · 登建康赏心亭"></a>水龙吟 · 登建康赏心亭</h3><p>[宋] 辛弃疾<br>楚天千里清秋，水随天去秋无际。遥岑远目，献愁供恨，玉簪螺髻。落日楼头，断鸿声里，江南游子。把吴钩看了，栏干拍遍，无人会、登临意。<br>休说鲈鱼堪脍，尽西风、季鹰归未？求田问舍，怕应羞见，刘郎才气。可惜流年，忧愁风雨，树犹如此。<strong>倩何人唤取，红巾翠袖，揾英雄泪</strong>。</p><p>倩（qìng）：请托。<br>揾（wèn）：擦拭。</p><hr><h3 id="满江红"><a href="#满江红" class="headerlink" title="满江红"></a>满江红</h3><p>[宋] 岳飞<br>怒发冲冠，凭栏处、潇潇雨歇。抬望眼，仰天长啸，壮怀激烈。<strong>三十功名尘与土，八千里路云和月</strong>。<strong>莫等闲，白了少年头，空悲切</strong>！<br>靖康耻，犹未雪。臣子恨，何时灭？驾长车、踏破贺兰山缺！壮志饥餐胡虏肉，笑谈渴饮匈奴血。<strong>待从头、收拾旧山河，朝天阙！</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;水龙吟-·-登建康赏心亭&quot;&gt;&lt;a href=&quot;#水龙吟-·-登建康赏心亭&quot; class=&quot;headerlink&quot; title=&quot;水龙吟 · 登建康赏心亭&quot;&gt;&lt;/a&gt;水龙吟 · 登建康赏心亭&lt;/h3&gt;&lt;p&gt;[宋] 辛弃疾&lt;br&gt;楚天千里清秋，水随天去秋无际。遥岑远目
+      
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周论文23</title>
+    <link href="http://www.linzehui.me/2019/06/29/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8723/"/>
+    <id>http://www.linzehui.me/2019/06/29/论文/每周论文23/</id>
+    <published>2019-06-29T15:01:30.000Z</published>
+    <updated>2019-07-01T11:24:59.512Z</updated>
+    
+    <content type="html"><![CDATA[<p>本周论文：</p><ol><li>Reinforcement Learning based Curriculum Optimization for Neural Machine Translation</li><li>Curriculum Dropout</li><li>Self-Paced Curriculum Learning</li><li>Learning the Easy Things First: Self-Paced Visual Category Discovery</li><li>Curriculum Learning and Minibatch Bucketing in Neural Machine Translation</li><li>Visualizing and Understanding Curriculum Learning for Long Short-Term Memory Networks</li><li>LEARNING TO TEACH</li><li>Learning to learn by gradient descent by gradient descent</li><li>Curriculum Learning of Multiple Tasks</li></ol><h2 id="Reinforcement-Learning-based-Curriculum-Optimization-for-Neural-Machine-Translation"><a href="#Reinforcement-Learning-based-Curriculum-Optimization-for-Neural-Machine-Translation" class="headerlink" title="[Reinforcement Learning based Curriculum Optimization for Neural Machine Translation]"></a>[Reinforcement Learning based Curriculum Optimization for Neural Machine Translation]</h2><p>使用RL来进行学习curriculum learning，使得模型能够在各式各样的数据集上表现良好（也即高效利用noise很大的数据集，如Paracrawl)。</p><p><img src="/images/15618207015732.jpg" width="60%" height="50%"></p><p>使用一个指标CDS来将数据切分：</p><script type="math/tex; mode=display">s(e, f)=\log p_{\theta_{c}}(f | e)-\log p_{\theta_{n}}(f | e)</script><p>$e$和$f$是翻译对。其中$\theta_c$是在可信任的数据集上训练的模型；$\theta_n$在noisy corpus上训练的（比如Paracrawl)。</p><p>RL的几个基本因素：</p><p>Observation Engineering：the observation is the vector containing sentence-level log-likelihoods produced by the NMT system for this prototype batch  参考（Reinforced co-training.）</p><p>Reward Engineering：The reward is a function of the log-likelihood of the development set of interest.</p><p>Action：将数据集分为多个bin，action就是选择在哪个bin里面选择数据集。</p><hr><h2 id="Curriculum-Dropout"><a href="#Curriculum-Dropout" class="headerlink" title="[Curriculum Dropout]"></a>[Curriculum Dropout]</h2><p>顾名思义，就是逐渐增加dropout rate。</p><p><img src="/images/15618211418694.jpg" width="40%" height="50%"></p><hr><h2 id="Self-Paced-Curriculum-Learning"><a href="#Self-Paced-Curriculum-Learning" class="headerlink" title="[Self-Paced Curriculum Learning]"></a>[Self-Paced Curriculum Learning]</h2><p>将self-paced learning与curriculum learning结合。</p><h3 id="Curriculum-Learning"><a href="#Curriculum-Learning" class="headerlink" title="Curriculum Learning"></a>Curriculum Learning</h3><p>通过先验知识对example的难度进行预定义，然后按照先后顺序训练模型；</p><p>这是一种Instructor-driven的训练方法；并不考虑learner的feedback</p><h3 id="Self-paced-Learning"><a href="#Self-paced-Learning" class="headerlink" title="Self-paced Learning"></a>Self-paced Learning</h3><p>是直接将目标函数和curriculum一起结合起来，也即在训练的过程中根据模型的学习情况（loss）调整curriculum。灵活，但不考虑先验知识。</p><script type="math/tex; mode=display">\min _{\mathbf{w}, \mathbf{v} \in[0,1]^{n}} \mathbb{E}(\mathbf{w}, \mathbf{v} ; \lambda)=\sum_{i=1}^{n} v_{i} L\left(y_{i}, f\left(\mathbf{x}_{i}, \mathbf{w}\right)\right)-\lambda \sum_{i=1}^{n} v_{i}</script><p>当loss小于$\lambda$时，就被认为是easy sample，$v=1$；若大于$\lambda$则$v=0$。</p><p>λ controls the pace at which the model learns new samples, and physically λ corresponds to the “age” of the model</p><p>由于学习过程完全被loss主导，因此可能会overfitting。</p><h3 id="Self-paced-Curriculum-Learning"><a href="#Self-paced-Curriculum-Learning" class="headerlink" title="Self-paced Curriculum Learning"></a>Self-paced Curriculum Learning</h3><p>在二者基础上结合，在SPL的框架下引入CL的先验知识。也即既考虑了先验知识，又考虑了模型学习的反馈（loss）。</p><script type="math/tex; mode=display">\min _{\mathbf{w}, \mathbf{v} \in[0,1]^{n}} \mathbb{E}(\mathbf{w}, \mathbf{v} ; \lambda, \Psi)=\sum_{i=1}^{n} v_{i} L\left(y_{i}, g\left(\mathbf{x}_{i}, \mathbf{w}\right)\right)+f(\mathbf{v} ; \lambda),\text { s.t. } \mathbf{v} \in \Psi</script><p>其中$\Psi$代表了预定义的curriculum的集合。</p><p>相当于CL提供了一个弱sample的顺序，建议模型要先学哪些，但他有自由去调整学习目标。<br>我的理解是，$\Psi$是可以动态增大的。但是模型是否要将集合里的example用于训练还是要看上述的目标函数的，loss小的时候代表的easy example，会用于学习。</p><p><img src="/images/15618570682762.jpg" width="60%" height="50%"></p><p>这是CL/SPL/SPCL的区别：</p><p><img src="/images/15618570907601.jpg" width="100%" height="50%"></p><p>思考：</p><p>$\lambda$代表了模型的成熟度，控制的是模型自身的competence；而$\Psi$集合大小代表了instructor认为模型的成熟度。这二者的结合能够让模型更灵活。但是competence还是需要一个手动的schedule。</p><hr><h2 id="Learning-the-Easy-Things-First-Self-Paced-Visual-Category-Discovery"><a href="#Learning-the-Easy-Things-First-Self-Paced-Visual-Category-Discovery" class="headerlink" title="[Learning the Easy Things First: Self-Paced Visual Category Discovery]"></a>[Learning the Easy Things First: Self-Paced Visual Category Discovery]</h2><p>将self-paced的思路应用于visual category discovery。与传统self-paced learning不同的是，并没有将self-paced绑定在loss function上。</p><p>每一次计算两个指标 objectness和context-awareness。将最简单的选出来训练，然后再计算指标，再选出简单的训练。不断循环。</p><p>self-paced与curriculum learning不同，没有一个固定的teacher来判断难易程度，根据每次自己学习的进程来判断难度。本文相较传统self-paced不同，因为将loss和对难易程度的判断两个步骤分离开来。</p><hr><h2 id="Curriculum-Learning-and-Minibatch-Bucketing-in-Neural-Machine-Translation"><a href="#Curriculum-Learning-and-Minibatch-Bucketing-in-Neural-Machine-Translation" class="headerlink" title="[Curriculum Learning and Minibatch Bucketing in Neural Machine Translation]"></a>[Curriculum Learning and Minibatch Bucketing in Neural Machine Translation]</h2><p>在翻译任务上做了一些训练方法上的组合尝试，给出了一些结论。</p><h3 id="Minibatch-Bucketing"><a href="#Minibatch-Bucketing" class="headerlink" title="Minibatch Bucketing"></a>Minibatch Bucketing</h3><p>首先是尝试了在同一个batch里不仅句子长度相同（加速训练），还希望同一个batch内部有某种linguistic的信息(sentence length, number of coordinating conjunctions, number of nouns, number of proper nouns and the number of verbs in the training data pairs)。可能由于他选的这些linguistic并不好，最终并没有发现结果的提升。</p><p><img src="/images/15618573588977.jpg" width="55%" height="50%"></p><h3 id="Curriculum-Learning-1"><a href="#Curriculum-Learning-1" class="headerlink" title="Curriculum Learning"></a>Curriculum Learning</h3><p>对curriculum learning进行了改进，实际上普通的CL间接地强调了easier example，因为他们被sample了多次，所以这里采用了一种新的方法能够让每个example在一个epoch都只被sample一次。</p><p>按照难度将样例分为几个bin，首先从最简单的bin开始取样例，直到该bin的剩余样例个数和第二个bin的样例一样，然后从这两个bin剩下的样例中取样例，直到剩下和第三个bin样例个数一样。这样能保证在一个epoch内每个example的概率是一致的。</p><p>如何判断难易程度？长度，词的频率等</p><h4 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h4><p>①<br>首先，在训练完一个epoch后，使用CL相比没使用CL有提升：</p><p><img src="/images/15618574547524.jpg" width="55%" height="50%"></p><p>②<br>在一个epoch内的训练曲线：</p><p><img src="/images/15618574884386.jpg" width="70%" height="50%"></p><p>可以看到用CL的在每次新加example后都会有一个陡峭的跳跃。特别要注意按照source长度和按照target长度的CL有很大的不同，可能是按照target的CL给了训练进程一个较大的penalization。</p><p>③<br>模型很容易过拟合recent example，因此如果只提供难一点的example，那么在easy的example就容易下降。所以需要mixing strategy。</p><p><img src="/images/15618575566938.jpg" width="70%" height="50%"></p><p>从CL by target length可以看出，陡峭的跳跃说明模型在新加入数据之前很快地adapt在短的句子，而长句一进来又很快adapt到长句。这种快速转换似乎说明了模型的快速适应性。<br>如果不回顾简单的句子，见sorted by length的曲线，可以看到performance很差。<br>同时如果reverse CL，也即一开始evenly cover所有句子，然后只使用短的句子，那么可以看到一开始效果不错，到后面就降低了，这是因为模型快速适应了生成短的句子，就没法生成test集的正常长度的句子。</p><p>④<br>注意到以上都是在一个epoch内（也即过完了一遍训练数据）的结论。在这个epoch后继续几种训练方式（基于‘CL by target length’）。</p><p><img src="/images/15618576497211.jpg" width="70%" height="50%"></p><p>重新从最简单的开始（second epoch of CL by target length)，会伤害performance，但到后面还是有提升的。如果在第二个epoch用shuffle的数据训练，那么可以看到是几乎没有提升的，可能是因为模型已经陷入了当前的optimum了。</p><h3 id="思考与结论"><a href="#思考与结论" class="headerlink" title="思考与结论"></a>思考与结论</h3><p>这里的回顾式的CL，无法减少训练时间，因为要到最后才能获得超越baseline的performance。<br>同时实验证明了，模型的快速适应性，很容易overfitting到最近的训练样例上，因此要设计mixing strategy。</p><hr><h2 id="Visualizing-and-Understanding-Curriculum-Learning-for-Long-Short-Term-Memory-Networks"><a href="#Visualizing-and-Understanding-Curriculum-Learning-for-Long-Short-Term-Memory-Networks" class="headerlink" title="[Visualizing and Understanding Curriculum Learning for Long Short-Term Memory Networks]"></a>[Visualizing and Understanding Curriculum Learning for Long Short-Term Memory Networks]</h2><p>对CL在LSTM的训练的影响进行分析。得到一些结论。</p><p>快速回顾了两种CL：One-Pass Curriculum和Baby Steps Curriculum。</p><p>One-Pass Curriculum：将训练数据分为几个bucket，然后从简单的bucket开始，训练完简单的bucket之后跳到难的bucket。</p><p><img src="/images/15618578493722.jpg" width="60%" height="50%"></p><p>Baby Steps Curriculum：从简单的开始，但在增加难的数据后，不会discard简单的数据。</p><p><img src="/images/15618578792843.jpg" width="60%" height="50%"></p><h3 id="实验-amp-结论"><a href="#实验-amp-结论" class="headerlink" title="实验&amp;结论"></a>实验&amp;结论</h3><p>①<br>Baby Step在多个任务上都明显更好，如，digit sum</p><p><img src="/images/15618579415036.jpg" width="90%" height="50%"></p><p>不仅仅是结果好，同时其variance也更小：</p><p><img src="/images/15618579749575.jpg" width="70%" height="50%"></p><p>②<br>在不同复杂度的模型上，CL效果都好，当模型越大，效果的差距会越小。注意到，CL在参数数量更少的情况下效果更好。</p><p><img src="/images/15618584599852.jpg" width="60%" height="50%"></p><p>③<br>在情感分析任务上的结果</p><p><img src="/images/15618585223767.jpg" width="60%" height="50%"></p><p>首先是使用CL效果好，其次是使用conjunction（是指连接两个情感极性相反句子的词（but等）（conjunctions where a span of text contradicts or supports overall sentiment polarity））效果差距更大。说明使用CL使得模型的鲁棒性更强。</p><p>同时CL在使用不同词来预测，其表现较为一致：</p><p><img src="/images/15618586132751.jpg" width="70%" height="50%"></p><p>同时，在数据量更少的情况下，CL的效果越明显：</p><p><img src="/images/15618586384812.jpg" width="60%" height="50%"></p><p>结论：<br>CL在数据少，模型小的情况下很重要。</p><hr><h2 id="LEARNING-TO-TEACH"><a href="#LEARNING-TO-TEACH" class="headerlink" title="[LEARNING TO TEACH]"></a>[LEARNING TO TEACH]</h2><p>采用RL的方法来进行schedule learning。 主要结构是，一个teacher决定给学生的数据，一个学生通过给定的数据训练，并获得reward和state作为feedback返回给teacher。 </p><p>teacher的目标是提供数据，loss function和hypothesis space。实际上论文只讨论了数据的提供。目标：</p><script type="math/tex; mode=display">\min _{D, L, \Omega} \mathcal{M}\left(\mu(D, L, \Omega), D_{t e s t}\right)</script><p><img src="/images/15618587842064.jpg" width="55%" height="50%"></p><p>RL的几个要素：</p><p>action：随机sample数据，然后从这些sample的数据里再筛选出数据。也即对所有sample的数据打标签，1代表给学生model训练，0则被抛弃掉。</p><p>state：实际上就是一些人工定好的feature。数据的feature，比如label category，句子长度，linguistic feature等；student model的feature，也即代表了当前NN被训练得多好的feature，历史training loss和历史的validation accuracy等；还有就是二者的结合，比如predicted probability ；data的loss等</p><p>reward：和student model收敛速度相关，也即记录第一个在测试集上准确率超过某个阈值的mini-batch的索引，然后计算：</p><script type="math/tex; mode=display">r_{T}=-\log \left(i_{\tau} / T^{\prime}\right)</script><p>这是为了鼓励早点收敛。</p><p>本篇文章框架设定得很好，但并没有讨论另外两个。</p><hr><h2 id="Learning-to-learn-by-gradient-descent-by-gradient-descent"><a href="#Learning-to-learn-by-gradient-descent-by-gradient-descent" class="headerlink" title="[Learning to learn by gradient descent by gradient descent]"></a>[Learning to learn by gradient descent by gradient descent]</h2><p>meta-learning的一种方法。被题目吸引，大概看了看。</p><p>利用LSTM来学习optimizer的梯度，以帮助模型更好的训练。</p><p><img src="/images/15618590469237.jpg" width="50%" height="50%"></p><p><img src="/images/15618590754597.jpg" width="60%" height="50%"></p><p>其中虚线不回传，实线回传。</p><p>同时，注意到为了让参数的顺序对输出没有影响，因为假设每个参数坐标都是独立的，因此使用separate hidden state，但LSTM的参数是共享的，也即每个输入梯度都单独处理。</p><p><img src="/images/15618591345801.jpg" width="45%" height="50%"></p><hr><h2 id="Teacher-Student-Curriculum-Learning"><a href="#Teacher-Student-Curriculum-Learning" class="headerlink" title="[Teacher-Student Curriculum Learning]"></a>[Teacher-Student Curriculum Learning]</h2><p>没仔细看，大概思想是，一个teacher帮忙选择sub-task让student学。</p><p><img src="/images/15618591847957.jpg" width="50%" height="50%"></p><p>state代表的是student的整个状态，neural network parameters and optimizer state) and is not observable to the Teacher.</p><p>action是teacher所采取的动作，也即选择某个task；</p><p>observation 是在选择了task后所获得的score；</p><p>reward也即在该timestep的score的改变 $r_{t}=x_{t}^{(i)}-x_{t_{i}^{\prime}}^{(i)}$</p><p>CL的地方在于从简单的学起（也即带来的改变最大的task），然后当其提升的速率降低了，则降低其sample的概率。</p><p>总结起来，CL的几个原则：</p><p><img src="/images/15618592716048.jpg" width="80%" height="50%"></p><p>理想化的CL：</p><p><img src="/images/15618593002197.jpg" width="76%" height="50%"></p><p>当某个task的score下降了，说明他忘了这部分的知识，又要提升该sample的概率。</p><hr><h2 id="Curriculum-Learning-of-Multiple-Tasks"><a href="#Curriculum-Learning-of-Multiple-Tasks" class="headerlink" title="[Curriculum Learning of Multiple Tasks]"></a>[Curriculum Learning of Multiple Tasks]</h2><p>学习多个task，按照先后顺序来，而不是联合训练。上一个task学到的weight用于下一个task的初始化。</p><p><img src="/images/15618593717627.jpg" width="55%" height="50%"></p><p>自动选择task顺序。我的理解是，每当训练完一个subtask，测试所有其他subtask，选择表现最好的那个（某个指标，平均期望误差），然后选择该subtask继续训练。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本周论文：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Reinforcement Learning based Curriculum Optimization for Neural Machine Translation&lt;/li&gt;
+&lt;li&gt;Curriculum Dropout&lt;/li&gt;
+&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="RL" scheme="http://www.linzehui.me/tags/RL/"/>
+    
+      <category term="Reinforcement Learning" scheme="http://www.linzehui.me/tags/Reinforcement-Learning/"/>
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="LSTM" scheme="http://www.linzehui.me/tags/LSTM/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
+    
+      <category term="Dropout" scheme="http://www.linzehui.me/tags/Dropout/"/>
+    
+      <category term="meta-learning" scheme="http://www.linzehui.me/tags/meta-learning/"/>
+    
+      <category term="multi-task" scheme="http://www.linzehui.me/tags/multi-task/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周诗词29</title>
+    <link href="http://www.linzehui.me/2019/06/23/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D29/"/>
+    <id>http://www.linzehui.me/2019/06/23/诗词&amp;句/每周诗词29/</id>
+    <published>2019-06-23T03:46:14.000Z</published>
+    <updated>2019-06-23T09:06:15.557Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="永遇乐-·-京口北固亭怀古"><a href="#永遇乐-·-京口北固亭怀古" class="headerlink" title="永遇乐 · 京口北固亭怀古"></a>永遇乐 · 京口北固亭怀古</h3><p>[宋] 辛弃疾<br>千古江山，英雄无觅，孙仲谋处。舞榭歌台，风流总被，雨打风吹去。斜阳草树，寻常巷陌，人道寄奴曾住。想当年、金戈铁马，气吞万里如虎。<br>元嘉草草，封狼居胥，赢得仓皇北顾。四十三年，望中犹记，烽火扬州路。可堪回首，佛貍祠下，一片神鸦社鼓。凭谁问，<strong>廉颇老矣，尚能饭否</strong>？</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;永遇乐-·-京口北固亭怀古&quot;&gt;&lt;a href=&quot;#永遇乐-·-京口北固亭怀古&quot; class=&quot;headerlink&quot; title=&quot;永遇乐 · 京口北固亭怀古&quot;&gt;&lt;/a&gt;永遇乐 · 京口北固亭怀古&lt;/h3&gt;&lt;p&gt;[宋] 辛弃疾&lt;br&gt;千古江山，英雄无觅，孙仲谋处。
+      
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>佳句分享1</title>
+    <link href="http://www.linzehui.me/2019/06/23/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB1/"/>
+    <id>http://www.linzehui.me/2019/06/23/诗词&amp;句/佳句分享1/</id>
+    <published>2019-06-23T03:41:15.000Z</published>
+    <updated>2019-07-07T03:43:57.223Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>仓促本身就是最要不得的态度。当你做某件事的时候，一旦想要求快 ，就表示你再也不关心它，而想去做别的事 —《禅与摩托车维修艺术》</p><h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><p>自律使我们与众不同，自律令我们活得更高级。<br>也正是自律，使我们获得更自由的人生。<br>假如我们像动物一样，听从欲望，逃避痛苦，我们并不是真的自由行动。我们只是成了欲望和冲动的奴隶。我们不是在选择，而是在服从。但人之所以为人， 就在于，人不是被欲望主宰，而是自我主宰。 —康德</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h3&gt;&lt;p&gt;仓促本身就是最要不得的态度。当你做某件事的时候，一旦想要求快 ，就表示你再也不关心它，而想去做别的事 —《禅与摩托车维修艺术》&lt;/p&gt;
+&lt;h3 id
+      
+    
+    </summary>
+    
+    
+      <category term="佳句分享" scheme="http://www.linzehui.me/tags/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周碎片知识23</title>
+    <link href="http://www.linzehui.me/2019/06/23/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8623/"/>
+    <id>http://www.linzehui.me/2019/06/23/碎片知识/每周碎片知识23/</id>
+    <published>2019-06-23T03:24:14.000Z</published>
+    <updated>2019-06-29T15:00:58.642Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="NAS"><a href="#NAS" class="headerlink" title="[NAS]"></a>[NAS]</h3><p>关于NAS(Neural Architecture Search)的科普文。<br><a href="https://medium.com/@ashiqbuet14/neural-architecture-search-nas-the-future-of-deep-learning-c99356351136" target="_blank" rel="noopener">https://medium.com/@ashiqbuet14/neural-architecture-search-nas-the-future-of-deep-learning-c99356351136</a></p><p><img src="/images/15612604991653.jpg" width="60%" height="50%"></p><p><strong>Search space</strong>：就是一个接一个的layer，也可以包括skip connection；</p><p><img src="/images/15612605302179.jpg" width="60%" height="50%"></p><p>如果希望大的框架定好，只是里面的layer搜索，这称为micro-search。</p><p><strong>RL</strong>：可以使用强化学习来做NAS，以RNN为基本模型。</p><p><img src="/images/15612606028985.jpg" width="77%" height="50%"></p><p>其实就是每个输出指示一个layer选项，然后通过RL获得的reward来更新。</p><p><img src="/images/15612606279730.jpg" width="65%" height="50%"></p><p><strong>Progressive Neural Architecture Search(PNAS)</strong>：这就是前面提到的固定整个大的框架（block），然后搜索里面的layer。</p><p><img src="/images/15612606813899.jpg" width="70%" height="50%"></p><p><img src="/images/15612606939857.jpg" width="40%" height="50%"></p><p><img src="/images/15612607076908.jpg" width="68%" height="50%"></p><p>可以通过每层选完去掉一些选项来减少排列组合巨大的总数。</p><p><strong>Differentiable Architecture Search(DARTS)</strong>：将选择layer的discrete的动作变成连续的，使得能够通过求导的方式更新。</p><p>其本质就是两个node之间连多个operation，然后训练获得每个operation的比例，只保留最大的。</p><p><img src="/images/15612607664055.jpg" width="40%" height="50%"></p><p><img src="/images/15612607797249.jpg" width="80%" height="50%"></p><p>这个用连续来达到离散的做法还挺有创新的。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;NAS&quot;&gt;&lt;a href=&quot;#NAS&quot; class=&quot;headerlink&quot; title=&quot;[NAS]&quot;&gt;&lt;/a&gt;[NAS]&lt;/h3&gt;&lt;p&gt;关于NAS(Neural Architecture Search)的科普文。&lt;br&gt;&lt;a href=&quot;https://med
+      
+    
+    </summary>
+    
+    
+      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="NAS" scheme="http://www.linzehui.me/tags/NAS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DRL Lecture 7:Sparse Reward</title>
+    <link href="http://www.linzehui.me/2019/06/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/DRL%20Lecture%207:%20Sparse%20Reward/"/>
+    <id>http://www.linzehui.me/2019/06/23/机器学习与深度学习算法知识/DRL Lecture 7: Sparse Reward/</id>
+    <published>2019-06-23T02:43:24.000Z</published>
+    <updated>2019-06-23T09:04:19.819Z</updated>
+    
+    <content type="html"><![CDATA[<p>讨论了当RL遇到sparse reward时的几个解决方案。</p><h2 id="Reward-Shaping"><a href="#Reward-Shaping" class="headerlink" title="Reward Shaping"></a>Reward Shaping</h2><h3 id="hand-crafted"><a href="#hand-crafted" class="headerlink" title="hand-crafted"></a>hand-crafted</h3><p>也即虚构出reward引导agent走向自己期望的结果。</p><p><img src="/images/15612581947292.jpg" width="80%" height="50%"></p><p>如上图，仔细定义了游戏中每个操作的reward。</p><h3 id="Curiosity"><a href="#Curiosity" class="headerlink" title="Curiosity"></a>Curiosity</h3><p>往agent里添加好奇心。</p><p><img src="/images/15612582253155.jpg" width="60%" height="50%"></p><p>输入是$a_t$和$s_t$尝试预测出$s_{t+1}$，如果预测的和真实的差距较大时，则该action的reward大，这样能够鼓励agent探索更多的操作。</p><p><img src="/images/15612583393730.jpg" width="60%" height="50%"></p><p>但有时候难以预测的state并不代表其重要。应当过滤掉这样的state，比如游戏中树叶飘动，但这个state完全不重要。因此对上述模型进行改进：</p><p><img src="/images/15612583648401.jpg" width="60%" height="50%"></p><p>添加feature extractor，同时添加另一个网络，来通过$s_t$和$s_{t+1}$预测action，这样就能够过滤掉state中没意义的部分。</p><h2 id="Curriculum-Learning"><a href="#Curriculum-Learning" class="headerlink" title="Curriculum Learning"></a>Curriculum Learning</h2><p>从简单的开始学起，比如玩游戏的例子：</p><p><img src="/images/15612584604093.jpg" width="74%" height="50%"></p><p>这个需要人工较为精细的调整。</p><h3 id="Reverse-Curriculum-Generation"><a href="#Reverse-Curriculum-Generation" class="headerlink" title="Reverse Curriculum Generation"></a>Reverse Curriculum Generation</h3><p>首先给定一个gold state，也即目标，然后寻找与gold state最接近的state获得相应的reward。</p><p><img src="/images/15612585028635.jpg" width="40%" height="50%"></p><p>然后去掉reward太大或太小的。在留下来的state中再获取与他们接近的state，继续以上流程。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;讨论了当RL遇到sparse reward时的几个解决方案。&lt;/p&gt;
+&lt;h2 id=&quot;Reward-Shaping&quot;&gt;&lt;a href=&quot;#Reward-Shaping&quot; class=&quot;headerlink&quot; title=&quot;Reward Shaping&quot;&gt;&lt;/a&gt;Reward
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习🤖" scheme="http://www.linzehui.me/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%F0%9F%A4%96/"/>
+    
+      <category term="强化学习" scheme="http://www.linzehui.me/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="RL" scheme="http://www.linzehui.me/tags/RL/"/>
+    
+      <category term="Reinforcement Learning" scheme="http://www.linzehui.me/tags/Reinforcement-Learning/"/>
+    
+      <category term="Deep Reinforcement Learning" scheme="http://www.linzehui.me/tags/Deep-Reinforcement-Learning/"/>
+    
+      <category term="李宏毅强化学习课程" scheme="http://www.linzehui.me/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/"/>
+    
+      <category term="Sparse Reward" scheme="http://www.linzehui.me/tags/Sparse-Reward/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DRL Lecture 6:Actor-Critic</title>
+    <link href="http://www.linzehui.me/2019/06/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/DRL%20Lecture%206:%20Actor-Critic/"/>
+    <id>http://www.linzehui.me/2019/06/23/机器学习与深度学习算法知识/DRL Lecture 6: Actor-Critic/</id>
+    <published>2019-06-23T02:33:24.000Z</published>
+    <updated>2019-07-02T06:21:34.529Z</updated>
+    
+    <content type="html"><![CDATA[<p>介绍了actor-critic的算法，结合了policy gradient和Q-learning。</p><h2 id="Actor-Critic"><a href="#Actor-Critic" class="headerlink" title="Actor-Critic"></a>Actor-Critic</h2><p>原先policy gradient的算法是直接学习一个policy：</p><script type="math/tex; mode=display">\nabla \overline{R}_{\theta} \approx \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_{n}}\left(\sum_{t^{\prime}=t}^{T_{n}} \gamma^{t^{\prime}-t} r_{t^{\prime}}^{n}-b\right) \nabla \log p_{\theta}\left(a_{t}^{n} | s_{t}^{n}\right)</script><p>但显然reward是不稳定的，它代表了采取action之后的reward的期望值，当sample次数不够多，其预估的也不准。</p><p>因此在这里将Q-learning引入到预估reward中，也即policy gradient和q-learning的结合。</p><p>也即我们将reward替换成$E\left[G_{t}^{n}\right]=Q^{\pi_{\theta}}\left(s_{t}^{n}, a_{t}^{n}\right)$。同时根据baseline的定义，我们将其替换成$V^{\pi_{\theta}}\left(s_{t}^{n}\right)$。</p><p>所以括号内的$\sum_{t^{\prime}=t}^{T_{n}} \gamma^{t^{\prime}-t} r_{t^{\prime}}^{n}-b$就变成$Q^{\pi \theta}\left(s_{t}^{n}, a_{t}^{n}\right)-V^{\pi_{\theta}}\left(s_{t}^{n}\right)$。</p><p>实际上我们不需要分别训练两个网络，直接整合成一个网络即可。也即将$Q^{\pi \theta}\left(s_{t}^{n}, a_{t}^{n}\right)-V^{\pi_{\theta}}\left(s_{t}^{n}\right)$改成$r_{t}^{n}+V^{\pi}\left(s_{t+1}^{n}\right)-V^{\pi}\left(s_{t}^{n}\right)$。</p><p>因此整个流程：</p><p><img src="/images/15612575693660.jpg" width="40%" height="50%"></p><p>形式化也即：</p><script type="math/tex; mode=display">\nabla \overline{R}_{\theta} \approx \frac{1}{N} \sum_{n=1}^{N} \sum_{t=1}^{T_{n}}\left(r_{t}^{n}+V^{\pi}\left(s_{t+1}^{n}\right)-V^{\pi}\left(s_{t}^{n}\right)\right) \nabla \log p_{\theta}\left(a_{t}^{n} | s_{t}^{n}\right)</script><p>由于$\pi$和$V$的输入都是$s$，在实际操作中可以将这两个网络的前几层参数共享：</p><p><img src="/images/15612576221669.jpg" width="50%" height="50%"></p><p>同时对$\pi$的输出加以限制，希望有更大的entropy，这样能够探索更多情况。</p><h2 id="Pathwise-Derivative-Policy-Gradient"><a href="#Pathwise-Derivative-Policy-Gradient" class="headerlink" title="Pathwise Derivative Policy Gradient"></a>Pathwise Derivative Policy Gradient</h2><p>接下来介绍了一种新的方法，直接学习一个$\pi$，输入$s$可以获得能够最大化Q的action。这和GAN的思想很相似。</p><p><img src="/images/15612577121214.jpg" width="60%" height="50%"></p><p>这样$\pi$天然地能够处理continuous的情况。</p><p>所以整个流程：</p><p><img src="/images/15612577508356.jpg" width="55%" height="50%"></p><p>先交互，学习一个好的$Q$，然后将这个$Q$作为标准，学习$\pi$使得输出的$Q$最大。和GAN很像。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;介绍了actor-critic的算法，结合了policy gradient和Q-learning。&lt;/p&gt;
+&lt;h2 id=&quot;Actor-Critic&quot;&gt;&lt;a href=&quot;#Actor-Critic&quot; class=&quot;headerlink&quot; title=&quot;Actor-Criti
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习🤖" scheme="http://www.linzehui.me/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%F0%9F%A4%96/"/>
+    
+      <category term="强化学习" scheme="http://www.linzehui.me/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="RL" scheme="http://www.linzehui.me/tags/RL/"/>
+    
+      <category term="Reinforcement Learning" scheme="http://www.linzehui.me/tags/Reinforcement-Learning/"/>
+    
+      <category term="Deep Reinforcement Learning" scheme="http://www.linzehui.me/tags/Deep-Reinforcement-Learning/"/>
+    
+      <category term="李宏毅强化学习课程" scheme="http://www.linzehui.me/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/"/>
+    
+      <category term="Actor-Critic" scheme="http://www.linzehui.me/tags/Actor-Critic/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DRL Lecture 5:Q-learning (Continuous Action)</title>
+    <link href="http://www.linzehui.me/2019/06/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/DRL%20Lecture%205:%20Q-learning%20(Continuous%20Action)/"/>
+    <id>http://www.linzehui.me/2019/06/23/机器学习与深度学习算法知识/DRL Lecture 5: Q-learning (Continuous Action)/</id>
+    <published>2019-06-23T02:27:24.000Z</published>
+    <updated>2019-06-23T02:33:07.092Z</updated>
+    
+    <content type="html"><![CDATA[<p>讨论了如何将Q-learning用于连续的action中。</p><p>前面提到 Q-learning就是：</p><script type="math/tex; mode=display">a=\arg \max _{a} Q(s, a)</script><p>若a是连续的，几种解决方案：</p><p>①sample一堆action$\left\{a_{1}, a_{2}, \cdots, a_{N}\right\}$，然后按照discrete的情况来处理。但精度不高，因为没法sample太多情况。</p><p>②使用gradient ascent来计算处理上式。该方法显然太耗时，因为每个sample都等于要训练一遍模型。</p><p>③设计专门的网络使得该优化可行。<br>首先输入state：</p><p><img src="/images/15612569949700.jpg" width="60%" height="50%"></p><p>获得一个$\mu$，$\Sigma$和$V$。接着和action交互：</p><script type="math/tex; mode=display">Q(s, a)=-(a-\mu(s))^{T} \Sigma(s)(a-\mu(s))+V(s)</script><p>显然,第一项若$\Sigma$半正定，必定小于等于0，所以当$a=\mu(s)$时$Q$最大。实际上$\Sigma$是通过先获得一个矩阵$A$，然后$A\times A^{T}$保证其正定性。</p><p>因此：</p><script type="math/tex; mode=display">\mu(s)=\arg \max _{a} Q(s, a)</script><p>④别用Q-learning处理连续的情况，因为处理还是比较麻烦的。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;讨论了如何将Q-learning用于连续的action中。&lt;/p&gt;
+&lt;p&gt;前面提到 Q-learning就是：&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;a=\arg \max _{a} Q(s, a)&lt;/script&gt;&lt;p&gt;若a是
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习🤖" scheme="http://www.linzehui.me/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%F0%9F%A4%96/"/>
+    
+      <category term="强化学习" scheme="http://www.linzehui.me/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="RL" scheme="http://www.linzehui.me/tags/RL/"/>
+    
+      <category term="Reinforcement Learning" scheme="http://www.linzehui.me/tags/Reinforcement-Learning/"/>
+    
+      <category term="Deep Reinforcement Learning" scheme="http://www.linzehui.me/tags/Deep-Reinforcement-Learning/"/>
+    
+      <category term="李宏毅强化学习课程" scheme="http://www.linzehui.me/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/"/>
+    
+      <category term="Q-learning" scheme="http://www.linzehui.me/tags/Q-learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DRL Lecture 4:Q-learning (Advanced Tips)</title>
+    <link href="http://www.linzehui.me/2019/06/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/DRL%20Lecture%204:%20Q-learning%20(Advanced%20Tips)/"/>
+    <id>http://www.linzehui.me/2019/06/23/机器学习与深度学习算法知识/DRL Lecture 4: Q-learning (Advanced Tips)/</id>
+    <published>2019-06-23T02:14:24.000Z</published>
+    <updated>2019-06-23T09:02:20.051Z</updated>
+    
+    <content type="html"><![CDATA[<p>介绍一些进阶的Q-learning tips，能够帮助Q-learning提升表现。</p><h3 id="Double-DQN"><a href="#Double-DQN" class="headerlink" title="Double DQN"></a>Double DQN</h3><p>发现Q-value总是容易被高估，原因是算法中有$Q\left(s_{t}, a_{t}\right)=r_{t}+\max _{a} Q\left(s_{t+1}, a\right)$。该公式的max使得$Q$总是选择最大的action，使得$Q$的拟合总是偏大。</p><p><img src="/images/15612561913726.jpg" width="40%" height="50%"></p><p>那么在这里多加一个$Q^{\prime}$以规避上述情况，也即：</p><script type="math/tex; mode=display">Q\left(s_{t}, a_{t}\right)=r_{t}+Q^{\prime}\left(s_{t+1}, \arg \max _{a} Q\left(s_{t+1}, a\right)\right)</script><p>若$Q$高估了a，$Q^{\prime}$不高估那么$Q^{\prime}$的值也不会那么大则左式的值就不会被高估；若$Q^{\prime}$对某个action高估了，只要$Q$不高估该action，那么也不会选择该action。</p><h3 id="Dueling-DQN"><a href="#Dueling-DQN" class="headerlink" title="Dueling DQN"></a>Dueling DQN</h3><p>将模型结构做了改变：</p><p><img src="/images/15612563207080.jpg" width="60%" height="50%"></p><p>也即将$Q$分离开来。一种解释是这样的分离可以使得数据的使用更有效率，使得模型更为灵活。课件上还举了一个例子。 同时还可以对$A$加一些限制，比如向量和为0。</p><h3 id="Prioritized-Reply"><a href="#Prioritized-Reply" class="headerlink" title="Prioritized Reply"></a>Prioritized Reply</h3><p>对replay buffer进行改进。对TD error较大的优先sample，也即对那些学得不好的example优先学习。</p><h3 id="Multi-step"><a href="#Multi-step" class="headerlink" title="Multi-step"></a>Multi-step</h3><p>将MC和TD综合起来。给定$\left(s_{t}, a_{t}, r_{t}, \cdots, s_{t+N}, a_{t+N}, r_{t+N}, s_{t+N+1}\right)$，有：</p><p><img src="/images/15612565388930.jpg" width="65%" height="50%"></p><p>也即介于MC的整个episode完成后再计算和TD的每个step都计算一次。</p><h3 id="Noisy-Net"><a href="#Noisy-Net" class="headerlink" title="Noisy Net"></a>Noisy Net</h3><p>epsilon greedy也可以看做是加噪声，但是是加在action上：</p><script type="math/tex; mode=display">a=\left\{\begin{aligned} \arg \max _{a} Q(s, a), & \text {with probability } 1-\varepsilon \\ \text {random}, & \text { otherwise } \end{aligned}\right.</script><p>这样使得模型的行为不一致，可能不大好。</p><p>而Noisy Net是在parameter上加噪声。也即在episode开始之前对$Q$加噪声，变成$\tilde{Q}$：</p><script type="math/tex; mode=display">a=\arg \max _{a} \tilde{Q}(s, a)</script><p>而在episode期间不会改变noise。这样更有系统性的探索可能会更好，因为模型行为一致。</p><h3 id="Distributional-Q-function"><a href="#Distributional-Q-function" class="headerlink" title="Distributional Q-function"></a>Distributional Q-function</h3><p>基本思想是令$Q$预测每个行为的reward的分布而不仅仅是一个期望值。因为期望值损失了太多信息了，不同的distribution可能有同样大小的期望。</p><p><img src="/images/15612567428631.jpg" width="50%" height="50%"></p><p>实际上操作也即：</p><p><img src="/images/15612567546608.jpg" width="60%" height="50%"></p><p>Distributional Q-function往往不会高估expectation而是低估。因为在预测distribution时已经限定了最高和最低的范围了，对于那些大于或小于的值都忽略掉。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;介绍一些进阶的Q-learning tips，能够帮助Q-learning提升表现。&lt;/p&gt;
+&lt;h3 id=&quot;Double-DQN&quot;&gt;&lt;a href=&quot;#Double-DQN&quot; class=&quot;headerlink&quot; title=&quot;Double DQN&quot;&gt;&lt;/a&gt;Double
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习🤖" scheme="http://www.linzehui.me/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%F0%9F%A4%96/"/>
+    
+      <category term="强化学习" scheme="http://www.linzehui.me/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="RL" scheme="http://www.linzehui.me/tags/RL/"/>
+    
+      <category term="Reinforcement Learning" scheme="http://www.linzehui.me/tags/Reinforcement-Learning/"/>
+    
+      <category term="Deep Reinforcement Learning" scheme="http://www.linzehui.me/tags/Deep-Reinforcement-Learning/"/>
+    
+      <category term="李宏毅强化学习课程" scheme="http://www.linzehui.me/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/"/>
+    
+      <category term="Q-learning" scheme="http://www.linzehui.me/tags/Q-learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DRL Lecture 3:Q-learning (Basic Idea)</title>
+    <link href="http://www.linzehui.me/2019/06/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/DRL%20Lecture%203:%20Q-learning%20(Basic%20Idea)/"/>
+    <id>http://www.linzehui.me/2019/06/22/机器学习与深度学习算法知识/DRL Lecture 3: Q-learning (Basic Idea)/</id>
+    <published>2019-06-22T14:22:24.000Z</published>
+    <updated>2019-06-23T09:01:32.232Z</updated>
+    
+    <content type="html"><![CDATA[<p>简单介绍Q-learning的思想以及相关的训练tips。</p><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>与Policy Gradient不同的是，Q-Learning是属于value based，也即学习一个critic去估计特定actor π在某个state s下的累积reward。</p><p>注意到Q-learning虽然只学习了critic，但仍然可以用于做决策。</p><p>首先是如何预估critic？<br>critic的本质就是函数映射$V^{\pi}(s)$，输入$s$，输出一个scalar作为使用了actor $\pi$的累积reward。有两种方法：Monte-Carlo (MC) based approach和Temporal-difference (TD) approach。</p><h4 id="Monte-Carlo-MC-based-approach"><a href="#Monte-Carlo-MC-based-approach" class="headerlink" title="Monte-Carlo (MC) based approach"></a>Monte-Carlo (MC) based approach</h4><p>critic看完整个episode，然后对$s$做出预估：</p><p><img src="/images/15612136873633.jpg" width="35%" height="50%"></p><p>其实质上就是在做regression。</p><h4 id="Temporal-difference-TD-approach"><a href="#Temporal-difference-TD-approach" class="headerlink" title="Temporal-difference (TD) approach"></a>Temporal-difference (TD) approach</h4><p>由于有些episode非常长，等跑完再预估效率太低，因此直接对每个step进行预估。<br>对于一个time step $\cdots s_{t}, a_{t}, r_{t}, s_{t+1} \cdots$，直接预估：</p><p><img src="/images/15612137939102.jpg" width="70%" height="50%"></p><p>介绍完$V^{\pi}(s)$，还有一种critic，输入$s$和$a$以获得一个累积reward。这里和$V^{\pi}(s)$不同的是，对于同一个π，能够评估强制采用$a$所获得的reward。</p><p><img src="/images/15612139717700.jpg" width="70%" height="50%"></p><h3 id="如何使用critic决策"><a href="#如何使用critic决策" class="headerlink" title="如何使用critic决策"></a>如何使用critic决策</h3><p>在训练完了一个critic，如何用于进行决策？</p><p>其基本思想是：给定$Q$，总能找到一个$\pi^{\prime}$ 比$\pi$好，也即$V^{\pi^{\prime}}(s) \geq V^{\pi}(s)$。形式化：</p><script type="math/tex; mode=display">\pi^{\prime}(s)=\arg \max _{a} Q^{\pi}(s, a)</script><p>也就是说，在学习完一个特定$\pi$对应的$Q$后，只需要遵照每遇到一个state，选择能使$Q$最大化的action，该新的$\pi$就会比原来的$\pi$更优。</p><p>为什么一定会更优。提供证明：</p><p><img src="/images/15612142985976.jpg" width="60%" height="50%"></p><p>每一步选择最优都会比原来好一些。</p><h3 id="如何训练Q-function"><a href="#如何训练Q-function" class="headerlink" title="如何训练Q function"></a>如何训练Q function</h3><p>我们通过类似TD的方法来训练。给定$\cdots s_{t}, a_{t}, r_{t}, s_{t+1} \cdots$,我们有：</p><script type="math/tex; mode=display">\mathrm{Q}^{\pi}\left(s_{t}, a_{t}\right)=r_{t}+\mathrm{Q}^{\pi}\left(s_{t+1}, \pi\left(s_{t+1}\right)\right)</script><p>其中由于公式有两个Q，若让两个Q同时变，不好做回归。因此我们让右边的Q固定住，训练左边的Q，在更新完几次后，直接将左边的Q覆盖右边。重复多次：</p><p><img src="/images/15612553664628.jpg" width="65%" height="50%"></p><p>另一个问题是如何收集数据？</p><p>由于action是基于Q函数的，也即每次都采用贪心的策略，会使得在初始情况下固定的action会一直出现，无法探索到其他情况。因此采用两种策略：</p><p>①epsilon greedy：</p><p><script type="math/tex">a=\left\{\begin{aligned} \arg \max _{a} Q(s, a), & \text { with probability } 1-\varepsilon \\ \text {random}, & \text { otherwise } \end{aligned}\right.</script></p><p>其中$\varepsilon$随着时间而逐渐变小。</p><p>②boltzmann exploration：<br>按概率采样</p><script type="math/tex; mode=display">P(a | s)=\frac{\exp (Q(s, a))}{\sum_{a} \exp (Q(s, a))}</script><p>还有一个小技巧用于更好利用sample，也即replay buffer：将每次π与环境交互的episode都放在一个buffer里面，可以都用来学习Q函数，即使数据来自不同的policy也没关系。这和off-policy有点像。为什么可以这么用一种解释是这样可以使得数据更diverse，同时减少sample次数加快训练。</p><p><img src="/images/15612559617307.jpg" width="40%" height="50%"></p><p>因此一个典型的q-learning则是：</p><p><img src="/images/15612560018865.jpg" width="60%" height="50%"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;简单介绍Q-learning的思想以及相关的训练tips。&lt;/p&gt;
+&lt;h3 id=&quot;是什么&quot;&gt;&lt;a href=&quot;#是什么&quot; class=&quot;headerlink&quot; title=&quot;是什么&quot;&gt;&lt;/a&gt;是什么&lt;/h3&gt;&lt;p&gt;与Policy Gradient不同的是，Q-Learni
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习🤖" scheme="http://www.linzehui.me/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%F0%9F%A4%96/"/>
+    
+      <category term="强化学习" scheme="http://www.linzehui.me/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="RL" scheme="http://www.linzehui.me/tags/RL/"/>
+    
+      <category term="Reinforcement Learning" scheme="http://www.linzehui.me/tags/Reinforcement-Learning/"/>
+    
+      <category term="Deep Reinforcement Learning" scheme="http://www.linzehui.me/tags/Deep-Reinforcement-Learning/"/>
+    
+      <category term="李宏毅强化学习课程" scheme="http://www.linzehui.me/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/"/>
+    
+      <category term="Q-learning" scheme="http://www.linzehui.me/tags/Q-learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周论文22</title>
+    <link href="http://www.linzehui.me/2019/06/22/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8722/"/>
+    <id>http://www.linzehui.me/2019/06/22/论文/每周论文22/</id>
+    <published>2019-06-22T08:20:30.000Z</published>
+    <updated>2019-07-02T01:03:49.690Z</updated>
+    
+    <content type="html"><![CDATA[<p>本周论文：</p><ol><li>Boosting Neural Machine Translation</li><li>Curriculum Learning by Transfer Learning: Theory and Experiments with Deep Networks</li><li>On The Power of Curriculum Learning in Training Deep Networks</li><li>XLNet: Generalized Autoregressive Pretraining for Language Understanding</li><li>An Empirical Exploration of Curriculum Learning for Neural Machine Translation</li></ol><h2 id="Boosting-Neural-Machine-Translation"><a href="#Boosting-Neural-Machine-Translation" class="headerlink" title="[Boosting Neural Machine Translation]"></a>[Boosting Neural Machine Translation]</h2><p>通过将机器学习中的boosting引入NMT，对翻译效果有一定提升。同时还提出了另外几种方法，对输入数据pipeline进行了修改，发现都有一定的提升。本文的中心思想就是focus on difficult examples，作者认为更多关注于difficult example，能够对模型有提升的作用。</p><h3 id="几种policy"><a href="#几种policy" class="headerlink" title="几种policy"></a>几种policy</h3><p><img src="/images/15611921654433.jpg" width="40%" height="50%"></p><p>original：就是将所有的数据都过一遍<br>boost：将最难的10%重复一遍<br>reduce：将最简单的20%去掉。具体操作是，每个epoch重新衡量一次，每三个epoch作为一个训练，也即三个epoch内部分别使用100% 80% 64%的数据<br>bootstrap：每个epoch都re-sample一遍，也即允许重复以及部分句子消失。</p><p>难度是通过perplexity来衡量的，因为每个epoch在训练时就已经计算过perplexity了，因此没有引入额外的计算复杂度。</p><h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>论文的实验采用的是双向LSTM作为翻译的模块。</p><p><img src="/images/15611922669857.jpg" width="40%" height="50%"></p><p><img src="/images/15611922830047.jpg" width="40%" height="50%"></p><p>几个实验结论：<br>boosting能够加速拟合，并且结果更好；<br>reduce用更少的数据，达到最好的效果。这点令人印象深刻<br>boostrap，稍微好一些，且训练更稳定。</p><p>为什么要focus on difficult example?</p><blockquote><p>We emulate a human spending additional energy on learning complex concepts<br>To force the system to pay much attention on them can adjust it towards “mastering” more information for these sentences.</p></blockquote><h3 id="几个想法"><a href="#几个想法" class="headerlink" title="几个想法"></a>几个想法</h3><p>这篇文章是一篇短文，很明显很多实验没做，估计是到deadline了就提交了，比如分析不同比例的结果，以及一些消融实验也没做。</p><p>为什么boostrap能够有提升并且有更稳定的训练？这种resample的方式能够带来一定的uncertainty，可能会有一定的帮助，虽然帮助不大，论文里面也仅仅提到了uncertainty，显然应该做进一步的分析。</p><p>这篇论文提供的insight我认为还是有一定启发的，首先这并不是curriculum-learning，也即没有从简单到难，而是正常的训练，只不过通过增加更多的difficult example，同时去掉了部分太简单的sample，说明仅仅是修改数据分布而不是修改数据的输入顺序（本质上也是修改数据分布），也能够带来提升效果；第二，通过减少简单数据，是否意味着，每个模型都有一个下限（特别是对于神经网络这种能力很强的模型），低过这个下限的数据对模型的训练是没有帮助的，反而可能会使模型overfit到某个简单的pattern（这和learning to execute的结论似乎有些类似）；同时，增加更多的difficult sample，使得模型的上限被提高了；以及，是否可以将curriculum learning与该思路结合起来，达到更好的结果，一方面由易到难，另一方面修改数据分布，使得模型更多关注难的数据。</p><hr><h2 id="Curriculum-Learning-by-Transfer-Learning-Theory-and-Experiments-with-Deep-Networks"><a href="#Curriculum-Learning-by-Transfer-Learning-Theory-and-Experiments-with-Deep-Networks" class="headerlink" title="[Curriculum Learning by Transfer Learning: Theory and Experiments with Deep Networks]"></a>[Curriculum Learning by Transfer Learning: Theory and Experiments with Deep Networks]</h2><p>ICML18的文章，极其硬核，根本看不懂理论的部分。</p><p>先贴出ICML oral的三张PPT：</p><p><img src="/images/15611926258594.jpg" width="60%" height="50%"></p><p><img src="/images/15611926643253.jpg" width="60%" height="50%"></p><p><img src="/images/15611926800604.jpg" width="60%" height="50%"></p><p>从理论上证明了：</p><p>①the rate of convergence of an ideal curriculum learning method is monotonically increasing with the difﬁculty of the examples</p><p>②convergence is faster when using points which incur higher loss with respect to the current hypothesis.<br>当difficulty score是固定的，对于current hypothesis而言，高的loss能够比低的loss拟合速度更快。该结论非常直观。也就是说，难的example更有益是针对当前而言（current hypothesis）而简单的example更有益是针对final hypothesis而言的。</p><p>③使用pretrain好的模型来作为difficulty的估计，a signiﬁcant boost in convergence speed at the beginning of training</p><p>④使用curriculum learning能够显著加速拟合；当任务难度（这和模型本身的容量也有关，模型越弱相对的任务难度也就越大，同时也和regularization相关，越强代表模型的自由度越弱）越大时，使用CL的效果就越明显。</p><p>几个结果：</p><p><img src="/images/15611928935044.jpg" width="90%" height="50%"></p><p><img src="/images/15611929075096.jpg" width="45%" height="50%"></p><p>思考：<br>文中的结论还是可以参考参考的，但theoretical的结论毕竟是在凸函数上得到的，似乎说服力不大。文中的思路是从理论上证明凸函数的结论；然后通过实验在非凸函数上从实践证明相似结论。其主要的贡献在于一些CL相关的结论和引入transfer learning作为difficulty score。</p><hr><h2 id="On-The-Power-of-Curriculum-Learning-in-Training-Deep-Networks"><a href="#On-The-Power-of-Curriculum-Learning-in-Training-Deep-Networks" class="headerlink" title="[On The Power of Curriculum Learning in Training Deep Networks]"></a>[On The Power of Curriculum Learning in Training Deep Networks]</h2><p>ICML19一篇很硬核的文章，说实话里面的证明以及部分实验设计我还是没怎么搞懂。但是一些结论值得注意。这属于有启发的一类论文。</p><p>通过transfer-learning和self-taught的方法获得新的curriculum-learning算法，同时通过理论证明获得了一些有启发性的结论。</p><p>curriculum learning有两个挑战： 如何定义数据的难度；以及数据喂给模型的速度，太快会让模型更confused，太慢导致学习太慢</p><p>本文对这两个挑战都有一定的解决方案：分别定义了scoring function 和 pacing function</p><p>scoring function有两种：transfer learning和self-tutoring，一个就是pretrained model，另一个是使用训练好的未采用curriculum learning的模型。</p><p>pacing function：①Fixed exponential pacing没固定次数的step就提升一下 ②Varied exponential pacing 提升的step可以是变化的 ③Single-step pacing 简化版的①</p><p><img src="/images/15611932107816.jpg" width="50%" height="50%"></p><p>关于current hypothesis与target hypothesis：</p><p>有些方法中（self-paced learning hard example mining 或 active learning）更倾向于hard example。实际上和CL不同，是因为focus on hard example是基于当前模型的状态去定义难度的（current hypothesis），CL则是基于最终的状态（target hypothesis）。实际上这两种并不矛盾，有研究表明模型可以同时受益于这两种。这篇文章也从理论角度去证明了这一结论。</p><h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>关于curriculum by transfer的结论：<br>Curriculum learning is clearly and signiﬁcantly beneﬁcial - learning starts faster, and converges to a better solution.<br>the observed advantage of CL is more signiﬁcant when the task is more difﬁcult（很直观，因为越难的任务越需要CL）</p><p>其中anti-curriculum指的是按照难度从高到低排；random则是对难度随机排：</p><p><img src="/images/15611933223227.jpg" width="70%" height="50%"></p><p>其他结论：</p><p>使用不同的transfer function都指向了相似的gradient方向；与使用所有数据相比，transfer function则指向了不同的方向；同时使用所有数据的gradient和使用random scoring function的gradient相似，说明random能够较为合理的去estimate真正的empirical gradient。如图：</p><p><img src="/images/15611934853212.jpg" width="65%" height="50%"></p><h3 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h3><p>略过大量公式。直接谈结论：</p><p>①通过CL修改后的optimization landscape拥有和原来一样的optimization function；并且修改后的global maximum 比原先的更明显（pronounced）</p><p>②如果数据分布p和最优的utility $U_{\tilde{\vartheta}}(X)$ 是正相关的，且比其他的$U_{\vartheta}(X)$更正相关，那么往optimal parameter $\tilde{\vartheta}$ 总体上会更加steeper（陡峭）。</p><p>③the optimization landscape is modiﬁed to amplify the difference between the optimal parameters vector and all other parameter values whose covariance with the optimal solution (the covariance is measured between the induced prior vectors) is small, and speciﬁcally smaller than the variance of the optimum. </p><h3 id="结论与思考"><a href="#结论与思考" class="headerlink" title="结论与思考"></a>结论与思考</h3><p>就我的理解而言，本文的最大贡献就是：统一了原先的从简单到难（curriculum learning或self-paced learning）和focus on difficulty examples（boosting或hard data mining），只要修改后的数据分布与optimal utility是正相关的，那么就可以提升表现，因此两种strategy都是有效的。 It may even be possible to find a curriculum which is directly correlated with the optimal utility, and that outperforms both methods</p><p>不过这篇文章有些奇怪，empirical和theoretical的部分完全割裂的感觉。</p><hr><h2 id="XLNet-Generalized-Autoregressive-Pretraining-for-Language-Understanding"><a href="#XLNet-Generalized-Autoregressive-Pretraining-for-Language-Understanding" class="headerlink" title="[XLNet: Generalized Autoregressive Pretraining for Language Understanding]"></a>[XLNet: Generalized Autoregressive Pretraining for Language Understanding]</h2><p>最近比较火的文章，对Bert的全面超越。将bert的双向和context以及language model的long range dependency巧妙结合，获得新的pretrain model。</p><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>预训练语言模型可以分为两种 autoregressive(AR)语言模型和 autoencoding（AE）。AR就是传统的语言模型，从前到后或从后到前预测，典型的就是GPT；AE则是通过受破坏的数据还原出原始数据，Bert就是其中一员。</p><p>但这两种方法各有缺点：</p><p>bert的AE方法假设了所有被预测的token是独立的（也即mask掉的词相互之间是独立的，也即上一个mask的词并不能对预测下一个mask的词有帮助），但自然语言中这种依赖关系应该是存在的；同时[Mask]在真实数据中并不存在，也即存在input noise，导致pretrain-ﬁnetune discrepancy。</p><p>而AR的问题主要在没有充分利用前后的上下文，只使用了部分。</p><p>本文通过permutation来达到规避这两个缺点的目的，也即 既利用了前后上下文，又没有input noise，同时还没有independence assumption。</p><h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p>定义一个factorization orders（注意是虚拟的顺序，原始顺序还是会保留的），将原始的顺序打乱。使得一个词的预测可以由两侧的词来帮助。</p><p>如图，输入的原始顺序还是不变，但通过 mask attention来达到不同的factorization order的目的，在不同order下预测同一个$x_3$，由于factorization order的顺序不同，在3之前的词发挥了作用，而在他之后的词就没有参与预测。</p><p><img src="/images/15611948252404.jpg" width="70%" height="50%"></p><p>形式化则有：</p><script type="math/tex; mode=display">\max _{\theta} \mathbb{E}_{\mathbf{z} \sim \mathcal{Z}_{T}}\left[\sum_{t=1}^{T} \log p_{\theta}\left(x_{z_{t}} | \mathbf{x}_{\mathbf{z}_{<t}}\right)\right]</script><p>其中$z$是permutation/factorization order。</p><p>显然这个模型如果只使用原来的transformer结构是有问题的，也即target position unaware。假设今天有两种factorization order，在t之前的内容都是一致的，在t上则有不同的词，那么他们预测的分布都会是一样的，但按理说不应该一样，因为target不一样。所以需要让target发挥作用。</p><p>因此在这里修改了一下transformer架构，引入Two-Stream Self-Attention for Target-Aware Representations。</p><p><img src="/images/15611949233220.jpg" width="90%" height="50%"></p><p>可以看到，现在兵分两路，每一层都得到两个表示。其中$h$和原来transformer一样，而$g$则是新引进的，也即在Q中只使用<strong>position</strong>而没有content。</p><p>形式化有：</p><script type="math/tex; mode=display">\begin{array}{l}{g_{z_{t}}^{(m)} \leftarrow \text { Attention }\left(\mathbf{Q}=g_{z_{t}}^{(m-1)}, \mathbf{K V}=\mathbf{h}_{\mathbf{z}<t}^{(m-1)} ; \theta\right)} \text{  (query stream: use } z_t \text{ but cannot see }  x_{z_t}) \\ {h_{z_{t}}^{(m)} \leftarrow \text { Attention }\left(\mathbf{Q}=h_{z_{t}}^{(m-1)}, \mathbf{K V}=\mathbf{h}_{\mathbf{z} \leq t}^{(m-1)} ; \theta\right)} \text{  (content stream: use both } z_t \text{ and }  x_{z_t})\end{array}</script><p>所以，进行预测词操作的时候只使用$g$去预测相应位置上的内容即可。</p><p>一些细节：<br>① 为了让训练更容易，只预测最后的几个tokens（factorization order的最后几个）；<br>②将transformer-xl引入，也即相对位置和历史信息的idea<br>③引入相对位置的segment encoding，使得更灵活，因为这样就可以encode超过两个输入的segment了，使用absolute segment则不行.</p><h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>相对bert而言，有更多的上下文信号，因为bert使用了mask，使得mask之间不能相互帮助。同时也有原先language model的特点，也即顺序预测的特点，这样就可以直接用于一些有该特点的下游任务。作者整个思路行云流水，并且对模型的本质看得很透。</p><p>但这种方法因为要保存两份hidden state，会需要更多的内存和计算资源。</p><p>这篇文章的结果很强，且模型也有说服力。但训练使用了512张TPU，以及用了超过Bert的数据量（数据量是否对超过Bert有很大的帮助？）。不得不说这类文章普通人只能看看，NLP已经进入了军备竞赛了。</p><hr><h2 id="An-Empirical-Exploration-of-Curriculum-Learning-for-Neural-Machine-Translation"><a href="#An-Empirical-Exploration-of-Curriculum-Learning-for-Neural-Machine-Translation" class="headerlink" title="[An Empirical Exploration of Curriculum Learning for Neural Machine Translation]"></a>[An Empirical Exploration of Curriculum Learning for Neural Machine Translation]</h2><p>讨论了一些关于在NMT上使用CL的策略（相比原本的CL更加灵活），并做了一系列实验得到一些结论。</p><h3 id="策略创新"><a href="#策略创新" class="headerlink" title="策略创新"></a>策略创新</h3><p>①<br>首先是将sample distribution的概念扩展到shard的层面而不是单一的example。也即：</p><p><img src="/images/15612123996612.jpg" width="50%" height="50%"></p><p>将example结成group。将相似difficulty的放在同一个shard里面。</p><p>具体应如何做？有三种方案：<br>①设定一个难度score的阈值，显然这个方法不好弄，因为不好手动设阈值。<br>②直接等大小分，每个shard的个数一样，但这样可能会带来shard内部的难度score的波动。  ③本文采用的是<strong>Jenks Natural Breaks classiﬁcation algorithm</strong>，也即shard内部的variance尽量小，shard之间的variance尽量大</p><p>②<br>第二是sample difficulty criteria：<br>采用了两种方法：一个是训练辅助（小的）模型来做判断；另一个是采用linguistic的feature</p><p>第一种也即Model-based Difﬁculty Criteria，给定source sentence，获得target的概率。<br>第二种是Linguistic Difﬁculty Criteria，也即word frequency，然后将句子按照least frequent word来排序（这实际上和逐步添加词表大小，然后训练所有词都在该词表的句子是等价的）</p><p>③<br>第三是schedule：</p><p><img src="/images/15612125916364.jpg" width="60%" height="50%"></p><p>每一行代表一个阶段（phase）。</p><p>注意到default是有shuffle的（shard之间的shuffle）；而noshuffle是shard内部有shuffle，但之间没有shuffle。</p><h3 id="实验结论"><a href="#实验结论" class="headerlink" title="实验结论"></a>实验结论</h3><p>似乎严格按照顺序来做（noshuffle)并没有帮助（相对default而言）；<br>对learning rate敏感；<br>CL确实有帮助，difficulty criteria是关键，词表频率和使用小模型来做标准都有用，但在这里句子长度没用。</p><h3 id="几个思考"><a href="#几个思考" class="headerlink" title="几个思考"></a>几个思考</h3><p>实验做得有点奇怪；论文中的phase似乎是每次数据过一遍就到下一个phase了，然而shard分得也太少了，那其实前几个epoch就把CL的phase全部走完了；<br>为什么noshuffle没有帮助，是否意味着在一个phase内部严格按照从易到难是没有帮助的，而模型更需要的是那些对它当前最难的那一批，而在这个phase内是先出现还是后出现都没有关系？这样是否可以在phase内部使用boosting？或者干脆删掉不重要的例子。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本周论文：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Boosting Neural Machine Translation&lt;/li&gt;
+&lt;li&gt;Curriculum Learning by Transfer Learning: Theory and Experiments with Dee
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
+    
+      <category term="Language Modeling" scheme="http://www.linzehui.me/tags/Language-Modeling/"/>
+    
+      <category term="boosting" scheme="http://www.linzehui.me/tags/boosting/"/>
+    
+      <category term="XLNet" scheme="http://www.linzehui.me/tags/XLNet/"/>
+    
+      <category term="pretrain" scheme="http://www.linzehui.me/tags/pretrain/"/>
+    
+  </entry>
+  
+</feed>
