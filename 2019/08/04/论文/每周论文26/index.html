@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Classification,Paper,每周论文阅读,Curriculum Learning," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Weekly Review" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本周论文：  Dynamic Curriculum Learning for Imbalanced Data Classification Simple and Effective Curriculum Pointer-Generator Networks for Reading Comprehension over Long Narratives CurriculumNet: Weakly Su">
+<meta name="keywords" content="Classification,Paper,每周论文阅读,Curriculum Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周论文26">
+<meta property="og:url" content="http://www.linzehui.me/2019/08/04/论文/每周论文26/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="本周论文：  Dynamic Curriculum Learning for Imbalanced Data Classification Simple and Effective Curriculum Pointer-Generator Networks for Reading Comprehension over Long Narratives CurriculumNet: Weakly Su">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.linzehui.me/images/15648828137885.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15648834974285.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15648849009112.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15648851046110.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15648859217378.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15648859490417.jpg">
+<meta property="og:updated_time" content="2019-08-04T11:38:48.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每周论文26">
+<meta name="twitter:description" content="本周论文：  Dynamic Curriculum Learning for Imbalanced Data Classification Simple and Effective Curriculum Pointer-Generator Networks for Reading Comprehension over Long Narratives CurriculumNet: Weakly Su">
+<meta name="twitter:image" content="http://www.linzehui.me/images/15648828137885.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2019/08/04/论文/每周论文26/"/>
+
+
+
+
+
+  <title>每周论文26 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/08/04/论文/每周论文26/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">每周论文26</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-04T09:30:30+08:00">
+                2019-08-04
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-04T19:38:48+08:00">
+                2019-08-04
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本周论文：</p>
+<ol>
+<li>Dynamic Curriculum Learning for Imbalanced Data Classification</li>
+<li>Simple and Effective Curriculum Pointer-Generator Networks for Reading Comprehension over Long Narratives</li>
+<li>CurriculumNet: Weakly Supervised Learning from Large-Scale Web Images</li>
+</ol>
+<h2 id="Dynamic-Curriculum-Learning-for-Imbalanced-Data-Classification"><a href="#Dynamic-Curriculum-Learning-for-Imbalanced-Data-Classification" class="headerlink" title="[Dynamic Curriculum Learning for Imbalanced Data Classification]"></a>[Dynamic Curriculum Learning for Imbalanced Data Classification]</h2><p>提出CL专注于分类中的不平衡问题。但实际上应该不算是CL。</p>
+<p>本质是sampling+loss调整。核心思想是：先让模型学到一个正确的general representation，然后再让模型学会分类。</p>
+<h4 id="四种schedule的变体"><a href="#四种schedule的变体" class="headerlink" title="四种schedule的变体"></a>四种schedule的变体</h4><p>先是提出四种schedule的变体，在下文中会用到。</p>
+<p><img src="/images/15648828137885.jpg" width="50%" height="50%"></p>
+<h4 id="Sampling"><a href="#Sampling" class="headerlink" title="Sampling"></a>Sampling</h4><script type="math/tex; mode=display">\begin{array}{c}{\mathcal{L}_{\mathrm{DSL}}=-\frac{1}{N} \sum_{j=1}^{M} \sum_{i=1}^{N_{j}} w_{j} * \log \left(p\left(y_{i, j}=\overline{y}_{i, j} | \mathbf{x}_{i, j}\right)\right)} \\ {w_{j}=\left\{\begin{array}{ll}{\frac{D_{j}(l)}{B_{j}}} & {\text { if } \frac{D_{j}(l)}{B_{j}} \geq 1} \\ {0 / 1} & {\text { if } \frac{D_{j}(l)}{B_{j}}<1}\end{array}\right.}\end{array}</script><p>其中：$D(l)=D_{t r a i n} g(l)$，$g(l)$是递减函数（上述四种schedule function）。</p>
+<p>上述公式的意思即对sample得到的batch内类的分布的重调整。假如当前的batch中第j个类期望的分布比整个训练分布${B_{j}}$大，则直接加强其weight；否则就做sample，被sample到的设为1，没被sample到的设为0。保证batch内的分布和期望的分布一致。一开始时，期望分布和总体分布一致，随着训练过程的进行，$g(l)$下降，到最后则是所有的类的期望分布是一致的。</p>
+<p>这种imbalance到balance的motivation是，如果一开始就balance，会丢弃掉大量数据的有用信息，过于强调minority的特性，容易overfitting。<br>论文提到这里有CL的特性（也即从简单到难），我猜测作者的意思是数量多的class相对于数量少的class平均更为简单，因为更容易学。否则我没看出来有什么CL的思想。</p>
+<h4 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h4><p>对loss加了一项正则化metric learning loss，该方法是其他论文的方法（但我没看懂这个公式的具体作用），大概意思就是能够’avoid the dominant effect of majority classes‘，即减小数量大的类的主导影响。并且论文对该loss做了一定改进。</p>
+<p>从：</p>
+<script type="math/tex; mode=display">\mathcal{L}_{\mathrm{crl}}=\frac{\sum_{T} \max \left(0, m_{j}+d\left(\mathbf{x}_{a l l, j}, \mathbf{x}_{+, j}\right)-d\left(\mathbf{x}_{a l l, j}, \mathbf{x}_{-, j}\right)\right)}{|T|}</script><p>改为：</p>
+<script type="math/tex; mode=display">\mathcal{L}_{\mathrm{TEA}}=\frac{\sum_{T} \max \left(0, m_{j}+d\left(\mathbf{x}_{e a s y, j}, \mathbf{x}_{+, j}\right)-d\left(\mathbf{x}_{e s y, j}, \mathbf{x}_{-, j}\right)\right)}{|T|}</script><p>该公式的作用：targets at learning a soft feature embedding to separate different samples in feature space without assigning labels。</p>
+<p>因此总的loss由cross entropy与triplet loss组成，而组成的比例由$f$控制。</p>
+<script type="math/tex; mode=display">\mathcal{L}_{\mathrm{DCL}}=\mathcal{L}_{\mathrm{DSL}}+f(l) * \mathcal{L}_{\mathrm{TEA}}</script><script type="math/tex; mode=display">f(l)=\left\{\begin{array}{ll}{\frac{1}{2} \cos \left(\frac{l}{L} \pi\right)+\frac{1}{2}+\epsilon} & {\text { if } l<p L} \\ {\epsilon} & {\text { if } l \geq p L}\end{array}\right.</script><p>最后，论文还将DCL作为一种框架做泛化，将几个算法都容纳进来：几种算法都是他的一种特殊情况。</p>
+<p><img src="/images/15648834974285.jpg" width="60%" height="50%"></p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>本文的出发点是不错的，思想很简单有效，sampling部分的schedule我觉得不错，也可能是以前有前人的基础了。但如果说是CL，我觉得关系不是很大，虽然有输入数据的schedule，但没有事先的按难度排，感觉更像是是self-paced learning。</p>
+<hr>
+<h2 id="Simple-and-Effective-Curriculum-Pointer-Generator-Networks-for-Reading-Comprehension-over-Long-Narratives"><a href="#Simple-and-Effective-Curriculum-Pointer-Generator-Networks-for-Reading-Comprehension-over-Long-Narratives" class="headerlink" title="[Simple and Effective Curriculum Pointer-Generator Networks for Reading Comprehension over Long Narratives]"></a>[Simple and Effective Curriculum Pointer-Generator Networks for Reading Comprehension over Long Narratives]</h2><p>提出一种新的框架用以长文本的QA。具体模型我并不关心，这里讨论的主要是CL的策略。</p>
+<p>在CL方面，提出Diverse curriculum learning scheme，通过两个指标来定义difficulty。answerability与understandability)</p>
+<h4 id="指标"><a href="#指标" class="headerlink" title="指标"></a>指标</h4><h5 id="Answerability"><a href="#Answerability" class="headerlink" title="Answerability"></a>Answerability</h5><p>对于一个sample来说，基于question抽取的就是hard setting；基于answer的则是easy setting。<br>“we consider the set of documents retrieved based on questions as the hard setting, H. Conversely, the set of retrieved documents using answers is regarded as the easy setting, E.”</p>
+<h5 id="Understandability"><a href="#Understandability" class="headerlink" title="Understandability"></a>Understandability</h5><p>依据document的长度来划分。预定义好的几个size，$\{50,100,200,500\}$。</p>
+<p>所以按照size以及answerability将sample划分几个chunk。</p>
+<script type="math/tex; mode=display">\begin{aligned} k & \in\{50,100,200,500\} \\ E_{n} & \leftarrow F(\text { corpus, answer, } n) \\ H_{n} & \leftarrow F(\text { corpus, question }, n) \end{aligned}</script><p>也即小于50的有easy和hard两个chunk，同理其他size的一样。</p>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>原则：从小的size到大的size，从easy setting到hard setting。论文认为Answerability应该优先于Understandability考虑。</p>
+<p>具体而言：从$E_{50}$这个chunk开始，当valid没有提升时，将小百分比δ（比如5%)的数据从难的swap到简单的chunk里（$H_k$到$E_k$）以提升answerability，当这么做1/δ次之后，chunk的所有数据就都是hard的了，然后此时将整个chunk swap，换成下一个size的$E_k$。重复步骤。</p>
+<p><img src="/images/15648849009112.jpg" width="50%" height="50%"></p>
+<h4 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h4><p>通过定义难度的<strong>多维度</strong>将其分为多个chunk，并且提出了比较精巧的scheme（swap的思路与之前的Curriculum Learning and Minibatch Bucketing in Neural Machine Translation有些类似）。<br><strong>diverse+chunk的思路</strong></p>
+<hr>
+<h2 id="CurriculumNet-Weakly-Supervised-Learning-from-Large-Scale-Web-Images"><a href="#CurriculumNet-Weakly-Supervised-Learning-from-Large-Scale-Web-Images" class="headerlink" title="[CurriculumNet: Weakly Supervised Learning from Large-Scale Web Images]"></a>[CurriculumNet: Weakly Supervised Learning from Large-Scale Web Images]</h2><p>提出了一种高效的方法能够在大量弱监督的网络图片（数据来源：输入query所获得的网络图片而不是人工标注的）上训练的方法，引入了CL。并且发现noisy label的数据也能够提升表现，并且有regularization的作用。</p>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><p><img src="/images/15648851046110.jpg" width="60%" height="50%"></p>
+<p>三部曲：首先在整个数据上训练一个模型，能够大致学得图片的representation；接着通过该初始模型，将每张图片映射到一个feature space，其潜在的结构和之间的关系能够被挖掘，也即能够将图片按照复杂度排序且分成subset；第三，从简单到难训练，也即先训clean label的数据，然后不断添加noisy的数据。</p>
+<h3 id="initial-feature-generation"><a href="#initial-feature-generation" class="headerlink" title="initial feature generation"></a>initial feature generation</h3><p>在整个数据集上训练一个模型。</p>
+<h3 id="curriculum-design"><a href="#curriculum-design" class="headerlink" title="curriculum design"></a>curriculum design</h3><p>假设：在每个category下，clean label的数据将会有较为接近的表示，而noisy label的数据则variance/diversity很大。</p>
+<p>则我们可以通过聚类的方法将同一个category下的数据分为三个subset，分别对应clean; noisy 与highly noisy。</p>
+<p>具体如何做/聚类？</p>
+<p>首先CNN获得的feature进入fc层获得一个深层的feature space的表示</p>
+<script type="math/tex; mode=display">P_{i} \rightarrow f\left(P_{i}\right)</script><p>接着计算欧氏距离，获得一个任意i到j之间的距离矩阵</p>
+<script type="math/tex; mode=display">D_{i j}=\left\|f\left(P_{i}\right)-f\left(P_{j}\right)\right\|^{2}</script><p>此时，计算每张image的local density：</p>
+<script type="math/tex; mode=display">\begin{array}{c}{\rho_{i}=\sum_{j} X\left(D_{i j}-d_{c}\right)}  {\qquad X(d)=\left\{\begin{array}{ll}{1} & {d<0} \\ {0} & {\text { other }}\end{array}\right.}\end{array}</script><p>也即，距离小于$d_c$的累计1。$d_c$是通过排序后取第$k$%得来的。则$\rho$越大代表其与其他image更接近。</p>
+<p>接着计算：</p>
+<script type="math/tex; mode=display">\delta_{i}=\left\{\begin{array}{ll}{\min _{j : \rho_{j}>\rho_{i}}\left(D_{i j}\right)} & {i f \exists j \text { s.t. } \rho_{j}>\rho_{i}} \\ {\max \left(D_{i j}\right)} & {\text { otherwise }}\end{array}\right.</script><p>也即，若对于图片i，若存在比他local density更大的，将与该最大local density的图片的距离设为图片i的距离；否则，就说明该图片就是cluster center。</p>
+<p>那么有了中心之后，就可以聚类了，$δ$大的表示其就是中心。可以根据图像到中心的距离大小分为三类（这里不清楚是否理解得对）。对于一个类而言，大density意味着分布更密集；而小density则更加分散。</p>
+<p>可以看到，clean data的分布会更加密集而noisy data更加分散：</p>
+<p><img src="/images/15648859217378.jpg" width="40%" height="50%"></p>
+<h3 id="Curriculum-Learning"><a href="#Curriculum-Learning" class="headerlink" title="Curriculum Learning"></a>Curriculum Learning</h3><p>当分好三类后，训练就是不断将noisy数据放入到clean数据训练的过程。</p>
+<p><img src="/images/15648859490417.jpg" width="50%" height="50%"></p>
+<p>注意subset是将不同category的同一类（clean/noisy/highly noisy)放在一起。</p>
+<p>实验证明，noisy data能够增强模型的泛化性，使得模型不会overfitting到clean data；同时由于模型已经先在clean data上训练得到一个较好的模型了，因此也不会收到noisy data的不好的影响。</p>
+<h3 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h3><p>我觉得这个思路不错，在category内部划分subset，能够更好保证clean data聚在一起。聚类倒不是很重要，因为可以有不同的聚类方法。同时，本篇论文证明了先训练一个能够获得representation表示且足够好到可以聚类是可行的。而CL训练方法上则没有什么新的东西，本质上就是分为几个shard/bucket，然后随着训练过程mix data，这在之前的论文An Empirical Exploration of Curriculum Learning for Neural Machine Translation还有其他的CL的论文里面都有。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    林泽辉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.linzehui.me/2019/08/04/论文/每周论文26/" title="每周论文26">http://www.linzehui.me/2019/08/04/论文/每周论文26/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://www.linzehui.me" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Classification/" rel="tag"> <i class="fa fa-tag"></i> Classification</a>
+          
+            <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
+          
+            <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
+          
+            <a href="/tags/Curriculum-Learning/" rel="tag"> <i class="fa fa-tag"></i> Curriculum Learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/28/碎片知识/每周碎片知识25/" rel="next" title="每周碎片知识25">
+                <i class="fa fa-chevron-left"></i> 每周碎片知识25
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/04/代码相关/代码记录18/" rel="prev" title="代码片段记录18">
+                代码片段记录18 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA0OC8xNjU3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">182</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">203</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamic-Curriculum-Learning-for-Imbalanced-Data-Classification"><span class="nav-number">1.</span> <span class="nav-text">[Dynamic Curriculum Learning for Imbalanced Data Classification]</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#四种schedule的变体"><span class="nav-number">1.0.1.</span> <span class="nav-text">四种schedule的变体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sampling"><span class="nav-number">1.0.2.</span> <span class="nav-text">Sampling</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Loss"><span class="nav-number">1.0.3.</span> <span class="nav-text">Loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#思考"><span class="nav-number">1.0.4.</span> <span class="nav-text">思考</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Simple-and-Effective-Curriculum-Pointer-Generator-Networks-for-Reading-Comprehension-over-Long-Narratives"><span class="nav-number">2.</span> <span class="nav-text">[Simple and Effective Curriculum Pointer-Generator Networks for Reading Comprehension over Long Narratives]</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#指标"><span class="nav-number">2.0.1.</span> <span class="nav-text">指标</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Answerability"><span class="nav-number">2.0.1.1.</span> <span class="nav-text">Answerability</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Understandability"><span class="nav-number">2.0.1.2.</span> <span class="nav-text">Understandability</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法"><span class="nav-number">2.0.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#想法"><span class="nav-number">2.0.3.</span> <span class="nav-text">想法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CurriculumNet-Weakly-Supervised-Learning-from-Large-Scale-Web-Images"><span class="nav-number">3.</span> <span class="nav-text">[CurriculumNet: Weakly Supervised Learning from Large-Scale Web Images]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-1"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#initial-feature-generation"><span class="nav-number">3.2.</span> <span class="nav-text">initial feature generation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#curriculum-design"><span class="nav-number">3.3.</span> <span class="nav-text">curriculum design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Curriculum-Learning"><span class="nav-number">3.4.</span> <span class="nav-text">Curriculum Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考-1"><span class="nav-number">3.5.</span> <span class="nav-text">思考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

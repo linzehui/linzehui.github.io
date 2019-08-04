@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.linzehui.me/"/>
-  <updated>2019-07-28T11:30:20.936Z</updated>
+  <updated>2019-08-04T11:36:44.884Z</updated>
   <id>http://www.linzehui.me/</id>
   
   <author>
@@ -17,11 +17,190 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>每周碎片知识26</title>
+    <link href="http://www.linzehui.me/2019/08/04/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8626/"/>
+    <id>http://www.linzehui.me/2019/08/04/碎片知识/每周碎片知识26/</id>
+    <published>2019-08-04T11:13:14.000Z</published>
+    <updated>2019-08-04T11:36:44.884Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;Python&quot;&gt;&lt;a href=&quot;#Python&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://www.linzehui.me/tags/Linux/"/>
+    
+      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="Python" scheme="http://www.linzehui.me/tags/Python/"/>
+    
+      <category term="Mac" scheme="http://www.linzehui.me/tags/Mac/"/>
+    
+      <category term="iTerm" scheme="http://www.linzehui.me/tags/iTerm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周诗词32</title>
+    <link href="http://www.linzehui.me/2019/08/04/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D32/"/>
+    <id>http://www.linzehui.me/2019/08/04/诗词&amp;句/每周诗词32/</id>
+    <published>2019-08-04T11:06:14.000Z</published>
+    <updated>2019-08-04T11:33:47.133Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;鹊踏枝-·-谁道闲情抛掷久&quot;&gt;&lt;a href=&quot;#鹊踏枝-·-谁道闲情抛掷久&quot; class=&quot;headerlink&quot; title=&quot;鹊踏枝 · 谁道闲情抛掷久&quot;&gt;&lt;/a&gt;鹊踏枝 · 谁道闲情抛掷久&lt;/h3&gt;&lt;p&gt;[五代十国]
+        
+      
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>记又一次debug的血泪教训</title>
+    <link href="http://www.linzehui.me/2019/08/04/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E8%AE%B0%E5%8F%88%E4%B8%80%E6%AC%A1debug%E7%9A%84%E8%A1%80%E6%B3%AA%E6%95%99%E8%AE%AD/"/>
+    <id>http://www.linzehui.me/2019/08/04/碎片知识/记又一次debug的血泪教训/</id>
+    <published>2019-08-04T09:24:14.000Z</published>
+    <updated>2019-08-04T11:36:16.710Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;这次的血泪教训就是，shuffle真的很重要！&lt;/p&gt;
+&lt;p&gt;训练模型发现一个问题：train集和dev集的performance差别很大。&lt;/p&gt;
+&lt;p&gt;我的心路历程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;怀疑自己的iterator写错了，将其换成dataloader之后，仍然有此
+        
+      
+    
+    </summary>
+    
+    
+      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="遇到的问题" scheme="http://www.linzehui.me/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于Transformer中position在代码实现的一点思考</title>
+    <link href="http://www.linzehui.me/2019/08/04/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8ETransformer%E4%B8%ADposition%E5%9C%A8%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/"/>
+    <id>http://www.linzehui.me/2019/08/04/碎片知识/关于Transformer中position在代码实现的一点思考/</id>
+    <published>2019-08-04T08:23:14.000Z</published>
+    <updated>2019-08-04T11:35:48.484Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Transformer需要显式加position，不同版本的代码有不同创建position的方式。前几天在实现中遇到了一些小问题，因此记录在此。&lt;/p&gt;
+&lt;p&gt;过去在获取position的时候，一般都是在外部创建，也即在做batch的时候创建。具体而言：&lt;/p&gt;
+&lt;figu
+        
+      
+    
+    </summary>
+    
+    
+      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="遇到的问题" scheme="http://www.linzehui.me/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    
+      <category term="Python" scheme="http://www.linzehui.me/tags/Python/"/>
+    
+      <category term="Pytorch" scheme="http://www.linzehui.me/tags/Pytorch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>代码片段记录18</title>
+    <link href="http://www.linzehui.me/2019/08/04/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E8%AE%B0%E5%BD%9518/"/>
+    <id>http://www.linzehui.me/2019/08/04/代码相关/代码记录18/</id>
+    <published>2019-08-04T08:16:30.000Z</published>
+    <updated>2019-08-04T08:19:50.087Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;不定长iterator的写法&quot;&gt;&lt;a href=&quot;#不定长iterator的写法&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="code snippets" scheme="http://www.linzehui.me/tags/code-snippets/"/>
+    
+      <category term="代码片段" scheme="http://www.linzehui.me/tags/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周论文26</title>
+    <link href="http://www.linzehui.me/2019/08/04/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8726/"/>
+    <id>http://www.linzehui.me/2019/08/04/论文/每周论文26/</id>
+    <published>2019-08-04T01:30:30.000Z</published>
+    <updated>2019-08-04T11:38:48.689Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本周论文：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Dynamic Curriculum Learning for Imbalanced Data Classification&lt;/li&gt;
+&lt;li&gt;Simple and Effective Curriculum
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Classification" scheme="http://www.linzehui.me/tags/Classification/"/>
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+  </entry>
+  
+  <entry>
     <title>每周碎片知识25</title>
     <link href="http://www.linzehui.me/2019/07/28/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8625/"/>
     <id>http://www.linzehui.me/2019/07/28/碎片知识/每周碎片知识25/</id>
     <published>2019-07-28T11:18:14.000Z</published>
-    <updated>2019-07-28T11:30:20.936Z</updated>
+    <updated>2019-08-02T07:31:39.435Z</updated>
     
     <summary type="html">
     
@@ -38,6 +217,14 @@
     
       <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
     
+      <category term="fairseq" scheme="http://www.linzehui.me/tags/fairseq/"/>
+    
+      <category term="CUDA" scheme="http://www.linzehui.me/tags/CUDA/"/>
+    
+      <category term="Arxiv" scheme="http://www.linzehui.me/tags/Arxiv/"/>
+    
+      <category term="LaTeX" scheme="http://www.linzehui.me/tags/LaTeX/"/>
+    
   </entry>
   
   <entry>
@@ -45,7 +232,7 @@
     <link href="http://www.linzehui.me/2019/07/26/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8725/"/>
     <id>http://www.linzehui.me/2019/07/26/论文/每周论文25/</id>
     <published>2019-07-26T14:12:30.000Z</published>
-    <updated>2019-07-30T15:05:12.672Z</updated>
+    <updated>2019-08-02T07:33:01.212Z</updated>
     
     <summary type="html">
     
@@ -66,6 +253,14 @@
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="SPL" scheme="http://www.linzehui.me/tags/SPL/"/>
+    
+      <category term="Self-paced Learning" scheme="http://www.linzehui.me/tags/Self-paced-Learning/"/>
+    
+      <category term="Boosting" scheme="http://www.linzehui.me/tags/Boosting/"/>
+    
+      <category term="Boost" scheme="http://www.linzehui.me/tags/Boost/"/>
     
   </entry>
   
@@ -149,7 +344,7 @@
     <link href="http://www.linzehui.me/2019/07/07/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8724/"/>
     <id>http://www.linzehui.me/2019/07/07/论文/每周论文24/</id>
     <published>2019-07-07T02:55:30.000Z</published>
-    <updated>2019-07-29T01:27:34.096Z</updated>
+    <updated>2019-08-02T07:31:12.488Z</updated>
     
     <summary type="html">
     
@@ -159,7 +354,7 @@
         
           &lt;p&gt;本周论文：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Curriculum Learning for Multi-Task Classiﬁcation of Visual Attributes&lt;/li&gt;
+&lt;li&gt;Curriculum Learning for Multi-Task Classification of Visual Attributes&lt;/li&gt;
 &lt;li&gt;Highway Networks&lt;/li&gt;
 &lt;li&gt;Deep
         
@@ -168,9 +363,19 @@
     </summary>
     
     
+      <category term="CNN" scheme="http://www.linzehui.me/tags/CNN/"/>
+    
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
+      <category term="RNN" scheme="http://www.linzehui.me/tags/RNN/"/>
+    
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="ResNet" scheme="http://www.linzehui.me/tags/ResNet/"/>
+    
+      <category term="Highway" scheme="http://www.linzehui.me/tags/Highway/"/>
     
   </entry>
   
@@ -310,7 +515,7 @@
     <link href="http://www.linzehui.me/2019/06/29/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8723/"/>
     <id>http://www.linzehui.me/2019/06/29/论文/每周论文23/</id>
     <published>2019-06-29T15:01:30.000Z</published>
-    <updated>2019-07-01T11:24:59.512Z</updated>
+    <updated>2019-08-02T07:32:40.086Z</updated>
     
     <summary type="html">
     
@@ -336,17 +541,21 @@
     
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
+      <category term="LSTM" scheme="http://www.linzehui.me/tags/LSTM/"/>
+    
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
-    
-      <category term="LSTM" scheme="http://www.linzehui.me/tags/LSTM/"/>
     
       <category term="Dropout" scheme="http://www.linzehui.me/tags/Dropout/"/>
     
       <category term="meta-learning" scheme="http://www.linzehui.me/tags/meta-learning/"/>
     
       <category term="multi-task" scheme="http://www.linzehui.me/tags/multi-task/"/>
+    
+      <category term="SPL" scheme="http://www.linzehui.me/tags/SPL/"/>
+    
+      <category term="Self-paced Learning" scheme="http://www.linzehui.me/tags/Self-paced-Learning/"/>
     
   </entry>
   
@@ -424,233 +633,6 @@
       <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
     
       <category term="NAS" scheme="http://www.linzehui.me/tags/NAS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DRL Lecture 7:Sparse Reward</title>
-    <link href="http://www.linzehui.me/2019/06/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/DRL%20Lecture%207:%20Sparse%20Reward/"/>
-    <id>http://www.linzehui.me/2019/06/23/机器学习与深度学习算法知识/DRL Lecture 7: Sparse Reward/</id>
-    <published>2019-06-23T02:43:24.000Z</published>
-    <updated>2019-06-23T09:04:19.819Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;讨论了当RL遇到sparse reward时的几个解决方案。&lt;/p&gt;
-&lt;h2 id=&quot;Reward-Shaping&quot;&gt;&lt;a href=&quot;#Reward-Shaping&quot; class=&quot;headerlink&quot; title=&quot;Reward
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习🤖" scheme="http://www.linzehui.me/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%F0%9F%A4%96/"/>
-    
-      <category term="强化学习" scheme="http://www.linzehui.me/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="RL" scheme="http://www.linzehui.me/tags/RL/"/>
-    
-      <category term="Reinforcement Learning" scheme="http://www.linzehui.me/tags/Reinforcement-Learning/"/>
-    
-      <category term="Deep Reinforcement Learning" scheme="http://www.linzehui.me/tags/Deep-Reinforcement-Learning/"/>
-    
-      <category term="李宏毅强化学习课程" scheme="http://www.linzehui.me/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/"/>
-    
-      <category term="Sparse Reward" scheme="http://www.linzehui.me/tags/Sparse-Reward/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DRL Lecture 6:Actor-Critic</title>
-    <link href="http://www.linzehui.me/2019/06/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/DRL%20Lecture%206:%20Actor-Critic/"/>
-    <id>http://www.linzehui.me/2019/06/23/机器学习与深度学习算法知识/DRL Lecture 6: Actor-Critic/</id>
-    <published>2019-06-23T02:33:24.000Z</published>
-    <updated>2019-07-02T06:21:34.529Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;介绍了actor-critic的算法，结合了policy gradient和Q-learning。&lt;/p&gt;
-&lt;h2 id=&quot;Actor-Critic&quot;&gt;&lt;a href=&quot;#Actor-Critic&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习🤖" scheme="http://www.linzehui.me/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%F0%9F%A4%96/"/>
-    
-      <category term="强化学习" scheme="http://www.linzehui.me/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="RL" scheme="http://www.linzehui.me/tags/RL/"/>
-    
-      <category term="Reinforcement Learning" scheme="http://www.linzehui.me/tags/Reinforcement-Learning/"/>
-    
-      <category term="Deep Reinforcement Learning" scheme="http://www.linzehui.me/tags/Deep-Reinforcement-Learning/"/>
-    
-      <category term="李宏毅强化学习课程" scheme="http://www.linzehui.me/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/"/>
-    
-      <category term="Actor-Critic" scheme="http://www.linzehui.me/tags/Actor-Critic/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DRL Lecture 5:Q-learning (Continuous Action)</title>
-    <link href="http://www.linzehui.me/2019/06/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/DRL%20Lecture%205:%20Q-learning%20(Continuous%20Action)/"/>
-    <id>http://www.linzehui.me/2019/06/23/机器学习与深度学习算法知识/DRL Lecture 5: Q-learning (Continuous Action)/</id>
-    <published>2019-06-23T02:27:24.000Z</published>
-    <updated>2019-06-23T02:33:07.092Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;讨论了如何将Q-learning用于连续的action中。&lt;/p&gt;
-&lt;p&gt;前面提到 Q-learning就是：&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;a=\arg \max _{a} Q(s,
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习🤖" scheme="http://www.linzehui.me/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%F0%9F%A4%96/"/>
-    
-      <category term="强化学习" scheme="http://www.linzehui.me/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="RL" scheme="http://www.linzehui.me/tags/RL/"/>
-    
-      <category term="Reinforcement Learning" scheme="http://www.linzehui.me/tags/Reinforcement-Learning/"/>
-    
-      <category term="Deep Reinforcement Learning" scheme="http://www.linzehui.me/tags/Deep-Reinforcement-Learning/"/>
-    
-      <category term="李宏毅强化学习课程" scheme="http://www.linzehui.me/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/"/>
-    
-      <category term="Q-learning" scheme="http://www.linzehui.me/tags/Q-learning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DRL Lecture 4:Q-learning (Advanced Tips)</title>
-    <link href="http://www.linzehui.me/2019/06/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/DRL%20Lecture%204:%20Q-learning%20(Advanced%20Tips)/"/>
-    <id>http://www.linzehui.me/2019/06/23/机器学习与深度学习算法知识/DRL Lecture 4: Q-learning (Advanced Tips)/</id>
-    <published>2019-06-23T02:14:24.000Z</published>
-    <updated>2019-06-23T09:02:20.051Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;介绍一些进阶的Q-learning tips，能够帮助Q-learning提升表现。&lt;/p&gt;
-&lt;h3 id=&quot;Double-DQN&quot;&gt;&lt;a href=&quot;#Double-DQN&quot; class=&quot;headerlink&quot; title=&quot;Double
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习🤖" scheme="http://www.linzehui.me/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%F0%9F%A4%96/"/>
-    
-      <category term="强化学习" scheme="http://www.linzehui.me/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="RL" scheme="http://www.linzehui.me/tags/RL/"/>
-    
-      <category term="Reinforcement Learning" scheme="http://www.linzehui.me/tags/Reinforcement-Learning/"/>
-    
-      <category term="Deep Reinforcement Learning" scheme="http://www.linzehui.me/tags/Deep-Reinforcement-Learning/"/>
-    
-      <category term="李宏毅强化学习课程" scheme="http://www.linzehui.me/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/"/>
-    
-      <category term="Q-learning" scheme="http://www.linzehui.me/tags/Q-learning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DRL Lecture 3:Q-learning (Basic Idea)</title>
-    <link href="http://www.linzehui.me/2019/06/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/DRL%20Lecture%203:%20Q-learning%20(Basic%20Idea)/"/>
-    <id>http://www.linzehui.me/2019/06/22/机器学习与深度学习算法知识/DRL Lecture 3: Q-learning (Basic Idea)/</id>
-    <published>2019-06-22T14:22:24.000Z</published>
-    <updated>2019-06-23T09:01:32.232Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;简单介绍Q-learning的思想以及相关的训练tips。&lt;/p&gt;
-&lt;h3 id=&quot;是什么&quot;&gt;&lt;a href=&quot;#是什么&quot; class=&quot;headerlink&quot; title=&quot;是什么&quot;&gt;&lt;/a&gt;是什么&lt;/h3&gt;&lt;p&gt;与Policy
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习🤖" scheme="http://www.linzehui.me/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%F0%9F%A4%96/"/>
-    
-      <category term="强化学习" scheme="http://www.linzehui.me/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="RL" scheme="http://www.linzehui.me/tags/RL/"/>
-    
-      <category term="Reinforcement Learning" scheme="http://www.linzehui.me/tags/Reinforcement-Learning/"/>
-    
-      <category term="Deep Reinforcement Learning" scheme="http://www.linzehui.me/tags/Deep-Reinforcement-Learning/"/>
-    
-      <category term="李宏毅强化学习课程" scheme="http://www.linzehui.me/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/"/>
-    
-      <category term="Q-learning" scheme="http://www.linzehui.me/tags/Q-learning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周论文22</title>
-    <link href="http://www.linzehui.me/2019/06/22/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8722/"/>
-    <id>http://www.linzehui.me/2019/06/22/论文/每周论文22/</id>
-    <published>2019-06-22T08:20:30.000Z</published>
-    <updated>2019-07-02T01:03:49.690Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;本周论文：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Boosting Neural Machine Translation&lt;/li&gt;
-&lt;li&gt;Curriculum Learning by Transfer Learning: Theory and Experiments with
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
-    
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
-      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
-    
-      <category term="Language Modeling" scheme="http://www.linzehui.me/tags/Language-Modeling/"/>
-    
-      <category term="boosting" scheme="http://www.linzehui.me/tags/boosting/"/>
-    
-      <category term="XLNet" scheme="http://www.linzehui.me/tags/XLNet/"/>
-    
-      <category term="pretrain" scheme="http://www.linzehui.me/tags/pretrain/"/>
     
   </entry>
   
