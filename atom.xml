@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.linzehui.me/"/>
-  <updated>2019-08-04T11:36:44.884Z</updated>
+  <updated>2019-08-10T03:31:23.106Z</updated>
   <id>http://www.linzehui.me/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Curriculum Learning schedule 总结</title>
+    <link href="http://www.linzehui.me/2019/08/09/%E8%AE%BA%E6%96%87/Curriculum%20Learning%20schedule%E6%80%BB%E7%BB%93/"/>
+    <id>http://www.linzehui.me/2019/08/09/论文/Curriculum Learning schedule总结/</id>
+    <published>2019-08-09T14:32:30.000Z</published>
+    <updated>2019-08-10T03:31:23.106Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Curriculum Learning主要有两块：①sample的难度定义；②设定特定的schedule&lt;/p&gt;
+&lt;p&gt;本文总结一下不同论文中出现的Curriculum Learning schedule，并将其分为几类。&lt;/p&gt;
+&lt;p&gt;不定期更新…&lt;/p&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+  </entry>
   
   <entry>
     <title>每周碎片知识26</title>
@@ -189,9 +218,9 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   
@@ -369,9 +398,9 @@
     
       <category term="RNN" scheme="http://www.linzehui.me/tags/RNN/"/>
     
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="ResNet" scheme="http://www.linzehui.me/tags/ResNet/"/>
     
@@ -539,11 +568,11 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="LSTM" scheme="http://www.linzehui.me/tags/LSTM/"/>
-    
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
@@ -607,32 +636,6 @@
     
     
       <category term="佳句分享" scheme="http://www.linzehui.me/tags/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周碎片知识23</title>
-    <link href="http://www.linzehui.me/2019/06/23/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8623/"/>
-    <id>http://www.linzehui.me/2019/06/23/碎片知识/每周碎片知识23/</id>
-    <published>2019-06-23T03:24:14.000Z</published>
-    <updated>2019-06-29T15:00:58.642Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;NAS&quot;&gt;&lt;a href=&quot;#NAS&quot; class=&quot;headerlink&quot; title=&quot;[NAS]&quot;&gt;&lt;/a&gt;[NAS]&lt;/h3&gt;&lt;p&gt;关于NAS(Neural Architecture Search)的科普文。&lt;br&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="NAS" scheme="http://www.linzehui.me/tags/NAS/"/>
     
   </entry>
   
