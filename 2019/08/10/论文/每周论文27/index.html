@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Paper,Curriculum Learning,每周论文阅读,Domain Adaptation,Pseudo Labeling," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Weekly Review" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本周论文：  Curriculum Learning for Domain Adaptation in Neural Machine Translation Dynamically Composing Domain-Data Selection with Clean-Data Selection by “Co-Curricular Learning” for Neural Machine Tran">
+<meta name="keywords" content="Paper,Curriculum Learning,每周论文阅读,Domain Adaptation,Pseudo Labeling">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周论文27">
+<meta property="og:url" content="http://www.linzehui.me/2019/08/10/论文/每周论文27/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="本周论文：  Curriculum Learning for Domain Adaptation in Neural Machine Translation Dynamically Composing Domain-Data Selection with Clean-Data Selection by “Co-Curricular Learning” for Neural Machine Tran">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.linzehui.me/images/15654423291460.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15654446572190.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15654447383111.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15654455360307.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15654455687375.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15654473154044.jpg">
+<meta property="og:updated_time" content="2019-08-11T14:19:40.605Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每周论文27">
+<meta name="twitter:description" content="本周论文：  Curriculum Learning for Domain Adaptation in Neural Machine Translation Dynamically Composing Domain-Data Selection with Clean-Data Selection by “Co-Curricular Learning” for Neural Machine Tran">
+<meta name="twitter:image" content="http://www.linzehui.me/images/15654423291460.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2019/08/10/论文/每周论文27/"/>
+
+
+
+
+
+  <title>每周论文27 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/08/10/论文/每周论文27/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">每周论文27</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-10T20:57:30+08:00">
+                2019-08-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-11T22:19:40+08:00">
+                2019-08-11
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本周论文：</p>
+<ol>
+<li>Curriculum Learning for Domain Adaptation in Neural Machine Translation</li>
+<li>Dynamically Composing Domain-Data Selection with Clean-Data Selection by “Co-Curricular Learning” for Neural Machine Translation</li>
+<li>Pseudo-Labeling Curriculum for Unsupervised Domain Adaptation</li>
+<li>Curriculum Learning for Natural Answer Generation</li>
+<li>MentorNet: Learning Data-Driven Curriculum for Very Deep Neural Networks on Corrupted Labels</li>
+</ol>
+<h2 id="Curriculum-Learning-for-Domain-Adaptation-in-Neural-Machine-Translation"><a href="#Curriculum-Learning-for-Domain-Adaptation-in-Neural-Machine-Translation" class="headerlink" title="[Curriculum Learning for Domain Adaptation in Neural Machine Translation]"></a>[Curriculum Learning for Domain Adaptation in Neural Machine Translation]</h2><p>提出将CL用于翻译任务上的domain adaptation。</p>
+<p>任务：有些领域相关的翻译没有那么多平行语料，一般有的都是general domain的，还有的就是不知道是什么领域的，比如从网络上爬下来的数据paracrawl，本文就是希望能够更好地利用这些未知领域的数据以训练更好的特定领域模型。</p>
+<p>其基本做法是：先训一个generic的模型，然后作为initialization。接着从这些unlabeled domain的数据，根据与特定领域数据集的相似程度排序，然后利用CL从相似性最高的到相似性低的训练。本文是第一个将CL用于domain adaptation。</p>
+<p>Pipeline：</p>
+<p><img src="/images/15654423291460.jpg" width="60%" height="50%"></p>
+<h3 id="排序指标-Domain-Similarity-Scoring"><a href="#排序指标-Domain-Similarity-Scoring" class="headerlink" title="排序指标(Domain Similarity Scoring)"></a>排序指标(Domain Similarity Scoring)</h3><p>第一个问题即，如何判断哪些句子是domain相关的？</p>
+<p>记$I$是in-domain的数据；$N$是unlabeled domain的数据，排序所要做的就是根据$I$的数据按照相似度来排序，并取前n个用于训练。</p>
+<p>本文使用了两种指标。</p>
+<h4 id="Moore-Lewis-Method"><a href="#Moore-Lewis-Method" class="headerlink" title="Moore-Lewis Method"></a>Moore-Lewis Method</h4><p>对于每个在$N$里面的句子$s$都会分配一个分数：</p>
+<script type="math/tex; mode=display">H_{I}(s)-H_{N}(s)</script><p>其中$H_{I}$是在$I$上训练的语言模型的cross entropy；$H_{N}$是在从$N$上随机采样的大小与$I$相近的数据所训练得到的语言模型的cross entropy。</p>
+<p>该指标越小，代表句子$s$与in-domain数据集$I$更相近。</p>
+<h4 id="Cynical-Data-Selection"><a href="#Cynical-Data-Selection" class="headerlink" title="Cynical Data Selection"></a>Cynical Data Selection</h4><p>循环选择句子构建training corpus来大致对$I$建模。每个iteration，每个sentence都会计算将其加入到已经构建好的training corpus所带来的cross-entropy decrease，而带来最大decrease的句子则被选中，这里的cross-entropy是previously selected n-sentence corpus与I之间的。</p>
+<h3 id="Curriculum-Learning-Training-Strategy"><a href="#Curriculum-Learning-Training-Strategy" class="headerlink" title="Curriculum Learning Training Strategy"></a>Curriculum Learning Training Strategy</h3><p>首先根据上述指标排序，然后切分成多个shards；训练过程是切分成若干个phase的，每个phase只能用部分的数据；在第一phase，只能用最简单的shard训练，然后随着phase的增加，增加剩余最简单的shard；注意到数据呈现的顺序不是固定的，并不是严格简单到难，而是随机从当前phase能看到的shard中采样。这样能够带来一定的随机性，对模型训练有帮助。</p>
+<p>在实验中是将数据分成了40个shards，每个phase随机采样1000个batch。</p>
+<hr>
+<h2 id="Dynamically-Composing-Domain-Data-Selection-with-Clean-Data-Selection-by-“Co-Curricular-Learning”-for-Neural-Machine-Translation"><a href="#Dynamically-Composing-Domain-Data-Selection-with-Clean-Data-Selection-by-“Co-Curricular-Learning”-for-Neural-Machine-Translation" class="headerlink" title="[Dynamically Composing Domain-Data Selection with Clean-Data Selection by “Co-Curricular Learning” for Neural Machine Translation]"></a>[Dynamically Composing Domain-Data Selection with Clean-Data Selection by “Co-Curricular Learning” for Neural Machine Translation]</h2><p>提出将domain-data selection与clean-data selection结合，并提出联合课程学习，用以翻译任务上的domain adaptation。</p>
+<p>任务背景描述：domain-data selection是从大数据集上根据特定领域的小数据集选择与该特定领域最相关的数据用以扩充数据量来训练；同理clean-data selection则是选择干净/噪声较少的数据来训练。</p>
+<p>本文将这二者的数据选择结合起来并用于CL的训练。</p>
+<h3 id="domain-noise的测量"><a href="#domain-noise的测量" class="headerlink" title="domain/noise的测量"></a>domain/noise的测量</h3><p>一般是使用language model来衡量。</p>
+<p>假设我们有一个general-domain的语言模型$\widetilde{\vartheta}$和一个in-domain的语言模型$\widehat{\vartheta}$，对于一个句子而言其domain相关性就有：</p>
+<script type="math/tex; mode=display">\varphi(x ; \widetilde{\vartheta}, \widehat{\vartheta})=\frac{\log P(x ; \widehat{\vartheta})-\log P(x ; \widetilde{\vartheta})}{|x|}</script><p>同样，假设我们有$\widetilde{\theta}$的NMT baseline模型，训练于有噪声的数据；$\widehat{\theta}$则是在干净的数据上基于$\widetilde{\theta}$ fine-tune的NMT模型，则衡量noise level有：</p>
+<script type="math/tex; mode=display">\phi(x, y ; \widetilde{\theta}, \widehat{\theta})=\frac{\log P(y | x ; \widehat{\theta})-\log P(y | x ; \widetilde{\theta})}{|y|}</script><h3 id="问题设置"><a href="#问题设置" class="headerlink" title="问题设置"></a>问题设置</h3><p><br>记$\widetilde{D_{X Y}}$是背景双语数据集，可以是从网上爬下来的，有不同domain和noise；$D_{X}^{\mathrm{ID}}$是in-domain的单语语料，可以较小，我们可以用这个来对domain relevance来排序；$\widehat{D_{X Y}^{\mathrm{OD}}}$是小的，可信任（干净）的out-of-domain的平行语料，我们可以用这份数据来语料的噪声程度做排序；$\widehat{D_{X Y}^{\mathrm{ID}}}$则是双语的in-domain语料，我们在这里假设in-domain的双语预料不存在，希望借助其他三个来学会domain adaptation。</p>
+<h3 id="Co-Curricular-Learning"><a href="#Co-Curricular-Learning" class="headerlink" title="Co-Curricular Learning"></a>Co-Curricular Learning</h3><p>$\mathcal{D}_{\lambda}^{\phi}(t, D)$ 是一个selection function，在时间t上返回top λ(t)的经过排序的数据作为训练。</p>
+<p>这里使用pace function：</p>
+<script type="math/tex; mode=display">\lambda(t)=0.5^{t / H}</script><p>注意这是随着时间递减的。也即我们希望遇到后面越domain相关/数据越干净。一开始是训练一个general的表示，可以理解成是一个initialization，然后后面再用好的数据去fine-tune。</p>
+<p>由于既要考虑clean-data又要考虑in-domain data，所以就引出两个策略。</p>
+<h4 id="Mixed-Co-Curriculum"><a href="#Mixed-Co-Curriculum" class="headerlink" title="Mixed Co-Curriculum"></a>Mixed Co-Curriculum</h4><p>我们可以直接将clean-data selection与in-domain selection的分数直接加起来作为总的排名分数：</p>
+<script type="math/tex; mode=display">\psi(x, y)=\phi(x, y)+\varphi(x)</script><p>然后再用同一个pace-function选择在时间t下的topk个数据用以训练。</p>
+<p>但这个方法的问题在于这两个分数并不一定是同一个量级的，不一定是一个分布族，不应该直接加起来。</p>
+<h4 id="Cascaded-Co-Curriculum"><a href="#Cascaded-Co-Curriculum" class="headerlink" title="Cascaded Co-Curriculum"></a>Cascaded Co-Curriculum</h4><p>另一种则是分别定义二者的pace function，然后结合起来。</p>
+<script type="math/tex; mode=display">\beta(t)=0.5^{t / F},\gamma(t)=0.5^{t / G}</script><p>分别是二者的pace function。</p>
+<p>因此结合起来，做两个的交集：</p>
+<script type="math/tex; mode=display">\left(\mathcal{D}_{\gamma}^{\varphi} \circ \mathcal{D}_{\beta}^{\phi}\right)\left(t, \widetilde{D_{X Y}}\right)=\mathcal{D}_{\gamma}^{\varphi}\left(t, \mathcal{D}_{\beta}^{\phi}\left(t, \widetilde{D_{X Y}}\right)\right)</script><p>所以每个sample的weight为：</p>
+<script type="math/tex; mode=display">W_{t}(x, y)=\left\{\begin{array}{ll}{\frac{1}{\left|\mathcal{D}_{\gamma}^{\varphi} \circ \mathcal{D}_{\beta}^{\phi}\right|}} & {\text { if }(x, y) \in \mathcal{D}_{\gamma}^{\varphi} \circ \mathcal{D}_{\beta}^{\phi}} \\ {0} & {\text { otherwise }}\end{array}\right.</script><p>以下是一个toy example：</p>
+<p><img src="/images/15654446572190.jpg" width="50%" height="50%"></p>
+<p>也即只保留两个指标都选择保留的数据。</p>
+<h3 id="CL-optimization"><a href="#CL-optimization" class="headerlink" title="CL optimization"></a>CL optimization</h3><p>该算法如何优化？本文采用EM-style的算法，这是一个迭代的过程。</p>
+<p><img src="/images/15654447383111.jpg" width="50%" height="50%"></p>
+<p>模型在更新过程中还会反过来重新更新scoring function。</p>
+<h3 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h3><p>原先的CL是从简单到难。这里的是从不相关/不干净 到 相关/干净， 其motivation是希望一开始训练一个general的表示，然后再不断地通过越来越相关/干净的数据去fine-tune。而传统CL则是希望先通过简单的数据使模型更平稳地发展。二者似乎出发点不同，如果严格地说，本文不应该算是一种传统CL（从简单到难）？</p>
+<p>实际上论文里面也提到了，这更像是一种multi-task transfer learning，假设每个时间t都是一个task，本文是定义了一系列的task $\mathcal{M}=\left\langle m_{1}, \ldots, m_{t} \ldots, m_{f}\right\rangle$，其中最后的task才是我们感兴趣的（也即in-domain），而中间的task都是一系列的垫脚石，希望能够将知识一步一步地transfer到最终的task上，这也是为什么随着训练过程的进行可用数据越来越少的原因。</p>
+<p>那么传统CL与这种multi-task transfer learning之间是否矛盾的地方？二者的motivation听起来都很合理，他们之间是否本质上有一个联结点能够使二者不矛盾？</p>
+<p>其实想一想似乎也不矛盾，主要看最终的目的是啥，以及标准是啥。CL是先从简单到难，最终是希望在同一个数据集上表现更好；而本文的transfer leanring则不同，是在general数据集上逐渐引导至特定domain，希望在特定domain的数据集上表现好，而不是希望在训练的general domain上表现好。二者的评测标准是不同的，出发点是不同的，因此应该是不矛盾的。</p>
+<hr>
+<h2 id="Pseudo-Labeling-Curriculum-for-Unsupervised-Domain-Adaptation"><a href="#Pseudo-Labeling-Curriculum-for-Unsupervised-Domain-Adaptation" class="headerlink" title="[Pseudo-Labeling Curriculum for Unsupervised Domain Adaptation]"></a>[Pseudo-Labeling Curriculum for Unsupervised Domain Adaptation]</h2><p>本文提出一种利用伪标签加上CL训练达到图像分类domain adaptation（领域自适应）的目的。</p>
+<p>任务介绍：给定有标签的source，以及无标签的target，其中source与target的领域是不同的，任务的目的是能够利用有标签的source训练得到能够有迁移到target领域能力的模型。</p>
+<p>做法：本文利用之前文章CurriculumNet: Weakly Supervised Learning from Large-Scale Web Images提到的density-based clustering，先将图像根据density分类，然后首先对density较大的图像打标签，并利用这些图像训练分类器，然后再对density小一些的打标签，不断更新与打标签训练，最终获得由迁移能力的模型。</p>
+<p><img src="/images/15654455360307.jpg" width="80%" height="50%"></p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p><img src="/images/15654455687375.jpg" width="70%" height="50%"></p>
+<p>记source samples $D_{\mathcal{S}}=\left\{\left(x_{i}^{S}, y_{i}^{S}\right)\right\}_{i=1}^{N_{S}}$ 是有标签的；target samples $D_{\mathcal{T}}=\left\{x_{i}^{t}\right\}_{i=1}^{N_{t}}$ 是无标签的$\hat{\boldsymbol{y}}_{\boldsymbol{i}}^{\boldsymbol{t}}$ 则是伪标签，目的是训练一个$C_t$能够将target samples分类。</p>
+<p>$G_f$是共享的特征提取器，$C_t$与$C_s$分别是source/target的分类器，$G_d$是二分类器，输入source或者target，能够判断输入是source还是target samples。</p>
+<p>一开始，我们训练$G_f$，$C_s$，$G_d$，因为一开始模型能力弱，打标签的可靠性低：</p>
+<script type="math/tex; mode=display">J_{1}\left(\theta_{f}, \theta_{d}, \theta_{s}\right)=\frac{1}{N_{s}} \sum_{i=1}^{N_{s}} L_{y}\left(C_{s}\left(f_{i}^{s}\right), y_{i}^{s}\right)-\frac{\lambda}{N_{s}} \sum_{i=1}^{N_{s}} L_{d}\left(G_{d}\left(f_{i}^{s}\right), d_{i}\right)-\frac{\lambda}{N_{t}} \sum_{i=1}^{N_{t}} L_{d}\left(G_{d}\left(f_{i}^{t}\right), d_{i}\right)</script><p>其中$f$就是$G_f$的输出。</p>
+<p>接着，通过之前提到的聚类方法，将target聚为3类，$D_{e}, D_{m},D_{h}$。</p>
+<p>给local density高的打标签，假设local density的更为可靠，我们打完这些标签后就开始利用这些来训练$C_s$，然后更新参数，注意到这里更新的是所有与之相关的参数，也包括$G_f$等。</p>
+<p>更新完了模型重新对数据打标签，此时就可以将$D_m$的数据用以训练了，然后训练完再更新完标签，就可以将$D_h$用以训练了。</p>
+<p>这里的思想有点借鉴了GAN了。</p>
+<hr>
+<h2 id="Curriculum-Learning-for-Natural-Answer-Generation"><a href="#Curriculum-Learning-for-Natural-Answer-Generation" class="headerlink" title="[Curriculum Learning for Natural Answer Generation]"></a>[Curriculum Learning for Natural Answer Generation]</h2><p>将CL应用于NAG的训练上。</p>
+<p>NAG这个任务我不熟，只讨论CL，仍然是从指标定义与训练策略两步讨论。</p>
+<h3 id="指标"><a href="#指标" class="headerlink" title="指标"></a>指标</h3><p>定义复杂度的指标：<br>通过两个指标，将sample分为两类：target instance与common instance。</p>
+<h4 id="Term-Frequency-Selector"><a href="#Term-Frequency-Selector" class="headerlink" title="Term Frequency Selector"></a>Term Frequency Selector</h4><p>通过answer的term frequency，如果frequency太大，说明这个词太过于普通，小的TF说明这个词有价值，但太小可能说明是噪声，所以也要设个下限。</p>
+<h4 id="Grammar-Selector"><a href="#Grammar-Selector" class="headerlink" title="Grammar Selector"></a>Grammar Selector</h4><p>利用Stanford parser score作为grammar的metric，拥有好的grammar的句子通常有更高的分数，同时由于短句容易获得更高的分数，因此按比例让short与long answer的比例各占0.5。</p>
+<p>被选中的就是target instance，也就是比较难的，否则就是common instance，也即比较简单的。</p>
+<h3 id="训练策略"><a href="#训练策略" class="headerlink" title="训练策略"></a>训练策略</h3><p>希望模型一开始学习简单结构的，短的答案，使得模型学会基本的QA model，然后学会更复杂的内容，能够有能力生成自然的答案，所以先用common instance，然后再用target instance。</p>
+<p>采用的是概率采样的schedul。记$Q_{c},Q_{t}$ 分别是common和target instance。一开始希望概率$w_{Q_{c}} \gg w_{Q_{t}}$，然后逐渐$w_{Q_{c}}$减小而$w_{Q_{t}}$增加，最后$w_{Q_{c}} \ll w_{Q_{t}}$。</p>
+<p>因此我们有：</p>
+<script type="math/tex; mode=display">w_{Q_{t}}=\left(\frac{\text {epoch}_{t}}{ | \text {epoch} |}\right)^{2},w_{Q_{c}}=1-w_{Q_{t}}</script><hr>
+<h2 id="MentorNet-Learning-Data-Driven-Curriculum-for-Very-Deep-Neural-Networks-on-Corrupted-Labels"><a href="#MentorNet-Learning-Data-Driven-Curriculum-for-Very-Deep-Neural-Networks-on-Corrupted-Labels" class="headerlink" title="[MentorNet: Learning Data-Driven Curriculum for Very Deep Neural Networks on Corrupted Labels]"></a>[MentorNet: Learning Data-Driven Curriculum for Very Deep Neural Networks on Corrupted Labels]</h2><p>提出通过训练另一个MentorNet网络来辅助训练网络，用以解决在受污染label的数据上训练的问题。<br>论文提出的CL是能够数据驱动的，但本质上并不是CL而是SPL。<br>其实这篇后面的理论没怎么看懂。</p>
+<p>基本做法是有一个辅助网络MentorNet，能够给予当前sample到的数据以一定权重，该权重是动态的，而不像传统SPL那样设定一个固定的schedule λ，小于λ的就用于训练，这是由人来确定schedule的，忽略了被训练的网络的反馈，而MentorNet则是数据驱动的，同时MentorNet与StudentNet是可以同时训练更新的。</p>
+<p>因此，MentorNet的输出就是每个sample的weight。他主要有两个可学习的地方，一个是学习预定义好的curriculum；另一个就是从数据中学。</p>
+<h3 id="可学习的Curriculum"><a href="#可学习的Curriculum" class="headerlink" title="可学习的Curriculum"></a>可学习的Curriculum</h3><h4 id="学习预定义的curriculum"><a href="#学习预定义的curriculum" class="headerlink" title="学习预定义的curriculum"></a>学习预定义的curriculum</h4><p>实际上就是在拟合预定义的curriculum的值。</p>
+<script type="math/tex; mode=display">g_{m}\left(\mathbf{z}_{i} ; \Theta^{*}\right)=\left\{\begin{array}{ll}{\mathbb{1}\left(\ell_{i} \leq \lambda_{1}\right)} & {\lambda_{2}=0} \\ {\min \left(\max \left(0,1-\frac{\ell_{i}-\lambda_{1}}{\lambda_{2}}\right), 1\right)} & {\lambda_{2} \neq 0}\end{array}\right.</script><p>$g_{m}$即MentorNet的输出。我们在给定$\mathbf{z}_{i}=\phi\left(\mathbf{x}_{i}, y_{i}, \mathbf{w}\right)$，也即每个sample的一些feature，模型能够输出和预定义的curriculum一样的值。</p>
+<h4 id="从数据中学习Curriculum"><a href="#从数据中学习Curriculum" class="headerlink" title="从数据中学习Curriculum"></a>从数据中学习Curriculum</h4><p>我们希望从数据集中$\left\{\left(\phi\left(\mathbf{x}_{i}, y_{i}, \mathbf{w}\right), v_{i}^{*}\right)\right\}$学习如何打分，其中v=1表示该label是正确的的。但显然我们不能直接从训练数据中获得该数据集，因为可能存在被污染label的数据。因此论文的做法则是从另一个可信任的小数据集上学习，相当于知识迁移。比如我们可以在CIFAR-10上训练获得这样一个MentorNet然后在CIFAR-100上用。</p>
+<p>那么要如何学？</p>
+<p><img src="/images/15654473154044.jpg" width="60%" height="50%"></p>
+<p>MentorNet在输入epoch的百分比以及label后，过一个embedding；然后另一边将过去的loss以及loss的变化多少过一个双向的LSTM，论文中取LSTM的step size=1，也即只考虑一次过去的变化。然后二者cat起来进入fc层，最终获得了一个概率。其中最后一层是dropout，是论文提出的burn-in的过程。burn-in指的是一开始在训练的前20% epoch让MentorNet固定输出$g_{m}\left(\mathbf{z}_{i} ; \Theta^{*}\right)=r_{i}$，其中$r_{i}$是伯努利分布的采样结果，相当于让training sample随机被dropout p%，这样能让StudentNet更稳定预测，且专注于学习简单的pattern （why？）。</p>
+<h3 id="一点思考"><a href="#一点思考" class="headerlink" title="一点思考"></a>一点思考</h3><p>从data中学习一个curriculum，也即去尝试给定一定的feature去拟合其label的正确概率，这有点像是meta-leanring在做的事情；同时在cifar10拟合在cifar100使用，也有点迁移学习的感觉。但这篇的本质并不是真正的CL，而是SPL，因为没有预先按照difficulty排序。同时，这让我想起CurriculumNet，CurriculumNet做的也是从不靠谱的数据中学到一个好的模型，他的做法则是利用聚类将数据分为三类然后按顺序训练；而这里则是通过知识迁移，在一个靠谱的数据集上训feature，然后在另一个上面时候用，这也不失为另一种思路，但如果不是同一类型的数据集如cifar10与cifar100，是否能够迁移也不好说。最后，这篇论文可能写得有些绕了，看起来有点累。</p>
+<hr>
+<h2 id="本周论文小结"><a href="#本周论文小结" class="headerlink" title="[本周论文小结]"></a>[本周论文小结]</h2><p>本周继续专注于Curriculum Learning的论文。但比较巧的是本周的论文都是将CL应用于比较实际的问题，如corrupted label或者domain adaptation。对于这样的实际问题，更多需要的恰恰是训练方法上的创新，而CL正好是属于这方面的方法，对于解决这样实际问题，如何引入CL是值得关注的。corrupted label切中了当前网络数据很多但噪声很大这一痛点，如何解决这一问题，利用好大数据，或许比设计精巧的模型所能带来的提升更大；而domain adaptation同样也是一大痛点，虽然数据很多，但部分领域相关的数据稀缺，比如翻译领域能收集到的都是新闻的平行语料，或者小语种的数据集很难收集，特定专业领域如医疗的数据也难以获取。因此可以多多关注此类论文，思考如何解决这些实际问题。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    林泽辉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.linzehui.me/2019/08/10/论文/每周论文27/" title="每周论文27">http://www.linzehui.me/2019/08/10/论文/每周论文27/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://www.linzehui.me" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
+          
+            <a href="/tags/Curriculum-Learning/" rel="tag"> <i class="fa fa-tag"></i> Curriculum Learning</a>
+          
+            <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
+          
+            <a href="/tags/Domain-Adaptation/" rel="tag"> <i class="fa fa-tag"></i> Domain Adaptation</a>
+          
+            <a href="/tags/Pseudo-Labeling/" rel="tag"> <i class="fa fa-tag"></i> Pseudo Labeling</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/09/论文/Curriculum Learning schedule总结/" rel="next" title="Curriculum Learning schedule 总结">
+                <i class="fa fa-chevron-left"></i> Curriculum Learning schedule 总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/10/碎片知识/每周碎片知识27/" rel="prev" title="每周碎片知识27">
+                每周碎片知识27 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA0OC8xNjU3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">186</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">207</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Curriculum-Learning-for-Domain-Adaptation-in-Neural-Machine-Translation"><span class="nav-number">1.</span> <span class="nav-text">[Curriculum Learning for Domain Adaptation in Neural Machine Translation]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#排序指标-Domain-Similarity-Scoring"><span class="nav-number">1.1.</span> <span class="nav-text">排序指标(Domain Similarity Scoring)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Moore-Lewis-Method"><span class="nav-number">1.1.1.</span> <span class="nav-text">Moore-Lewis Method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cynical-Data-Selection"><span class="nav-number">1.1.2.</span> <span class="nav-text">Cynical Data Selection</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Curriculum-Learning-Training-Strategy"><span class="nav-number">1.2.</span> <span class="nav-text">Curriculum Learning Training Strategy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamically-Composing-Domain-Data-Selection-with-Clean-Data-Selection-by-“Co-Curricular-Learning”-for-Neural-Machine-Translation"><span class="nav-number">2.</span> <span class="nav-text">[Dynamically Composing Domain-Data Selection with Clean-Data Selection by “Co-Curricular Learning” for Neural Machine Translation]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#domain-noise的测量"><span class="nav-number">2.1.</span> <span class="nav-text">domain/noise的测量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题设置"><span class="nav-number">2.2.</span> <span class="nav-text">问题设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Co-Curricular-Learning"><span class="nav-number">2.3.</span> <span class="nav-text">Co-Curricular Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Mixed-Co-Curriculum"><span class="nav-number">2.3.1.</span> <span class="nav-text">Mixed Co-Curriculum</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cascaded-Co-Curriculum"><span class="nav-number">2.3.2.</span> <span class="nav-text">Cascaded Co-Curriculum</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CL-optimization"><span class="nav-number">2.4.</span> <span class="nav-text">CL optimization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些思考"><span class="nav-number">2.5.</span> <span class="nav-text">一些思考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pseudo-Labeling-Curriculum-for-Unsupervised-Domain-Adaptation"><span class="nav-number">3.</span> <span class="nav-text">[Pseudo-Labeling Curriculum for Unsupervised Domain Adaptation]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Curriculum-Learning-for-Natural-Answer-Generation"><span class="nav-number">4.</span> <span class="nav-text">[Curriculum Learning for Natural Answer Generation]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指标"><span class="nav-number">4.1.</span> <span class="nav-text">指标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Term-Frequency-Selector"><span class="nav-number">4.1.1.</span> <span class="nav-text">Term Frequency Selector</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Grammar-Selector"><span class="nav-number">4.1.2.</span> <span class="nav-text">Grammar Selector</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练策略"><span class="nav-number">4.2.</span> <span class="nav-text">训练策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MentorNet-Learning-Data-Driven-Curriculum-for-Very-Deep-Neural-Networks-on-Corrupted-Labels"><span class="nav-number">5.</span> <span class="nav-text">[MentorNet: Learning Data-Driven Curriculum for Very Deep Neural Networks on Corrupted Labels]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可学习的Curriculum"><span class="nav-number">5.1.</span> <span class="nav-text">可学习的Curriculum</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#学习预定义的curriculum"><span class="nav-number">5.1.1.</span> <span class="nav-text">学习预定义的curriculum</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从数据中学习Curriculum"><span class="nav-number">5.1.2.</span> <span class="nav-text">从数据中学习Curriculum</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一点思考"><span class="nav-number">5.2.</span> <span class="nav-text">一点思考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本周论文小结"><span class="nav-number">6.</span> <span class="nav-text">[本周论文小结]</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

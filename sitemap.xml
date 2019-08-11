@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.linzehui.me/2019/08/10/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8727/</loc>
+    
+    <lastmod>2019-08-11T14:19:40.605Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2019/08/10/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8627/</loc>
+    
+    <lastmod>2019-08-11T14:11:09.841Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2019/08/11/%E8%AF%97%E8%AF%8D&%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D33/</loc>
+    
+    <lastmod>2019-08-11T11:43:15.218Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.linzehui.me/2019/08/09/%E8%AE%BA%E6%96%87/Curriculum%20Learning%20schedule%E6%80%BB%E7%BB%93/</loc>
     
     <lastmod>2019-08-10T03:31:23.106Z</lastmod>
@@ -695,14 +716,14 @@
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/</loc>
+    <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2012:%20Unsupervised%20Learning:%20Neighbor%20Embedding/</loc>
     
     <lastmod>2018-11-19T03:21:34.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2012:%20Unsupervised%20Learning:%20Neighbor%20Embedding/</loc>
+    <loc>http://www.linzehui.me/2018/10/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2011:%20Unsupervised%20Learning:%20Linear%20Dimension%20Reduction/</loc>
     
     <lastmod>2018-11-19T03:21:34.000Z</lastmod>
     
@@ -730,13 +751,6 @@
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/09/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%202%20Bias%20and%20Variance/</loc>
-    
-    <lastmod>2018-11-19T03:21:29.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.linzehui.me/2018/10/14/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%2017:%20Ensemble/</loc>
     
     <lastmod>2018-11-19T03:21:29.000Z</lastmod>
@@ -751,14 +765,21 @@
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/09/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/</loc>
+    <loc>http://www.linzehui.me/2018/09/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%202%20Bias%20and%20Variance/</loc>
+    
+    <lastmod>2018-11-19T03:21:29.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2018/09/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%203%20Gradient%20Descent/</loc>
     
     <lastmod>2018-11-19T03:21:28.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/09/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%203%20Gradient%20Descent/</loc>
+    <loc>http://www.linzehui.me/2018/09/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/Lecture%204%20Classification%20%20Probabilistic%20Generative%20Model/</loc>
     
     <lastmod>2018-11-19T03:21:28.000Z</lastmod>
     
@@ -856,13 +877,6 @@
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/08/19/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/Python%20Tricks%5B%E8%BD%AC%5D/</loc>
-    
-    <lastmod>2018-11-19T03:21:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.linzehui.me/2018/07/31/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E4%B8%80%E4%B8%AA%E5%85%B3%E4%BA%8Eyield%E7%9A%84%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86/</loc>
     
     <lastmod>2018-11-19T03:21:20.000Z</lastmod>
@@ -870,14 +884,21 @@
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/10/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8610/</loc>
+    <loc>http://www.linzehui.me/2018/08/19/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/Python%20Tricks%5B%E8%BD%AC%5D/</loc>
+    
+    <lastmod>2018-11-19T03:21:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2018/07/29/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%861/</loc>
     
     <lastmod>2018-11-19T03:21:18.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/07/29/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%861/</loc>
+    <loc>http://www.linzehui.me/2018/10/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8610/</loc>
     
     <lastmod>2018-11-19T03:21:18.000Z</lastmod>
     
@@ -891,13 +912,6 @@
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/08/26/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%865/</loc>
-    
-    <lastmod>2018-11-19T03:21:16.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.linzehui.me/2018/08/12/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%863/</loc>
     
     <lastmod>2018-11-19T03:21:16.000Z</lastmod>
@@ -906,6 +920,13 @@
   
   <url>
     <loc>http://www.linzehui.me/2018/08/19/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%864/</loc>
+    
+    <lastmod>2018-11-19T03:21:16.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2018/08/26/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%865/</loc>
     
     <lastmod>2018-11-19T03:21:16.000Z</lastmod>
     
@@ -961,14 +982,14 @@
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/10/20/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%872/</loc>
+    <loc>http://www.linzehui.me/2018/10/29/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%873/</loc>
     
     <lastmod>2018-11-19T03:21:12.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/10/29/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%873/</loc>
+    <loc>http://www.linzehui.me/2018/10/20/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%872/</loc>
     
     <lastmod>2018-11-19T03:21:12.000Z</lastmod>
     
@@ -1094,13 +1115,6 @@
   </url>
   
   <url>
-    <loc>http://www.linzehui.me/2018/08/05/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB3/</loc>
-    
-    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.linzehui.me/2018/08/12/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB4/</loc>
     
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
@@ -1116,6 +1130,13 @@
   
   <url>
     <loc>http://www.linzehui.me/2018/08/19/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E5%88%86%E4%BA%AB5/</loc>
+    
+    <lastmod>2018-09-23T01:30:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.linzehui.me/2018/08/05/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E4%BA%AB3/</loc>
     
     <lastmod>2018-09-23T01:30:20.000Z</lastmod>
     

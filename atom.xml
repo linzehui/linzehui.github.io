@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.linzehui.me/"/>
-  <updated>2019-08-10T03:31:23.106Z</updated>
+  <updated>2019-08-11T11:43:15.218Z</updated>
   <id>http://www.linzehui.me/</id>
   
   <author>
@@ -15,6 +15,99 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>每周诗词33</title>
+    <link href="http://www.linzehui.me/2019/08/11/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D33/"/>
+    <id>http://www.linzehui.me/2019/08/11/诗词&amp;句/每周诗词33/</id>
+    <published>2019-08-11T11:42:14.000Z</published>
+    <updated>2019-08-11T11:43:15.218Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;题龙阳县青草湖&quot;&gt;&lt;a href=&quot;#题龙阳县青草湖&quot; class=&quot;headerlink&quot; title=&quot;题龙阳县青草湖&quot;&gt;&lt;/a&gt;题龙阳县青草湖&lt;/h3&gt;&lt;p&gt;[元]
+        
+      
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周碎片知识27</title>
+    <link href="http://www.linzehui.me/2019/08/10/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8627/"/>
+    <id>http://www.linzehui.me/2019/08/10/碎片知识/每周碎片知识27/</id>
+    <published>2019-08-10T14:48:14.000Z</published>
+    <updated>2019-08-11T14:11:09.841Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;Pytorch加速建议&quot;&gt;&lt;a href=&quot;#Pytorch加速建议&quot; class=&quot;headerlink&quot; title=&quot;[Pytorch加速建议]&quot;&gt;&lt;/a&gt;[Pytorch加速建议]&lt;/h3&gt;&lt;p&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="Python" scheme="http://www.linzehui.me/tags/Python/"/>
+    
+      <category term="Pytorch" scheme="http://www.linzehui.me/tags/Pytorch/"/>
+    
+      <category term="assert" scheme="http://www.linzehui.me/tags/assert/"/>
+    
+      <category term="global" scheme="http://www.linzehui.me/tags/global/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周论文27</title>
+    <link href="http://www.linzehui.me/2019/08/10/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8727/"/>
+    <id>http://www.linzehui.me/2019/08/10/论文/每周论文27/</id>
+    <published>2019-08-10T12:57:30.000Z</published>
+    <updated>2019-08-11T14:19:40.605Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本周论文：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Curriculum Learning for Domain Adaptation in Neural Machine Translation&lt;/li&gt;
+&lt;li&gt;Dynamically Composing Domain-Data
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Domain Adaptation" scheme="http://www.linzehui.me/tags/Domain-Adaptation/"/>
+    
+      <category term="Pseudo Labeling" scheme="http://www.linzehui.me/tags/Pseudo-Labeling/"/>
+    
+  </entry>
   
   <entry>
     <title>Curriculum Learning schedule 总结</title>
@@ -392,19 +485,19 @@
     </summary>
     
     
-      <category term="CNN" scheme="http://www.linzehui.me/tags/CNN/"/>
-    
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
-    
-      <category term="RNN" scheme="http://www.linzehui.me/tags/RNN/"/>
     
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
     
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
+      <category term="CNN" scheme="http://www.linzehui.me/tags/CNN/"/>
+    
       <category term="ResNet" scheme="http://www.linzehui.me/tags/ResNet/"/>
     
       <category term="Highway" scheme="http://www.linzehui.me/tags/Highway/"/>
+    
+      <category term="RNN" scheme="http://www.linzehui.me/tags/RNN/"/>
     
   </entry>
   
@@ -435,9 +528,9 @@
     
       <category term="Pytorch" scheme="http://www.linzehui.me/tags/Pytorch/"/>
     
-      <category term="nan" scheme="http://www.linzehui.me/tags/nan/"/>
-    
       <category term="inf" scheme="http://www.linzehui.me/tags/inf/"/>
+    
+      <category term="nan" scheme="http://www.linzehui.me/tags/nan/"/>
     
   </entry>
   
@@ -536,106 +629,6 @@
       <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
     
       <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周论文23</title>
-    <link href="http://www.linzehui.me/2019/06/29/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8723/"/>
-    <id>http://www.linzehui.me/2019/06/29/论文/每周论文23/</id>
-    <published>2019-06-29T15:01:30.000Z</published>
-    <updated>2019-08-02T07:32:40.086Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;本周论文：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Reinforcement Learning based Curriculum Optimization for Neural Machine Translation&lt;/li&gt;
-&lt;li&gt;Curriculum
-        
-      
-    
-    </summary>
-    
-    
-      <category term="RL" scheme="http://www.linzehui.me/tags/RL/"/>
-    
-      <category term="Reinforcement Learning" scheme="http://www.linzehui.me/tags/Reinforcement-Learning/"/>
-    
-      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
-    
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-      <category term="LSTM" scheme="http://www.linzehui.me/tags/LSTM/"/>
-    
-      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
-    
-      <category term="Dropout" scheme="http://www.linzehui.me/tags/Dropout/"/>
-    
-      <category term="meta-learning" scheme="http://www.linzehui.me/tags/meta-learning/"/>
-    
-      <category term="multi-task" scheme="http://www.linzehui.me/tags/multi-task/"/>
-    
-      <category term="SPL" scheme="http://www.linzehui.me/tags/SPL/"/>
-    
-      <category term="Self-paced Learning" scheme="http://www.linzehui.me/tags/Self-paced-Learning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周诗词29</title>
-    <link href="http://www.linzehui.me/2019/06/23/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D29/"/>
-    <id>http://www.linzehui.me/2019/06/23/诗词&amp;句/每周诗词29/</id>
-    <published>2019-06-23T03:46:14.000Z</published>
-    <updated>2019-06-23T09:06:15.557Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;永遇乐-·-京口北固亭怀古&quot;&gt;&lt;a href=&quot;#永遇乐-·-京口北固亭怀古&quot; class=&quot;headerlink&quot; title=&quot;永遇乐 · 京口北固亭怀古&quot;&gt;&lt;/a&gt;永遇乐 · 京口北固亭怀古&lt;/h3&gt;&lt;p&gt;[宋]
-        
-      
-    
-    </summary>
-    
-    
-      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
-    
-      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>佳句分享1</title>
-    <link href="http://www.linzehui.me/2019/06/23/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB1/"/>
-    <id>http://www.linzehui.me/2019/06/23/诗词&amp;句/佳句分享1/</id>
-    <published>2019-06-23T03:41:15.000Z</published>
-    <updated>2019-07-07T03:43:57.223Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h3&gt;&lt;p&gt;仓促本身就是最要不得的态度。当你做某件事的时候，一旦想要求快 ，就表示你再也不关心它，而想去做别的事 —《禅与摩托车维修艺术》&lt;/p&gt;
-&lt;h3
-        
-      
-    
-    </summary>
-    
-    
-      <category term="佳句分享" scheme="http://www.linzehui.me/tags/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB/"/>
     
   </entry>
   
