@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15572009149790.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15572009689231.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15572010355613.jpg">
-<meta property="og:updated_time" content="2019-05-07T07:26:01.901Z">
+<meta property="og:updated_time" content="2019-08-15T04:23:50.638Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于transformer-xl中rel-shift实现的解读">
 <meta name="twitter:description" content="背景transformer-xl中有一步使用相对位置计算attention weight： $\mathbf{A}_{i, j}^{\mathrm{rel}}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{W}_{q}^{\top} \mathbf{W}_{k, E} \mathbf{E}_{x_{j}}}_{(a)}+\underbrace{\mat">
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-05-07T15:26:01+08:00">
-                2019-05-07
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-15T12:23:50+08:00">
+                2019-08-15
               </time>
             
           </span>
@@ -377,7 +377,7 @@
 <p>由于相对位置要计算所有的query与key对，因此是平方的复杂度。而在论文的附录中提到可以通过简单的推导将复杂度降为线性。<br>简单地说，我们希望获得：<br>$\mathbf{B} = \left[ \begin{array}{cccccc}{q_{0}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{M}} &amp; {\cdots} &amp; {q_{0}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{0}} &amp; {0} &amp; {\cdots} &amp; {0} \\ {q_{1}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{M+1}} &amp; {\cdots} &amp; {q_{1}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{1}} &amp; {q_{1}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{0}} &amp; {\cdots} &amp; {0} \\ {\vdots} &amp; {\vdots} &amp; {\vdots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots} \\ {q_{L-1}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{M+L-1}} &amp; {\cdots} &amp; {q_{L-1}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{M+L-1}} &amp; {q_{L-1}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{L-1}} &amp; {\cdots} &amp; {q_{L-1}^{\top} \mathbf{W}_{k, R} \mathbf{R}_{0}}\end{array}\right] \\  = \left[ \begin{array}{cccccc}{q_{0}^{\top} \mathbf{Q}_{L-1}} &amp; {\cdots} &amp; {q_{0}^{\top} \mathbf{Q}_{M+L-1}} &amp; {0} &amp; {\cdots} &amp; {0} \\ {q_{1}^{\top} \mathbf{Q}_{L-2}} &amp; {\cdots} &amp; {q_{1}^{\top} \mathbf{Q}_{M+L-2}} &amp; {q_{1}^{\top} \mathbf{Q}_{M+L-1}} &amp; {\cdots} &amp; {0} \\ {\vdots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots} \\ {q_{L-1}^{\top} \mathbf{Q}_{0}} &amp; {\cdots} &amp; {q_{L-1}^{\top} \mathbf{Q}_{M}} &amp; {q_{L-1}^{\top} \mathbf{Q}_{M+1}} &amp; {\cdots} &amp; {q_{L-1}^{\top} \mathbf{Q}_{M+L-1}}\end{array}\right]$</p>
 <p>其中：<br>$\mathbf{Q} :=\left[ \begin{array}{c}{\mathbf{R}_{M+L-1}^{\top}} \\ {\mathbf{R}_{M+L-2}^{\top}} \\ {\vdots} \\ {\mathbf{R}_{1}^{\top}} \\ {\mathbf{R}_{0}^{\top}}\end{array}\right] \mathbf{W}_{k, R}^{\top}=\left[ \begin{array}{c}{\left[\mathbf{W}_{k, R} \mathbf{R}_{M+L-1}\right]^{\top}} \\ {\vdots} \\ {\vdots} \\ {\left[\mathbf{W}_{k, R} \mathbf{R}_{1}\right]^{\top}} \\ {\left[\mathbf{W}_{k, R} \mathbf{R}_{0}\right]^{\top}}\end{array}\right] \in \mathbb{R}^{(M+L) \times d}$</p>
 <p>而我们可以直接获得的是：<br>$\tilde{\mathbf{B}}=\mathbf{q} \mathbf{Q}^{\top}=\left[ \begin{array}{cccccc}{q_{0}^{\top} \mathbf{Q}_{0}} &amp; {\cdots} &amp; {q_{0}^{\top} \mathbf{Q}_{M}} &amp; {q_{0}^{\top} \mathbf{Q}_{M+1}} &amp; {\cdots} &amp; {q_{0}^{\top} \mathbf{Q}_{M+L-1}} \\ {q_{1}^{\top} \mathbf{Q}_{0}} &amp; {\cdots} &amp; {q_{1}^{\top} \mathbf{Q}_{M}} &amp; {q_{1}^{\top} \mathbf{Q}_{M+1}} &amp; {\cdots} &amp; {q_{1}^{\top} \mathbf{Q}_{M+L-1}} \\ {\vdots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots} \\ {q_{L-1}^{\top} \mathbf{Q}_{0}} &amp; {\cdots} &amp; {q_{L-1}^{\top} \mathbf{Q}_{M}} &amp; {q_{L-1}^{\top} \mathbf{Q}_{M+1}} &amp; {\cdots} &amp; {q_{L-1}^{\top} \mathbf{Q}_{M+L-1}}\end{array}\right]<br>$</p>
-<p>$\tilde{\mathbf{B}}$与$\mathbf{B}$的区别在于$\tilde{\mathbf{B}}$是$\mathbf{B}$的left-shifted版本，其中第一行左移了L-1，后面每行依次递减左移个数，最后一行则不左移。</p>
+<p>$\tilde{\mathbf{B}}$与$\mathbf{B}$的区别在于$\mathbf{B}$是$\tilde{\mathbf{B}}$的left-shifted版本，其中第一行左移了L-1，后面每行依次递减左移个数，最后一行则不左移。</p>
 <h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>抽象地看，我们要做的事情就是，给定一个矩阵，每行都进行左移，而移动的个数随行数递增而递减。</p>
 <p>我目前想到的一种方法是使用gather，将想要的index提前定好，然后使用Pytorch的gather就能够实现。</p>
 <p>而transformer-xl实现了另一种更好的方法：<code>_rel_shift</code>。</p>
@@ -448,8 +448,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/" rel="next" title="关于Pytorch中Parameter的nan">
-                <i class="fa fa-chevron-left"></i> 关于Pytorch中Parameter的nan
+              <a href="/2019/05/07/碎片知识/PyTorch中遇到的问题（合集）/" rel="next" title="Pytorch中遇到的问题（合集）">
+                <i class="fa fa-chevron-left"></i> Pytorch中遇到的问题（合集）
               </a>
             
           </div>
@@ -542,7 +542,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">186</span>
+                  <span class="site-state-item-count">190</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -555,7 +555,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">207</span>
+                  <span class="site-state-item-count">208</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

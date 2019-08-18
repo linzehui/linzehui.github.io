@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.linzehui.me/"/>
-  <updated>2019-08-11T11:43:15.218Z</updated>
+  <updated>2019-08-18T02:16:50.853Z</updated>
   <id>http://www.linzehui.me/</id>
   
   <author>
@@ -15,6 +15,119 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>代码片段记录19</title>
+    <link href="http://www.linzehui.me/2019/08/18/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E8%AE%B0%E5%BD%9519/"/>
+    <id>http://www.linzehui.me/2019/08/18/代码相关/代码记录19/</id>
+    <published>2019-08-18T02:15:30.000Z</published>
+    <updated>2019-08-18T02:16:50.853Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;Python获得list中topk的index&quot;&gt;&lt;a href=&quot;#Python获得list中topk的index&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="code snippets" scheme="http://www.linzehui.me/tags/code-snippets/"/>
+    
+      <category term="代码片段" scheme="http://www.linzehui.me/tags/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周诗词34</title>
+    <link href="http://www.linzehui.me/2019/08/18/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D34/"/>
+    <id>http://www.linzehui.me/2019/08/18/诗词&amp;句/每周诗词34/</id>
+    <published>2019-08-18T02:14:14.000Z</published>
+    <updated>2019-08-18T02:14:34.238Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;走马川行奉送封大夫出师西征&quot;&gt;&lt;a href=&quot;#走马川行奉送封大夫出师西征&quot; class=&quot;headerlink&quot; title=&quot;走马川行奉送封大夫出师西征&quot;&gt;&lt;/a&gt;走马川行奉送封大夫出师西征&lt;/h3&gt;&lt;p&gt;[唐]
+        
+      
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周论文28</title>
+    <link href="http://www.linzehui.me/2019/08/17/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8728/"/>
+    <id>http://www.linzehui.me/2019/08/17/论文/每周论文28/</id>
+    <published>2019-08-17T14:00:30.000Z</published>
+    <updated>2019-08-18T09:42:51.608Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本周论文：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Easy Questions First? A Case Study on Curriculum Learning for Question Answering&lt;/li&gt;
+&lt;li&gt;Bridging the Gap between
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Transformer" scheme="http://www.linzehui.me/tags/Transformer/"/>
+    
+      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
+    
+      <category term="exposure bias" scheme="http://www.linzehui.me/tags/exposure-bias/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>佳句分享4</title>
+    <link href="http://www.linzehui.me/2019/08/16/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB4/"/>
+    <id>http://www.linzehui.me/2019/08/16/诗词&amp;句/佳句分享4/</id>
+    <published>2019-08-16T15:04:15.000Z</published>
+    <updated>2019-08-17T09:06:12.631Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="佳句分享" scheme="http://www.linzehui.me/tags/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
   
   <entry>
     <title>每周诗词33</title>
@@ -498,137 +611,6 @@
       <category term="Highway" scheme="http://www.linzehui.me/tags/Highway/"/>
     
       <category term="RNN" scheme="http://www.linzehui.me/tags/RNN/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于Pytorch中inf导数的nan问题</title>
-    <link href="http://www.linzehui.me/2019/07/03/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPyTorch%E4%B8%ADinf%E5%AF%BC%E6%95%B0%E7%9A%84nan%E9%97%AE%E9%A2%98/"/>
-    <id>http://www.linzehui.me/2019/07/03/碎片知识/关于PyTorch中inf导数的nan问题/</id>
-    <published>2019-07-03T02:20:14.000Z</published>
-    <updated>2019-07-03T02:20:23.405Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;想要实现一个功能。将Transformer中多层的attention矩阵加权平均。也即：&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span
-        
-      
-    
-    </summary>
-    
-    
-      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="遇到的问题" scheme="http://www.linzehui.me/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    
-      <category term="Pytorch" scheme="http://www.linzehui.me/tags/Pytorch/"/>
-    
-      <category term="inf" scheme="http://www.linzehui.me/tags/inf/"/>
-    
-      <category term="nan" scheme="http://www.linzehui.me/tags/nan/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周碎片知识24</title>
-    <link href="http://www.linzehui.me/2019/06/30/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8624/"/>
-    <id>http://www.linzehui.me/2019/06/30/碎片知识/每周碎片知识24/</id>
-    <published>2019-06-30T02:59:14.000Z</published>
-    <updated>2019-07-28T11:18:56.988Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;Homebrew&quot;&gt;&lt;a href=&quot;#Homebrew&quot; class=&quot;headerlink&quot; title=&quot;[Homebrew]&quot;&gt;&lt;/a&gt;[Homebrew]&lt;/h3&gt;&lt;p&gt;Homebrew安装遇到 Permission denied @
-        
-      
-    
-    </summary>
-    
-    
-      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="Homebrew" scheme="http://www.linzehui.me/tags/Homebrew/"/>
-    
-      <category term="Alfred" scheme="http://www.linzehui.me/tags/Alfred/"/>
-    
-      <category term="Mac" scheme="http://www.linzehui.me/tags/Mac/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DRL Lecture 8:Imitation Learning</title>
-    <link href="http://www.linzehui.me/2019/06/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AF%86/DRL%20Lecture%208:%20Imitation%20Learning/"/>
-    <id>http://www.linzehui.me/2019/06/30/机器学习与深度学习算法知识/DRL Lecture 8: Imitation Learning/</id>
-    <published>2019-06-30T02:42:24.000Z</published>
-    <updated>2019-06-30T02:58:16.429Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;讨论了在没有reward的情况下，如何利用expert来进行RL。&lt;/p&gt;
-&lt;p&gt;问题定义：在一些问题上是没有reward的，给定一些expert的demonstration example，如何利用这些example使得机器能够学习？&lt;/p&gt;
-&lt;h3
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习🤖" scheme="http://www.linzehui.me/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%F0%9F%A4%96/"/>
-    
-      <category term="强化学习" scheme="http://www.linzehui.me/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="RL" scheme="http://www.linzehui.me/tags/RL/"/>
-    
-      <category term="Reinforcement Learning" scheme="http://www.linzehui.me/tags/Reinforcement-Learning/"/>
-    
-      <category term="Deep Reinforcement Learning" scheme="http://www.linzehui.me/tags/Deep-Reinforcement-Learning/"/>
-    
-      <category term="李宏毅强化学习课程" scheme="http://www.linzehui.me/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/"/>
-    
-      <category term="Imitation Learning" scheme="http://www.linzehui.me/tags/Imitation-Learning/"/>
-    
-      <category term="IRL" scheme="http://www.linzehui.me/tags/IRL/"/>
-    
-      <category term="Inverse Reinforcement Learning" scheme="http://www.linzehui.me/tags/Inverse-Reinforcement-Learning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周诗词30</title>
-    <link href="http://www.linzehui.me/2019/06/30/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D30/"/>
-    <id>http://www.linzehui.me/2019/06/30/诗词&amp;句/每周诗词30/</id>
-    <published>2019-06-30T01:55:14.000Z</published>
-    <updated>2019-06-30T02:00:00.798Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;水龙吟-·-登建康赏心亭&quot;&gt;&lt;a href=&quot;#水龙吟-·-登建康赏心亭&quot; class=&quot;headerlink&quot; title=&quot;水龙吟 · 登建康赏心亭&quot;&gt;&lt;/a&gt;水龙吟 · 登建康赏心亭&lt;/h3&gt;&lt;p&gt;[宋]
-        
-      
-    
-    </summary>
-    
-    
-      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
-    
-      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
     
   </entry>
   

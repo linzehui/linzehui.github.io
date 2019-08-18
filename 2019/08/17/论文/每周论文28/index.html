@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Paper,Curriculum Learning,每周论文阅读,Transformer,NMT,exposure bias," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Weekly Review" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本周论文：  Easy Questions First? A Case Study on Curriculum Learning for Question Answering Bridging the Gap between Training and Inference for Neural Machine Translation Improving Multi-step Prediction o">
+<meta name="keywords" content="Paper,Curriculum Learning,每周论文阅读,Transformer,NMT,exposure bias">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周论文28">
+<meta property="og:url" content="http://www.linzehui.me/2019/08/17/论文/每周论文28/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="本周论文：  Easy Questions First? A Case Study on Curriculum Learning for Question Answering Bridging the Gap between Training and Inference for Neural Machine Translation Improving Multi-step Prediction o">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.linzehui.me/images/15660513298758.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660514154749.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660518415062.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660519181632.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660521569189.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660521805452.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660521942211.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660522167431.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660522455047.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660523604587.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660523930825.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660525698952.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660525988009.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660527119463.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660527382516.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660528416693.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660530021248.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660530338643.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660530482870.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660534305129.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660535677759.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660541121139.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660541846618.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660543170148.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660935753744.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660960806712.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660961714055.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660962394243.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660962832031.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15660963462654.jpg">
+<meta property="og:updated_time" content="2019-08-18T09:42:51.608Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每周论文28">
+<meta name="twitter:description" content="本周论文：  Easy Questions First? A Case Study on Curriculum Learning for Question Answering Bridging the Gap between Training and Inference for Neural Machine Translation Improving Multi-step Prediction o">
+<meta name="twitter:image" content="http://www.linzehui.me/images/15660513298758.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2019/08/17/论文/每周论文28/"/>
+
+
+
+
+
+  <title>每周论文28 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/08/17/论文/每周论文28/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">每周论文28</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-17T22:00:30+08:00">
+                2019-08-17
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-18T17:42:51+08:00">
+                2019-08-18
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本周论文：</p>
+<ol>
+<li>Easy Questions First? A Case Study on Curriculum Learning for Question Answering</li>
+<li>Bridging the Gap between Training and Inference for Neural Machine Translation</li>
+<li>Improving Multi-step Prediction of Learned Time Series Models</li>
+<li>Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks</li>
+<li>SEQUENCE LEVEL TRAINING WITH RECURRENT NEURAL NETWORKS</li>
+<li>Minimum Risk Training for Neural Machine Translation</li>
+<li>Greedy Search with Probabilistic N-gram Matching for Neural Machine Translation</li>
+<li>Insertion Transformer: Flexible Sequence Generation via Insertion Operations</li>
+</ol>
+<h2 id="Easy-Questions-First-A-Case-Study-on-Curriculum-Learning-for-Question-Answering"><a href="#Easy-Questions-First-A-Case-Study-on-Curriculum-Learning-for-Question-Answering" class="headerlink" title="[Easy Questions First? A Case Study on Curriculum Learning for Question Answering]"></a>[Easy Questions First? A Case Study on Curriculum Learning for Question Answering]</h2><p>提出在QA中引入CL，但实际上其本质不是CL而更像是SPL。</p>
+<p>QA任务我不感兴趣，只讨论CL。</p>
+<p>其基本做法是：每次从剩下未被选择的数据中选择对于当前模型最简单的sample，并定义了一系列的指标去衡量难易程度，这相当于是<strong>动态</strong>在选择sample，根据当前的模型能力去选择最容易学的sample，从整个过程来看，确实是从简单到难，且达到了动态选择的目的，并且不像SPL那样会直接丢弃sample，效率（或许）会更高。</p>
+<p>具体做法：<br>每次从剩余sample集合内选择最简单的sample $q_{i} \in Q \backslash Q_{0}$。</p>
+<p>有几种指标衡量对于当前模型的难易程度：<br>①Greedy Optimal: has the minimum expected effect on the model<br>Change in Objective causes the smallest increase in the objective.<br>②Mini-max minimizes the regularized expected risk when including the question with the answer candidate a ij that yields the maximum error.<br>③Expected Change in Objective the minimum expected effect on the model<br>④Change in Objective-Expected Change in Objective the minimum value of the difference between the change in objective and the expected change in objective<br>⑤Correctly Answered is answered by the model M with the minimum cost</p>
+<p>同时，希望每次选的batch，尽量diverse，通过feature space的夹角去衡量。</p>
+<p>这个思想还挺有意思的，但每次选择sample都要重新计算一遍，会不会复杂度过高？</p>
+<hr>
+<h2 id="Bridging-the-Gap-between-Training-and-Inference-for-Neural-Machine-Translation"><a href="#Bridging-the-Gap-between-Training-and-Inference-for-Neural-Machine-Translation" class="headerlink" title="[Bridging the Gap between Training and Inference for Neural Machine Translation]"></a>[Bridging the Gap between Training and Inference for Neural Machine Translation]</h2><p>这是ACL19的best paper。</p>
+<p>本文主要的目标是缓解exposure bias的问题，也即训练使用ground truth而inference使用predicted words所造成的不一致。主要思路是：在训练过程中随机从predicted word和ground truth 采样作为接下来的上下文。</p>
+<p>当前这种discrepancy的问题就是<strong>过度纠正（overcorrection）</strong>，只要模型生成了一个和ground truth不一样的，就会被立即纠正，但实际上翻译可以有好几种合理的候选，并不是和ground truth不一样就错误；同时在训练时有监督，而在inference没有信号监督，predicted word在不同阶段是从不同的分布获取的，也即data distribution vs model distribution，这就是exposure bias带来的问题。</p>
+<p>论文举了一个例子：<br><img src="/images/15660513298758.jpg" width="40%" height="50%"></p>
+<p>①假如模型生成了第三个词为abide，为了和ground truth相一致，模型会强制让第四个词生成with，然后with作为输入去生成the rule，但实际上整句是错误的。如cand1就是过度矫正（overcorrection）<br>②假设模型生成对了by，但也可能因为输入了by而产生了错误的’the law’，假设一种情形，模型记住了with后面一定跟the rule，为了能够生成cand3的，我们应将 with作为输入而不是by，即使我们生成了by。称这种做法为 overcorrection recovery。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>因此本文的做法就是将预测的词（oracle）和golden 在训练的时候随机sample作为输入。在一开始模型还没有收敛的时候，主要是golden，而在后期则增加oracle的比例。</p>
+<p><img src="/images/15660514154749.jpg" width="50%" height="50%"></p>
+<p>这样模型就能够handle在inference出现的情况，也即没有golden truth的辅助，同时可以减小训练和测试之间的gap。</p>
+<p>有两种方法获得oracle word，一种是word level的一种是sentence level的。</p>
+<h4 id="Oracle-word-selection"><a href="#Oracle-word-selection" class="headerlink" title="Oracle word selection"></a>Oracle word selection</h4><h5 id="word-level"><a href="#word-level" class="headerlink" title="word level"></a>word level</h5><p>也即greedy的方法，每次选择概率最高的词作为oracle</p>
+<p><img src="/images/15660518415062.jpg" width="50%" height="50%"></p>
+<p>为了获取更为鲁棒的oracle，引入了gumbel noise，这是一种正则化方法。</p>
+<script type="math/tex; mode=display">
+\begin{aligned} \eta=&-\log (-\log u) \\ \tilde{o}_{j-1} &=\left(o_{j-1}+\eta\right) / \tau \\ \tilde{P}_{j-1} &=\operatorname{softmax}\left(\tilde{o}_{j-1}\right) \end{aligned}</script><p>当$\tau$趋于0，则逼近argmax，若趋于∞则逼近均匀采样。</p>
+<p><img src="/images/15660519181632.jpg" width="60%" height="50%"></p>
+<p>因此最终：</p>
+<script type="math/tex; mode=display">y_{j-1}^{\text {oracle }}=y_{j-1}^{\mathrm{WO}}=\operatorname{argmax}\left(\tilde{P}_{j-1}\right)</script><h5 id="sentence-level"><a href="#sentence-level" class="headerlink" title="sentence level"></a>sentence level</h5><p>另一种则是扩大匹配的范围，允许更灵活的选择，也即先通过beam search让模型生成一个概率最高的句子，将该句子的词与ground truth一一对应，在生成期间也可以引入gumbel noise。一一对应的词就可以随机采样了。</p>
+<p>但该做法有一个问题，也即可能生成的句子长度可能和ground truth不对应，因此这里引入<strong>force decoding</strong>的做法强制对应。</p>
+<p><strong>force decoding</strong></p>
+<p>①当生成到第j个step时top first的概率是EOS，此时$j \leqslant\left|\mathbf{y}^{*}\right|$，那么避开EOS，选择top second概率的词，使其能够继续生成下去。</p>
+<p>②当生成到$\left\{\left|\mathbf{y}^{*}\right|+1\right\}$个时还没生成到EOS，则直接选择EOS作为结尾，强制停止。</p>
+<h4 id="Sampling-with-Decay"><a href="#Sampling-with-Decay" class="headerlink" title="Sampling with Decay"></a>Sampling with Decay</h4><p>另一个就是在模型不同阶段sample的概率应该是不同的，在这里</p>
+<script type="math/tex; mode=display">p=\frac{\mu}{\mu+\exp (e / \mu)}</script><p>e是epoch数。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/images/15660521569189.jpg" width="80%" height="50%"></p>
+<p>实验表明能够有更好的效果，且更快速收敛，只看training可以发现，没有baseline那么容易overfitting。</p>
+<p><img src="/images/15660521805452.jpg" width="50%" height="50%"></p>
+<p><img src="/images/15660521942211.jpg" width="50%" height="50%"></p>
+<p>对于长度越长的提升越大，说明exposure bias在长句子表现更明显。</p>
+<p><img src="/images/15660522167431.jpg" width="40%" height="50%"></p>
+<p>在不同数据集和不同模型上都有提升：</p>
+<p><img src="/images/15660522455047.jpg" width="40%" height="50%"></p>
+<h3 id="一点思考"><a href="#一点思考" class="headerlink" title="一点思考"></a>一点思考</h3><p>本篇很清晰易懂，结构也很好，同时举的例子也非常容易让人理解。再者实验效果也很好，做了很多分析。这个方向可以多关注关注，因为还有挺多可做的。</p>
+<p>我们假设让training也完全用predicted是一个极端，完全用ground truth是另一个极端，在此二者之间的就是这种sample方式。</p>
+<p>但似乎仍然有未解决的问题，也即target word始终是ground truth，这种方法好像还是没能解决overcorrection的问题。</p>
+<hr>
+<h2 id="Improving-Multi-step-Prediction-of-Learned-Time-Series-Models"><a href="#Improving-Multi-step-Prediction-of-Learned-Time-Series-Models" class="headerlink" title="[Improving Multi-step Prediction of Learned Time Series Models]"></a>[Improving Multi-step Prediction of Learned Time Series Models]</h2><p>讨论如何在时序模型下解决错误累积的问题（在翻译中就是exposure bias），该问题的本质就是train-test的iid假设被打破。本文的做法就是将prediction与training data结合形成新的数据集，也即相当于用正确的数据对prediction进行修正。并且从理论上证明了该算法的高效性。</p>
+<p>示例图很清楚：<br><img src="/images/15660523604587.jpg" width="40%" height="50%"></p>
+<p>图a是在训练完一个模型后做的预测与真实数据的对比；图b是将预测的序列与正确的序列结合形成新的序列，重新训新模型。其实就相当于用正确数据做了修正。</p>
+<p>因此算法就有：</p>
+<p><img src="/images/15660523930825.jpg" width="50%" height="50%"></p>
+<p>算法过程清晰明了。在训练多个模型的过程中，数据会越来越多，有recurrent的感觉。其实这个方法的本质上也是在ground truth和oracle上进行sampling，因为数据D里面混杂了ground truth或oracle。</p>
+<hr>
+<h2 id="Scheduled-Sampling-for-Sequence-Prediction-with-Recurrent-Neural-Networks"><a href="#Scheduled-Sampling-for-Sequence-Prediction-with-Recurrent-Neural-Networks" class="headerlink" title="[Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks]"></a>[Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks]</h2><p>在sequence prediction的问题上，提出schedule sampling的方式缓解exposure bias的问题。exposure bias是指训练使用teacher force，完全用监督信息，而inference期间完全用predicted word，错误可能会被放大。</p>
+<p>其做法是：在训练期间，按概率输入golden truth或者predicted word，该概率通过某种schedule来控制。这里的做法就是在训练期间概率采样输入predicted word，让模型自己去学习如何解决inference可能出现的问题。</p>
+<p><img src="/images/15660525698952.jpg" width="40%" height="50%"></p>
+<p>而schedule则是：</p>
+<p><img src="/images/15660525988009.jpg" width="40%" height="50%"></p>
+<p>未解决的问题：target word仍然是golden truth。sampling这类思路都会有这个问题。</p>
+<hr>
+<h2 id="SEQUENCE-LEVEL-TRAINING-WITH-RECURRENT-NEURAL-NETWORKS"><a href="#SEQUENCE-LEVEL-TRAINING-WITH-RECURRENT-NEURAL-NETWORKS" class="headerlink" title="[SEQUENCE LEVEL TRAINING WITH RECURRENT NEURAL NETWORKS]"></a>[SEQUENCE LEVEL TRAINING WITH RECURRENT NEURAL NETWORKS]</h2><p>本文意在解决翻译中存在的exposure bias以及测试阶段的指标和训练指标不同的问题。</p>
+<p>其做法是：提出一种基于RL的算法，在训练过程中混合了RL和普通训练方法，既能优化word level的loss又能直接优化sentence level的bleu。同时该方法还解决了RL在random init上难以拟合超大的search space的问题，因为使用了预训练的参数。</p>
+<p>接下来介绍几个相关的模型。</p>
+<h3 id="WORD-LEVEL-TRAINING"><a href="#WORD-LEVEL-TRAINING" class="headerlink" title="WORD-LEVEL TRAINING"></a>WORD-LEVEL TRAINING</h3><h4 id="CROSS-ENTROPY-TRAINING-XENT"><a href="#CROSS-ENTROPY-TRAINING-XENT" class="headerlink" title="CROSS ENTROPY TRAINING (XENT)"></a>CROSS ENTROPY TRAINING (XENT)</h4><p>也即普通的训练方式，每次输入golden truth，然后优化loss<br>这是该模型在训练与inference时的示意图：</p>
+<p><img src="/images/15660527119463.jpg" width="80%" height="50%"></p>
+<p>主要问题：①exposure bias  ②训练指标是word level的而测试指标则是sentence level的，造成训练没法直接优化测试的指标。</p>
+<h4 id="DATA-AS-DEMONSTRATOR-DAD"><a href="#DATA-AS-DEMONSTRATOR-DAD" class="headerlink" title="DATA AS DEMONSTRATOR (DAD)"></a>DATA AS DEMONSTRATOR (DAD)</h4><p>混合oracle与ground truth：</p>
+<p><img src="/images/15660527382516.jpg" width="90%" height="50%"></p>
+<p>一个问题在于，在每个时间步t，target label总是ground truth而不管输入是oracle或者ground truth。这样可能就会造成不对齐的问题，比如：<br>正确的翻译是“I took a long walk”，模型目前翻译到“I took a walk”，而在接下来模型会强制再翻译一次wark<br>另一个问题在于，梯度回传没有到oracle，也即oracle虽然是由模型生成的，但gradient的待遇和ground truth是一样的，且仍然局限于word-level。</p>
+<h4 id="END-TO-END-BACKPROP-E2E"><a href="#END-TO-END-BACKPROP-E2E" class="headerlink" title="END-TO-END BACKPROP (E2E)"></a>END-TO-END BACKPROP (E2E)</h4><p>在训练过程中也使用oracle而不是ground truth。</p>
+<p>在每个时间步t上，我们选择top k个预测的词作为下一个输入而不是ground truth。具体的做法是将softmax过后的distribution过一个k-max layer，将其他的都设为0，然后再renormalize使其和为1，此时我们有：</p>
+<script type="math/tex; mode=display">\left\{i_{t+1, j}, v_{t+1, j}\right\}_{j=1, \ldots, k}=\mathrm{k}-\max p_{\theta}\left(w_{t+1} | w_{t}, h_{t}\right)</script><p>其中i是index，v是对应的score，也作为其weight，用于梯度回传。</p>
+<p><img src="/images/15660528416693.jpg" width="90%" height="50%"></p>
+<p>在实际实现中，一开始还是用ground truth的，直到训练后期才使用top-k的策略。</p>
+<p>该方法确实解决了training-inference的discrepancy，但仍然还是word-level的。</p>
+<h3 id="SEQUENCE-LEVEL-TRAINING"><a href="#SEQUENCE-LEVEL-TRAINING" class="headerlink" title="SEQUENCE LEVEL TRAINING"></a>SEQUENCE LEVEL TRAINING</h3><p>使用RL直接对bleu进行优化。RNN是agent，action是预测下一个词，agent的参数就是policy，在预测完该句子后，BLEU就是reward。</p>
+<p>由于RL难以从random init去拟合大搜索空间，因此是先通过普通的训练RNN，然后用该参数去作为init去训练接下来的RL。</p>
+<p>第二就是，为了训练的稳定，在训练过程中逐渐引入oracle（RL部分）。在前$(T-\Delta)$个step用普通的XENT，然后接下来的$\Delta$个step使用RL去生成。逐渐增大$\Delta$直到整个训练都是由RL生成的:</p>
+<p><img src="/images/15660530021248.jpg" width="90%" height="50%"></p>
+<p>因此MIXER的算法如下：</p>
+<p><img src="/images/15660530338643.jpg" width="80%" height="50%"></p>
+<p>总结一下几个算法：</p>
+<p><img src="/images/15660530482870.jpg" width="80%" height="50%"></p>
+<h3 id="一点想法"><a href="#一点想法" class="headerlink" title="一点想法"></a>一点想法</h3><p>似乎要真正解决传统训练方法的两个问题，就只能通过直接优化test evaluation metric来做到，而像直接针对解决exposure bias的方法（scheduled sampling等）都没办法真正解决这两个问题。</p>
+<hr>
+<h2 id="Minimum-Risk-Training-for-Neural-Machine-Translation"><a href="#Minimum-Risk-Training-for-Neural-Machine-Translation" class="headerlink" title="[Minimum Risk Training for Neural Machine Translation]"></a>[Minimum Risk Training for Neural Machine Translation]</h2><p>在翻译任务中，直接通过优化evaluation metric如bleu而不是word-level的loss来提升表现。</p>
+<p>我们普通的方法是通过优化词级别的loss，也即MLE（maximum likelihood estimation），每个step的预测和golden truth计算cross entropy然后累加。但这个方法的两个劣势：exposure bias 和 loss function只定义在词级别而不是句子级别，而在测试阶段则是用bleu这种句子级别的metric来评测。</p>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><p>记$\left\langle\mathbf{x}^{(s)}, \mathbf{y}^{(s)}\right\rangle$是sentence-pair，同时有$\Delta\left(\mathbf{y}, \mathbf{y}^{(s)}\right)$作为prediction与golden truth之间的差距，这是不可导的。</p>
+<p>定义expected loss：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} \mathcal{R}(\boldsymbol{\theta}) &=\sum_{s=1}^{S} \mathbb{E}_{\mathbf{y} | \mathbf{x}^{(s)} ; \boldsymbol{\theta}}\left[\Delta\left(\mathbf{y}, \mathbf{y}^{(s)}\right)\right] \\ &=\sum_{s=1}^{S} \sum_{\mathbf{y} \in \mathcal{Y}\left(\mathbf{x}^{(s)}\right)} P\left(\mathbf{y} | \mathbf{x}^{(s)} ; \boldsymbol{\theta}\right) \Delta\left(\mathbf{y}, \mathbf{y}^{(s)}\right) \end{aligned}</script><p>其中$\mathcal{Y}\left(\mathbf{x}^{(s)}\right)$是所有的可能的candidate，P就是生成该candidate的概率。</p>
+<p>因此我们的目标就是：</p>
+<script type="math/tex; mode=display">\hat{\boldsymbol{\theta}}_{\mathrm{MRT}}=\underset{\boldsymbol{\theta}}{\operatorname{argmin}}\{\mathcal{R}(\boldsymbol{\theta})\}</script><p>也即，希望生成出来句子中的与golden truth的差距最小的概率最大。</p>
+<p>一个很清晰的例子：</p>
+<p><img src="/images/15660534305129.jpg" width="80%" height="50%"></p>
+<p>右边四列是四个不同的模型，y1，y2与y3是三个不同的candidate，其中y1与y最接近，而y2最远。第四列生成y1的概率最高，y2最低，因此可以看到其风险期望最小。也即我们的目标总是希望最大概率生成与golden truth最接近的样本。</p>
+<p>（这里就有点像RL了，生成了几个episode，希望reward最大的episode出现的可能性更大。而普通的训练方法则是在每步都优化。）</p>
+<p>在实际中，由于不可能遍历所有的情况，因此只选择一个candidate subset：</p>
+<script type="math/tex; mode=display">\begin{aligned} \tilde{\mathcal{R}}(\boldsymbol{\theta}) &=\sum_{s=1}^{S} \mathbb{E}_{\mathbf{y} | \mathbf{x}^{(s)} ; \boldsymbol{\theta}, \alpha}\left[\Delta\left(\mathbf{y}, \mathbf{y}^{(s)}\right)\right] \\ &=\sum_{s=1}^{S} \sum_{\mathbf{y} \in \mathcal{S}\left(\mathbf{x}^{(s)}\right)} Q\left(\mathbf{y} | \mathbf{x}^{(s)} ; \boldsymbol{\theta}, \alpha\right) \Delta\left(\mathbf{y}, \mathbf{y}^{(s)}\right) \end{aligned}</script><p>其中$\mathcal{S}\left(\mathbf{x}^{(s)}\right) \subset \mathcal{Y}\left(\mathbf{x}^{(s)}\right)$，且$Q$是subset的distribution，保证和为1。</p>
+<script type="math/tex; mode=display">Q\left(\mathbf{y} | \mathbf{x}^{(s)} ; \boldsymbol{\theta}, \alpha\right)=\frac{P\left(\mathbf{y} | \mathbf{x}^{(s)} ; \boldsymbol{\theta}\right)^{\alpha}}{\sum_{\mathbf{y}^{\prime} \in \mathcal{S}\left(\mathbf{x}^{(s)}\right)} P\left(\mathbf{y}^{\prime} | \mathbf{x}^{(s)} ; \boldsymbol{\theta}\right)^{\alpha}}</script><p>其中$α$控制$Q$的sharp程度。</p>
+<p>而sample subset的方式：</p>
+<p><img src="/images/15660535677759.jpg" width="90%" height="50%"></p>
+<p>有点像beam-search的probabilistic sampling 版。实验设k=100。</p>
+<h3 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h3><p>本文的MRT在SMT上有使用过。思路有点像RL，论文中也有提到这点，在思路上与MIXER相近。且training与test的行为一致（没有exposure bias的问题），也直接优化了sentence-level的指标，一次解决了两个问题。</p>
+<hr>
+<h2 id="Greedy-Search-with-Probabilistic-N-gram-Matching-for-Neural-Machine-Translation"><a href="#Greedy-Search-with-Probabilistic-N-gram-Matching-for-Neural-Machine-Translation" class="headerlink" title="[Greedy Search with Probabilistic N-gram Matching for Neural Machine Translation]"></a>[Greedy Search with Probabilistic N-gram Matching for Neural Machine Translation]</h2><p>引入可导的sentence level的评价指标，同时在此基础上训练过程也使用greedy search而不是teacher forcing，能够缓解传统训练方法带来的 exposure bias和word-level loss带来的training-test之间的指标不一致的问题。</p>
+<h3 id="传统做法"><a href="#传统做法" class="headerlink" title="传统做法"></a>传统做法</h3><script type="math/tex; mode=display">P(\hat{\boldsymbol{y}} | \boldsymbol{x})=\prod_{j=1}^{T} p\left(\hat{y}_{j} | \hat{\boldsymbol{y}}_{<j}, \boldsymbol{x}, \theta\right)</script><script type="math/tex; mode=display">\boldsymbol{\theta}=\arg \max _{\theta}\{\mathcal{L}(\theta)\}</script><script type="math/tex; mode=display">\mathcal{L}(\theta)=\sum_{m=1}^{M} \sum_{j=1}^{l^{m}} \log \left(p\left(\hat{y}_{j}^{m} | \hat{\boldsymbol{y}}_{<j}^{m}, \boldsymbol{x}^{m}, \theta\right)\right)</script><h3 id="论文做法"><a href="#论文做法" class="headerlink" title="论文做法"></a>论文做法</h3><p>句子级别的evaluation metrics，比如BLEU是基于n-gram的匹配的。记$y$和$\hat{y}$是prediction和ground truth，长度分别为$T$和$T’$。</p>
+<p>记n-gram $\boldsymbol{g}=\left(g_{1}, \ldots, g_{n}\right)$，则在$y$中计算ngram的count为：</p>
+<script type="math/tex; mode=display">\mathrm{C}_{\boldsymbol{y}}(\boldsymbol{g})=\sum_{t=0}^{T-n} \prod_{i=1}^{n} 1\left\{g_{i}=y_{t+i}\right\}</script><p>在$y$与$\hat{y}$之间的count则为：</p>
+<script type="math/tex; mode=display">\mathbf{C}_{\boldsymbol{y}}^{\hat{y}}(\boldsymbol{g})=\min \left(\mathbf{C}_{\boldsymbol{y}}(\boldsymbol{g}), \mathbf{C}_{\hat{\boldsymbol{y}}}(\boldsymbol{g})\right)</script><p>precision和recall则为：</p>
+<script type="math/tex; mode=display">\begin{aligned} p_{n} &=\frac{\sum_{\boldsymbol{g} \in \boldsymbol{y}} \mathbf{C}_{\boldsymbol{y}}^{\hat{y}}(\boldsymbol{g})}{\sum_{\boldsymbol{g} \in \boldsymbol{y}} \mathbf{C}_{\boldsymbol{y}}(\boldsymbol{g})} \\ r_{n} &=\frac{\sum_{\boldsymbol{g} \in \boldsymbol{y}} \mathbf{C}_{\boldsymbol{y}}^{\hat{y}}(\boldsymbol{g})}{\sum_{\boldsymbol{g} \in \hat{\boldsymbol{y}}} \mathbf{C}_{\hat{\boldsymbol{y}}}(\boldsymbol{g})} \end{aligned}</script><p>而BLEU的计算方法为：</p>
+<script type="math/tex; mode=display">\mathrm{BLEU}=\mathrm{BP} \cdot \exp \left(\sum_{n=1}^{N} w_{n} \log p_{n}\right)</script><p>BP为brevity penalty，$w_n$是n-gram的weight。</p>
+<p>上述公式，可以看到将所有的输出的词一视同仁，但实际上在输出的不同的词是有不同的概率的，因此应该对n-gram count有更精细的描述，也即将预测的概率也引入：</p>
+<script type="math/tex; mode=display">\widetilde{\mathbf{C}}_{\boldsymbol{y}}(\boldsymbol{g})=\sum_{t=0}^{T-n} \prod_{i=1}^{n} 1\left\{g_{i}=y_{t+i}\right\} \cdot p\left(y_{t+i} | \boldsymbol{y}_{<t+i}, \boldsymbol{x}, \theta\right)</script><p>因此bleu也更新为：</p>
+<script type="math/tex; mode=display">\widetilde{\mathbf{C}}_{\boldsymbol{y}}^{\hat{\boldsymbol{y}}}(\boldsymbol{g})=\min \left(\widetilde{\mathbf{C}}_{\boldsymbol{y}}(\boldsymbol{g}), \mathbf{C}_{\hat{\boldsymbol{y}}}(\boldsymbol{g})\right)</script><script type="math/tex; mode=display">\tilde{p}_{n}=\frac{\sum_{\boldsymbol{g} \in \boldsymbol{y}} \widetilde{\mathbf{C}}_{\boldsymbol{y}}^{\hat{y}}(\boldsymbol{g})}{\sum_{\boldsymbol{g} \in \boldsymbol{y}} \widetilde{\mathbf{C}}_{\boldsymbol{y}}(\boldsymbol{g})}</script><script type="math/tex; mode=display">\mathrm{P}-\mathrm{BLEU}=\mathrm{BP} \cdot \exp \left(\sum_{n=1}^{N} w_{n} \log \tilde{p}_{n}\right)</script><p>最终的loss function为：</p>
+<script type="math/tex; mode=display">\mathcal{L}(\theta)=-\sum_{m=1}^{M} \mathcal{P}\left(\boldsymbol{y}^{m}, \hat{\boldsymbol{y}}^{m}\right)</script><p>示意图：</p>
+<p><img src="/images/15660541121139.jpg" width="80%" height="50%"></p>
+<p>在这里，训练过程中也使用了greedy search而不是teacher forcing。且本文是使用baseline在probabilistic loss上fine-tune的，因为模型一开始的能力很弱，不足以翻译有意义的句子，没法训。</p>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>作者做了一个实验探究是exposure bias的缓解还是采用了sentence-level的loss带来的提升？</p>
+<p><img src="/images/15660541846618.jpg" width="50%" height="50%"></p>
+<p>作者发现二者都有带来提升，不缓解exposure bias（也即使用了teacher forcing）能提升0.5，而使用greedy search则带来BLEU值1个点的提升。</p>
+<h3 id="想法-1"><a href="#想法-1" class="headerlink" title="想法"></a>想法</h3><p>用了整体的指标且用了greedy search，也就缓解了传统训练方法的两个弊端。但这个方法显然没法从头训，因此需要fine-tune，但fine-tune是基于原先的模型行为进行改变，是否可能出现已经卡在minimal上的情况？如果能够找到一个方法从头训，可能会更好？</p>
+<hr>
+<h2 id="Insertion-Transformer-Flexible-Sequence-Generation-via-Insertion-Operations"><a href="#Insertion-Transformer-Flexible-Sequence-Generation-via-Insertion-Operations" class="headerlink" title="[Insertion Transformer: Flexible Sequence Generation via Insertion Operations]"></a>[Insertion Transformer: Flexible Sequence Generation via Insertion Operations]</h2><p>提出一种新的部分自回归的文本生成方式，基于插入操作，每次生成的词插入到文本任意位置。同时，不仅能够每次生成一个词，还能够同时生成多个词插入到不同位置。</p>
+<p>例子：</p>
+<p><img src="/images/15660543170148.jpg" width="90%" height="50%"></p>
+<p>在每个iteration t，模型会产生一个联合概率分布，关于预测的content和插入位置l $l \in\left[0,\left|\hat{y}_{t}\right|\right]$。</p>
+<h3 id="Insertion-Transformer-Model"><a href="#Insertion-Transformer-Model" class="headerlink" title="Insertion Transformer Model"></a>Insertion Transformer Model</h3><p>与transformer decoder不同的地方：<br>①去掉了mask，所有位置都能够attend到对方。<br>②标准transformer生成n个向量表示，将最后一个表示用于预测下一个词，而在这里需要生成n+1个表示，也即slot representation，每两个词之间共n-1个表示，加上开头与结尾两个。通过加前后两个特殊的标记符，过transformer后获得n+2个向量，并将每两个相邻的向量拼起来获得n+1个向量。</p>
+<h4 id="Model-Variants"><a href="#Model-Variants" class="headerlink" title="Model Variants"></a>Model Variants</h4><p>模型有两个变体，一个是直接建模联合概率分布，另一个则是条件概率分布。</p>
+<p>记$H \in \mathbb{R}^{(T+1) \times h}$为slot representation，T是当前的生成句子的长度，$W \in \mathbb{R}^{h \times|\mathcal{C}|}$则是softmax的映射矩阵。</p>
+<p>因此可以直接建模联合概率分布：</p>
+<script type="math/tex; mode=display">p(c, l)=\operatorname{softmax}(\text {flatten}(H W))</script><p>先计算$HW$然后展开过softmax，最大的值对应其vocab的位置以及相应的slot的位置。</p>
+<p>另一种方法则是通过计算条件概率：</p>
+<script type="math/tex; mode=display">p(c, l)=p(c | l) p(l)</script><p>其中$p(c | l)=\operatorname{softmax}\left(h_{l} W\right)$，而$p(l)=\operatorname{softmax}(H q)$，$q$是可学习的参数。</p>
+<p>另外，为了增加slot之间的信息交流，可通过max-pooling获得上下文的向量$g$，再通过可学习的$V$生成一个共享的bias用于计算概率分布，也即：</p>
+<script type="math/tex; mode=display">\begin{aligned} g &=\operatorname{maxpool}(H) \\ b &=g V \\ B &=\operatorname{repmat}(b,[T+1,1]) \\ p(c, l) &=\operatorname{softmax}(H W+B) \end{aligned}</script><h3 id="Training-and-Loss-Functions"><a href="#Training-and-Loss-Functions" class="headerlink" title="Training and Loss Functions"></a>Training and Loss Functions</h3><p>有两种顺序，一种是从左到右，另一种则是平衡二叉树的形式。</p>
+<h4 id="Left-to-Right"><a href="#Left-to-Right" class="headerlink" title="Left-to-Right"></a>Left-to-Right</h4><p>给定训练样本$(x, y)$，先随机sample 长度$k \sim$ Uniform $([0,|y|])$，并且假定已经生成了左边k个词，$\hat{y}=\left(y_{1}, \dots, y_{k}\right)$，目标则是maximize location l=k的概率：</p>
+<script type="math/tex; mode=display">\operatorname{loss}(x, \hat{y})=-\log p\left(y_{k+1}, k | x, \hat{y}\right)</script><h4 id="Balanced-Binary-Tree"><a href="#Balanced-Binary-Tree" class="headerlink" title="Balanced Binary Tree"></a>Balanced Binary Tree</h4><p>我们希望最中心的词先生成，然后左右两端的中心词，然后左右两端的左右两端的中心词，像一棵树那样。<br>如：$[ ] \rightarrow[D] \rightarrow[B, D, F] \rightarrow[A, B, C, D, E, F, G]$</p>
+<p>为了达到这个目的，我们希望能够优先强调中心附近的词。</p>
+<p>给定$(x, y)$，首先sample $y$的子集，为了保证不同长度被sample到的概率是一致的，先sample长度$k$，然后随机从$y$中sample $k$个词，$k$个词的呈现顺序是与$y$内一致的。</p>
+<p>对于k+1个slot而言，我们需要计算这k+1个slot的loss。记$\left(y_{i_{l}}, y_{i_{l}+1}, \dots, y_{j_{l}}\right)$为当前尚未生成的位置的target word。先定义这之间每个位置到中心的距离：</p>
+<script type="math/tex; mode=display">d_{l}(i)=\left|\frac{i_{l}+j_{l}}{2}-i\right|</script><p>接着使用该distance作为reward function：</p>
+<script type="math/tex; mode=display">w_{l}(i)=\frac{\exp \left(-d_{l}(i) / \tau\right)}{\sum_{i^{\prime}=i_{l}}^{j_{l}} \exp \left(-d_{l}\left(i^{\prime}\right) / \tau\right)}</script><p>其中$\tau$趋近0时表示只考虑中心词，趋近∞则是uniform。</p>
+<p>将其插入到loss里：</p>
+<script type="math/tex; mode=display">slot-loss(x, \hat{y}, l)=\sum_{i=i_{l}}^{j_{l}}-\log p\left(y_{i}, l | x, \hat{y}\right) \cdot w_{l}(i)</script><p>这就强调了中心词要先被预测出来。</p>
+<p>示意图：</p>
+<p><img src="/images/15660935753744.jpg" width="70%" height="50%"></p>
+<p>灰色的词是还没被预测的，红色的直方图是uniform的，经过reweight的是白色的。</p>
+<p>最后我们将所有的位置的loss加起来：</p>
+<script type="math/tex; mode=display">\operatorname{loss}(x, \hat{y})=\frac{1}{k+1} \sum_{l=0}^{k} \operatorname{slot}-\operatorname{loss}(x, \hat{y}, l)</script><h4 id="Uniform"><a href="#Uniform" class="headerlink" title="Uniform"></a>Uniform</h4><p>论文中还尝试了uniform的方式，也即不强调中心词：</p>
+<script type="math/tex; mode=display">\operatorname{slot}-\operatorname{loss}(x, \hat{y}, l)=\frac{1}{j_{l}-i_{l}+1} \sum_{i=i_{l}}^{j_{l}}-\log p\left(y_{i}, l | x, \hat{y}\right)</script><p>其好处（没看懂）：<br>This neutral approach is useful insofar as it forces the model to be aware of all valid actions during each step of decoding, providing a rich learning signal during training and maximizing robustness；<br>Such an approach also bears resemblance to the principle of maximum entropy, which has successfully been employed for maximum entropy modeling across a number of domains in machine learning</p>
+<h4 id="Termination"><a href="#Termination" class="headerlink" title="Termination"></a>Termination</h4><p>在训练过程中什么时候停止？<br>有两种：slot finalization 和 sequence finalization。</p>
+<h5 id="slot-finalization"><a href="#slot-finalization" class="headerlink" title="slot finalization"></a>slot finalization</h5><p>当模型预测到某个location，该location对应的是在真实输出中不存在的span，那就直接将target设为end-of-slot token。<br>在测试阶段，当所有的slot都预测到end-of-slot token，则停止decode。</p>
+<h5 id="sequence-finalization"><a href="#sequence-finalization" class="headerlink" title="sequence finalization"></a>sequence finalization</h5><p>在训练阶段，当遇到空span，则将该部分的loss定义为未定义，也即不纳入loss的计算。当整个句子被生成完了，将每个位置的loss设为end-of-sequence token的loss（相当于希望模型此时全都预测该token）。<br>在测试阶段，下面详谈。</p>
+<h5 id="Training-Differences"><a href="#Training-Differences" class="headerlink" title="Training Differences"></a>Training Differences</h5><p>与普通autoregressive的模型相比的不同：<br>①generation step之间没有state的propagation，因为每生成完都要重新计算state，不能复用。<br>②普通的autoregressive在训练时可以一次性计算完所有的loss，而这里只能一次计算一个。因此更占内存。<br>③subsampling可能带来variance估计不准的问题。</p>
+<h3 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h3><h4 id="Greedy-Decoding"><a href="#Greedy-Decoding" class="headerlink" title="Greedy Decoding"></a>Greedy Decoding</h4><p>每次选择最大的即可：</p>
+<script type="math/tex; mode=display">\left(\hat{c}_{t}, \hat{l}_{t}\right)=\underset{c, l}{\operatorname{argmax}} p\left(c, l | x, \hat{y}_{t}\right)</script><p>如果是sequence finalization，则当直到end-of-sequence token被任意位置选中则停止。<br>如果是slot finalization，那么只在还没生成end-of-slot的位置上用argmax，直到所有位置都生成了end-of-slot。</p>
+<h4 id="Parallel-Decoding"><a href="#Parallel-Decoding" class="headerlink" title="Parallel Decoding"></a>Parallel Decoding</h4><p>先计算每个位置的l的argmax：</p>
+<script type="math/tex; mode=display">\hat{c}_{l, t}=\underset{c}{\operatorname{argmax}} p\left(c | l, x, \hat{y}_{t}\right)</script><p>如果是前面提到的条件概率$p(c, l)=p(l) p(c | l)$，那么此时$p(c | l)$已经有了；如果是直接计算联合概率分布则可通过$p(c | l)=p(c, l) / p(l)=p(c, l) / \sum_{c^{\prime}} p\left(c^{\prime}, l\right)$ 获得。</p>
+<p>接着将已经生成了end-of-slot的location过滤掉，最后插入对应的预测词。</p>
+<p>这种方法理论上可以只需要$\left\lfloor\log _{2} n\right\rfloor+ 1$个steps。</p>
+<h3 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h3><h4 id="Part1"><a href="#Part1" class="headerlink" title="Part1"></a>Part1</h4><p><img src="/images/15660960806712.jpg" width="90%" height="50%"></p>
+<p>括号都是报告的加了EOS最好的结果。<br>几个值得注意的点：<br>①发现EOS总是过早被生成，因此引入EOS penalty，也即将EOS的概率减掉一个β，当EOS的概率与概率第二高的差距超过β才真正生成EOS，发现确实有不错的提升。</p>
+<p>②使用knowledge distillation有显著提升，teacher model是transformer baseline。</p>
+<h4 id="Part2"><a href="#Part2" class="headerlink" title="Part2"></a>Part2</h4><p><img src="/images/15660961714055.jpg" width="60%" height="50%"></p>
+<p>使用parallel decoding相比greedy decoding稍好一些，证明模型是有能力同时生成文本的。</p>
+<p>parallel decoding的几个例子：</p>
+<p><img src="/images/15660962394243.jpg" width="90%" height="50%"></p>
+<h4 id="Part3"><a href="#Part3" class="headerlink" title="Part3"></a>Part3</h4><p><img src="/images/15660962832031.jpg" width="50%" height="50%"></p>
+<p>在实验过程中发现parallel decoding确实能逼近下界。</p>
+<h4 id="Part4"><a href="#Part4" class="headerlink" title="Part4"></a>Part4</h4><p>最后一个与其他related work的对比：</p>
+<p><img src="/images/15660963462654.jpg" width="60%" height="50%"></p>
+<p>可以看到其复杂度非常低。</p>
+<hr>
+<h2 id="本周论文小结"><a href="#本周论文小结" class="headerlink" title="[本周论文小结]"></a>[本周论文小结]</h2><p>本周由于要在组会讲机器翻译的论文，因此绝大多数都是相关的论文。其实大部分都是ACL19的best paper以及相关论文。目前机器翻译有几个有意思的方向如non-autoregressive NMT、unsupervised/semi-supervised NMT都是值得深入的。而实验室接下来也会围绕机器翻译做一些工作，我个人还是倾向将Curriculum Learninig与NMT结合。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    林泽辉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.linzehui.me/2019/08/17/论文/每周论文28/" title="每周论文28">http://www.linzehui.me/2019/08/17/论文/每周论文28/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://www.linzehui.me" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
+          
+            <a href="/tags/Curriculum-Learning/" rel="tag"> <i class="fa fa-tag"></i> Curriculum Learning</a>
+          
+            <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
+          
+            <a href="/tags/Transformer/" rel="tag"> <i class="fa fa-tag"></i> Transformer</a>
+          
+            <a href="/tags/NMT/" rel="tag"> <i class="fa fa-tag"></i> NMT</a>
+          
+            <a href="/tags/exposure-bias/" rel="tag"> <i class="fa fa-tag"></i> exposure bias</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/16/诗词&句/佳句分享4/" rel="next" title="佳句分享4">
+                <i class="fa fa-chevron-left"></i> 佳句分享4
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/18/诗词&句/每周诗词34/" rel="prev" title="每周诗词34">
+                每周诗词34 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA0OC8xNjU3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">190</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">208</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Easy-Questions-First-A-Case-Study-on-Curriculum-Learning-for-Question-Answering"><span class="nav-number">1.</span> <span class="nav-text">[Easy Questions First? A Case Study on Curriculum Learning for Question Answering]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bridging-the-Gap-between-Training-and-Inference-for-Neural-Machine-Translation"><span class="nav-number">2.</span> <span class="nav-text">[Bridging the Gap between Training and Inference for Neural Machine Translation]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">2.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Oracle-word-selection"><span class="nav-number">2.1.1.</span> <span class="nav-text">Oracle word selection</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#word-level"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">word level</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sentence-level"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">sentence level</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sampling-with-Decay"><span class="nav-number">2.1.2.</span> <span class="nav-text">Sampling with Decay</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验结果"><span class="nav-number">2.2.</span> <span class="nav-text">实验结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一点思考"><span class="nav-number">2.3.</span> <span class="nav-text">一点思考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Improving-Multi-step-Prediction-of-Learned-Time-Series-Models"><span class="nav-number">3.</span> <span class="nav-text">[Improving Multi-step Prediction of Learned Time Series Models]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scheduled-Sampling-for-Sequence-Prediction-with-Recurrent-Neural-Networks"><span class="nav-number">4.</span> <span class="nav-text">[Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SEQUENCE-LEVEL-TRAINING-WITH-RECURRENT-NEURAL-NETWORKS"><span class="nav-number">5.</span> <span class="nav-text">[SEQUENCE LEVEL TRAINING WITH RECURRENT NEURAL NETWORKS]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WORD-LEVEL-TRAINING"><span class="nav-number">5.1.</span> <span class="nav-text">WORD-LEVEL TRAINING</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CROSS-ENTROPY-TRAINING-XENT"><span class="nav-number">5.1.1.</span> <span class="nav-text">CROSS ENTROPY TRAINING (XENT)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DATA-AS-DEMONSTRATOR-DAD"><span class="nav-number">5.1.2.</span> <span class="nav-text">DATA AS DEMONSTRATOR (DAD)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#END-TO-END-BACKPROP-E2E"><span class="nav-number">5.1.3.</span> <span class="nav-text">END-TO-END BACKPROP (E2E)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SEQUENCE-LEVEL-TRAINING"><span class="nav-number">5.2.</span> <span class="nav-text">SEQUENCE LEVEL TRAINING</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一点想法"><span class="nav-number">5.3.</span> <span class="nav-text">一点想法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Minimum-Risk-Training-for-Neural-Machine-Translation"><span class="nav-number">6.</span> <span class="nav-text">[Minimum Risk Training for Neural Machine Translation]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-1"><span class="nav-number">6.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#想法"><span class="nav-number">6.2.</span> <span class="nav-text">想法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Greedy-Search-with-Probabilistic-N-gram-Matching-for-Neural-Machine-Translation"><span class="nav-number">7.</span> <span class="nav-text">[Greedy Search with Probabilistic N-gram Matching for Neural Machine Translation]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#传统做法"><span class="nav-number">7.1.</span> <span class="nav-text">传统做法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#论文做法"><span class="nav-number">7.2.</span> <span class="nav-text">论文做法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验"><span class="nav-number">7.3.</span> <span class="nav-text">实验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#想法-1"><span class="nav-number">7.4.</span> <span class="nav-text">想法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Insertion-Transformer-Flexible-Sequence-Generation-via-Insertion-Operations"><span class="nav-number">8.</span> <span class="nav-text">[Insertion Transformer: Flexible Sequence Generation via Insertion Operations]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Insertion-Transformer-Model"><span class="nav-number">8.1.</span> <span class="nav-text">Insertion Transformer Model</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Model-Variants"><span class="nav-number">8.1.1.</span> <span class="nav-text">Model Variants</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training-and-Loss-Functions"><span class="nav-number">8.2.</span> <span class="nav-text">Training and Loss Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Left-to-Right"><span class="nav-number">8.2.1.</span> <span class="nav-text">Left-to-Right</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Balanced-Binary-Tree"><span class="nav-number">8.2.2.</span> <span class="nav-text">Balanced Binary Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Uniform"><span class="nav-number">8.2.3.</span> <span class="nav-text">Uniform</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Termination"><span class="nav-number">8.2.4.</span> <span class="nav-text">Termination</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#slot-finalization"><span class="nav-number">8.2.4.1.</span> <span class="nav-text">slot finalization</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sequence-finalization"><span class="nav-number">8.2.4.2.</span> <span class="nav-text">sequence finalization</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Training-Differences"><span class="nav-number">8.2.4.3.</span> <span class="nav-text">Training Differences</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inference"><span class="nav-number">8.3.</span> <span class="nav-text">Inference</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Greedy-Decoding"><span class="nav-number">8.3.1.</span> <span class="nav-text">Greedy Decoding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Parallel-Decoding"><span class="nav-number">8.3.2.</span> <span class="nav-text">Parallel Decoding</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验-1"><span class="nav-number">8.4.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Part1"><span class="nav-number">8.4.1.</span> <span class="nav-text">Part1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part2"><span class="nav-number">8.4.2.</span> <span class="nav-text">Part2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part3"><span class="nav-number">8.4.3.</span> <span class="nav-text">Part3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part4"><span class="nav-number">8.4.4.</span> <span class="nav-text">Part4</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本周论文小结"><span class="nav-number">9.</span> <span class="nav-text">[本周论文小结]</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
