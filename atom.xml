@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.linzehui.me/"/>
-  <updated>2019-08-18T02:16:50.853Z</updated>
+  <updated>2019-09-01T02:21:01.812Z</updated>
   <id>http://www.linzehui.me/</id>
   
   <author>
@@ -15,6 +15,69 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>每周诗词35</title>
+    <link href="http://www.linzehui.me/2019/09/01/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D35/"/>
+    <id>http://www.linzehui.me/2019/09/01/诗词&amp;句/每周诗词35/</id>
+    <published>2019-09-01T02:16:14.000Z</published>
+    <updated>2019-09-01T02:21:01.812Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;登金陵凤凰台&quot;&gt;&lt;a href=&quot;#登金陵凤凰台&quot; class=&quot;headerlink&quot; title=&quot;登金陵凤凰台&quot;&gt;&lt;/a&gt;登金陵凤凰台&lt;/h3&gt;&lt;p&gt;[唐]
+        
+      
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周论文29</title>
+    <link href="http://www.linzehui.me/2019/09/01/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8729/"/>
+    <id>http://www.linzehui.me/2019/09/01/论文/每周论文29/</id>
+    <published>2019-09-01T01:24:30.000Z</published>
+    <updated>2019-09-02T08:13:53.781Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本周论文：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Repeat before Forgetting: Spaced Repetition for Efficient and Effective Training of Neural Networks&lt;/li&gt;
+&lt;li&gt;A Simple
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
+    
+      <category term="Summary" scheme="http://www.linzehui.me/tags/Summary/"/>
+    
+      <category term="Sequence Generation" scheme="http://www.linzehui.me/tags/Sequence-Generation/"/>
+    
+  </entry>
   
   <entry>
     <title>代码片段记录19</title>
@@ -93,11 +156,11 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+      <category term="Transformer" scheme="http://www.linzehui.me/tags/Transformer/"/>
     
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
-      <category term="Transformer" scheme="http://www.linzehui.me/tags/Transformer/"/>
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
@@ -212,9 +275,9 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
     
       <category term="Domain Adaptation" scheme="http://www.linzehui.me/tags/Domain-Adaptation/"/>
     
@@ -424,9 +487,9 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
     
   </entry>
   
@@ -547,70 +610,6 @@
     
     
       <category term="佳句分享" scheme="http://www.linzehui.me/tags/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>佳句分享2</title>
-    <link href="http://www.linzehui.me/2019/07/07/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB2/"/>
-    <id>http://www.linzehui.me/2019/07/07/诗词&amp;句/佳句分享2/</id>
-    <published>2019-07-07T03:41:15.000Z</published>
-    <updated>2019-07-07T03:44:12.686Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h3&gt;&lt;p&gt;Learn to be ordinary before you wish to be
-        
-      
-    
-    </summary>
-    
-    
-      <category term="佳句分享" scheme="http://www.linzehui.me/tags/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周论文24</title>
-    <link href="http://www.linzehui.me/2019/07/07/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8724/"/>
-    <id>http://www.linzehui.me/2019/07/07/论文/每周论文24/</id>
-    <published>2019-07-07T02:55:30.000Z</published>
-    <updated>2019-08-02T07:31:12.488Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;本周论文：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Curriculum Learning for Multi-Task Classification of Visual Attributes&lt;/li&gt;
-&lt;li&gt;Highway Networks&lt;/li&gt;
-&lt;li&gt;Deep
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
-    
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-      <category term="CNN" scheme="http://www.linzehui.me/tags/CNN/"/>
-    
-      <category term="ResNet" scheme="http://www.linzehui.me/tags/ResNet/"/>
-    
-      <category term="Highway" scheme="http://www.linzehui.me/tags/Highway/"/>
-    
-      <category term="RNN" scheme="http://www.linzehui.me/tags/RNN/"/>
     
   </entry>
   

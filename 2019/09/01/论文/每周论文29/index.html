@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Paper,每周论文阅读,Curriculum Learning,NMT,Summary,Sequence Generation," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Weekly Review" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本周论文：  Repeat before Forgetting: Spaced Repetition for Efficient and Effective Training of Neural Networks A Simple Theoretical Model of Importance for Summarization Attending to Future Tokens for Bid">
+<meta name="keywords" content="Paper,每周论文阅读,Curriculum Learning,NMT,Summary,Sequence Generation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周论文29">
+<meta property="og:url" content="http://www.linzehui.me/2019/09/01/论文/每周论文29/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="本周论文：  Repeat before Forgetting: Spaced Repetition for Efficient and Effective Training of Neural Networks A Simple Theoretical Model of Importance for Summarization Attending to Future Tokens for Bid">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.linzehui.me/images/15673013678116.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15673016101025.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15673017081202.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15673034453669.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15673038459325.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15673038731825.jpg">
+<meta property="og:updated_time" content="2019-09-02T08:13:53.781Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每周论文29">
+<meta name="twitter:description" content="本周论文：  Repeat before Forgetting: Spaced Repetition for Efficient and Effective Training of Neural Networks A Simple Theoretical Model of Importance for Summarization Attending to Future Tokens for Bid">
+<meta name="twitter:image" content="http://www.linzehui.me/images/15673013678116.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2019/09/01/论文/每周论文29/"/>
+
+
+
+
+
+  <title>每周论文29 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/09/01/论文/每周论文29/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">每周论文29</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-01T09:24:30+08:00">
+                2019-09-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-09-02T16:13:53+08:00">
+                2019-09-02
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本周论文：</p>
+<ol>
+<li>Repeat before Forgetting: Spaced Repetition for Efficient and Effective Training of Neural Networks</li>
+<li>A Simple Theoretical Model of Importance for Summarization</li>
+<li>Attending to Future Tokens for Bidirectional Sequence Generation</li>
+<li>Sequence Generation: From Both Sides to the Middle</li>
+</ol>
+<h2 id="Repeat-before-Forgetting-Spaced-Repetition-for-Efficient-and-Effective-Training-of-Neural-Networks"><a href="#Repeat-before-Forgetting-Spaced-Repetition-for-Efficient-and-Effective-Training-of-Neural-Networks" class="headerlink" title="[Repeat before Forgetting: Spaced Repetition for Efficient and Effective Training of Neural Networks]"></a>[Repeat before Forgetting: Spaced Repetition for Efficient and Effective Training of Neural Networks]</h2><p>提出一种基于核密度估计的训练神经网络的scheduler。</p>
+<p>论文首先从实验上论证了神经网络与人类认知的相似性。接着基于此提出新的训练神经网络的方法。</p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>人类在记忆新知识时，需要不断重复，而重复的间隔时间随着重复次数而逐渐扩大。（遗忘曲线）。同时学习过程还和该知识的难度与人类记忆的强度相关。放在神经网络中，就有：</p>
+<script type="math/tex; mode=display">\operatorname{Pr}(r e c a l l)=\exp \left(-\frac{\text {difficulty} \times \text {delay}}{\text {strength}}\right)</script><p>其中recall就是分类任务的准确率。</p>
+<p>因此本文基于以上三个变量提出一种基于间隔重复训练神经网络的方法。<br>实际上本质就是，在快要遗忘之前重新过一遍这个sample。通过预估的方法去获得delay的时间。</p>
+<p>在此之前的工作：</p>
+<p><img src="/images/15673013678116.jpg" width="50%" height="50%"></p>
+<p>大概做法是，设定几个队列，如果当前的sample预测对了，就将该sample push到后一个队列，否则就将其push到前一个队列或第一个队列。越后面的队列被review的间隔越长。相当于认为越后面的越简单，需要被训练到的次数越少。</p>
+<p>但这里的间隔是手动设定的（2的k次方），并不是很准。本文提出的就是动态设定这样一个间隔。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>设$x_{i}=\frac{d_{i} \times t_{i}}{s_{e}}$</p>
+<p>d是该sample的loss，t是还有几个epoch被review到；s则是在validation data上的performance。</p>
+<p>x是不同核函数的变量：</p>
+<p>$f_{g a u}(x, \tau)=\exp \left(-\tau x^{2}\right)$</p>
+<p>$f_{l a p}(x, \tau)=\exp (-\tau x)$</p>
+<p>$f_{l i n}(x, \tau)=\left\{\begin{array}{ll}{1-\tau x} &amp; {x&lt;\frac{1}{\tau}} \\ {0} &amp; {\text { otherwise }}\end{array}\right.$</p>
+<p>$f_{\sec }(x, \tau)=\frac{2}{\exp \left(-\tau x^{2}\right)+\exp \left(\tau x^{2}\right)}$</p>
+<p>等等。</p>
+<p>不同核函数的曲线：</p>
+<p><img src="/images/15673016101025.jpg" width="40%" height="50%"></p>
+<p>我们用核函数来预估一个样本被review的间隔。</p>
+<p><img src="/images/15673017081202.jpg" width="50%" height="50%"></p>
+<p>如果t小于等于1，则选做当前的训练数据。一开始大家都是1。其他未被选中的记录在delayed batch里。<br>在训练完一个epoch后，获得valid上的accuracy。通过validation来预估当前的$\tau$：</p>
+<script type="math/tex; mode=display">\hat{\tau}=\arg \min _{\tau}\left(f\left(x_{j}, \tau\right)-a_{j}\right)^{2}, \forall h_{j} \in \mathbf{V}, a_{j} \geq \eta</script><p>其中$a$是accuracy。<br>接着利用这个$\tau$去预估当前训练数据的delay $t$。<br>最后将delay batch的t减1，因为已经训练过了一个epoch了。</p>
+<p>实际上就相当于利用密度核函数去动态预估参数t。</p>
+<hr>
+<h2 id="A-Simple-Theoretical-Model-of-Importance-for-Summarization"><a href="#A-Simple-Theoretical-Model-of-Importance-for-Summarization" class="headerlink" title="[A Simple Theoretical Model of Importance for Summarization]"></a>[A Simple Theoretical Model of Importance for Summarization]</h2><p>提出summary任务的几个指标，Redundancy, Relevance, and Informativeness，以及统一这三个指标的Importance。本文贡献是将信息论引入，并证明其他过去的工作可以放在这个框架下。</p>
+<p>记semantic unit作为基本单位，$\Omega$是所有semantic unit的集合，$X$是文本。$\mathbb{P}_{X}\left(\omega_{i}\right)$则是文本$X$出现该unit的概率。</p>
+<p>$D$是source document；$S$是candidate summary。</p>
+<h3 id="Redundancy"><a href="#Redundancy" class="headerlink" title="Redundancy"></a>Redundancy</h3><p>$S$的交叉熵：</p>
+<script type="math/tex; mode=display">H(S)=-\sum_{\omega_{i}} \mathbb{P}_{S}\left(\omega_{i}\right) \cdot \log \left(\mathbb{P}_{S}\left(\omega_{i}\right)\right)</script><p>引入redundancy：</p>
+<script type="math/tex; mode=display">\operatorname{Red}(S)=H_{\max }-H(S)</script><p>可以简写为：$\operatorname{Red}(S)=-H(S)$</p>
+<p>当所有的semantic unit的概率相同时，redundancy最大。因为这样就没有什么有用的信息了。</p>
+<h3 id="Relevance"><a href="#Relevance" class="headerlink" title="Relevance"></a>Relevance</h3><script type="math/tex; mode=display">\operatorname{Rel}(S, D)=\sum_{\omega_{i}} \mathbb{P}_{S}\left(\omega_{i}\right) \cdot \log \left(\mathbb{P}_{D}\left(\omega_{i}\right)\right)</script><p>衡量$S$与$D$的关联度。</p>
+<p>A summary with a low expected surprise produces a low uncertainty about what were the original sources。summary相当于对源文档的有损压缩，因此应尽可能减小该损失。</p>
+<p>relevance与redundancy的联系：</p>
+<script type="math/tex; mode=display">\begin{aligned} K L(S| | D) &=C E(S, D)-H(S) \\-K L(S| | D) &=\operatorname{Rel}(S, D)-\operatorname{Red}(S) \end{aligned}</script><p>KL divergence is the information loss incurred by using D as an approximation of S (i.e., the uncertainty about D arising from observing S instead of D). <strong>A summarizer that minimizes the KL divergence minimizes Redundancy while maximizing Relevance.</strong></p>
+<h3 id="Informativeness"><a href="#Informativeness" class="headerlink" title="Informativeness"></a>Informativeness</h3><p>relevance忽略了外部知识。将外部知识引入，a summary is informative if it induces, for a user, a great change in her knowledge about the world.</p>
+<script type="math/tex; mode=display">\operatorname{Inf}(S, K)=-\sum_{\omega_{i}} \mathbb{P}_{S}\left(\omega_{i}\right) \cdot \log \left(\mathbb{P}_{K}\left(\omega_{i}\right)\right)</script><p>其中$K$是background knowledge。</p>
+<p>for Informativeness, the cross-entropy between S and K should be high because we measure the amount of new information induced by the summary in our knowledge.</p>
+<h3 id="Importance"><a href="#Importance" class="headerlink" title="Importance"></a>Importance</h3><p>其实就是将relevance与informativeness结合起来。</p>
+<script type="math/tex; mode=display">\begin{aligned} \mathbb{P}_{\frac{D}{K}}\left(\omega_{i}\right) &=\frac{1}{C} \cdot \frac{d_{i}^{\alpha}}{k_{i}^{\beta}} \\ C &=\sum_{i} \frac{d_{i}^{\alpha}}{k_{i}^{\beta}}, \alpha, \beta \in \mathbb{R}^{+} \end{aligned}</script><hr>
+<h2 id="Attending-to-Future-Tokens-for-Bidirectional-Sequence-Generation"><a href="#Attending-to-Future-Tokens-for-Bidirectional-Sequence-Generation" class="headerlink" title="[Attending to Future Tokens for Bidirectional Sequence Generation]"></a>[Attending to Future Tokens for Bidirectional Sequence Generation]</h2><p>基于bert的思想，引入双向的序列生成，也即生成的过程中可以看到左右两边。</p>
+<p>基本做法是：首先将x与y拼起来，然后将y用placeholder替代，过transformer encoder去uncover这些placeholder。</p>
+<p><img src="/images/15673034453669.jpg" width="80%" height="50%"></p>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><p>在训练时候，引入Placeholder Replacement Strategy，采用伯努利分布或高斯分布随机将部分的词用placeholder替代，通过上下文将其recover。</p>
+<p>在生成时，有几种方案：</p>
+<p>One-step greedy： 直接同时将所有的placeholder一次性recover。<br>Highest probability：一步一步来，每次uncover概率最大的那个token。<br>Lowest entropy： 选择熵最小的，这代表了其不确定性最小。<br>Left-to-right：就是从左到右，但未来的placeholder也会attend到。</p>
+<h3 id="一点思考"><a href="#一点思考" class="headerlink" title="一点思考"></a>一点思考</h3><p>这实际上就有点像任意顺序的序列生成。但似乎设计有些粗糙，且实验没有在翻译上跑，可能是在翻译上没有效果。且论文似乎没有提到如何加position encoding。<br>总体思想还是比较清晰的，如果用于翻译设计得应该更精巧一些。另外一个问题是停止条件是什么论文似乎也没提到，大概也是当生成到EOS就停止吧。placeholder的个数是怎么确定的？only placeholder tokens up to some pre-determined maximum sequence length。</p>
+<hr>
+<h2 id="Sequence-Generation-From-Both-Sides-to-the-Middle"><a href="#Sequence-Generation-From-Both-Sides-to-the-Middle" class="headerlink" title="[Sequence Generation: From Both Sides to the Middle]"></a>[Sequence Generation: From Both Sides to the Middle]</h2><p>提出从左到右和从右到左的同时decoding。更多的算是模型上的创新吧，但感觉没有什么insight。</p>
+<p>为什么要从两端到中间：<br>inference的时候能加速；能够attend到未来的词，缓解under-translation；</p>
+<h3 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h3><p><img src="/images/15673038459325.jpg" width="50%" height="50%"></p>
+<p>在decode端，先forward与backward自行做attention（intra），然后二者再做交互（inter）。</p>
+<p><img src="/images/15673038731825.jpg" width="60%" height="50%"></p>
+<h3 id="一点思考-1"><a href="#一点思考-1" class="headerlink" title="一点思考"></a>一点思考</h3><p>从两端到中间的想法不错，过去应该也有论文做过这样的尝试。但本文有点像两年前的论文，从模型的结构入手，改改模型跑跑实验就发出来，有点像实验报告。并没有提供一些更有价值的insight，难以follow。同时，本文也没有提position应该如何加？这点或许很关键。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    林泽辉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.linzehui.me/2019/09/01/论文/每周论文29/" title="每周论文29">http://www.linzehui.me/2019/09/01/论文/每周论文29/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://www.linzehui.me" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
+          
+            <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
+          
+            <a href="/tags/Curriculum-Learning/" rel="tag"> <i class="fa fa-tag"></i> Curriculum Learning</a>
+          
+            <a href="/tags/NMT/" rel="tag"> <i class="fa fa-tag"></i> NMT</a>
+          
+            <a href="/tags/Summary/" rel="tag"> <i class="fa fa-tag"></i> Summary</a>
+          
+            <a href="/tags/Sequence-Generation/" rel="tag"> <i class="fa fa-tag"></i> Sequence Generation</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/18/代码相关/代码记录19/" rel="next" title="代码片段记录19">
+                <i class="fa fa-chevron-left"></i> 代码片段记录19
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/01/诗词&句/每周诗词35/" rel="prev" title="每周诗词35">
+                每周诗词35 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA0OC8xNjU3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">192</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">210</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Repeat-before-Forgetting-Spaced-Repetition-for-Efficient-and-Effective-Training-of-Neural-Networks"><span class="nav-number">1.</span> <span class="nav-text">[Repeat before Forgetting: Spaced Repetition for Efficient and Effective Training of Neural Networks]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">1.2.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Simple-Theoretical-Model-of-Importance-for-Summarization"><span class="nav-number">2.</span> <span class="nav-text">[A Simple Theoretical Model of Importance for Summarization]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redundancy"><span class="nav-number">2.1.</span> <span class="nav-text">Redundancy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Relevance"><span class="nav-number">2.2.</span> <span class="nav-text">Relevance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Informativeness"><span class="nav-number">2.3.</span> <span class="nav-text">Informativeness</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Importance"><span class="nav-number">2.4.</span> <span class="nav-text">Importance</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Attending-to-Future-Tokens-for-Bidirectional-Sequence-Generation"><span class="nav-number">3.</span> <span class="nav-text">[Attending to Future Tokens for Bidirectional Sequence Generation]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-1"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一点思考"><span class="nav-number">3.2.</span> <span class="nav-text">一点思考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequence-Generation-From-Both-Sides-to-the-Middle"><span class="nav-number">4.</span> <span class="nav-text">[Sequence Generation: From Both Sides to the Middle]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-2"><span class="nav-number">4.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一点思考-1"><span class="nav-number">4.2.</span> <span class="nav-text">一点思考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
