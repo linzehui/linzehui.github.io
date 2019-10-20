@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.linzehui.me/"/>
-  <updated>2019-09-15T03:27:52.993Z</updated>
+  <updated>2019-10-20T03:11:42.975Z</updated>
   <id>http://www.linzehui.me/</id>
   
   <author>
@@ -17,11 +17,185 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>每周论文32</title>
+    <link href="http://www.linzehui.me/2019/10/20/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8732/"/>
+    <id>http://www.linzehui.me/2019/10/20/论文/每周论文32/</id>
+    <published>2019-10-20T01:27:30.000Z</published>
+    <updated>2019-10-20T03:11:42.975Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本周论文：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Incremental Parsing with the Perceptron Algorithm&lt;/li&gt;
+&lt;li&gt;Iterative Dual Domain Adaptation for Neural Machine
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="Transformer" scheme="http://www.linzehui.me/tags/Transformer/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
+    
+      <category term="structured learning" scheme="http://www.linzehui.me/tags/structured-learning/"/>
+    
+      <category term="domain adaptation" scheme="http://www.linzehui.me/tags/domain-adaptation/"/>
+    
+      <category term="style transfer" scheme="http://www.linzehui.me/tags/style-transfer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周诗词39</title>
+    <link href="http://www.linzehui.me/2019/10/20/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D39/"/>
+    <id>http://www.linzehui.me/2019/10/20/诗词&amp;句/每周诗词39/</id>
+    <published>2019-10-20T01:26:14.000Z</published>
+    <updated>2019-10-20T01:27:09.160Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;眼儿媚·中元夜有感&quot;&gt;&lt;a href=&quot;#眼儿媚·中元夜有感&quot; class=&quot;headerlink&quot; title=&quot;眼儿媚·中元夜有感&quot;&gt;&lt;/a&gt;眼儿媚·中元夜有感&lt;/h3&gt;&lt;p&gt;[清]
+        
+      
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>佳句分享5</title>
+    <link href="http://www.linzehui.me/2019/09/30/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB5/"/>
+    <id>http://www.linzehui.me/2019/09/30/诗词&amp;句/佳句分享5/</id>
+    <published>2019-09-30T03:17:15.000Z</published>
+    <updated>2019-09-30T03:18:06.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="佳句分享" scheme="http://www.linzehui.me/tags/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周论文31</title>
+    <link href="http://www.linzehui.me/2019/09/29/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8731/"/>
+    <id>http://www.linzehui.me/2019/09/29/论文/每周论文31/</id>
+    <published>2019-09-29T03:34:30.000Z</published>
+    <updated>2019-09-30T03:02:22.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本周论文：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Quantifying Exposure Bias for Neural Language Generation&lt;/li&gt;
+&lt;li&gt;Sequence-to-Sequence Learning as Beam-Search
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
+    
+      <category term="exposure bias" scheme="http://www.linzehui.me/tags/exposure-bias/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周诗词38</title>
+    <link href="http://www.linzehui.me/2019/09/29/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D38/"/>
+    <id>http://www.linzehui.me/2019/09/29/诗词&amp;句/每周诗词38/</id>
+    <published>2019-09-29T03:26:14.000Z</published>
+    <updated>2019-09-29T03:33:54.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;赠孟浩然&quot;&gt;&lt;a href=&quot;#赠孟浩然&quot; class=&quot;headerlink&quot; title=&quot;赠孟浩然&quot;&gt;&lt;/a&gt;赠孟浩然&lt;/h3&gt;&lt;p&gt;[唐]
+        
+      
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周诗词37</title>
+    <link href="http://www.linzehui.me/2019/09/22/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D37/"/>
+    <id>http://www.linzehui.me/2019/09/22/诗词&amp;句/每周诗词37/</id>
+    <published>2019-09-22T02:28:14.000Z</published>
+    <updated>2019-09-22T02:29:45.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;在狱咏蝉&quot;&gt;&lt;a href=&quot;#在狱咏蝉&quot; class=&quot;headerlink&quot; title=&quot;在狱咏蝉&quot;&gt;&lt;/a&gt;在狱咏蝉&lt;/h3&gt;&lt;p&gt;[唐]
+        
+      
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>每周碎片知识28</title>
     <link href="http://www.linzehui.me/2019/09/15/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8628/"/>
     <id>http://www.linzehui.me/2019/09/15/碎片知识/每周碎片知识28/</id>
     <published>2019-09-15T03:08:14.000Z</published>
-    <updated>2019-09-15T03:27:52.993Z</updated>
+    <updated>2019-09-15T03:27:52.000Z</updated>
     
     <summary type="html">
     
@@ -47,7 +221,7 @@
     <link href="http://www.linzehui.me/2019/09/15/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8730/"/>
     <id>http://www.linzehui.me/2019/09/15/论文/每周论文30/</id>
     <published>2019-09-15T02:15:30.000Z</published>
-    <updated>2019-09-15T03:06:41.487Z</updated>
+    <updated>2019-09-15T03:06:41.000Z</updated>
     
     <summary type="html">
     
@@ -67,9 +241,9 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
@@ -82,7 +256,7 @@
     <link href="http://www.linzehui.me/2019/09/15/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D36/"/>
     <id>http://www.linzehui.me/2019/09/15/诗词&amp;句/每周诗词36/</id>
     <published>2019-09-15T02:09:14.000Z</published>
-    <updated>2019-09-15T02:13:43.176Z</updated>
+    <updated>2019-09-15T02:13:43.000Z</updated>
     
     <summary type="html">
     
@@ -108,7 +282,7 @@
     <link href="http://www.linzehui.me/2019/09/01/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D35/"/>
     <id>http://www.linzehui.me/2019/09/01/诗词&amp;句/每周诗词35/</id>
     <published>2019-09-01T02:16:14.000Z</published>
-    <updated>2019-09-01T02:21:01.812Z</updated>
+    <updated>2019-09-01T02:21:01.000Z</updated>
     
     <summary type="html">
     
@@ -134,7 +308,7 @@
     <link href="http://www.linzehui.me/2019/09/01/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8729/"/>
     <id>http://www.linzehui.me/2019/09/01/论文/每周论文29/</id>
     <published>2019-09-01T01:24:30.000Z</published>
-    <updated>2019-09-02T08:13:53.781Z</updated>
+    <updated>2019-09-02T08:13:53.000Z</updated>
     
     <summary type="html">
     
@@ -154,9 +328,9 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
@@ -171,7 +345,7 @@
     <link href="http://www.linzehui.me/2019/08/18/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E8%AE%B0%E5%BD%9519/"/>
     <id>http://www.linzehui.me/2019/08/18/代码相关/代码记录19/</id>
     <published>2019-08-18T02:15:30.000Z</published>
-    <updated>2019-08-18T02:16:50.853Z</updated>
+    <updated>2019-08-18T02:16:50.000Z</updated>
     
     <summary type="html">
     
@@ -197,7 +371,7 @@
     <link href="http://www.linzehui.me/2019/08/18/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D34/"/>
     <id>http://www.linzehui.me/2019/08/18/诗词&amp;句/每周诗词34/</id>
     <published>2019-08-18T02:14:14.000Z</published>
-    <updated>2019-08-18T02:14:34.238Z</updated>
+    <updated>2019-08-18T02:14:34.000Z</updated>
     
     <summary type="html">
     
@@ -223,7 +397,7 @@
     <link href="http://www.linzehui.me/2019/08/17/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8728/"/>
     <id>http://www.linzehui.me/2019/08/17/论文/每周论文28/</id>
     <published>2019-08-17T14:00:30.000Z</published>
-    <updated>2019-08-18T09:42:51.608Z</updated>
+    <updated>2019-08-18T09:42:51.000Z</updated>
     
     <summary type="html">
     
@@ -245,9 +419,9 @@
     
       <category term="Transformer" scheme="http://www.linzehui.me/tags/Transformer/"/>
     
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
@@ -260,7 +434,7 @@
     <link href="http://www.linzehui.me/2019/08/16/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E4%BD%B3%E5%8F%A5%E5%88%86%E4%BA%AB4/"/>
     <id>http://www.linzehui.me/2019/08/16/诗词&amp;句/佳句分享4/</id>
     <published>2019-08-16T15:04:15.000Z</published>
-    <updated>2019-08-17T09:06:12.631Z</updated>
+    <updated>2019-08-17T09:06:12.000Z</updated>
     
     <summary type="html">
     
@@ -284,7 +458,7 @@
     <link href="http://www.linzehui.me/2019/08/11/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D33/"/>
     <id>http://www.linzehui.me/2019/08/11/诗词&amp;句/每周诗词33/</id>
     <published>2019-08-11T11:42:14.000Z</published>
-    <updated>2019-08-11T11:43:15.218Z</updated>
+    <updated>2019-08-11T11:43:15.000Z</updated>
     
     <summary type="html">
     
@@ -310,7 +484,7 @@
     <link href="http://www.linzehui.me/2019/08/10/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8627/"/>
     <id>http://www.linzehui.me/2019/08/10/碎片知识/每周碎片知识27/</id>
     <published>2019-08-10T14:48:14.000Z</published>
-    <updated>2019-08-11T14:11:09.841Z</updated>
+    <updated>2019-08-11T14:11:09.000Z</updated>
     
     <summary type="html">
     
@@ -327,9 +501,9 @@
     
       <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
     
-      <category term="Python" scheme="http://www.linzehui.me/tags/Python/"/>
-    
       <category term="Pytorch" scheme="http://www.linzehui.me/tags/Pytorch/"/>
+    
+      <category term="Python" scheme="http://www.linzehui.me/tags/Python/"/>
     
       <category term="assert" scheme="http://www.linzehui.me/tags/assert/"/>
     
@@ -342,7 +516,7 @@
     <link href="http://www.linzehui.me/2019/08/10/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8727/"/>
     <id>http://www.linzehui.me/2019/08/10/论文/每周论文27/</id>
     <published>2019-08-10T12:57:30.000Z</published>
-    <updated>2019-08-11T14:19:40.605Z</updated>
+    <updated>2019-08-11T14:19:40.000Z</updated>
     
     <summary type="html">
     
@@ -362,9 +536,9 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="Domain Adaptation" scheme="http://www.linzehui.me/tags/Domain-Adaptation/"/>
     
@@ -377,7 +551,7 @@
     <link href="http://www.linzehui.me/2019/08/09/%E8%AE%BA%E6%96%87/Curriculum%20Learning%20schedule%E6%80%BB%E7%BB%93/"/>
     <id>http://www.linzehui.me/2019/08/09/论文/Curriculum Learning schedule总结/</id>
     <published>2019-08-09T14:32:30.000Z</published>
-    <updated>2019-08-10T03:31:23.106Z</updated>
+    <updated>2019-08-10T03:31:23.000Z</updated>
     
     <summary type="html">
     
@@ -406,7 +580,7 @@
     <link href="http://www.linzehui.me/2019/08/04/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8626/"/>
     <id>http://www.linzehui.me/2019/08/04/碎片知识/每周碎片知识26/</id>
     <published>2019-08-04T11:13:14.000Z</published>
-    <updated>2019-08-04T11:36:44.884Z</updated>
+    <updated>2019-08-04T11:36:44.000Z</updated>
     
     <summary type="html">
     
@@ -430,185 +604,6 @@
       <category term="Mac" scheme="http://www.linzehui.me/tags/Mac/"/>
     
       <category term="iTerm" scheme="http://www.linzehui.me/tags/iTerm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周诗词32</title>
-    <link href="http://www.linzehui.me/2019/08/04/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D32/"/>
-    <id>http://www.linzehui.me/2019/08/04/诗词&amp;句/每周诗词32/</id>
-    <published>2019-08-04T11:06:14.000Z</published>
-    <updated>2019-08-04T11:33:47.133Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;鹊踏枝-·-谁道闲情抛掷久&quot;&gt;&lt;a href=&quot;#鹊踏枝-·-谁道闲情抛掷久&quot; class=&quot;headerlink&quot; title=&quot;鹊踏枝 · 谁道闲情抛掷久&quot;&gt;&lt;/a&gt;鹊踏枝 · 谁道闲情抛掷久&lt;/h3&gt;&lt;p&gt;[五代十国]
-        
-      
-    
-    </summary>
-    
-    
-      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
-    
-      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>记又一次debug的血泪教训</title>
-    <link href="http://www.linzehui.me/2019/08/04/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E8%AE%B0%E5%8F%88%E4%B8%80%E6%AC%A1debug%E7%9A%84%E8%A1%80%E6%B3%AA%E6%95%99%E8%AE%AD/"/>
-    <id>http://www.linzehui.me/2019/08/04/碎片知识/记又一次debug的血泪教训/</id>
-    <published>2019-08-04T09:24:14.000Z</published>
-    <updated>2019-08-04T11:36:16.710Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;这次的血泪教训就是，shuffle真的很重要！&lt;/p&gt;
-&lt;p&gt;训练模型发现一个问题：train集和dev集的performance差别很大。&lt;/p&gt;
-&lt;p&gt;我的心路历程：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;怀疑自己的iterator写错了，将其换成dataloader之后，仍然有此
-        
-      
-    
-    </summary>
-    
-    
-      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="遇到的问题" scheme="http://www.linzehui.me/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于Transformer中position在代码实现的一点思考</title>
-    <link href="http://www.linzehui.me/2019/08/04/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8ETransformer%E4%B8%ADposition%E5%9C%A8%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/"/>
-    <id>http://www.linzehui.me/2019/08/04/碎片知识/关于Transformer中position在代码实现的一点思考/</id>
-    <published>2019-08-04T08:23:14.000Z</published>
-    <updated>2019-08-04T11:35:48.484Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Transformer需要显式加position，不同版本的代码有不同创建position的方式。前几天在实现中遇到了一些小问题，因此记录在此。&lt;/p&gt;
-&lt;p&gt;过去在获取position的时候，一般都是在外部创建，也即在做batch的时候创建。具体而言：&lt;/p&gt;
-&lt;figu
-        
-      
-    
-    </summary>
-    
-    
-      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="遇到的问题" scheme="http://www.linzehui.me/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    
-      <category term="Python" scheme="http://www.linzehui.me/tags/Python/"/>
-    
-      <category term="Pytorch" scheme="http://www.linzehui.me/tags/Pytorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>代码片段记录18</title>
-    <link href="http://www.linzehui.me/2019/08/04/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E8%AE%B0%E5%BD%9518/"/>
-    <id>http://www.linzehui.me/2019/08/04/代码相关/代码记录18/</id>
-    <published>2019-08-04T08:16:30.000Z</published>
-    <updated>2019-08-04T08:19:50.087Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;不定长iterator的写法&quot;&gt;&lt;a href=&quot;#不定长iterator的写法&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="code snippets" scheme="http://www.linzehui.me/tags/code-snippets/"/>
-    
-      <category term="代码片段" scheme="http://www.linzehui.me/tags/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周论文26</title>
-    <link href="http://www.linzehui.me/2019/08/04/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8726/"/>
-    <id>http://www.linzehui.me/2019/08/04/论文/每周论文26/</id>
-    <published>2019-08-04T01:30:30.000Z</published>
-    <updated>2019-08-04T11:38:48.689Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;本周论文：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Dynamic Curriculum Learning for Imbalanced Data Classification&lt;/li&gt;
-&lt;li&gt;Simple and Effective Curriculum
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Classification" scheme="http://www.linzehui.me/tags/Classification/"/>
-    
-      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
-    
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周碎片知识25</title>
-    <link href="http://www.linzehui.me/2019/07/28/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8625/"/>
-    <id>http://www.linzehui.me/2019/07/28/碎片知识/每周碎片知识25/</id>
-    <published>2019-07-28T11:18:14.000Z</published>
-    <updated>2019-08-02T07:31:39.435Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;fairseq-CUDA&quot;&gt;&lt;a href=&quot;#fairseq-CUDA&quot; class=&quot;headerlink&quot; title=&quot;[fairseq CUDA]&quot;&gt;&lt;/a&gt;[fairseq
-        
-      
-    
-    </summary>
-    
-    
-      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="fairseq" scheme="http://www.linzehui.me/tags/fairseq/"/>
-    
-      <category term="CUDA" scheme="http://www.linzehui.me/tags/CUDA/"/>
-    
-      <category term="Arxiv" scheme="http://www.linzehui.me/tags/Arxiv/"/>
-    
-      <category term="LaTeX" scheme="http://www.linzehui.me/tags/LaTeX/"/>
     
   </entry>
   

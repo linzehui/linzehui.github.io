@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Paper,Transformer,每周论文阅读,NMT,structured learning,domain adaptation,style transfer," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Weekly Review" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本周论文：  Incremental Parsing with the Perceptron Algorithm Iterative Dual Domain Adaptation for Neural Machine Translation Classical Structured Prediction Losses for Sequence to Sequence Learning Learni">
+<meta name="keywords" content="Paper,Transformer,每周论文阅读,NMT,structured learning,domain adaptation,style transfer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周论文32">
+<meta property="og:url" content="http://www.linzehui.me/2019/10/20/论文/每周论文32/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="本周论文：  Incremental Parsing with the Perceptron Algorithm Iterative Dual Domain Adaptation for Neural Machine Translation Classical Structured Prediction Losses for Sequence to Sequence Learning Learni">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.linzehui.me/images/15715350372832.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715351353551.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715351517163.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715353551772.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715358862970.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715359137599.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715359541812.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715359771917.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715360031714.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715360816007.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715365606455.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715367458802.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715377655239.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715381498182.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715383038673.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715384140483.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715386888191.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15715387985967.jpg">
+<meta property="og:updated_time" content="2019-10-20T03:11:42.975Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每周论文32">
+<meta name="twitter:description" content="本周论文：  Incremental Parsing with the Perceptron Algorithm Iterative Dual Domain Adaptation for Neural Machine Translation Classical Structured Prediction Losses for Sequence to Sequence Learning Learni">
+<meta name="twitter:image" content="http://www.linzehui.me/images/15715350372832.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2019/10/20/论文/每周论文32/"/>
+
+
+
+
+
+  <title>每周论文32 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/10/20/论文/每周论文32/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">每周论文32</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-20T09:27:30+08:00">
+                2019-10-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-20T11:11:42+08:00">
+                2019-10-20
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本周论文：</p>
+<ol>
+<li>Incremental Parsing with the Perceptron Algorithm</li>
+<li>Iterative Dual Domain Adaptation for Neural Machine Translation</li>
+<li>Classical Structured Prediction Losses for Sequence to Sequence Learning</li>
+<li>Learning as Search Optimization: Approximate Large Margin Methods for Structured Prediction</li>
+<li>Professor Forcing: A New Algorithm for Training Recurrent Networks</li>
+<li>Style Transformer: Unpaired Text Style Transfer without Disentangled Latent Representation</li>
+<li>Style Transfer from Non-Parallel Text by Cross-Alignment</li>
+</ol>
+<h2 id="Incremental-Parsing-with-the-Perceptron-Algorithm"><a href="#Incremental-Parsing-with-the-Perceptron-Algorithm" class="headerlink" title="[Incremental Parsing with the Perceptron Algorithm]"></a>[Incremental Parsing with the Perceptron Algorithm]</h2><p>早期early update的论文。在seq2seq/structured learning任务中，在生成过程中当遇到不是golden truth时候就提前停止，直接更新参数。</p>
+<p><img src="/images/15715350372832.jpg" width="70%" height="50%"></p>
+<hr>
+<h2 id="Iterative-Dual-Domain-Adaptation-for-Neural-Machine-Translation"><a href="#Iterative-Dual-Domain-Adaptation-for-Neural-Machine-Translation" class="headerlink" title="[Iterative Dual Domain Adaptation for Neural Machine Translation]"></a>[Iterative Dual Domain Adaptation for Neural Machine Translation]</h2><p>讨论了一种domain adaptation的做法。与传统domain adaptation在out domain训练一个模型，在in domain数据上fine-tune得到最终的模型不同，本文的做法是：在in domain和out domain之间来回迁移，同时还保留过去阶段的最优模型，采用knowledge distillation提取有用信息以帮助当前模型的训练。来回迁移的motivation是能更好保留<strong>domain-shared</strong>的知识。</p>
+<p><img src="/images/15715351353551.jpg" width="80%" height="50%"></p>
+<p><img src="/images/15715351517163.jpg" width="90%" height="50%"></p>
+<p>在训练过程中，模型不仅要最小化训练集的误差，同时还要拟合上个best模型的输出。</p>
+<script type="math/tex; mode=display">\begin{aligned} \mathcal{L}_{i n}^{(k)}=& \sum_{(\mathbf{x}, \mathbf{y}) \in D_{i n}}\left[-(1-\lambda) \cdot \log P\left(\mathbf{y} | \mathbf{x} ; \theta_{i n}^{(k)}\right)+\right.\\ &\left.\lambda \cdot \operatorname{KL}\left(P\left(\mathbf{y} | \mathbf{x} ; \theta_{i n}^{(k)}\right) \| P\left(\mathbf{y} | \mathbf{x} ; \theta_{i n}^{*}\right)\right)\right] \end{aligned}</script><hr>
+<h2 id="Classical-Structured-Prediction-Losses-for-Sequence-to-Sequence-Learning"><a href="#Classical-Structured-Prediction-Losses-for-Sequence-to-Sequence-Learning" class="headerlink" title="[Classical Structured Prediction Losses for Sequence to Sequence Learning]"></a>[Classical Structured Prediction Losses for Sequence to Sequence Learning]</h2><p>深入探讨了各种经典structured learning的loss在NN-based的生成任务下的效果。结论是传统的这些loss仍然具有很强的竞争力。</p>
+<p>论文一共提到几种loss：</p>
+<p><img src="/images/15715353551772.jpg" width="80%" height="50%"></p>
+<p>$\mathbf{x}$是source sentence；$\mathbf{u}$是模型生成的句子；$\mathbf{t}$是reference。</p>
+<p>公式1是普通的teacher forcing的loss；公式2是label smoothing之后的loss。<br>公式3是sentence-level的loss，其中$\mathbf{u}^*$是指与reference计算后最高的candidate。公式的意思也即最大化$\mathbf{u}^*$的概率而最小化其他的概率，或者说希望该$\mathbf{u}^*$与其他candidate之间有较大差异margin。</p>
+<p>公式4的cost是$\operatorname{cost}(\mathbf{t}, \mathbf{u})=1-\mathrm{BLEU}(\mathbf{t}, \mathbf{u})$；也即最小化那些bleu小的。相对公式3而言，能够提高多个cost小的candidate的概率，而公式3只能focus在一个sequence。</p>
+<p>公式5强迫model中最高分数（也即概率最高的）$\hat{\mathbf{u}}$与实际上和reference相似度最高的$\mathbf{u}^*$之间要有margin。</p>
+<p>公式6是对5的改进，希望能够focus到多个candidate。</p>
+<p>公式7是对seqNLL的改进，直观上我们希望能够根据cost的大小去放大或缩小loss。</p>
+<p>论文还提到将token-level和sequence-level的结合方法：</p>
+<p>①weighted</p>
+<p>$\mathcal{L}_{\text {Weighted }}=\alpha \mathcal{L}_{\text {TokLS }}+(1-\alpha) \mathcal{L}_{\text {Risk }}$</p>
+<p>②先用token-level pretrain，然后用sequence-level fine-tune</p>
+<p>$\mathcal{L}_{\text {constrained }}=\left\{\begin{array}{ll}{\mathcal{L}_{\text {Risk }}} &amp; {\mathcal{L}_{\text {TokLs }} \leq \mathcal{L}_{\text {TokLS }}^{b}} \\ {\mathcal{L}_{\text {TokLs }}} &amp; {\text { otherwise }}\end{array}\right.$</p>
+<p>实验的几个结论：</p>
+<p>①sequence-level的loss比所有的token-level的loss更好：</p>
+<p><img src="/images/15715358862970.jpg" width="40%" height="50%"></p>
+<p>②sequence-level和token-level结合的loss会比单独用更好：</p>
+<p><img src="/images/15715359137599.jpg" width="40%" height="50%"><br>其中weighted的会constrained的更好。</p>
+<p>③对于pretrain再fine-tune的方法，对比使用label-smoothing和不使用LS的模型作为初始化，使用LS的模型在初始阶段performance更高；同时在fine-tune后的提升也更大。</p>
+<p><img src="/images/15715359541812.jpg" width="40%" height="50%"></p>
+<p>④在生成candidate过程中有两种，一种是beam search，另一种是sample。beam search的表现总是更好</p>
+<p><img src="/images/15715359771917.jpg" width="50%" height="50%"></p>
+<p>⑤Risk与BSO的对比：Risk更优。</p>
+<p><img src="/images/15715360031714.jpg" width="40%" height="50%"></p>
+<hr>
+<h2 id="Learning-as-Search-Optimization-Approximate-Large-Margin-Methods-for-Structured-Prediction"><a href="#Learning-as-Search-Optimization-Approximate-Large-Margin-Methods-for-Structured-Prediction" class="headerlink" title="[Learning as Search Optimization: Approximate Large Margin Methods for Structured Prediction]"></a>[Learning as Search Optimization: Approximate Large Margin Methods for Structured Prediction]</h2><p>BSO的早期版本。</p>
+<p>基本思想是：在生成过程中，如果遇到正确的y不在队列中，则更新参数，更新方法是正确的和错误的相减，同时清空queue，重新插入正确的y再继续生成。</p>
+<p><img src="/images/15715360816007.jpg" width="60%" height="50%"></p>
+<p>参数更新：</p>
+<script type="math/tex; mode=display">\Delta=\sum_{n \in s i b s} \frac{\mathbf{\Phi}(x, n)}{|s i b s|}-\sum_{n \in n o d e s} \frac{\mathbf{\Phi}(x, n)}{|n o d e s|}</script><hr>
+<h2 id="Professor-Forcing-A-New-Algorithm-for-Training-Recurrent-Networks"><a href="#Professor-Forcing-A-New-Algorithm-for-Training-Recurrent-Networks" class="headerlink" title="[Professor Forcing: A New Algorithm for Training Recurrent Networks]"></a>[Professor Forcing: A New Algorithm for Training Recurrent Networks]</h2><p>通过GAN训练RNN。具体操作是利用GAN强迫模型减少 teacher forcing和self-generated 行为的差异。这样可以缓解exposure bias。</p>
+<p><img src="/images/15715365606455.jpg" width="70%" height="50%"></p>
+<p>具体做法：一个RNN跑teacher forcing以及free running生成两个句子，另一个双向RNN将生成出来的句子/hidden state，过一遍RNN将hidden state拼起来作为输出传入到discriminator。</p>
+<hr>
+<h2 id="Style-Transformer-Unpaired-Text-Style-Transfer-without-Disentangled-Latent-Representation"><a href="#Style-Transformer-Unpaired-Text-Style-Transfer-without-Disentangled-Latent-Representation" class="headerlink" title="[Style Transformer: Unpaired Text Style Transfer without Disentangled Latent Representation]"></a>[Style Transformer: Unpaired Text Style Transfer without Disentangled Latent Representation]</h2><p>提出一种style transfer的方法。去掉latent variable，直接用transformer建模。同时在训练方法上也有创新。</p>
+<p>传统方法：encoder-decoder结构。encoder将文本映射为style-independent的latent representation；decoder通过该representation加上一个style variable生成目标sequence。这些方法都专注于如何在隐空间分离style-independent内容和style本身。</p>
+<p>但这种方法有几个问题：<br>难以判断分离的情况；这种分离似乎没有必要，因为decoder可以通过直接overwriter原先的style从未分离的latent representation中生成想要的style，；向量表示的limited capacity，并不能很好保存丰富的信息；所有现存的方法都假设输入句子通过一个固定大小的latent vector encode，没办法直接用attention；现存的方法都采用RNN，难以捕获到长程依赖。</p>
+<p>本文直接对句子建模而不采用latent representation的方案；直接使用transformer解决长程依赖问题；在训练方法上也有所创新。</p>
+<p>传统方法与本文提出的方法的对比：传统方法是在encode时将生成的vector分为两个部分，一个是content一个是style，然后通过替换style，再用decode去生成y；而在transformer是直接在句子前面插入一个style的表示。</p>
+<p><img src="/images/15715367458802.jpg" width="50%" height="50%"></p>
+<p>Notation:<br>记$\left\{\mathcal{D}_{i}\right\}_{i=1}^{K}$为拥有K个style的数据集；其中$\mathbf{s}^{(i)}$为第i个style；则style transfer的定义：给定任意一个句子$\mathbf{x}$，以及一个想要的style $\widehat{\mathbf{s}} \in\left\{\mathbf{s}^{(i)}\right\}_{i=1}^{K}$，能够生成新的$\hat{\mathbf{x}}$，同时尽可能保存更多的$\mathbf{x}$的信息。记$f_{\theta}(\mathbf{x}, \mathbf{s})$为映射函数，将$\mathbf{x}$映射成$\mathbf{s}$的$\hat{\mathbf{x}}$。</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><p>在style transformer中，encoder将$\mathbf{x}=\left(x_{1}, x_{2}, \ldots, x_{n}\right)$ encode成$\mathbf{z}=\left(z_{1}, z_{2}, \ldots, z_{n}\right)$，而decoder则通过autoregressive的方式生成$\mathbf{y}=\left(y_{1}, y_{2}, \dots, y_{n}\right)$。形式化为：</p>
+<script type="math/tex; mode=display">p_{\theta}(\mathbf{y} | \mathbf{x})=\prod_{t=1}^{m} p_{\theta}\left(y_{t} | \mathbf{z}, y_{1}, \ldots, y_{t-1}\right)</script><p>为了保证有style control，在输入前面添加一个style的embedding。</p>
+<p>由于不存在平行语料，因此通过discriminator来做监督。也即用discriminator来判断源句子的style和生成句子的style的不同。该discriminator也是一个transformer encoder，尝试学会分辨不同style的句子，而生成器则尝试去最大化discriminator对所在style的判别概率。</p>
+<p>本文提出了两种discriminator：<br>①conditional discriminator：每次输入$\mathbf{x}$和$\mathbf{s}$，判别器$d_{\phi}(\mathbf{x}, \mathbf{s})$要求回答$\mathbf{x}$和是不是对应$\mathbf{s}$的style。</p>
+<p>②Multi-class Discriminator：<br>只输入$\mathbf{x}$，判别器$d_{\phi}(\mathbf{x})$要求回答是哪个style。</p>
+<h4 id="训练方法"><a href="#训练方法" class="headerlink" title="训练方法"></a>训练方法</h4><h5 id="Discriminator-Learning"><a href="#Discriminator-Learning" class="headerlink" title="Discriminator Learning"></a>Discriminator Learning</h5><p>主要是训练辨别原始输入$\mathbf{x}$以及reconstructed的输入$\mathbf{y}$和$\widehat{\mathbf{y}}=f_{\theta}(\mathbf{x}, \widehat{\mathbf{s}})$之间的差异。其中$\widehat{\mathbf{y}}$是$\mathbf{x}$加上另一个不同的style所生成的句子。而reconstructed $\mathbf{y}$则是在输入$\mathbf{x}$以及相对应的style的情况下重建相同style的句子。</p>
+<p>Discriminator Learning的算法：</p>
+<p><img src="/images/15715377655239.jpg" width="60%" height="50%"></p>
+<h5 id="Style-Transformer-Learning"><a href="#Style-Transformer-Learning" class="headerlink" title="Style Transformer Learning"></a>Style Transformer Learning</h5><p>不同case的$f_{\theta}(\mathbf{x}, \widehat{\mathbf{s}})$有不同算法。一共有两种case，$\mathbf{s}=\widehat{\mathbf{s}}$ or $\mathbf{s} \neq \widehat{\mathbf{s}}$</p>
+<p>如果$\mathbf{s}=\widehat{\mathbf{s}}$，也即输入的style和$\mathbf{x}$原先的style是一致的，则我们希望style transformer能够重建该句子。也即：</p>
+<script type="math/tex; mode=display">\mathcal{L}_{self}(\theta)=-p_{\theta}(\mathbf{y}=\mathbf{x} | \mathbf{x}, \mathbf{s})</script><p>如果$\mathbf{s} \neq \widehat{\mathbf{s}}$，则有两个loss：</p>
+<p>①Cycle Reconstruction：希望模型尽可能保存原始输入$\mathbf{x}$的信息，那么将生成的$\widehat{\mathbf{y}}$重新输入进模型中，且给定$\mathbf{x}$的style，希望能够重建回原先的$\mathbf{x}$。也即：</p>
+<script type="math/tex; mode=display">\mathcal{L}_{c y c l e}(\theta)=-p_{\theta}\left(\mathbf{y}=\mathbf{x} | f_{\theta}(\mathbf{x}, \widehat{\mathbf{s}}), \mathbf{s}\right)</script><p>②Style Controlling：如果仅仅是上面的方法，那么模型就会学会直接将输入copy到输出就能将loss降得很低，为了防止这个问题，则将$\widehat{\mathbf{y}}$输入到discriminator以希望最大化$\widehat{\mathbf{s}}$的概率。</p>
+<p>总的来说：<br><img src="/images/15715381498182.jpg" width="60%" height="50%"></p>
+<p>将algorithm1和algorithm2结合则有总的算法：</p>
+<p><img src="/images/15715383038673.jpg" width="60%" height="50%"></p>
+<hr>
+<h2 id="Style-Transfer-from-Non-Parallel-Text-by-Cross-Alignment"><a href="#Style-Transfer-from-Non-Parallel-Text-by-Cross-Alignment" class="headerlink" title="[Style Transfer from Non-Parallel Text by Cross-Alignment]"></a>[Style Transfer from Non-Parallel Text by Cross-Alignment]</h2><p>style transfer的一个方法。其中心思想是希望能够将内容和style分离开来。其具体做法是将一个句子和其style的indicator作为输入输给encoder，映射到一个style-independent的content representation；接着将该表示传入到一个style-dependent的decoder生成句子。</p>
+<p>如图有四种可能：在映射到z后，如果与original style绑定，则希望能够重建；如果与不同style绑定，则希望能在分布上有尽可能align（通过GAN的思想实现）。</p>
+<p><img src="/images/15715384140483.jpg" width="70%" height="50%"></p>
+<h3 id="Aligned-auto-encoder"><a href="#Aligned-auto-encoder" class="headerlink" title="Aligned auto-encoder"></a>Aligned auto-encoder</h3><p>其实就是重建。</p>
+<script type="math/tex; mode=display">\begin{aligned} \boldsymbol{\theta}^{*} &=\underset{\boldsymbol{\theta}}{\arg \min } \mathcal{L}_{\text {rec }}\left(\boldsymbol{\theta}_{E}, \boldsymbol{\theta}_{G}\right) \\ \text { s.t. } E\left(\boldsymbol{x}_{1}, \boldsymbol{y}_{1}\right) & \stackrel{\mathrm{d}}{=} E\left(\boldsymbol{x}_{2}, \boldsymbol{y}_{2}\right) \quad \boldsymbol{x}_{1} \sim \boldsymbol{X}_{1}, \boldsymbol{x}_{2} \sim \boldsymbol{X}_{2} \end{aligned}</script><p>同时，为了使z尽量是style-independent的，使用一个GAN来监督。</p>
+<script type="math/tex; mode=display">\mathcal{L}_{\mathrm{adv}}\left(\boldsymbol{\theta}_{E}, \boldsymbol{\theta}_{D}\right)=\mathbb{E}_{\boldsymbol{x}_{1} \sim \boldsymbol{X}_{1}}\left[-\log D\left(E\left(\boldsymbol{x}_{1}, \boldsymbol{y}_{1}\right)\right)\right]+\mathbb{E}_{\boldsymbol{x}_{2} \sim \boldsymbol{X}_{2}}\left[-\log \left(1-D\left(E\left(\boldsymbol{x}_{2}, \boldsymbol{y}_{2}\right)\right)\right)\right]</script><p>其实z的形式是RNN的最后一个state。</p>
+<p>最终的loss则为：<br>$\min _{E, G} \max _{D} \mathcal{L}_{\mathrm{rec}}-\lambda \mathcal{L}_{\mathrm{adv}}$</p>
+<h3 id="Cross-aligned-auto-encoder"><a href="#Cross-aligned-auto-encoder" class="headerlink" title="Cross-aligned auto-encoder"></a>Cross-aligned auto-encoder</h3><p>希望在风格转换后的句子能够与所转换的风格的句子的<strong>分布</strong>一致。</p>
+<p><img src="/images/15715386888191.jpg" width="70%" height="50%"></p>
+<p>采用的是professor forcing的做法：<br>如图，encoder在生成两个不同句子的表示后，与同一风格y绑定作为decoder的初始输入，对于句子和风格相同的情况（上半部分），则使用teacher forcing，对于句子和风格不同的情况下（下半部分）则使用self-fed的方式生成transferred sentence，将所有的hidden state收集起来用discriminator做判别，模型希望能够生成的hidden state能够尽量让discriminator分辨不出来，也即对于不同的内容z，在给定同一个风格的情况下，其表示接近，也即分布接近）。</p>
+<p>最终的算法：</p>
+<p><img src="/images/15715387985967.jpg" width="90%" height="50%"></p>
+<hr>
+<h2 id="本周论文小结"><a href="#本周论文小结" class="headerlink" title="[本周论文小结]"></a>[本周论文小结]</h2><p>似乎有一段时间没有更新了。原本的打算是继续做一些翻译相关的工作，但似乎由于资源限制没法做了。大概接下来一段时间会专注于style transfer。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    林泽辉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.linzehui.me/2019/10/20/论文/每周论文32/" title="每周论文32">http://www.linzehui.me/2019/10/20/论文/每周论文32/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://www.linzehui.me" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
+          
+            <a href="/tags/Transformer/" rel="tag"> <i class="fa fa-tag"></i> Transformer</a>
+          
+            <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
+          
+            <a href="/tags/NMT/" rel="tag"> <i class="fa fa-tag"></i> NMT</a>
+          
+            <a href="/tags/structured-learning/" rel="tag"> <i class="fa fa-tag"></i> structured learning</a>
+          
+            <a href="/tags/domain-adaptation/" rel="tag"> <i class="fa fa-tag"></i> domain adaptation</a>
+          
+            <a href="/tags/style-transfer/" rel="tag"> <i class="fa fa-tag"></i> style transfer</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/20/诗词&句/每周诗词39/" rel="next" title="每周诗词39">
+                <i class="fa fa-chevron-left"></i> 每周诗词39
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA0OC8xNjU3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">201</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Incremental-Parsing-with-the-Perceptron-Algorithm"><span class="nav-number">1.</span> <span class="nav-text">[Incremental Parsing with the Perceptron Algorithm]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterative-Dual-Domain-Adaptation-for-Neural-Machine-Translation"><span class="nav-number">2.</span> <span class="nav-text">[Iterative Dual Domain Adaptation for Neural Machine Translation]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Classical-Structured-Prediction-Losses-for-Sequence-to-Sequence-Learning"><span class="nav-number">3.</span> <span class="nav-text">[Classical Structured Prediction Losses for Sequence to Sequence Learning]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Learning-as-Search-Optimization-Approximate-Large-Margin-Methods-for-Structured-Prediction"><span class="nav-number">4.</span> <span class="nav-text">[Learning as Search Optimization: Approximate Large Margin Methods for Structured Prediction]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Professor-Forcing-A-New-Algorithm-for-Training-Recurrent-Networks"><span class="nav-number">5.</span> <span class="nav-text">[Professor Forcing: A New Algorithm for Training Recurrent Networks]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Style-Transformer-Unpaired-Text-Style-Transfer-without-Disentangled-Latent-Representation"><span class="nav-number">6.</span> <span class="nav-text">[Style Transformer: Unpaired Text Style Transfer without Disentangled Latent Representation]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Method"><span class="nav-number">6.1.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模型"><span class="nav-number">6.1.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#训练方法"><span class="nav-number">6.1.2.</span> <span class="nav-text">训练方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Discriminator-Learning"><span class="nav-number">6.1.2.1.</span> <span class="nav-text">Discriminator Learning</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Style-Transformer-Learning"><span class="nav-number">6.1.2.2.</span> <span class="nav-text">Style Transformer Learning</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Style-Transfer-from-Non-Parallel-Text-by-Cross-Alignment"><span class="nav-number">7.</span> <span class="nav-text">[Style Transfer from Non-Parallel Text by Cross-Alignment]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Aligned-auto-encoder"><span class="nav-number">7.1.</span> <span class="nav-text">Aligned auto-encoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cross-aligned-auto-encoder"><span class="nav-number">7.2.</span> <span class="nav-text">Cross-aligned auto-encoder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本周论文小结"><span class="nav-number">8.</span> <span class="nav-text">[本周论文小结]</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
