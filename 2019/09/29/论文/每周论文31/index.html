@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15698112346426.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15698113062324.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15698124950344.jpg">
-<meta property="og:updated_time" content="2019-09-30T03:02:22.000Z">
+<meta property="og:updated_time" content="2019-10-25T12:16:12.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文31">
 <meta name="twitter:description" content="本周论文：  Quantifying Exposure Bias for Neural Language Generation Sequence-to-Sequence Learning as Beam-Search Optimization Learning to Stop in Structured Prediction for Neural Machine Translation Sched">
@@ -341,8 +341,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-09-30T11:02:22+08:00">
-                2019-09-30
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-25T20:16:12+08:00">
+                2019-10-25
               </time>
             
           </span>
@@ -401,7 +401,7 @@
 <li>引入sentence-level cost，具体也即当ground truth掉出beam size的窗口时会计算ground truth与beam search窗口内分数最低的句子的前缀的BLEU，如果两个前缀很相似，则该loss就会小一些，否则会大一些。也即在loss的前面加了一个scale，能够动态放大或缩小loss。</li>
 </ol>
 <h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><p><img src="/images/15697458311045.jpg" width="60%" height="50%"></p>
-<p>如图，黄色的是ground truth。在训练过程中，使用beam search生成，当ground truth在beam size内，则不计算loss，继续生成下去；当ground truth掉出beam size了，如图第4个step，则计算ground truth所对应的分数和beam size内分数最小的差距的loss，其目的是希望能够让模型将ground truth排进beam size，计算loss的方法是：</p>
+<p>如图，黄色的是ground truth。在训练过程中，使用beam search生成，当ground truth在beam size内，则不计算loss，继续生成下去；当ground truth掉出beam size了，如图第4个step，则计算ground truth所对应的分数和beam size内分数最小的差距的loss，其目的是希望能够让模型将ground truth排进beam size，计算loss的方法是：</p>
 <script type="math/tex; mode=display">\mathcal{L}(f)=
 \quad \sum_{t=1}^{T} \Delta\left(\hat{y}_{1 : t}^{(K)}\right)\left[1-f\left(y_{t}, \boldsymbol{h}_{t-1}\right)+f\left(\hat{y}_{t}^{(K)}, \hat{\boldsymbol{h}}_{t-1}^{(K)}\right)\right]</script><p>其中$\Delta$所代表的是两个$y$所对应的前缀的匹配程度，用以缩放loss的大小，比如可以将$\Delta$设为1-BLEU。</p>
 <p>当ground truth掉出beam size时，显然不能再用模型生成的词去预测接下来的词，因此在step=4时用ground truth继续生成下去，直到再次出现掉出beam size的情况。</p>

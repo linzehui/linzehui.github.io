@@ -474,8 +474,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-05-28T11:02:38+08:00">
-                2019-05-28
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-25T20:27:13+08:00">
+                2019-10-25
               </time>
             
           </span>
@@ -1045,8 +1045,8 @@ $\mathbf{A}_{i, j}^{\mathrm{rel}}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-05-08T15:29:02+08:00">
-                2019-05-08
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-25T20:16:57+08:00">
+                2019-10-25
               </time>
             
           </span>
@@ -1081,9 +1081,9 @@ $\mathbf{A}_{i, j}^{\mathrm{rel}}=\underbrace{\mathbf{E}_{x_{i}}^{\top} \mathbf{
       
         
           
-          前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。如：
+          前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。如：
 找了一圈网上没有找到其原因，已经在论坛提问了。我的解决方案是显式对其进行初始化：
-1234567if args.init == 'uniform':    nn.init.uniform_(self.u, -args.init_range, args.init_range)    nn.init.uniform_(self.v, -args.init_range, args.init_range)elif args.init == 'normal':    nn.init.norm
+1234567if args.init == 'uniform':    nn.init.uniform_(self.u, -args.init_range, args.init_range)    nn.init.uniform_(self.v, -args.init_range, args.init_range)elif args.init == 'normal':    nn.init.norma
           ...
           <!--noindex-->
           <div class="post-button text-center">

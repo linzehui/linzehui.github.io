@@ -107,7 +107,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15715384140483.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15715386888191.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15715387985967.jpg">
-<meta property="og:updated_time" content="2019-10-20T03:12:17.398Z">
+<meta property="og:updated_time" content="2019-10-20T08:12:04.271Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文32">
 <meta name="twitter:description" content="本周论文：  Incremental Parsing with the Perceptron Algorithm Iterative Dual Domain Adaptation for Neural Machine Translation Classical Structured Prediction Losses for Sequence to Sequence Learning Learni">
@@ -353,7 +353,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-20T11:12:17+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-20T16:12:04+08:00">
                 2019-10-20
               </time>
             
@@ -436,7 +436,7 @@
 <p><img src="/images/15715360816007.jpg" width="60%" height="50%"></p>
 <p>参数更新：</p>
 <script type="math/tex; mode=display">\Delta=\sum_{n \in s i b s} \frac{\mathbf{\Phi}(x, n)}{|s i b s|}-\sum_{n \in n o d e s} \frac{\mathbf{\Phi}(x, n)}{|n o d e s|}</script><hr>
-<h2 id="Professor-Forcing-A-New-Algorithm-for-Training-Recurrent-Networks"><a href="#Professor-Forcing-A-New-Algorithm-for-Training-Recurrent-Networks" class="headerlink" title="[Professor Forcing: A New Algorithm for Training Recurrent Networks]"></a>[Professor Forcing: A New Algorithm for Training Recurrent Networks]</h2><p>通过GAN训练RNN。具体操作是利用GAN强迫模型减少 teacher forcing和self-generated 行为的差异。这样可以缓解exposure bias。</p>
+<h2 id="Professor-Forcing-A-New-Algorithm-for-Training-Recurrent-Networks"><a href="#Professor-Forcing-A-New-Algorithm-for-Training-Recurrent-Networks" class="headerlink" title="[Professor Forcing: A New Algorithm for Training Recurrent Networks]"></a>[Professor Forcing: A New Algorithm for Training Recurrent Networks]</h2><p>通过GAN训练RNN。具体操作是利用GAN强迫模型减少 teacher forcing和self-generated 行为的差异。这样可以缓解exposure bias，同时还能够帮助模型建模长程依赖。</p>
 <p><img src="/images/15715365606455.jpg" width="70%" height="50%"></p>
 <p>具体做法：一个RNN跑teacher forcing以及free running生成两个句子，另一个双向RNN将生成出来的句子/hidden state，过一遍RNN将hidden state拼起来作为输出传入到discriminator。</p>
 <hr>

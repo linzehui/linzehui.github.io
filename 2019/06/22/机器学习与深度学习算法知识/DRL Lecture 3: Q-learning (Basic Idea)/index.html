@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15612553664628.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15612559617307.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15612560018865.jpg">
-<meta property="og:updated_time" content="2019-06-23T09:01:32.000Z">
+<meta property="og:updated_time" content="2019-10-25T12:16:26.905Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DRL Lecture 3:Q-learning (Basic Idea)">
 <meta name="twitter:description" content="简单介绍Q-learning的思想以及相关的训练tips。 是什么与Policy Gradient不同的是，Q-Learning是属于value based，也即学习一个critic去估计特定actor π在某个state s下的累积reward。 注意到Q-learning虽然只学习了critic，但仍然可以用于做决策。 首先是如何预估critic？critic的本质就是函数映射$V^{\pi}">
@@ -342,8 +342,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-06-23T17:01:32+08:00">
-                2019-06-23
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-25T20:16:26+08:00">
+                2019-10-25
               </time>
             
           </span>
@@ -399,8 +399,7 @@
 <p>另一个问题是如何收集数据？</p>
 <p>由于action是基于Q函数的，也即每次都采用贪心的策略，会使得在初始情况下固定的action会一直出现，无法探索到其他情况。因此采用两种策略：</p>
 <p>①epsilon greedy：</p>
-<p><script type="math/tex">a=\left\{\begin{aligned} \arg \max _{a} Q(s, a), & \text { with probability } 1-\varepsilon \\ \text {random}, & \text { otherwise } \end{aligned}\right.</script></p>
-<p>其中$\varepsilon$随着时间而逐渐变小。</p>
+<script type="math/tex; mode=display">a=\left\{\begin{aligned} \arg \max _{a} Q(s, a), & \text { with probability } 1-\varepsilon \\ \text {random}, & \text { otherwise } \end{aligned}\right.</script><p>其中$\varepsilon$随着时间而逐渐变小。</p>
 <p>②boltzmann exploration：<br>按概率采样</p>
 <script type="math/tex; mode=display">P(a | s)=\frac{\exp (Q(s, a))}{\sum_{a} \exp (Q(s, a))}</script><p>还有一个小技巧用于更好利用sample，也即replay buffer：将每次π与环境交互的episode都放在一个buffer里面，可以都用来学习Q函数，即使数据来自不同的policy也没关系。这和off-policy有点像。为什么可以这么用一种解释是这样可以使得数据更diverse，同时减少sample次数加快训练。</p>
 <p><img src="/images/15612559617307.jpg" width="40%" height="50%"></p>

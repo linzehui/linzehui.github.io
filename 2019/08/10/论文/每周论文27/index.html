@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15654455360307.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15654455687375.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15654473154044.jpg">
-<meta property="og:updated_time" content="2019-08-11T14:19:40.000Z">
+<meta property="og:updated_time" content="2019-10-25T12:16:14.092Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每周论文27">
 <meta name="twitter:description" content="本周论文：  Curriculum Learning for Domain Adaptation in Neural Machine Translation Dynamically Composing Domain-Data Selection with Clean-Data Selection by “Co-Curricular Learning” for Neural Machine Tran">
@@ -341,8 +341,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-08-11T22:19:40+08:00">
-                2019-08-11
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-25T20:16:14+08:00">
+                2019-10-25
               </time>
             
           </span>
@@ -404,7 +404,7 @@
 <h3 id="domain-noise的测量"><a href="#domain-noise的测量" class="headerlink" title="domain/noise的测量"></a>domain/noise的测量</h3><p>一般是使用language model来衡量。</p>
 <p>假设我们有一个general-domain的语言模型$\widetilde{\vartheta}$和一个in-domain的语言模型$\widehat{\vartheta}$，对于一个句子而言其domain相关性就有：</p>
 <script type="math/tex; mode=display">\varphi(x ; \widetilde{\vartheta}, \widehat{\vartheta})=\frac{\log P(x ; \widehat{\vartheta})-\log P(x ; \widetilde{\vartheta})}{|x|}</script><p>同样，假设我们有$\widetilde{\theta}$的NMT baseline模型，训练于有噪声的数据；$\widehat{\theta}$则是在干净的数据上基于$\widetilde{\theta}$ fine-tune的NMT模型，则衡量noise level有：</p>
-<script type="math/tex; mode=display">\phi(x, y ; \widetilde{\theta}, \widehat{\theta})=\frac{\log P(y | x ; \widehat{\theta})-\log P(y | x ; \widetilde{\theta})}{|y|}</script><h3 id="问题设置"><a href="#问题设置" class="headerlink" title="问题设置"></a>问题设置</h3><p><br>记$\widetilde{D_{X Y}}$是背景双语数据集，可以是从网上爬下来的，有不同domain和noise；$D_{X}^{\mathrm{ID}}$是in-domain的单语语料，可以较小，我们可以用这个来对domain relevance来排序；$\widehat{D_{X Y}^{\mathrm{OD}}}$是小的，可信任（干净）的out-of-domain的平行语料，我们可以用这份数据来语料的噪声程度做排序；$\widehat{D_{X Y}^{\mathrm{ID}}}$则是双语的in-domain语料，我们在这里假设in-domain的双语预料不存在，希望借助其他三个来学会domain adaptation。</p>
+<script type="math/tex; mode=display">\phi(x, y ; \widetilde{\theta}, \widehat{\theta})=\frac{\log P(y | x ; \widehat{\theta})-\log P(y | x ; \widetilde{\theta})}{|y|}</script><h3 id="问题设置"><a href="#问题设置" class="headerlink" title="问题设置"></a>问题设置</h3><p>记$\widetilde{D_{X Y}}$是背景双语数据集，可以是从网上爬下来的，有不同domain和noise；$D_{X}^{\mathrm{ID}}$是in-domain的单语语料，可以较小，我们可以用这个来对domain relevance来排序；$\widehat{D_{X Y}^{\mathrm{OD}}}$是小的，可信任（干净）的out-of-domain的平行语料，我们可以用这份数据来语料的噪声程度做排序；$\widehat{D_{X Y}^{\mathrm{ID}}}$则是双语的in-domain语料，我们在这里假设in-domain的双语预料不存在，希望借助其他三个来学会domain adaptation。</p>
 <h3 id="Co-Curricular-Learning"><a href="#Co-Curricular-Learning" class="headerlink" title="Co-Curricular Learning"></a>Co-Curricular Learning</h3><p>$\mathcal{D}_{\lambda}^{\phi}(t, D)$ 是一个selection function，在时间t上返回top λ(t)的经过排序的数据作为训练。</p>
 <p>这里使用pace function：</p>
 <script type="math/tex; mode=display">\lambda(t)=0.5^{t / H}</script><p>注意这是随着时间递减的。也即我们希望遇到后面越domain相关/数据越干净。一开始是训练一个general的表示，可以理解成是一个initialization，然后后面再用好的数据去fine-tune。</p>
