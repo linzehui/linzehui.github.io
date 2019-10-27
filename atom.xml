@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.linzehui.me/"/>
-  <updated>2019-10-20T08:12:04.271Z</updated>
+  <updated>2019-10-27T13:25:41.432Z</updated>
   <id>http://www.linzehui.me/</id>
   
   <author>
@@ -15,6 +15,96 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>每周碎片知识29</title>
+    <link href="http://www.linzehui.me/2019/10/27/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8629/"/>
+    <id>http://www.linzehui.me/2019/10/27/碎片知识/每周碎片知识29/</id>
+    <published>2019-10-27T13:15:14.000Z</published>
+    <updated>2019-10-27T13:25:41.432Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;条件数&quot;&gt;&lt;a href=&quot;#条件数&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="attention" scheme="http://www.linzehui.me/tags/attention/"/>
+    
+      <category term="条件数" scheme="http://www.linzehui.me/tags/%E6%9D%A1%E4%BB%B6%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周论文33</title>
+    <link href="http://www.linzehui.me/2019/10/27/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8733/"/>
+    <id>http://www.linzehui.me/2019/10/27/论文/每周论文33/</id>
+    <published>2019-10-27T03:41:30.000Z</published>
+    <updated>2019-10-27T13:33:25.580Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本周论文：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Toward Controlled Generation of Text&lt;/li&gt;
+&lt;li&gt;Style Transfer in Text: Exploration and
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="style transfer" scheme="http://www.linzehui.me/tags/style-transfer/"/>
+    
+      <category term="分类" scheme="http://www.linzehui.me/tags/%E5%88%86%E7%B1%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于hexo无法搜索的详细解决方案</title>
+    <link href="http://www.linzehui.me/2019/10/27/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E5%85%B3%E4%BA%8Ehexo%E6%97%A0%E6%B3%95%E6%90%9C%E7%B4%A2%E7%9A%84%E8%AF%A6%E7%BB%86%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>http://www.linzehui.me/2019/10/27/杂七杂八/关于hexo无法搜索的详细解决方案/</id>
+    <published>2019-10-27T02:57:13.000Z</published>
+    <updated>2019-10-27T13:38:01.599Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;遇到hexo无法搜索的问题已经好长时间了，每次点击搜索都会一直显示加载的圈圈。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/15721451404498.png&quot; width=&quot;50%&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="杂七杂八" scheme="http://www.linzehui.me/tags/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
+    
+      <category term="hexo" scheme="http://www.linzehui.me/tags/hexo/"/>
+    
+      <category term="遇到的问题" scheme="http://www.linzehui.me/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
   
   <entry>
     <title>每周论文32</title>
@@ -508,102 +598,6 @@
       <category term="assert" scheme="http://www.linzehui.me/tags/assert/"/>
     
       <category term="global" scheme="http://www.linzehui.me/tags/global/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周论文27</title>
-    <link href="http://www.linzehui.me/2019/08/10/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8727/"/>
-    <id>http://www.linzehui.me/2019/08/10/论文/每周论文27/</id>
-    <published>2019-08-10T12:57:30.000Z</published>
-    <updated>2019-10-25T12:16:14.092Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;本周论文：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Curriculum Learning for Domain Adaptation in Neural Machine Translation&lt;/li&gt;
-&lt;li&gt;Dynamically Composing Domain-Data
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
-    
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-      <category term="Domain Adaptation" scheme="http://www.linzehui.me/tags/Domain-Adaptation/"/>
-    
-      <category term="Pseudo Labeling" scheme="http://www.linzehui.me/tags/Pseudo-Labeling/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Curriculum Learning schedule 总结</title>
-    <link href="http://www.linzehui.me/2019/08/09/%E8%AE%BA%E6%96%87/Curriculum%20Learning%20schedule%E6%80%BB%E7%BB%93/"/>
-    <id>http://www.linzehui.me/2019/08/09/论文/Curriculum Learning schedule总结/</id>
-    <published>2019-08-09T14:32:30.000Z</published>
-    <updated>2019-08-10T03:31:23.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Curriculum Learning主要有两块：①sample的难度定义；②设定特定的schedule&lt;/p&gt;
-&lt;p&gt;本文总结一下不同论文中出现的Curriculum Learning schedule，并将其分为几类。&lt;/p&gt;
-&lt;p&gt;不定期更新…&lt;/p&gt;
-&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
-    
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周碎片知识26</title>
-    <link href="http://www.linzehui.me/2019/08/04/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8626/"/>
-    <id>http://www.linzehui.me/2019/08/04/碎片知识/每周碎片知识26/</id>
-    <published>2019-08-04T11:13:14.000Z</published>
-    <updated>2019-08-04T11:36:44.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;Python&quot;&gt;&lt;a href=&quot;#Python&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="http://www.linzehui.me/tags/Linux/"/>
-    
-      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="Python" scheme="http://www.linzehui.me/tags/Python/"/>
-    
-      <category term="Mac" scheme="http://www.linzehui.me/tags/Mac/"/>
-    
-      <category term="iTerm" scheme="http://www.linzehui.me/tags/iTerm/"/>
     
   </entry>
   

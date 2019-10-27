@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Paper,每周论文阅读,style transfer,分类," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Weekly Review" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本周论文：  Toward Controlled Generation of Text Style Transfer in Text: Exploration and Evaluation Unsupervised Text Style Transfer using Language Models as Discriminators Unpaired Sentiment-to-Sentiment">
+<meta name="keywords" content="Paper,每周论文阅读,style transfer,分类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周论文33">
+<meta property="og:url" content="http://www.linzehui.me/2019/10/27/论文/每周论文33/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="本周论文：  Toward Controlled Generation of Text Style Transfer in Text: Exploration and Evaluation Unsupervised Text Style Transfer using Language Models as Discriminators Unpaired Sentiment-to-Sentiment">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.linzehui.me/images/15721482835511.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721769663657.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721791494071.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721793478258.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721795128794.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721795998974.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721796925697.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721797724438.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721805892169.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721806118504.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721806660683.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721807128106.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721807318957.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721807750198.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721809468995.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/15721820144438.jpg">
+<meta property="og:updated_time" content="2019-10-27T13:33:25.580Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每周论文33">
+<meta name="twitter:description" content="本周论文：  Toward Controlled Generation of Text Style Transfer in Text: Exploration and Evaluation Unsupervised Text Style Transfer using Language Models as Discriminators Unpaired Sentiment-to-Sentiment">
+<meta name="twitter:image" content="http://www.linzehui.me/images/15721482835511.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2019/10/27/论文/每周论文33/"/>
+
+
+
+
+
+  <title>每周论文33 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2019/10/27/论文/每周论文33/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">每周论文33</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-27T11:41:30+08:00">
+                2019-10-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-27T21:33:25+08:00">
+                2019-10-27
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本周论文：</p>
+<ol>
+<li>Toward Controlled Generation of Text</li>
+<li>Style Transfer in Text: Exploration and Evaluation</li>
+<li>Unsupervised Text Style Transfer using Language Models as Discriminators</li>
+<li>Unpaired Sentiment-to-Sentiment Translation: A Cycled Reinforcement Learning Approach</li>
+<li>Delete, Retrieve, Generate: A Simple Approach to Sentiment and Style Transfer</li>
+<li>Progressive Self-Supervised Attention Learning for Aspect-Level Sentiment Analysis</li>
+<li>SHAPED: Shared-Private Encoder-Decoder for Text Style Adaptation</li>
+<li>Style Transfer Through Back-Translation</li>
+<li>Fighting Offensive Language on Social Media with Unsupervised Text Style Transfer</li>
+<li>Disentangled Representation Learning for Non-Parallel Text Style Transfer</li>
+</ol>
+<h2 id="Toward-Controlled-Generation-of-Text"><a href="#Toward-Controlled-Generation-of-Text" class="headerlink" title="[Toward Controlled Generation of Text]"></a>[Toward Controlled Generation of Text]</h2><p>VAE+GAN用以生成可控制文本。</p>
+<p><img src="/images/15721482835511.jpg" width="60%" height="50%"></p>
+<p>为了生成可控制方向的文本，其思想是希望能够让模型学会生成disentangled latent representation，将内容和控制变量分离开，具体是通过GAN来实现的。</p>
+<p>简单来说，给定$x$，要求encoder能够生成disentangled latent representation，也即控制变量$c$和内容$z$的分离。在给定特定的控制变量$c$，通过generator生成对应的$\hat{x}$，要求$\hat{x}$能够骗过discriminator，使得discriminator认为$\hat{x}$是属于给定的特定控制变量$c$；同时$\hat{x}$会重新输入到encoder中以期望能够拟合$z$，这样能够保证$z$与$c$的解耦。</p>
+<hr>
+<h2 id="Style-Transfer-in-Text-Exploration-and-Evaluation"><a href="#Style-Transfer-in-Text-Exploration-and-Evaluation" class="headerlink" title="[Style Transfer in Text: Exploration and Evaluation]"></a>[Style Transfer in Text: Exploration and Evaluation]</h2><p>两个贡献：提出一种新的style transfer的模型；提出新的评价指标。</p>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p><img src="/images/15721769663657.jpg" width="80%" height="50%"></p>
+<p>本文提出两个模型， 一种是multi-decoder的，另一种是基于style-embedding的。encoder端都是一样，通过discriminator来获得style-independent content $c$。对于multi-decoder而言，不同style有不同的decoder；而在style-embedding中，则是通过在内容后面cat一个style的embedding作为输入传给decoder。</p>
+<h3 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h3><p>在评价指标中，提出两个方面：Transfer Strength和content preservation。</p>
+<p>Transfer Strength：指的是转换成功的能力，也即用一个分类器判断生成的句子和源句子是否是不同的style；</p>
+<p>content preservation：计算两个句子的embedding然后算他们之间的cos距离。具体公式：</p>
+<p>$\begin{aligned} v_{\min }[i] &amp;=\min \left\{w_{1}[i], \ldots w_{n}[i]\right\} \\ v_{\operatorname{mean}}[i] &amp;=\operatorname{mean}\left\{w_{1}[i], \ldots w_{n}[i]\right\} \\ v_{\max }[i] &amp;=\max \left\{w_{1}[i], \ldots w_{n}[i]\right\} \\ v &amp;=\left[v_{\min }, v_{\operatorname{mean}}, v_{\max }\right] \\ \operatorname{score} &amp;=\frac{v_{s}^{\top} v_{t}}{\left|v_{s}\right| \cdot\left|v_{t}\right|} \\ \text {score}_{t o t a l} &amp;=\sum_{i=1}^{M_{t e s t}} s c o r e_{i} \end{aligned}$</p>
+<hr>
+<h2 id="Unsupervised-Text-Style-Transfer-using-Language-Models-as-Discriminators"><a href="#Unsupervised-Text-Style-Transfer-using-Language-Models-as-Discriminators" class="headerlink" title="[Unsupervised Text Style Transfer using Language Models as Discriminators]"></a>[Unsupervised Text Style Transfer using Language Models as Discriminators]</h2><p>本文的亮点是利用语言模型来替代分类器作为discriminator。</p>
+<p>为什么选择language model而不是分类器：<br>语言模型能够获得更直接的信号，是token-level而不是sentence-level的，能够针对词进行计算loss；同时还能够提供整体的score（ppl）。</p>
+<p>模型整体做法：</p>
+<p><img src="/images/15721791494071.jpg" width="80%" height="50%"></p>
+<p>loss由两部分组成：reconstruction loss和transferred loss。reconstruction loss就是在encode为一个style-independent representation后再给定同一个style的情况下，恢复回原先的x；第二是在给定不同style的情况下generator生成的$\tilde{x}$的loss。</p>
+<p>transferred loss具体做法：</p>
+<p><img src="/images/15721793478258.jpg" width="80%" height="50%"></p>
+<p>第一，在这里使用continuous approximation，也即使用的是概率分布而不是one-hot作为下一次的输入，具体来说是gumbel softmax；第二，该分布不仅传入到generator作为下一次的预测，同时还传入到语言模型，生成的概率分布与generator的概率计算cross entropy作为loss。</p>
+<p>实验的一些小trick：language model更倾向于短句子，因此将loss按照长度归一化，同时固定$\tilde{x}$与x的长度一致。</p>
+<p>总结：行文非常流畅，而且也有亮点，确实用language model更自然。</p>
+<hr>
+<h2 id="Unpaired-Sentiment-to-Sentiment-Translation-A-Cycled-Reinforcement-Learning-Approach"><a href="#Unpaired-Sentiment-to-Sentiment-Translation-A-Cycled-Reinforcement-Learning-Approach" class="headerlink" title="[Unpaired Sentiment-to-Sentiment Translation: A Cycled Reinforcement Learning Approach]"></a>[Unpaired Sentiment-to-Sentiment Translation: A Cycled Reinforcement Learning Approach]</h2><p>通过两个模块neutralization和emotionalization生成不同情感极性的句子，前者将句子映射成没有情感的中性句子，后者将中性句子映射成不同情感极性的句子。同时通过RL的reward对整个模型进行训练。</p>
+<p><img src="/images/15721795128794.jpg" width="45%" height="50%"></p>
+<p>第一，neutralization模块通过一个分类器的attention weight判断哪些词是有情感极性的，然后删掉；<br>第二，emotionalization模块将删掉词的句子过一个双向的LSTM，然后获得一个表示整个句子的表示，输入到decoder中，其中分别有生成正向情感和负向情感的decoder。<br>在训练过程中，两个模块通过cycled RL训练。其中reward有两个，一个是生成的句子是否与所特定的情感相同，这通过一个预训练的分类器判断，第二则是通过BLEU评判内容保留的情况。</p>
+<p>细节：<br>①具体来说，neutralization模块的做法是先预训练一个分类器，然后一个句子过一个单向的LSTM，所有hidden state与最后一个hidden state（认为是保留了句子的所有信息）计算attention weight，大于平均值的attention所对应的词就被认为是情感极性的词。<br>②neutralization模块和emotionalization模块都提前与训练好了。</p>
+<p>最终的算法：</p>
+<p><img src="/images/15721795998974.jpg" width="50%" height="50%"></p>
+<hr>
+<h2 id="Delete-Retrieve-Generate-A-Simple-Approach-to-Sentiment-and-Style-Transfer"><a href="#Delete-Retrieve-Generate-A-Simple-Approach-to-Sentiment-and-Style-Transfer" class="headerlink" title="[Delete, Retrieve, Generate: A Simple Approach to Sentiment and Style Transfer]"></a>[Delete, Retrieve, Generate: A Simple Approach to Sentiment and Style Transfer]</h2><p>style transfer相关。三步走：删除关键词；抽取对立style句子；以及生成新句子。大致思路是先抽取极性词，然后通过替换或生成的方式得到新的句子。</p>
+<p><img src="/images/15721796925697.jpg" width="45%" height="50%"></p>
+<h3 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h3><p><img src="/images/15721797724438.jpg" width="70%" height="50%"></p>
+<h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><p>首先删除：识别出输入中与style相关的词，做法是相对频率：</p>
+<script type="math/tex; mode=display">s(u, v)=\frac{\operatorname{count}\left(u, \mathcal{D}_{v}\right)+\lambda}{\left(\sum_{v^{\prime} \in \mathcal{V}, v^{\prime} \neq v} \operatorname{count}\left(u, \mathcal{D}_{v^{\prime}}\right)\right)+\lambda}</script><p>也即如果一个词在该style的频率对比在另一个style的数据的频率高于一个阈值则认为是与style相关的。</p>
+<h4 id="Retrieve"><a href="#Retrieve" class="headerlink" title="Retrieve"></a>Retrieve</h4><p>记$a\left(x, v^{\mathrm{src}}\right)$为删除掉的词的集合，也即attribute markers。将这些词删掉后的句子为$c\left(x, v^{\mathrm{src}}\right)$。</p>
+<p>利用$c\left(x, v^{\mathrm{src}}\right)$在target style的数据集上找类似的句子作为参考，也即：</p>
+<script type="math/tex; mode=display">x^{\mathrm{tgt}}=\underset{x^{\prime} \in \mathcal{D}_{v^{\mathrm{tgt}}}}{\operatorname{argmin}} d\left(c\left(x, v^{\mathrm{src}}\right), c\left(x^{\prime}, v^{\mathrm{tgt}}\right)\right)</script><p>$d$也即计算距离的函数。</p>
+<h4 id="Generate"><a href="#Generate" class="headerlink" title="Generate"></a>Generate</h4><p>本文提出四种方法</p>
+<p>①RETRIEVE ONLY：直接把前文抽取的参考句子当做输出。</p>
+<p>②TEMPLATE BASED：直接拿参考的句子找到他的attribute marker直接填到对应空格。</p>
+<p>③DELETE ONLY：将句子过RNN，获得一个单一的句子向量，设置可学习的style embedding，将目标style的embedding cat到该句子向量中，然后输入到另一个RNN中生成目标句子。</p>
+<p>④DELETE AND RETRIEVE：类似上面的，但是是利用参考句子的attribute markers过一个RNN提取一个向量，cat到源句子的句子向量，输入到另一个RNN中生成目标句子。相比上面的更有指向性。</p>
+<p>其他细节：<br>在训练过程中，是利用reconstruction来做的。</p>
+<hr>
+<h2 id="Progressive-Self-Supervised-Attention-Learning-for-Aspect-Level-Sentiment-Analysis"><a href="#Progressive-Self-Supervised-Attention-Learning-for-Aspect-Level-Sentiment-Analysis" class="headerlink" title="[Progressive Self-Supervised Attention Learning for Aspect-Level Sentiment Analysis]"></a>[Progressive Self-Supervised Attention Learning for Aspect-Level Sentiment Analysis]</h2><p>Motivation：模型常常能够识别出频率高的情感极性词，而对频率低的情感极性词则是underfit的。这里通过循环mask掉极性的词，使得模型能够训练到频率低的极性词。具体做法是通过attention的监督信号。</p>
+<p>具体做法：通过不断mask attention weight最大的词，观察分类是否出错。如果出错，则说明该词是misleading，模型应该减小该词的weight；如果分类正确，说明该词应该分配大的weight，记为active的词。通过提取active 和misleading的词，并且在训练过程中给予监督信号/正则化（attention weight的放大或缩小），这样能够让模型挖掘出频率较低的词的情感极性而不是overfit到常用词的极性。</p>
+<p><img src="/images/15721805892169.jpg" width="80%" height="50%"></p>
+<p><img src="/images/15721806118504.jpg" width="80%" height="50%"></p>
+<hr>
+<h2 id="SHAPED-Shared-Private-Encoder-Decoder-for-Text-Style-Adaptation"><a href="#SHAPED-Shared-Private-Encoder-Decoder-for-Text-Style-Adaptation" class="headerlink" title="[SHAPED: Shared-Private Encoder-Decoder for Text Style Adaptation]"></a>[SHAPED: Shared-Private Encoder-Decoder for Text Style Adaptation]</h2><p>采用了shard-private的思想。share encoder编码与style无关的特性；private则编码style相关的特性。</p>
+<p><img src="/images/15721806660683.jpg" width="50%" height="50%"></p>
+<hr>
+<h2 id="Style-Transfer-Through-Back-Translation"><a href="#Style-Transfer-Through-Back-Translation" class="headerlink" title="[Style Transfer Through Back-Translation]"></a>[Style Transfer Through Back-Translation]</h2><p>通过back translation以去除style-specific的信息。基于假设：通过back translation所获得latent representation有更少的style-specific信息。</p>
+<p><img src="/images/15721807128106.jpg" width="80%" height="50%"></p>
+<p><img src="/images/15721807318957.jpg" width="70%" height="50%"></p>
+<p>有两个loss：一个是reconstruction的loss，另一个则是discriminator的loss。这里有两个decoder。</p>
+<hr>
+<h2 id="Fighting-Offensive-Language-on-Social-Media-with-Unsupervised-Text-Style-Transfer"><a href="#Fighting-Offensive-Language-on-Social-Media-with-Unsupervised-Text-Style-Transfer" class="headerlink" title="[Fighting Offensive Language on Social Media with Unsupervised Text Style Transfer]"></a>[Fighting Offensive Language on Social Media with Unsupervised Text Style Transfer]</h2><p>style transfer相关。</p>
+<p><img src="/images/15721807750198.jpg" width="80%" height="50%"></p>
+<p>loss：一个reconstruction loss，也即encoder的style与decoder的style一致；如果不一致，则再将该句子重新传回到encoder decoder，并提供原来的style并重新生成回去。然后就是discriminator的loss了。</p>
+<p>感觉其实没啥创新，基本上都是别人做过的。唯一的贡献就是提了数据集吧。</p>
+<hr>
+<h2 id="Disentangled-Representation-Learning-for-Non-Parallel-Text-Style-Transfer"><a href="#Disentangled-Representation-Learning-for-Non-Parallel-Text-Style-Transfer" class="headerlink" title="[Disentangled Representation Learning for Non-Parallel Text Style Transfer]"></a>[Disentangled Representation Learning for Non-Parallel Text Style Transfer]</h2><p>style transfer相关。从更好分离style和content的角度出发设计了几个loss。这篇挺有启发性的。</p>
+<p>其做法是人工将latent representation分成两块，也即不同的向量。在inference时，直接将style对应的向量替换成另一个style的向量就能做到风格转换。</p>
+<p><img src="/images/15721809468995.jpg" width="50%" height="50%"></p>
+<p>论文提出了几个loss：</p>
+<p>①autoencoding loss，也即reconstruction的loss，一个encoder生成latent representation，然后decoder利用该latent representation重新恢复原来的句子。</p>
+<p>②Style-Oriented Losses：保证style space有style信息而content space没有style的信息。</p>
+<p>③Content-Oriented Losses：保证content space有content信息而style space没有content的信息。</p>
+<h3 id="Style-Oriented-Losses"><a href="#Style-Oriented-Losses" class="headerlink" title="Style-Oriented Losses"></a>Style-Oriented Losses</h3><h4 id="Multi-Task-Loss-for-Style"><a href="#Multi-Task-Loss-for-Style" class="headerlink" title="Multi-Task Loss for Style"></a>Multi-Task Loss for Style</h4><p>记$\boldsymbol{s}$为style的representation；$\boldsymbol{c}$代表content的representation。</p>
+<p>$\boldsymbol{y}_{s}=\operatorname{softmax}\left(W_{\operatorname{mul}(\mathrm{s})} \boldsymbol{s}+\boldsymbol{b}_{\mathrm{mul}(\mathrm{s})}\right)$</p>
+<p>$J_{\mathrm{mul(s)}}\left(\boldsymbol{\theta}_{\mathrm{E}} ; \boldsymbol{\theta}_{\mathrm{mul}(\mathrm{s})}\right)=-\sum_{l \in \text { labels }} t_{s}(l) \log y_{s}(l)$</p>
+<p>也即让分类器能够通过$\mathrm{s}$识别出该latent representation的style。</p>
+<h4 id="Adversarial-Loss-for-Style"><a href="#Adversarial-Loss-for-Style" class="headerlink" title="Adversarial Loss for Style"></a>Adversarial Loss for Style</h4><p>上述loss只能保证style space有style的信息，不能保证content没有style信息。</p>
+<p>因此：</p>
+<p>$\boldsymbol{y}_{s}=\operatorname{softmax}\left(W_{\mathrm{dis}(\mathrm{s})} \boldsymbol{c}+\boldsymbol{b}_{\mathrm{dis}(\mathrm{s})}\right)$</p>
+<p>$J_{\mathrm{dis}(\mathrm{s})}\left(\boldsymbol{\theta}_{\mathrm{dis}(\mathrm{s})}\right)=-\sum_{l \in \mathrm{labels}} t_{c}(l) \log y_{s}(l)$</p>
+<p>为了能够让梯度传到到autoencoder，则autoencoder最大化：</p>
+<script type="math/tex; mode=display">J_{\mathrm{adv}(\mathrm{s})}\left(\boldsymbol{\theta}_{\mathrm{E}}\right)=\mathcal{H}\left(\boldsymbol{y}_{s} | \boldsymbol{c} ; \boldsymbol{\theta}_{\mathrm{dis}(\mathrm{s})}\right)</script><p>当预测的标签$\boldsymbol{y}_{s}$是uniform的时候，目标最大，也即希望content中关于style的内容尽量少，使得discriminator无法通过$\boldsymbol{c}$识别出句子的style。</p>
+<h3 id="Content-Oriented-Losses"><a href="#Content-Oriented-Losses" class="headerlink" title="Content-Oriented Losses"></a>Content-Oriented Losses</h3><p>该loss希望content的内容不会渗透到style space中。做法是告诉模型，应如何正确编码content，也即要告诉模型，content到底指的是什么。</p>
+<p>本文用了BoW的feature作为引导模型encode的辅助。<br>BoW：对于一个句子有N个词的，则词w*的BoW概率为$t_{c}\left(w_{}\right)=\frac{\sum_{i=1}^{N} \mathbb{I}\left\{w_{i}=w_{}\right\}}{N}$。注意这里只考虑content word，也即去掉了停用词和情感词（引入了外部词典）。</p>
+<p>因此拟合该encoding：</p>
+<p>$\boldsymbol{y}_{c}=\operatorname{softmax}\left(W_{\mathrm{mul}(\mathrm{c})} \boldsymbol{c}+\boldsymbol{b}_{\mathrm{mulc}}\right)$</p>
+<p>$J_{\mathrm{mul(c)}}\left(\boldsymbol{\theta}_{\mathrm{E}} ; \boldsymbol{\theta}_{\mathrm{mul}(\mathrm{c})}\right)=-\sum_{w \in \text { vocab }} t_{c}(w) \log y_{c}(w)$</p>
+<p>同样，希望style space没有这样的信息：</p>
+<p>$\begin{aligned} \boldsymbol{y}_{c}=&amp; \operatorname{softmax}\left(W_{\mathrm{dis}(\mathrm{c})}^{\top} \boldsymbol{s}+\boldsymbol{b}_{\mathrm{dis}(\mathrm{c})}\right) \\ J_{\mathrm{dis}(\mathrm{c})}\left(\boldsymbol{\theta}_{\mathrm{dis}(\mathrm{c})}\right) &amp;=-\sum_{w \in \text { vocab }} t_{c}(w) \log y_{c}(w) \\ J_{\mathrm{adv}(\mathrm{c})}\left(\boldsymbol{\theta}_{\mathrm{E}}\right) &amp;=\mathcal{H}\left(\boldsymbol{y}_{c} | \boldsymbol{s} ; \boldsymbol{\theta}_{\mathrm{dis}(\mathrm{c})}\right) \end{aligned}$</p>
+<h3 id="其他细节"><a href="#其他细节" class="headerlink" title="其他细节"></a>其他细节</h3><p>①当inference时，我们就可以直接将style的部分替换成另一个style的latent representation，其中另一个style的latent representation是这样取得的：</p>
+<script type="math/tex; mode=display">\hat{\boldsymbol{s}}=\frac{\sum_{i \in \text { target style }} \boldsymbol{s}_{i}}{\# \text { target style samples }}</script><p>也即将训练集的所有目标style的s做一个平均。</p>
+<p>②在实现中，是将hidden state分别过两个全连接以获得这两个latent representation，比如hidden state为256维，过两个全连接获得s为8维，content为128维。然后在decode的时候将这两个表示拼起来$\boldsymbol{h}=[\boldsymbol{s}, \boldsymbol{c}]$传入到decoder。</p>
+<p>③通过降维可以看到确实分离得不错：</p>
+<p><img src="/images/15721820144438.jpg" width="50%" height="50%"></p>
+<hr>
+<h2 id="本周论文小结"><a href="#本周论文小结" class="headerlink" title="[本周论文小结]"></a>[本周论文小结]</h2><p>本周看的基本上是style transfer的论文，大概算是入门了。有几篇比较亮眼的外，其他的似乎novelty都不是很好。生病了导致进度有些慢，希望下周能基本上看完style transfer经典的论文。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    林泽辉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.linzehui.me/2019/10/27/论文/每周论文33/" title="每周论文33">http://www.linzehui.me/2019/10/27/论文/每周论文33/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://www.linzehui.me" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
+          
+            <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
+          
+            <a href="/tags/style-transfer/" rel="tag"> <i class="fa fa-tag"></i> style transfer</a>
+          
+            <a href="/tags/分类/" rel="tag"> <i class="fa fa-tag"></i> 分类</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/27/杂七杂八/关于hexo无法搜索的详细解决方案/" rel="next" title="关于hexo无法搜索的详细解决方案">
+                <i class="fa fa-chevron-left"></i> 关于hexo无法搜索的详细解决方案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/27/碎片知识/每周碎片知识29/" rel="prev" title="每周碎片知识29">
+                每周碎片知识29 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA0OC8xNjU3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">204</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">216</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Toward-Controlled-Generation-of-Text"><span class="nav-number">1.</span> <span class="nav-text">[Toward Controlled Generation of Text]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Style-Transfer-in-Text-Exploration-and-Evaluation"><span class="nav-number">2.</span> <span class="nav-text">[Style Transfer in Text: Exploration and Evaluation]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-number">2.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评价指标"><span class="nav-number">2.2.</span> <span class="nav-text">评价指标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unsupervised-Text-Style-Transfer-using-Language-Models-as-Discriminators"><span class="nav-number">3.</span> <span class="nav-text">[Unsupervised Text Style Transfer using Language Models as Discriminators]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unpaired-Sentiment-to-Sentiment-Translation-A-Cycled-Reinforcement-Learning-Approach"><span class="nav-number">4.</span> <span class="nav-text">[Unpaired Sentiment-to-Sentiment Translation: A Cycled Reinforcement Learning Approach]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-Retrieve-Generate-A-Simple-Approach-to-Sentiment-and-Style-Transfer"><span class="nav-number">5.</span> <span class="nav-text">[Delete, Retrieve, Generate: A Simple Approach to Sentiment and Style Transfer]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Methods"><span class="nav-number">5.1.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Delete"><span class="nav-number">5.1.1.</span> <span class="nav-text">Delete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Retrieve"><span class="nav-number">5.1.2.</span> <span class="nav-text">Retrieve</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Generate"><span class="nav-number">5.1.3.</span> <span class="nav-text">Generate</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Progressive-Self-Supervised-Attention-Learning-for-Aspect-Level-Sentiment-Analysis"><span class="nav-number">6.</span> <span class="nav-text">[Progressive Self-Supervised Attention Learning for Aspect-Level Sentiment Analysis]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SHAPED-Shared-Private-Encoder-Decoder-for-Text-Style-Adaptation"><span class="nav-number">7.</span> <span class="nav-text">[SHAPED: Shared-Private Encoder-Decoder for Text Style Adaptation]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Style-Transfer-Through-Back-Translation"><span class="nav-number">8.</span> <span class="nav-text">[Style Transfer Through Back-Translation]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fighting-Offensive-Language-on-Social-Media-with-Unsupervised-Text-Style-Transfer"><span class="nav-number">9.</span> <span class="nav-text">[Fighting Offensive Language on Social Media with Unsupervised Text Style Transfer]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Disentangled-Representation-Learning-for-Non-Parallel-Text-Style-Transfer"><span class="nav-number">10.</span> <span class="nav-text">[Disentangled Representation Learning for Non-Parallel Text Style Transfer]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Style-Oriented-Losses"><span class="nav-number">10.1.</span> <span class="nav-text">Style-Oriented Losses</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Multi-Task-Loss-for-Style"><span class="nav-number">10.1.1.</span> <span class="nav-text">Multi-Task Loss for Style</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adversarial-Loss-for-Style"><span class="nav-number">10.1.2.</span> <span class="nav-text">Adversarial Loss for Style</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Content-Oriented-Losses"><span class="nav-number">10.2.</span> <span class="nav-text">Content-Oriented Losses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他细节"><span class="nav-number">10.3.</span> <span class="nav-text">其他细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本周论文小结"><span class="nav-number">11.</span> <span class="nav-text">[本周论文小结]</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
