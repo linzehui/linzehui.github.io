@@ -1,6 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>每周诗词40</title>
+    <url>/2019/11/03/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D40/</url>
+    <content><![CDATA[<h2 id="古风"><a href="#古风" class="headerlink" title="古风"></a>古风</h2><p>李白<br><strong>秦王扫六合，虎视何雄哉！挥剑决浮云，诸侯尽西来。</strong><br>明断自天启，大略驾群才。收兵铸金人，函谷正东开。<br>铭功会稽岭，骋望琅琊台。刑徒七十万，起土骊山隈。<br>尚采不死药，茫然使心哀。连弩射海鱼，长鲸正崔嵬。<br>额鼻象五岳，扬波喷云雷。鬐鬣蔽青天，何由睹蓬莱？<br>徐氏载秦女，楼船几时回？但见三泉下，金棺葬寒灰。</p>
+<p>鬐鬣qí liè，鱼、龙的脊鳍。也借指马兽畜的鬃毛。</p>
+]]></content>
+      <tags>
+        <tag>诗词</tag>
+        <tag>诗词分享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>每周论文33</title>
+    <url>/2019/11/03/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8734/</url>
+    <content><![CDATA[<p>本周论文：</p>
+<ol>
+<li>Style Transfer as Unsupervised Machine Translation</li>
+<li>Multiple-Attribute Text Style Transfer</li>
+<li>Domain Adaptive Text Style Transfer</li>
+<li>Transforming Delete, Retrieve, Generate Approach for Controlled Text Style Transfer</li>
+<li>Mask and Infill: Applying Masked Language Model to Sentiment Transfer</li>
+<li>IMaT: Unsupervised Text Attribute Transfer via Iterative Matching and Translation</li>
+<li>Controllable Unsupervised Text Attribute Transfer via Editing Entangled Latent Representation</li>
+<li>Revision in Continuous Space: Fine-Grained Control of Text Style Transfer </li>
+<li>Reinforcement Learning Based Text Style Transfer without Parallel Training Corpus </li>
+<li>Content preserving text generation with attribute controls</li>
+<li>Structured Content Preservation for Unsupervised Text Style Transfer</li>
+</ol>
+<h2 id="Style-Transfer-as-Unsupervised-Machine-Translation"><a href="#Style-Transfer-as-Unsupervised-Machine-Translation" class="headerlink" title="[Style Transfer as Unsupervised Machine Translation]"></a>[Style Transfer as Unsupervised Machine Translation]</h2><p>通过SMT配对伪句对，然后通过不断地back translation进行训练，在训练过程中用分类器作为正则项防止偏离过多。</p>
+<p><img src="/images/15727445934112.jpg" width="80%" height="50%"></p>
+<hr>
+<h2 id="Multiple-Attribute-Text-Style-Transfer"><a href="#Multiple-Attribute-Text-Style-Transfer" class="headerlink" title="[Multiple-Attribute Text Style Transfer]"></a>[Multiple-Attribute Text Style Transfer]</h2><p>与传统方法不同，不通过disentangled representation，也即分离style和content来做，而是通过通过简单的控制style embedding+back translation。</p>
+<p>首先作者claim一点：discriminator所做的并没有真正分离style和content，使用另外训练的分类器可以轻易判断出latent representation的style。</p>
+<p><img src="/images/15727447607210.jpg" width="70%" height="50%"></p>
+<p>基本模型框架：<br>reconstruction+back translation</p>
+<script type="math/tex; mode=display">\mathcal{L}=\lambda_{A E} \sum_{(x, y) \sim \mathcal{D}}-\log p_{d}\left(x | e\left(x_{c}\right), y\right)+\lambda_{B T} \sum_{\sim \mathcal{D}, \tilde{y} \sim \mathcal{Y}}-\log p_{d}(x | e(d(e(x), \tilde{y})), y)</script><p>第一项是encoder将句子encode，然后给与x相对应的style $y$的信息，要求恢复原始的x；第二项则是首先encode x，接着给另一个不同的style $\tilde{y}$，decode成一个句子之后，再用该句子和原始的$y$，要求还原出x。<br>注意这里不需要将style和content分离。</p>
+<p>为了控制style，传入可训练的目标style的embedding作为decoder的第一个词。<br>同时，作者观察到如果不用attention，模型容易丢失内容，而生成的句子仅仅符合style的要求；而如果用attention，则模型常常会对单个词进行替换，（我的理解是直接对encoder的词进行copy）。为了既能够保存内容；又能够符合style的要求，这里就取二者的中间态，也即将句子分割成几个不重叠的窗口，每个窗口大小固定，窗口内的词进行max-pooling，然后作为一个整体去做attention。当w=1时，就是原来的attention机制，当w=N时，就只有一个latent representation。</p>
+<hr>
+<h2 id="Domain-Adaptive-Text-Style-Transfer"><a href="#Domain-Adaptive-Text-Style-Transfer" class="headerlink" title="[Domain Adaptive Text Style Transfer]"></a>[Domain Adaptive Text Style Transfer]</h2><p>希望利用另一个domain的数据来帮助target domain更好transfer。其本质是用更多数据帮助训练。<br>举例，我们希望对电影 IMDB进行style transfer；而我们可以利用饭馆评价 yelp来帮助IMDB。</p>
+<p>两种情况：当source domain没有style标签，或者有style标签。</p>
+<p>情况1：左边<br>source domain的作用仅仅是训练更好的encoder和decoder。在decoder时加一个代表标签的向量。</p>
+<p><img src="/images/15727450653344.jpg" width="80%" height="50%"></p>
+<p>情况2：右边<br>如果有标签，则可以更好利用这个信息。在进入decoder前多加一个表示不同domain的向量。</p>
+<hr>
+<h2 id="Transforming-Delete-Retrieve-Generate-Approach-for-Controlled-Text-Style-Transfer"><a href="#Transforming-Delete-Retrieve-Generate-Approach-for-Controlled-Text-Style-Transfer" class="headerlink" title="[Transforming Delete, Retrieve, Generate Approach for Controlled Text Style Transfer]"></a>[Transforming Delete, Retrieve, Generate Approach for Controlled Text Style Transfer]</h2><p>基于<a href="http://www.linzehui.me/2019/10/27/论文/每周论文33/">Delete, Retrieve, Generate: A Simple Approach to Sentiment and Style Transfer</a>框架，但使用了transformer以及pretrain(使得句子在流畅方面更好），并做了一些改进。</p>
+<p>原先框架存在的问题：delete机制不够好，可能会删除掉重要的上下文；有些style attribute没有被删掉；LSTM不够鲁棒；生成句子不够流畅；难以生成长句子。</p>
+<p>delete机制使用transformer来做。在句子前面加一个CLS，然后基于每层每个head的CLS对其他token的attention来分辨哪些是content哪些是attribute。具体怎么做没看懂。</p>
+<p>Retrieve和原先类似，也是计算content的距离：<br>$x^{t g t}=\operatorname{argmin}_{x^{\prime} \in D_{s^{t g t}}} d\left(c_{x}, c_{x^{\prime}}\right)$</p>
+<p>Generate：使用GPT，有两种，对应原来的框架。一种是只给style和content的，另一种会跟content和target的attribute。</p>
+<p><img src="/images/15727453772337.jpg" width="70%" height="50%"></p>
+<p>可以看到这个方法的一大特点就是可以直接在前面放一些特殊token以及句子，然后用一个[START]来分割源句和生成句。这是transformer的特点，LSTM就做不到或者做不好。</p>
+<hr>
+<h2 id="Mask-and-Infill-Applying-Masked-Language-Model-to-Sentiment-Transfer"><a href="#Mask-and-Infill-Applying-Masked-Language-Model-to-Sentiment-Transfer" class="headerlink" title="[Mask and Infill: Applying Masked Language Model to Sentiment Transfer]"></a>[Mask and Infill: Applying Masked Language Model to Sentiment Transfer]</h2><p>用了pretrain language model，但本质上的思想还是前人做过的。也即基于挖掉attribute word然后利用bert去填空。</p>
+<p><img src="/images/15727454447045.jpg" width="50%" height="50%"></p>
+<p><img src="/images/15727454804409.jpg" width="50%" height="50%"></p>
+<p>都是之前的工作有提到的。</p>
+<hr>
+<h2 id="IMaT-Unsupervised-Text-Attribute-Transfer-via-Iterative-Matching-and-Translation"><a href="#IMaT-Unsupervised-Text-Attribute-Transfer-via-Iterative-Matching-and-Translation" class="headerlink" title="[IMaT: Unsupervised Text Attribute Transfer via Iterative Matching and Translation]"></a>[IMaT: Unsupervised Text Attribute Transfer via Iterative Matching and Translation]</h2><p>三步走：match-translation-refinement，并不断循环这三步。</p>
+<p>Match：在一开始阶段t=0，对每个source，在target corpus中计算相似度，只有相似度高于某个阈值的才配对成功。记$\hat{X}$为配对成功的source句子。在t&gt;=1阶段，会计算当前这个配对的$y$和上一阶段的refinement所获得的$y$哪个到$x$的距离更短。</p>
+<script type="math/tex; mode=display">\mathrm{WMD}\left(x_{i}, \hat{y}_{i}\right)</script><p>如果新的$y$更短，则替换掉旧的$y$。</p>
+<p>Translation：通过标准的seq2seq利用好上述配对好的数据进行训练。</p>
+<p>Refinement：上述训练好的模型生成$x$所对应的$y$，记为$\hat{Y}(t)$。也即对于每个$x_{i} \in \hat{X}$而言，此时有两个候选的$y$，一个是上一阶段留下来的，一个是当前模型所生成的。这两个则会在step1去计算WMD然后挑选。</p>
+<p><img src="/images/15727458370171.jpg" width="90%" height="50%"></p>
+<p>模型细节：<br>Word Mover Distance是sentence a到sentence b的最小代价，具体计算我也不知道。<br>Semantic Sentence Representation一开始配对计算句子之间的距离的时候会用到，本文用了ELMO的embedding，并做平均。</p>
+<hr>
+<h2 id="Controllable-Unsupervised-Text-Attribute-Transfer-via-Editing-Entangled-Latent-Representation"><a href="#Controllable-Unsupervised-Text-Attribute-Transfer-via-Editing-Entangled-Latent-Representation" class="headerlink" title="[Controllable Unsupervised Text Attribute Transfer via Editing Entangled Latent Representation]"></a>[Controllable Unsupervised Text Attribute Transfer via Editing Entangled Latent Representation]</h2><p>相当有趣的一篇论文。与传统方法不同的是，不直接尝试对latent representation解耦，使其分为style和content两个部分，而是直接循环对latent representation进行修改，其修改的指导路线是由分类器提供的，具体也即分类器根据target style label计算回传梯度。</p>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p><img src="/images/15727459712063.jpg" width="80%" height="50%"></p>
+<p>从模型上来说本文并没有什么创新，采用了transformer结构，以及加了一层GRU，由此获得了一个表示整个句子的latent representation，接着丢入到decoder内，和传统的encoder-decoder结构基本一致。而计算loss时只有一个reconstruction loss：</p>
+<script type="math/tex; mode=display">\mathcal{L}_{a e}\left(D_{\theta_{d}}\left(E_{\theta_{e}}(\boldsymbol{x})\right), \boldsymbol{x}\right)=\mathcal{L}_{a e}\left(D_{\theta_{d}}(\boldsymbol{z}), \boldsymbol{x}\right)=-\sum^{|\boldsymbol{x}|}\left((1-\varepsilon) \sum_{i=1}^{v} \bar{p}_{i} \log \left(p_{i}\right)+\frac{\varepsilon}{v} \sum_{i=1}^{v} \log \left(p_{i}\right)\right)</script><p>也即希望通过latent representation重新生成原来的句子。</p>
+<p>同时引入分类器，希望能够正确分类两个style。在这里分类器并没有提供梯度给生成器。训练方式：</p>
+<script type="math/tex; mode=display">\mathcal{L}_{c}\left(C_{\theta_{c}}(\boldsymbol{z}), \boldsymbol{y}\right)=-\sum_{i=1}^{|\boldsymbol{q}|} \bar{q}_{i} \log q_{i}</script><p>到这里都是传统的东西。</p>
+<p>在训练完分类器后，本文的一大贡献就是，希望能够利用分类器的梯度去直接修改latent representation，直到分类器将latent representation分类为目标style。也即找到一个$z’$能够最接近z（不大改z使得生成的时候出问题），同时该z’还应该属于目标style属性。所以在这里，提供目标style的标签，分类器回传gradient，对latent representation直接修改。</p>
+<script type="math/tex; mode=display">\boldsymbol{z}^{*}=\boldsymbol{z}-w_{i} \nabla_{\boldsymbol{z}} \mathcal{L}_{c}\left(C_{\theta_{c}}(\boldsymbol{z}), \boldsymbol{y}^{\prime}\right)</script><p>$w$在这里是权重，控制$w$的大小可以控制修改style的程度大小。</p>
+<p><img src="/images/15727461317545.jpg" width="80%" height="50%"></p>
+<p>，比如有一个评价啤酒的数据集有五个属性“appearance”, “aroma”, “palate”, “taste” and “overall”。我们可以从0，0，0，0，0修改为1，1，1，1，1。这是其他模型难以做到的，而在这里只需要训练一个分类器就可以做到。</p>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>权重$w$的改变带来的影响：</p>
+<p><img src="/images/15727463282655.jpg" width="80%" height="50%"></p>
+<p>$w$越大，其情感改变的程度也越大。</p>
+<p><img src="/images/15727463911253.jpg" width="70%" height="50%"></p>
+<p>随着$w$的增大，不同style的latent representation分离程度越大。</p>
+<p>这篇文章的思想相当好，能够适用的范围比其他方法更广，我觉得是相当好的一篇论文了，让人耳目一新，虽然方法上也不算很新了，在adversarial attack用过。</p>
+<hr>
+<h2 id="Revision-in-Continuous-Space-Fine-Grained-Control-of-Text-Style-Transfer"><a href="#Revision-in-Continuous-Space-Fine-Grained-Control-of-Text-Style-Transfer" class="headerlink" title="[Revision in Continuous Space: Fine-Grained Control of Text Style Transfer]"></a>[Revision in Continuous Space: Fine-Grained Control of Text Style Transfer]</h2><p>大致看了一下，基本思想和上一篇比较类似，也是对latent representation直接修改。</p>
+<p><img src="/images/15727465414576.jpg" width="70%" height="50%"></p>
+<p>加了一个控制长度的分类器；采用了VAE；在修改latent representation时同时还对content的encode进行了监督。</p>
+<hr>
+<h2 id="Reinforcement-Learning-Based-Text-Style-Transfer-without-Parallel-Training-Corpus"><a href="#Reinforcement-Learning-Based-Text-Style-Transfer-without-Parallel-Training-Corpus" class="headerlink" title="[Reinforcement Learning Based Text Style Transfer without Parallel Training Corpus]"></a>[Reinforcement Learning Based Text Style Transfer without Parallel Training Corpus]</h2><p>大致看了一下，就是利用rl来做，其中reward是三个部分：style discriminator；semantic module；language model，分别对应transfer到目标style的程度；句子保留程度；流畅度。</p>
+<p><img src="/images/15727466918271.jpg" width="70%" height="50%"></p>
+<hr>
+<h2 id="Content-preserving-text-generation-with-attribute-controls"><a href="#Content-preserving-text-generation-with-attribute-controls" class="headerlink" title="[Content preserving text generation with attribute controls]"></a>[Content preserving text generation with attribute controls]</h2><p>基本框架和disentangled latent representation一致，只是设计loss有些不大一样，但其实也没啥创新点。</p>
+<p>Reconstruction loss：auto-encoder和back translation。</p>
+<script type="math/tex; mode=display">\begin{aligned} \mathcal{L}^{a e}(x, l) &=-\log p_{G}\left(x | z_{x}, l\right) \\ \mathcal{L}^{b t}(x, l) &=-\log p_{G}\left(x | z_{y}, l\right) \end{aligned}</script><p>本文将二者给结合了：</p>
+<script type="math/tex; mode=display">\mathcal{L}^{i n t}=\mathbb{E}_{(x, l) \sim p_{\text {data }}, y \sim p_{G}\left(\cdot | z_{x}, l^{\prime}\right)}\left[-\log p_{G}\left(x | z_{x y}, l\right)\right]</script><p>其中，$z_{x y}=g \odot z_{x}+(1-g) \odot z_{y}$</p>
+<p>也就是将x和y的latent representation加权结合起来，如下图：</p>
+<p><img src="/images/15727468223113.jpg" width="80%" height="50%"></p>
+<p>这么做的目的是：y可能在模型早期和x在内容上是不match的，为了尽量让y和x在representation上更近一点。不让y的representation偏离。</p>
+<hr>
+<h2 id="Structured-Content-Preservation-for-Unsupervised-Text-Style-Transfer"><a href="#Structured-Content-Preservation-for-Unsupervised-Text-Style-Transfer" class="headerlink" title="[Structured Content Preservation for Unsupervised Text Style Transfer]"></a>[Structured Content Preservation for Unsupervised Text Style Transfer]</h2><p>都是老的loss，唯一新加的loss是pos preservation constraint，也即利用pos tagging将名词保留下来，然后计算生成前后句子的名词相似度。</p>
+<script type="math/tex; mode=display">\mathcal{L}_{P O S}\left(\theta_{G}\right)=\gamma \sum_{i=1}^{\min \left(c_{N}^{x}, c_{\bar{N}}^{y}\right)} d_{i}\left(d_{i} \in D=\left\{d_{1}, d_{2}, \ldots, d_{n}\right\}\right)</script><p><img src="/images/15727469712041.jpg" width="70%" height="50%"></p>
+<hr>
+<h2 id="本周论文小结"><a href="#本周论文小结" class="headerlink" title="[本周论文小结]"></a>[本周论文小结]</h2><p>本周基本将style transfer的论文读完了。接下来应该就全力准备ACL了。</p>
+]]></content>
+      <tags>
+        <tag>Paper</tag>
+        <tag>每周论文阅读</tag>
+        <tag>style transfer</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>每周碎片知识29</title>
     <url>/2019/10/27/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8629/</url>
     <content><![CDATA[<h3 id="条件数"><a href="#条件数" class="headerlink" title="[条件数]"></a>[条件数]</h3><p>一点推测：在使用fairseq时，即使使用默认的超参以及训练方法，都有一定机会出现在训练过程中出现nan的问题。这里推测或许是和条件数（condition number)相关。</p>
@@ -174,8 +282,8 @@
 ]]></content>
       <tags>
         <tag>杂七杂八</tag>
-        <tag>hexo</tag>
         <tag>遇到的问题</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -278,9 +386,9 @@
         <tag>Transformer</tag>
         <tag>每周论文阅读</tag>
         <tag>NMT</tag>
+        <tag>style transfer</tag>
         <tag>structured learning</tag>
         <tag>domain adaptation</tag>
-        <tag>style transfer</tag>
       </tags>
   </entry>
   <entry>
@@ -1371,9 +1479,9 @@
 ]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>Mac</tag>
         <tag>Homebrew</tag>
         <tag>Alfred</tag>
+        <tag>Mac</tag>
       </tags>
   </entry>
   <entry>
@@ -2541,25 +2649,6 @@
       </tags>
   </entry>
   <entry>
-    <title>关于Pytorch中Parameter的nan</title>
-    <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADParameter%E7%9A%84nan/</url>
-    <content><![CDATA[<p>前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。<br>如：<br><img src="/images/15571956719188.jpg" width="80%" height="50%"></p>
-<p><del>找了一圈网上没有找到其原因，已经在论坛提问了。</del><br>我的解决方案是显式对其进行初始化：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> args.init == <span class="string">'uniform'</span>:</span><br><span class="line">    nn.init.uniform_(self.u, -args.init_range, args.init_range)</span><br><span class="line">    nn.init.uniform_(self.v, -args.init_range, args.init_range)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> args.init == <span class="string">'normal'</span>:</span><br><span class="line">    nn.init.normal_(self.u, <span class="number">0.0</span>, args.init_std)</span><br><span class="line">    nn.init.normal_(self.v, <span class="number">0.0</span>, args.init_std)</span><br></pre></td></tr></table></figure>
-<hr>
-<p>原来是torch.Tensor的锅，torch.Tensor会分配内存空间，但不会清空该空间的值，因此里面可能会有奇怪的值。正确的做法应该是：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.Parameter(torch.rand(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">torch.nn.Parameter(torch.zeros(<span class="number">10</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-<p>参考资料：<br><a href="https://discuss.pytorch.org/t/nan-in-torch-tensor/8987" target="_blank" rel="noopener">https://discuss.pytorch.org/t/nan-in-torch-tensor/8987</a></p>
-]]></content>
-      <tags>
-        <tag>碎片知识</tag>
-        <tag>遇到的问题</tag>
-        <tag>Pytorch</tag>
-        <tag>nan</tag>
-        <tag>Parameter</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Pytorch中遇到的问题（合集）</title>
     <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/PyTorch%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E5%90%88%E9%9B%86%EF%BC%89/</url>
     <content><![CDATA[<p>断断续续记录一下在写代码过程中遇到的问题以及解决方案。</p>
@@ -2591,6 +2680,25 @@
         <tag>Pytorch</tag>
         <tag>nan</tag>
         <tag>inf</tag>
+        <tag>Parameter</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于Pytorch中Parameter的nan</title>
+    <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADParameter%E7%9A%84nan/</url>
+    <content><![CDATA[<p>前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。<br>如：<br><img src="/images/15571956719188.jpg" width="80%" height="50%"></p>
+<p><del>找了一圈网上没有找到其原因，已经在论坛提问了。</del><br>我的解决方案是显式对其进行初始化：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> args.init == <span class="string">'uniform'</span>:</span><br><span class="line">    nn.init.uniform_(self.u, -args.init_range, args.init_range)</span><br><span class="line">    nn.init.uniform_(self.v, -args.init_range, args.init_range)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> args.init == <span class="string">'normal'</span>:</span><br><span class="line">    nn.init.normal_(self.u, <span class="number">0.0</span>, args.init_std)</span><br><span class="line">    nn.init.normal_(self.v, <span class="number">0.0</span>, args.init_std)</span><br></pre></td></tr></table></figure>
+<hr>
+<p>原来是torch.Tensor的锅，torch.Tensor会分配内存空间，但不会清空该空间的值，因此里面可能会有奇怪的值。正确的做法应该是：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.Parameter(torch.rand(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">torch.nn.Parameter(torch.zeros(<span class="number">10</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<p>参考资料：<br><a href="https://discuss.pytorch.org/t/nan-in-torch-tensor/8987" target="_blank" rel="noopener">https://discuss.pytorch.org/t/nan-in-torch-tensor/8987</a></p>
+]]></content>
+      <tags>
+        <tag>碎片知识</tag>
+        <tag>遇到的问题</tag>
+        <tag>Pytorch</tag>
+        <tag>nan</tag>
         <tag>Parameter</tag>
       </tags>
   </entry>
@@ -4678,8 +4786,8 @@
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>李宏毅机器学习课程</tag>
         <tag>Unsupervised Learning</tag>
+        <tag>李宏毅机器学习课程</tag>
         <tag>Generation</tag>
       </tags>
   </entry>
@@ -4699,9 +4807,9 @@
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>李宏毅机器学习课程</tag>
         <tag>Unsupervised Learning</tag>
         <tag>Auto-encoder</tag>
+        <tag>李宏毅机器学习课程</tag>
       </tags>
   </entry>
   <entry>
@@ -4726,8 +4834,8 @@
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>李宏毅机器学习课程</tag>
         <tag>Unsupervised Learning</tag>
+        <tag>李宏毅机器学习课程</tag>
         <tag>Neighbor Embedding</tag>
       </tags>
   </entry>
@@ -4769,8 +4877,8 @@
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>李宏毅机器学习课程</tag>
         <tag>Unsupervised Learning</tag>
+        <tag>李宏毅机器学习课程</tag>
         <tag>Linear Dimension Reduction</tag>
       </tags>
   </entry>
@@ -4885,8 +4993,8 @@
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>Semi-supervised learning</tag>
         <tag>李宏毅机器学习课程</tag>
+        <tag>Semi-supervised learning</tag>
       </tags>
   </entry>
   <entry>
@@ -6574,8 +6682,8 @@ Perplexity (W)=& 2^{H(W)} \\
 ]]></content>
       <tags>
         <tag>杂七杂八</tag>
-        <tag>遇到的问题</tag>
         <tag>conda</tag>
+        <tag>遇到的问题</tag>
       </tags>
   </entry>
 </search>
