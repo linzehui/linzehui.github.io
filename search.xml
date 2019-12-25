@@ -1,6 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>每周论文35</title>
+    <url>/2019/12/21/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8735/</url>
+    <content><![CDATA[<p>本周论文：</p>
+<ol>
+<li>Self-Attention Enhanced CNNs and Collaborative Curriculum Learning for Distantly Supervised Relation Extraction</li>
+<li>Multiple Text Style Transfer by using Word-level Conditional Generative Adversarial Network with Two-Phase Training</li>
+<li>Generating Diverse Translations with Sentence Codes</li>
+<li>A Probabilistic Formulation of Unsupervised Text Style Transfer</li>
+<li>On Variational Learning of Controllable Representations for Text without Supervision</li>
+</ol>
+<h2 id="Self-Attention-Enhanced-CNNs-and-Collaborative-Curriculum-Learning-for-Distantly-Supervised-Relation-Extraction"><a href="#Self-Attention-Enhanced-CNNs-and-Collaborative-Curriculum-Learning-for-Distantly-Supervised-Relation-Extraction" class="headerlink" title="[Self-Attention Enhanced CNNs and Collaborative Curriculum Learning for Distantly Supervised Relation Extraction]"></a>[Self-Attention Enhanced CNNs and Collaborative Curriculum Learning for Distantly Supervised Relation Extraction]</h2><p>Motivation：在distant relation extraction任务中由于自动标注的原因，有很多的标注错误，如：</p>
+<p><img src="/images/15769319913004.jpg" width="50%" height="50%"></p>
+<p>这种错误会影响模型的训练。因此在这里设计两个不同的模型，互相regularize。当二者的output出现冲突时，就认为该sample是hard的，给该sample分配一个小权重或者0。两个模型这样可以互相监督，将hard的sample排除出去/延迟训练，达到从简单到难的学习。</p>
+<p>感觉这不算是Curriculum Learning啊，更像是self-paced learning。</p>
+<hr>
+<h2 id="Multiple-Text-Style-Transfer-by-using-Word-level-Conditional-Generative-Adversarial-Network-with-Two-Phase-Training"><a href="#Multiple-Text-Style-Transfer-by-using-Word-level-Conditional-Generative-Adversarial-Network-with-Two-Phase-Training" class="headerlink" title="[Multiple Text Style Transfer by using Word-level Conditional Generative Adversarial Network with Two-Phase Training]"></a>[Multiple Text Style Transfer by using Word-level Conditional Generative Adversarial Network with Two-Phase Training]</h2><p>使用了标准的attention encoder-decoder模型，同时还使用了adversarial discriminator，采用了back translation那一套训练方法。有一点不同的是，将y标签和decoder的hidden cat起来然后过全连接以获得output。</p>
+<p><img src="/images/15769321731975.jpg" width="50%" height="50%"></p>
+<p>想法：论文名字中的condition就是每个词的生成都直接condition到y的标签。而two-phase training是指先预训练reconstruction，然后再将adv引入，这个方法应该很多人都会这么做，这是为了提升稳定性。<br>其实正常的back translation（参考multiple attribute text style transfer）是不会用到adversarial的，但这里用到了，而intro又提到了adversarial的不稳定性，感觉打脸了。而且题目虽然有Multiple Text Style Transfer，但其实和multiple attribute text style transfer这篇没啥联系的感觉。</p>
+<hr>
+<h2 id="Generating-Diverse-Translations-with-Sentence-Codes"><a href="#Generating-Diverse-Translations-with-Sentence-Codes" class="headerlink" title="[Generating Diverse Translations with Sentence Codes]"></a>[Generating Diverse Translations with Sentence Codes]</h2><p>目的是为了在机器翻译中生成不同结构的句子，使得不同的candidate之间的diversity更强。其做法是获得一个code，其中这个code是通过constituency parsing tree的auto-encoder得到的，也即利用tree lstm将一个tree encode成一个discrete code，然后一个decoder根据该code尝试还原出原来的tree。然后将获得的code放在decoder作为前缀。也即给模型注入了syntex的信息。实验结果证明了在bleu不下降的情况下显著提升了diversity。</p>
+<p><img src="/images/15769323738904.jpg" width="45%" height="50%"></p>
+<hr>
+<h2 id="A-Probabilistic-Formulation-of-Unsupervised-Text-Style-Transfer"><a href="#A-Probabilistic-Formulation-of-Unsupervised-Text-Style-Transfer" class="headerlink" title="[A Probabilistic Formulation of Unsupervised Text Style Transfer]"></a>[A Probabilistic Formulation of Unsupervised Text Style Transfer]</h2><p>本文从生成式概率模型的角度出发，做很少的独立性假设，这和之前的非生成式模型不一样，将non-parallel corpus作为部分可见的parallel corpus。通过优化ELBO以训练模型。同时，该模型还可以看做是过去一些模型的统一框架。</p>
+<p>整体框架：<br><img src="/images/15769336548305.jpg" width="70%" height="50%"></p>
+<p>将不存在的parallel corpus看做是latent，然后用模型去近似。有一点不同的是，过去都是根据已知去推测未知，这里相反，是用latent去推测observed。而这个latent有先验，是一个pretrained language model。</p>
+<p>从模型角度这就是一个普通的attention encoder-decoder模型，language model也是一个recurrent的。</p>
+<p>如何去学这样的模型。第一：先用reconstruction loss去pretrain，让模型有一定的能力；第二：去优化evidence lower bound（ELBO）。</p>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p>记domain1 $\mathcal{D}_{1}$的数据$X=\left\{x^{(1)}, x^{(2)}, \cdots, x^{(m)}\right\}$，domain2 $\mathcal{D}_{2}$的数据$Y=\left\{y^{(m+1)}, y^{(m+2)}, \cdots, y^{(n)}\right\}$；同时不可见的latent $\bar{X}=\left\{\bar{x}^{(m+1)}, \bar{x}^{(m+2)}, \cdots, \bar{x}^{(n)}\right\}$，$\bar{Y}=\left\{\bar{y}^{(1)}, \bar{y}^{(2)}, \cdots, \bar{y}^{(m)}\right\}$</p>
+<p>模型要学的就是：<br>$p(\bar{y} | x)$ 和 $p(\bar{x} | y)$</p>
+<p>显然数据不存在没法直接建模。通过一个生成式模型（也即对数据分布建模）去建模一个联合分布，也即$p(X, \bar{X}, Y, \bar{Y})$<br>该模型假设每个observed句子是由一个不可见的sentence生成的，也即上图1。具体而言，整个过程是这么假设的：首先一个latent sequence $\bar{y}^{(i)}$从一个先验$p_{\mathcal{D}_{2}}\left(\bar{y}^{(i)}\right)$采样获得；接着$x^{(i)}$是根据$p\left(x^{(i)} | \bar{y}^{(i)}\right)$采样生成。</p>
+<p>联合分布可以形式化为：</p>
+<script type="math/tex; mode=display">p\left(X, \bar{X}, Y, Y ; \theta_{x | \bar{y}}, \theta_{y | \bar{x}}\right)=\left(\prod_{i=1}^{m} p\left(x^{(i)} | \bar{y}^{(i)} ; \theta_{x | \bar{y}}\right) p_{\mathcal{D}_{2}}\left(\bar{y}^{(i)}\right)\right)\left(\prod_{j=m+1}^{n} p\left(y^{(j)} | \bar{x}^{(j)} ; \theta_{y | \bar{x}}\right) p_{\mathcal{D}_{1}}\left(\bar{x}^{(j)}\right)\right)</script><p>其中$p(y)$是该domain的language model的先验。</p>
+<p>取log，有：</p>
+<script type="math/tex; mode=display">\log p\left(X, Y ; \theta_{x | \bar{y}}, \theta_{y | \bar{x}}\right)=\log \sum_{\bar{X}} \sum_{\bar{Y}} p\left(X, \bar{X}, Y, \bar{Y} ; \theta_{x | \bar{y}}, \theta_{y | \bar{x}}\right)</script><p>没法直接解，因此转化为优化ELBO。也即：<br>$\log p\left(X, Y ; \theta_{x | \bar{y}}, \theta_{y | \bar{x}}\right)$<br>$\geq \mathcal{L}_{\mathrm{ELBO}}\left(X, Y ; \theta_{x | \bar{y}}, \theta_{y | \bar{x}}, \phi_{\bar{x} | y}, \phi_{\bar{y} | x}\right)$<br>$=\sum_{i}\left[\mathbb{E}_{q\left(\bar{y} | x^{(i)} ; \phi_{\bar{y} | x}\right)}\left[\log p\left(x^{(i)} | \bar{y} ; \theta_{x | \bar{y}}\right)\right]-D_{\mathrm{KL}}\left(q\left(\bar{y} | x^{(i)} ; \phi_{\bar{y} | x}\right) | p_{\mathcal{D}_{2}}(\bar{y})\right)\right]$<br>$+\sum_{j} \underbrace{\left[\mathbb{E}_{q\left(\bar{x} | y^{(j)} ; \phi_{\bar{x} | y}\right)}\left[\log p\left(y^{(j)} | \bar{x} ; \theta_{y | \bar{x}}\right)\right]\right.}_{\text {Reconstruction likelihood }}-\underbrace{\left.D_{K L}\left(q\left(\bar{x} | y^{(j)} ; \phi_{\bar{x} | y}\right) | p_{\mathcal{D}_{1}}(\bar{x})\right)\right]}_{\text {KL regularizer }}$</p>
+<p>也即引入一个q的分布（$q\left(\bar{y} | x^{(i)} ; \phi_{\bar{y} | x}\right)$ 和 $q\left(\bar{x} | y^{(j)} ; \phi_{\bar{x} | y}\right)$）去拟合p的分布。注意这边的q，是给定observed去推测不可见的。</p>
+<p>其中KL项，是作为一个regularization，使得分布能接近该domain的language model。</p>
+<p>一般来说，这个方法是用在连续的latent variable，但在这里用在了discrete sequence，至于怎么用，参考Discrete generative models for sentence compression（怎么用我也还没懂）。</p>
+<p>整体的结构就是这样的。在这里用了几个trick：<br>①parameter sharing。刚刚提到用q去拟合p。但实际上在style transfer中，这二者都是为了去学习一个分布变换（从domain1到domain2），也即$q\left(\bar{y} | x^{(i)} ; \phi_{\bar{y} | x}\right)$和$p\left(y | \bar{x}^{(i)} ; \theta_{y | \bar{x}}\right)$正好目标是一致的，所以在这里将二者的分布参数共享。</p>
+<p>同时，还将encoder的参数绑定，也即二者的encoder是一个。（根据作者在openreview上的回复，似乎decoder也是同一个，但我的理解decoder应该是分开的，从下图中看也应该是分开的，这里有点不懂）。同时embedding的参数也绑定。因此整体的流程框架：</p>
+<p><img src="/images/15769347112996.jpg" width="70%" height="50%"></p>
+<p>②Approximating Gradients of ELBO<br>ELBO不是很懂。其实就是用gumbel-softmax达到梯度回传。</p>
+<p>③Initialization<br>先pretrain一个能reconstruct的模型，使得模型有一定的生成能力。</p>
+<h3 id="与过去的联系"><a href="#与过去的联系" class="headerlink" title="与过去的联系"></a>与过去的联系</h3><p>①与back translation的联系：从ELBO可以看出，reconstruction部分和bt一样。bt实际上可以看做一种数据增强。ELBO公式中的reconstruction部分也是这样，用一个unobserved的去生成一个observed。</p>
+<p>②与language model的联系：<br>从ELBO的KL项看，KL项可以分解为：</p>
+<script type="math/tex; mode=display">D_{\mathrm{KL}}\left(q(\bar{y} | x) \| p_{\mathcal{D}_{2}}(\bar{y})\right)=-H_{q}-\mathbb{E}_{q}\left[\log p_{\mathcal{D}_{2}}(\bar{y})\right]</script><p>可以看到这里利用到了pretrain language model作为一种正则方式，这和过去的一些工作类似；而这里还加了一项H，这是过去没有的。这一项的作用是防止极端的转换分布，让q的分布更平一点。啥意思，举个例子，就是如果没有这项，模型会容易陷入生成重复的句子，比如在negative到positive的时候无视source，而直接生成简单的‘i love the place’这样。这样可以更容易satisfy language model项，而有了H这项，模型就会避免这个问题。在实验中也有这部分的分析实验，发现确实是这样的。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>简单的实验结果：</p>
+<p><img src="/images/15769349339767.jpg" width="90%" height="50%"></p>
+<p>其中值得注意的就是BT+NLL就是少掉$H_{q}$项的模型，可以看到其ppl非常小而bleu也非常低，这是因为其一直生成重复的句子。而论文的模型则有很不错的结果，在不同任务上和UNMT差不多甚至明显优于。</p>
+<p>论文同时还分析了为啥比UNMT更好。因为UNMT更倾向于更大的转换句子的内容，使得原本的意思容易丢失（但这个不是可以通过调整window来减小内容丢失吗）。同时作者定量分析得到了其模型能更好地生成更多的名词（通过POS tagging），使得保存更多的内容。</p>
+<p><img src="/images/15769350720207.jpg" width="40%" height="50%"></p>
+<h3 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h3><p>这篇论文感觉写得很好；同时实验也非常翔实。通过将style transfer这个问题formulate成概率问题，然后隐式地引入language model作为prior，我认为这是其主要贡献。同时还将该模型和过去的做了对比，让人对这个模型有更加深入的理解。非常推荐这篇，这篇也是今年ICLR的高分论文。<br>就我的理解而言，不考虑这个漂亮的框架，应该就是一个正常的attention encoder-decoder框架，但conditioned on pretrained language model，这样一来，就不需要像bt那样需要显式的从x到y再到x，而是只需要一步到位从unobserved到observed。当然论文中关于具体怎么实现的（直接对discrete sequence做variational inference）我还没搞懂，但整体框架还是大概明白了。</p>
+<hr>
+<h2 id="On-Variational-Learning-of-Controllable-Representations-for-Text-without-Supervision"><a href="#On-Variational-Learning-of-Controllable-Representations-for-Text-without-Supervision" class="headerlink" title="[On Variational Learning of Controllable Representations for Text without Supervision]"></a>[On Variational Learning of Controllable Representations for Text without Supervision]</h2><p>Motivation：主要address的问题是VAE的vacant region。（latent vacancy problem），也即被encode的latent representation的分布存在一些空洞和密度小的地方，一旦直接对该latent representation进行改动，会使得该representation移动到空洞的地方，而decoder直接对该representation进行decode会造成无法预测的行为。如图：</p>
+<p><img src="/images/15769354278711.jpg" width="40%" height="50%"></p>
+<p>而本文则是通过对这种posterior进行一定的限制。在encode端就进行限制，使得其分布更加紧密。具体公式没仔细看，大致是这样的：</p>
+<p><img src="/images/15769354641619.jpg" width="45%" height="50%"></p>
+<p>β是baseline，CP是本文提出的：<br><img src="/images/15769354920975.jpg" width="50%" height="50%"></p>
+<p>可以看到cp（Constrained Posterior VAE）改进了许多，使得latent的改动能够尽可能还在分布里面。</p>
+<hr>
+<h3 id="本周论文小结"><a href="#本周论文小结" class="headerlink" title="[本周论文小结]"></a>[本周论文小结]</h3><p>ACL过后瞎看了几篇。还是以style transfer为主。</p>
+]]></content>
+      <tags>
+        <tag>Paper</tag>
+        <tag>Curriculum Learning</tag>
+        <tag>每周论文阅读</tag>
+        <tag>style transfer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>每周诗词41</title>
+    <url>/2019/12/21/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D41/</url>
+    <content><![CDATA[<h2 id="咏怀古迹（其五）"><a href="#咏怀古迹（其五）" class="headerlink" title="咏怀古迹（其五）"></a>咏怀古迹（其五）</h2><p>[唐] 杜甫<br>诸葛大名垂宇宙，宗臣遗像肃清高。<br>三分割据纡筹策，万古云霄一羽毛。<br>伯仲之间见伊吕，指挥若定失萧曹。<br>运移汉祚终难复，志决身歼军务劳。</p>
+]]></content>
+      <tags>
+        <tag>诗词</tag>
+        <tag>诗词分享</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>每周诗词40</title>
     <url>/2019/11/03/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D40/</url>
     <content><![CDATA[<h2 id="古风"><a href="#古风" class="headerlink" title="古风"></a>古风</h2><p>李白<br><strong>秦王扫六合，虎视何雄哉！挥剑决浮云，诸侯尽西来。</strong><br>明断自天启，大略驾群才。收兵铸金人，函谷正东开。<br>铭功会稽岭，骋望琅琊台。刑徒七十万，起土骊山隈。<br>尚采不死药，茫然使心哀。连弩射海鱼，长鲸正崔嵬。<br>额鼻象五岳，扬波喷云雷。鬐鬣蔽青天，何由睹蓬莱？<br>徐氏载秦女，楼船几时回？但见三泉下，金棺葬寒灰。</p>
@@ -12,7 +91,7 @@
       </tags>
   </entry>
   <entry>
-    <title>每周论文33</title>
+    <title>每周论文34</title>
     <url>/2019/11/03/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8734/</url>
     <content><![CDATA[<p>本周论文：</p>
 <ol>
@@ -386,9 +465,9 @@
         <tag>Transformer</tag>
         <tag>每周论文阅读</tag>
         <tag>NMT</tag>
-        <tag>style transfer</tag>
         <tag>structured learning</tag>
         <tag>domain adaptation</tag>
+        <tag>style transfer</tag>
       </tags>
   </entry>
   <entry>
@@ -1282,8 +1361,8 @@
 ]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>fairseq</tag>
         <tag>CUDA</tag>
+        <tag>fairseq</tag>
         <tag>Arxiv</tag>
         <tag>LaTeX</tag>
       </tags>
@@ -1648,8 +1727,8 @@
         <tag>Paper</tag>
         <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
-        <tag>NMT</tag>
         <tag>LSTM</tag>
+        <tag>NMT</tag>
         <tag>Dropout</tag>
         <tag>meta-learning</tag>
         <tag>multi-task</tag>
@@ -2673,7 +2752,13 @@
 <h4 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h4><p>两个tensor相乘，若其中一个tensor带有inf，则另一个tensor（该tensor可更新）的grad则为nan。</p>
 <h4 id="原因-3"><a href="#原因-3" class="headerlink" title="原因"></a>原因</h4><p>乘法的导数的定义。两个tensor相乘，导数为对方。在PyTorch中，inf的grad则为nan。</p>
 <h4 id="解决方案-3"><a href="#解决方案-3" class="headerlink" title="解决方案"></a>解决方案</h4><p>在相乘前，将带有inf的tensor做masked_fill，inf被置为0后再相乘。</p>
-]]></content>
+<hr>
+<h3 id="device-side-assert-trigger"><a href="#device-side-assert-trigger" class="headerlink" title="[device-side assert trigger]"></a>[device-side assert trigger]</h3><p><a href="https://discuss.pytorch.org/t/solved-assertion-srcindex-srcselectdimsize-failed-on-gpu-for-torch-cat/1804/9" target="_blank" rel="noopener">https://discuss.pytorch.org/t/solved-assertion-srcindex-srcselectdimsize-failed-on-gpu-for-torch-cat/1804/9</a><br><a href="https://discuss.pytorch.org/t/what-the-error-means-runtimeerror-device-side-assert-triggered/3249" target="_blank" rel="noopener">https://discuss.pytorch.org/t/what-the-error-means-runtimeerror-device-side-assert-triggered/3249</a></p>
+<h4 id="问题描述-4"><a href="#问题描述-4" class="headerlink" title="问题描述"></a>问题描述</h4><p>出现错误<code>CUDA error: device-side assert trigger
+Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
+<h4 id="原因-4"><a href="#原因-4" class="headerlink" title="原因"></a>原因</h4><p>很可能是embedding out of index的问题</p>
+<h4 id="解决方案-4"><a href="#解决方案-4" class="headerlink" title="解决方案"></a>解决方案</h4><p>最好再cpu上跑一下，会有更详细的出错提示。如果没办法在cpu上跑，可以尝试</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CUDA_LAUNCH_BLOCKING=1 python script.py args</span><br></pre></td></tr></table></figure>]]></content>
       <tags>
         <tag>碎片知识</tag>
         <tag>遇到的问题</tag>
@@ -2681,6 +2766,7 @@
         <tag>nan</tag>
         <tag>inf</tag>
         <tag>Parameter</tag>
+        <tag>CUDA</tag>
       </tags>
   </entry>
   <entry>
@@ -3913,8 +3999,8 @@
 ]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>Transformer</tag>
         <tag>attention</tag>
+        <tag>Transformer</tag>
         <tag>capsule</tag>
       </tags>
   </entry>
@@ -4241,8 +4327,8 @@
 ]]></content>
       <tags>
         <tag>有感</tag>
-        <tag>莱斯杯</tag>
         <tag>比赛</tag>
+        <tag>莱斯杯</tag>
       </tags>
   </entry>
   <entry>
@@ -5244,8 +5330,8 @@
 ]]></content>
       <tags>
         <tag>有感</tag>
-        <tag>比赛</tag>
         <tag>达观杯</tag>
+        <tag>比赛</tag>
       </tags>
   </entry>
   <entry>
@@ -6079,9 +6165,9 @@
 ]]></content>
       <tags>
         <tag>技巧</tag>
+        <tag>Vim</tag>
         <tag>杂七杂八</tag>
         <tag>快捷键</tag>
-        <tag>Vim</tag>
       </tags>
   </entry>
   <entry>
@@ -6105,9 +6191,9 @@
 ]]></content>
       <tags>
         <tag>技巧</tag>
-        <tag>Pycharm</tag>
         <tag>杂七杂八</tag>
         <tag>快捷键</tag>
+        <tag>Pycharm</tag>
       </tags>
   </entry>
   <entry>
@@ -6295,8 +6381,8 @@
 ]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>hexo</tag>
         <tag>Pytorch</tag>
+        <tag>hexo</tag>
         <tag>Paper</tag>
         <tag>Tf-idf</tag>
         <tag>文本分类</tag>
