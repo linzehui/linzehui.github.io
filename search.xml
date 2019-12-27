@@ -23,7 +23,7 @@
 <h2 id="Generating-Diverse-Translations-with-Sentence-Codes"><a href="#Generating-Diverse-Translations-with-Sentence-Codes" class="headerlink" title="[Generating Diverse Translations with Sentence Codes]"></a>[Generating Diverse Translations with Sentence Codes]</h2><p>目的是为了在机器翻译中生成不同结构的句子，使得不同的candidate之间的diversity更强。其做法是获得一个code，其中这个code是通过constituency parsing tree的auto-encoder得到的，也即利用tree lstm将一个tree encode成一个discrete code，然后一个decoder根据该code尝试还原出原来的tree。然后将获得的code放在decoder作为前缀。也即给模型注入了syntex的信息。实验结果证明了在bleu不下降的情况下显著提升了diversity。</p>
 <p><img src="/images/15769323738904.jpg" width="45%" height="50%"></p>
 <hr>
-<h2 id="A-Probabilistic-Formulation-of-Unsupervised-Text-Style-Transfer"><a href="#A-Probabilistic-Formulation-of-Unsupervised-Text-Style-Transfer" class="headerlink" title="[A Probabilistic Formulation of Unsupervised Text Style Transfer]"></a>[A Probabilistic Formulation of Unsupervised Text Style Transfer]</h2><p>本文从生成式概率模型的角度出发，做很少的独立性假设，这和之前的非生成式模型不一样，将non-parallel corpus作为部分可见的parallel corpus。通过优化ELBO以训练模型。同时，该模型还可以看做是过去一些模型的统一框架。</p>
+<h2 id="A-Probabilistic-Formulation-of-Unsupervised-Text-Style-Transfer"><a href="#A-Probabilistic-Formulation-of-Unsupervised-Text-Style-Transfer" class="headerlink" title="[A Probabilistic Formulation of Unsupervised Text Style Transfer]"></a>[A Probabilistic Formulation of Unsupervised Text Style Transfer]</h2><p>本文从生成式概率模型的角度出发，做很少的独立性假设，这和之前的非生成式模型不一样，将non-parallel corpus作为部分可见的parallel corpus。通过优化ELBO以训练模型。同时，该模型还可以看做是过去一些模型的统一框架。</p>
 <p>整体框架：<br><img src="/images/15769336548305.jpg" width="70%" height="50%"></p>
 <p>将不存在的parallel corpus看做是latent，然后用模型去近似。有一点不同的是，过去都是根据已知去推测未知，这里相反，是用latent去推测observed。而这个latent有先验，是一个pretrained language model。</p>
 <p>从模型角度这就是一个普通的attention encoder-decoder模型，language model也是一个recurrent的。</p>
@@ -64,8 +64,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>style transfer</tag>
       </tags>
   </entry>
@@ -361,8 +361,8 @@
 ]]></content>
       <tags>
         <tag>杂七杂八</tag>
-        <tag>遇到的问题</tag>
         <tag>hexo</tag>
+        <tag>遇到的问题</tag>
       </tags>
   </entry>
   <entry>
@@ -465,9 +465,9 @@
         <tag>Transformer</tag>
         <tag>每周论文阅读</tag>
         <tag>NMT</tag>
+        <tag>style transfer</tag>
         <tag>structured learning</tag>
         <tag>domain adaptation</tag>
-        <tag>style transfer</tag>
       </tags>
   </entry>
   <entry>
@@ -625,8 +625,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
         <tag>Machine Translation</tag>
       </tags>
@@ -726,8 +726,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
         <tag>Summary</tag>
         <tag>Sequence Generation</tag>
@@ -942,8 +942,8 @@
       <tags>
         <tag>Paper</tag>
         <tag>Transformer</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
         <tag>exposure bias</tag>
       </tags>
@@ -1096,8 +1096,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>Domain Adaptation</tag>
         <tag>Pseudo Labeling</tag>
       </tags>
@@ -1342,8 +1342,8 @@
       <tags>
         <tag>Classification</tag>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
       </tags>
   </entry>
   <entry>
@@ -1516,8 +1516,8 @@
         <tag>CNN</tag>
         <tag>Paper</tag>
         <tag>RNN</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>ResNet</tag>
         <tag>Highway</tag>
       </tags>
@@ -1725,10 +1725,10 @@
         <tag>RL</tag>
         <tag>Reinforcement Learning</tag>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
-        <tag>LSTM</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
+        <tag>LSTM</tag>
         <tag>Dropout</tag>
         <tag>meta-learning</tag>
         <tag>multi-task</tag>
@@ -2053,8 +2053,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
         <tag>Language Modeling</tag>
         <tag>boosting</tag>
@@ -2218,8 +2218,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
       </tags>
   </entry>
@@ -2303,8 +2303,8 @@
 <p>溜了溜了。</p>
 ]]></content>
       <tags>
-        <tag>活动</tag>
         <tag>AIS</tag>
+        <tag>活动</tag>
       </tags>
   </entry>
   <entry>
@@ -2728,6 +2728,25 @@
       </tags>
   </entry>
   <entry>
+    <title>关于Pytorch中Parameter的nan</title>
+    <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADParameter%E7%9A%84nan/</url>
+    <content><![CDATA[<p>前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。<br>如：<br><img src="/images/15571956719188.jpg" width="80%" height="50%"></p>
+<p><del>找了一圈网上没有找到其原因，已经在论坛提问了。</del><br>我的解决方案是显式对其进行初始化：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> args.init == <span class="string">'uniform'</span>:</span><br><span class="line">    nn.init.uniform_(self.u, -args.init_range, args.init_range)</span><br><span class="line">    nn.init.uniform_(self.v, -args.init_range, args.init_range)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> args.init == <span class="string">'normal'</span>:</span><br><span class="line">    nn.init.normal_(self.u, <span class="number">0.0</span>, args.init_std)</span><br><span class="line">    nn.init.normal_(self.v, <span class="number">0.0</span>, args.init_std)</span><br></pre></td></tr></table></figure>
+<hr>
+<p>原来是torch.Tensor的锅，torch.Tensor会分配内存空间，但不会清空该空间的值，因此里面可能会有奇怪的值。正确的做法应该是：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.Parameter(torch.rand(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">torch.nn.Parameter(torch.zeros(<span class="number">10</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<p>参考资料：<br><a href="https://discuss.pytorch.org/t/nan-in-torch-tensor/8987" target="_blank" rel="noopener">https://discuss.pytorch.org/t/nan-in-torch-tensor/8987</a></p>
+]]></content>
+      <tags>
+        <tag>碎片知识</tag>
+        <tag>遇到的问题</tag>
+        <tag>Pytorch</tag>
+        <tag>nan</tag>
+        <tag>Parameter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Pytorch中遇到的问题（合集）</title>
     <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/PyTorch%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E5%90%88%E9%9B%86%EF%BC%89/</url>
     <content><![CDATA[<p>断断续续记录一下在写代码过程中遇到的问题以及解决方案。</p>
@@ -2767,25 +2786,6 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
         <tag>inf</tag>
         <tag>Parameter</tag>
         <tag>CUDA</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于Pytorch中Parameter的nan</title>
-    <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADParameter%E7%9A%84nan/</url>
-    <content><![CDATA[<p>前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。<br>如：<br><img src="/images/15571956719188.jpg" width="80%" height="50%"></p>
-<p><del>找了一圈网上没有找到其原因，已经在论坛提问了。</del><br>我的解决方案是显式对其进行初始化：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> args.init == <span class="string">'uniform'</span>:</span><br><span class="line">    nn.init.uniform_(self.u, -args.init_range, args.init_range)</span><br><span class="line">    nn.init.uniform_(self.v, -args.init_range, args.init_range)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> args.init == <span class="string">'normal'</span>:</span><br><span class="line">    nn.init.normal_(self.u, <span class="number">0.0</span>, args.init_std)</span><br><span class="line">    nn.init.normal_(self.v, <span class="number">0.0</span>, args.init_std)</span><br></pre></td></tr></table></figure>
-<hr>
-<p>原来是torch.Tensor的锅，torch.Tensor会分配内存空间，但不会清空该空间的值，因此里面可能会有奇怪的值。正确的做法应该是：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.Parameter(torch.rand(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">torch.nn.Parameter(torch.zeros(<span class="number">10</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-<p>参考资料：<br><a href="https://discuss.pytorch.org/t/nan-in-torch-tensor/8987" target="_blank" rel="noopener">https://discuss.pytorch.org/t/nan-in-torch-tensor/8987</a></p>
-]]></content>
-      <tags>
-        <tag>碎片知识</tag>
-        <tag>遇到的问题</tag>
-        <tag>Pytorch</tag>
-        <tag>nan</tag>
-        <tag>Parameter</tag>
       </tags>
   </entry>
   <entry>
@@ -3003,8 +3003,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
         <tag>intrinsic dimension</tag>
         <tag>attention mechanism</tag>
@@ -3599,8 +3599,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 <p><img src="/images/IMG_1256.jpg" width="70%" height="50%"></p>
 ]]></content>
       <tags>
-        <tag>Google</tag>
         <tag>活动</tag>
+        <tag>Google</tag>
       </tags>
   </entry>
   <entry>
@@ -4327,8 +4327,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>有感</tag>
-        <tag>比赛</tag>
         <tag>莱斯杯</tag>
+        <tag>比赛</tag>
       </tags>
   </entry>
   <entry>
@@ -4872,8 +4872,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>Unsupervised Learning</tag>
         <tag>李宏毅机器学习课程</tag>
+        <tag>Unsupervised Learning</tag>
         <tag>Generation</tag>
       </tags>
   </entry>
@@ -4893,9 +4893,9 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
+        <tag>李宏毅机器学习课程</tag>
         <tag>Unsupervised Learning</tag>
         <tag>Auto-encoder</tag>
-        <tag>李宏毅机器学习课程</tag>
       </tags>
   </entry>
   <entry>
@@ -4920,8 +4920,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>Unsupervised Learning</tag>
         <tag>李宏毅机器学习课程</tag>
+        <tag>Unsupervised Learning</tag>
         <tag>Neighbor Embedding</tag>
       </tags>
   </entry>
@@ -4963,8 +4963,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>Unsupervised Learning</tag>
         <tag>李宏毅机器学习课程</tag>
+        <tag>Unsupervised Learning</tag>
         <tag>Linear Dimension Reduction</tag>
       </tags>
   </entry>
@@ -5079,8 +5079,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>李宏毅机器学习课程</tag>
         <tag>Semi-supervised learning</tag>
+        <tag>李宏毅机器学习课程</tag>
       </tags>
   </entry>
   <entry>
@@ -5330,8 +5330,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>有感</tag>
-        <tag>达观杯</tag>
         <tag>比赛</tag>
+        <tag>达观杯</tag>
       </tags>
   </entry>
   <entry>
@@ -6165,9 +6165,9 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>技巧</tag>
-        <tag>Vim</tag>
         <tag>杂七杂八</tag>
         <tag>快捷键</tag>
+        <tag>Vim</tag>
       </tags>
   </entry>
   <entry>
@@ -6191,9 +6191,9 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>技巧</tag>
+        <tag>Pycharm</tag>
         <tag>杂七杂八</tag>
         <tag>快捷键</tag>
-        <tag>Pycharm</tag>
       </tags>
   </entry>
   <entry>
@@ -6381,8 +6381,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>Pytorch</tag>
         <tag>hexo</tag>
+        <tag>Pytorch</tag>
         <tag>Paper</tag>
         <tag>Tf-idf</tag>
         <tag>文本分类</tag>
@@ -6768,8 +6768,8 @@ Perplexity (W)=& 2^{H(W)} \\
 ]]></content>
       <tags>
         <tag>杂七杂八</tag>
-        <tag>conda</tag>
         <tag>遇到的问题</tag>
+        <tag>conda</tag>
       </tags>
   </entry>
 </search>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.linzehui.me/"/>
-  <updated>2019-12-25T03:54:25.759Z</updated>
+  <updated>2019-12-27T01:14:47.208Z</updated>
   <id>http://www.linzehui.me/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://www.linzehui.me/2019/12/21/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8735/"/>
     <id>http://www.linzehui.me/2019/12/21/论文/每周论文35/</id>
     <published>2019-12-21T12:27:30.000Z</published>
-    <updated>2019-12-25T03:54:25.759Z</updated>
+    <updated>2019-12-27T01:14:47.208Z</updated>
     
     <summary type="html">
     
@@ -40,9 +40,9 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
     
       <category term="style transfer" scheme="http://www.linzehui.me/tags/style-transfer/"/>
     
@@ -216,9 +216,9 @@
     
       <category term="杂七杂八" scheme="http://www.linzehui.me/tags/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
     
-      <category term="遇到的问题" scheme="http://www.linzehui.me/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    
       <category term="hexo" scheme="http://www.linzehui.me/tags/hexo/"/>
+    
+      <category term="遇到的问题" scheme="http://www.linzehui.me/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     
   </entry>
   
@@ -253,11 +253,11 @@
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
+      <category term="style transfer" scheme="http://www.linzehui.me/tags/style-transfer/"/>
+    
       <category term="structured learning" scheme="http://www.linzehui.me/tags/structured-learning/"/>
     
       <category term="domain adaptation" scheme="http://www.linzehui.me/tags/domain-adaptation/"/>
-    
-      <category term="style transfer" scheme="http://www.linzehui.me/tags/style-transfer/"/>
     
   </entry>
   
@@ -447,9 +447,9 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
@@ -534,9 +534,9 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
