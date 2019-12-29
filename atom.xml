@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.linzehui.me/"/>
-  <updated>2019-12-27T01:14:47.208Z</updated>
+  <updated>2019-12-29T03:30:23.357Z</updated>
   <id>http://www.linzehui.me/</id>
   
   <author>
@@ -15,6 +15,67 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>每周碎片知识30</title>
+    <link href="http://www.linzehui.me/2019/12/29/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8630/"/>
+    <id>http://www.linzehui.me/2019/12/29/碎片知识/每周碎片知识30/</id>
+    <published>2019-12-29T03:06:14.000Z</published>
+    <updated>2019-12-29T03:30:23.357Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;fairseq-generate-编码问题&quot;&gt;&lt;a href=&quot;#fairseq-generate-编码问题&quot; class=&quot;headerlink&quot; title=&quot;[fairseq generate 编码问题]&quot;&gt;&lt;/a&gt;[fairseq generate
+        
+      
+    
+    </summary>
+    
+    
+      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="Pytorch" scheme="http://www.linzehui.me/tags/Pytorch/"/>
+    
+      <category term="fairseq" scheme="http://www.linzehui.me/tags/fairseq/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周论文36</title>
+    <link href="http://www.linzehui.me/2019/12/29/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8736/"/>
+    <id>http://www.linzehui.me/2019/12/29/论文/每周论文36/</id>
+    <published>2019-12-29T01:40:30.000Z</published>
+    <updated>2019-12-29T03:35:39.052Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本周论文：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification&lt;/li&gt;
+&lt;li&gt;On Controllable Sparse
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="Softmax" scheme="http://www.linzehui.me/tags/Softmax/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>每周论文35</title>
@@ -40,9 +101,9 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="style transfer" scheme="http://www.linzehui.me/tags/style-transfer/"/>
     
@@ -216,9 +277,9 @@
     
       <category term="杂七杂八" scheme="http://www.linzehui.me/tags/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
     
-      <category term="hexo" scheme="http://www.linzehui.me/tags/hexo/"/>
-    
       <category term="遇到的问题" scheme="http://www.linzehui.me/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    
+      <category term="hexo" scheme="http://www.linzehui.me/tags/hexo/"/>
     
   </entry>
   
@@ -253,11 +314,11 @@
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
-      <category term="style transfer" scheme="http://www.linzehui.me/tags/style-transfer/"/>
-    
       <category term="structured learning" scheme="http://www.linzehui.me/tags/structured-learning/"/>
     
       <category term="domain adaptation" scheme="http://www.linzehui.me/tags/domain-adaptation/"/>
+    
+      <category term="style transfer" scheme="http://www.linzehui.me/tags/style-transfer/"/>
     
   </entry>
   
@@ -447,9 +508,9 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
@@ -534,67 +595,15 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
       <category term="Summary" scheme="http://www.linzehui.me/tags/Summary/"/>
     
       <category term="Sequence Generation" scheme="http://www.linzehui.me/tags/Sequence-Generation/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>代码片段记录19</title>
-    <link href="http://www.linzehui.me/2019/08/18/%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E4%BB%A3%E7%A0%81%E8%AE%B0%E5%BD%9519/"/>
-    <id>http://www.linzehui.me/2019/08/18/代码相关/代码记录19/</id>
-    <published>2019-08-18T02:15:30.000Z</published>
-    <updated>2019-08-18T02:16:50.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;Python获得list中topk的index&quot;&gt;&lt;a href=&quot;#Python获得list中topk的index&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="code snippets" scheme="http://www.linzehui.me/tags/code-snippets/"/>
-    
-      <category term="代码片段" scheme="http://www.linzehui.me/tags/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周诗词34</title>
-    <link href="http://www.linzehui.me/2019/08/18/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D34/"/>
-    <id>http://www.linzehui.me/2019/08/18/诗词&amp;句/每周诗词34/</id>
-    <published>2019-08-18T02:14:14.000Z</published>
-    <updated>2019-08-18T02:14:34.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;走马川行奉送封大夫出师西征&quot;&gt;&lt;a href=&quot;#走马川行奉送封大夫出师西征&quot; class=&quot;headerlink&quot; title=&quot;走马川行奉送封大夫出师西征&quot;&gt;&lt;/a&gt;走马川行奉送封大夫出师西征&lt;/h3&gt;&lt;p&gt;[唐]
-        
-      
-    
-    </summary>
-    
-    
-      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
-    
-      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
     
   </entry>
   

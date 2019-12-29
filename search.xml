@@ -1,6 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>每周碎片知识30</title>
+    <url>/2019/12/29/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8630/</url>
+    <content><![CDATA[<h3 id="fairseq-generate-编码问题"><a href="#fairseq-generate-编码问题" class="headerlink" title="[fairseq generate 编码问题]"></a>[fairseq generate 编码问题]</h3><p>fairseq在生成的时候：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">CUDA_VISIBIE_DEVICES=<span class="number">2</span> python generate.py data-bin/wmt16_en_de_bpe32k/ --path checkpoints/wmt/checkpoint_best.pt --remove-bpe --beam <span class="number">4</span> --batch-size <span class="number">64</span> --lenpen <span class="number">0.6</span> --max-len-a <span class="number">1</span> --max-len-b <span class="number">50</span> | tee generate.out</span><br></pre></td></tr></table></figure>
+<p>容易出现编码问题。</p>
+<p><img src="/images/15775893127334.jpg" width="60%" height="50%"></p>
+<blockquote>
+<p>UnicodeEncodeError: ‘ascii’ codec can’t encode character ‘\xe4’ in position 42: ordinal not in range(128)</p>
+</blockquote>
+<p>这个问题是python自身的编码问题。</p>
+<p>解决方案是直接在代码里或系统配置里显式置为utf-8。<br><a href="https://stackoverflow.com/questions/2276200/changing-default-encoding-of-python" target="_blank" rel="noopener">https://stackoverflow.com/questions/2276200/changing-default-encoding-of-python</a><br>如果只想临时设置，可以在命令行使用：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> LC_ALL=en_US.UTF-8</span><br><span class="line"><span class="built_in">export</span> LANG=en_US.UTF-8</span><br></pre></td></tr></table></figure>
+<p>亲测有效。</p>
+<hr>
+<h3 id="Pytorch梯度累积出现显存OOM问题"><a href="#Pytorch梯度累积出现显存OOM问题" class="headerlink" title="[Pytorch梯度累积出现显存OOM问题]"></a>[Pytorch梯度累积出现显存OOM问题]</h3><p>关于梯度累积有两个版本：<br>①直接loss累加</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    loss=cal_loss(model, batch)</span><br><span class="line">    total_loss+=loss  <span class="comment"># accumulate loss</span></span><br><span class="line">total_loss.backward()</span><br><span class="line">optim.step()</span><br><span class="line">model.zero_grad()</span><br></pre></td></tr></table></figure>
+<p>②每次计算backward，累积完gradient再更新</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    loss=cal_loss(model, batch)</span><br><span class="line">    loss.backward()  <span class="comment"># backward every time but no step</span></span><br><span class="line">optim.step()</span><br><span class="line">model.zero_grad()</span><br></pre></td></tr></table></figure>
+<p>其实二者的计算结果是一样的，但第一种方法的显存会显著大于第二种。因为直接loss的叠加，并没有将计算图释放掉，使得每次循环所生成的计算图保留（当backward计算完梯度后计算图才会释放），大大占用显存。而第二种方法每次只保留了梯度而将计算图释放，累积梯度n次所占的显存和不做梯度累积的显存是一样的。</p>
+<p><a href="https://discuss.pytorch.org/t/accumulating-gradients/30020" target="_blank" rel="noopener">https://discuss.pytorch.org/t/accumulating-gradients/30020</a></p>
+]]></content>
+      <tags>
+        <tag>碎片知识</tag>
+        <tag>Pytorch</tag>
+        <tag>fairseq</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>每周论文36</title>
+    <url>/2019/12/29/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8736/</url>
+    <content><![CDATA[<p>本周论文：</p>
+<ol>
+<li>From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification</li>
+<li>On Controllable Sparse Alternatives to Softmax</li>
+<li>DropMax: Adaptive Variational Softmax</li>
+<li>Data Parameters: A New Family of Parameters for Learning a Differentiable Curriculum</li>
+</ol>
+<h2 id="From-Softmax-to-Sparsemax-A-Sparse-Model-of-Attention-and-Multi-Label-Classification"><a href="#From-Softmax-to-Sparsemax-A-Sparse-Model-of-Attention-and-Multi-Label-Classification" class="headerlink" title="[From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification]"></a>[From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification]</h2><p>提出一种新的softmax变体，能够对部分output分配0权值。同时还探索了sparsemax的特性，以及提出专门的sparsemax的loss用于multi-label分类上；最后在snli上做了实验（在attention替换softmax的实验）。</p>
+<p>简单地说，就是引入一个阈值，每个概率都会向该阈值平移，小于0的话就置为0。</p>
+<p><img src="/images/15775838206189.jpg" width="55%" height="50%"></p>
+<p>当然这个阈值不是瞎想的，是经过推导的。平移后的权值具有和为1的性质。</p>
+<p>和softmax的区别：</p>
+<p><img src="/images/15775838607893.jpg" width="70%" height="50%"></p>
+<p>可以看出更加线性。</p>
+<p><img src="/images/15775838848033.jpg" width="40%" height="50%"></p>
+<p>中间的性质探索不详细写了。<br>注意到，sparsemax是用在<strong>output</strong>上的，使得对于多标签分类任务上能够直接对不正确的label直接分配0的概率，这也更加符合直观。当然sparsemax也可以用在attention上，使得模型更加专注于少数几个点，也更加具有解释性（翻译中的alignment）。但论文中在snli上的实验似乎并没有比softmax attention更好。</p>
+<p><img src="/images/15775840023064.jpg" width="60%" height="50%"></p>
+<hr>
+<h2 id="On-Controllable-Sparse-Alternatives-to-Softmax"><a href="#On-Controllable-Sparse-Alternatives-to-Softmax" class="headerlink" title="[On Controllable Sparse Alternatives to Softmax]"></a>[On Controllable Sparse Alternatives to Softmax]</h2><p>提出一种映射向量到概率分布的框架。softmax，sparsemax都是其特殊形式，该框架还能够显式控制sparsity的程度；同时，在推导中发现还能够直接控制translation和scale invariance的trade-off。</p>
+<p>其形式就是对sparsemax的拓展和一般化。</p>
+<p>sparsemax：</p>
+<script type="math/tex; mode=display">\rho(\boldsymbol{z})=\operatorname{argmin}_{\boldsymbol{p} \in \Delta^{K-1}}\|\boldsymbol{p}-\boldsymbol{z}\|_{2}^{2}</script><p>其中$\boldsymbol{z}$是普通的向量，$\rho$则是将$\boldsymbol{z}$映射到一个单型(simplex)中。</p>
+<p>在这里将其一般化为：</p>
+<script type="math/tex; mode=display">\rho(\boldsymbol{z})=\operatorname{sparsegen}(\boldsymbol{z} ; g, \lambda)=\underset{\boldsymbol{p} \in \Delta^{K-1}}{\operatorname{argmin}}\|\boldsymbol{p}-g(\boldsymbol{z})\|_{2}^{2}-\lambda\|\boldsymbol{p}\|_{2}^{2}</script><p>其实就是将$\boldsymbol{z}$的形式扩展了，不仅仅是线性的还可以是非线性的；第二是加了一个regularization，注意到这里是负的，所以会鼓励稀疏化。上式和sparsemax都有闭式解，且有很多相似的特性。</p>
+<p>论文有很多特性分析，讲得不错。但我懒得记了。</p>
+<p>在翻译和摘要的结果：<br><img src="/images/15775842339867.jpg" width="80%" height="50%"></p>
+<p>看起来提升不大，当然这篇的重点不是这个，而是提出一种框架。</p>
+<hr>
+<h2 id="DropMax-Adaptive-Variational-Softmax"><a href="#DropMax-Adaptive-Variational-Softmax" class="headerlink" title="[DropMax: Adaptive Variational Softmax]"></a>[DropMax: Adaptive Variational Softmax]</h2><p>提出在训练中直接drop non-target类，让模型每次训练不同的decision bound，该方法能够有ensemble不同分类器的效果。同时论文还进一步提出与输入instance相关的dropout概率，即根据输入决定对哪些class进行dropout以及多大的dropout概率。<br>注意到，这个在train和test都是要drop的，和普通dropout不一样。</p>
+<p>大概意思是说，在训练过程中，drop掉一些不相关的类别，使得模型能够focus在难分辨的class上，同时，dropout class并不是随机drop掉就完事了，实际上模型需要<strong>根据输入</strong>来学习要将哪些drop掉，也即模型会习得class之间的内在联系，比如说在mnist中，4和9的关系比较紧密（因为二者长得比较像），那么在真实标签为4的时候，9的保留概率也会更高。</p>
+<p>具体方法：</p>
+<script type="math/tex; mode=display">z_{k}\left|\mathbf{x} \sim \operatorname{Ber}\left(z_{k} ; \rho_{k}(\mathbf{x} ; \theta)\right), \quad p(\mathbf{y} | \mathbf{x}, \mathbf{z} ; \psi, \theta)=\frac{\left(z_{t}+\varepsilon\right) \exp \left(o_{t}(\mathbf{x} ; \psi)\right)}{\sum_{k}\left(z_{k}+\varepsilon\right) \exp \left(o_{k}(\mathbf{x} ; \psi)\right)}\right.</script><p>$z_{k}$指的就是第k类被drop的概率，从上述公式可以看到实际上这里并不是真的被drop掉，只是调整其概率。</p>
+<p>下图中可以看到，当输入不同的cat图片时，对应有不同的容易confuse的class，左边的cat容易和lion混淆，而右边的cat容易和豹子混淆。所以需要将其他的无关class drop掉，使得模型能够专注于区分这二者。</p>
+<p><img src="/images/15775845120060.jpg" width="50%" height="50%"></p>
+<p>（论文用了变分推断推出输入相关的dropout的概率，但我没看懂🤣后面学了VI之后再补🤪）。</p>
+<hr>
+<h2 id="Data-Parameters-A-New-Family-of-Parameters-for-Learning-a-Differentiable-Curriculum"><a href="#Data-Parameters-A-New-Family-of-Parameters-for-Learning-a-Differentiable-Curriculum" class="headerlink" title="[Data Parameters: A New Family of Parameters for Learning a Differentiable Curriculum]"></a>[Data Parameters: A New Family of Parameters for Learning a Differentiable Curriculum]</h2><p>通过给sample和类别分配一个可学习的变量，作为指示该sample或类的重要性的指标，隐式地学得一个动态的curriculum。</p>
+<p>CL的主要问题：1)对于繁杂的问题而言，难以定义sample的难度；2)人类所定义的难度和模型所认为的难度可能并不对应；3)对于一个预定义好的curriculum，并不一定适合模型的所有时刻，因为模型是一个动态的学习过程。</p>
+<p>实际上上述问题是狭义上的curriculum learning的通病，如果要动态调整，那其实就是self-paced learning而不是传统意义上的CL了。</p>
+<p>在这里，通过在学习过程中梯度回传，更新每个instance或class的难度，通过该难度去<strong>影响学习该instance的快慢</strong>，<strong>而不是CL中的被采样的概率</strong>；这种动态的可以不需要人的介入。</p>
+<p>论文做了几个实验，一个是普通的分类和目标检测实验；第二是加入noisy label，看是否能够减小噪声的影响，将clean label的优先级提高；同时还做了一个完全random label的数据，发现curriculum能够避免直接记忆被污染的数据。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h4 id="Learning-curriculum-over-classes"><a href="#Learning-curriculum-over-classes" class="headerlink" title="Learning curriculum over classes"></a>Learning curriculum over classes</h4><p>一种是给每个类别一个可学习的变量，以标示其难度。这个好理解，总有一些分类比其他的难。</p>
+<p>记$\sigma^{c l a s s} \in \mathbb{R}^{k}$ 为$k$个类的类别parameter。每个类一个scalar记录该class的难度，该scalar<strong>用于softmax的缩放</strong>，也即：</p>
+<script type="math/tex; mode=display">\begin{aligned} L^{i} &=-\log \left(p_{y^{i}}^{i}\right) \\ p_{y^{i}}^{i} &=\frac{\exp \left(z_{y^{i}}^{i} / \sigma_{y^{i}}^{\text {class}}\right)}{\sum_{j} \exp \left(z_{j}^{i} / \sigma_{y^{i}}^{\text {class }}\right)} \end{aligned}</script><p>$z$是logic，而$p$则是正确类别的概率（过完softmax）。<br>若所有的class的$\sigma$都为1，则和标准的cross-entropy一样。</p>
+<p>下面看看有什么性质：<br>①对$z$求导：</p>
+<script type="math/tex; mode=display">\frac{\partial L^{i}}{\partial z_{j}^{i}}=\frac{p_{j}^{i}-1\left(j=y^{i}\right)}{\sigma_{y^{i}}^{\text {class }}}</script><p>②对$\sigma$求导：</p>
+<script type="math/tex; mode=display">\frac{\partial L^{i}}{\partial \sigma_{y^{i}}^{c l a s s}}=\frac{\left(1-p_{y^{i}}^{i}\right)}{\left(\sigma_{y^{i}}^{c l a s s}\right)^{2}}\left(z_{y^{i}}^{i}-\sum_{j \neq y^{i}} q_{j}^{i} z_{j}^{i}\right)</script><p>其中$q$为$q_{j}^{i}=\frac{p_{j}^{i}}{1-p_{y}^{i}}$，可以理解为non-target分类的概率分布。</p>
+<p>现在看看，如果$z_{y^{i}}^{i}&lt;\sum_{j \neq y^{i}} q_{j}^{i} z_{j}^{i}$，也即正确标签的logic小于其他非target标签的expected value(期望）小的话，则更新梯度后$\sigma$增大，代表其难度大，很好理解，因为模型分配给正确标签的概率不够大，说明不好分；同时若$\sigma$大的话，那么对$z$的求导的值就小（因为分母大了），也即学习过程被decay了，间接对该instance的学习减速了。</p>
+<h4 id="Learning-curriculum-over-instances"><a href="#Learning-curriculum-over-instances" class="headerlink" title="Learning curriculum over instances"></a>Learning curriculum over instances</h4><p>另一种是对每个instance分配一个parameter。其实和上面的一样的。<br>当然还可以将二者结合起来。</p>
+<script type="math/tex; mode=display">\sigma_{i}^{*}=\sigma_{y^{i}}^{c l a s s}+\sigma_{i}^{i n s t}</script><h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>实验结果（只列分类的）</p>
+<p><img src="/images/15775858184161.jpg" width="70%" height="50%"></p>
+<p>确实效果不错。</p>
+<p>将$\sigma$在训练过程的变化画出来可以发现，不同类和不同instance确实难度不同。</p>
+<p><img src="/images/15775879917542.jpg" width="80%" height="50%"></p>
+<p>将一部分的label设成random，可以看到，影响相对控制得还行：</p>
+<p><img src="/images/15775880344912.jpg" width="80%" height="50%"></p>
+<p>且可以较好的分辨出clean和noisy的数据：</p>
+<p><img src="/images/15775880493921.jpg" width="80%" height="50%"></p>
+<p>之前的工作表明，如果一个数据集全是random的label，DNN能够将整个数据集都记下来，使用curriculum，可以避免/缓解这个过程（记忆sample）。</p>
+<p><img src="/images/15775880882505.jpg" width="50%" height="50%"></p>
+<h3 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h3><p>和CL相比，是动态的，从student model的角度出发，所以倒不如说本质上是一种self-paced learning。<br>和self-paced相比，self-paced是通过loss来分配weight大小，这个问题在于DNN能够直接记忆hard example，使得用loss评判难度并不准确；但本文方法真的能从本质上解决这个问题吗，如果模型强行去学，也是可以记住的，上图如果一直训，可能也会达到很高的acc。</p>
+<h3 id="一点想法"><a href="#一点想法" class="headerlink" title="一点想法"></a>一点想法</h3><p>这篇是不错的文章，简单易操作，方法虽简单，但很优雅。有几个点可以深入想一下：<br>1) curriculum learning也可以不像以前那样严格从简单到难，因为设计这样的课程是很难的；同时CL的sample难度作用体现在采样的概率上，而在这里并非体现在采样的概率，而是应用在softmax上，这启发了我们，是否可能从模型内部的某个component中去应用出这个难度大小。<br>2) 感觉data parameter会有延迟，比如一个模型刚开始给一个sample高的weight，到后面过了一遍数据之后这个weight就应该变小，但此时还很大，虽然从整体上来说效果还可以，但是否能够更精细一点？可能实现中的weight decay会稍微缓解这个问题？这个延迟是否可以用VI后验这套方法来解？（还不清楚应该怎么做，但只是想到latent alignment and variational attention的思路）；或者是否可以通过加入一定的先验来缓解这个问题？<br>3) 粒度的拓展。multi-task中以task为单位，亦或NLP中以词为单位？</p>
+<hr>
+<h3 id="本周论文小结"><a href="#本周论文小结" class="headerlink" title="[本周论文小结]"></a>[本周论文小结]</h3><p>读了几篇softmax相关的。同时读了这篇CL的论文感觉也挺有意思的。</p>
+]]></content>
+      <tags>
+        <tag>Paper</tag>
+        <tag>Softmax</tag>
+        <tag>Curriculum Learning</tag>
+        <tag>每周论文阅读</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>每周论文35</title>
     <url>/2019/12/21/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8735/</url>
     <content><![CDATA[<p>本周论文：</p>
@@ -64,8 +167,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>每周论文阅读</tag>
         <tag>Curriculum Learning</tag>
+        <tag>每周论文阅读</tag>
         <tag>style transfer</tag>
       </tags>
   </entry>
@@ -361,8 +464,8 @@
 ]]></content>
       <tags>
         <tag>杂七杂八</tag>
-        <tag>hexo</tag>
         <tag>遇到的问题</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -465,9 +568,9 @@
         <tag>Transformer</tag>
         <tag>每周论文阅读</tag>
         <tag>NMT</tag>
-        <tag>style transfer</tag>
         <tag>structured learning</tag>
         <tag>domain adaptation</tag>
+        <tag>style transfer</tag>
       </tags>
   </entry>
   <entry>
@@ -625,8 +728,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>每周论文阅读</tag>
         <tag>Curriculum Learning</tag>
+        <tag>每周论文阅读</tag>
         <tag>NMT</tag>
         <tag>Machine Translation</tag>
       </tags>
@@ -726,8 +829,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>每周论文阅读</tag>
         <tag>Curriculum Learning</tag>
+        <tag>每周论文阅读</tag>
         <tag>NMT</tag>
         <tag>Summary</tag>
         <tag>Sequence Generation</tag>
@@ -942,8 +1045,8 @@
       <tags>
         <tag>Paper</tag>
         <tag>Transformer</tag>
-        <tag>每周论文阅读</tag>
         <tag>Curriculum Learning</tag>
+        <tag>每周论文阅读</tag>
         <tag>NMT</tag>
         <tag>exposure bias</tag>
       </tags>
@@ -1096,8 +1199,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>每周论文阅读</tag>
         <tag>Curriculum Learning</tag>
+        <tag>每周论文阅读</tag>
         <tag>Domain Adaptation</tag>
         <tag>Pseudo Labeling</tag>
       </tags>
@@ -1342,8 +1445,8 @@
       <tags>
         <tag>Classification</tag>
         <tag>Paper</tag>
-        <tag>每周论文阅读</tag>
         <tag>Curriculum Learning</tag>
+        <tag>每周论文阅读</tag>
       </tags>
   </entry>
   <entry>
@@ -1514,10 +1617,10 @@
 ]]></content>
       <tags>
         <tag>CNN</tag>
-        <tag>Paper</tag>
         <tag>RNN</tag>
-        <tag>每周论文阅读</tag>
+        <tag>Paper</tag>
         <tag>Curriculum Learning</tag>
+        <tag>每周论文阅读</tag>
         <tag>ResNet</tag>
         <tag>Highway</tag>
       </tags>
@@ -1725,8 +1828,8 @@
         <tag>RL</tag>
         <tag>Reinforcement Learning</tag>
         <tag>Paper</tag>
-        <tag>每周论文阅读</tag>
         <tag>Curriculum Learning</tag>
+        <tag>每周论文阅读</tag>
         <tag>NMT</tag>
         <tag>LSTM</tag>
         <tag>Dropout</tag>
@@ -2053,8 +2156,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>每周论文阅读</tag>
         <tag>Curriculum Learning</tag>
+        <tag>每周论文阅读</tag>
         <tag>NMT</tag>
         <tag>Language Modeling</tag>
         <tag>boosting</tag>
@@ -2218,8 +2321,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>每周论文阅读</tag>
         <tag>Curriculum Learning</tag>
+        <tag>每周论文阅读</tag>
         <tag>NMT</tag>
       </tags>
   </entry>
@@ -2303,8 +2406,8 @@
 <p>溜了溜了。</p>
 ]]></content>
       <tags>
-        <tag>AIS</tag>
         <tag>活动</tag>
+        <tag>AIS</tag>
       </tags>
   </entry>
   <entry>
@@ -2728,25 +2831,6 @@
       </tags>
   </entry>
   <entry>
-    <title>关于Pytorch中Parameter的nan</title>
-    <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADParameter%E7%9A%84nan/</url>
-    <content><![CDATA[<p>前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。<br>如：<br><img src="/images/15571956719188.jpg" width="80%" height="50%"></p>
-<p><del>找了一圈网上没有找到其原因，已经在论坛提问了。</del><br>我的解决方案是显式对其进行初始化：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> args.init == <span class="string">'uniform'</span>:</span><br><span class="line">    nn.init.uniform_(self.u, -args.init_range, args.init_range)</span><br><span class="line">    nn.init.uniform_(self.v, -args.init_range, args.init_range)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> args.init == <span class="string">'normal'</span>:</span><br><span class="line">    nn.init.normal_(self.u, <span class="number">0.0</span>, args.init_std)</span><br><span class="line">    nn.init.normal_(self.v, <span class="number">0.0</span>, args.init_std)</span><br></pre></td></tr></table></figure>
-<hr>
-<p>原来是torch.Tensor的锅，torch.Tensor会分配内存空间，但不会清空该空间的值，因此里面可能会有奇怪的值。正确的做法应该是：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.Parameter(torch.rand(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">torch.nn.Parameter(torch.zeros(<span class="number">10</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-<p>参考资料：<br><a href="https://discuss.pytorch.org/t/nan-in-torch-tensor/8987" target="_blank" rel="noopener">https://discuss.pytorch.org/t/nan-in-torch-tensor/8987</a></p>
-]]></content>
-      <tags>
-        <tag>碎片知识</tag>
-        <tag>遇到的问题</tag>
-        <tag>Pytorch</tag>
-        <tag>nan</tag>
-        <tag>Parameter</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Pytorch中遇到的问题（合集）</title>
     <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/PyTorch%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E5%90%88%E9%9B%86%EF%BC%89/</url>
     <content><![CDATA[<p>断断续续记录一下在写代码过程中遇到的问题以及解决方案。</p>
@@ -2777,7 +2861,14 @@
 Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 <h4 id="原因-4"><a href="#原因-4" class="headerlink" title="原因"></a>原因</h4><p>很可能是embedding out of index的问题</p>
 <h4 id="解决方案-4"><a href="#解决方案-4" class="headerlink" title="解决方案"></a>解决方案</h4><p>最好再cpu上跑一下，会有更详细的出错提示。如果没办法在cpu上跑，可以尝试</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CUDA_LAUNCH_BLOCKING=1 python script.py args</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CUDA_LAUNCH_BLOCKING=1 python script.py args</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="Pytorch梯度累积出现显存OOM问题"><a href="#Pytorch梯度累积出现显存OOM问题" class="headerlink" title="[Pytorch梯度累积出现显存OOM问题]"></a>[Pytorch梯度累积出现显存OOM问题]</h3><p><a href="https://discuss.pytorch.org/t/accumulating-gradients/30020" target="_blank" rel="noopener">https://discuss.pytorch.org/t/accumulating-gradients/30020</a></p>
+<h4 id="问题描述-5"><a href="#问题描述-5" class="headerlink" title="问题描述"></a>问题描述</h4><p>使用梯度累积显存占用显著增加。</p>
+<h4 id="原因-5"><a href="#原因-5" class="headerlink" title="原因"></a>原因</h4><p>梯度累积用了不好的写法。每次计算完loss直接累加而不是先backward，等到循环完了再step。</p>
+<h4 id="解决方案-5"><a href="#解决方案-5" class="headerlink" title="解决方案"></a>解决方案</h4><p>采用较优的写法：每次计算backward，累积完gradient再更新。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    loss=cal_loss(model, batch)</span><br><span class="line">    loss.backward()  <span class="comment"># backward every time but no step</span></span><br><span class="line">optim.step()</span><br><span class="line">model.zero_grad()</span><br></pre></td></tr></table></figure>
+]]></content>
       <tags>
         <tag>碎片知识</tag>
         <tag>遇到的问题</tag>
@@ -2786,6 +2877,27 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
         <tag>inf</tag>
         <tag>Parameter</tag>
         <tag>CUDA</tag>
+        <tag>OOM</tag>
+        <tag>梯度累积</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于Pytorch中Parameter的nan</title>
+    <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADParameter%E7%9A%84nan/</url>
+    <content><![CDATA[<p>前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。<br>如：<br><img src="/images/15571956719188.jpg" width="80%" height="50%"></p>
+<p><del>找了一圈网上没有找到其原因，已经在论坛提问了。</del><br>我的解决方案是显式对其进行初始化：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> args.init == <span class="string">'uniform'</span>:</span><br><span class="line">    nn.init.uniform_(self.u, -args.init_range, args.init_range)</span><br><span class="line">    nn.init.uniform_(self.v, -args.init_range, args.init_range)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> args.init == <span class="string">'normal'</span>:</span><br><span class="line">    nn.init.normal_(self.u, <span class="number">0.0</span>, args.init_std)</span><br><span class="line">    nn.init.normal_(self.v, <span class="number">0.0</span>, args.init_std)</span><br></pre></td></tr></table></figure>
+<hr>
+<p>原来是torch.Tensor的锅，torch.Tensor会分配内存空间，但不会清空该空间的值，因此里面可能会有奇怪的值。正确的做法应该是：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.Parameter(torch.rand(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">torch.nn.Parameter(torch.zeros(<span class="number">10</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<p>参考资料：<br><a href="https://discuss.pytorch.org/t/nan-in-torch-tensor/8987" target="_blank" rel="noopener">https://discuss.pytorch.org/t/nan-in-torch-tensor/8987</a></p>
+]]></content>
+      <tags>
+        <tag>碎片知识</tag>
+        <tag>遇到的问题</tag>
+        <tag>Pytorch</tag>
+        <tag>nan</tag>
+        <tag>Parameter</tag>
       </tags>
   </entry>
   <entry>
@@ -3003,8 +3115,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>每周论文阅读</tag>
         <tag>Curriculum Learning</tag>
+        <tag>每周论文阅读</tag>
         <tag>NMT</tag>
         <tag>intrinsic dimension</tag>
         <tag>attention mechanism</tag>
@@ -3599,8 +3711,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 <p><img src="/images/IMG_1256.jpg" width="70%" height="50%"></p>
 ]]></content>
       <tags>
-        <tag>活动</tag>
         <tag>Google</tag>
+        <tag>活动</tag>
       </tags>
   </entry>
   <entry>
@@ -3999,8 +4111,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>碎片知识</tag>
-        <tag>attention</tag>
         <tag>Transformer</tag>
+        <tag>attention</tag>
         <tag>capsule</tag>
       </tags>
   </entry>
@@ -4872,8 +4984,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>李宏毅机器学习课程</tag>
         <tag>Unsupervised Learning</tag>
+        <tag>李宏毅机器学习课程</tag>
         <tag>Generation</tag>
       </tags>
   </entry>
@@ -4893,8 +5005,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>李宏毅机器学习课程</tag>
         <tag>Unsupervised Learning</tag>
+        <tag>李宏毅机器学习课程</tag>
         <tag>Auto-encoder</tag>
       </tags>
   </entry>
@@ -4920,8 +5032,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>李宏毅机器学习课程</tag>
         <tag>Unsupervised Learning</tag>
+        <tag>李宏毅机器学习课程</tag>
         <tag>Neighbor Embedding</tag>
       </tags>
   </entry>
@@ -4963,9 +5075,9 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>李宏毅机器学习课程</tag>
         <tag>Unsupervised Learning</tag>
         <tag>Linear Dimension Reduction</tag>
+        <tag>李宏毅机器学习课程</tag>
       </tags>
   </entry>
   <entry>
@@ -5079,8 +5191,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>Semi-supervised learning</tag>
         <tag>李宏毅机器学习课程</tag>
+        <tag>Semi-supervised learning</tag>
       </tags>
   </entry>
   <entry>
@@ -6768,8 +6880,8 @@ Perplexity (W)=& 2^{H(W)} \\
 ]]></content>
       <tags>
         <tag>杂七杂八</tag>
-        <tag>遇到的问题</tag>
         <tag>conda</tag>
+        <tag>遇到的问题</tag>
       </tags>
   </entry>
 </search>
