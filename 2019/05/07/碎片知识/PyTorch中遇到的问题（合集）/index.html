@@ -90,7 +90,7 @@
 <meta property="og:description" content="断断续续记录一下在写代码过程中遇到的问题以及解决方案。 [Parameter nan]http://www.linzehui.me/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/ 问题描述在定义Parameter时遇到其元素存在nan的问题。  原因torch.Tensor(m,n)只分配空间而没有将其中的值更新。 解决方案torch.Tensor(m,n)是不建">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.linzehui.me/images/15571956719188.jpg">
-<meta property="og:updated_time" content="2019-12-29T03:30:13.324Z">
+<meta property="og:updated_time" content="2019-12-29T03:41:04.559Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pytorch中遇到的问题（合集）">
 <meta name="twitter:description" content="断断续续记录一下在写代码过程中遇到的问题以及解决方案。 [Parameter nan]http://www.linzehui.me/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/ 问题描述在定义Parameter时遇到其元素存在nan的问题。  原因torch.Tensor(m,n)只分配空间而没有将其中的值更新。 解决方案torch.Tensor(m,n)是不建">
@@ -336,7 +336,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-29T11:30:13+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-29T11:41:04+08:00">
                 2019-12-29
               </time>
             
@@ -400,7 +400,7 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 <h4 id="解决方案-4"><a href="#解决方案-4" class="headerlink" title="解决方案"></a>解决方案</h4><p>最好再cpu上跑一下，会有更详细的出错提示。如果没办法在cpu上跑，可以尝试</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CUDA_LAUNCH_BLOCKING=1 python script.py args</span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="Pytorch梯度累积出现显存OOM问题"><a href="#Pytorch梯度累积出现显存OOM问题" class="headerlink" title="[Pytorch梯度累积出现显存OOM问题]"></a>[Pytorch梯度累积出现显存OOM问题]</h3><p><a href="https://discuss.pytorch.org/t/accumulating-gradients/30020" target="_blank" rel="noopener">https://discuss.pytorch.org/t/accumulating-gradients/30020</a></p>
+<h3 id="Pytorch梯度累积出现显存OOM问题"><a href="#Pytorch梯度累积出现显存OOM问题" class="headerlink" title="[Pytorch梯度累积出现显存OOM问题]"></a>[Pytorch梯度累积出现显存OOM问题]</h3><p><a href="https://discuss.pytorch.org/t/accumulating-gradients/30020" target="_blank" rel="noopener">https://discuss.pytorch.org/t/accumulating-gradients/30020</a><br><a href="http://www.linzehui.me/2019/12/29/碎片知识/每周碎片知识30/">http://www.linzehui.me/2019/12/29/碎片知识/每周碎片知识30/</a></p>
 <h4 id="问题描述-5"><a href="#问题描述-5" class="headerlink" title="问题描述"></a>问题描述</h4><p>使用梯度累积显存占用显著增加。</p>
 <h4 id="原因-5"><a href="#原因-5" class="headerlink" title="原因"></a>原因</h4><p>梯度累积用了不好的写法。每次计算完loss直接累加而不是先backward，等到循环完了再step。</p>
 <h4 id="解决方案-5"><a href="#解决方案-5" class="headerlink" title="解决方案"></a>解决方案</h4><p>采用较优的写法：每次计算backward，累积完gradient再更新。</p>
@@ -469,8 +469,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/" rel="next" title="关于Pytorch中Parameter的nan">
-                <i class="fa fa-chevron-left"></i> 关于Pytorch中Parameter的nan
+              <a href="/2019/05/06/代码相关/代码记录16/" rel="next" title="代码片段记录16">
+                <i class="fa fa-chevron-left"></i> 代码片段记录16
               </a>
             
           </div>
@@ -479,8 +479,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/07/代码相关/关于transformer-xl中rel-shift实现的解读/" rel="prev" title="关于transformer-xl中rel-shift实现的解读">
-                关于transformer-xl中rel-shift实现的解读 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/07/碎片知识/关于Pytorch中Parameter的nan/" rel="prev" title="关于Pytorch中Parameter的nan">
+                关于Pytorch中Parameter的nan <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -563,7 +563,7 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">210</span>
+                  <span class="site-state-item-count">214</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -576,7 +576,7 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">218</span>
+                  <span class="site-state-item-count">221</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -636,7 +636,7 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

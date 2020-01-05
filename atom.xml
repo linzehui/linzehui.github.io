@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.linzehui.me/"/>
-  <updated>2019-12-29T03:30:23.357Z</updated>
+  <updated>2020-01-05T03:43:14.759Z</updated>
   <id>http://www.linzehui.me/</id>
   
   <author>
@@ -15,6 +15,124 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>每周碎片知识41</title>
+    <link href="http://www.linzehui.me/2020/01/05/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8641/"/>
+    <id>http://www.linzehui.me/2020/01/05/碎片知识/每周碎片知识41/</id>
+    <published>2020-01-05T03:39:14.000Z</published>
+    <updated>2020-01-05T03:43:14.759Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;命令行删除排除文件&quot;&gt;&lt;a href=&quot;#命令行删除排除文件&quot; class=&quot;headerlink&quot; title=&quot;[命令行删除排除文件]&quot;&gt;&lt;/a&gt;[命令行删除排除文件]&lt;/h3&gt;&lt;p&gt;删除除了指定文件的所有文件&lt;/p&gt;
+&lt;figure
+        
+      
+    
+    </summary>
+    
+    
+      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="bash" scheme="http://www.linzehui.me/tags/bash/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于fp16混合精度的一点感受和debug经历</title>
+    <link href="http://www.linzehui.me/2020/01/04/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8Efp16%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E7%9A%84%E4%B8%80%E7%82%B9%E6%84%9F%E5%8F%97%E5%92%8Cdebug%E7%BB%8F%E5%8E%86/"/>
+    <id>http://www.linzehui.me/2020/01/04/碎片知识/关于fp16混合精度的一点感受和debug经历/</id>
+    <published>2020-01-04T12:43:14.000Z</published>
+    <updated>2020-01-05T03:50:02.725Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;严格来说，这应该是关于在fairseq使用混合精度的一点感受。&lt;/p&gt;
+&lt;p&gt;前两天因为需求需要在fairseq上跑一个transformer large，自己的卡（XP和1080ti和2080ti）又不算很支持（按理说XP和2080ti都有tensor
+        
+      
+    
+    </summary>
+    
+    
+      <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="fairseq" scheme="http://www.linzehui.me/tags/fairseq/"/>
+    
+      <category term="fp16" scheme="http://www.linzehui.me/tags/fp16/"/>
+    
+      <category term="混合精度" scheme="http://www.linzehui.me/tags/%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周论文37</title>
+    <link href="http://www.linzehui.me/2020/01/04/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8737/"/>
+    <id>http://www.linzehui.me/2020/01/04/论文/每周论文37/</id>
+    <published>2020-01-04T12:28:30.000Z</published>
+    <updated>2020-01-05T03:45:18.517Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本周论文：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;TENER: Adapting Transformer Encoder for Named Entity Recognition&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="Transformer" scheme="http://www.linzehui.me/tags/Transformer/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="NER" scheme="http://www.linzehui.me/tags/NER/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周诗词42</title>
+    <link href="http://www.linzehui.me/2020/01/04/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D42/"/>
+    <id>http://www.linzehui.me/2020/01/04/诗词&amp;句/每周诗词42/</id>
+    <published>2020-01-04T12:27:14.000Z</published>
+    <updated>2020-01-04T12:27:46.395Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;南陵别儿童入京&quot;&gt;&lt;a href=&quot;#南陵别儿童入京&quot; class=&quot;headerlink&quot; title=&quot;南陵别儿童入京&quot;&gt;&lt;/a&gt;南陵别儿童入京&lt;/h2&gt;&lt;p&gt;[唐]
+        
+      
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
+    
+      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
   
   <entry>
     <title>每周碎片知识30</title>
@@ -71,9 +189,9 @@
     
       <category term="Softmax" scheme="http://www.linzehui.me/tags/Softmax/"/>
     
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
     
   </entry>
   
@@ -101,9 +219,9 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
     
       <category term="style transfer" scheme="http://www.linzehui.me/tags/style-transfer/"/>
     
@@ -314,11 +432,11 @@
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
+      <category term="style transfer" scheme="http://www.linzehui.me/tags/style-transfer/"/>
+    
       <category term="structured learning" scheme="http://www.linzehui.me/tags/structured-learning/"/>
     
       <category term="domain adaptation" scheme="http://www.linzehui.me/tags/domain-adaptation/"/>
-    
-      <category term="style transfer" scheme="http://www.linzehui.me/tags/style-transfer/"/>
     
   </entry>
   
@@ -480,130 +598,6 @@
       <category term="碎片知识" scheme="http://www.linzehui.me/tags/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
     
       <category term="Pytorch" scheme="http://www.linzehui.me/tags/Pytorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周论文30</title>
-    <link href="http://www.linzehui.me/2019/09/15/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8730/"/>
-    <id>http://www.linzehui.me/2019/09/15/论文/每周论文30/</id>
-    <published>2019-09-15T02:15:30.000Z</published>
-    <updated>2019-09-15T03:06:41.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;本周论文：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Constant-Time Machine Translation with Conditional Masked Language Models&lt;/li&gt;
-&lt;li&gt;Learning a Multitask Curriculum
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
-    
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
-    
-      <category term="Machine Translation" scheme="http://www.linzehui.me/tags/Machine-Translation/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周诗词36</title>
-    <link href="http://www.linzehui.me/2019/09/15/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D36/"/>
-    <id>http://www.linzehui.me/2019/09/15/诗词&amp;句/每周诗词36/</id>
-    <published>2019-09-15T02:09:14.000Z</published>
-    <updated>2019-09-15T02:13:43.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;辋川闲居赠裴秀才迪&quot;&gt;&lt;a href=&quot;#辋川闲居赠裴秀才迪&quot; class=&quot;headerlink&quot; title=&quot;辋川闲居赠裴秀才迪&quot;&gt;&lt;/a&gt;辋川闲居赠裴秀才迪&lt;/h3&gt;&lt;p&gt;[唐]
-        
-      
-    
-    </summary>
-    
-    
-      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
-    
-      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周诗词35</title>
-    <link href="http://www.linzehui.me/2019/09/01/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D35/"/>
-    <id>http://www.linzehui.me/2019/09/01/诗词&amp;句/每周诗词35/</id>
-    <published>2019-09-01T02:16:14.000Z</published>
-    <updated>2019-09-01T02:21:01.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;登金陵凤凰台&quot;&gt;&lt;a href=&quot;#登金陵凤凰台&quot; class=&quot;headerlink&quot; title=&quot;登金陵凤凰台&quot;&gt;&lt;/a&gt;登金陵凤凰台&lt;/h3&gt;&lt;p&gt;[唐]
-        
-      
-    
-    </summary>
-    
-    
-      <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
-    
-      <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每周论文29</title>
-    <link href="http://www.linzehui.me/2019/09/01/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8729/"/>
-    <id>http://www.linzehui.me/2019/09/01/论文/每周论文29/</id>
-    <published>2019-09-01T01:24:30.000Z</published>
-    <updated>2019-09-02T08:13:53.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;本周论文：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Repeat before Forgetting: Spaced Repetition for Efficient and Effective Training of Neural Networks&lt;/li&gt;
-&lt;li&gt;A Simple
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
-    
-      <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
-    
-      <category term="Summary" scheme="http://www.linzehui.me/tags/Summary/"/>
-    
-      <category term="Sequence Generation" scheme="http://www.linzehui.me/tags/Sequence-Generation/"/>
     
   </entry>
   

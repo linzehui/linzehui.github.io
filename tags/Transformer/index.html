@@ -364,7 +364,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">210</span>
+                  <span class="site-state-item-count">214</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -377,7 +377,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">218</span>
+                  <span class="site-state-item-count">221</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -421,7 +421,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -954,7 +954,13 @@
 
 </body>
 </html>
-sliceLeft, sliceRight) {
+}
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
                     if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
                       return sliceRight.searchTextCount - sliceLeft.searchTextCount;
                     } else if (sliceLeft.hits.length !== sliceRight.hits.length) {

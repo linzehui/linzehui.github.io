@@ -1,6 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>每周碎片知识41</title>
+    <url>/2020/01/05/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8641/</url>
+    <content><![CDATA[<h3 id="命令行删除排除文件"><a href="#命令行删除排除文件" class="headerlink" title="[命令行删除排除文件]"></a>[命令行删除排除文件]</h3><p>删除除了指定文件的所有文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rm -rf !(keep) <span class="comment">#删除keep文件之外的所有文件</span></span><br><span class="line">rm -rf !(keep1 | keep2) <span class="comment">#删除keep1和keep2文件之外的所有文件</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://www.jianshu.com/p/c3f8b4fe8dc0" target="_blank" rel="noopener">https://www.jianshu.com/p/c3f8b4fe8dc0</a></p>
+]]></content>
+      <tags>
+        <tag>碎片知识</tag>
+        <tag>bash</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于fp16混合精度的一点感受和debug经历</title>
+    <url>/2020/01/04/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8Efp16%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E7%9A%84%E4%B8%80%E7%82%B9%E6%84%9F%E5%8F%97%E5%92%8Cdebug%E7%BB%8F%E5%8E%86/</url>
+    <content><![CDATA[<p>严格来说，这应该是关于在fairseq使用混合精度的一点感受。</p>
+<p>前两天因为需求需要在fairseq上跑一个transformer large，自己的卡（XP和1080ti和2080ti）又不算很支持（按理说XP和2080ti都有tensor core，应该是可以支持混合精度加速的，但驱动死活装不上）又不大行，恰巧正好借到几张V100，感受了一下，发现fp16确实真的相当快。训练70个epoch只需要1天时间，而使用fp32则需要两天多。</p>
+<p>但是baseline跑完了，我需要在transformer的基础上加点东西，具体来说就是在attention上随机mask掉一些tensor，然后重新归一化。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># attn_weight is fp16</span></span><br><span class="line">attn_weight = attn_weight*mask  <span class="comment"># attn: bs*n_head,q_len,k_len</span></span><br><span class="line">attn_weight = attn_weight/(attn_weight.sum(dim=<span class="number">-1</span>,keepdim=<span class="keyword">True</span>)+<span class="number">1e-10</span>)</span><br></pre></td></tr></table></figure>
+<p>只要加了这一个，跑过几个step就一定会出现overflow。</p>
+<blockquote>
+<p>| WARNING: overflow detected, setting loss scale to 0.01<br>Minimum loss scale reached (0.0001). Your loss is probably exploding. Try lowering the learning rate, using gradient clipping or increasing the batch size.</p>
+</blockquote>
+<p>第一时间搜索issue，发现还是有不少人遇到这个情况的，而也有官方给出<a href="https://github.com/pytorch/fairseq/issues/1529" target="_blank" rel="noopener">建议</a>。</p>
+<p><img src="/images/15781426800870.png" width="80%" height="50%"></p>
+<p>这里的解决方案其实就是增加训练的稳定性，包括对overflow的容忍度提升；增加batch或者减小lr使得模型的loss不爆掉。</p>
+<p>我用上了这几个方法后虽然爆掉的时间点推后了，但还是爆了。</p>
+<p>这个时候旁边的人说，你既然用了fp16，为啥要加1e-10啊，1e-10是不是已经超过了fp16的表达范围了？我查了一下，还真是。</p>
+<p>那我就改成1e-6吧。</p>
+<p>好像又将模型爆掉的时间点推后了一点点，可是还是爆了。</p>
+<p>我尝试关掉这个归一化，诶，好像就稳定了。看来问题就锁定在归一化这条语句上。</p>
+<p>我想，是不是fp16有啥特殊写法啊，那我查一下吧。网上的写法多是使用apex的，看了一下，fairseq都是自己写的混合精度训练。没办法，我只好参考fairseq自己是怎么写兼容混合精度训练的代码了。</p>
+<p>我翻了一下，无意中在multihead类看到这句：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">attn_weights = attn_weights.float().masked_fill(</span><br><span class="line">                    key_padding_mask.unsqueeze(<span class="number">1</span>).unsqueeze(<span class="number">2</span>),</span><br><span class="line">                    float(<span class="string">'-inf'</span>),</span><br><span class="line">                ).type_as(attn_weights)  <span class="comment"># FP16 support: cast to float and back</span></span><br><span class="line">                </span><br><span class="line">attn_weights = attn_weights.view(bsz * self.num_heads, tgt_len, src_len)</span><br></pre></td></tr></table></figure>
+<p>看到注释，诶，原来这里是要先升精度计算完softmax再降精度啊。是不是因为我的就是因为没做这个操作才不work的？</p>
+<p>那我改：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">attn_weight_float=attn_weight.float()</span><br><span class="line">attn_weight_float = attn_weight_float / (attn_weight_float.sum(dim=<span class="number">-1</span>, keepdim=<span class="keyword">True</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> attn_weight_float.type_as(attn_weight)</span><br></pre></td></tr></table></figure>
+<p>我全程计算用fp32，在return的时候再降到fp16。这回没问题了吧。</p>
+<p>有。跑了几个回合后最终还是爆掉了。</p>
+<p>我想了一下（我对浮点数这块不会算），有没有可能是float在除以另一个float的时候导致尾数很多，而在最后被cast到fp16的时候就出现不稳定的情况，比如有些很小的数干脆就被cast成0了，导致数值的不稳定？</p>
+<p>恰好这天郭博来了，就顺口问了一下。他告诉我，fp16确实要特殊写法，比如升降精度这块就得自己把握，但具体要啥时候升啥时候降？不知道。出了问题只能一条一条debug，一点一点尝试，靠经验。</p>
+<p>好吧，这至少说明我所想的升降精度还是没错的。</p>
+<p>我想了一下，那干脆这样，在做mask的时候，我用fp16，走到归一化这关，我就全程用fp16好了，这样sum出来的也是fp16，不用经历cast的过程。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">attn_weight_float = attn_weight.float()</span><br><span class="line">attn_weight_float = attn_weight_float * mask</span><br><span class="line">attn_weight = attn_weight_float.type_as(attn_weight)</span><br><span class="line">scale = attn_weight.sum(dim=<span class="number">-1</span>, keepdim=<span class="keyword">True</span>)  <span class="comment"># fp16</span></span><br><span class="line">attn_weight = attn_weight / scale</span><br></pre></td></tr></table></figure>
+<p>诶，这样好像就没问题了！跑了一晚上，第二天还是没出错。看来被我蒙对了。</p>
+<p>而虽然找到了对的方法，但我还想优化。既然进来的时候weight就已经fp16了，为啥我在得到mask之后不直接把mask转换成fp16，然后和attn_weight相乘，fp16之间的相乘应该更快才是。</p>
+<p>所以改进版就应该是：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">attn_weight = attn_weight * mask.type_as(attn_weight)</span><br><span class="line">scale = attn_weight.sum(dim=<span class="number">-1</span>, keepdim=<span class="keyword">True</span>)  <span class="comment"># fp16</span></span><br><span class="line">attn_weight = attn_weight / scale</span><br></pre></td></tr></table></figure>
+<p>emmm，很不巧，我感觉这个方法应该没任何问题的，但还是爆了。或许是矩阵乘法这边又出了啥问题吧。但此时我已经心累了，那就还是按照之前找到的方法来吧。</p>
+<p>记录一下debug艰辛过程的思路：<br><img src="/images/15781442598512.jpg" width="70%" height="50%"></p>
+<p><img src="/images/15781442323012.jpg" width="70%" height="50%"></p>
+<p><img src="/images/15781442987656.jpg" width="70%" height="50%"></p>
+<p><img src="/images/15781443362377.jpg" width="60%" height="50%"></p>
+<p><img src="/images/15781443659502.jpg" width="70%" height="50%"></p>
+<p><img src="/images/15781444296042.jpg" width="70%" height="50%"></p>
+<p>从30日改到1日，横跨一年，终于debug完成。</p>
+<hr>
+<p>说了那么多，总结一下：</p>
+<ol>
+<li>当没有改动直接用fairseq跑，出现overflow的问题，建议看看上面提到的issue的解决方案，很多时候loss爆掉就是lr太大了，这个一般可以通过减小lr和增大batch来解决。</li>
+<li>如果是自己加东西或者写模型，要非常注意加减乘除这些操作，要注意范围，比如不要加1e-10这种明显超过表示范围的。在写之前想一下有没有可能性会导致cast的过程中出现数值不稳定；同时要记得升降精度这个操作。关于混合精度计算，有几个operator是需要升降精度的，这个在NVIDIA官方文档中有。</li>
+<li>如果出现loss爆掉，应该逐行排查，其实就是逐行用<code>torch.isnan()</code>以及print出来，看看是哪里导致的nan，使得loss爆掉，然后解决方案就是尝试各种的升降精度，使得逻辑上没啥问题。当然这个还是玄学，似乎有一套指导方案，但我不知道。</li>
+<li>在训练过程中看log的时候，有overflow的WARNING是很正常的，因为fairseq代码会根据overflow的情况自动调整loss scale，除非scale到很小的数值，否则可以静观其变。因为如果在训练过程中长时间没有overflow的风险，模型会自动调高scale。</li>
+</ol>
+<p>最后的最后，fp16真的香，如果显卡支持尽量尝试fp16。</p>
+]]></content>
+      <tags>
+        <tag>碎片知识</tag>
+        <tag>fairseq</tag>
+        <tag>fp16</tag>
+        <tag>混合精度</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>每周论文37</title>
+    <url>/2020/01/04/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8737/</url>
+    <content><![CDATA[<p>本周论文：</p>
+<ol>
+<li>TENER: Adapting Transformer Encoder for Named Entity Recognition</li>
+</ol>
+<h2 id="TENER-Adapting-Transformer-Encoder-for-Named-Entity-Recognition"><a href="#TENER-Adapting-Transformer-Encoder-for-Named-Entity-Recognition" class="headerlink" title="[TENER: Adapting Transformer Encoder for Named Entity Recognition]"></a>[TENER: Adapting Transformer Encoder for Named Entity Recognition]</h2><p>提出一种经过修改的Transformer，能在NER任务上达到SOTA。</p>
+<p><img src="/images/15781410773629.jpg" width="50%" height="50%"></p>
+<p>主要几个改动：<br>① 将position embedding改了。因为原先的position只对位置感知，对方向没有感知，而这个在NER任务上可能有帮助。</p>
+<p>可以看到方向还是挺重要的：</p>
+<p><img src="/images/15781411354278.jpg" width="50%" height="50%"></p>
+<p>而在transformer中position只能感知距离而没有方向感：</p>
+<p><img src="/images/15781411852555.jpg" width="50%" height="50%"></p>
+<p>具体方法是将绝对位置换成相对位置：</p>
+<p>$Q, K, V=H W_{q}, H_{d_{k}}, H W_{v}$</p>
+<p>$R_{t-j}=\left[\ldots \sin \left(\frac{t-j}{10000^{2 i / d_{k}}}\right) \cos \left(\frac{t-j}{10000^{2 i / d_{k}}}\right) \ldots\right]^{T}$</p>
+<p>$A_{t, j}^{r e l}=Q_{t} K_{j}^{T}+Q_{t} R_{t-j}^{T}+\mathbf{u} K_{j}^{T}+\mathbf{v} R_{t-j}^{T}$</p>
+<p>$\operatorname{Attn}(Q, K, V)=\operatorname{softmax}\left(A^{r e l}\right) V$</p>
+<p>参考了transformer-xl。</p>
+<p>②减少参数<br>上述公式可以看出，减小了key的可学习参数；同时在multihead中，去掉了$W_O$：<br>$MultiHead (H)=\left[\text { head}^{(1)} ; \ldots ; \text { head}^{(n)}\right] W_{O}$</p>
+<p>这是为了减少过拟合的风险。</p>
+<p>③unscale dot-product attention<br>在原先计算dot-product时有除以一个$\sqrt{d_k}$，这是为了让attention分布更加平滑。而在这里去掉了这个scale，使得模型能够分配更加sharp的attention分布，这对NER这个任务有好处，因为NER只需要少数几个context就足够了。</p>
+<p>这篇的工程意义很大，解决了实际问题。</p>
+]]></content>
+      <tags>
+        <tag>Paper</tag>
+        <tag>Transformer</tag>
+        <tag>每周论文阅读</tag>
+        <tag>NER</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>每周诗词42</title>
+    <url>/2020/01/04/%E8%AF%97%E8%AF%8D&amp;%E5%8F%A5/%E6%AF%8F%E5%91%A8%E8%AF%97%E8%AF%8D42/</url>
+    <content><![CDATA[<h2 id="南陵别儿童入京"><a href="#南陵别儿童入京" class="headerlink" title="南陵别儿童入京"></a>南陵别儿童入京</h2><p>[唐] 李白<br>白酒新熟山中归，黄鸡啄黍秋正肥。<br>呼童烹鸡酌白酒，儿女嬉笑牵人衣。<br>高歌取醉欲自慰，起舞落日争光辉。<br>游说万乘苦不早，著鞭跨马涉远道。<br>会稽愚妇轻买臣，余亦辞家西入秦。<br><strong>仰天大笑出门去，我辈岂是蓬蒿人</strong>。</p>
+<h2 id="夏日山中"><a href="#夏日山中" class="headerlink" title="夏日山中"></a>夏日山中</h2><p>[唐] 李白<br>懒摇白羽扇，裸袒青林中。<br>脱巾挂石壁，露顶洒松风。</p>
+]]></content>
+      <tags>
+        <tag>诗词</tag>
+        <tag>诗词分享</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>每周碎片知识30</title>
     <url>/2019/12/29/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E6%AF%8F%E5%91%A8%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%8630/</url>
     <content><![CDATA[<h3 id="fairseq-generate-编码问题"><a href="#fairseq-generate-编码问题" class="headerlink" title="[fairseq generate 编码问题]"></a>[fairseq generate 编码问题]</h3><p>fairseq在生成的时候：</p>
@@ -99,8 +215,8 @@
       <tags>
         <tag>Paper</tag>
         <tag>Softmax</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
       </tags>
   </entry>
   <entry>
@@ -167,8 +283,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>style transfer</tag>
       </tags>
   </entry>
@@ -568,9 +684,9 @@
         <tag>Transformer</tag>
         <tag>每周论文阅读</tag>
         <tag>NMT</tag>
+        <tag>style transfer</tag>
         <tag>structured learning</tag>
         <tag>domain adaptation</tag>
-        <tag>style transfer</tag>
       </tags>
   </entry>
   <entry>
@@ -728,8 +844,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
         <tag>Machine Translation</tag>
       </tags>
@@ -829,8 +945,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
         <tag>Summary</tag>
         <tag>Sequence Generation</tag>
@@ -1045,8 +1161,8 @@
       <tags>
         <tag>Paper</tag>
         <tag>Transformer</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
         <tag>exposure bias</tag>
       </tags>
@@ -1199,8 +1315,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>Domain Adaptation</tag>
         <tag>Pseudo Labeling</tag>
       </tags>
@@ -1445,8 +1561,8 @@
       <tags>
         <tag>Classification</tag>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
       </tags>
   </entry>
   <entry>
@@ -1539,8 +1655,8 @@
       <tags>
         <tag>Paper</tag>
         <tag>每周论文阅读</tag>
-        <tag>SPL</tag>
         <tag>Self-paced Learning</tag>
+        <tag>SPL</tag>
         <tag>Boosting</tag>
         <tag>Boost</tag>
       </tags>
@@ -1617,10 +1733,10 @@
 ]]></content>
       <tags>
         <tag>CNN</tag>
-        <tag>RNN</tag>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
+        <tag>RNN</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>ResNet</tag>
         <tag>Highway</tag>
       </tags>
@@ -1828,15 +1944,15 @@
         <tag>RL</tag>
         <tag>Reinforcement Learning</tag>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
         <tag>LSTM</tag>
+        <tag>Self-paced Learning</tag>
+        <tag>SPL</tag>
         <tag>Dropout</tag>
         <tag>meta-learning</tag>
         <tag>multi-task</tag>
-        <tag>SPL</tag>
-        <tag>Self-paced Learning</tag>
       </tags>
   </entry>
   <entry>
@@ -2156,8 +2272,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
         <tag>Language Modeling</tag>
         <tag>boosting</tag>
@@ -2321,8 +2437,8 @@
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
       </tags>
   </entry>
@@ -2831,6 +2947,25 @@
       </tags>
   </entry>
   <entry>
+    <title>关于Pytorch中Parameter的nan</title>
+    <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADParameter%E7%9A%84nan/</url>
+    <content><![CDATA[<p>前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。<br>如：<br><img src="/images/15571956719188.jpg" width="80%" height="50%"></p>
+<p><del>找了一圈网上没有找到其原因，已经在论坛提问了。</del><br>我的解决方案是显式对其进行初始化：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> args.init == <span class="string">'uniform'</span>:</span><br><span class="line">    nn.init.uniform_(self.u, -args.init_range, args.init_range)</span><br><span class="line">    nn.init.uniform_(self.v, -args.init_range, args.init_range)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> args.init == <span class="string">'normal'</span>:</span><br><span class="line">    nn.init.normal_(self.u, <span class="number">0.0</span>, args.init_std)</span><br><span class="line">    nn.init.normal_(self.v, <span class="number">0.0</span>, args.init_std)</span><br></pre></td></tr></table></figure>
+<hr>
+<p>原来是torch.Tensor的锅，torch.Tensor会分配内存空间，但不会清空该空间的值，因此里面可能会有奇怪的值。正确的做法应该是：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.Parameter(torch.rand(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">torch.nn.Parameter(torch.zeros(<span class="number">10</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<p>参考资料：<br><a href="https://discuss.pytorch.org/t/nan-in-torch-tensor/8987" target="_blank" rel="noopener">https://discuss.pytorch.org/t/nan-in-torch-tensor/8987</a></p>
+]]></content>
+      <tags>
+        <tag>碎片知识</tag>
+        <tag>遇到的问题</tag>
+        <tag>Pytorch</tag>
+        <tag>nan</tag>
+        <tag>Parameter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Pytorch中遇到的问题（合集）</title>
     <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/PyTorch%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E5%90%88%E9%9B%86%EF%BC%89/</url>
     <content><![CDATA[<p>断断续续记录一下在写代码过程中遇到的问题以及解决方案。</p>
@@ -2863,7 +2998,7 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 <h4 id="解决方案-4"><a href="#解决方案-4" class="headerlink" title="解决方案"></a>解决方案</h4><p>最好再cpu上跑一下，会有更详细的出错提示。如果没办法在cpu上跑，可以尝试</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CUDA_LAUNCH_BLOCKING=1 python script.py args</span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="Pytorch梯度累积出现显存OOM问题"><a href="#Pytorch梯度累积出现显存OOM问题" class="headerlink" title="[Pytorch梯度累积出现显存OOM问题]"></a>[Pytorch梯度累积出现显存OOM问题]</h3><p><a href="https://discuss.pytorch.org/t/accumulating-gradients/30020" target="_blank" rel="noopener">https://discuss.pytorch.org/t/accumulating-gradients/30020</a></p>
+<h3 id="Pytorch梯度累积出现显存OOM问题"><a href="#Pytorch梯度累积出现显存OOM问题" class="headerlink" title="[Pytorch梯度累积出现显存OOM问题]"></a>[Pytorch梯度累积出现显存OOM问题]</h3><p><a href="https://discuss.pytorch.org/t/accumulating-gradients/30020" target="_blank" rel="noopener">https://discuss.pytorch.org/t/accumulating-gradients/30020</a><br><a href="http://www.linzehui.me/2019/12/29/碎片知识/每周碎片知识30/">http://www.linzehui.me/2019/12/29/碎片知识/每周碎片知识30/</a></p>
 <h4 id="问题描述-5"><a href="#问题描述-5" class="headerlink" title="问题描述"></a>问题描述</h4><p>使用梯度累积显存占用显著增加。</p>
 <h4 id="原因-5"><a href="#原因-5" class="headerlink" title="原因"></a>原因</h4><p>梯度累积用了不好的写法。每次计算完loss直接累加而不是先backward，等到循环完了再step。</p>
 <h4 id="解决方案-5"><a href="#解决方案-5" class="headerlink" title="解决方案"></a>解决方案</h4><p>采用较优的写法：每次计算backward，累积完gradient再更新。</p>
@@ -2879,25 +3014,6 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
         <tag>CUDA</tag>
         <tag>OOM</tag>
         <tag>梯度累积</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于Pytorch中Parameter的nan</title>
-    <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADParameter%E7%9A%84nan/</url>
-    <content><![CDATA[<p>前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。<br>如：<br><img src="/images/15571956719188.jpg" width="80%" height="50%"></p>
-<p><del>找了一圈网上没有找到其原因，已经在论坛提问了。</del><br>我的解决方案是显式对其进行初始化：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> args.init == <span class="string">'uniform'</span>:</span><br><span class="line">    nn.init.uniform_(self.u, -args.init_range, args.init_range)</span><br><span class="line">    nn.init.uniform_(self.v, -args.init_range, args.init_range)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> args.init == <span class="string">'normal'</span>:</span><br><span class="line">    nn.init.normal_(self.u, <span class="number">0.0</span>, args.init_std)</span><br><span class="line">    nn.init.normal_(self.v, <span class="number">0.0</span>, args.init_std)</span><br></pre></td></tr></table></figure>
-<hr>
-<p>原来是torch.Tensor的锅，torch.Tensor会分配内存空间，但不会清空该空间的值，因此里面可能会有奇怪的值。正确的做法应该是：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.Parameter(torch.rand(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">torch.nn.Parameter(torch.zeros(<span class="number">10</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-<p>参考资料：<br><a href="https://discuss.pytorch.org/t/nan-in-torch-tensor/8987" target="_blank" rel="noopener">https://discuss.pytorch.org/t/nan-in-torch-tensor/8987</a></p>
-]]></content>
-      <tags>
-        <tag>碎片知识</tag>
-        <tag>遇到的问题</tag>
-        <tag>Pytorch</tag>
-        <tag>nan</tag>
-        <tag>Parameter</tag>
       </tags>
   </entry>
   <entry>
@@ -3115,8 +3231,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>Paper</tag>
-        <tag>Curriculum Learning</tag>
         <tag>每周论文阅读</tag>
+        <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
         <tag>intrinsic dimension</tag>
         <tag>attention mechanism</tag>
@@ -3568,9 +3684,9 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 <p><a href="https://github.com/pytorch/fairseq/issues/346" target="_blank" rel="noopener">How to reproduce the result of WMT14 en-de on transformer BASE model?</a></p>
 ]]></content>
       <tags>
+        <tag>fairseq</tag>
         <tag>教程</tag>
         <tag>Transformer</tag>
-        <tag>fairseq</tag>
         <tag>NMT</tag>
         <tag>机器翻译</tag>
       </tags>
@@ -4984,8 +5100,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>Unsupervised Learning</tag>
         <tag>李宏毅机器学习课程</tag>
+        <tag>Unsupervised Learning</tag>
         <tag>Generation</tag>
       </tags>
   </entry>
@@ -5005,8 +5121,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>Unsupervised Learning</tag>
         <tag>李宏毅机器学习课程</tag>
+        <tag>Unsupervised Learning</tag>
         <tag>Auto-encoder</tag>
       </tags>
   </entry>
@@ -5032,8 +5148,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>Unsupervised Learning</tag>
         <tag>李宏毅机器学习课程</tag>
+        <tag>Unsupervised Learning</tag>
         <tag>Neighbor Embedding</tag>
       </tags>
   </entry>
@@ -5075,9 +5191,9 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
+        <tag>李宏毅机器学习课程</tag>
         <tag>Unsupervised Learning</tag>
         <tag>Linear Dimension Reduction</tag>
-        <tag>李宏毅机器学习课程</tag>
       </tags>
   </entry>
   <entry>
@@ -5191,8 +5307,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>机器学习🤖</tag>
-        <tag>李宏毅机器学习课程</tag>
         <tag>Semi-supervised learning</tag>
+        <tag>李宏毅机器学习课程</tag>
       </tags>
   </entry>
   <entry>
@@ -5708,10 +5824,10 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这是一篇干货满满的博客，实际上我还是有许多地方没有读懂，这适合多看几遍，慢慢理解。</p>
 ]]></content>
       <tags>
-        <tag>指南</tag>
-        <tag>调参</tag>
         <tag>NLP🤖</tag>
         <tag>笔记📒</tag>
+        <tag>指南</tag>
+        <tag>调参</tag>
       </tags>
   </entry>
   <entry>
@@ -5838,10 +5954,10 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 <p><a href="https://arxiv.org/pdf/1510.03820.pdf" target="_blank" rel="noopener">A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional<br>Neural Networks for Sentence Classification</a></p>
 ]]></content>
       <tags>
-        <tag>CNN</tag>
-        <tag>情感分析</tag>
         <tag>指南</tag>
         <tag>调参</tag>
+        <tag>CNN</tag>
+        <tag>情感分析</tag>
       </tags>
   </entry>
   <entry>
