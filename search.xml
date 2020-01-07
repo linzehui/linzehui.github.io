@@ -30,7 +30,7 @@
 <p>这个时候旁边的人说，你既然用了fp16，为啥要加1e-10啊，1e-10是不是已经超过了fp16的表达范围了？我查了一下，还真是。</p>
 <p>那我就改成1e-6吧。</p>
 <p>好像又将模型爆掉的时间点推后了一点点，可是还是爆了。</p>
-<p>我尝试关掉这个归一化，诶，好像就稳定了。看来问题就锁定在归一化这条语句上。</p>
+<p>我尝试关掉这个归一化，诶，好像就稳定了。看来问题就锁定在归一化这条语句上。</p>
 <p>我想，是不是fp16有啥特殊写法啊，那我查一下吧。网上的写法多是使用apex的，看了一下，fairseq都是自己写的混合精度训练。没办法，我只好参考fairseq自己是怎么写兼容混合精度训练的代码了。</p>
 <p>我翻了一下，无意中在multihead类看到这句：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">attn_weights = attn_weights.float().masked_fill(</span><br><span class="line">                    key_padding_mask.unsqueeze(<span class="number">1</span>).unsqueeze(<span class="number">2</span>),</span><br><span class="line">                    float(<span class="string">'-inf'</span>),</span><br><span class="line">                ).type_as(attn_weights)  <span class="comment"># FP16 support: cast to float and back</span></span><br><span class="line">                </span><br><span class="line">attn_weights = attn_weights.view(bsz * self.num_heads, tgt_len, src_len)</span><br></pre></td></tr></table></figure>
@@ -580,8 +580,8 @@
 ]]></content>
       <tags>
         <tag>杂七杂八</tag>
-        <tag>遇到的问题</tag>
         <tag>hexo</tag>
+        <tag>遇到的问题</tag>
       </tags>
   </entry>
   <entry>
@@ -1655,8 +1655,8 @@
       <tags>
         <tag>Paper</tag>
         <tag>每周论文阅读</tag>
-        <tag>Self-paced Learning</tag>
         <tag>SPL</tag>
+        <tag>Self-paced Learning</tag>
         <tag>Boosting</tag>
         <tag>Boost</tag>
       </tags>
@@ -1733,8 +1733,8 @@
 ]]></content>
       <tags>
         <tag>CNN</tag>
-        <tag>Paper</tag>
         <tag>RNN</tag>
+        <tag>Paper</tag>
         <tag>每周论文阅读</tag>
         <tag>Curriculum Learning</tag>
         <tag>ResNet</tag>
@@ -1948,11 +1948,11 @@
         <tag>Curriculum Learning</tag>
         <tag>NMT</tag>
         <tag>LSTM</tag>
-        <tag>Self-paced Learning</tag>
-        <tag>SPL</tag>
         <tag>Dropout</tag>
         <tag>meta-learning</tag>
         <tag>multi-task</tag>
+        <tag>SPL</tag>
+        <tag>Self-paced Learning</tag>
       </tags>
   </entry>
   <entry>
@@ -2522,8 +2522,8 @@
 <p>溜了溜了。</p>
 ]]></content>
       <tags>
-        <tag>活动</tag>
         <tag>AIS</tag>
+        <tag>活动</tag>
       </tags>
   </entry>
   <entry>
@@ -2947,25 +2947,6 @@
       </tags>
   </entry>
   <entry>
-    <title>关于Pytorch中Parameter的nan</title>
-    <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADParameter%E7%9A%84nan/</url>
-    <content><![CDATA[<p>前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。<br>如：<br><img src="/images/15571956719188.jpg" width="80%" height="50%"></p>
-<p><del>找了一圈网上没有找到其原因，已经在论坛提问了。</del><br>我的解决方案是显式对其进行初始化：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> args.init == <span class="string">'uniform'</span>:</span><br><span class="line">    nn.init.uniform_(self.u, -args.init_range, args.init_range)</span><br><span class="line">    nn.init.uniform_(self.v, -args.init_range, args.init_range)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> args.init == <span class="string">'normal'</span>:</span><br><span class="line">    nn.init.normal_(self.u, <span class="number">0.0</span>, args.init_std)</span><br><span class="line">    nn.init.normal_(self.v, <span class="number">0.0</span>, args.init_std)</span><br></pre></td></tr></table></figure>
-<hr>
-<p>原来是torch.Tensor的锅，torch.Tensor会分配内存空间，但不会清空该空间的值，因此里面可能会有奇怪的值。正确的做法应该是：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.Parameter(torch.rand(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">torch.nn.Parameter(torch.zeros(<span class="number">10</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-<p>参考资料：<br><a href="https://discuss.pytorch.org/t/nan-in-torch-tensor/8987" target="_blank" rel="noopener">https://discuss.pytorch.org/t/nan-in-torch-tensor/8987</a></p>
-]]></content>
-      <tags>
-        <tag>碎片知识</tag>
-        <tag>遇到的问题</tag>
-        <tag>Pytorch</tag>
-        <tag>nan</tag>
-        <tag>Parameter</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Pytorch中遇到的问题（合集）</title>
     <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/PyTorch%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E5%90%88%E9%9B%86%EF%BC%89/</url>
     <content><![CDATA[<p>断断续续记录一下在写代码过程中遇到的问题以及解决方案。</p>
@@ -3014,6 +2995,25 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
         <tag>CUDA</tag>
         <tag>OOM</tag>
         <tag>梯度累积</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于Pytorch中Parameter的nan</title>
+    <url>/2019/05/07/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/%E5%85%B3%E4%BA%8EPytorch%E4%B8%ADParameter%E7%9A%84nan/</url>
+    <content><![CDATA[<p>前几天遇到一个很神奇的bug，在Model里面定义一个Parameter，Parameter出现了nan。<br>如：<br><img src="/images/15571956719188.jpg" width="80%" height="50%"></p>
+<p><del>找了一圈网上没有找到其原因，已经在论坛提问了。</del><br>我的解决方案是显式对其进行初始化：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> args.init == <span class="string">'uniform'</span>:</span><br><span class="line">    nn.init.uniform_(self.u, -args.init_range, args.init_range)</span><br><span class="line">    nn.init.uniform_(self.v, -args.init_range, args.init_range)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> args.init == <span class="string">'normal'</span>:</span><br><span class="line">    nn.init.normal_(self.u, <span class="number">0.0</span>, args.init_std)</span><br><span class="line">    nn.init.normal_(self.v, <span class="number">0.0</span>, args.init_std)</span><br></pre></td></tr></table></figure>
+<hr>
+<p>原来是torch.Tensor的锅，torch.Tensor会分配内存空间，但不会清空该空间的值，因此里面可能会有奇怪的值。正确的做法应该是：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.Parameter(torch.rand(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">torch.nn.Parameter(torch.zeros(<span class="number">10</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<p>参考资料：<br><a href="https://discuss.pytorch.org/t/nan-in-torch-tensor/8987" target="_blank" rel="noopener">https://discuss.pytorch.org/t/nan-in-torch-tensor/8987</a></p>
+]]></content>
+      <tags>
+        <tag>碎片知识</tag>
+        <tag>遇到的问题</tag>
+        <tag>Pytorch</tag>
+        <tag>nan</tag>
+        <tag>Parameter</tag>
       </tags>
   </entry>
   <entry>
@@ -3827,8 +3827,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 <p><img src="/images/IMG_1256.jpg" width="70%" height="50%"></p>
 ]]></content>
       <tags>
-        <tag>Google</tag>
         <tag>活动</tag>
+        <tag>Google</tag>
       </tags>
   </entry>
   <entry>
@@ -5824,10 +5824,10 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这是一篇干货满满的博客，实际上我还是有许多地方没有读懂，这适合多看几遍，慢慢理解。</p>
 ]]></content>
       <tags>
-        <tag>NLP🤖</tag>
-        <tag>笔记📒</tag>
         <tag>指南</tag>
         <tag>调参</tag>
+        <tag>NLP🤖</tag>
+        <tag>笔记📒</tag>
       </tags>
   </entry>
   <entry>
@@ -5954,10 +5954,10 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 <p><a href="https://arxiv.org/pdf/1510.03820.pdf" target="_blank" rel="noopener">A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional<br>Neural Networks for Sentence Classification</a></p>
 ]]></content>
       <tags>
-        <tag>指南</tag>
-        <tag>调参</tag>
         <tag>CNN</tag>
         <tag>情感分析</tag>
+        <tag>指南</tag>
+        <tag>调参</tag>
       </tags>
   </entry>
   <entry>
@@ -6419,8 +6419,8 @@ Assertion srcIndex &lt; srcSelectDimSize failed</code></p>
 ]]></content>
       <tags>
         <tag>技巧</tag>
-        <tag>Pycharm</tag>
         <tag>杂七杂八</tag>
+        <tag>Pycharm</tag>
         <tag>快捷键</tag>
       </tags>
   </entry>
@@ -6996,8 +6996,8 @@ Perplexity (W)=& 2^{H(W)} \\
 ]]></content>
       <tags>
         <tag>杂七杂八</tag>
-        <tag>conda</tag>
         <tag>遇到的问题</tag>
+        <tag>conda</tag>
       </tags>
   </entry>
 </search>

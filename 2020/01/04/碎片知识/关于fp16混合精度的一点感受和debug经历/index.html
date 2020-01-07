@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://www.linzehui.me/images/15781443362377.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15781443659502.jpg">
 <meta property="og:image" content="http://www.linzehui.me/images/15781444296042.jpg">
-<meta property="og:updated_time" content="2020-01-05T03:50:02.725Z">
+<meta property="og:updated_time" content="2020-01-07T13:05:02.997Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于fp16混合精度的一点感受和debug经历">
 <meta name="twitter:description" content="严格来说，这应该是关于在fairseq使用混合精度的一点感受。 前两天因为需求需要在fairseq上跑一个transformer large，自己的卡（XP和1080ti和2080ti）又不算很支持（按理说XP和2080ti都有tensor core，应该是可以支持混合精度加速的，但驱动死活装不上）又不大行，恰巧正好借到几张V100，感受了一下，发现fp16确实真的相当快。训练70个epoch只需">
@@ -342,8 +342,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-05T11:50:02+08:00">
-                2020-01-05
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-07T21:05:02+08:00">
+                2020-01-07
               </time>
             
           </span>
@@ -391,7 +391,7 @@
 <p>这个时候旁边的人说，你既然用了fp16，为啥要加1e-10啊，1e-10是不是已经超过了fp16的表达范围了？我查了一下，还真是。</p>
 <p>那我就改成1e-6吧。</p>
 <p>好像又将模型爆掉的时间点推后了一点点，可是还是爆了。</p>
-<p>我尝试关掉这个归一化，诶，好像就稳定了。看来问题就锁定在归一化这条语句上。</p>
+<p>我尝试关掉这个归一化，诶，好像就稳定了。看来问题就锁定在归一化这条语句上。</p>
 <p>我想，是不是fp16有啥特殊写法啊，那我查一下吧。网上的写法多是使用apex的，看了一下，fairseq都是自己写的混合精度训练。没办法，我只好参考fairseq自己是怎么写兼容混合精度训练的代码了。</p>
 <p>我翻了一下，无意中在multihead类看到这句：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">attn_weights = attn_weights.float().masked_fill(</span><br><span class="line">                    key_padding_mask.unsqueeze(<span class="number">1</span>).unsqueeze(<span class="number">2</span>),</span><br><span class="line">                    float(<span class="string">'-inf'</span>),</span><br><span class="line">                ).type_as(attn_weights)  <span class="comment"># FP16 support: cast to float and back</span></span><br><span class="line">                </span><br><span class="line">attn_weights = attn_weights.view(bsz * self.num_heads, tgt_len, src_len)</span><br></pre></td></tr></table></figure>
