@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Paper,每周论文阅读,Transformer,NMT," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Weekly Review" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本周论文：  Understanding the Difficulty of Training Transformers  [Understanding the Difficulty of Training Transformers]这篇论文很有意思并且很有启发性。本文的核心观点是：训练深层Transformer的难点不在于梯度消失（gradient vanishing），而是在训练初期对resi">
+<meta name="keywords" content="Paper,每周论文阅读,Transformer,NMT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周论文39">
+<meta property="og:url" content="http://www.linzehui.me/2020/09/19/论文/每周论文39/index.html">
+<meta property="og:site_name" content="Weekly Review">
+<meta property="og:description" content="本周论文：  Understanding the Difficulty of Training Transformers  [Understanding the Difficulty of Training Transformers]这篇论文很有意思并且很有启发性。本文的核心观点是：训练深层Transformer的难点不在于梯度消失（gradient vanishing），而是在训练初期对resi">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.linzehui.me/images/16005200579239.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/16005202851784.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/16005217719964.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/16005220583133.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/16005222337169.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/16005227736330.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/16005234130860.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/16005234386927.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/16005239438753.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/16005239614654.jpg">
+<meta property="og:image" content="http://www.linzehui.me/images/16005241391257.jpg">
+<meta property="og:updated_time" content="2020-09-19T14:26:31.913Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每周论文39">
+<meta name="twitter:description" content="本周论文：  Understanding the Difficulty of Training Transformers  [Understanding the Difficulty of Training Transformers]这篇论文很有意思并且很有启发性。本文的核心观点是：训练深层Transformer的难点不在于梯度消失（gradient vanishing），而是在训练初期对resi">
+<meta name="twitter:image" content="http://www.linzehui.me/images/16005200579239.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.linzehui.me/2020/09/19/论文/每周论文39/"/>
+
+
+
+
+
+  <title>每周论文39 | Weekly Review</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Weekly Review</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.linzehui.me/2020/09/19/论文/每周论文39/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林泽辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Weekly Review">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">每周论文39</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-19T20:41:30+08:00">
+                2020-09-19
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-09-19T22:26:31+08:00">
+                2020-09-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本周论文：</p>
+<ol>
+<li>Understanding the Difficulty of Training Transformers</li>
+</ol>
+<h2 id="Understanding-the-Difficulty-of-Training-Transformers"><a href="#Understanding-the-Difficulty-of-Training-Transformers" class="headerlink" title="[Understanding the Difficulty of Training Transformers]"></a>[Understanding the Difficulty of Training Transformers]</h2><p>这篇论文很有意思并且很有启发性。本文的核心观点是：训练深层Transformer的难点不在于梯度消失（gradient vanishing），而是在训练初期对residual branch（非线性那部分）的依赖过重，导致小的扰动会带来很大的变化，从而引起模型的不稳定。作者提出Admin，一种两段式的初始化方法来解决此问题。同时，作者认为post-norm比pre-norm潜力更大，并将Aadmin应用于post-norm的Transformer上，并取得明显的效果。</p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>Post-norm：对于每层layer而言，先做非线性（即multihead和ffn），与残差相加后再做normalization；<br>Pre-norm：先对输入进行normalization，再做非线性，最后与残差相加。</p>
+<p><img src="/images/16005200579239.jpg" width="80%" height="50%"></p>
+<h3 id="导致深层Transformer无法训动的原因"><a href="#导致深层Transformer无法训动的原因" class="headerlink" title="导致深层Transformer无法训动的原因"></a>导致深层Transformer无法训动的原因</h3><p>过去解决训练深层Transformer困难的一大方法就是使用pre-norm。作者先对比pre-norm与post-norm在不同超参下的结果。</p>
+<p><img src="/images/16005202851784.jpg" width="50%" height="50%"></p>
+<p>可以看到，pre-norm在所有的超参下都能够收敛，而post-norm则在15次中出现了7次不收敛的情况。这说明pre-norm比post-norm更鲁棒。</p>
+<p>但是，要注意到，当post-norm收敛时，基本上比相同超参下的pre-norm要好。这说明了post-norm的潜力比pre-norm强。</p>
+<p>接着，作者以主流的梯度消失的观点做了一些统计，具体来说，统计了pre-norm和post-norm的encoder和decoder的每层的梯度norm的相对值 $\frac{\left|\Delta \mathbf{x}_{i}^{(\cdot)}\right|_{2}}{\max _{j}\left|\Delta \mathbf{x}_{j}^{(\cdot)}\right|_{2}}$。</p>
+<p><img src="/images/16005217719964.jpg" width="90%" height="50%"></p>
+<p>上图可以得到几个结论：</p>
+<ul>
+<li>pre-norm的encoder和decoder都没有梯度消失的问题；post-norm的encoder没有梯度消失问题，而decoder则有问题。</li>
+<li>（上图的下半部分要从右往左看）当decoder的梯度经过encoder-attention时，会有明显的减少。这说明了梯度消失是由encoder-attention（即cross-attention造成的）。</li>
+</ul>
+<p>既然发现了post-norm的decoder有梯度消失的问题，那是否可以仅解决decoder的问题，也即可以将post-norm的decoder换成pre-norm的decoder，构造一个混合模型。</p>
+<p><img src="/images/16005220583133.jpg" width="50%" height="50%"></p>
+<p>上图可以看到，仅仅解决梯度消失的问题是不够的。因此存在其他原因导致模型训练不稳定。</p>
+<h3 id="放大效应（Amplification-effect）是造成模型训练不稳定的原因"><a href="#放大效应（Amplification-effect）是造成模型训练不稳定的原因" class="headerlink" title="放大效应（Amplification effect）是造成模型训练不稳定的原因"></a>放大效应（Amplification effect）是造成模型训练不稳定的原因</h3><p>引入一些notation：<br>记$\widehat{\mathbf{a}}_{i}=\frac{\mathbf{a}_{i}}{\sqrt{\operatorname{Var} \mathbf{a}_{i}}}$ 是第i层的residual branch（residual branch这里指的是ffn和multihead）的normalized输出；记$\widehat{\mathbf{x}}_{i}=\frac{\mathbf{x}_{i}}{\sqrt{\operatorname{Var} \mathbf{x}_{i}}}$是第i层的总的normalized输出。我们可以将$\widehat{\mathbf{x}}$看做是所有过去$\widehat{\mathbf{a}}$的加权平均（很好理解，因为每个$\widehat{\mathbf{a}}$都输入到下一层了）。那么我们就有：</p>
+<script type="math/tex; mode=display">\widehat{\mathbf{x}}_{i}=\sum_{j<i} \beta_{i, j} \widehat{\mathbf{a}}_{j}</script><p>$\beta_{i, j} $代表了$\widehat{\mathbf{x}}$对第j层的依赖程度。</p>
+<p>我们可以将pre-norm和post-norm换个角度看，如图所示。</p>
+<p><img src="/images/16005222337169.jpg" width="50%" height="50%"></p>
+<p>可以看到，在pre-norm中，每个residual output只被norm一次；而post-norm则不止一次，并且，越远的层被norm的次数将会越多，因此对于层i的输出来说，它对近的层的依赖更强。也即，我们可以将norm看做是对residual branch的输出进行一次赋权。对于post-norm而言，他对更近的层的residual branch更倚重。</p>
+<p>作者不仅从公式中推导出这一结论，还对$\beta$做了一些统计。</p>
+<p><img src="/images/16005227736330.jpg" width="55%" height="50%"></p>
+<p>可以发现：pre-norm从初始化开始到训练结束，每一层对底层的依赖都比较平均，虽然在训练过程中也会逐渐加强对近的层的依赖，但相对没那么严重。而post-norm从训练开始对近层的依赖就很严重，而随着训练过程的进行，变得越来越严重。</p>
+<p>因此，我们可以认为，pre-norm实质上是一种<strong>正则化方法</strong>。</p>
+<ul>
+<li>对于pre-norm而言，模型被限制过重依赖近层的输出，但因此也限制了模型的表示空间和表示能力。从公式上我们也可以看出，$\beta_{i, i}=\frac{\sqrt{\operatorname{Var}\left[\mathbf{a}_{i}\right]}}{\sqrt{\operatorname{Var}\left[\mathbf{x}_{i-1}^{(p \cdot)}+\mathbf{a}_{i}\right]}}$代表了当前层输出对自己的residual branch输出的依赖程度，由于$\operatorname{Var}\left[\mathbf{x}_{i}^{(p \cdot)}\right]$会随着层数加深而逐渐变大（很好理解，因为过了那么多非线性以及各种相加的操作，层i相比底层的输出的方差更大），则$\beta_{i, i}$在越高层则会变得越小，也即pre-norm限制了对自身residual branch输出的依赖程度。</li>
+<li>由于pre-norm限制了模型不能太过于依赖近的branch，当层数非常深时，第i层和第i+1层的输出很可能没太大区别（因为内容被前面层填满了）。这也是为什么pre-norm模型再加深反而性能会下降的原因。同时，这也解释了，为什么post-norm的潜力大于pre-norm。</li>
+</ul>
+<p>作者从这开始，从理论和统计都证明了，对于pre-norm而言，输入/参数扰动造成的影响是O(logn)级别的，而post-norm则是O(n)级别的。其中n表示模型深度。（具体证明见论文）</p>
+<p><img src="/images/16005234130860.jpg" width="50%" height="50%"></p>
+<p><img src="/images/16005234386927.jpg" width="60%" height="50%"></p>
+<p>从图中可以看到，pre-norm和post-norm面对扰动造成的输出变化是基本符合推论的。</p>
+<p>作者同时还证明了，随着训练的进行，这种扰动造成的输出偏移会逐渐变小。（证明见论文）</p>
+<p>根据这一结论以及上述结论，作者提出一种两段式的初始化方法，其目的是为了使post-norm模型在训练初期稳定，而在训练达到稳定后，再使用普通post-norm使其能够释放潜能。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<li>添加一个新的参数$\omega$，原公式变为$\mathbf{x}_{i}=f_{\mathrm{LN}}\left(\mathbf{x}_{i-1} \cdot \omega_{i}+f_{i}\left(\mathbf{x}_{i-1}\right)\right)$</li>
+<li>两段式训练：Profiling-Initialization<ul>
+<li>Profiling：先初始化$\omega=1$，也即退化成一个普通的post-norm。该阶段不训练，只<strong>记录</strong>输出的方差。</li>
+<li>Initialization：在记录后，设$\boldsymbol{\omega}_{i}=\sqrt{\sum_{j&lt;i} \operatorname{Var}\left[f_{j}\left(\mathbf{x}_{j-1}\right)\right]}$，然后从头开始训练。</li>
+<li>当模型训练稳定后，去掉$\omega$，以释放post-norm的全部潜能。</li>
+</ul>
+</li>
+</ul>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p><img src="/images/16005239438753.jpg" width="45%" height="50%"></p>
+<p><img src="/images/16005239614654.jpg" width="45%" height="50%"></p>
+<p>以上表格说明，相对post-norm，Admin能够获得稳定的提升。</p>
+<p>同时，作者还统计了使用Admin后，$\beta$的变化。</p>
+<p><img src="/images/16005241391257.jpg" width="60%" height="50%"></p>
+<p>可以看到，使用Admin后，模型在一开始没那么依赖近的branch，因此能够稳步训练；而在训练过程中则逐渐加深对近的branch的依赖。</p>
+<h2 id="结论与思考"><a href="#结论与思考" class="headerlink" title="结论与思考"></a>结论与思考</h2><p>过去传统的梯度消失问题并不是真正带来训练深层Transformer困难的原因，模型输出对扰动过于敏感可能才是真正的问题。实际上过去的工作虽然声称是解决了梯度消失的问题，但他们真正解决的是扰动敏感的问题（我会稍后写一篇新的博客来讨论过去的工作是怎么不小心/隐式地解决了这个问题的），只不过梯度消失是扰动敏感这一问题的表现形式之一罢了，他们解决了扰动敏感，实验或统计表现出来的则是梯度消失被解决了（所以这里面倒是一个表象与本质之间的关系问题）。</p>
+<p>pre-norm虽好，但带来了限制，影响了Transformer的模型表示能力。而我们一直认为不好的post-norm相反则有更强的能力，只不过我们以前一直没有训动而已。</p>
+<p>pre-norm与post-norm之外是否能够再找到一个新的变体？作者虽然解决/缓解了训练深层Transformer的问题，但这种方法仍然不够简洁。我们是否能够end2end地解决这个问题？或者我们是否能提出一个新的模型改动使得这个问题在新的架构下不存在？</p>
+<p>作者能够打破过去主流的梯度消失的观点，并且提出了自己的观点。论文循序渐进，逻辑严谨，行文如行云流水，不仅有理论推导，还有定量统计，最后再辅以实验验证，使人信服。确实是不可多得的好论文，刷新了我的认知。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    林泽辉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.linzehui.me/2020/09/19/论文/每周论文39/" title="每周论文39">http://www.linzehui.me/2020/09/19/论文/每周论文39/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://www.linzehui.me" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Paper/" rel="tag"> <i class="fa fa-tag"></i> Paper</a>
+          
+            <a href="/tags/每周论文阅读/" rel="tag"> <i class="fa fa-tag"></i> 每周论文阅读</a>
+          
+            <a href="/tags/Transformer/" rel="tag"> <i class="fa fa-tag"></i> Transformer</a>
+          
+            <a href="/tags/NMT/" rel="tag"> <i class="fa fa-tag"></i> NMT</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/19/诗词&句/每周诗词44/" rel="next" title="每周诗词44">
+                <i class="fa fa-chevron-left"></i> 每周诗词44
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDA0OC8xNjU3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">林泽辉</p>
+              <p class="site-description motion-element" itemprop="description">人一己千</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">221</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">222</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Understanding-the-Difficulty-of-Training-Transformers"><span class="nav-number">1.</span> <span class="nav-text">[Understanding the Difficulty of Training Transformers]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导致深层Transformer无法训动的原因"><span class="nav-number">1.2.</span> <span class="nav-text">导致深层Transformer无法训动的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#放大效应（Amplification-effect）是造成模型训练不稳定的原因"><span class="nav-number">1.3.</span> <span class="nav-text">放大效应（Amplification effect）是造成模型训练不稳定的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">1.4.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验"><span class="nav-number">1.5.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论与思考"><span class="nav-number">2.</span> <span class="nav-text">结论与思考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林泽辉</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
