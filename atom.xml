@@ -42,9 +42,9 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
       <category term="Transformer" scheme="http://www.linzehui.me/tags/Transformer/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
     
@@ -74,30 +74,6 @@
       <category term="诗词" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D/"/>
     
       <category term="诗词分享" scheme="http://www.linzehui.me/tags/%E8%AF%97%E8%AF%8D%E5%88%86%E4%BA%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>回来了</title>
-    <link href="http://www.linzehui.me/2020/09/19/%E8%A7%81%E9%97%BB&amp;%E6%83%B3%E6%B3%95/%E5%9B%9E%E6%9D%A5%E4%BA%86/"/>
-    <id>http://www.linzehui.me/2020/09/19/见闻&amp;想法/回来了/</id>
-    <published>2020-09-19T05:29:14.000Z</published>
-    <updated>2020-09-19T14:19:00.060Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;我回来了。回顾了一下上次写博客，已经是1月份了。&lt;/p&gt;
-&lt;p&gt;这8个月发生了太多事情。先是前3个月因为疫情呆在家，百无聊赖。疫情期间好好准备实习，疯狂刷题，面了好多家公司，最后运气比较好来到了字节AI-Lab做NLP算法实习生，主要研究机器翻译方向。&lt;/p&gt;
-&lt;p&gt;5月开
-        
-      
-    
-    </summary>
-    
     
   </entry>
   
@@ -296,9 +272,9 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
-      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
       <category term="Transformer" scheme="http://www.linzehui.me/tags/Transformer/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="NER" scheme="http://www.linzehui.me/tags/NER/"/>
     
@@ -383,11 +359,11 @@
     
       <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
     
+      <category term="Softmax" scheme="http://www.linzehui.me/tags/Softmax/"/>
+    
       <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="Curriculum Learning" scheme="http://www.linzehui.me/tags/Curriculum-Learning/"/>
-    
-      <category term="Softmax" scheme="http://www.linzehui.me/tags/Softmax/"/>
     
   </entry>
   
@@ -594,6 +570,45 @@
       <category term="遇到的问题" scheme="http://www.linzehui.me/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     
       <category term="hexo" scheme="http://www.linzehui.me/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每周论文32</title>
+    <link href="http://www.linzehui.me/2019/10/20/%E8%AE%BA%E6%96%87/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%8732/"/>
+    <id>http://www.linzehui.me/2019/10/20/论文/每周论文32/</id>
+    <published>2019-10-20T01:27:30.000Z</published>
+    <updated>2019-10-20T08:12:04.271Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本周论文：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Incremental Parsing with the Perceptron Algorithm&lt;/li&gt;
+&lt;li&gt;Iterative Dual Domain Adaptation for Neural Machine
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Paper" scheme="http://www.linzehui.me/tags/Paper/"/>
+    
+      <category term="Transformer" scheme="http://www.linzehui.me/tags/Transformer/"/>
+    
+      <category term="每周论文阅读" scheme="http://www.linzehui.me/tags/%E6%AF%8F%E5%91%A8%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="NMT" scheme="http://www.linzehui.me/tags/NMT/"/>
+    
+      <category term="style transfer" scheme="http://www.linzehui.me/tags/style-transfer/"/>
+    
+      <category term="structured learning" scheme="http://www.linzehui.me/tags/structured-learning/"/>
+    
+      <category term="domain adaptation" scheme="http://www.linzehui.me/tags/domain-adaptation/"/>
     
   </entry>
   
